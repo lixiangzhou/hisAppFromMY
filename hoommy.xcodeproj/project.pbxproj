@@ -667,6 +667,8 @@
 		9A97D90C20EF420000688ADB /* MainClass */ = {
 			isa = PBXGroup;
 			children = (
+				9A97D91320EF420000688ADB /* Home */,
+				9A97D91A20EF420000688ADB /* My */,
 				9A97D90D20EF420000688ADB /* Demo */,
 			);
 			path = MainClass;
@@ -677,8 +679,6 @@
 			children = (
 				9A97D90E20EF420000688ADB /* ExtendTest */,
 				9A97D90F20EF420000688ADB /* Fragment */,
-				9A97D91320EF420000688ADB /* Home */,
-				9A97D91A20EF420000688ADB /* My */,
 				9A97D92320EF420000688ADB /* Test */,
 			);
 			path = Demo;
@@ -752,6 +752,7 @@
 		9A97D91A20EF420000688ADB /* My */ = {
 			isa = PBXGroup;
 			children = (
+				9ACB2F3820EF5F0F005C3C3D /* ViewModel */,
 				9A97D91B20EF420000688ADB /* Model */,
 				9A97D91E20EF420000688ADB /* View */,
 				9A97D91F20EF420000688ADB /* ViewController */,
@@ -1462,6 +1463,13 @@
 			children = (
 			);
 			path = Component;
+			sourceTree = "<group>";
+		};
+		9ACB2F3820EF5F0F005C3C3D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		CF54BBECD744511DC299BD08 /* Pods */ = {
