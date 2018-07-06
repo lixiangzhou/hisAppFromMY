@@ -65,6 +65,7 @@ static NSString *const kTokenUrl = @"/token";
     }
     [[HXBBaseRequestManager sharedInstance] sendFreshTokenNotify:result];
 }
+
 /**
  令牌失效处理
  */
