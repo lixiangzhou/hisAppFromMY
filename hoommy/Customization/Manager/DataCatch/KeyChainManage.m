@@ -7,8 +7,8 @@
 //
 
 #import "KeyChainManage.h"
+#import "HSJKeyChainStore.h"
 
-#import <UICKeyChainStore.h>
 #import <Security/Security.h>
 
 static NSString * const kToken = @"token";
@@ -16,7 +16,7 @@ static NSString * const kService = @"www.hoomxb.com";
 
 @interface KeyChainManage ()
 
-@property (nonatomic, strong) UICKeyChainStore *keychain;
+@property (nonatomic, strong) HSJKeyChainStore *keychain;
 
 @end
 
@@ -28,7 +28,7 @@ static NSString * const kService = @"www.hoomxb.com";
     static dispatch_once_t once;
     dispatch_once(&once, ^{
         sharedInstance = [[self alloc] init];
-        sharedInstance.keychain = [UICKeyChainStore keyChainStoreWithService:kService];
+        sharedInstance.keychain = [[HSJKeyChainStore alloc] initWithService:kService];
     });
     
     return sharedInstance;
@@ -40,13 +40,12 @@ static NSString * const kService = @"www.hoomxb.com";
         [self.keychain removeItemForKey:kToken];
         return;
     }
-    self.keychain[kToken] = token;
-    
+    [self.keychain setItemForKey:token ForKey:kToken];
 }
 
 - (NSString *)token
 {
-    NSString *token = self.keychain[kToken];
+    NSString *token = [self.keychain itemForkey:kToken];
     return token?:@"";
 }
 

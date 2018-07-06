@@ -28,7 +28,6 @@
 		9A97DA6820EF420200688ADB /* HSJHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A97D91820EF420000688ADB /* HSJHomeViewController.m */; };
 		9A97DA6920EF420200688ADB /* HXBVersionUpdateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A97D91D20EF420000688ADB /* HXBVersionUpdateModel.m */; };
 		9A97DA6A20EF420200688ADB /* HSJMyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A97D92120EF420000688ADB /* HSJMyViewController.m */; };
-		9A97DA6B20EF420200688ADB /* HSJMyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A97D92220EF420000688ADB /* HSJMyViewController.xib */; };
 		9A97DA6C20EF420200688ADB /* LazyCatLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A97D92620EF420000688ADB /* LazyCatLoadingView.m */; };
 		9A97DA6D20EF420200688ADB /* HSJListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A97D92920EF420000688ADB /* HSJListViewController.m */; };
 		9A97DA6E20EF420200688ADB /* HSJListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A97D92A20EF420000688ADB /* HSJListViewController.xib */; };
@@ -134,6 +133,7 @@
 		9A97DAD220EF420200688ADB /* sanbiao.svg in Resources */ = {isa = PBXBuildFile; fileRef = 9A97DA5B20EF420200688ADB /* sanbiao.svg */; };
 		9A97DAD320EF420200688ADB /* trading_record.svg in Resources */ = {isa = PBXBuildFile; fileRef = 9A97DA5C20EF420200688ADB /* trading_record.svg */; };
 		9A97DAD420EF420200688ADB /* transaction_password.svg in Resources */ = {isa = PBXBuildFile; fileRef = 9A97DA5D20EF420200688ADB /* transaction_password.svg */; };
+		9ACB2F3C20EF6E08005C3C3D /* HSJKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ACB2F3B20EF6E08005C3C3D /* HSJKeyChainStore.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -196,7 +196,6 @@
 		9A97D91D20EF420000688ADB /* HXBVersionUpdateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBVersionUpdateModel.m; sourceTree = "<group>"; };
 		9A97D92020EF420000688ADB /* HSJMyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSJMyViewController.h; sourceTree = "<group>"; };
 		9A97D92120EF420000688ADB /* HSJMyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSJMyViewController.m; sourceTree = "<group>"; };
-		9A97D92220EF420000688ADB /* HSJMyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HSJMyViewController.xib; sourceTree = "<group>"; };
 		9A97D92520EF420000688ADB /* LazyCatLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LazyCatLoadingView.h; sourceTree = "<group>"; };
 		9A97D92620EF420000688ADB /* LazyCatLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LazyCatLoadingView.m; sourceTree = "<group>"; };
 		9A97D92820EF420000688ADB /* HSJListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSJListViewController.h; sourceTree = "<group>"; };
@@ -462,6 +461,8 @@
 		9A97DA5B20EF420200688ADB /* sanbiao.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = sanbiao.svg; sourceTree = "<group>"; };
 		9A97DA5C20EF420200688ADB /* trading_record.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = trading_record.svg; sourceTree = "<group>"; };
 		9A97DA5D20EF420200688ADB /* transaction_password.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = transaction_password.svg; sourceTree = "<group>"; };
+		9ACB2F3A20EF6E08005C3C3D /* HSJKeyChainStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJKeyChainStore.h; sourceTree = "<group>"; };
+		9ACB2F3B20EF6E08005C3C3D /* HSJKeyChainStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJKeyChainStore.m; sourceTree = "<group>"; };
 		F3AA4ECD958918A00E682797 /* Pods-hoommy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hoommy.release.xcconfig"; path = "Pods/Target Support Files/Pods-hoommy/Pods-hoommy.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -781,7 +782,6 @@
 			children = (
 				9A97D92020EF420000688ADB /* HSJMyViewController.h */,
 				9A97D92120EF420000688ADB /* HSJMyViewController.m */,
-				9A97D92220EF420000688ADB /* HSJMyViewController.xib */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1345,6 +1345,7 @@
 		9A97DA2E20EF420100688ADB /* Api */ = {
 			isa = PBXGroup;
 			children = (
+				9ACB2F3920EF6DB0005C3C3D /* HSJKeyChainStore */,
 				9A97DA2F20EF420100688ADB /* HSJNetworking */,
 			);
 			path = Api;
@@ -1470,6 +1471,15 @@
 			children = (
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		9ACB2F3920EF6DB0005C3C3D /* HSJKeyChainStore */ = {
+			isa = PBXGroup;
+			children = (
+				9ACB2F3A20EF6E08005C3C3D /* HSJKeyChainStore.h */,
+				9ACB2F3B20EF6E08005C3C3D /* HSJKeyChainStore.m */,
+			);
+			path = HSJKeyChainStore;
 			sourceTree = "<group>";
 		};
 		CF54BBECD744511DC299BD08 /* Pods */ = {
@@ -1617,7 +1627,6 @@
 				9A97DAD320EF420200688ADB /* trading_record.svg in Resources */,
 				9A97DABE20EF420200688ADB /* bank.svg in Resources */,
 				9A97DABC20EF420200688ADB /* audit_status.svg in Resources */,
-				9A97DA6B20EF420200688ADB /* HSJMyViewController.xib in Resources */,
 				9A97DABD20EF420200688ADB /* back.svg in Resources */,
 				9A97DA7120EF420200688ADB /* HSJTestViewController.xib in Resources */,
 				9A97DAD020EF420200688ADB /* password_eye_close.svg in Resources */,
@@ -1764,6 +1773,7 @@
 				9A97DA7020EF420200688ADB /* HSJTestViewController.m in Sources */,
 				9A97DA7820EF420200688ADB /* HXBBaseViewController.m in Sources */,
 				9A97DA8820EF420200688ADB /* NSString+CopiesTransfer.m in Sources */,
+				9ACB2F3C20EF6E08005C3C3D /* HSJKeyChainStore.m in Sources */,
 				9A97DA7220EF420200688ADB /* HSJTestWebviewControllerViewController.m in Sources */,
 				9A97DA9F20EF420200688ADB /* IDPStorageSqliteInner.m in Sources */,
 				9A97DA9720EF420200688ADB /* UIViewController+HSContentAreaInset.m in Sources */,
