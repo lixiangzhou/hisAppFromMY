@@ -1,0 +1,40 @@
+//
+//  PrefixHeader.pch
+//  HSJFrameProject
+//
+//  Created by caihongji on 2018/4/11.
+//  Copyright © 2018年 caihongji. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#import "AFNetworking.h"
+#import <MJRefresh/MJRefresh.h>
+#import "HXBUtility.h"
+#import <Masonry.h>
+#import "HXBDeviceVersion.h"
+#import "IDPCache.h"
+#import "IDPLog.h"
+#import "Jastor.h"
+
+/////////////////////////////////////////
+#import "HSJConfig.h"
+#import "HXBRootVCManager.h"
+#import "KeyChainManage.h"
+
+////////////////////////////////////////
+#import "NYBaseRequest.h"
+
+////////////////////////////////////////
+#import "HXBBaseViewController+HSAPI.h"
+#import "HXBBaseViewController+UITableView.h"
+#import "NSDictionary+IDPExtension.h"
+#import "NSArray+IDPExtension.h"
+#import "NSString+IDPExtension.h"
+#import "UIScrollView+HXBScrollView.h"
+#import "HSJBaseViewModel+HSJNetWorkApi.h"
+
+#endif /* PrefixHeader_pch */
