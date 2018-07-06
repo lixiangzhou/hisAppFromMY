@@ -60,9 +60,7 @@
 {
     if([[HXBBaseRequestManager sharedInstance] deleteRequest:request]) {
         // 适配重构前的HUD
-        if(request.showHud) {
-            [request hideLoading];
-        }
+        [request hideLoading:request];
         
         [self callBackRequestSuccess:request responseJsonObject:responseJsonObject];
     }
@@ -72,9 +70,7 @@
 {
     if([[HXBBaseRequestManager sharedInstance] deleteRequest:request]) {
         // 适配重构前的HUD
-        if(request.showHud) {
-            [request hideLoading];
-        }
+        [request hideLoading:request];
         
         [self callBackRequestFailure:request error:error];
     }

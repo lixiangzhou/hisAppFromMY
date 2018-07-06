@@ -83,10 +83,10 @@
  隐藏加载框
  
  */
-- (void)hideLoading
+- (void)hideLoading:(NYBaseRequest *)request
 {
-    if([self.hudDelegate respondsToSelector:@selector(hideProgress)]){
-        [self.hudDelegate hideProgress];
+    if([self.hudDelegate respondsToSelector:@selector(hideProgress:)]){
+        [self.hudDelegate hideProgress:request];
     }
 }
 /**

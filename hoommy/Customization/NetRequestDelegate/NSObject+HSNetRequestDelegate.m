@@ -77,7 +77,7 @@ static const char kNetRequestListKey = '\0';
     }
 }
 
-- (void)hideProgress {
+- (void)hideProgress:(NYBaseRequest *)request {
     [self showMBP:NO withHudContent:nil];
 }
 

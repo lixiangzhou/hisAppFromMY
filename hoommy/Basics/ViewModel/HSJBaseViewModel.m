@@ -22,7 +22,7 @@
 {
     [[HXBBaseRequestManager sharedInstance] cancelRequest:self];
     if([self getHugView] == [UIApplication sharedApplication].keyWindow) {
-        [self hideProgress];
+        [self hideProgress:nil];
     }
 }
 
@@ -35,6 +35,16 @@
     return [super getHugView];
 }
 
+- (void)hideProgress:(NYBaseRequest *)request {
+    if(self.isFilterHugHidden) {
+        if(!request || request.showHud) {
+            [super hideProgress:request];
+        }
+    }
+    else {
+        [super hideProgress:request];
+    }
+}
 /**
  viewmodel中统一的网络数据加载方法
  

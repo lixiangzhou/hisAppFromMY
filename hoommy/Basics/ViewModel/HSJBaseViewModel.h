@@ -17,6 +17,9 @@ typedef void(^NetWorkResponseBlock)(id responseData, NSError* erro);
 
 @interface HSJBaseViewModel : NSObject
 
+//是否在hug隐藏的方法中进行过滤
+@property (nonatomic, assign) BOOL isFilterHugHidden;
+
 @property (nonatomic, strong) HugViewBlock hugViewBlock;
 
 /**
