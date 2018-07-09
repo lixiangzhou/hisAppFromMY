@@ -14,5 +14,5 @@
 
 - (void)setupUI {}
 
-- (void)addConstraints {}
+- (void)setupConstraints {}
 @end
