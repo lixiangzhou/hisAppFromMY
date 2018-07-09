@@ -7,10 +7,10 @@
 //
 
 #import "HSJSignInViewController.h"
-
+#import "HXBCustomTextField.h"
 @interface HSJSignInViewController ()
 
-@property (nonatomic, strong) UITextField *phoneTextField;
+@property (nonatomic, strong) HXBCustomTextField *phoneTextField;
 
 @property (nonatomic, strong) UIButton *nextButton;
 
