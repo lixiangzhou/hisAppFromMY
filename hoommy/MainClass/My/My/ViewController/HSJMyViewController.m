@@ -20,7 +20,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 }
- 
+
+- (IBAction)loginAct:(UIButton *)sender {
+    
+}
+
+- (IBAction)openAccountAct:(UIButton *)sender {
+}
+
+- (IBAction)bindPhoneAct:(UIButton *)sender {
+
+}
+
 - (void)buttonClickAct:(UIButton *)sender {
     HSJBaseModel* mode = [[HSJBaseModel alloc] initWithDictionary:@{@"code":@200, @"id":@"hello", @"data":@{@"name":@"jim"}}];
     if(mode.code.intValue == 200) {
