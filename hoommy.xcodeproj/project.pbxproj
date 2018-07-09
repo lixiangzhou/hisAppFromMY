@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1B74F72E67F77E394AFF76A6 /* libPods-hoommy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 73C7B870EA4F77D826DA647B /* libPods-hoommy.a */; };
+		8D7F480920F3493400F22312 /* HSJDepositoryOpenController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F480620F3493400F22312 /* HSJDepositoryOpenController.m */; };
+		8D7F480A20F3493400F22312 /* HSJDepositoryOpenTipController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F480820F3493400F22312 /* HSJDepositoryOpenTipController.m */; };
 		9A4B180520F33DD6006B83C7 /* HSJMyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A4B180420F33DD6006B83C7 /* HSJMyViewController.xib */; };
 		9A6E0A5C20F84C9700598071 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A6E0A5B20F84C9700598071 /* AppDelegate.m */; };
 		9A6E0A6220F84C9700598071 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A6E0A6020F84C9700598071 /* Main.storyboard */; };
@@ -157,6 +159,10 @@
 /* Begin PBXFileReference section */
 		54B20A0D6605B011D885333F /* Pods-hoommy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hoommy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-hoommy/Pods-hoommy.debug.xcconfig"; sourceTree = "<group>"; };
 		73C7B870EA4F77D826DA647B /* libPods-hoommy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-hoommy.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7F480520F3493400F22312 /* HSJDepositoryOpenController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSJDepositoryOpenController.h; sourceTree = "<group>"; };
+		8D7F480620F3493400F22312 /* HSJDepositoryOpenController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSJDepositoryOpenController.m; sourceTree = "<group>"; };
+		8D7F480720F3493400F22312 /* HSJDepositoryOpenTipController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSJDepositoryOpenTipController.h; sourceTree = "<group>"; };
+		8D7F480820F3493400F22312 /* HSJDepositoryOpenTipController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSJDepositoryOpenTipController.m; sourceTree = "<group>"; };
 		9A4B180420F33DD6006B83C7 /* HSJMyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSJMyViewController.xib; sourceTree = "<group>"; };
 		9A6E0A5720F84C9700598071 /* hoommy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = hoommy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A6E0A5A20F84C9700598071 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -505,6 +511,25 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		8D7F480320F3493400F22312 /* DepositoryOpen */ = {
+			isa = PBXGroup;
+			children = (
+				8D7F480420F3493400F22312 /* ViewController */,
+			);
+			path = DepositoryOpen;
+			sourceTree = "<group>";
+		};
+		8D7F480420F3493400F22312 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8D7F480520F3493400F22312 /* HSJDepositoryOpenController.h */,
+				8D7F480620F3493400F22312 /* HSJDepositoryOpenController.m */,
+				8D7F480720F3493400F22312 /* HSJDepositoryOpenTipController.h */,
+				8D7F480820F3493400F22312 /* HSJDepositoryOpenTipController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		9A4B180220F33D0C006B83C7 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -775,6 +800,7 @@
 			isa = PBXGroup;
 			children = (
 				9A4B180320F33D21006B83C7 /* My */,
+				8D7F480320F3493400F22312 /* DepositoryOpen */,
 			);
 			path = My;
 			sourceTree = "<group>";
@@ -1772,6 +1798,7 @@
 				9A97DA7F20EF420200688ADB /* HSJBaseViewModel.m in Sources */,
 				9A97DA7620EF420200688ADB /* HXBBaseViewController+HSAPI.m in Sources */,
 				9A97DA6620EF420200688ADB /* UIScrollView+HXBScrollView.m in Sources */,
+				8D7F480A20F3493400F22312 /* HSJDepositoryOpenTipController.m in Sources */,
 				9A97DAB120EF420200688ADB /* HXBNsTimerManager.m in Sources */,
 				9A97DA8320EF420200688ADB /* NSDate+HXB.m in Sources */,
 				9A97DA8220EF420200688ADB /* NSAttributedString+Util.m in Sources */,
@@ -1794,6 +1821,7 @@
 				9A97DA7820EF420200688ADB /* HXBBaseViewController.m in Sources */,
 				9A97DA8820EF420200688ADB /* NSString+CopiesTransfer.m in Sources */,
 				9ACB2F3C20EF6E08005C3C3D /* HSJKeyChainStore.m in Sources */,
+				8D7F480920F3493400F22312 /* HSJDepositoryOpenController.m in Sources */,
 				9A97DA7220EF420200688ADB /* HSJTestWebviewControllerViewController.m in Sources */,
 				9A97DA9F20EF420200688ADB /* IDPStorageSqliteInner.m in Sources */,
 				9A97DA9720EF420200688ADB /* UIViewController+HSContentAreaInset.m in Sources */,

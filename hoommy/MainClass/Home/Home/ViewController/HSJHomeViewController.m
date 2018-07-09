@@ -11,6 +11,7 @@
 #import "HSJListViewController.h"
 #import "HSJFragmentViewController.h"
 #import "HSJTestWebviewControllerViewController.h"
+#import "HSJDepositoryOpenTipController.h"
 
 @interface HSJHomeViewController ()
 
@@ -73,7 +74,7 @@
 }
 
 - (void)buttonClickAct:(UIButton*)button {
-    HSJTestViewController* vc = [[HSJTestViewController alloc] init];
+    HSJDepositoryOpenTipController* vc = [[HSJDepositoryOpenTipController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
