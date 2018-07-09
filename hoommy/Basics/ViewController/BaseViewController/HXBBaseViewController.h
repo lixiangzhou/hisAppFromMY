@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UIViewController+HSContentAreaInset.h"
+#import "UIViewController+HSJStandard.h"
 
 @interface HXBBaseViewController : UIViewController
 ///所有的子视图都在这个视图里添加
