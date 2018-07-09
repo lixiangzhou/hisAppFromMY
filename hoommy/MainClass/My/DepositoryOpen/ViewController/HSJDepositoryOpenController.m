@@ -11,6 +11,7 @@
 #import "HXBCustomTextField.h"
 #import "SVGKit/SVGKImage.h"
 #import "UITextField+HLNumberFormatTextField.h"
+#import "HXBAgreementView.h"
 
 #define kInputHeight 50
 
@@ -29,6 +30,7 @@
 /// 预留手机号
 @property (nonatomic, weak) HXBCustomTextField *mobileView;
 
+@property (nonatomic, assign) BOOL isAgree;
 @end
 
 @implementation HSJDepositoryOpenController
@@ -230,9 +232,46 @@
     bottomBtn.layer.masksToBounds = YES;
     [bottomBtn addTarget:self action:@selector(bottomBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [self.scrollView addSubview:bottomBtn];
+    
+    
+//    我已查看并同意《红小宝认证服务协议》与《存管服务协议》
+    NSAttributedString *attString = [[NSAttributedString alloc] initWithString:@"我已查看并同意《红小宝认证服务协议》与《存管服务协议》"];
+    
+    NSDictionary *linkAttributes = @{
+                                     NSForegroundColorAttributeName:kHXBColor_73ADFF_100,
+                                     NSFontAttributeName:kHXBFont_PINGFANGSC_REGULAR(12)
+                                     };
+    NSMutableAttributedString *attributedString = [HXBAgreementView configureLinkAttributedString:attString withString:@"《红小宝认证服务协议》" sameStringEnable:NO linkAttributes:linkAttributes activeLinkAttributes:linkAttributes parameter:nil clickLinkBlock:^{
+        NSLog(@"《红小宝认证服务协议》");
+    }];
+    attributedString = [HXBAgreementView configureLinkAttributedString:attributedString withString:@"《存管服务协议》" sameStringEnable:NO linkAttributes:linkAttributes activeLinkAttributes:linkAttributes parameter:nil clickLinkBlock:^{
+        NSLog(@"《存管服务协议》");
+    }];
+    
+    kWeakSelf
+    HXBAgreementView *agreementView = [[HXBAgreementView alloc] initWithFrame:CGRectZero];
+    agreementView.text = attributedString;
+    agreementView.agreeBtnBlock = ^(BOOL isSelected){
+        weakSelf.isAgree = isSelected;
+        if (isSelected) {
+            bottomBtn.backgroundColor = kHXBColor_E3BF80;
+            bottomBtn.enabled = YES;
+        }else
+        {
+            bottomBtn.backgroundColor = kHXBColor_D8D8D8_100;
+            bottomBtn.enabled = NO;
+        }
+    };
+    
+    [self.scrollView addSubview:agreementView];
+    
+    [agreementView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(bottomBtn);
+        make.bottom.equalTo(bottomBtn.mas_top).offset(-10);
+    }];
 
     [bottomBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.mobileView.mas_bottom).offset(40);
+        make.top.equalTo(self.mobileView.mas_bottom).offset(80);
         make.left.equalTo(self.view).offset(35);
         make.right.equalTo(self.view).offset(-35);
         make.height.equalTo(@41);
