@@ -167,8 +167,8 @@
         [leftBackBtn setImage:nil forState:UIControlStateHighlighted];
     }
     else {
-        [leftBackBtn setImage:[SVGKImage imageNamed:@"back.svg"].UIImage forState:UIControlStateNormal];
-        [leftBackBtn setImage:[SVGKImage imageNamed:@"back.svg"].UIImage forState:UIControlStateHighlighted];
+        [leftBackBtn setImage:[SVGKImage imageNamed:@"back_hei"].UIImage forState:UIControlStateNormal];
+        [leftBackBtn setImage:[SVGKImage imageNamed:@"back_hei"].UIImage forState:UIControlStateHighlighted];
     }
 
     [leftBackBtn addTarget:self action:@selector(leftBackBtnClick) forControlEvents:UIControlEventTouchUpInside];
