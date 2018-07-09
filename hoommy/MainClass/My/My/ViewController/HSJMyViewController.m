@@ -8,7 +8,9 @@
 
 #import "HSJMyViewController.h"
 #import "HSJBaseModel.h"
-
+#import "HSJBankCardListViewController.h"
+#import "HSJRiskAssessmentViewController.h"
+#import "HSJSignInViewController.h"
 @interface HSJMyViewController ()
 
 @end
@@ -17,20 +19,27 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    [self setupSubViews];
 }
 
-- (IBAction)loginAct:(UIButton *)sender {
+- (void)setupSubViews {
+    UIButton *bankListBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 100, 100, 30 )];
+    bankListBtn.backgroundColor = [UIColor redColor];
+    [bankListBtn setTitle:@"银行卡列表" forState:(UIControlStateNormal)];
+    [bankListBtn addTarget:self action:@selector(gotoBankListVC) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.view addSubview:bankListBtn];
     
 }
 
-- (IBAction)openAccountAct:(UIButton *)sender {
+- (void)gotoBankListVC {
+//    [self.navigationController pushViewController:[[HSJBankCardListViewController alloc] init] animated:YES];
+//     [self.navigationController pushViewController:[[HSJRiskAssessmentViewController alloc] init] animated:YES];
+    [self presentViewController:[[HSJSignInViewController alloc] init] animated:YES completion:^{
+        
+    }];
 }
-
-- (IBAction)bindPhoneAct:(UIButton *)sender {
-}
-
-- (IBAction)buttonClickAct:(UIButton *)sender {
+ 
+- (void)buttonClickAct:(UIButton *)sender {
     HSJBaseModel* mode = [[HSJBaseModel alloc] initWithDictionary:@{@"code":@200, @"id":@"hello", @"data":@{@"name":@"jim"}}];
     if(mode.code.intValue == 200) {
         [[IDPCache sharedCache] setObj:mode forKey:@"obj"];
