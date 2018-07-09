@@ -9,6 +9,8 @@
 #import "HSJMyViewController.h"
 #import "HSJBaseModel.h"
 
+#import "HXBBindPhoneViewController.h"
+
 @interface HSJMyViewController ()
 
 @end
@@ -28,6 +30,8 @@
 }
 
 - (IBAction)bindPhoneAct:(UIButton *)sender {
+    HXBBindPhoneViewController* vc = [[HXBBindPhoneViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (IBAction)buttonClickAct:(UIButton *)sender {
