@@ -503,6 +503,28 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		9A4B180220F33D0C006B83C7 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				9A97D91420EF420000688ADB /* Model */,
+				9A97D91520EF420000688ADB /* View */,
+				9A97D91620EF420000688ADB /* ViewController */,
+				9A97D91920EF420000688ADB /* ViewModel */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		9A4B180320F33D21006B83C7 /* My */ = {
+			isa = PBXGroup;
+			children = (
+				9ACB2F3820EF5F0F005C3C3D /* ViewModel */,
+				9A97D91B20EF420000688ADB /* Model */,
+				9A97D91E20EF420000688ADB /* View */,
+				9A97D91F20EF420000688ADB /* ViewController */,
+			);
+			path = My;
+			sourceTree = "<group>";
+		};
 		9A6E0A4E20F84C9700598071 = {
 			isa = PBXGroup;
 			children = (
@@ -712,10 +734,7 @@
 		9A97D91320EF420000688ADB /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				9A97D91420EF420000688ADB /* Model */,
-				9A97D91520EF420000688ADB /* View */,
-				9A97D91620EF420000688ADB /* ViewController */,
-				9A97D91920EF420000688ADB /* ViewModel */,
+				9A4B180220F33D0C006B83C7 /* Home */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -753,10 +772,7 @@
 		9A97D91A20EF420000688ADB /* My */ = {
 			isa = PBXGroup;
 			children = (
-				9ACB2F3820EF5F0F005C3C3D /* ViewModel */,
-				9A97D91B20EF420000688ADB /* Model */,
-				9A97D91E20EF420000688ADB /* View */,
-				9A97D91F20EF420000688ADB /* ViewController */,
+				9A4B180320F33D21006B83C7 /* My */,
 			);
 			path = My;
 			sourceTree = "<group>";
