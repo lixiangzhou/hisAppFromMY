@@ -8,11 +8,30 @@
 
 #import "HXBBindPhoneTableViewCell.h"
 
+@interface HXBBindPhoneTableViewCell()
+
+@property (nonatomic, strong) UILabel *titleLb;
+@property (nonatomic, strong) UIButton *codeBt;
+@property (nonatomic, strong) UILabel *codeLb;
+@property (nonatomic, strong) UIImageView *lineImv;
+
+@end
+
 @implementation HXBBindPhoneTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+}
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    
+    if(self) {
+        
+    }
+    
+    return self;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
