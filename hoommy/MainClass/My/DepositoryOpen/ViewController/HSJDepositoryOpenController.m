@@ -12,6 +12,7 @@
 #import "SVGKit/SVGKImage.h"
 #import "UITextField+HLNumberFormatTextField.h"
 #import "HXBAgreementView.h"
+#import "HxbHUDProgress.h"
 
 #define kInputHeight 50
 
@@ -237,10 +238,7 @@
 //    我已查看并同意《红小宝认证服务协议》与《存管服务协议》
     NSAttributedString *attString = [[NSAttributedString alloc] initWithString:@"我已查看并同意《红小宝认证服务协议》与《存管服务协议》"];
     
-    NSDictionary *linkAttributes = @{
-                                     NSForegroundColorAttributeName:kHXBColor_73ADFF_100,
-                                     NSFontAttributeName:kHXBFont_PINGFANGSC_REGULAR(12)
-                                     };
+    NSDictionary *linkAttributes = @{NSForegroundColorAttributeName:kHXBColor_73ADFF_100, NSFontAttributeName:kHXBFont_PINGFANGSC_REGULAR(12)};
     NSMutableAttributedString *attributedString = [HXBAgreementView configureLinkAttributedString:attString withString:@"《红小宝认证服务协议》" sameStringEnable:NO linkAttributes:linkAttributes activeLinkAttributes:linkAttributes parameter:nil clickLinkBlock:^{
         NSLog(@"《红小宝认证服务协议》");
     }];
@@ -372,33 +370,62 @@
 - (BOOL)judgeIsTure
 {
     BOOL isNull = NO;
-//    if (!(self.nameView.text.length > 0)) {
-//        [HxbHUDProgress showMessageCenter:@"真实姓名不能为空" inView:self.view];
-//        isNull = YES;
-//        return isNull;
-//    }
-//    if (!(self.idView.text.length > 0)) {
-//        [HxbHUDProgress showMessageCenter:@"身份证号不能为空" inView:self.view];
-//        isNull = YES;
-//        return isNull;
-//    }
-//    if(self.idView.text.length != 18)
-//    {
-//        [HxbHUDProgress showMessageCenter:@"身份证号输入有误" inView:self.view];
-//        isNull = YES;
-//        return isNull;
-//    }
-//
-//    if (!(self.bankNoView.text.length > 0)) {
-//        [HxbHUDProgress showMessageCenter:@"银行卡号不能为空" inView:self.view];
-//        isNull = YES;
-//        return isNull;
-//    }
-//    if (!(self.bankNoView.text.length >= 10 && self.bankNoView.text.length <= 31)) {
-//        [HxbHUDProgress showMessageCenter:@"银行卡号输入有误" inView:self.view];
-//        isNull = YES;
-//        return isNull;
-//    }
+    if (!(self.nameView.text.length > 0)) {
+        [HxbHUDProgress showTextInView:self.view text:@"请输入您的真实姓名"];
+        isNull = YES;
+        return isNull;
+    }
+    
+    if (!(self.idView.text.length > 0)) {
+        [HxbHUDProgress showTextInView:self.view text:@"请输入身份证号"];
+        isNull = YES;
+        return isNull;
+    }
+    
+    if(self.idView.text.length != 18)
+    {
+        [HxbHUDProgress showTextInView:self.view text:@"请输入正确身份号"];
+        isNull = YES;
+        return isNull;
+    }
+    
+    if (!(self.transactionPwdView.text.length > 0)) {
+        [HxbHUDProgress showTextInView:self.view text:@"请设置6位交易密码"];
+        isNull = YES;
+        return isNull;
+    }
+    
+    if (self.transactionPwdView.text.length != 6) {
+        [HxbHUDProgress showTextInView:self.view text:@"请设置正确的交易密码"];
+        isNull = YES;
+        return isNull;
+    }
+
+    if (!(self.bankNoView.text.length > 0)) {
+        [HxbHUDProgress showTextInView:self.view text:@"请输入银行卡号"];
+        
+        isNull = YES;
+        return isNull;
+    }
+    
+    if (!(self.bankNoView.text.length >= 10 && self.bankNoView.text.length <= 31)) {
+        [HxbHUDProgress showTextInView:self.view text:@"请输入正确银行卡号"];
+        isNull = YES;
+        return isNull;
+    }
+    
+    if (!(self.mobileView.text.length > 0)) {
+        [HxbHUDProgress showTextInView:self.view text:@"预留手机号不能为空"];
+        isNull = YES;
+        return isNull;
+    }
+    
+    if (self.mobileView.text.length != 11) {
+        [HxbHUDProgress showTextInView:self.view text:@"预留手机号有误"];
+        isNull = YES;
+        return isNull;
+    }
+    
     return isNull;
 }
 
