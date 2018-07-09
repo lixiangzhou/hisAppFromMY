@@ -10,6 +10,7 @@
 		1B74F72E67F77E394AFF76A6 /* libPods-hoommy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 73C7B870EA4F77D826DA647B /* libPods-hoommy.a */; };
 		8D7F480920F3493400F22312 /* HSJDepositoryOpenController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F480620F3493400F22312 /* HSJDepositoryOpenController.m */; };
 		8D7F480A20F3493400F22312 /* HSJDepositoryOpenTipController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F480820F3493400F22312 /* HSJDepositoryOpenTipController.m */; };
+		8D7F480E20F34B2C00F22312 /* HSJDepositoryOpenViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F480D20F34B2C00F22312 /* HSJDepositoryOpenViewModel.m */; };
 		9A4B180520F33DD6006B83C7 /* HSJMyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A4B180420F33DD6006B83C7 /* HSJMyViewController.xib */; };
 		9A6E0A5C20F84C9700598071 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A6E0A5B20F84C9700598071 /* AppDelegate.m */; };
 		9A6E0A6220F84C9700598071 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A6E0A6020F84C9700598071 /* Main.storyboard */; };
@@ -163,6 +164,8 @@
 		8D7F480620F3493400F22312 /* HSJDepositoryOpenController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSJDepositoryOpenController.m; sourceTree = "<group>"; };
 		8D7F480720F3493400F22312 /* HSJDepositoryOpenTipController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSJDepositoryOpenTipController.h; sourceTree = "<group>"; };
 		8D7F480820F3493400F22312 /* HSJDepositoryOpenTipController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSJDepositoryOpenTipController.m; sourceTree = "<group>"; };
+		8D7F480C20F34B2C00F22312 /* HSJDepositoryOpenViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJDepositoryOpenViewModel.h; sourceTree = "<group>"; };
+		8D7F480D20F34B2C00F22312 /* HSJDepositoryOpenViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJDepositoryOpenViewModel.m; sourceTree = "<group>"; };
 		9A4B180420F33DD6006B83C7 /* HSJMyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSJMyViewController.xib; sourceTree = "<group>"; };
 		9A6E0A5720F84C9700598071 /* hoommy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = hoommy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A6E0A5A20F84C9700598071 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -514,6 +517,8 @@
 		8D7F480320F3493400F22312 /* DepositoryOpen */ = {
 			isa = PBXGroup;
 			children = (
+				8D7F480F20F34C1700F22312 /* View */,
+				8D7F480B20F34AFA00F22312 /* ViewModel */,
 				8D7F480420F3493400F22312 /* ViewController */,
 			);
 			path = DepositoryOpen;
@@ -528,6 +533,22 @@
 				8D7F480820F3493400F22312 /* HSJDepositoryOpenTipController.m */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		8D7F480B20F34AFA00F22312 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8D7F480C20F34B2C00F22312 /* HSJDepositoryOpenViewModel.h */,
+				8D7F480D20F34B2C00F22312 /* HSJDepositoryOpenViewModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8D7F480F20F34C1700F22312 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		9A4B180220F33D0C006B83C7 /* Home */ = {
@@ -1814,6 +1835,7 @@
 				9A97DA9A20EF420200688ADB /* IDPCache.m in Sources */,
 				9A97DA7920EF420200688ADB /* HXBBaseWKWebViewController.m in Sources */,
 				9A97DA7720EF420200688ADB /* HXBBaseViewController+UITableView.m in Sources */,
+				8D7F480E20F34B2C00F22312 /* HSJDepositoryOpenViewModel.m in Sources */,
 				9A97DA8720EF420200688ADB /* NSAttributedString+HxbAttributedString.m in Sources */,
 				9A97DA9C20EF420200688ADB /* IDPStorage.m in Sources */,
 				9A97DA9D20EF420200688ADB /* IDPStorageFileInner.m in Sources */,
