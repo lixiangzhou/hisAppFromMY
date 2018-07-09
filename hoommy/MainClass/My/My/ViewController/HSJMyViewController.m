@@ -19,24 +19,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setupSubViews];
-}
-
-- (void)setupSubViews {
-    UIButton *bankListBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 100, 100, 30 )];
-    bankListBtn.backgroundColor = [UIColor redColor];
-    [bankListBtn setTitle:@"银行卡列表" forState:(UIControlStateNormal)];
-    [bankListBtn addTarget:self action:@selector(gotoBankListVC) forControlEvents:(UIControlEventTouchUpInside)];
-    [self.view addSubview:bankListBtn];
-    
-}
-
-- (void)gotoBankListVC {
-//    [self.navigationController pushViewController:[[HSJBankCardListViewController alloc] init] animated:YES];
-//     [self.navigationController pushViewController:[[HSJRiskAssessmentViewController alloc] init] animated:YES];
-    [self presentViewController:[[HSJSignInViewController alloc] init] animated:YES completion:^{
-        
-    }];
 }
  
 - (void)buttonClickAct:(UIButton *)sender {
@@ -54,14 +36,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
