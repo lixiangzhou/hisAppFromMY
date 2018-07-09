@@ -16,7 +16,7 @@
 - (void)showProgress:(NSString*)hudContent;
 - (void)showToast:(NSString *)toast;
 
-- (void)hideProgress;
+- (void)hideProgress:(NYBaseRequest *)request;
 
 #pragma mark 错误码处理
 /**

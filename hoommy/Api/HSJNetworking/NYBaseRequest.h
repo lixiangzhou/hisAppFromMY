@@ -107,7 +107,7 @@ typedef void (^HXBRequestFailureBlock)(NYBaseRequest *request, NSError *error);
  隐藏加载框
  
  */
-- (void)hideLoading;
+- (void)hideLoading:(NYBaseRequest *)request;
 
 /**
  显示提示文本
