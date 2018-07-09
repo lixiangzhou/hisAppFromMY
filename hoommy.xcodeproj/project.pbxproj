@@ -29,6 +29,7 @@
 		4EA57D3020F3500B006FD573 /* HXBVersionUpdateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA57D2B20F3500B006FD573 /* HXBVersionUpdateModel.m */; };
 		4EA57D3120F3500B006FD573 /* HSJMyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA57D2E20F3500B006FD573 /* HSJMyViewController.m */; };
 		4EA57D3220F3500B006FD573 /* HSJMyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EA57D2F20F3500B006FD573 /* HSJMyViewController.xib */; };
+		9A4B181F20F35FC5006B83C7 /* HxbHUDProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A4B181E20F35FC5006B83C7 /* HxbHUDProgress.m */; };
 		9A6E0A5C20F84C9700598071 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A6E0A5B20F84C9700598071 /* AppDelegate.m */; };
 		9A6E0A6220F84C9700598071 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A6E0A6020F84C9700598071 /* Main.storyboard */; };
 		9A6E0A6420F84CA000598071 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A6E0A6320F84CA000598071 /* Assets.xcassets */; };
@@ -215,6 +216,8 @@
 		9A4B181420F34433006B83C7 /* HXBBindPhoneVCViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBBindPhoneVCViewModel.m; sourceTree = "<group>"; };
 		9A4B181A20F349E5006B83C7 /* HXBUserInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBUserInfoModel.h; sourceTree = "<group>"; };
 		9A4B181B20F349E5006B83C7 /* HXBUserInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBUserInfoModel.m; sourceTree = "<group>"; };
+		9A4B181D20F35FC5006B83C7 /* HxbHUDProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HxbHUDProgress.h; sourceTree = "<group>"; };
+		9A4B181E20F35FC5006B83C7 /* HxbHUDProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HxbHUDProgress.m; sourceTree = "<group>"; };
 		9A6E0A5720F84C9700598071 /* hoommy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = hoommy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A6E0A5A20F84C9700598071 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9A6E0A5B20F84C9700598071 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -1222,6 +1225,8 @@
 		9A97D96720EF420100688ADB /* AlertView */ = {
 			isa = PBXGroup;
 			children = (
+				9A4B181D20F35FC5006B83C7 /* HxbHUDProgress.h */,
+				9A4B181E20F35FC5006B83C7 /* HxbHUDProgress.m */,
 				9A97D96820EF420100688ADB /* SGInfoAlert.h */,
 				9A97D96920EF420100688ADB /* SGInfoAlert.m */,
 			);
@@ -2008,6 +2013,7 @@
 				9A97DA9F20EF420200688ADB /* IDPStorageSqliteInner.m in Sources */,
 				9A97DA9720EF420200688ADB /* UIViewController+HSContentAreaInset.m in Sources */,
 				4EA57D1B20F34C9A006FD573 /* BXTextField.m in Sources */,
+				9A4B181F20F35FC5006B83C7 /* HxbHUDProgress.m in Sources */,
 				9A97DA6820EF420200688ADB /* HSJHomeViewController.m in Sources */,
 				9A97DA8520EF420200688ADB /* NSObject+Hxb.m in Sources */,
 				9A97DA9820EF420200688ADB /* UIViewController+HXBUtil.m in Sources */,
