@@ -36,5 +36,6 @@
 #import "NSString+IDPExtension.h"
 #import "UIScrollView+HXBScrollView.h"
 #import "HSJBaseViewModel+HSJNetWorkApi.h"
+#import "UIView+HSJStandard.h"
 
 #endif /* PrefixHeader_pch */

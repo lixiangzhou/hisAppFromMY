@@ -24,6 +24,8 @@
 		4EA57D3220F3500B006FD573 /* HSJMyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EA57D2F20F3500B006FD573 /* HSJMyViewController.xib */; };
 		9A4B181F20F35FC5006B83C7 /* HxbHUDProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A4B181E20F35FC5006B83C7 /* HxbHUDProgress.m */; };
 		9A4B182720F36585006B83C7 /* HXBAgreementView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A4B182620F36585006B83C7 /* HXBAgreementView.m */; };
+		9A4B182F20F36DB2006B83C7 /* UIViewController+HSJStandard.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A4B182E20F36DB2006B83C7 /* UIViewController+HSJStandard.m */; };
+		9A4B183220F36DCC006B83C7 /* UIView+HSJStandard.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A4B183120F36DCC006B83C7 /* UIView+HSJStandard.m */; };
 		9A6E0A5C20F84C9700598071 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A6E0A5B20F84C9700598071 /* AppDelegate.m */; };
 		9A6E0A6220F84C9700598071 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A6E0A6020F84C9700598071 /* Main.storyboard */; };
 		9A6E0A6420F84CA000598071 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A6E0A6320F84CA000598071 /* Assets.xcassets */; };
@@ -201,6 +203,10 @@
 		9A4B181E20F35FC5006B83C7 /* HxbHUDProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HxbHUDProgress.m; sourceTree = "<group>"; };
 		9A4B182520F36585006B83C7 /* HXBAgreementView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBAgreementView.h; sourceTree = "<group>"; };
 		9A4B182620F36585006B83C7 /* HXBAgreementView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBAgreementView.m; sourceTree = "<group>"; };
+		9A4B182D20F36DB2006B83C7 /* UIViewController+HSJStandard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+HSJStandard.h"; sourceTree = "<group>"; };
+		9A4B182E20F36DB2006B83C7 /* UIViewController+HSJStandard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+HSJStandard.m"; sourceTree = "<group>"; };
+		9A4B183020F36DCC006B83C7 /* UIView+HSJStandard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+HSJStandard.h"; sourceTree = "<group>"; };
+		9A4B183120F36DCC006B83C7 /* UIView+HSJStandard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+HSJStandard.m"; sourceTree = "<group>"; };
 		9A6E0A5720F84C9700598071 /* hoommy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = hoommy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A6E0A5A20F84C9700598071 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9A6E0A5B20F84C9700598071 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -685,6 +691,17 @@
 			path = AgreementView;
 			sourceTree = "<group>";
 		};
+		9A4B182C20F36D42006B83C7 /* StandardExtend */ = {
+			isa = PBXGroup;
+			children = (
+				9A4B182D20F36DB2006B83C7 /* UIViewController+HSJStandard.h */,
+				9A4B182E20F36DB2006B83C7 /* UIViewController+HSJStandard.m */,
+				9A4B183020F36DCC006B83C7 /* UIView+HSJStandard.h */,
+				9A4B183120F36DCC006B83C7 /* UIView+HSJStandard.m */,
+			);
+			path = StandardExtend;
+			sourceTree = "<group>";
+		};
 		9A6E0A4E20F84C9700598071 = {
 			isa = PBXGroup;
 			children = (
@@ -1138,6 +1155,7 @@
 		9A97D96620EF420100688ADB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				9A4B182C20F36D42006B83C7 /* StandardExtend */,
 				9A97D96720EF420100688ADB /* AlertView */,
 				9A97D96A20EF420100688ADB /* HXBDeviceVersion */,
 				9A97D96D20EF420100688ADB /* HXBUtility */,
@@ -1864,6 +1882,7 @@
 				9A97DAB720EF420200688ADB /* NYBaseRequest.m in Sources */,
 				9A97DA9220EF420200688ADB /* UIResponder+FindNext.m in Sources */,
 				4EA57D3120F3500B006FD573 /* HSJMyViewController.m in Sources */,
+				9A4B183220F36DCC006B83C7 /* UIView+HSJStandard.m in Sources */,
 				9A97DA9520EF420200688ADB /* UIView+HXBFrame.m in Sources */,
 				9A97DA7C20EF420200688ADB /* HXBBaseNavigationController.m in Sources */,
 				9A97DA8120EF420200688ADB /* HXBDeviceVersion.m in Sources */,
@@ -1943,6 +1962,7 @@
 				9A97DA8B20EF420200688ADB /* NSString+HxbMask.m in Sources */,
 				9A97DAB020EF420200688ADB /* NSString+MD5.m in Sources */,
 				9A97DA6020EF420200688ADB /* HXBTokenModel.m in Sources */,
+				9A4B182F20F36DB2006B83C7 /* UIViewController+HSJStandard.m in Sources */,
 				4EA57D3020F3500B006FD573 /* HXBVersionUpdateModel.m in Sources */,
 				9A97DA7520EF420200688ADB /* HSJBaseModel.m in Sources */,
 				9A6E0A5C20F84C9700598071 /* AppDelegate.m in Sources */,
