@@ -58,7 +58,7 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DW0-VA-0Vv">
                                     <rect key="frame" x="0.0" y="0.0" width="111.5" height="172"/>
                                     <color key="backgroundColor" red="0.80089833210000005" green="1" blue="0.3301858111" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <state key="normal" title="待定"/>
+                                    <state key="normal" title="账户信息"/>
                                     <connections>
                                         <action selector="settingAccount:" destination="-1" eventType="touchUpInside" id="Wae-Ud-R1L"/>
                                     </connections>
