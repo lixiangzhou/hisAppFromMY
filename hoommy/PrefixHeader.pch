@@ -37,5 +37,7 @@
 #import "UIScrollView+HXBScrollView.h"
 #import "HSJBaseViewModel+HSJNetWorkApi.h"
 #import "UIView+HSJStandard.h"
+#import "NSString+HxbPerMilMoney.h"
+
 
 #endif /* PrefixHeader_pch */

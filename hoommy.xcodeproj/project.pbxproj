@@ -151,6 +151,9 @@
 		9A97DAD420EF420200688ADB /* transaction_password.svg in Resources */ = {isa = PBXBuildFile; fileRef = 9A97DA5D20EF420200688ADB /* transaction_password.svg */; };
 		9ACB2F3C20EF6E08005C3C3D /* HSJKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ACB2F3B20EF6E08005C3C3D /* HSJKeyChainStore.m */; };
 		E13A0E7C20F48D9F00A3E364 /* HXBGeneralAlertVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E13A0E7B20F48D9F00A3E364 /* HXBGeneralAlertVC.m */; };
+		E13A0E8420F48EF600A3E364 /* HXB_XYTools.m in Sources */ = {isa = PBXBuildFile; fileRef = E13A0E8320F48EF500A3E364 /* HXB_XYTools.m */; };
+		E13A0EF320F49E2500A3E364 /* HXBRequestUserInfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E13A0ED520F49E2500A3E364 /* HXBRequestUserInfoViewModel.m */; };
+		E13A0EF420F49E2500A3E364 /* HXBUserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E13A0ED720F49E2500A3E364 /* HXBUserInfoModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -514,6 +517,12 @@
 		E13A0E7920F48D6D00A3E364 /* HXBColorMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBColorMacro.h; sourceTree = "<group>"; };
 		E13A0E7A20F48D9F00A3E364 /* HXBGeneralAlertVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBGeneralAlertVC.h; sourceTree = "<group>"; };
 		E13A0E7B20F48D9F00A3E364 /* HXBGeneralAlertVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBGeneralAlertVC.m; sourceTree = "<group>"; };
+		E13A0E8220F48EF500A3E364 /* HXB_XYTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXB_XYTools.h; sourceTree = "<group>"; };
+		E13A0E8320F48EF500A3E364 /* HXB_XYTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXB_XYTools.m; sourceTree = "<group>"; };
+		E13A0ED420F49E2500A3E364 /* HXBRequestUserInfoViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBRequestUserInfoViewModel.h; sourceTree = "<group>"; };
+		E13A0ED520F49E2500A3E364 /* HXBRequestUserInfoViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBRequestUserInfoViewModel.m; sourceTree = "<group>"; };
+		E13A0ED620F49E2500A3E364 /* HXBUserInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBUserInfoModel.h; sourceTree = "<group>"; };
+		E13A0ED720F49E2500A3E364 /* HXBUserInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBUserInfoModel.m; sourceTree = "<group>"; };
 		F3AA4ECD958918A00E682797 /* Pods-hoommy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hoommy.release.xcconfig"; path = "Pods/Target Support Files/Pods-hoommy/Pods-hoommy.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -960,6 +969,7 @@
 		9A97D91A20EF420000688ADB /* My */ = {
 			isa = PBXGroup;
 			children = (
+				E13A0E8820F49E2500A3E364 /* User */,
 				E13A0E7D20F48DF400A3E364 /* AccountInfo */,
 				4EA57D2820F3500B006FD573 /* My */,
 				4EA57D0720F3389E006FD573 /* RiskAssessment */,
@@ -1178,6 +1188,8 @@
 		9A97D96720EF420100688ADB /* AlertView */ = {
 			isa = PBXGroup;
 			children = (
+				E13A0E8220F48EF500A3E364 /* HXB_XYTools.h */,
+				E13A0E8320F48EF500A3E364 /* HXB_XYTools.m */,
 				E13A0E7A20F48D9F00A3E364 /* HXBGeneralAlertVC.h */,
 				E13A0E7B20F48D9F00A3E364 /* HXBGeneralAlertVC.m */,
 				9A4B181D20F35FC5006B83C7 /* HxbHUDProgress.h */,
@@ -1704,6 +1716,25 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		E13A0E8820F49E2500A3E364 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				E13A0ED320F49E2500A3E364 /* UserInfo */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		E13A0ED320F49E2500A3E364 /* UserInfo */ = {
+			isa = PBXGroup;
+			children = (
+				E13A0ED420F49E2500A3E364 /* HXBRequestUserInfoViewModel.h */,
+				E13A0ED520F49E2500A3E364 /* HXBRequestUserInfoViewModel.m */,
+				E13A0ED620F49E2500A3E364 /* HXBUserInfoModel.h */,
+				E13A0ED720F49E2500A3E364 /* HXBUserInfoModel.m */,
+			);
+			path = UserInfo;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1944,6 +1975,7 @@
 				9A97DA7A20EF420200688ADB /* HXBWKWebViewProgressView.m in Sources */,
 				9A97DA9B20EF420200688ADB /* IDPConfig.m in Sources */,
 				9A97DAA520EF420200688ADB /* NSString+IDPExtension.m in Sources */,
+				E13A0EF320F49E2500A3E364 /* HXBRequestUserInfoViewModel.m in Sources */,
 				9A97DA8D20EF420200688ADB /* NSString+HXBPhonNumber.m in Sources */,
 				9A97DA7B20EF420200688ADB /* HXBWKWebviewViewModel.m in Sources */,
 				9A97DA7320EF420200688ADB /* HSJMyViewModel.m in Sources */,
@@ -1956,8 +1988,10 @@
 				9A97DA9020EF420200688ADB /* UIImage+HXBUtil.m in Sources */,
 				9A97DA8020EF420200688ADB /* SGInfoAlert.m in Sources */,
 				9A97DA6420EF420200688ADB /* HSJPageScrollView.m in Sources */,
+				E13A0EF420F49E2500A3E364 /* HXBUserInfoModel.m in Sources */,
 				9A97DA9E20EF420200688ADB /* IDPStorageMemoryInner.m in Sources */,
 				9A97DA5F20EF420200688ADB /* HSJTokenManager.m in Sources */,
+				E13A0E8420F48EF600A3E364 /* HXB_XYTools.m in Sources */,
 				9A97DAA720EF420200688ADB /* JastorRuntimeHelper.m in Sources */,
 				9A97DA6320EF420200688ADB /* NSObject+HSNetRequestDelegate.m in Sources */,
 				9A97DAB220EF420200688ADB /* NSTimer+Addition.m in Sources */,

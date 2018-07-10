@@ -20,6 +20,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 }
+- (IBAction)settingAccount:(id)sender {
+    
+}
 
 - (IBAction)loginAct:(UIButton *)sender {
     

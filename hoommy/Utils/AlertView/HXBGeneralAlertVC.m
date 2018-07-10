@@ -7,6 +7,7 @@
 //
 
 #import "HXBGeneralAlertVC.h"
+#import "HXB_XYTools.h"
 
 @interface HXBGeneralAlertVC ()
 @property (nonatomic, strong) UIButton *backBtn;
