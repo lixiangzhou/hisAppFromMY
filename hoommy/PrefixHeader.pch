@@ -24,7 +24,7 @@
 #import "HSJConfig.h"
 #import "HXBRootVCManager.h"
 #import "KeyChainManage.h"
-
+#import "HXBRequestUserInfoViewModel.h"
 ////////////////////////////////////////
 #import "NYBaseRequest.h"
 
@@ -38,6 +38,6 @@
 #import "HSJBaseViewModel+HSJNetWorkApi.h"
 #import "UIView+HSJStandard.h"
 #import "NSString+HxbPerMilMoney.h"
-
+#import "NSString+HxbMask.h"
 
 #endif /* PrefixHeader_pch */

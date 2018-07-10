@@ -154,6 +154,13 @@
 		E13A0E8420F48EF600A3E364 /* HXB_XYTools.m in Sources */ = {isa = PBXBuildFile; fileRef = E13A0E8320F48EF500A3E364 /* HXB_XYTools.m */; };
 		E13A0EF320F49E2500A3E364 /* HXBRequestUserInfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E13A0ED520F49E2500A3E364 /* HXBRequestUserInfoViewModel.m */; };
 		E13A0EF420F49E2500A3E364 /* HXBUserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E13A0ED720F49E2500A3E364 /* HXBUserInfoModel.m */; };
+		E13A0EF720F4A60400A3E364 /* HxbAccountInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E13A0EF520F4A60300A3E364 /* HxbAccountInfoViewController.m */; };
+		E13A0EFA20F4AB4400A3E364 /* HxbMyAboutMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E13A0EF920F4AB4400A3E364 /* HxbMyAboutMeViewController.m */; };
+		E13A0EFD20F4ADAA00A3E364 /* HXBBottomLineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E13A0EFB20F4ADAA00A3E364 /* HXBBottomLineTableViewCell.m */; };
+		E13A0F0020F4B45900A3E364 /* HXBAccountInfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E13A0EFF20F4B45900A3E364 /* HXBAccountInfoViewModel.m */; };
+		E13A0F0320F4C94900A3E364 /* HXBCommonProblemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E13A0F0220F4C94900A3E364 /* HXBCommonProblemViewController.m */; };
+		E13A0F0620F4C9FF00A3E364 /* HXBAlertManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E13A0F0420F4C9FF00A3E364 /* HXBAlertManager.m */; };
+		E13A0F0B20F4DC2700A3E364 /* HXBMiddlekey.m in Sources */ = {isa = PBXBuildFile; fileRef = E13A0F0A20F4DC2600A3E364 /* HXBMiddlekey.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -523,6 +530,21 @@
 		E13A0ED520F49E2500A3E364 /* HXBRequestUserInfoViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBRequestUserInfoViewModel.m; sourceTree = "<group>"; };
 		E13A0ED620F49E2500A3E364 /* HXBUserInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBUserInfoModel.h; sourceTree = "<group>"; };
 		E13A0ED720F49E2500A3E364 /* HXBUserInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBUserInfoModel.m; sourceTree = "<group>"; };
+		E13A0EF520F4A60300A3E364 /* HxbAccountInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HxbAccountInfoViewController.m; sourceTree = "<group>"; };
+		E13A0EF620F4A60300A3E364 /* HxbAccountInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HxbAccountInfoViewController.h; sourceTree = "<group>"; };
+		E13A0EF820F4AB4400A3E364 /* HxbMyAboutMeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HxbMyAboutMeViewController.h; sourceTree = "<group>"; };
+		E13A0EF920F4AB4400A3E364 /* HxbMyAboutMeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HxbMyAboutMeViewController.m; sourceTree = "<group>"; };
+		E13A0EFB20F4ADAA00A3E364 /* HXBBottomLineTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBBottomLineTableViewCell.m; sourceTree = "<group>"; };
+		E13A0EFC20F4ADAA00A3E364 /* HXBBottomLineTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBBottomLineTableViewCell.h; sourceTree = "<group>"; };
+		E13A0EFE20F4B45900A3E364 /* HXBAccountInfoViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBAccountInfoViewModel.h; sourceTree = "<group>"; };
+		E13A0EFF20F4B45900A3E364 /* HXBAccountInfoViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBAccountInfoViewModel.m; sourceTree = "<group>"; };
+		E13A0F0120F4C94900A3E364 /* HXBCommonProblemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBCommonProblemViewController.h; sourceTree = "<group>"; };
+		E13A0F0220F4C94900A3E364 /* HXBCommonProblemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBCommonProblemViewController.m; sourceTree = "<group>"; };
+		E13A0F0420F4C9FF00A3E364 /* HXBAlertManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBAlertManager.m; sourceTree = "<group>"; };
+		E13A0F0520F4C9FF00A3E364 /* HXBAlertManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBAlertManager.h; sourceTree = "<group>"; };
+		E13A0F0720F4D25D00A3E364 /* MacroDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacroDefinition.h; sourceTree = "<group>"; };
+		E13A0F0920F4DC2600A3E364 /* HXBMiddlekey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBMiddlekey.h; sourceTree = "<group>"; };
+		E13A0F0A20F4DC2600A3E364 /* HXBMiddlekey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBMiddlekey.m; sourceTree = "<group>"; };
 		F3AA4ECD958918A00E682797 /* Pods-hoommy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hoommy.release.xcconfig"; path = "Pods/Target Support Files/Pods-hoommy/Pods-hoommy.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1055,6 +1077,7 @@
 		9A97D93E20EF420000688ADB /* Theme */ = {
 			isa = PBXGroup;
 			children = (
+				E13A0F0720F4D25D00A3E364 /* MacroDefinition.h */,
 				9A97D93F20EF420000688ADB /* Color */,
 				9A97D94220EF420000688ADB /* Dimen */,
 				9A97D94520EF420000688ADB /* Font */,
@@ -1171,6 +1194,7 @@
 		9A97D96620EF420100688ADB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				E13A0F0820F4DC2600A3E364 /* Middlekey */,
 				9A4B182C20F36D42006B83C7 /* StandardExtend */,
 				9A97D96720EF420100688ADB /* AlertView */,
 				9A97D96A20EF420100688ADB /* HXBDeviceVersion */,
@@ -1188,6 +1212,8 @@
 		9A97D96720EF420100688ADB /* AlertView */ = {
 			isa = PBXGroup;
 			children = (
+				E13A0F0520F4C9FF00A3E364 /* HXBAlertManager.h */,
+				E13A0F0420F4C9FF00A3E364 /* HXBAlertManager.m */,
 				E13A0E8220F48EF500A3E364 /* HXB_XYTools.h */,
 				E13A0E8320F48EF500A3E364 /* HXB_XYTools.m */,
 				E13A0E7A20F48D9F00A3E364 /* HXBGeneralAlertVC.h */,
@@ -1698,6 +1724,8 @@
 		E13A0E7F20F48DF400A3E364 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E13A0EFC20F4ADAA00A3E364 /* HXBBottomLineTableViewCell.h */,
+				E13A0EFB20F4ADAA00A3E364 /* HXBBottomLineTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1705,6 +1733,12 @@
 		E13A0E8020F48DF400A3E364 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				E13A0F0120F4C94900A3E364 /* HXBCommonProblemViewController.h */,
+				E13A0F0220F4C94900A3E364 /* HXBCommonProblemViewController.m */,
+				E13A0EF820F4AB4400A3E364 /* HxbMyAboutMeViewController.h */,
+				E13A0EF920F4AB4400A3E364 /* HxbMyAboutMeViewController.m */,
+				E13A0EF620F4A60300A3E364 /* HxbAccountInfoViewController.h */,
+				E13A0EF520F4A60300A3E364 /* HxbAccountInfoViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1712,6 +1746,8 @@
 		E13A0E8120F48DF400A3E364 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				E13A0EFE20F4B45900A3E364 /* HXBAccountInfoViewModel.h */,
+				E13A0EFF20F4B45900A3E364 /* HXBAccountInfoViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1733,6 +1769,15 @@
 				E13A0ED720F49E2500A3E364 /* HXBUserInfoModel.m */,
 			);
 			path = UserInfo;
+			sourceTree = "<group>";
+		};
+		E13A0F0820F4DC2600A3E364 /* Middlekey */ = {
+			isa = PBXGroup;
+			children = (
+				E13A0F0920F4DC2600A3E364 /* HXBMiddlekey.h */,
+				E13A0F0A20F4DC2600A3E364 /* HXBMiddlekey.m */,
+			);
+			path = Middlekey;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1973,21 +2018,25 @@
 				9A97DAAA20EF420200688ADB /* CRSA.m in Sources */,
 				9A97DA6D20EF420200688ADB /* HSJListViewController.m in Sources */,
 				9A97DA7A20EF420200688ADB /* HXBWKWebViewProgressView.m in Sources */,
+				E13A0EF720F4A60400A3E364 /* HxbAccountInfoViewController.m in Sources */,
 				9A97DA9B20EF420200688ADB /* IDPConfig.m in Sources */,
 				9A97DAA520EF420200688ADB /* NSString+IDPExtension.m in Sources */,
 				E13A0EF320F49E2500A3E364 /* HXBRequestUserInfoViewModel.m in Sources */,
 				9A97DA8D20EF420200688ADB /* NSString+HXBPhonNumber.m in Sources */,
+				E13A0F0320F4C94900A3E364 /* HXBCommonProblemViewController.m in Sources */,
 				9A97DA7B20EF420200688ADB /* HXBWKWebviewViewModel.m in Sources */,
 				9A97DA7320EF420200688ADB /* HSJMyViewModel.m in Sources */,
 				9A97DA6220EF420200688ADB /* HXBRootVCManager.m in Sources */,
 				9A6E0A6A20F84CA000598071 /* main.m in Sources */,
 				9A97DA6720EF420200688ADB /* HSJFragmentViewController.m in Sources */,
 				9A97DA9920EF420200688ADB /* IDPLog.m in Sources */,
+				E13A0F0620F4C9FF00A3E364 /* HXBAlertManager.m in Sources */,
 				9A97DAA920EF420200688ADB /* Base64.m in Sources */,
 				9A97DAA220EF420200688ADB /* NSData+IDPExtension.m in Sources */,
 				9A97DA9020EF420200688ADB /* UIImage+HXBUtil.m in Sources */,
 				9A97DA8020EF420200688ADB /* SGInfoAlert.m in Sources */,
 				9A97DA6420EF420200688ADB /* HSJPageScrollView.m in Sources */,
+				E13A0F0020F4B45900A3E364 /* HXBAccountInfoViewModel.m in Sources */,
 				E13A0EF420F49E2500A3E364 /* HXBUserInfoModel.m in Sources */,
 				9A97DA9E20EF420200688ADB /* IDPStorageMemoryInner.m in Sources */,
 				9A97DA5F20EF420200688ADB /* HSJTokenManager.m in Sources */,
@@ -2027,6 +2076,7 @@
 				9A97DA9C20EF420200688ADB /* IDPStorage.m in Sources */,
 				9A97DA9D20EF420200688ADB /* IDPStorageFileInner.m in Sources */,
 				4EA57D2720F34F1F006FD573 /* UITextField+BXExtension.m in Sources */,
+				E13A0EFA20F4AB4400A3E364 /* HxbMyAboutMeViewController.m in Sources */,
 				4EA57D2420F34F07006FD573 /* UIView+BXExtension.m in Sources */,
 				9A97DA7020EF420200688ADB /* HSJTestViewController.m in Sources */,
 				9A97DA7820EF420200688ADB /* HXBBaseViewController.m in Sources */,
@@ -2042,6 +2092,7 @@
 				9A4B182720F36585006B83C7 /* HXBAgreementView.m in Sources */,
 				9A97DA9820EF420200688ADB /* UIViewController+HXBUtil.m in Sources */,
 				9A97DA8B20EF420200688ADB /* NSString+HxbMask.m in Sources */,
+				E13A0F0B20F4DC2700A3E364 /* HXBMiddlekey.m in Sources */,
 				9A97DAB020EF420200688ADB /* NSString+MD5.m in Sources */,
 				9A97DA6020EF420200688ADB /* HXBTokenModel.m in Sources */,
 				9A4B182F20F36DB2006B83C7 /* UIViewController+HSJStandard.m in Sources */,
@@ -2051,6 +2102,7 @@
 				9A97DA9120EF420200688ADB /* UILabel+Util.m in Sources */,
 				4EA57D0B20F338EA006FD573 /* HSJRiskAssessmentViewController.m in Sources */,
 				4EA57D0F20F340BB006FD573 /* HSJSignInViewController.m in Sources */,
+				E13A0EFD20F4ADAA00A3E364 /* HXBBottomLineTableViewCell.m in Sources */,
 				9A97DA9320EF420200688ADB /* UITextView+YLTextView.m in Sources */,
 				9A97DAB520EF420200688ADB /* NYNetworkAgent.m in Sources */,
 			);

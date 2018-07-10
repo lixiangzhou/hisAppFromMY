@@ -22,8 +22,12 @@
 
 
 
+#define kHXBUser_signOutURL @"/logout" /// 登出
 
 
+
+//MARK: ======================= 账户信息 =======================
+#define kHXBUser_QuestionsURL           @"/questions"///常见问题
 
 
 #endif /* HSJNetWorkUrl_h */

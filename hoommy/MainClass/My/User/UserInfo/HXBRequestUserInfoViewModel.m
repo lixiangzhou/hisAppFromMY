@@ -11,6 +11,16 @@
 #import "HXBUserInfoModel.h"
 
 @implementation HXBRequestUserInfoViewModel
+
++ (void)signOut {
+    NYBaseRequest *request = [[NYBaseRequest alloc]init];
+    request.requestUrl = kHXBUser_signOutURL;
+    request.requestMethod = NYRequestMethodPost;
+    [request loadData:^(NYBaseRequest *request, id responseObject) {
+    } failure:^(NYBaseRequest *request, NSError *error) {
+    }];
+}
+
 - (void)setUserInfoModel:(HXBUserInfoModel *)userInfoModel {
     _userInfoModel = userInfoModel;
 //    KeyChain.phone = userInfoModel.userInfo.mobile;

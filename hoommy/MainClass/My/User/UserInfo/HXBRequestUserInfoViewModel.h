@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "HXBUserInfoModel.h"
-
+#import "HSJBaseViewModel.h"
 ///用户相关的VIewmode
 @interface HXBRequestUserInfoViewModel : HSJBaseViewModel
++ (void)signOut;      //!< 退出登录
+
 @property (nonatomic,strong) HXBUserInfoModel *userInfoModel;
 
 // --------------------- 拼接了元 ----------------------
