@@ -150,6 +150,7 @@
 		9A97DAD320EF420200688ADB /* trading_record.svg in Resources */ = {isa = PBXBuildFile; fileRef = 9A97DA5C20EF420200688ADB /* trading_record.svg */; };
 		9A97DAD420EF420200688ADB /* transaction_password.svg in Resources */ = {isa = PBXBuildFile; fileRef = 9A97DA5D20EF420200688ADB /* transaction_password.svg */; };
 		9ACB2F3C20EF6E08005C3C3D /* HSJKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ACB2F3B20EF6E08005C3C3D /* HSJKeyChainStore.m */; };
+		E13A0E7C20F48D9F00A3E364 /* HXBGeneralAlertVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E13A0E7B20F48D9F00A3E364 /* HXBGeneralAlertVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -510,6 +511,9 @@
 		9A97DA5D20EF420200688ADB /* transaction_password.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = transaction_password.svg; sourceTree = "<group>"; };
 		9ACB2F3A20EF6E08005C3C3D /* HSJKeyChainStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJKeyChainStore.h; sourceTree = "<group>"; };
 		9ACB2F3B20EF6E08005C3C3D /* HSJKeyChainStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJKeyChainStore.m; sourceTree = "<group>"; };
+		E13A0E7920F48D6D00A3E364 /* HXBColorMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBColorMacro.h; sourceTree = "<group>"; };
+		E13A0E7A20F48D9F00A3E364 /* HXBGeneralAlertVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBGeneralAlertVC.h; sourceTree = "<group>"; };
+		E13A0E7B20F48D9F00A3E364 /* HXBGeneralAlertVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBGeneralAlertVC.m; sourceTree = "<group>"; };
 		F3AA4ECD958918A00E682797 /* Pods-hoommy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hoommy.release.xcconfig"; path = "Pods/Target Support Files/Pods-hoommy/Pods-hoommy.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -956,6 +960,7 @@
 		9A97D91A20EF420000688ADB /* My */ = {
 			isa = PBXGroup;
 			children = (
+				E13A0E7D20F48DF400A3E364 /* AccountInfo */,
 				4EA57D2820F3500B006FD573 /* My */,
 				4EA57D0720F3389E006FD573 /* RiskAssessment */,
 				4E43B05820EF77B5000BDAE7 /* BankCardList */,
@@ -1052,6 +1057,7 @@
 		9A97D93F20EF420000688ADB /* Color */ = {
 			isa = PBXGroup;
 			children = (
+				E13A0E7920F48D6D00A3E364 /* HXBColorMacro.h */,
 				9A97D94020EF420000688ADB /* HXBBackgroundColorMacros.h */,
 				9A97D94120EF420000688ADB /* HXBFontColorMacros.h */,
 			);
@@ -1172,6 +1178,8 @@
 		9A97D96720EF420100688ADB /* AlertView */ = {
 			isa = PBXGroup;
 			children = (
+				E13A0E7A20F48D9F00A3E364 /* HXBGeneralAlertVC.h */,
+				E13A0E7B20F48D9F00A3E364 /* HXBGeneralAlertVC.m */,
 				9A4B181D20F35FC5006B83C7 /* HxbHUDProgress.h */,
 				9A4B181E20F35FC5006B83C7 /* HxbHUDProgress.m */,
 				9A97D96820EF420100688ADB /* SGInfoAlert.h */,
@@ -1657,6 +1665,45 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		E13A0E7D20F48DF400A3E364 /* AccountInfo */ = {
+			isa = PBXGroup;
+			children = (
+				E13A0E7E20F48DF400A3E364 /* model */,
+				E13A0E7F20F48DF400A3E364 /* View */,
+				E13A0E8020F48DF400A3E364 /* ViewController */,
+				E13A0E8120F48DF400A3E364 /* ViewModel */,
+			);
+			path = AccountInfo;
+			sourceTree = "<group>";
+		};
+		E13A0E7E20F48DF400A3E364 /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		E13A0E7F20F48DF400A3E364 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E13A0E8020F48DF400A3E364 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		E13A0E8120F48DF400A3E364 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1933,6 +1980,7 @@
 				9A97DA5E20EF420200688ADB /* KeyChainManage.m in Sources */,
 				4E43B06B20EF7C60000BDAE7 /* UIImageView+HxbSDWebImage.m in Sources */,
 				9A97DAA320EF420200688ADB /* NSDate+IDPExtension.m in Sources */,
+				E13A0E7C20F48D9F00A3E364 /* HXBGeneralAlertVC.m in Sources */,
 				9A97DAB420EF420200688ADB /* NYHTTPConnection.m in Sources */,
 				9A97DA7420EF420200688ADB /* HSJNotification.m in Sources */,
 				4E43B06820EF7A80000BDAE7 /* HSJBankListModel.m in Sources */,
