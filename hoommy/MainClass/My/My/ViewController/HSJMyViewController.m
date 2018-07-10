@@ -8,7 +8,9 @@
 
 #import "HSJMyViewController.h"
 #import "HSJBaseModel.h"
-
+#import "HSJBankCardListViewController.h"
+#import "HSJRiskAssessmentViewController.h"
+#import "HSJSignInViewController.h"
 @interface HSJMyViewController ()
 
 @end
@@ -17,10 +19,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
 }
 
-- (IBAction)buttonClickAct:(UIButton *)sender {
+- (IBAction)loginAct:(UIButton *)sender {
+    
+}
+
+- (IBAction)openAccountAct:(UIButton *)sender {
+}
+
+- (IBAction)bindPhoneAct:(UIButton *)sender {
+
+}
+
+- (void)buttonClickAct:(UIButton *)sender {
     HSJBaseModel* mode = [[HSJBaseModel alloc] initWithDictionary:@{@"code":@200, @"id":@"hello", @"data":@{@"name":@"jim"}}];
     if(mode.code.intValue == 200) {
         [[IDPCache sharedCache] setObj:mode forKey:@"obj"];
@@ -35,14 +47,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
