@@ -204,6 +204,14 @@
 		4EE6169A20F4AE8B0044B998 /* HSJCodeSigInViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJCodeSigInViewController.m; sourceTree = "<group>"; };
 		54B20A0D6605B011D885333F /* Pods-hoommy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hoommy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-hoommy/Pods-hoommy.debug.xcconfig"; sourceTree = "<group>"; };
 		73C7B870EA4F77D826DA647B /* libPods-hoommy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-hoommy.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A4B181D20F35FC5006B83C7 /* HxbHUDProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HxbHUDProgress.h; sourceTree = "<group>"; };
+		9A4B181E20F35FC5006B83C7 /* HxbHUDProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HxbHUDProgress.m; sourceTree = "<group>"; };
+		9A4B182520F36585006B83C7 /* HXBAgreementView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBAgreementView.h; sourceTree = "<group>"; };
+		9A4B182620F36585006B83C7 /* HXBAgreementView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBAgreementView.m; sourceTree = "<group>"; };
+		9A4B182D20F36DB2006B83C7 /* UIViewController+HSJStandard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+HSJStandard.h"; sourceTree = "<group>"; };
+		9A4B182E20F36DB2006B83C7 /* UIViewController+HSJStandard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+HSJStandard.m"; sourceTree = "<group>"; };
+		9A4B183020F36DCC006B83C7 /* UIView+HSJStandard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+HSJStandard.h"; sourceTree = "<group>"; };
+		9A4B183120F36DCC006B83C7 /* UIView+HSJStandard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+HSJStandard.m"; sourceTree = "<group>"; };
 		9A6E0A5720F84C9700598071 /* hoommy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = hoommy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A6E0A5A20F84C9700598071 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9A6E0A5B20F84C9700598071 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -606,6 +614,7 @@
 		4EA57D1020F34B6C006FD573 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				9A4B182420F36585006B83C7 /* AgreementView */,
 				4EA57D1520F34BD7006FD573 /* CustomTextField */,
 			);
 			path = Component;
@@ -690,6 +699,26 @@
 				9A97D91920EF420000688ADB /* ViewModel */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		9A4B182420F36585006B83C7 /* AgreementView */ = {
+			isa = PBXGroup;
+			children = (
+				9A4B182520F36585006B83C7 /* HXBAgreementView.h */,
+				9A4B182620F36585006B83C7 /* HXBAgreementView.m */,
+			);
+			path = AgreementView;
+			sourceTree = "<group>";
+		};
+		9A4B182C20F36D42006B83C7 /* StandardExtend */ = {
+			isa = PBXGroup;
+			children = (
+				9A4B182D20F36DB2006B83C7 /* UIViewController+HSJStandard.h */,
+				9A4B182E20F36DB2006B83C7 /* UIViewController+HSJStandard.m */,
+				9A4B183020F36DCC006B83C7 /* UIView+HSJStandard.h */,
+				9A4B183120F36DCC006B83C7 /* UIView+HSJStandard.m */,
+			);
+			path = StandardExtend;
 			sourceTree = "<group>";
 		};
 		9A6E0A4E20F84C9700598071 = {
@@ -1145,6 +1174,7 @@
 		9A97D96620EF420100688ADB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				9A4B182C20F36D42006B83C7 /* StandardExtend */,
 				9A97D96720EF420100688ADB /* AlertView */,
 				9A97D96A20EF420100688ADB /* HXBDeviceVersion */,
 				9A97D96D20EF420100688ADB /* HXBUtility */,
@@ -1161,6 +1191,8 @@
 		9A97D96720EF420100688ADB /* AlertView */ = {
 			isa = PBXGroup;
 			children = (
+				9A4B181D20F35FC5006B83C7 /* HxbHUDProgress.h */,
+				9A4B181E20F35FC5006B83C7 /* HxbHUDProgress.m */,
 				9A97D96820EF420100688ADB /* SGInfoAlert.h */,
 				9A97D96920EF420100688ADB /* SGInfoAlert.m */,
 			);
@@ -1943,6 +1975,7 @@
 				9A97DA9F20EF420200688ADB /* IDPStorageSqliteInner.m in Sources */,
 				9A97DA9720EF420200688ADB /* UIViewController+HSContentAreaInset.m in Sources */,
 				4EA57D1B20F34C9A006FD573 /* BXTextField.m in Sources */,
+				9A4B181F20F35FC5006B83C7 /* HxbHUDProgress.m in Sources */,
 				9A97DA6820EF420200688ADB /* HSJHomeViewController.m in Sources */,
 				9A97DA8520EF420200688ADB /* NSObject+Hxb.m in Sources */,
 				4EE6169B20F4AE8B0044B998 /* HSJCodeSigInViewController.m in Sources */,
@@ -1950,6 +1983,7 @@
 				9A97DA8B20EF420200688ADB /* NSString+HxbMask.m in Sources */,
 				9A97DAB020EF420200688ADB /* NSString+MD5.m in Sources */,
 				9A97DA6020EF420200688ADB /* HXBTokenModel.m in Sources */,
+				9A4B182F20F36DB2006B83C7 /* UIViewController+HSJStandard.m in Sources */,
 				4EA57D3020F3500B006FD573 /* HXBVersionUpdateModel.m in Sources */,
 				9A97DA7520EF420200688ADB /* HSJBaseModel.m in Sources */,
 				9A6E0A5C20F84C9700598071 /* AppDelegate.m in Sources */,
