@@ -11,6 +11,7 @@
 #import "HSJBankCardListViewController.h"
 #import "HSJRiskAssessmentViewController.h"
 #import "HSJSignInViewController.h"
+#import "HXBBaseNavigationController.h"
 @interface HSJMyViewController ()
 
 @end
@@ -23,6 +24,11 @@
 
 - (IBAction)loginAct:(UIButton *)sender {
     
+    HXBBaseNavigationController *nav = [[HXBBaseNavigationController alloc] initWithRootViewController:[[HSJSignInViewController alloc] init]];
+    
+    [self presentViewController:nav animated:YES completion:^{
+        
+    }];
 }
 
 - (IBAction)openAccountAct:(UIButton *)sender {

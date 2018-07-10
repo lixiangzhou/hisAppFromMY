@@ -14,7 +14,6 @@
 		4E43B06820EF7A80000BDAE7 /* HSJBankListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E43B06720EF7A80000BDAE7 /* HSJBankListModel.m */; };
 		4E43B06B20EF7C60000BDAE7 /* UIImageView+HxbSDWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E43B06A20EF7C5F000BDAE7 /* UIImageView+HxbSDWebImage.m */; };
 		4EA57D0B20F338EA006FD573 /* HSJRiskAssessmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA57D0A20F338EA006FD573 /* HSJRiskAssessmentViewController.m */; };
-		4EA57D0F20F340BB006FD573 /* HSJSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA57D0E20F340BB006FD573 /* HSJSignInViewController.m */; };
 		4EA57D1B20F34C9A006FD573 /* BXTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA57D1920F34C99006FD573 /* BXTextField.m */; };
 		4EA57D2120F34D0D006FD573 /* HXBCustomTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA57D2020F34D0D006FD573 /* HXBCustomTextField.m */; };
 		4EA57D2420F34F07006FD573 /* UIView+BXExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA57D2220F34F06006FD573 /* UIView+BXExtension.m */; };
@@ -22,6 +21,10 @@
 		4EA57D3020F3500B006FD573 /* HXBVersionUpdateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA57D2B20F3500B006FD573 /* HXBVersionUpdateModel.m */; };
 		4EA57D3120F3500B006FD573 /* HSJMyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA57D2E20F3500B006FD573 /* HSJMyViewController.m */; };
 		4EA57D3220F3500B006FD573 /* HSJMyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EA57D2F20F3500B006FD573 /* HSJMyViewController.xib */; };
+		4EE6169420F4AD5A0044B998 /* HSJSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE6169020F4AD5A0044B998 /* HSJSignInViewController.m */; };
+		4EE6169520F4AD5A0044B998 /* HSJSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE6169220F4AD5A0044B998 /* HSJSignUpViewController.m */; };
+		4EE6169820F4ADB40044B998 /* HSJPasswordSigInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE6169720F4ADB40044B998 /* HSJPasswordSigInViewController.m */; };
+		4EE6169B20F4AE8B0044B998 /* HSJCodeSigInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE6169A20F4AE8B0044B998 /* HSJCodeSigInViewController.m */; };
 		9A6E0A5C20F84C9700598071 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A6E0A5B20F84C9700598071 /* AppDelegate.m */; };
 		9A6E0A6220F84C9700598071 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A6E0A6020F84C9700598071 /* Main.storyboard */; };
 		9A6E0A6420F84CA000598071 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A6E0A6320F84CA000598071 /* Assets.xcassets */; };
@@ -178,8 +181,6 @@
 		4E43B06A20EF7C5F000BDAE7 /* UIImageView+HxbSDWebImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+HxbSDWebImage.m"; sourceTree = "<group>"; };
 		4EA57D0920F338EA006FD573 /* HSJRiskAssessmentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJRiskAssessmentViewController.h; sourceTree = "<group>"; };
 		4EA57D0A20F338EA006FD573 /* HSJRiskAssessmentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJRiskAssessmentViewController.m; sourceTree = "<group>"; };
-		4EA57D0D20F340BB006FD573 /* HSJSignInViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJSignInViewController.h; sourceTree = "<group>"; };
-		4EA57D0E20F340BB006FD573 /* HSJSignInViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJSignInViewController.m; sourceTree = "<group>"; };
 		4EA57D1920F34C99006FD573 /* BXTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BXTextField.m; sourceTree = "<group>"; };
 		4EA57D1A20F34C9A006FD573 /* BXTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BXTextField.h; sourceTree = "<group>"; };
 		4EA57D1F20F34D0D006FD573 /* HXBCustomTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBCustomTextField.h; sourceTree = "<group>"; };
@@ -193,6 +194,14 @@
 		4EA57D2D20F3500B006FD573 /* HSJMyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSJMyViewController.h; sourceTree = "<group>"; };
 		4EA57D2E20F3500B006FD573 /* HSJMyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSJMyViewController.m; sourceTree = "<group>"; };
 		4EA57D2F20F3500B006FD573 /* HSJMyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HSJMyViewController.xib; sourceTree = "<group>"; };
+		4EE6168F20F4AD5A0044B998 /* HSJSignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSJSignInViewController.h; sourceTree = "<group>"; };
+		4EE6169020F4AD5A0044B998 /* HSJSignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSJSignInViewController.m; sourceTree = "<group>"; };
+		4EE6169120F4AD5A0044B998 /* HSJSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSJSignUpViewController.h; sourceTree = "<group>"; };
+		4EE6169220F4AD5A0044B998 /* HSJSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSJSignUpViewController.m; sourceTree = "<group>"; };
+		4EE6169620F4ADB40044B998 /* HSJPasswordSigInViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJPasswordSigInViewController.h; sourceTree = "<group>"; };
+		4EE6169720F4ADB40044B998 /* HSJPasswordSigInViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJPasswordSigInViewController.m; sourceTree = "<group>"; };
+		4EE6169920F4AE8B0044B998 /* HSJCodeSigInViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJCodeSigInViewController.h; sourceTree = "<group>"; };
+		4EE6169A20F4AE8B0044B998 /* HSJCodeSigInViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJCodeSigInViewController.m; sourceTree = "<group>"; };
 		54B20A0D6605B011D885333F /* Pods-hoommy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hoommy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-hoommy/Pods-hoommy.debug.xcconfig"; sourceTree = "<group>"; };
 		73C7B870EA4F77D826DA647B /* libPods-hoommy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-hoommy.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A6E0A5720F84C9700598071 /* hoommy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = hoommy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -594,15 +603,6 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
-		4EA57D0C20F34093006FD573 /* SignInAndUp */ = {
-			isa = PBXGroup;
-			children = (
-				4EA57D0D20F340BB006FD573 /* HSJSignInViewController.h */,
-				4EA57D0E20F340BB006FD573 /* HSJSignInViewController.m */,
-			);
-			path = SignInAndUp;
-			sourceTree = "<group>";
-		};
 		4EA57D1020F34B6C006FD573 /* Component */ = {
 			isa = PBXGroup;
 			children = (
@@ -646,6 +646,29 @@
 				4EA57D2D20F3500B006FD573 /* HSJMyViewController.h */,
 				4EA57D2E20F3500B006FD573 /* HSJMyViewController.m */,
 				4EA57D2F20F3500B006FD573 /* HSJMyViewController.xib */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		4EE6168B20F4AD5A0044B998 /* SignInAndUp */ = {
+			isa = PBXGroup;
+			children = (
+				4EE6168C20F4AD5A0044B998 /* ViewController */,
+			);
+			path = SignInAndUp;
+			sourceTree = "<group>";
+		};
+		4EE6168C20F4AD5A0044B998 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4EE6168F20F4AD5A0044B998 /* HSJSignInViewController.h */,
+				4EE6169020F4AD5A0044B998 /* HSJSignInViewController.m */,
+				4EE6169120F4AD5A0044B998 /* HSJSignUpViewController.h */,
+				4EE6169220F4AD5A0044B998 /* HSJSignUpViewController.m */,
+				4EE6169620F4ADB40044B998 /* HSJPasswordSigInViewController.h */,
+				4EE6169720F4ADB40044B998 /* HSJPasswordSigInViewController.m */,
+				4EE6169920F4AE8B0044B998 /* HSJCodeSigInViewController.h */,
+				4EE6169A20F4AE8B0044B998 /* HSJCodeSigInViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -840,7 +863,7 @@
 		9A97D90C20EF420000688ADB /* MainClass */ = {
 			isa = PBXGroup;
 			children = (
-				4EA57D0C20F34093006FD573 /* SignInAndUp */,
+				4EE6168B20F4AD5A0044B998 /* SignInAndUp */,
 				9A97D91320EF420000688ADB /* Home */,
 				9A97D91A20EF420000688ADB /* My */,
 				9A97D90D20EF420000688ADB /* Demo */,
@@ -1846,6 +1869,7 @@
 				9A97DAB720EF420200688ADB /* NYBaseRequest.m in Sources */,
 				9A97DA9220EF420200688ADB /* UIResponder+FindNext.m in Sources */,
 				4EA57D3120F3500B006FD573 /* HSJMyViewController.m in Sources */,
+				4EE6169420F4AD5A0044B998 /* HSJSignInViewController.m in Sources */,
 				9A97DA9520EF420200688ADB /* UIView+HXBFrame.m in Sources */,
 				9A97DA7C20EF420200688ADB /* HXBBaseNavigationController.m in Sources */,
 				9A97DA8120EF420200688ADB /* HXBDeviceVersion.m in Sources */,
@@ -1889,6 +1913,7 @@
 				9A97DA7620EF420200688ADB /* HXBBaseViewController+HSAPI.m in Sources */,
 				9A97DA6620EF420200688ADB /* UIScrollView+HXBScrollView.m in Sources */,
 				9A97DAB120EF420200688ADB /* HXBNsTimerManager.m in Sources */,
+				4EE6169520F4AD5A0044B998 /* HSJSignUpViewController.m in Sources */,
 				9A97DA8320EF420200688ADB /* NSDate+HXB.m in Sources */,
 				9A97DA8220EF420200688ADB /* NSAttributedString+Util.m in Sources */,
 				9A97DA8F20EF420200688ADB /* UIColor+HxbColor.m in Sources */,
@@ -1914,11 +1939,13 @@
 				9A97DA8820EF420200688ADB /* NSString+CopiesTransfer.m in Sources */,
 				9ACB2F3C20EF6E08005C3C3D /* HSJKeyChainStore.m in Sources */,
 				9A97DA7220EF420200688ADB /* HSJTestWebviewControllerViewController.m in Sources */,
+				4EE6169820F4ADB40044B998 /* HSJPasswordSigInViewController.m in Sources */,
 				9A97DA9F20EF420200688ADB /* IDPStorageSqliteInner.m in Sources */,
 				9A97DA9720EF420200688ADB /* UIViewController+HSContentAreaInset.m in Sources */,
 				4EA57D1B20F34C9A006FD573 /* BXTextField.m in Sources */,
 				9A97DA6820EF420200688ADB /* HSJHomeViewController.m in Sources */,
 				9A97DA8520EF420200688ADB /* NSObject+Hxb.m in Sources */,
+				4EE6169B20F4AE8B0044B998 /* HSJCodeSigInViewController.m in Sources */,
 				9A97DA9820EF420200688ADB /* UIViewController+HXBUtil.m in Sources */,
 				9A97DA8B20EF420200688ADB /* NSString+HxbMask.m in Sources */,
 				9A97DAB020EF420200688ADB /* NSString+MD5.m in Sources */,
@@ -1928,7 +1955,6 @@
 				9A6E0A5C20F84C9700598071 /* AppDelegate.m in Sources */,
 				9A97DA9120EF420200688ADB /* UILabel+Util.m in Sources */,
 				4EA57D0B20F338EA006FD573 /* HSJRiskAssessmentViewController.m in Sources */,
-				4EA57D0F20F340BB006FD573 /* HSJSignInViewController.m in Sources */,
 				9A97DA9320EF420200688ADB /* UITextView+YLTextView.m in Sources */,
 				9A97DAB520EF420200688ADB /* NYNetworkAgent.m in Sources */,
 			);
