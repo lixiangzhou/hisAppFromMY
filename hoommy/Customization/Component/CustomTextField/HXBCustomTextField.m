@@ -137,6 +137,11 @@
 {
     self.textField.secureTextEntry = self.eyeBtn.selected;
     self.eyeBtn.selected = !self.eyeBtn.selected;
+    if (!self.textField.secureTextEntry) {
+        NSString *text = self.textField.text;
+        self.textField.text = @"";
+        self.textField.text = text;
+    }
 }
 #pragma mark - UITextFieldDelegate
 - (void)textFieldDidEndEditing:(UITextField *)textField {

@@ -12,6 +12,10 @@
 #define kHXBMY_VersionUpdateURL @"/update"//版本更新
 
 
+#define kHXBUser_CheckExistMobileURL @"/checkExistMobile"///忘记密码校验手机号
+#define kHXBUser_LoginURL @"/user/login"//登录
+
+
 
 
 
