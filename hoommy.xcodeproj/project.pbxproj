@@ -13,6 +13,8 @@
 		4E43B06520EF7A0A000BDAE7 /* HSJBankListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E43B06420EF7A0A000BDAE7 /* HSJBankListCell.m */; };
 		4E43B06820EF7A80000BDAE7 /* HSJBankListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E43B06720EF7A80000BDAE7 /* HSJBankListModel.m */; };
 		4E43B06B20EF7C60000BDAE7 /* UIImageView+HxbSDWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E43B06A20EF7C5F000BDAE7 /* UIImageView+HxbSDWebImage.m */; };
+		4E8DB75420F5AEE3000712D7 /* TimerWeakTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8DB75220F5AEE3000712D7 /* TimerWeakTarget.m */; };
+		4E8DB75820F5B63F000712D7 /* HSJSignInViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8DB75720F5B63F000712D7 /* HSJSignInViewModel.m */; };
 		4EA57D0B20F338EA006FD573 /* HSJRiskAssessmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA57D0A20F338EA006FD573 /* HSJRiskAssessmentViewController.m */; };
 		4EA57D1B20F34C9A006FD573 /* BXTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA57D1920F34C99006FD573 /* BXTextField.m */; };
 		4EA57D2120F34D0D006FD573 /* HXBCustomTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA57D2020F34D0D006FD573 /* HXBCustomTextField.m */; };
@@ -25,6 +27,9 @@
 		4EE6169520F4AD5A0044B998 /* HSJSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE6169220F4AD5A0044B998 /* HSJSignUpViewController.m */; };
 		4EE6169820F4ADB40044B998 /* HSJPasswordSigInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE6169720F4ADB40044B998 /* HSJPasswordSigInViewController.m */; };
 		4EE6169B20F4AE8B0044B998 /* HSJCodeSigInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE6169A20F4AE8B0044B998 /* HSJCodeSigInViewController.m */; };
+		4EE616A520F4B4F20044B998 /* AXHNewFeatureController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE6169F20F4B4F20044B998 /* AXHNewFeatureController.m */; };
+		4EE616A620F4B4F20044B998 /* AXHNewFeatureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE616A220F4B4F20044B998 /* AXHNewFeatureCell.m */; };
+		4EE616A720F4B4F20044B998 /* TAExampleDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE616A420F4B4F20044B998 /* TAExampleDotView.m */; };
 		9A6E0A5C20F84C9700598071 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A6E0A5B20F84C9700598071 /* AppDelegate.m */; };
 		9A6E0A6220F84C9700598071 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A6E0A6020F84C9700598071 /* Main.storyboard */; };
 		9A6E0A6420F84CA000598071 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A6E0A6320F84CA000598071 /* Assets.xcassets */; };
@@ -179,6 +184,10 @@
 		4E43B06720EF7A80000BDAE7 /* HSJBankListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJBankListModel.m; sourceTree = "<group>"; };
 		4E43B06920EF7C5F000BDAE7 /* UIImageView+HxbSDWebImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+HxbSDWebImage.h"; sourceTree = "<group>"; };
 		4E43B06A20EF7C5F000BDAE7 /* UIImageView+HxbSDWebImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+HxbSDWebImage.m"; sourceTree = "<group>"; };
+		4E8DB75220F5AEE3000712D7 /* TimerWeakTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerWeakTarget.m; sourceTree = "<group>"; };
+		4E8DB75320F5AEE3000712D7 /* TimerWeakTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerWeakTarget.h; sourceTree = "<group>"; };
+		4E8DB75620F5B63F000712D7 /* HSJSignInViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJSignInViewModel.h; sourceTree = "<group>"; };
+		4E8DB75720F5B63F000712D7 /* HSJSignInViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJSignInViewModel.m; sourceTree = "<group>"; };
 		4EA57D0920F338EA006FD573 /* HSJRiskAssessmentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJRiskAssessmentViewController.h; sourceTree = "<group>"; };
 		4EA57D0A20F338EA006FD573 /* HSJRiskAssessmentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJRiskAssessmentViewController.m; sourceTree = "<group>"; };
 		4EA57D1920F34C99006FD573 /* BXTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BXTextField.m; sourceTree = "<group>"; };
@@ -202,6 +211,12 @@
 		4EE6169720F4ADB40044B998 /* HSJPasswordSigInViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJPasswordSigInViewController.m; sourceTree = "<group>"; };
 		4EE6169920F4AE8B0044B998 /* HSJCodeSigInViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJCodeSigInViewController.h; sourceTree = "<group>"; };
 		4EE6169A20F4AE8B0044B998 /* HSJCodeSigInViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJCodeSigInViewController.m; sourceTree = "<group>"; };
+		4EE6169E20F4B4F20044B998 /* AXHNewFeatureController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AXHNewFeatureController.h; sourceTree = "<group>"; };
+		4EE6169F20F4B4F20044B998 /* AXHNewFeatureController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AXHNewFeatureController.m; sourceTree = "<group>"; };
+		4EE616A120F4B4F20044B998 /* AXHNewFeatureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AXHNewFeatureCell.h; sourceTree = "<group>"; };
+		4EE616A220F4B4F20044B998 /* AXHNewFeatureCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AXHNewFeatureCell.m; sourceTree = "<group>"; };
+		4EE616A320F4B4F20044B998 /* TAExampleDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAExampleDotView.h; sourceTree = "<group>"; };
+		4EE616A420F4B4F20044B998 /* TAExampleDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAExampleDotView.m; sourceTree = "<group>"; };
 		54B20A0D6605B011D885333F /* Pods-hoommy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hoommy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-hoommy/Pods-hoommy.debug.xcconfig"; sourceTree = "<group>"; };
 		73C7B870EA4F77D826DA647B /* libPods-hoommy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-hoommy.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A4B181D20F35FC5006B83C7 /* HxbHUDProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HxbHUDProgress.h; sourceTree = "<group>"; };
@@ -594,6 +609,15 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		4E8DB75520F5B60A000712D7 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				4E8DB75620F5B63F000712D7 /* HSJSignInViewModel.h */,
+				4E8DB75720F5B63F000712D7 /* HSJSignInViewModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		4EA57D0720F3389E006FD573 /* RiskAssessment */ = {
 			isa = PBXGroup;
 			children = (
@@ -662,6 +686,7 @@
 		4EE6168B20F4AD5A0044B998 /* SignInAndUp */ = {
 			isa = PBXGroup;
 			children = (
+				4E8DB75520F5B60A000712D7 /* ViewModel */,
 				4EE6168C20F4AD5A0044B998 /* ViewController */,
 			);
 			path = SignInAndUp;
@@ -680,6 +705,35 @@
 				4EE6169A20F4AE8B0044B998 /* HSJCodeSigInViewController.m */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		4EE6169C20F4B4F20044B998 /* NewFeature */ = {
+			isa = PBXGroup;
+			children = (
+				4EE6169D20F4B4F20044B998 /* Controller */,
+				4EE616A020F4B4F20044B998 /* View */,
+			);
+			path = NewFeature;
+			sourceTree = "<group>";
+		};
+		4EE6169D20F4B4F20044B998 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4EE6169E20F4B4F20044B998 /* AXHNewFeatureController.h */,
+				4EE6169F20F4B4F20044B998 /* AXHNewFeatureController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		4EE616A020F4B4F20044B998 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4EE616A120F4B4F20044B998 /* AXHNewFeatureCell.h */,
+				4EE616A220F4B4F20044B998 /* AXHNewFeatureCell.m */,
+				4EE616A320F4B4F20044B998 /* TAExampleDotView.h */,
+				4EE616A420F4B4F20044B998 /* TAExampleDotView.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		52DAD5FB0889718E49F314DE /* Frameworks */ = {
@@ -892,6 +946,7 @@
 		9A97D90C20EF420000688ADB /* MainClass */ = {
 			isa = PBXGroup;
 			children = (
+				4EE6169C20F4B4F20044B998 /* NewFeature */,
 				4EE6168B20F4AD5A0044B998 /* SignInAndUp */,
 				9A97D91320EF420000688ADB /* Home */,
 				9A97D91A20EF420000688ADB /* My */,
@@ -1533,6 +1588,8 @@
 		9A97DA2920EF420100688ADB /* Timer */ = {
 			isa = PBXGroup;
 			children = (
+				4E8DB75320F5AEE3000712D7 /* TimerWeakTarget.h */,
+				4E8DB75220F5AEE3000712D7 /* TimerWeakTarget.m */,
 				9A97DA2A20EF420100688ADB /* HXBNsTimerManager.h */,
 				9A97DA2B20EF420100688ADB /* HXBNsTimerManager.m */,
 				9A97DA2C20EF420100688ADB /* NSTimer+Addition.h */,
@@ -1899,6 +1956,7 @@
 				9A97DA8A20EF420200688ADB /* NSString+HxbHash.m in Sources */,
 				9A97DAA120EF420200688ADB /* NSArray+IDPExtension.m in Sources */,
 				9A97DAB720EF420200688ADB /* NYBaseRequest.m in Sources */,
+				4EE616A720F4B4F20044B998 /* TAExampleDotView.m in Sources */,
 				9A97DA9220EF420200688ADB /* UIResponder+FindNext.m in Sources */,
 				4EA57D3120F3500B006FD573 /* HSJMyViewController.m in Sources */,
 				4EE6169420F4AD5A0044B998 /* HSJSignInViewController.m in Sources */,
@@ -1950,6 +2008,7 @@
 				9A97DA8220EF420200688ADB /* NSAttributedString+Util.m in Sources */,
 				9A97DA8F20EF420200688ADB /* UIColor+HxbColor.m in Sources */,
 				9A97DA6520EF420200688ADB /* HSJTopFragmentNavgationView.m in Sources */,
+				4EE616A620F4B4F20044B998 /* AXHNewFeatureCell.m in Sources */,
 				9A97DA5E20EF420200688ADB /* KeyChainManage.m in Sources */,
 				4E43B06B20EF7C60000BDAE7 /* UIImageView+HxbSDWebImage.m in Sources */,
 				9A97DAA320EF420200688ADB /* NSDate+IDPExtension.m in Sources */,
@@ -1968,6 +2027,7 @@
 				4EA57D2420F34F07006FD573 /* UIView+BXExtension.m in Sources */,
 				9A97DA7020EF420200688ADB /* HSJTestViewController.m in Sources */,
 				9A97DA7820EF420200688ADB /* HXBBaseViewController.m in Sources */,
+				4E8DB75820F5B63F000712D7 /* HSJSignInViewModel.m in Sources */,
 				9A97DA8820EF420200688ADB /* NSString+CopiesTransfer.m in Sources */,
 				9ACB2F3C20EF6E08005C3C3D /* HSJKeyChainStore.m in Sources */,
 				9A97DA7220EF420200688ADB /* HSJTestWebviewControllerViewController.m in Sources */,
@@ -1975,7 +2035,6 @@
 				9A97DA9F20EF420200688ADB /* IDPStorageSqliteInner.m in Sources */,
 				9A97DA9720EF420200688ADB /* UIViewController+HSContentAreaInset.m in Sources */,
 				4EA57D1B20F34C9A006FD573 /* BXTextField.m in Sources */,
-				9A4B181F20F35FC5006B83C7 /* HxbHUDProgress.m in Sources */,
 				9A97DA6820EF420200688ADB /* HSJHomeViewController.m in Sources */,
 				9A97DA8520EF420200688ADB /* NSObject+Hxb.m in Sources */,
 				4EE6169B20F4AE8B0044B998 /* HSJCodeSigInViewController.m in Sources */,
@@ -1983,11 +2042,12 @@
 				9A97DA8B20EF420200688ADB /* NSString+HxbMask.m in Sources */,
 				9A97DAB020EF420200688ADB /* NSString+MD5.m in Sources */,
 				9A97DA6020EF420200688ADB /* HXBTokenModel.m in Sources */,
-				9A4B182F20F36DB2006B83C7 /* UIViewController+HSJStandard.m in Sources */,
 				4EA57D3020F3500B006FD573 /* HXBVersionUpdateModel.m in Sources */,
 				9A97DA7520EF420200688ADB /* HSJBaseModel.m in Sources */,
 				9A6E0A5C20F84C9700598071 /* AppDelegate.m in Sources */,
+				4EE616A520F4B4F20044B998 /* AXHNewFeatureController.m in Sources */,
 				9A97DA9120EF420200688ADB /* UILabel+Util.m in Sources */,
+				4E8DB75420F5AEE3000712D7 /* TimerWeakTarget.m in Sources */,
 				4EA57D0B20F338EA006FD573 /* HSJRiskAssessmentViewController.m in Sources */,
 				9A97DA9320EF420200688ADB /* UITextView+YLTextView.m in Sources */,
 				9A97DAB520EF420200688ADB /* NYNetworkAgent.m in Sources */,

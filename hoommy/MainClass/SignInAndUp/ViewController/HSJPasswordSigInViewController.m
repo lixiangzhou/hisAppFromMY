@@ -9,6 +9,7 @@
 #import "HSJPasswordSigInViewController.h"
 #import "HXBCustomTextField.h"
 #import "HSJCodeSigInViewController.h"
+
 @interface HSJPasswordSigInViewController ()
 
 @property (nonatomic, strong) HXBCustomTextField *passwordField;
@@ -17,12 +18,15 @@
 
 @property (nonatomic, strong) UIButton *codeButton;
 
+
+
 @end
 
 @implementation HSJPasswordSigInViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"密码登录";
     [self setupUI];
 }
 
@@ -48,13 +52,16 @@
     }];
 }
 - (void)nextButtonClick {
-    BOOL success = YES;
-    if (success) {
-        //登录成功
-        
-    } else {
-        //登录失败
-    }
+    [self.viewModel loginRequetWithMobile:self.viewModel.phoneNumber password:self.passwordField.text resultBlock:^(BOOL isSuccess) {
+        if (isSuccess) {
+            //登录成功
+            [self dismissViewControllerAnimated:YES completion:nil];
+        } else {
+            //登录失败
+        }
+    }];
+    
+    
 }
 
 - (void)getCode {

@@ -8,14 +8,18 @@
 
 #import "HSJCodeSigInViewController.h"
 #import "HXBCustomTextField.h"
-
+#import "TimerWeakTarget.h"
 @interface HSJCodeSigInViewController ()
 
 @property (nonatomic, strong) HXBCustomTextField *passwordField;
 
-@property (nonatomic, strong) UIButton *nextButton;
+@property (nonatomic, strong) UIButton *signInButton;
 
 @property (nonatomic, strong) UIButton *codeButton;
+
+@property (nonatomic, strong) NSTimer *timer;
+
+@property (nonatomic, assign) int timeCount;
 
 @end
 
@@ -28,26 +32,26 @@
 
 - (void)setupUI {
     [self.view addSubview:self.passwordField];
-    [self.view addSubview:self.nextButton];
+    [self.view addSubview:self.signInButton];
     [self.view addSubview:self.codeButton];
     [self.passwordField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self.view);
         make.left.equalTo(self.view).offset(kScrAdaptationW(15));
         make.right.equalTo(self.view).offset(-kScrAdaptationW(15));
     }];
-    [self.nextButton mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.signInButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.passwordField);
         make.top.equalTo(self.passwordField.mas_bottom).offset(kScrAdaptationH(10));
         make.height.offset(kScrAdaptationH(41));
     }];
     [self.codeButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.passwordField);
-        make.top.equalTo(self.nextButton.mas_bottom).offset(kScrAdaptationH(10));
+        make.top.equalTo(self.signInButton.mas_bottom).offset(kScrAdaptationH(10));
         make.height.offset(kScrAdaptationH(41));
         make.width.offset(kScrAdaptationH(150));
     }];
 }
-- (void)nextButtonClick {
+- (void)signInButtonClick {
     BOOL success = YES;
     if (success) {
         //登录成功
@@ -57,6 +61,25 @@
     }
 }
 
+- (void)getCode {
+    self.timeCount = 60;
+    self.codeButton.enabled = NO;
+    [self.codeButton setTitle:[NSString stringWithFormat:@"%d秒",self.timeCount] forState:UIControlStateNormal];
+    self.timer = [TimerWeakTarget scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timeDown) userInfo:nil repeats:YES];
+}
+
+- (void)timeDown
+{
+    self.timeCount--;
+    [self.codeButton setTitle:[NSString stringWithFormat:@"%d秒",self.timeCount] forState:UIControlStateNormal];
+    if (self.timeCount <= 0) {
+        self.codeButton.enabled = YES;
+        [self.timer invalidate];
+        self.timer = nil;
+        [self.codeButton setTitle:@"重新获取验证码" forState:UIControlStateNormal];
+    }
+    
+}
 - (HXBCustomTextField *)passwordField {
     if (!_passwordField) {
         _passwordField = [[HXBCustomTextField alloc] init];
@@ -67,25 +90,29 @@
     return _passwordField;
 }
 
-- (UIButton *)nextButton {
-    if (!_nextButton) {
-        _nextButton = [[UIButton alloc] init];
-        [_nextButton addTarget:self action:@selector(nextButtonClick) forControlEvents:(UIControlEventTouchUpInside)];
-        [_nextButton setTitle:@"登陆" forState:(UIControlStateNormal)];
-        [_nextButton setTitleColor:[UIColor redColor] forState:(UIControlStateNormal)];
-        _nextButton.layer.borderWidth = 1;
-        _nextButton.layer.borderColor = [UIColor redColor].CGColor;
+- (UIButton *)signInButton {
+    if (!_signInButton) {
+        _signInButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
+        [_signInButton addTarget:self action:@selector(signInButtonClick) forControlEvents:(UIControlEventTouchUpInside)];
+        [_signInButton setTitle:@"登陆" forState:(UIControlStateNormal)];
+        [_signInButton setTitleColor:[UIColor redColor] forState:(UIControlStateNormal)];
+        _signInButton.layer.borderWidth = 1;
+        _signInButton.layer.borderColor = [UIColor redColor].CGColor;
     }
-    return _nextButton;
+    return _signInButton;
 }
 
 - (UIButton *)codeButton {
     if (!_codeButton) {
         _codeButton = [[UIButton alloc] init];
         [_codeButton setTitle:@"重新获取验证码" forState:(UIControlStateNormal)];
+        [_codeButton addTarget:self action:@selector(getCode) forControlEvents:(UIControlEventTouchUpInside)];
         [_codeButton setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
     }
     return _codeButton;
 }
 
+- (void)dealloc {
+    [self.timer invalidate];
+}
 @end

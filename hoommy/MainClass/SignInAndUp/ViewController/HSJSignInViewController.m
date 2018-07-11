@@ -11,11 +11,14 @@
 #import "HSJPasswordSigInViewController.h"
 #import "SVGKImage.h"
 #import "HSJSignUpViewController.h"
+#import "HSJSignInViewModel.h"
 @interface HSJSignInViewController ()
 
 @property (nonatomic, strong) HXBCustomTextField *phoneTextField;
 
 @property (nonatomic, strong) UIButton *nextButton;
+
+@property (nonatomic, strong) HSJSignInViewModel *viewModel;
 
 @end
 
@@ -72,14 +75,20 @@
 }
 
 - (void)nextButtonClick {
-    BOOL isHave = YES;
-    if (isHave) {
-        //进入登录页面
-        [self.navigationController pushViewController:[[HSJPasswordSigInViewController alloc] init] animated:YES];
-    } else {
-        //注册页面
-        [self.navigationController pushViewController:[[HSJSignUpViewController alloc] init] animated:YES];
-    }
+    kWeakSelf
+    [self.viewModel checkExistMobile:self.phoneTextField.text resultBlock:^(BOOL isSuccess,NYBaseRequest *request) {
+            if (isSuccess) {
+                //进入登录页面
+                HSJPasswordSigInViewController *passwordVC = [[HSJPasswordSigInViewController alloc] init];
+                passwordVC.viewModel = weakSelf.viewModel;
+                [self.navigationController pushViewController:passwordVC animated:YES];
+            } else {
+                //注册页面
+                [self.navigationController pushViewController:[[HSJSignUpViewController alloc] init] animated:YES];
+            }
+    }];
+    
+
 }
 
 - (HXBCustomTextField *)phoneTextField {
@@ -105,6 +114,14 @@
     return _nextButton;
 }
 
-
+- (HSJSignInViewModel *)viewModel {
+    if (!_viewModel) {
+        _viewModel = [[HSJSignInViewModel alloc] init];
+    }
+    return _viewModel;
+}
+- (void)dealloc {
+    
+}
 
 @end

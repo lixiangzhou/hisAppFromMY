@@ -7,7 +7,9 @@
 //
 
 #import "HXBBaseViewController.h"
-
+#import "HSJSignInViewModel.h"
 @interface HSJPasswordSigInViewController : HXBBaseViewController
+
+@property (nonatomic, strong) HSJSignInViewModel *viewModel;
 
 @end
