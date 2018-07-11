@@ -161,6 +161,7 @@
 		E13A0F0320F4C94900A3E364 /* HXBCommonProblemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E13A0F0220F4C94900A3E364 /* HXBCommonProblemViewController.m */; };
 		E13A0F0620F4C9FF00A3E364 /* HXBAlertManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E13A0F0420F4C9FF00A3E364 /* HXBAlertManager.m */; };
 		E13A0F0B20F4DC2700A3E364 /* HXBMiddlekey.m in Sources */ = {isa = PBXBuildFile; fileRef = E13A0F0A20F4DC2600A3E364 /* HXBMiddlekey.m */; };
+		E150F80020F5B4910006E0FE /* HXBAccountSecureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E150F7FE20F5B48F0006E0FE /* HXBAccountSecureCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -545,6 +546,8 @@
 		E13A0F0720F4D25D00A3E364 /* MacroDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacroDefinition.h; sourceTree = "<group>"; };
 		E13A0F0920F4DC2600A3E364 /* HXBMiddlekey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBMiddlekey.h; sourceTree = "<group>"; };
 		E13A0F0A20F4DC2600A3E364 /* HXBMiddlekey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBMiddlekey.m; sourceTree = "<group>"; };
+		E150F7FE20F5B48F0006E0FE /* HXBAccountSecureCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBAccountSecureCell.m; sourceTree = "<group>"; };
+		E150F7FF20F5B4910006E0FE /* HXBAccountSecureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBAccountSecureCell.h; sourceTree = "<group>"; };
 		F3AA4ECD958918A00E682797 /* Pods-hoommy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hoommy.release.xcconfig"; path = "Pods/Target Support Files/Pods-hoommy/Pods-hoommy.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1724,6 +1727,8 @@
 		E13A0E7F20F48DF400A3E364 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E150F7FF20F5B4910006E0FE /* HXBAccountSecureCell.h */,
+				E150F7FE20F5B48F0006E0FE /* HXBAccountSecureCell.m */,
 				E13A0EFC20F4ADAA00A3E364 /* HXBBottomLineTableViewCell.h */,
 				E13A0EFB20F4ADAA00A3E364 /* HXBBottomLineTableViewCell.m */,
 			);
@@ -2055,6 +2060,7 @@
 				9A97DA7F20EF420200688ADB /* HSJBaseViewModel.m in Sources */,
 				9A97DA7620EF420200688ADB /* HXBBaseViewController+HSAPI.m in Sources */,
 				9A97DA6620EF420200688ADB /* UIScrollView+HXBScrollView.m in Sources */,
+				E150F80020F5B4910006E0FE /* HXBAccountSecureCell.m in Sources */,
 				9A97DAB120EF420200688ADB /* HXBNsTimerManager.m in Sources */,
 				9A97DA8320EF420200688ADB /* NSDate+HXB.m in Sources */,
 				9A97DA8220EF420200688ADB /* NSAttributedString+Util.m in Sources */,

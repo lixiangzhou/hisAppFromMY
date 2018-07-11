@@ -10,7 +10,7 @@
 @class HXBRequestUserInfoAPI_UserAssets,HXBRequestUserInfoAPI_UserInfo;
 
 ///用户相关的Model
-@interface HXBUserInfoModel : NSObject
+@interface HXBUserInfoModel : Jastor
 ///资金相关
 @property (nonatomic,strong) HXBRequestUserInfoAPI_UserAssets *userAssets;
 ///用户相关

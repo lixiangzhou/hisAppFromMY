@@ -13,6 +13,8 @@
 
 @property (nonatomic, assign) BOOL isLogin;
 @property (nonatomic, copy) NSString  *token;
+///用户手机号
+@property (nonatomic,copy) NSString *mobile;
 /**
  h5根地址
  */
