@@ -76,4 +76,16 @@
         }
     }];
 }
+
+/**
+ 获取状态码
+ 
+ @param responseObj 网络响应数据
+ @return 状态码
+ */
+- (int)getStateCode:(NSDictionary*)responseObj {
+    int statusCode = [responseObj stringAtPath:@"statusCode"].intValue;
+    
+    return statusCode;
+}
 @end

@@ -21,6 +21,8 @@
 @property (nonatomic, assign) BOOL isFullScreenShow;
 ///是否禁用滑动返回, 仅能在viewDidLoad方法顶部指定
 @property (nonatomic, assign) BOOL isDisableSliderBack;
+///页面是否有底部的tabbar
+@property (nonatomic, assign) BOOL iswithTabbarInPage;
 
 ///可以重写返回方法
 - (void)leftBackBtnClick;

@@ -35,18 +35,27 @@
     
     [self buildSafeAreaView];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.safeAreaView.backgroundColor = self.view.backgroundColor;
+    self.safeAreaView.backgroundColor = [UIColor clearColor];
     if(self.navigationController) {
        self.isRedColourGradientNavigationBar = YES;
     }
 }
+
 - (void)buildSafeAreaView {
     _safeAreaView = [[UIView alloc] init];
     [self.view addSubview:_safeAreaView];
     [self.view sendSubviewToBack:_safeAreaView];
-    [_safeAreaView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(self.contentViewInsetNoTabbar);
-    }];
+    if(self.iswithTabbarInPage) {
+        [_safeAreaView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(self.contentViewInsetWithTabbar);
+        }];
+    }
+    else {
+        [_safeAreaView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(self.contentViewInsetNoTabbar);
+        }];
+    }
+    
 }
 
 - (void)willMoveToParentViewController:(UIViewController *)parent {
@@ -209,7 +218,7 @@
         self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor], NSFontAttributeName: kHXBFont_PINGFANGSC_REGULAR(18)};
         self.isTransparentNavigationBar = YES;
         self.navgationBarImageView.backgroundColor = [UIColor whiteColor];
-        self.navgationBarImageView.image = [UIImage imageNamed:@"top"];
+//        self.navgationBarImageView.image = [UIImage imageNamed:@"top"];
         [self.view bringSubviewToFront: self.navgationBarImageView];
     }
 }
@@ -220,7 +229,7 @@
         self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:kHXBFont_PINGFANGSC_REGULAR(18)};
         self.isTransparentNavigationBar = YES;
         self.navgationBarImageView.backgroundColor = [UIColor redColor];
-        self.navgationBarImageView.image = [UIImage imageNamed:@""];
+//        self.navgationBarImageView.image = [UIImage imageNamed:@""];
         [self.view bringSubviewToFront: self.navgationBarImageView];
     }
 }

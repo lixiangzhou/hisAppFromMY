@@ -29,6 +29,9 @@
     self.backgroundColor = [UIColor clearColor];
     
     self.checkButton = [[UIButton alloc] init];
+    self.checkButton.layer.cornerRadius = 2;
+    self.checkButton.titleLabel.font = kHXBFont_PINGFANGSC_REGULAR(15);
+    [self.checkButton addTarget:self action:@selector(checkButtonAct:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.checkButton];
 }
 
@@ -51,6 +54,18 @@
     _buttonBackGroundColor = buttonBackGroundColor;
     
     [self.checkButton setBackgroundColor:buttonBackGroundColor];
+}
+
+- (void)setButtonBackGroundImage:(UIImage *)buttonBackGroundImage {
+    _buttonBackGroundImage = buttonBackGroundImage;
+    
+    [self.checkButton setBackgroundImage:buttonBackGroundImage forState:UIControlStateNormal];
+}
+
+- (void)checkButtonAct:(UIButton *)button {
+    if(self.checkAct) {
+        self.checkAct();
+    }
 }
 /*
 // Only override drawRect: if you perform custom drawing.

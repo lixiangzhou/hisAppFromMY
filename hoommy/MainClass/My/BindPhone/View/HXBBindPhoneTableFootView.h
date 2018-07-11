@@ -11,5 +11,8 @@
 @interface HXBBindPhoneTableFootView : UIView
 
 @property (nonatomic, strong) UIColor *buttonBackGroundColor;
+@property (nonatomic, strong) UIImage *buttonBackGroundImage;
 @property (nonatomic, copy) NSString *buttonTitle;
+
+@property (nonatomic, strong) void (^checkAct)();
 @end

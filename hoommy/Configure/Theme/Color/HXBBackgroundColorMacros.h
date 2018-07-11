@@ -26,6 +26,7 @@
 #define kHXBColor_666666_100                RGBA(102, 102, 102, 1)
 #define kHXBColor_999999_100                RGBA(153, 153, 153, 1)
 #define kHXBColor_D8D8D8_100                RGBA(216, 216, 216, 1)
+#define kHXBColor_ECECF0_100         UIColorFromRGB(0xECECF0)
 
 ///蓝色的背景色
 #define kHXBColor_73ADFF_100                RGBA(115, 173, 255, 1)
@@ -35,6 +36,7 @@
 
 ///用于分割线颜色
 #define kHXBSpacingLineColor_DDDDDD_100     RGBA(221, 221, 221, 1)
+#define kHXBColor_EEEEF5_100         UIColorFromRGB(0xEEEEF5)
 
 ///白色的背景色
 #define kHXBColor_FFFFFF_100                RGBA(255, 255, 255, 1)
@@ -44,5 +46,7 @@
 #define kHXBColor_000000_30                 RGBA(0, 0, 0, 0.3)
 #define kHXBColor_000000_10                 RGBA(0, 0, 0, 0.1)
 
+///粉红色
+#define kHXBColor_FF8359_100         UIColorFromRGB(0xFF8359)
 
 #endif /* HXBBackgroundColorMacros_h */

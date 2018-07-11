@@ -14,4 +14,10 @@
 @property (nonatomic, copy) NSString* text;
 
 @property (nonatomic, assign) BOOL isShowCheckCodeView;
+@property (nonatomic, assign) BOOL isLastItem;
+@property (nonatomic, assign) int limtTextLenght;//默认值999999, 无限制
+@property (nonatomic, assign) BOOL isCanEdit;
+@property (nonatomic, assign) UIKeyboardType keyboardType;
+
+- (instancetype)initModel:(NSString*)title placeText:(NSString*)place isLastItem:(BOOL)isLast text:(NSString*)content;
 @end

@@ -99,6 +99,43 @@
     self.leftImageView.svgImageString = svgImageName;
 }
 
+- (void)setIsHiddenLeftImage:(BOOL)isHiddenLeftImage {
+    _isHiddenLeftImage = isHiddenLeftImage;
+    
+    if(isHiddenLeftImage) {
+        [self.leftImageView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.bottom.top.equalTo(self);
+            make.width.mas_equalTo(0);
+        }];
+        
+        [self.textField mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.right.equalTo(self);
+        }];
+        
+        [self.idTextField mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.right.equalTo(self);
+        }];
+    }
+    else{
+        [self.leftImageView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self).offset(kScrAdaptationW750(40));
+            make.centerY.equalTo(self);
+            make.width.offset(kScrAdaptationW750(36));
+            make.height.offset(kScrAdaptationH750(38));
+        }];
+        
+        [self.textField mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.leftImageView.mas_right).offset(kScrAdaptationW750(20));
+            make.right.equalTo(self).offset(-kScrAdaptationW750(40));
+        }];
+        
+        [self.idTextField mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.leftImageView.mas_right).offset(kScrAdaptationW750(20));
+            make.right.equalTo(self).offset(-kScrAdaptationW750(40));
+        }];
+    }
+}
+
 - (void)setupSubViewFrame
 {
     [self.leftImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -141,16 +178,27 @@
 #pragma mark - UITextFieldDelegate
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     self.line.backgroundColor = kHXBSpacingLineColor_DDDDDD_100;
+    if(self.keyBoardChange) {
+        self.keyBoardChange(NO);
+    }
 }
 
 
 //这里可以通过发送object消息获取注册时指定的UITextField对象
 - (void)textFieldDidBeginEditing:(NSNotification *)notification {
     self.line.backgroundColor = kHXBColor_F55151_100;
+    
+    if(self.keyBoardChange) {
+        self.keyBoardChange(YES);
+    }
 }
 
 - (void)textFieldDidEndEditing1:(NSNotification *)notification {
     self.line.backgroundColor = kHXBSpacingLineColor_DDDDDD_100;
+    
+    if(self.keyBoardChange) {
+        self.keyBoardChange(NO);
+    }
 }
 
 - (void)textFieldDidChangeValue:(NSNotification *)notification {
@@ -282,6 +330,12 @@
     _text = text;
     self.textField.text = text;
     self.idTextField.text = text;
+}
+
+- (void)setFont:(UIFont *)font {
+    _font = font;
+    self.textField.font = font;
+    self.idTextField.font = font;
 }
 
 - (void)setIsCleanAllBtn:(BOOL)isCleanAllBtn {

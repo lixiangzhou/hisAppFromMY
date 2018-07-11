@@ -29,7 +29,7 @@
 
 //保存
 - (void)setItemForKey:(id)item ForKey:(NSString *)key {
-    if(key.length > 0) {
+    if(key.length>0 && item) {
         self.keychain[key] = item;
     }
 }
