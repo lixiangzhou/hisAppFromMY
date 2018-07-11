@@ -13,5 +13,6 @@
 #import "HXBTheme.h"
 #import "HSJNetWorkUrl.h"
 #import "HSJNotification.h"
+#import "HXBSignUPAndLoginRequest_EnumManager.h"
 
 #endif /* HSJConfig_h */

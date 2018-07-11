@@ -43,9 +43,6 @@
     manager.repeatSecond = ti;
     manager.countDownBlock = countDownBlock;
     manager.isCountDown = isCountDown;
-    if(!isCountDown) {
-        manager.totalSeconds = 0;
-    }
     return manager;
 }
 
