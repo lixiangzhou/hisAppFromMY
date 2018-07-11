@@ -71,6 +71,9 @@
 }
 
 - (void)leftBackBtnClick {
+    if (self.selectedIndexVC != nil) {
+        [HXBRootVCManager manager].mainTabbarVC.selectedIndex = [self.selectedIndexVC integerValue];
+    }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
