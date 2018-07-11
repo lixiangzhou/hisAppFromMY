@@ -9,7 +9,8 @@
 #import "HXBBaseTabBarController.h"
 #import "HXBBaseNavigationController.h"
 #import "SVGKit/SVGKImage.h"
-
+#import "HSJMyViewController.h"
+#import "HSJSignInViewController.h"
 @interface HXBBaseTabBarController ()<UITabBarControllerDelegate>
 
 @end
@@ -68,7 +69,16 @@
 #pragma mark - Observer
 ///注册通知
 - (void)registerNotification {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentLoginVC:) name:kHXBNotification_ShowLoginVC object:nil];
 
+}
+
+
+- (void)presentLoginVC:(NSNotification *)notification {
+    HSJSignInViewController *signInVC = [[HSJSignInViewController alloc] init];
+    HXBBaseNavigationController *nav = [[HXBBaseNavigationController alloc] initWithRootViewController:signInVC];
+    signInVC.selectedIndexVC = notification.object[@"selectedIndex"];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 #pragma mark - 封装的方法
@@ -132,7 +142,15 @@
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
     //获取当前的导航控制器的跟控制器
-//    UIViewController *vc = ((HXBBaseNavigationController *)viewController).viewControllers.firstObject;
+//    HXBBaseNavigationController *vc = ((HXBBaseNavigationController *)viewController).viewControllers.firstObject;
+    HXBBaseNavigationController *vc = (HXBBaseNavigationController *)viewController ;
+    
+    if ([vc.topViewController isMemberOfClass:[HSJMyViewController class]]) {
+        if (!KeyChain.isLogin)  {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_ShowLoginVC object:@{@"selectedIndex" : [NSString stringWithFormat:@"%lu",(unsigned long)tabBarController.selectedIndex]}];
+            return YES;
+        }
+    }
     
     return YES;
 }
