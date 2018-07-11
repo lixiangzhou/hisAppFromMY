@@ -29,6 +29,8 @@
         [self presentViewController:nav animated:YES completion:^{
             
         }];
+    } else {
+        IDPLogDebug(@"已经登录");
     }
 
 }

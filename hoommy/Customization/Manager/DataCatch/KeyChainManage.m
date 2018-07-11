@@ -13,6 +13,7 @@
 
 static NSString * const kToken = @"token";
 static NSString * const kService = @"www.hoomxb.com";
+static NSString *const kIsLogin = @"kIsLogin";
 
 @interface KeyChainManage ()
 
@@ -47,6 +48,15 @@ static NSString * const kService = @"www.hoomxb.com";
 {
     NSString *token = [self.keychain itemForkey:kToken];
     return token?:@"";
+}
+
+-(BOOL)isLogin
+{
+    return [[self.keychain itemForkey:kIsLogin] integerValue];
+}
+
+- (void)setIsLogin:(BOOL)isLogin {
+     [self.keychain setItemForKey:@(isLogin).description ForKey:kIsLogin];
 }
 
 //- (void)setValueWith
