@@ -9,6 +9,9 @@
 #import "HXBRootVCManager.h"
 #import "HSJHomeViewController.h"
 #import "HSJMyViewController.h"
+#import "AXHNewFeatureController.h"
+
+#define AXHVersionKey @"version"
 
 @interface HXBRootVCManager ()
 @property (nonatomic, strong) UIWindow *window;
@@ -27,11 +30,20 @@
 
 /// 创建根控制器
 - (void)createRootVCAndMakeKeyWindow {
+    
+    NSString *currentVersion = [[[NSBundle mainBundle]infoDictionary]objectForKey:@"CFBundleShortVersionString"];
+    NSString *lastVersion = [[NSUserDefaults standardUserDefaults] objectForKey:AXHVersionKey];
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     [UIApplication sharedApplication].delegate.window = self.window;
-
-    self.window.rootViewController = self.mainTabbarVC;
-
+    //版本检测
+    if ([currentVersion isEqualToString:lastVersion]) { // 没有最新的版本号
+        self.window.rootViewController = self.mainTabbarVC;
+    } else { // 有新版本
+        AXHNewFeatureController *VC = [[AXHNewFeatureController alloc] init];
+        self.window.rootViewController = VC;
+        //保存当前版本，用偏好设置
+        [[NSUserDefaults standardUserDefaults] setObject:currentVersion forKey:AXHVersionKey];
+    }
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
 }

@@ -27,4 +27,18 @@
     }];
 }
 
+- (void)downLoadUserInfo:(BOOL)isShowHud resultBlock:(NetWorkResponseBlock)resultBlock {
+    kWeakSelf
+    [self loadData:^(NYBaseRequest *request) {
+        request.showHud= isShowHud;
+        request.hudDelegate = weakSelf;
+        request.requestUrl = kHXBUser_UserInfoURL;
+        request.requestMethod = NYRequestMethodGet;
+        request.modelType = NSClassFromString(@"HXBUserInfoModel");
+    } responseResult:^(id responseData, NSError *erro) {
+        if(resultBlock) {
+            resultBlock(responseData, erro);
+        }
+    }];
+}
 @end

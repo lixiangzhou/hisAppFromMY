@@ -13,7 +13,7 @@
 - (instancetype)initWithService:(NSString *)service;
 
 //保存
-- (void)setItemForKey:(id)item ForKey:(NSString *)key;
+- (void)setItem:(id)item ForKey:(NSString *)key;
 
 //移除
 - (BOOL)removeItemForKey:(NSString *)key;

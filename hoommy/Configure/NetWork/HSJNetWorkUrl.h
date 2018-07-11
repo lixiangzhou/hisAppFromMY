@@ -35,4 +35,26 @@
 #define kHXBSetTransaction_MobifyPassword_CashpwdEditURL @"/account/cashpwd/edit"//修改交易密码--修改交易密码接口w
 #define kHXBSetTransaction_MobifyPhoneNumber_CashMobileEditURL @"/account/mobile"//修改手机号--修改手机号接口
 
+#define kHXBUser_CheckExistMobileURL @"/checkExistMobile"///忘记密码校验手机号
+#define kHXBUser_LoginURL @"/user/login"//登录
+
+
+
+
+
+
+//MARK: ======================= 用户 =======================
+#define kHXBUser_UserInfoURL @"/account/info"///用户信息
+
+
+
+
+#define kHXBUser_signOutURL @"/logout" /// 登出
+
+
+
+//MARK: ======================= 账户信息 =======================
+#define kHXBUser_QuestionsURL           @"/questions"///常见问题
+
+
 #endif /* HSJNetWorkUrl_h */
