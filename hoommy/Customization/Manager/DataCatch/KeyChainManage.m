@@ -14,6 +14,13 @@
 static NSString * const kToken = @"token";
 static NSString * const kService = @"www.hoomxb.com";
 static NSString *const kIsLogin = @"kIsLogin";
+static NSString * const kLoginPwd = @"loginPwd";
+static NSString * const kTradePwd = @"tradePwd";
+//统一密文处理
+static NSString * const kCiphertext = @"ciphertext";
+//H5页面的BaseURL
+static NSString *const hostH5 = @"hostH5";
+
 
 @interface KeyChainManage ()
 
@@ -33,6 +40,31 @@ static NSString *const kIsLogin = @"kIsLogin";
     });
     
     return sharedInstance;
+}
+
+- (NSString *)h5host
+{
+    NSString *h5Host = [self.keychain itemForkey:hostH5];
+    if (!h5Host.length) {
+        h5Host = @"https://m.hoomxb.com";
+    }
+    return h5Host;
+}
+
+- (void)setH5host:(NSString *)h5host
+{
+    [self.keychain setItemForKey:hostH5 ForKey:h5host];
+}
+
+- (void)signOut
+{
+    KeyChainManage *manager = KeyChain;
+    self.isLogin = NO;
+    [HXBRequestUserInfoViewModel signOut];
+    [manager.keychain removeItemForKey:kLoginPwd];
+    [manager.keychain removeItemForKey:kTradePwd];
+    [manager.keychain removeItemForKey:kToken];
+    [manager.keychain removeItemForKey:kCiphertext];
 }
 
 - (void)setToken:(NSString *)token
