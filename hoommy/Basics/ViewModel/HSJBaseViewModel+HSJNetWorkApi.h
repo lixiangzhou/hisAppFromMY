@@ -12,4 +12,5 @@
 
 - (void)checkVersionUpdate:(NetWorkResponseBlock)resultBlock;
 
+- (void)downLoadUserInfo:(BOOL)isShowHud resultBlock:(NetWorkResponseBlock)resultBlock;
 @end

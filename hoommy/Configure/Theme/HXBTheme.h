@@ -21,5 +21,6 @@
 #import "HXBFontMacro.h"
 #import "HXBBackgroundColorMacros.h"
 #import "HXBFontColorMacros.h"
-
+#import "HXBColorMacro.h"
+#import "MacroDefinition.h"
 #endif /* HXBTheme_h */

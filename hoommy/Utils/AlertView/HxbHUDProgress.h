@@ -11,6 +11,5 @@
 @interface HxbHUDProgress : NSObject
 
 + (void)showTextWithMessage:(NSString *)message;
-
 + (void)showTextInView:(UIView*)view text:(NSString *)message;
 @end

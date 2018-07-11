@@ -10,7 +10,6 @@
 #import "SGInfoAlert.h"
 
 @interface HxbHUDProgress ()
-
 @end
 
 
