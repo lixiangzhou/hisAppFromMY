@@ -8,6 +8,9 @@
 
 #import "HSJMyViewController.h"
 #import "HSJBaseModel.h"
+
+#import "HXBBindPhoneViewController.h"
+
 #import "HSJBankCardListViewController.h"
 #import "HSJRiskAssessmentViewController.h"
 #import "HSJSignInViewController.h"
@@ -46,6 +49,8 @@
 }
 
 - (IBAction)bindPhoneAct:(UIButton *)sender {
+    HXBBindPhoneViewController* vc = [[HXBBindPhoneViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 
 }
 

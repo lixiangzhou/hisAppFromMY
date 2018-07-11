@@ -36,6 +36,10 @@ typedef void(^isLimitText)(NSString *text1);
 @property (nonatomic, assign) BOOL isLagerText;
 //字体颜色
 @property (nonatomic, strong) UIColor *textColor;
+//字体
+@property (nonatomic, strong) UIFont *font;
+//是否隐藏图片
+@property (nonatomic, assign) BOOL isHiddenLeftImage;
 /**
  SVG图片
  */
@@ -49,5 +53,7 @@ typedef void(^isLimitText)(NSString *text1);
  背景按钮点击
  */
 @property (nonatomic, copy) void(^btnClick)();
+//键盘编辑状态
+@property (nonatomic, copy) void(^keyBoardChange)(BOOL isEditState);
 
 @end

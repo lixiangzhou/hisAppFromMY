@@ -15,6 +15,6 @@
 - (void)setDataFromDictionary:(NSDictionary *)dictionary;
 - (NSMutableDictionary *)toDictionary;
 
-- (NSDictionary *)map;
+- (NSMutableDictionary *)map;
 
 @end
