@@ -11,6 +11,7 @@
 #import "HSJBankCardListViewController.h"
 #import "HSJRiskAssessmentViewController.h"
 #import "HSJSignInViewController.h"
+#import "HXBBaseNavigationController.h"
 #import "HxbAccountInfoViewController.h"
 @interface HSJMyViewController ()
 
@@ -29,7 +30,16 @@
 }
 
 - (IBAction)loginAct:(UIButton *)sender {
-    
+    if (!KeyChain.isLogin) {
+        HXBBaseNavigationController *nav = [[HXBBaseNavigationController alloc] initWithRootViewController:[[HSJSignInViewController alloc] init]];
+        
+        [self presentViewController:nav animated:YES completion:^{
+            
+        }];
+    } else {
+        IDPLogDebug(@"已经登录");
+    }
+
 }
 
 - (IBAction)openAccountAct:(UIButton *)sender {
