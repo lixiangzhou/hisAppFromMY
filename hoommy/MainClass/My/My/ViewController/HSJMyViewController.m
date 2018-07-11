@@ -11,6 +11,7 @@
 #import "HSJBankCardListViewController.h"
 #import "HSJRiskAssessmentViewController.h"
 #import "HSJSignInViewController.h"
+#import "HxbAccountInfoViewController.h"
 @interface HSJMyViewController ()
 
 @end
@@ -19,6 +20,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+}
+- (IBAction)settingAccount:(id)sender {
+    HxbAccountInfoViewController *accountInfoVC = [[HxbAccountInfoViewController alloc]init];
+//    accountInfoVC.userInfoViewModel = self.viewModel.userInfoModel;
+//    accountInfoVC.isDisplayAdvisor = self.viewModel.userInfoModel.userInfoModel.userInfo.isDisplayAdvisor;
+    [self.navigationController pushViewController:accountInfoVC animated:YES];
 }
 
 - (IBAction)loginAct:(UIButton *)sender {

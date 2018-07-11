@@ -14,8 +14,16 @@
 @property (nonatomic, assign) BOOL isLogin;
 @property (nonatomic, copy) NSString  *token;
 /**
+ h5根地址
+ */
+@property (nonatomic, copy) NSString *h5host;
+
+
+
+
+/**
  *  获取KeyChainManage单例
  */
 + (instancetype)sharedInstance;
-
+- (void)signOut;      //!< 退出登录
 @end
