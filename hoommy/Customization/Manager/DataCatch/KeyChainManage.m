@@ -12,7 +12,7 @@
 #import <Security/Security.h>
 
 static NSString * const kToken = @"token";
-static NSString * const kService = @"www.hoomxb.com";
+static NSString * const kService = @"www.hoommy.com";
 static NSString *const kIsLogin = @"kIsLogin";
 static NSString * const kLoginPwd = @"loginPwd";
 static NSString * const kTradePwd = @"tradePwd";
@@ -20,6 +20,8 @@ static NSString * const kTradePwd = @"tradePwd";
 static NSString * const kCiphertext = @"ciphertext";
 //H5页面的BaseURL
 static NSString *const hostH5 = @"hostH5";
+///手机号
+static NSString *const kMobile = @"kMobile";
 
 
 @interface KeyChainManage ()
@@ -29,6 +31,7 @@ static NSString *const hostH5 = @"hostH5";
 @end
 
 @implementation KeyChainManage
+@synthesize mobile = _mobile;
 
 + (instancetype)sharedInstance
 {
@@ -54,6 +57,14 @@ static NSString *const hostH5 = @"hostH5";
 - (void)setH5host:(NSString *)h5host
 {
     [self.keychain setItem:hostH5 ForKey:h5host];
+}
+- (void)setMobile:(NSString *)mobile {
+    _mobile = mobile;
+    [self.keychain setItem:mobile ForKey:kMobile];
+}
+- (NSString *)mobile {
+    NSString *mobile = [self.keychain itemForkey:kMobile];
+    return mobile?:@"";
 }
 
 - (void)signOut

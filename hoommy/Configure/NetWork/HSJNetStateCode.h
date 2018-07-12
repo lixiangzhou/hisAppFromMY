@@ -24,6 +24,16 @@ typedef enum : NSUInteger {
     kHXBOpenAccount_Outnumber = 5068,
     // 解绑银行卡失败（跳结果页）
     kHXBCode_UnBindCardFail = 4002,
+    ///Form错误处理字段
+    kHXBCode_Enum_ProcessingField = 104,
+    ///未登录
+    kHXBCode_Enum_NotSigin = 402,
+    /// token 单点登录
+    kHXBCode_Enum_SingleLogin = 409,
+    //服务器错误
+    kHXBCode_Enum_NoServerFaile = 500,
+    //购买处理中
+    kHXBPurchase_Processing = -999,
 } HSJNetStateCode;
 
 

@@ -15,10 +15,14 @@
 
 @property (nonatomic, assign) BOOL isLogin;
 @property (nonatomic, copy) NSString  *token;
+///用户手机号
+@property (nonatomic,copy) NSString *mobile;
 /**
  h5根地址
  */
 @property (nonatomic, copy) NSString *h5host;
+//是否有网络
+@property (nonatomic, assign) BOOL ishaveNet;
 
 
 
