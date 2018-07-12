@@ -30,6 +30,18 @@
 		4EE616A520F4B4F20044B998 /* AXHNewFeatureController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE6169F20F4B4F20044B998 /* AXHNewFeatureController.m */; };
 		4EE616A620F4B4F20044B998 /* AXHNewFeatureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE616A220F4B4F20044B998 /* AXHNewFeatureCell.m */; };
 		4EE616A720F4B4F20044B998 /* TAExampleDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE616A420F4B4F20044B998 /* TAExampleDotView.m */; };
+		8D60B4D420F7486300287E52 /* CALayer+Anim.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B4BA20F7486300287E52 /* CALayer+Anim.m */; };
+		8D60B4D520F7486300287E52 /* PCCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B4BC20F7486300287E52 /* PCCircle.m */; };
+		8D60B4D620F7486300287E52 /* PCCircleInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B4BE20F7486300287E52 /* PCCircleInfoView.m */; };
+		8D60B4D720F7486300287E52 /* PCCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B4C020F7486300287E52 /* PCCircleView.m */; };
+		8D60B4D820F7486300287E52 /* PCCircleViewConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B4C220F7486300287E52 /* PCCircleViewConst.m */; };
+		8D60B4D920F7486300287E52 /* PCLockLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B4C420F7486300287E52 /* PCLockLabel.m */; };
+		8D60B4DA20F7486300287E52 /* HSJGestureLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B4C720F7486300287E52 /* HSJGestureLoginController.m */; };
+		8D60B4DB20F7486300287E52 /* HSJGestureSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B4C920F7486300287E52 /* HSJGestureSettingController.m */; };
+		8D60B4DC20F7486300287E52 /* HSJDepositoryOpenController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B4CE20F7486300287E52 /* HSJDepositoryOpenController.m */; };
+		8D60B4DD20F7486300287E52 /* HSJDepositoryOpenTipController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B4D020F7486300287E52 /* HSJDepositoryOpenTipController.m */; };
+		8D60B4DE20F7486300287E52 /* HSJDepositoryOpenViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B4D320F7486300287E52 /* HSJDepositoryOpenViewModel.m */; };
+		8D60B4E120F748BC00287E52 /* UITextField+HLNumberFormatTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B4E020F748BC00287E52 /* UITextField+HLNumberFormatTextField.m */; };
 		9A0BD51D20F6F8ED00B1CC59 /* UIButton+HxbButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A0BD51C20F6F8ED00B1CC59 /* UIButton+HxbButton.m */; };
 		9A0BD52120F6FA0E00B1CC59 /* HXBColourGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A0BD52020F6FA0E00B1CC59 /* HXBColourGradientView.m */; };
 		9A0BD52520F6FBB300B1CC59 /* HXBUserInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A0BD52420F6FBB300B1CC59 /* HXBUserInfoView.m */; };
@@ -264,6 +276,30 @@
 		4EE616A420F4B4F20044B998 /* TAExampleDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAExampleDotView.m; sourceTree = "<group>"; };
 		54B20A0D6605B011D885333F /* Pods-hoommy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hoommy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-hoommy/Pods-hoommy.debug.xcconfig"; sourceTree = "<group>"; };
 		73C7B870EA4F77D826DA647B /* libPods-hoommy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-hoommy.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D60B4B920F7486300287E52 /* CALayer+Anim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+Anim.h"; sourceTree = "<group>"; };
+		8D60B4BA20F7486300287E52 /* CALayer+Anim.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+Anim.m"; sourceTree = "<group>"; };
+		8D60B4BB20F7486300287E52 /* PCCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCCircle.h; sourceTree = "<group>"; };
+		8D60B4BC20F7486300287E52 /* PCCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCCircle.m; sourceTree = "<group>"; };
+		8D60B4BD20F7486300287E52 /* PCCircleInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCCircleInfoView.h; sourceTree = "<group>"; };
+		8D60B4BE20F7486300287E52 /* PCCircleInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCCircleInfoView.m; sourceTree = "<group>"; };
+		8D60B4BF20F7486300287E52 /* PCCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCCircleView.h; sourceTree = "<group>"; };
+		8D60B4C020F7486300287E52 /* PCCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCCircleView.m; sourceTree = "<group>"; };
+		8D60B4C120F7486300287E52 /* PCCircleViewConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCCircleViewConst.h; sourceTree = "<group>"; };
+		8D60B4C220F7486300287E52 /* PCCircleViewConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCCircleViewConst.m; sourceTree = "<group>"; };
+		8D60B4C320F7486300287E52 /* PCLockLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCLockLabel.h; sourceTree = "<group>"; };
+		8D60B4C420F7486300287E52 /* PCLockLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCLockLabel.m; sourceTree = "<group>"; };
+		8D60B4C620F7486300287E52 /* HSJGestureLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSJGestureLoginController.h; sourceTree = "<group>"; };
+		8D60B4C720F7486300287E52 /* HSJGestureLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSJGestureLoginController.m; sourceTree = "<group>"; };
+		8D60B4C820F7486300287E52 /* HSJGestureSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSJGestureSettingController.h; sourceTree = "<group>"; };
+		8D60B4C920F7486300287E52 /* HSJGestureSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSJGestureSettingController.m; sourceTree = "<group>"; };
+		8D60B4CD20F7486300287E52 /* HSJDepositoryOpenController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSJDepositoryOpenController.h; sourceTree = "<group>"; };
+		8D60B4CE20F7486300287E52 /* HSJDepositoryOpenController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSJDepositoryOpenController.m; sourceTree = "<group>"; };
+		8D60B4CF20F7486300287E52 /* HSJDepositoryOpenTipController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSJDepositoryOpenTipController.h; sourceTree = "<group>"; };
+		8D60B4D020F7486300287E52 /* HSJDepositoryOpenTipController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSJDepositoryOpenTipController.m; sourceTree = "<group>"; };
+		8D60B4D220F7486300287E52 /* HSJDepositoryOpenViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSJDepositoryOpenViewModel.h; sourceTree = "<group>"; };
+		8D60B4D320F7486300287E52 /* HSJDepositoryOpenViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSJDepositoryOpenViewModel.m; sourceTree = "<group>"; };
+		8D60B4DF20F748BC00287E52 /* UITextField+HLNumberFormatTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+HLNumberFormatTextField.h"; sourceTree = "<group>"; };
+		8D60B4E020F748BC00287E52 /* UITextField+HLNumberFormatTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+HLNumberFormatTextField.m"; sourceTree = "<group>"; };
 		9A0BD51A20F6F75000B1CC59 /* MacrosInBusiness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacrosInBusiness.h; sourceTree = "<group>"; };
 		9A0BD51B20F6F8ED00B1CC59 /* UIButton+HxbButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+HxbButton.h"; sourceTree = "<group>"; };
 		9A0BD51C20F6F8ED00B1CC59 /* UIButton+HxbButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+HxbButton.m"; sourceTree = "<group>"; };
@@ -883,6 +919,82 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		8D60B4B720F7486300287E52 /* GesturePassword */ = {
+			isa = PBXGroup;
+			children = (
+				8D60B4B820F7486300287E52 /* View */,
+				8D60B4C520F7486300287E52 /* ViewController */,
+			);
+			path = GesturePassword;
+			sourceTree = "<group>";
+		};
+		8D60B4B820F7486300287E52 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8D60B4B920F7486300287E52 /* CALayer+Anim.h */,
+				8D60B4BA20F7486300287E52 /* CALayer+Anim.m */,
+				8D60B4BB20F7486300287E52 /* PCCircle.h */,
+				8D60B4BC20F7486300287E52 /* PCCircle.m */,
+				8D60B4BD20F7486300287E52 /* PCCircleInfoView.h */,
+				8D60B4BE20F7486300287E52 /* PCCircleInfoView.m */,
+				8D60B4BF20F7486300287E52 /* PCCircleView.h */,
+				8D60B4C020F7486300287E52 /* PCCircleView.m */,
+				8D60B4C120F7486300287E52 /* PCCircleViewConst.h */,
+				8D60B4C220F7486300287E52 /* PCCircleViewConst.m */,
+				8D60B4C320F7486300287E52 /* PCLockLabel.h */,
+				8D60B4C420F7486300287E52 /* PCLockLabel.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8D60B4C520F7486300287E52 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8D60B4C620F7486300287E52 /* HSJGestureLoginController.h */,
+				8D60B4C720F7486300287E52 /* HSJGestureLoginController.m */,
+				8D60B4C820F7486300287E52 /* HSJGestureSettingController.h */,
+				8D60B4C920F7486300287E52 /* HSJGestureSettingController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		8D60B4CA20F7486300287E52 /* DepositoryOpen */ = {
+			isa = PBXGroup;
+			children = (
+				8D60B4CB20F7486300287E52 /* View */,
+				8D60B4CC20F7486300287E52 /* ViewController */,
+				8D60B4D120F7486300287E52 /* ViewModel */,
+			);
+			path = DepositoryOpen;
+			sourceTree = "<group>";
+		};
+		8D60B4CB20F7486300287E52 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8D60B4CC20F7486300287E52 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8D60B4CD20F7486300287E52 /* HSJDepositoryOpenController.h */,
+				8D60B4CE20F7486300287E52 /* HSJDepositoryOpenController.m */,
+				8D60B4CF20F7486300287E52 /* HSJDepositoryOpenTipController.h */,
+				8D60B4D020F7486300287E52 /* HSJDepositoryOpenTipController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		8D60B4D120F7486300287E52 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8D60B4D220F7486300287E52 /* HSJDepositoryOpenViewModel.h */,
+				8D60B4D320F7486300287E52 /* HSJDepositoryOpenViewModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		9A0BD51920F6F71100B1CC59 /* Macros */ = {
 			isa = PBXGroup;
 			children = (
@@ -1342,6 +1454,8 @@
 			children = (
 				9A4B185220F60C2A006B83C7 /* BankCard */,
 				9A4B180620F34433006B83C7 /* BindPhone */,
+				8D60B4CA20F7486300287E52 /* DepositoryOpen */,
+				8D60B4B720F7486300287E52 /* GesturePassword */,
 				E13A0E8820F49E2500A3E364 /* User */,
 				E13A0E7D20F48DF400A3E364 /* AccountInfo */,
 				4EA57D2820F3500B006FD573 /* My */,
@@ -1712,6 +1826,8 @@
 		9A97D99A20EF420100688ADB /* UITextField */ = {
 			isa = PBXGroup;
 			children = (
+				8D60B4DF20F748BC00287E52 /* UITextField+HLNumberFormatTextField.h */,
+				8D60B4E020F748BC00287E52 /* UITextField+HLNumberFormatTextField.m */,
 			);
 			path = UITextField;
 			sourceTree = "<group>";
@@ -2365,6 +2481,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A97DAA020EF420200688ADB /* b64.m in Sources */,
+				8D60B4E120F748BC00287E52 /* UITextField+HLNumberFormatTextField.m in Sources */,
 				9A0BD52E20F6FC9300B1CC59 /* HXBBaseView_MoreTopBottomView.m in Sources */,
 				9A97DA9420EF420200688ADB /* UILabel+HxbLabel.m in Sources */,
 				9A4B181620F34434006B83C7 /* HXBBindPhoneTableFootView.m in Sources */,
@@ -2385,6 +2502,7 @@
 				4EA57D3120F3500B006FD573 /* HSJMyViewController.m in Sources */,
 				9A4B183220F36DCC006B83C7 /* UIView+HSJStandard.m in Sources */,
 				4EE6169420F4AD5A0044B998 /* HSJSignInViewController.m in Sources */,
+				8D60B4DC20F7486300287E52 /* HSJDepositoryOpenController.m in Sources */,
 				9A97DA9520EF420200688ADB /* UIView+HXBFrame.m in Sources */,
 				9A97DA7C20EF420200688ADB /* HXBBaseNavigationController.m in Sources */,
 				9A4B18B720F62209006B83C7 /* HXBBaseView_HaveLabel_TopBottomView.m in Sources */,
@@ -2397,10 +2515,13 @@
 				9A97DA7D20EF420200688ADB /* HXBBaseTabBarController.m in Sources */,
 				4E43B05F20EF77F8000BDAE7 /* HSJBankCardListViewController.m in Sources */,
 				9A97DAAB20EF420200688ADB /* HandleMessage.m in Sources */,
+				8D60B4DA20F7486300287E52 /* HSJGestureLoginController.m in Sources */,
 				9A97DAAA20EF420200688ADB /* CRSA.m in Sources */,
+				8D60B4DB20F7486300287E52 /* HSJGestureSettingController.m in Sources */,
 				9A97DA6D20EF420200688ADB /* HSJListViewController.m in Sources */,
 				9A4B18B120F620B8006B83C7 /* HXBCardBinModel.m in Sources */,
 				9A97DA7A20EF420200688ADB /* HXBWKWebViewProgressView.m in Sources */,
+				8D60B4D520F7486300287E52 /* PCCircle.m in Sources */,
 				E13A0EF720F4A60400A3E364 /* HxbAccountInfoViewController.m in Sources */,
 				9A97DA9B20EF420200688ADB /* IDPConfig.m in Sources */,
 				9A97DAA520EF420200688ADB /* NSString+IDPExtension.m in Sources */,
@@ -2428,6 +2549,7 @@
 				E13A0EF420F49E2500A3E364 /* HXBUserInfoModel.m in Sources */,
 				9A97DA9E20EF420200688ADB /* IDPStorageMemoryInner.m in Sources */,
 				9A97DA5F20EF420200688ADB /* HSJTokenManager.m in Sources */,
+				8D60B4D720F7486300287E52 /* PCCircleView.m in Sources */,
 				E13A0E8420F48EF600A3E364 /* HXB_XYTools.m in Sources */,
 				9A4B18AE20F60E89006B83C7 /* HXBBankCardModel.m in Sources */,
 				9A97DAA720EF420200688ADB /* JastorRuntimeHelper.m in Sources */,
@@ -2440,6 +2562,7 @@
 				9A97DA8920EF420200688ADB /* NSString+HxbGeneral.m in Sources */,
 				4EA57D2120F34D0D006FD573 /* HXBCustomTextField.m in Sources */,
 				9A97DA6120EF420200688ADB /* HXBThemAdapterManager.m in Sources */,
+				8D60B4D620F7486300287E52 /* PCCircleInfoView.m in Sources */,
 				9A4B184E20F5AFB6006B83C7 /* HXBSignUPAndLoginRequest_EnumManager.m in Sources */,
 				9A97DAA620EF420200688ADB /* Jastor.m in Sources */,
 				9A0BD51D20F6F8ED00B1CC59 /* UIButton+HxbButton.m in Sources */,
@@ -2473,6 +2596,7 @@
 				9A97DAB620EF420200688ADB /* NYNetworkConfig.m in Sources */,
 				9A97DA7E20EF420200688ADB /* HSJBaseViewModel+HSJNetWorkApi.m in Sources */,
 				9A97DA9A20EF420200688ADB /* IDPCache.m in Sources */,
+				8D60B4D420F7486300287E52 /* CALayer+Anim.m in Sources */,
 				9A97DA7920EF420200688ADB /* HXBBaseWKWebViewController.m in Sources */,
 				9A97DA7720EF420200688ADB /* HXBBaseViewController+UITableView.m in Sources */,
 				9A4B18A220F60C2B006B83C7 /* HxbMyBankCardViewController.m in Sources */,
@@ -2488,6 +2612,7 @@
 				9A97DA7820EF420200688ADB /* HXBBaseViewController.m in Sources */,
 				4E8DB75820F5B63F000712D7 /* HSJSignInViewModel.m in Sources */,
 				9A97DA8820EF420200688ADB /* NSString+CopiesTransfer.m in Sources */,
+				8D60B4D820F7486300287E52 /* PCCircleViewConst.m in Sources */,
 				9ACB2F3C20EF6E08005C3C3D /* HSJKeyChainStore.m in Sources */,
 				9A97DA7220EF420200688ADB /* HSJTestWebviewControllerViewController.m in Sources */,
 				4EE6169820F4ADB40044B998 /* HSJPasswordSigInViewController.m in Sources */,
@@ -2504,16 +2629,19 @@
 				9A97DAB020EF420200688ADB /* NSString+MD5.m in Sources */,
 				9A97DA6020EF420200688ADB /* HXBTokenModel.m in Sources */,
 				4EA57D3020F3500B006FD573 /* HXBVersionUpdateModel.m in Sources */,
+				8D60B4DD20F7486300287E52 /* HSJDepositoryOpenTipController.m in Sources */,
 				9A97DA7520EF420200688ADB /* HSJBaseModel.m in Sources */,
 				9A6E0A5C20F84C9700598071 /* AppDelegate.m in Sources */,
 				4EE616A520F4B4F20044B998 /* AXHNewFeatureController.m in Sources */,
 				9A97DA9120EF420200688ADB /* UILabel+Util.m in Sources */,
+				8D60B4DE20F7486300287E52 /* HSJDepositoryOpenViewModel.m in Sources */,
 				4E8DB75420F5AEE3000712D7 /* TimerWeakTarget.m in Sources */,
 				4EA57D0B20F338EA006FD573 /* HSJRiskAssessmentViewController.m in Sources */,
 				E13A0EFD20F4ADAA00A3E364 /* HXBBottomLineTableViewCell.m in Sources */,
 				9A97DA9320EF420200688ADB /* UITextView+YLTextView.m in Sources */,
 				9A97DAB520EF420200688ADB /* NYNetworkAgent.m in Sources */,
 				9A4B185120F5FF85006B83C7 /* HxbHUDProgress.m in Sources */,
+				8D60B4D920F7486300287E52 /* PCLockLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
