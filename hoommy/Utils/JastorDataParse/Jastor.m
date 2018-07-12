@@ -158,13 +158,13 @@ static Class nsArrayClass;
     return dic;
 }
 
-- (NSDictionary *)map {
+- (NSMutableDictionary *)map {
 	NSArray *properties = [JastorRuntimeHelper propertyNames:[self class]];
 	NSMutableDictionary *mapDictionary = [[[NSMutableDictionary alloc] initWithCapacity:properties.count] autorelease];
 	for (NSString *property in properties) {
 		[mapDictionary setObject:property forKey:property];
 	}
-	return [NSDictionary dictionaryWithDictionary:mapDictionary];
+	return mapDictionary;
 }
 
 - (NSString *)description {

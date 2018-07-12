@@ -17,7 +17,9 @@ typedef enum : NSUInteger {
     // 当封装多处使用的通用接口时， 如果state的值是非0值， 那么就以这个错误吗构建一个NSErro对象，回传给调用者
     HSJNetStateCodeCommonInterfaceErro = -200000,
     // 成功
-    HSJNetStateCodeSuccess = 0
+    HSJNetStateCodeSuccess = 0,
+    ///服务器时间与系统时间相差过大
+    kHXBCode_Enum_RequestOverrun = 412,
 } HSJNetStateCode;
 
 

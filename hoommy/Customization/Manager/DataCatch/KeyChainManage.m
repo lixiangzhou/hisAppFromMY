@@ -56,7 +56,7 @@ static NSString *const kMobile = @"kMobile";
 
 - (void)setH5host:(NSString *)h5host
 {
-    [self.keychain setItemForKey:hostH5 ForKey:h5host];
+    [self.keychain setItem:hostH5 ForKey:h5host];
 }
 - (void)setMobile:(NSString *)mobile {
     _mobile = mobile;
@@ -83,7 +83,7 @@ static NSString *const kMobile = @"kMobile";
         [self.keychain removeItemForKey:kToken];
         return;
     }
-    [self.keychain setItemForKey:token ForKey:kToken];
+    [self.keychain setItem:token ForKey:kToken];
 }
 
 - (NSString *)token
@@ -98,7 +98,7 @@ static NSString *const kMobile = @"kMobile";
 }
 
 - (void)setIsLogin:(BOOL)isLogin {
-     [self.keychain setItemForKey:@(isLogin).description ForKey:kIsLogin];
+     [self.keychain setItem:@(isLogin).description ForKey:kIsLogin];
 }
 
 //- (void)setValueWith
