@@ -12,7 +12,7 @@
 #import <Security/Security.h>
 
 static NSString * const kToken = @"token";
-static NSString * const kService = @"www.hoomxb.com";
+static NSString * const kService = @"www.hoommy.com";
 static NSString *const kIsLogin = @"kIsLogin";
 static NSString * const kLoginPwd = @"loginPwd";
 static NSString * const kTradePwd = @"tradePwd";
@@ -66,6 +66,7 @@ static NSString *const kMobile = @"kMobile";
     NSString *mobile = [self.keychain itemForkey:kMobile];
     return mobile?:@"";
 }
+
 - (void)signOut
 {
     KeyChainManage *manager = KeyChain;
