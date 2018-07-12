@@ -29,4 +29,20 @@ typedef void(^NetWorkResponseBlock)(id responseData, NSError* erro);
  @param responseBlock 回调结果给发送者
  */
 - (void)loadData:(void(^)(NYBaseRequest *request))requestBlock responseResult:(void(^)(id responseData, NSError* erro))responseBlock;
+
+/**
+ 获取状态码
+
+ @param responseObj 网络响应数据
+ @return 状态码
+ */
+- (int)getStateCode:(NSDictionary*)responseObj;
+
+/**
+ 获取网络错误消息
+ 
+ @param responseObj 网络响应数据
+ @return 消息
+ */
+- (NSString*)getErroMessage:(NSDictionary*)responseObj;
 @end

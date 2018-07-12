@@ -76,4 +76,28 @@
         }
     }];
 }
+
+/**
+ 获取状态码
+ 
+ @param responseObj 网络响应数据
+ @return 状态码
+ */
+- (int)getStateCode:(NSDictionary*)responseObj {
+    int statusCode = [responseObj stringAtPath:@"statusCode"].intValue;
+    
+    return statusCode;
+}
+
+/**
+ 获取网络错误消息
+ 
+ @param responseObj 网络响应数据
+ @return 消息
+ */
+- (NSString*)getErroMessage:(NSDictionary*)responseObj {
+    NSString *errMsg = [responseObj stringAtPath:@"message"];
+    
+    return errMsg;
+}
 @end

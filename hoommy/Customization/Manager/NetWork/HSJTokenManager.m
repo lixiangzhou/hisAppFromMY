@@ -31,6 +31,7 @@ static NSString *const kTokenUrl = @"/token";
  获取令牌
  */
 - (void)getAccessToken{
+    [self processTokenInvidate];
     
     KeyChain.token = nil;
     NSString *tokenURLString = [NSString stringWithFormat:@"%@%@",[NYNetworkConfig sharedInstance].baseUrl,kTokenUrl];
@@ -60,9 +61,7 @@ static NSString *const kTokenUrl = @"/token";
         result = YES;
         
     }
-    if(result) {
-        [self processTokenInvidate];
-    }
+
     [[HXBBaseRequestManager sharedInstance] sendFreshTokenNotify:result];
 }
 
@@ -70,6 +69,11 @@ static NSString *const kTokenUrl = @"/token";
  令牌失效处理
  */
 - (void)processTokenInvidate {
-    
+    KeyChain.isLogin = NO;
+    UINavigationController* navVC =  [HXBRootVCManager manager].mainTabbarVC.selectedViewController;
+    if(navVC.viewControllers.count > 0) {
+        [navVC popToRootViewControllerAnimated:YES];
+        [HXBRootVCManager manager].mainTabbarVC.selectedIndex = 0;
+    }
 }
 @end

@@ -13,5 +13,10 @@
 #import "HXBTheme.h"
 #import "HSJNetWorkUrl.h"
 #import "HSJNotification.h"
+#import "HXBSignUPAndLoginRequest_EnumManager.h"
+
+//红小宝宏定义文件
+#import "MacrosInBusiness.h"
+#import "HXBEnumerateTransitionManager.h"
 
 #endif /* HSJConfig_h */

@@ -59,7 +59,7 @@ static NSString *const X_HxbAuth_Token = @"X-Hxb-Auth-Token";
 
 - (NSString *)baseUrl {
     if(_baseUrl.length <= 0) {
-        return @"https://api.hoomxb.com";
+        return @"http://192.168.1.29:3100";
     }
     return _baseUrl;
 }
@@ -100,11 +100,13 @@ static NSString *const X_HxbAuth_Token = @"X-Hxb-Auth-Token";
         }
         if(status ==AFNetworkReachabilityStatusReachableViaWWAN || status == AFNetworkReachabilityStatusReachableViaWiFi)
         {
+            KeyChain.ishaveNet = YES;
             NSLog(@"🐯有网");
         }else
         {
             NSLog(@"🐯没有网");
-//            [HxbHUDProgress showMessageCenter:kNoNetworkText inView:nil];
+            KeyChain.ishaveNet = NO;
+            [HxbHUDProgress showTextWithMessage:kNoNetworkText];
         }
     }];
 }
