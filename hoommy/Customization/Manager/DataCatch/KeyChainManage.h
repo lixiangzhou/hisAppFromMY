@@ -28,8 +28,8 @@
 @property (nonatomic,copy) NSString *mobile;
 ///手势密码
 @property (nonatomic, copy) NSString  *gesturePwd;
-///手势密码输入的次数
-@property (nonatomic, copy) NSString  *gesturePwdCount;
+///手势密码输入的次数，不存在返回 NSNotFound
+@property (nonatomic, assign) NSInteger gesturePwdCount;
 /// 是否忽略手势密码，值为 kHXBGesturePwdSkipeYES，或 kHXBGesturePwdSkipeNO
 @property (nonatomic, copy) NSString *skipGesture;
 /// 是否弹窗过忽略手势密码

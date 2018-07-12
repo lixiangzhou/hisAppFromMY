@@ -112,9 +112,9 @@ static NSString *const hostH5 = @"hostH5";
     [self.keychain setItemForKey:gesturePwd ForKey:kGesturePwd];
 }
 
-- (void)setGesturePwdCount:(NSString *)gesturePwdCount
+- (void)setGesturePwdCount:(NSInteger)gesturePwdCount
 {
-    [self.keychain setItemForKey:gesturePwdCount ForKey:kGesturePwdCount];
+    [self.keychain setItemForKey:[NSString stringWithFormat:@"%zd", gesturePwdCount] ForKey:kGesturePwdCount];
 }
 
 - (NSString *)gesturePwd
@@ -123,10 +123,15 @@ static NSString *const hostH5 = @"hostH5";
     return gesturePwd?:@"";
 }
 
-- (NSString *)gesturePwdCount
+- (NSInteger)gesturePwdCount
 {
-    NSString *gesturePwdCount = [self.keychain itemForkey:kGesturePwdCount];
-    return gesturePwdCount?:@"";
+    NSString *number = [self.keychain itemForkey:kGesturePwdCount];
+    if (number) {
+        NSInteger gesturePwdCount = [number integerValue];
+        return gesturePwdCount;
+    } else {    
+        return NSNotFound;
+    }
 }
 
 - (NSString *)skipGesture {

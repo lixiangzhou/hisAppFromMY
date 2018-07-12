@@ -19,12 +19,12 @@
 /**
  *  普通状态下外空心圆颜色
  */
-#define CircleStateNormalOutsideColor rgba(241,241,241,1)
+#define CircleStateNormalOutsideColor [UIColor clearColor]
 
 /**
  *  选中状态下外空心圆颜色
  */
-#define CircleStateSelectedOutsideColor rgba(34,178,246,1)
+#define CircleStateSelectedOutsideColor rgba(72,140,255,1)
 
 /**
  *  错误状态下外空心圆颜色
@@ -34,17 +34,17 @@
 /**
  *  普通状态下内实心圆颜色
  */
-#define CircleStateNormalInsideColor [UIColor clearColor]
+#define CircleStateNormalInsideColor rgba(237, 237, 237, 1)
 
 /**
  *  选中状态下内实心圆颜色
  */
-#define CircleStateSelectedInsideColor rgba(34,178,246,1)
+#define CircleStateSelectedInsideColor CircleStateSelectedOutsideColor
 
 /**
  *  错误状态内实心圆颜色
  */
-#define CircleStateErrorInsideColor rgba(254,82,92,1)
+#define CircleStateErrorInsideColor CircleStateErrorOutsideColor
 
 /**
  *  普通状态下三角形颜色
@@ -54,12 +54,12 @@
 /**
  *  选中状态下三角形颜色
  */
-#define CircleStateSelectedTrangleColor rgba(34,178,246,1)
+#define CircleStateSelectedTrangleColor CircleStateSelectedOutsideColor
 
 /**
  *  错误状态三角形颜色
  */
-#define CircleStateErrorTrangleColor rgba(254,82,92,1)
+#define CircleStateErrorTrangleColor CircleStateErrorOutsideColor
 
 /**
  *  三角形边长
@@ -69,12 +69,12 @@
 /**
  *  普通时连线颜色
  */
-#define CircleConnectLineNormalColor rgba(34,178,246,1)
+#define CircleConnectLineNormalColor CircleStateSelectedOutsideColor
 
 /**
  *  错误时连线颜色
  */
-#define CircleConnectLineErrorColor rgba(254,82,92,1)
+#define CircleConnectLineErrorColor CircleStateErrorOutsideColor
 
 /**
  *  连线宽度
@@ -84,7 +84,7 @@
 /**
  *  单个圆的半径
  */
-#define CircleRadius 30.0f
+#define CircleRadius 25.0f
 
 /**
  *  单个圆的圆心
@@ -99,7 +99,7 @@
 /**
  *  九宫格展示infoView 单个圆的半径
  */
-#define CircleInfoRadius 5
+#define CircleInfoRadius 3
 
 /**
  *  内部实心圆占空心圆的比例系数
@@ -139,17 +139,17 @@
 /**
  *  普通状态下文字提示的颜色
  */
-#define textColorNormalState rgba(241,241,241,1)
+#define textColorNormalState rgba(146,146,162,1)
 
 /**
  *  警告状态下文字提示的颜色
  */
-#define textColorWarningState rgba(254,82,92,1)
+#define textColorWarningState rgba(245,107,47,1)
 
 /**
  *  绘制解锁界面准备好时，提示文字
  */
-#define gestureTextBeforeSet @"绘制解锁图案"
+#define gestureTextBeforeSet @"每次开启红小宝可使用手势密码"
 
 /**
  *  设置时，连线个数少，提示文字
@@ -159,12 +159,12 @@
 /**
  *  确认图案，提示再次绘制
  */
-#define gestureTextDrawAgain @"再次绘制解锁图案"
+#define gestureTextDrawAgain @"再次绘制"
 
 /**
  *  再次绘制不一致，提示文字
  */
-#define gestureTextDrawAgainError @"与上次绘制不一致，请重新绘制"
+#define gestureTextDrawAgainError @"两次密码不一致，请重新绘制"
 
 /**
  *  设置成功

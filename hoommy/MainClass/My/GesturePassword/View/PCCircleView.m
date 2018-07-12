@@ -107,7 +107,7 @@
     [super layoutSubviews];
     
     CGFloat itemViewWH = CircleRadius * 2;
-    CGFloat marginValue = (self.frame.size.width - 3 * itemViewWH) / 3.0f;
+    CGFloat marginValue = 50;//(self.frame.size.width - 3 * itemViewWH) / 3.0f;
     
     [self.subviews enumerateObjectsUsingBlock:^(UIView *subview, NSUInteger idx, BOOL *stop) {
         
@@ -282,7 +282,7 @@
 #pragma mark - 对数组中最后一个对象的处理
 - (void)circleSetLastObjectWithState:(CircleState)state
 {
-    [[self.circleSet lastObject] setState:state];
+    [(PCCircle *)[self.circleSet lastObject] setState:state];
 }
 
 #pragma mark - 解锁类型：设置 手势路径的处理

@@ -12,7 +12,7 @@
 #import "HSJFragmentViewController.h"
 #import "HSJTestWebviewControllerViewController.h"
 #import "HSJDepositoryOpenTipController.h"
-#import "HSJGesturePasswordController.h"
+#import "HSJGestureSettingController.h"
 
 @interface HSJHomeViewController ()
 
@@ -80,7 +80,7 @@
 }
 
 - (void)tableViewButtonClickAct:(UIButton*)button {
-    HSJGesturePasswordController* vc = [[HSJGesturePasswordController alloc] init];
+    HSJGestureSettingController* vc = [[HSJGestureSettingController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

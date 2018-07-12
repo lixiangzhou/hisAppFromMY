@@ -23,13 +23,13 @@
 		4EA57D3120F3500B006FD573 /* HSJMyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA57D2E20F3500B006FD573 /* HSJMyViewController.m */; };
 		4EA57D3220F3500B006FD573 /* HSJMyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EA57D2F20F3500B006FD573 /* HSJMyViewController.xib */; };
 		8D60B43C20F35AFF00287E52 /* UITextField+HLNumberFormatTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B43B20F35AFF00287E52 /* UITextField+HLNumberFormatTextField.m */; };
-		8D60B44120F36D9300287E52 /* HSJGesturePasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B44020F36D9300287E52 /* HSJGesturePasswordController.m */; };
 		8D60B4A520F6EE5A00287E52 /* PCCircleViewConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B49F20F6EE5700287E52 /* PCCircleViewConst.m */; };
 		8D60B4A620F6EE5A00287E52 /* PCCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B4A020F6EE5800287E52 /* PCCircle.m */; };
 		8D60B4A720F6EE5A00287E52 /* PCCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B4A220F6EE5900287E52 /* PCCircleView.m */; };
 		8D60B4AA20F6EE6200287E52 /* CALayer+Anim.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B4A920F6EE6200287E52 /* CALayer+Anim.m */; };
 		8D60B4AF20F6EEFA00287E52 /* PCLockLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B4AD20F6EEF900287E52 /* PCLockLabel.m */; };
 		8D60B4B020F6EEFA00287E52 /* PCCircleInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B4AE20F6EEF900287E52 /* PCCircleInfoView.m */; };
+		8D60B4B320F7038600287E52 /* HSJGestureSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B4B220F7038600287E52 /* HSJGestureSettingController.m */; };
 		8D7F480920F3493400F22312 /* HSJDepositoryOpenController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F480620F3493400F22312 /* HSJDepositoryOpenController.m */; };
 		8D7F480A20F3493400F22312 /* HSJDepositoryOpenTipController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F480820F3493400F22312 /* HSJDepositoryOpenTipController.m */; };
 		8D7F480E20F34B2C00F22312 /* HSJDepositoryOpenViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F480D20F34B2C00F22312 /* HSJDepositoryOpenViewModel.m */; };
@@ -223,8 +223,6 @@
 		73C7B870EA4F77D826DA647B /* libPods-hoommy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-hoommy.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D60B43A20F35AFF00287E52 /* UITextField+HLNumberFormatTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+HLNumberFormatTextField.h"; sourceTree = "<group>"; };
 		8D60B43B20F35AFF00287E52 /* UITextField+HLNumberFormatTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+HLNumberFormatTextField.m"; sourceTree = "<group>"; };
-		8D60B43F20F36D9300287E52 /* HSJGesturePasswordController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJGesturePasswordController.h; sourceTree = "<group>"; };
-		8D60B44020F36D9300287E52 /* HSJGesturePasswordController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJGesturePasswordController.m; sourceTree = "<group>"; };
 		8D60B49F20F6EE5700287E52 /* PCCircleViewConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCCircleViewConst.m; sourceTree = "<group>"; };
 		8D60B4A020F6EE5800287E52 /* PCCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCCircle.m; sourceTree = "<group>"; };
 		8D60B4A120F6EE5800287E52 /* PCCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCCircleView.h; sourceTree = "<group>"; };
@@ -237,6 +235,8 @@
 		8D60B4AC20F6EEF800287E52 /* PCLockLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCLockLabel.h; sourceTree = "<group>"; };
 		8D60B4AD20F6EEF900287E52 /* PCLockLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCLockLabel.m; sourceTree = "<group>"; };
 		8D60B4AE20F6EEF900287E52 /* PCCircleInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCCircleInfoView.m; sourceTree = "<group>"; };
+		8D60B4B120F7038600287E52 /* HSJGestureSettingController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJGestureSettingController.h; sourceTree = "<group>"; };
+		8D60B4B220F7038600287E52 /* HSJGestureSettingController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJGestureSettingController.m; sourceTree = "<group>"; };
 		8D7F480520F3493400F22312 /* HSJDepositoryOpenController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSJDepositoryOpenController.h; sourceTree = "<group>"; };
 		8D7F480620F3493400F22312 /* HSJDepositoryOpenController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSJDepositoryOpenController.m; sourceTree = "<group>"; };
 		8D7F480720F3493400F22312 /* HSJDepositoryOpenTipController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSJDepositoryOpenTipController.h; sourceTree = "<group>"; };
@@ -760,8 +760,8 @@
 		8D60B43E20F36D6B00287E52 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				8D60B43F20F36D9300287E52 /* HSJGesturePasswordController.h */,
-				8D60B44020F36D9300287E52 /* HSJGesturePasswordController.m */,
+				8D60B4B120F7038600287E52 /* HSJGestureSettingController.h */,
+				8D60B4B220F7038600287E52 /* HSJGestureSettingController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -2170,6 +2170,7 @@
 				8D60B4B020F6EEFA00287E52 /* PCCircleInfoView.m in Sources */,
 				9A97DA7620EF420200688ADB /* HXBBaseViewController+HSAPI.m in Sources */,
 				9A97DA6620EF420200688ADB /* UIScrollView+HXBScrollView.m in Sources */,
+				8D60B4B320F7038600287E52 /* HSJGestureSettingController.m in Sources */,
 				8D60B4A720F6EE5A00287E52 /* PCCircleView.m in Sources */,
 				8D7F480A20F3493400F22312 /* HSJDepositoryOpenTipController.m in Sources */,
 				9A97DAB120EF420200688ADB /* HXBNsTimerManager.m in Sources */,
@@ -2212,7 +2213,6 @@
 				9A97DA8520EF420200688ADB /* NSObject+Hxb.m in Sources */,
 				9A4B182720F36585006B83C7 /* HXBAgreementView.m in Sources */,
 				9A97DA9820EF420200688ADB /* UIViewController+HXBUtil.m in Sources */,
-				8D60B44120F36D9300287E52 /* HSJGesturePasswordController.m in Sources */,
 				9A97DA8B20EF420200688ADB /* NSString+HxbMask.m in Sources */,
 				E13A0F0B20F4DC2700A3E364 /* HXBMiddlekey.m in Sources */,
 				9A97DAB020EF420200688ADB /* NSString+MD5.m in Sources */,

@@ -36,7 +36,6 @@
     self.backgroundColor = CircleBackgroundColor;
     
     for (NSUInteger i=0; i<9; i++) {
-        
         PCCircle *circle = [[PCCircle alloc] init];
         circle.type = CircleTypeInfo;
         [self addSubview:circle];
@@ -48,7 +47,7 @@
     [super layoutSubviews];
     
     CGFloat itemViewWH = CircleInfoRadius * 2;
-    CGFloat marginValue = (self.frame.size.width - 3 * itemViewWH) / 3.0f;
+    CGFloat marginValue = 10;//(self.frame.size.width - 3 * itemViewWH) / 3.0f;
     
     [self.subviews enumerateObjectsUsingBlock:^(UIView *subview, NSUInteger idx, BOOL *stop) {
         
