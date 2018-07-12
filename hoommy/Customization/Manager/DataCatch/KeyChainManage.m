@@ -60,7 +60,7 @@ static NSString *const kMobile = @"kMobile";
 }
 - (void)setMobile:(NSString *)mobile {
     _mobile = mobile;
-    [self.keychain setItemForKey:mobile ForKey:kMobile];
+    [self.keychain setItem:mobile ForKey:kMobile];
 }
 - (NSString *)mobile {
     NSString *mobile = [self.keychain itemForkey:kMobile];
