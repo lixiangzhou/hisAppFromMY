@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "HXBUserInfoModel.h"
+
 #define KeyChain [KeyChainManage sharedInstance]
 
 @interface KeyChainManage : NSObject

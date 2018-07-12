@@ -20,6 +20,10 @@ typedef enum : NSUInteger {
     HSJNetStateCodeSuccess = 0,
     ///服务器时间与系统时间相差过大
     kHXBCode_Enum_RequestOverrun = 412,
+    //开户或绑卡超过次数
+    kHXBOpenAccount_Outnumber = 5068,
+    // 解绑银行卡失败（跳结果页）
+    kHXBCode_UnBindCardFail = 4002,
 } HSJNetStateCode;
 
 

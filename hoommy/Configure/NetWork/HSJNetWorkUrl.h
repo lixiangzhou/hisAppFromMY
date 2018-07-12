@@ -11,6 +11,27 @@
 
 #define kHXBMY_VersionUpdateURL @"/update"//版本更新
 
+//MARK: ======================= 协议 ==========================
+//协议或合同名    端口号后链接    状态    账户内连接
+#define kHXB_Negotiate_SginUPURL @"/agreement/signup"///《注册服务协议》
+#define kHXB_Negotiate_CertificationURL @"/agreement/realname"///《红小宝认证服务协议》
+#define kHXB_Negotiate_ServePlanURL @"/agreement/plan"///《红利智投服务协议书》
+#define kHXB_Negotiate_ServePlanMonthURL @"/agreement/planMonth"///《按月付息服务协议书》
+#define kHXB_Negotiate_ServePlan_AccountURL(productID) [NSString stringWithFormat: @"/acount/plan/%@/agreement",(productID)]///账户内服务协议 plan
+#define kHXB_Negotiate_ServeMonthPlan_AccountURL(productID) [NSString stringWithFormat: @"/acount/planMonth/%@/agreement",(productID)]///账户内按月付息服务协议
+#define kHXB_Negotiate_ServeLoan_AccountURL(productID) [NSString stringWithFormat: @"/acount/loan/%@/agreement/",(productID)]///账户内《借款协议》
+#define kHXB_Negotiate_ServeLoanURL @"/agreement/loan"///《借款服务协议书》
+#define kHXB_Negotiate_Anti_MoneyLaunderingURL @"/agreement/antimoney"///《反洗钱告知暨客户出借承诺书》
+#define kHXB_Negotiate_LoanTruansferURL @"/agreement/debts"///《债权转让及受让协议》
+#define kHXB_Negotiate_ServeCreditor_AccountURL(productID) [NSString stringWithFormat: @"/account/transfer/%@/agreement",(productID)]///账户内《债权转让及受让协议》
+#define kHXB_Negotiate_depository @"/agreement/depository" ///《存管开户协议》
+#define kHXB_Negotiate_thirdpart @"/agreement/thirdpart" ///《恒丰银行股份有限公司杭州分行网络交易资金账户三方协议》
+#define kHXB_Negotiate_authorize @"/agreement/authorize" ///《红小宝平台授权协议》
+#define kHXB_Negotiate_couponExchangeInstructionsUrl @"/discount/explain" ///优惠券使用说明
+
+#define kHXB_Negotiate_AddTrustURL @"/landing/trust"///增信页
+#define kHXB_Agreement_Hint @"/agreement/hint"//网络借贷协议书
+
 //MARK: ======================= 用户 =======================
 #define kHXBUser_UserInfoURL @"/account/info"///用户信息
 #define kHXBUser_LoginURL @"/user/login"//登录
@@ -38,7 +59,13 @@
 #define kHXBUser_CheckExistMobileURL @"/checkExistMobile"///忘记密码校验手机号
 #define kHXBUser_LoginURL @"/user/login"//登录
 
-
+//MARK: ======================= 存管 ==========================
+#define kHXBOpenDepositAccount_Escrow @"/user/escrow" //用户开通存管账户
+#define kHXBUserInfo_UnbindBankCard @"/account/bankcard/unbind" // 解绑银行卡操作
+#define kHXBUserInfo_BankCard @"/account/bankcard"//@"/account/user/card" //用户获取绑定银行卡信息
+#define kHXBAccount_quickpay_smscode @"/account/smscode/" //代扣充值获取手机验证码
+#define kHXBAccount_Bindcard @"/account/bindcard" //绑卡
+#define kHXBUser_checkCardBin @"/user/checkCardBin" //卡bin校验
 
 
 
