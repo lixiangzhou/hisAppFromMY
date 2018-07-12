@@ -17,6 +17,9 @@
 #import "HXBAccountSecureCell.h"
 #import <YYModel.h>
 //#import "HXBBottomLineTableViewCell.h"
+#import "HXBBaseWKWebViewController.h"
+#import "HXBAccount_AlterLoginPassword_ViewController.h"
+
 @interface HxbAccountInfoViewController ()
 <
 UITableViewDelegate,
@@ -27,8 +30,7 @@ UITableViewDataSource
 //@property (nonatomic, strong) NSArray *itemArray;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) HXBAccountInfoViewModel *viewModel;
-//@property (nonatomic, strong) UIButton *signOutButton;
-//@property (nonatomic, strong) HXBRequestUserInfoViewModel *userInfoViewModel;
+
 @end
 
 @implementation HxbAccountInfoViewController
@@ -49,8 +51,8 @@ UITableViewDataSource
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-//    self.isColourGradientNavigationBar = YES;
-    
+    self.automaticallyAdjustsScrollViewInsets = YES;
+    self.isWhiteColourGradientNavigationBar = YES;
     [self loadData_userInfo];///加载用户数据
 }
 
@@ -65,12 +67,75 @@ UITableViewDataSource
 #pragma TableViewDelegate
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (section == 0) {
-        UILabel *bankInfo = [[UILabel alloc]initWithFrame:CGRectMake(kScrAdaptationW(52.5), kScrAdaptationH(20), kScrAdaptationW(120), kScrAdaptationH(20))];
-        bankInfo.font = NSTextAlignmentLeft;
-        bankInfo.font = kHXBFont_PINGFANGSC_REGULAR(14);
-        bankInfo.textColor = kHXBColor_FFFFFF_100;
-        bankInfo.text = @"恒丰银行存管信息";
-        return bankInfo;
+        
+        UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScrAdaptationH(160))];
+        bgView.backgroundColor = [UIColor whiteColor];
+        
+        UIImageView *iconImg = [[UIImageView alloc]initWithFrame:CGRectMake(kScrAdaptationW(25), kScrAdaptationH(20), kScrAdaptationW(50), kScrAdaptationW(50))];
+        iconImg.layer.cornerRadius = kScrAdaptationW(25);
+        iconImg.layer.masksToBounds = YES;
+        iconImg.image = [UIImage imageNamed:@"hflogo"];
+        [bgView addSubview:iconImg];
+        
+        UILabel *nameLab = [[UILabel alloc]initWithFrame:CGRectMake(kScrAdaptationW(90), kScrAdaptationH(32), kScrAdaptationW(150), kScrAdaptationH(25))];
+        nameLab.textAlignment = NSTextAlignmentLeft;
+        nameLab.font = kHXBFont_PINGFANGSC_REGULAR(18);
+        nameLab.textColor = COR28;
+        nameLab.text = self.userInfoModel.userInfo.username?:@"--";
+        [bgView addSubview:nameLab];
+        
+        UIImageView *hf_bgImgV = [[UIImageView alloc]initWithFrame:CGRectMake(kScrAdaptationW(15), kScrAdaptationH(89), kScreenWidth-2*kScrAdaptationW(15), kScrAdaptationH(70))];
+        hf_bgImgV.image = [UIImage imageNamed:@"home_bot_safety_bg"];
+        hf_bgImgV.userInteractionEnabled = YES;
+        [bgView addSubview:hf_bgImgV];
+        
+        if (self.userInfoModel.userInfo.isCreateEscrowAcc) {
+            UIImageView *hfProtocolImg = [[UIImageView alloc]initWithFrame:CGRectMake(kScrAdaptationW(15), kScrAdaptationH(11), kScrAdaptationW(11), kScrAdaptationH(13))];
+            hfProtocolImg.image = [UIImage imageNamed:@"home_bot_safety"];
+            [hf_bgImgV addSubview:hfProtocolImg];
+            
+            UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(kScrAdaptationW(31), kScrAdaptationH(11), kScrAdaptationW(230), kScrAdaptationH(20))];
+            name.textAlignment = NSTextAlignmentLeft;
+            name.font = kHXBFont_PINGFANGSC_REGULAR(14);
+            name.textColor = COR5;
+            NSString *str = self.userInfoModel.userInfo.realName;
+            NSMutableString * nameStr = [NSMutableString stringWithString:str];
+            [nameStr replaceCharactersInRange:NSMakeRange(0, 1)  withString:@"*"];
+            name.text = [NSString stringWithFormat:@"真实姓名：%@",nameStr];
+            [hf_bgImgV addSubview:name];
+            
+            UILabel *bankProtocolLab = [[UILabel alloc]initWithFrame:CGRectMake(kScrAdaptationW(11), kScrAdaptationH(39), kScrAdaptationW(150), kScrAdaptationH(20))];
+            bankProtocolLab.textAlignment = NSTextAlignmentLeft;
+            bankProtocolLab.font = kHXBFont_PINGFANGSC_REGULAR(14);
+            bankProtocolLab.textColor = COR25;
+            bankProtocolLab.text = @"《恒丰银行存管协议》";
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickHFbankProtocolButton:)];
+            [bankProtocolLab addGestureRecognizer:tap];
+            bankProtocolLab.userInteractionEnabled = YES;
+            [hf_bgImgV addSubview:bankProtocolLab];
+        } else {
+            UIImageView *hfProtocolImg = [[UIImageView alloc]initWithFrame:CGRectMake(kScrAdaptationW(30), kScrAdaptationH(26), kScrAdaptationW(24), kScrAdaptationH(18))];
+            hfProtocolImg.image = [UIImage imageNamed:@"hflogo"];
+            [hf_bgImgV addSubview:hfProtocolImg];
+            
+            UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(kScrAdaptationW(59), kScrAdaptationH(24), kScrAdaptationW(130), kScrAdaptationH(22))];
+            name.textAlignment = NSTextAlignmentLeft;
+            name.font = kHXBFont_PINGFANGSC_REGULAR(16);
+            name.textColor = COR19;
+            name.text = @"恒丰银行资金存管";
+            [hf_bgImgV addSubview:name];
+            
+            UIButton *openBtn = [[UIButton alloc]initWithFrame:CGRectMake(kScrAdaptationW(245), kScrAdaptationH(19), kScrAdaptationW(90), kScrAdaptationH(32))];
+            [openBtn setTitle:@"立即开通" forState:UIControlStateNormal];
+            [openBtn setBackgroundColor: [UIColor colorWithRed:72/255.0 green:140/255.0 blue:255/255.0 alpha:1/1.0]];
+            openBtn.titleLabel.font = kHXBFont_PINGFANGSC_REGULAR(14);
+            openBtn.layer.cornerRadius = 4.0f;
+            openBtn.layer.masksToBounds = YES;
+            [openBtn addTarget:self action:@selector(entryDepositoryAccount) forControlEvents:UIControlEventTouchUpInside];
+            [hf_bgImgV addSubview:openBtn];
+        }
+        
+        return bgView;
     } else {
         return nil;
     }
@@ -87,7 +152,12 @@ UITableViewDataSource
                 break;
             case HXBAccountSecureTypeLoginPwd:
                 //登录密码
+            {
                 NSLog(@"登录密码");
+                HXBAccount_AlterLoginPassword_ViewController *signUPVC = [[HXBAccount_AlterLoginPassword_ViewController alloc] init];
+                signUPVC.type = HXBSignUPAndLoginRequest_sendSmscodeType_forgot;
+                [self.navigationController pushViewController: signUPVC animated:YES];
+            }
                 break;
             case HXBAccountSecureTypeTransactionPwd:
                 //交易密码
@@ -101,18 +171,25 @@ UITableViewDataSource
                 //修改手势密码
                 NSLog(@"手势密码开关");
                 break;
-            case HXBAccountSecureTypeCommonProblems:
-                //常见问题
-                NSLog(@"常见问题");
-                break;
-            case HXBAccountSecureTypeAboutUs:
-                //关于我们
-                NSLog(@"关于我们");
-                break;
             default:
                 break;
         }
         
+    } else if (indexPath.section == 1) {
+        NSInteger row =  [tableView numberOfRowsInSection:0] + indexPath.row;
+        model = self.dataSource[row];
+        switch (model.type) {
+        case HXBAccountSecureTypeCommonProblems:
+            //常见问题
+            NSLog(@"常见问题");
+            break;
+        case HXBAccountSecureTypeAboutUs:
+            //关于我们
+            NSLog(@"关于我们");
+            break;
+        default:
+            break;
+        }
     } else {
         NSLog(@"退出账号");
         [self signOutButtonButtonClick]; //退出账号
@@ -120,12 +197,12 @@ UITableViewDataSource
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return kScrAdaptationH(45);
+    return kScrAdaptationH(55);
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (section == 0) {
-        return kScrAdaptationH(80);
+        return kScrAdaptationH(160);
     } else {
         return kScrAdaptationH(10);
     }
@@ -143,6 +220,10 @@ UITableViewDataSource
     HXBAccountSecureCell *cell = [tableView dequeueReusableCellWithIdentifier:HXBAccountSecureCellID forIndexPath:indexPath];
     if (indexPath.section == 0) {
         cell.model = self.dataSource[indexPath.row];
+        cell.hiddenLine = cell.model.type == HXBAccountSecureTypeGesturePwdModify ?:NO;
+    } else if (indexPath.section == 1) {
+        NSInteger row =  [tableView numberOfRowsInSection:0] + indexPath.row;
+        cell.model = self.dataSource[row];
         cell.hiddenLine = cell.model.type == HXBAccountSecureTypeAboutUs ?:NO;
     } else {
         [cell.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
@@ -246,9 +327,12 @@ UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     switch (section) {
         case 0:
-            return self.dataSource.count;
+            return self.dataSource.count-2;
             break;
         case 1:
+            return 2;
+            break;
+        case 2:
             return 1;
             break;
         default:
@@ -258,18 +342,24 @@ UITableViewDataSource
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
+    return 3;
+}
+
+- (void)clickHFbankProtocolButton:(UIGestureRecognizer *)tap {
+    NSLog(@"跳转恒丰银行协议");
+    kWeakSelf
+    [HXBBaseWKWebViewController pushWithPageUrl:[NSString splicingH5hostWithURL:kHXB_Negotiate_thirdpart] fromController:weakSelf];
 }
 
 //进入绑卡界面
 - (void)bindBankCardClick
 {
-    if (self.userInfoViewModel.userInfoModel.userInfo.isUnbundling) {
+    if (self.userInfoModel.userInfo.isUnbundling) {
         //        [HXBAlertManager callupWithphoneNumber:kServiceMobile andWithTitle:@"温馨提示" Message:[NSString stringWithFormat:@"您的身份信息不完善，请联系客服 %@", kServiceMobile]];
         return;
     }
     
-    if ([self.userInfoViewModel.userInfoModel.userInfo.isCashPasswordPassed isEqualToString:@"1"])  {
+    if ([self.userInfoModel.userInfo.isCashPasswordPassed isEqualToString:@"1"])  {
         //        //    //进入绑卡界面
         //        HxbWithdrawCardViewController *withdrawCardViewController = [[HxbWithdrawCardViewController alloc]init];
         //        withdrawCardViewController.title = @"绑卡";
@@ -288,9 +378,10 @@ UITableViewDataSource
 /**
  进入存管账户
  */
-- (void)entryDepositoryAccount:(BOOL)isbankView
+- (void)entryDepositoryAccount
 {
-    
+    NSLog(@"开通存管账户");
+    /*
     if (self.userInfoViewModel.userInfoModel.userInfo.isUnbundling) {
         //        [HXBAlertManager callupWithphoneNumber:kServiceMobile andWithTitle:@"温馨提示" Message:[NSString stringWithFormat:@"您的身份信息不完善，请联系客服 %@", kServiceMobile]];
         //        [HXBAlertManager callupWithphoneNumber:kServiceMobile andWithMessage:[NSString stringWithFormat:@"您的身份信息不完善，请联系客服 %@", kServiceMobile]];
@@ -345,6 +436,7 @@ UITableViewDataSource
         //        openDepositAccountVC.type = HXBRechargeAndWithdrawalsLogicalJudgment_Other;
         //        [self.navigationController pushViewController:openDepositAccountVC animated:YES];
     }
+     */
 }
 
 - (void)prepareData {
@@ -392,21 +484,13 @@ UITableViewDataSource
     }];
 }
 
-////登出按钮
-//- (UIButton *)signOutButton{
-//    if (!_signOutButton) {
-//        _signOutButton = [UIButton btnwithTitle:@"退出当前账号" andTarget:self andAction:@selector(signOutButtonButtonClick:) andFrameByCategory:CGRectMake(20, SCREEN_HEIGHT - 64 - 44 - 20, SCREEN_WIDTH - 40, 44)];
-//    }
-//    return _signOutButton;
-//}
-
 - (UILabel *)signOutLabel
 {
     if (!_signOutLabel) {
         _signOutLabel = [[UILabel alloc] init];
-        _signOutLabel.text = @"退出当前账号";
-        _signOutLabel.textColor = COR29;
-        _signOutLabel.font = kHXBFont_PINGFANGSC_REGULAR(15);
+        _signOutLabel.text = @"退出登陆";
+        _signOutLabel.textColor = kHXBColor_666666_100;
+        _signOutLabel.font = kHXBFont_PINGFANGSC_REGULAR(14);
         _signOutLabel.textAlignment = NSTextAlignmentCenter;
         
     }
@@ -414,7 +498,7 @@ UITableViewDataSource
 }
 - (UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView  alloc]initWithFrame:CGRectMake(0, 0,kScreenWidth , kScreenHeight) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView  alloc]initWithFrame:CGRectMake(0, kScrAdaptationH(80),kScreenWidth , kScreenHeight-kScrAdaptationH(80)) style:UITableViewStyleGrouped];
         [_tableView registerClass:[HXBAccountSecureCell class] forCellReuseIdentifier:HXBAccountSecureCellID];
         _tableView.delegate = self;
         _tableView.dataSource = self;
@@ -426,19 +510,19 @@ UITableViewDataSource
     return _tableView;
 }
 
-- (HXBRequestUserInfoViewModel *)userInfoViewModel {
-    if(!_userInfoViewModel) {
-        _userInfoViewModel = [[HXBRequestUserInfoViewModel alloc] init];
-    }
-    return _userInfoViewModel;
-}
+//- (HXBRequestUserInfoViewModel *)userInfoViewModel {
+//    if(!_userInfoViewModel) {
+//        _userInfoViewModel = [[HXBRequestUserInfoViewModel alloc] init];
+//    }
+//    return _userInfoViewModel;
+//}
 
 #pragma mark - 加载数据
 - (void)loadData_userInfo {
     kWeakSelf
-    [self.userInfoViewModel downLoadUserInfo:YES resultBlock:^(id responseData, NSError *erro) {
+    [self.viewModel downLoadUserInfo:YES resultBlock:^(id responseData, NSError *erro) {
         if (!erro) {
-            weakSelf.userInfoViewModel = responseData;//weakSelf.viewModel.userInfoModel;
+            weakSelf.userInfoModel = responseData;//weakSelf.viewModel.userInfoModel;
             [weakSelf.tableView reloadData];
         }
     }];

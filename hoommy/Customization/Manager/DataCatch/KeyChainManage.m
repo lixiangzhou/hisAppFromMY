@@ -90,6 +90,13 @@ static NSString *const hostH5 = @"hostH5";
     return mobile?:@"";
 }
 
+- (void)setSiginCount:(NSString *)siginCount {
+    [self.keychain setItem:siginCount ForKey:kSiginPwd];
+}
+- (NSString *)siginCount {
+    return [self.keychain itemForkey:kSiginPwd] ? : @"0";
+}
+
 - (void)setMobile:(NSString *)mobile {
     [self.keychain setItem:mobile ForKey:kMobile];
 }

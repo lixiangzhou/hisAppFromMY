@@ -29,6 +29,9 @@
 @property (nonatomic, copy) NSString *h5host;
 //是否有网络
 @property (nonatomic, assign) BOOL ishaveNet;
+///记录修改登录密码的次数
+@property (nonatomic, copy) NSString *siginCount;
+
 
 ///手势密码
 @property (nonatomic, copy) NSString  *gesturePwd;
@@ -38,6 +41,7 @@
 @property (nonatomic, copy) NSString *skipGesture;
 /// 是否弹窗过忽略手势密码
 @property (nonatomic, assign) BOOL skipGestureAlertAppeared;
+
 
 /**
  *  获取KeyChainManage单例
