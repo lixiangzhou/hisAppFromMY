@@ -1,20 +1,19 @@
-//
-//  HXBCircleInfoView.m
-//  hoomxb
-//
-//  Created by HXB-C on 2017/6/20.
-//  Copyright © 2017年 hoomsun-miniX. All rights reserved.
-//
 
-#import "HXBCircleInfoView.h"
-#import "HXBCircleViewConst.h"
-#import "HXBCircle.h"
-@implementation HXBCircleInfoView
+#import "PCCircleInfoView.h"
+#import "PCCircleViewConst.h"
+#import "PCCircle.h"
+
+@interface PCCircleInfoView()
+
+
+@end
+
+@implementation PCCircleInfoView
 
 - (instancetype)init
 {
     if (self = [super init]) {
-        // 解锁视图准备
+        // 解锁视图
         [self lockViewPrepare];
     }
     return self;
@@ -23,14 +22,14 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-        // 解锁视图准备
+        // 解锁视图
         [self lockViewPrepare];
     }
     return self;
 }
 
 /*
- *  解锁视图准备
+ *  解锁视图
  */
 -(void)lockViewPrepare{
     
@@ -38,8 +37,7 @@
     
     for (NSUInteger i=0; i<9; i++) {
         
-        HXBCircle *circle = [[HXBCircle alloc] init];
-        circle.isDisplayTrajectory = YES;
+        PCCircle *circle = [[PCCircle alloc] init];
         circle.type = CircleTypeInfo;
         [self addSubview:circle];
     }
@@ -71,5 +69,5 @@
     }];
 }
 
-
 @end
+

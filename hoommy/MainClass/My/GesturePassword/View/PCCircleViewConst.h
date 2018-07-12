@@ -1,13 +1,5 @@
-//
-//  HXBCircleViewConst.h
-//  hoomxb
-//
-//  Created by HXB-C on 2017/6/20.
-//  Copyright © 2017年 hoomsun-miniX. All rights reserved.
-//
 
 #import <Foundation/Foundation.h>
-
 
 #define rgba(r,g,b,a) [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:a]
 
@@ -22,37 +14,37 @@
 /**
  *  解锁背景色
  */
-#define CircleViewBackgroundColor [UIColor whiteColor]
+#define CircleViewBackgroundColor rgba(13,52,89,1)
 
 /**
  *  普通状态下外空心圆颜色
  */
-#define CircleStateNormalOutsideColor [UIColor clearColor]
+#define CircleStateNormalOutsideColor rgba(241,241,241,1)
 
 /**
  *  选中状态下外空心圆颜色
  */
-#define CircleStateSelectedOutsideColor rgba(115,173,255,1)
+#define CircleStateSelectedOutsideColor rgba(34,178,246,1)
 
 /**
  *  错误状态下外空心圆颜色
  */
-#define CircleStateErrorOutsideColor rgba(253,54,54,1)
+#define CircleStateErrorOutsideColor rgba(254,82,92,1)
 
 /**
  *  普通状态下内实心圆颜色
  */
-#define CircleStateNormalInsideColor rgba(231,231,231,1)
+#define CircleStateNormalInsideColor [UIColor clearColor]
 
 /**
  *  选中状态下内实心圆颜色
  */
-#define CircleStateSelectedInsideColor rgba(115,173,255,1)
+#define CircleStateSelectedInsideColor rgba(34,178,246,1)
 
 /**
  *  错误状态内实心圆颜色
  */
-#define CircleStateErrorInsideColor rgba(253,54,54,1)
+#define CircleStateErrorInsideColor rgba(254,82,92,1)
 
 /**
  *  普通状态下三角形颜色
@@ -82,7 +74,7 @@
 /**
  *  错误时连线颜色
  */
-#define CircleConnectLineErrorColor rgba(253,54,54,1)
+#define CircleConnectLineErrorColor rgba(254,82,92,1)
 
 /**
  *  连线宽度
@@ -92,7 +84,7 @@
 /**
  *  单个圆的半径
  */
-#define CircleRadius kScrAdaptationW(30)
+#define CircleRadius 30.0f
 
 /**
  *  单个圆的圆心
@@ -122,7 +114,7 @@
 /**
  *  整个解锁View的Center.y值 在当前屏幕的3/5位置
  */
-#define CircleViewCenterY kScrAdaptationH(338)
+#define CircleViewCenterY kScreenH * 3/5
 
 /**
  *  连接的圆最少的个数
@@ -137,17 +129,17 @@
 /**
  *  最终的手势密码存储key
  */
-//#define gestureFinalSaveKey @"gestureFinalSaveKey"
+#define gestureFinalSaveKey @"gestureFinalSaveKey"
 
 /**
  *  第一个手势密码存储key
  */
-//#define gestureOneSaveKey @"gestureOneSaveKey"
+#define gestureOneSaveKey @"gestureOneSaveKey"
 
 /**
  *  普通状态下文字提示的颜色
  */
-#define textColorNormalState rgba(153,153,153,1)
+#define textColorNormalState rgba(241,241,241,1)
 
 /**
  *  警告状态下文字提示的颜色
@@ -162,7 +154,7 @@
 /**
  *  设置时，连线个数少，提示文字
  */
-#define gestureTextConnectLess [NSString stringWithFormat:@"至少连接%d个点", CircleSetCountLeast]
+#define gestureTextConnectLess [NSString stringWithFormat:@"最少连接%d个点，请重新输入", CircleSetCountLeast]
 
 /**
  *  确认图案，提示再次绘制
@@ -189,7 +181,7 @@
  */
 #define gestureTextGestureVerifyError @"密码错误"
 
-@interface HXBCircleViewConst : NSObject
+@interface PCCircleViewConst : NSObject
 
 /**
  *  偏好设置：存字符串（手势密码）
@@ -207,4 +199,5 @@
  *  @return 字符串对象
  */
 + (NSString *)getGestureWithKey:(NSString *)key;
+
 @end

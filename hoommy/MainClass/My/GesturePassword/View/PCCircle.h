@@ -1,12 +1,6 @@
-//
-//  HXBCircle.h
-//  hoomxb
-//
-//  Created by HXB-C on 2017/6/20.
-//  Copyright © 2017年 hoomsun-miniX. All rights reserved.
-//
 
 #import <UIKit/UIKit.h>
+
 /**
  *  单个圆的各种状态
  */
@@ -27,7 +21,7 @@ typedef enum
     CircleTypeGesture
 }CircleType;
 
-@interface HXBCircle : UIView
+@interface PCCircle : UIView
 
 /**
  *  所处的状态
@@ -43,11 +37,6 @@ typedef enum
  *  是否有箭头 default is YES
  */
 @property (nonatomic, assign) BOOL arrow;
-
-/**
- *  是否显示手势轨迹 default is YES
- */
-@property (nonatomic, assign) BOOL isDisplayTrajectory;
 
 /** 角度 */
 @property (nonatomic,assign) CGFloat angle;

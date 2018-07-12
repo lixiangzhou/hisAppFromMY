@@ -1,16 +1,9 @@
-//
-//  HXBCircleView.m
-//  hoomxb
-//
-//  Created by HXB-C on 2017/6/20.
-//  Copyright © 2017年 hoomsun-miniX. All rights reserved.
-//
 
-#import "HXBCircleView.h"
-#import "HXBCircle.h"
-#import "HXBCircleViewConst.h"
+#import "PCCircleView.h"
+#import "PCCircle.h"
+#import "PCCircleViewConst.h"
 
-@interface HXBCircleView ()
+@interface PCCircleView()
 
 // 选中的圆的集合
 @property (nonatomic, strong) NSMutableArray *circleSet;
@@ -21,13 +14,9 @@
 // 数组清空标志
 @property (nonatomic, assign) BOOL hasClean;
 
-/**
- 存储第一次手势密码
- */
-@property (nonatomic, copy) NSString *firstGesturePwd;
 @end
 
-@implementation HXBCircleView
+@implementation PCCircleView
 
 #pragma mark - 重写arrow的setter
 - (void)setArrow:(BOOL)arrow
@@ -35,18 +24,9 @@
     _arrow = arrow;
     
     // 遍历子控件，改变其是否有箭头
-    [self.subviews enumerateObjectsUsingBlock:^(HXBCircle *circle, NSUInteger idx, BOOL *stop) {
+    [self.subviews enumerateObjectsUsingBlock:^(PCCircle *circle, NSUInteger idx, BOOL *stop) {
         [circle setArrow:arrow];
     }];
-}
-- (void)setIsDisplayTrajectory:(BOOL)isDisplayTrajectory
-{
-    _isDisplayTrajectory = isDisplayTrajectory;
-    // 遍历子控件，改变其是否有箭头
-    [self.subviews enumerateObjectsUsingBlock:^(HXBCircle *circle, NSUInteger idx, BOOL *stop) {
-        [circle setIsDisplayTrajectory:isDisplayTrajectory];
-    }];
-    
 }
 
 - (NSMutableArray *)circleSet
@@ -103,7 +83,7 @@
 -(void)lockViewPrepare{
     
     [self setFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width - CircleViewEdgeMargin * 2, [UIScreen mainScreen].bounds.size.width - CircleViewEdgeMargin * 2)];
-    [self setCenter:CGPointMake([UIScreen mainScreen].bounds.size.width/2, CircleViewCenterY + HXBStatusBarAdditionHeight)];
+    [self setCenter:CGPointMake([UIScreen mainScreen].bounds.size.width/2, CircleViewCenterY)];
     
     // 默认剪裁子控件
     [self setClip:YES];
@@ -111,17 +91,13 @@
     // 默认有箭头
     [self setArrow:YES];
     
-    //默认有手势轨迹
-    [self setIsDisplayTrajectory:YES];
-    
     self.backgroundColor = CircleBackgroundColor;
     
     for (NSUInteger i=0; i<9; i++) {
         
-        HXBCircle *circle = [[HXBCircle alloc] init];
+        PCCircle *circle = [[PCCircle alloc] init];
         circle.type = CircleTypeGesture;
         circle.arrow = self.arrow;
-        circle.isDisplayTrajectory = self.isDisplayTrajectory;
         [self addSubview:circle];
     }
 }
@@ -161,7 +137,7 @@
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView:self];
     
-    [self.subviews enumerateObjectsUsingBlock:^(HXBCircle *circle, NSUInteger idx, BOOL *stop) {
+    [self.subviews enumerateObjectsUsingBlock:^(PCCircle *circle, NSUInteger idx, BOOL *stop) {
         if (CGRectContainsPoint(circle.frame, point)) {
             [circle setState:CircleStateSelected];
             [self.circleSet addObject:circle];
@@ -180,7 +156,7 @@
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView:self];
     
-    [self.subviews enumerateObjectsUsingBlock:^(HXBCircle *circle, NSUInteger idx, BOOL *stop) {
+    [self.subviews enumerateObjectsUsingBlock:^(PCCircle *circle, NSUInteger idx, BOOL *stop) {
         
         if (CGRectContainsPoint(circle.frame, point)) {
             if ([self.circleSet containsObject:circle]) {
@@ -190,7 +166,7 @@
                 
                 // move过程中的连线（包含跳跃连线的处理）
                 [self calAngleAndconnectTheJumpedCircle];
-                
+
             }
         } else {
             
@@ -198,16 +174,16 @@
         }
     }];
     
-    [self.circleSet enumerateObjectsUsingBlock:^(HXBCircle *circle, NSUInteger idx, BOOL *stop) {
-        
+    [self.circleSet enumerateObjectsUsingBlock:^(PCCircle *circle, NSUInteger idx, BOOL *stop) {
+
         [circle setState:CircleStateSelected];
-        
+
         // 如果是登录或者验证原手势密码，就改为对应的状态
         if (self.type != CircleViewTypeSetting) {
-            [circle setState:CircleStateSelected];
+            [circle setState:CircleStateLastOneSelected];
         }
     }];
-    
+
     // 数组中最后一个对象的处理
     [self circleSetLastObjectWithState:CircleStateLastOneSelected];
     
@@ -224,7 +200,7 @@
     if (length == 0) {
         return;
     }
-    
+
     // 手势绘制结果处理
     switch (self.type) {
         case CircleViewTypeSetting:
@@ -292,13 +268,13 @@
 #pragma mark - 获取当前选中圆的状态
 - (CircleState)getCircleState
 {
-    return [(HXBCircle *)[self.circleSet firstObject] state];
+    return [(PCCircle *)[self.circleSet firstObject] state];
 }
 
 #pragma mark - 清空所有子控件的方向
 - (void)resetAllCirclesDirect
 {
-    [self.subviews enumerateObjectsUsingBlock:^(HXBCircle *obj, NSUInteger idx, BOOL *stop) {
+    [self.subviews enumerateObjectsUsingBlock:^(PCCircle *obj, NSUInteger idx, BOOL *stop) {
         [obj setAngle:0];
     }];
 }
@@ -306,8 +282,7 @@
 #pragma mark - 对数组中最后一个对象的处理
 - (void)circleSetLastObjectWithState:(CircleState)state
 {
-    HXBCircle *circle = [self.circleSet lastObject];
-    [circle setState:state];
+    [[self.circleSet lastObject] setState:state];
 }
 
 #pragma mark - 解锁类型：设置 手势路径的处理
@@ -329,13 +304,12 @@
         
     } else {// 连接多于最少个数 （>=4个）
         
-        NSString *gestureOne = self.firstGesturePwd;
+        NSString *gestureOne = [PCCircleViewConst getGestureWithKey:gestureOneSaveKey];
         
         if ([gestureOne length] < CircleSetCountLeast) { // 接收并存储第一个密码
             // 记录第一次密码
-//            [HXBCircleViewConst saveGesture:gesture Key:gestureOneSaveKey];
-//            KeyChain.gesturePwd = gesture;
-            self.firstGesturePwd = gesture;
+            [PCCircleViewConst saveGesture:gesture Key:gestureOneSaveKey];
+            
             // 通知代理
             if ([self.delegate respondsToSelector:@selector(circleView:type:didCompleteSetFirstGesture:)]) {
                 [self.delegate circleView:self type:self.type didCompleteSetFirstGesture:gesture];
@@ -343,7 +317,7 @@
             
         } else { // 接受第二个密码并与第一个密码匹配，一致后存储起来
             
-            BOOL equal = [gesture isEqual:self.firstGesturePwd]; // 匹配两次手势
+            BOOL equal = [gesture isEqual:[PCCircleViewConst getGestureWithKey:gestureOneSaveKey]]; // 匹配两次手势
             
             // 通知代理
             if ([self.delegate respondsToSelector:@selector(circleView:type:didCompleteSetSecondGesture:result:)]) {
@@ -354,8 +328,7 @@
             
             if (equal){
                 // 一致，存储密码
-//                [HXBCircleViewConst saveGesture:gesture Key:gestureFinalSaveKey];
-//                KeyChain.gesturePwd = gesture;
+                [PCCircleViewConst saveGesture:gesture Key:gestureFinalSaveKey];
                 
             } else {
                 // 不一致，重绘回显
@@ -372,7 +345,7 @@
  */
 - (void)gestureEndByTypeLoginWithGesture:(NSString *)gesture length:(CGFloat)length
 {
-    NSString *password = @"";//KeyChain.gesturePwd;
+    NSString *password = [PCCircleViewConst getGestureWithKey:gestureFinalSaveKey];
     
     BOOL equal = [gesture isEqual:password];
     
@@ -383,7 +356,7 @@
     if (equal) {
         
     } else {
-        
+
         [self changeCircleInCircleSetWithState:CircleStateError];
     }
 }
@@ -410,17 +383,17 @@
 #pragma mark - 改变选中数组CircleSet子控件状态
 - (void)changeCircleInCircleSetWithState:(CircleState)state
 {
-    [self.circleSet enumerateObjectsUsingBlock:^(HXBCircle *circle, NSUInteger idx, BOOL *stop) {
-        
+    [self.circleSet enumerateObjectsUsingBlock:^(PCCircle *circle, NSUInteger idx, BOOL *stop) {
+
         [circle setState:state];
-        
+
         // 如果是错误状态，那就将最后一个按钮特殊处理
         if (state == CircleStateError) {
             if (idx == self.circleSet.count - 1) {
                 [circle setState:CircleStateLastOneError];
             }
         }
-        
+
     }];
     
     [self setNeedsDisplay];
@@ -431,7 +404,7 @@
 {
     NSMutableString *gesture = [NSMutableString string];
     
-    for (HXBCircle *circle in circleSet) {
+    for (PCCircle *circle in circleSet) {
         // 遍历取tag拼字符串
         [gesture appendFormat:@"%@", @(circle.tag)];
     }
@@ -449,12 +422,7 @@
     if ([self getCircleState] == CircleStateError) {
         color = CircleConnectLineErrorColor;
     } else {
-        if (self.isDisplayTrajectory) {
-            color = CircleConnectLineNormalColor;
-        }else
-        {
-            color = [UIColor clearColor];
-        }
+        color = CircleConnectLineNormalColor;
     }
     
     // 绘制图案
@@ -486,7 +454,7 @@
     for (int index = 0; index < self.circleSet.count; index++) {
         
         // 取出选中按钮
-        HXBCircle *circle = self.circleSet[index];
+        PCCircle *circle = self.circleSet[index];
         
         if (index == 0) { // 起点按钮
             CGContextMoveToPoint(ctx, circle.center.x, circle.center.y);
@@ -498,7 +466,7 @@
     // 连接最后一个按钮到手指当前触摸得点
     if (CGPointEqualToPoint(self.currentPoint, CGPointZero) == NO) {
         
-        [self.subviews enumerateObjectsUsingBlock:^(HXBCircle *circle, NSUInteger idx, BOOL *stop) {
+        [self.subviews enumerateObjectsUsingBlock:^(PCCircle *circle, NSUInteger idx, BOOL *stop) {
             
             if ([self getCircleState] == CircleStateError || [self getCircleState] == CircleStateLastOneError) {
                 // 如果是错误的状态下不连接到当前点
@@ -537,7 +505,7 @@
     if (clip) {
         
         // 遍历所有子控件
-        [self.subviews enumerateObjectsUsingBlock:^(HXBCircle *circle, NSUInteger idx, BOOL *stop) {
+        [self.subviews enumerateObjectsUsingBlock:^(PCCircle *circle, NSUInteger idx, BOOL *stop) {
             
             CGContextAddEllipseInRect(ctx, circle.frame); // 确定"剪裁"的形状
         }];
@@ -550,10 +518,10 @@
     if(self.circleSet == nil || [self.circleSet count] <= 1) return;
     
     //取出最后一个对象
-    HXBCircle *lastOne = [self.circleSet lastObject];
+    PCCircle *lastOne = [self.circleSet lastObject];
     
     //倒数第二个
-    HXBCircle *lastTwo = [self.circleSet objectAtIndex:(self.circleSet.count -2)];
+    PCCircle *lastTwo = [self.circleSet objectAtIndex:(self.circleSet.count -2)];
     
     //计算倒数第二个的位置
     CGFloat last_1_x = lastOne.center.x;
@@ -568,7 +536,7 @@
     // 2.处理跳跃连线
     CGPoint center = [self centerPointWithPointOne:lastOne.center pointTwo:lastTwo.center];
     
-    HXBCircle *centerCircle = [self enumCircleSetToFindWhichSubviewContainTheCenterPoint:center];
+    PCCircle *centerCircle = [self enumCircleSetToFindWhichSubviewContainTheCenterPoint:center];
     
     if (centerCircle != nil) {
         
@@ -582,11 +550,11 @@
 #pragma mark - 提供两个点，返回一个它们的中点
 - (CGPoint)centerPointWithPointOne:(CGPoint)pointOne pointTwo:(CGPoint)pointTwo
 {
-    CGFloat x1 = pointOne.x > pointTwo.x ? pointOne.x : pointTwo.x;
-    CGFloat x2 = pointOne.x < pointTwo.x ? pointOne.x : pointTwo.x;
-    CGFloat y1 = pointOne.y > pointTwo.y ? pointOne.y : pointTwo.y;
-    CGFloat y2 = pointOne.y < pointTwo.y ? pointOne.y : pointTwo.y;
-    
+    CGFloat x1 = fmax(pointOne.x, pointTwo.x);
+    CGFloat x2 = fmin(pointOne.x, pointTwo.x);
+    CGFloat y1 = fmax(pointOne.y, pointTwo.y);
+    CGFloat y2 = fmin(pointOne.y, pointTwo.y);
+
     return CGPointMake((x1+x2)/2, (y1 + y2)/2);
 }
 
@@ -598,10 +566,10 @@
  *
  *  @return 点所在的圆
  */
-- (HXBCircle *)enumCircleSetToFindWhichSubviewContainTheCenterPoint:(CGPoint)point
+- (PCCircle *)enumCircleSetToFindWhichSubviewContainTheCenterPoint:(CGPoint)point
 {
-    HXBCircle *centerCircle;
-    for (HXBCircle *circle in self.subviews) {
+    PCCircle *centerCircle;
+    for (PCCircle *circle in self.subviews) {
         if (CGRectContainsPoint(circle.frame, point)) {
             centerCircle = circle;
         }
@@ -615,11 +583,4 @@
     return centerCircle; // 注意：可能返回的是nil，就是当前点不在圆内
 }
 
-/**
- 重置手势密码
- */
-- (void)resetGesturePassword
-{
-    self.firstGesturePwd = nil;
-}
 @end

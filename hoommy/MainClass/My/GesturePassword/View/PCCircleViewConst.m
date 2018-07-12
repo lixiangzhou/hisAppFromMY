@@ -1,14 +1,8 @@
-//
-//  HXBCircleViewConst.m
-//  hoomxb
-//
-//  Created by HXB-C on 2017/6/20.
-//  Copyright © 2017年 hoomsun-miniX. All rights reserved.
-//
 
-#import "HXBCircleViewConst.h"
+#import "PCCircleViewConst.h"
 
-@implementation HXBCircleViewConst
+@implementation PCCircleViewConst
+
 + (void)saveGesture:(NSString *)gesture Key:(NSString *)key
 {
     [[NSUserDefaults standardUserDefaults] setObject:gesture forKey:key];
@@ -20,4 +14,5 @@
     
     return [[NSUserDefaults standardUserDefaults] objectForKey:key];
 }
+
 @end

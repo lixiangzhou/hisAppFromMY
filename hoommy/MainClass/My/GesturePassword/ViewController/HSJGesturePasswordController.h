@@ -30,8 +30,4 @@ typedef enum {
 /// 手势密码开关
 @property (nonatomic, assign) HSJAccountSecureSwitchType switchType;
 
-@property (nonatomic, copy) void (^dismissBlock)(BOOL delay, BOOL toActivity, BOOL popRightNow);
-
-- (void)checkAlertSkipSetting;
-
 @end

@@ -1,15 +1,9 @@
-//
-//  HXBCircle.m
-//  hoomxb
-//
-//  Created by HXB-C on 2017/6/20.
-//  Copyright © 2017年 hoomsun-miniX. All rights reserved.
-//
 
-#import "HXBCircle.h"
-#import "HXBCircleViewConst.h"
+#import "PCCircle.h"
+#import "PCCircleViewConst.h"
 
-@interface HXBCircle ()
+@interface PCCircle()
+
 /**
  *  外环颜色
  */
@@ -24,11 +18,10 @@
  *  三角形颜色
  */
 @property (nonatomic, strong) UIColor *trangleColor;
+
 @end
 
-@implementation HXBCircle
-
-
+@implementation PCCircle
 
 - (instancetype)init
 {
@@ -51,12 +44,12 @@
     
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     
-    CGFloat radio = 0.0;
+    CGFloat radio;
     CGRect circleRect = CGRectMake(CircleEdgeWidth, CircleEdgeWidth, rect.size.width - 2 * CircleEdgeWidth, rect.size.height - 2 * CircleEdgeWidth);
     
     if (self.type == CircleTypeGesture) {
         radio = CircleRadio;
-    } else if (self.type == CircleTypeInfo) {
+    } else {
         radio = 1;
     }
     
@@ -68,9 +61,9 @@
     
     // 画实心圆
     [self drawSolidCircleWithContext:ctx rect:rect radio:radio color:self.inCircleColor];
-    
+ 
     if (self.arrow) {
-        
+
         // 画三角形箭头
         [self drawTrangleWithContext:ctx topPoint:CGPointMake(rect.size.width/2, 10) length:kTrangleLength color:self.trangleColor];
     }
@@ -139,7 +132,7 @@
  *  上下文旋转
  */
 -(void)transFormCtx:(CGContextRef)ctx rect:(CGRect)rect{
-    //    if(self.angle == 0) return;
+//    if(self.angle == 0) return;
     CGFloat translateXY = rect.size.width * .5f;
     //平移
     CGContextTranslateCTM(ctx, translateXY, translateXY);
@@ -148,9 +141,6 @@
     CGContextTranslateCTM(ctx, -translateXY, -translateXY);
 }
 
-/**
- *  圆环绘制颜色的getter
- */
 - (UIColor *)outCircleColor
 {
     UIColor *color;
@@ -159,23 +149,13 @@
             color = CircleStateNormalOutsideColor;
             break;
         case CircleStateSelected:
-        {
             color = CircleStateSelectedOutsideColor;
-            if (!self.isDisplayTrajectory) {
-                color = CircleStateNormalOutsideColor;
-            }
-        }
             break;
         case CircleStateError:
             color = CircleStateErrorOutsideColor;
             break;
         case CircleStateLastOneSelected:
-        {
             color = CircleStateSelectedOutsideColor;
-            if (!self.isDisplayTrajectory) {
-                color = CircleStateNormalOutsideColor;
-            }
-        }
             break;
         case CircleStateLastOneError:
             color = CircleStateErrorOutsideColor;
@@ -184,13 +164,9 @@
             color = CircleStateNormalOutsideColor;
             break;
     }
-    
     return color;
 }
 
-/**
- *  实心圆绘制颜色的getter
- */
 - (UIColor *)inCircleColor
 {
     UIColor *color;
@@ -199,23 +175,13 @@
             color = CircleStateNormalInsideColor;
             break;
         case CircleStateSelected:
-        {
             color = CircleStateSelectedInsideColor;
-            if (!self.isDisplayTrajectory) {
-                color = CircleStateNormalInsideColor;
-            }
-        }
             break;
         case CircleStateError:
             color = CircleStateErrorInsideColor;
             break;
         case CircleStateLastOneSelected:
-        {
             color = CircleStateSelectedInsideColor;
-            if (!self.isDisplayTrajectory) {
-                color = CircleStateNormalInsideColor;
-            }
-        }
             break;
         case CircleStateLastOneError:
             color = CircleStateErrorInsideColor;
@@ -227,9 +193,6 @@
     return color;
 }
 
-/**
- *  三角形颜色的getter
- */
 - (UIColor *)trangleColor
 {
     UIColor *color;
@@ -238,12 +201,7 @@
             color = CircleStateNormalTrangleColor;
             break;
         case CircleStateSelected:
-        {
             color = CircleStateSelectedTrangleColor;
-            if (!self.isDisplayTrajectory) {
-                color = CircleStateNormalTrangleColor;
-            }
-        }
             break;
         case CircleStateError:
             color = CircleStateErrorTrangleColor;
@@ -261,9 +219,6 @@
     return color;
 }
 
-/**
- *  重写angle的setter
- */
 - (void)setAngle:(CGFloat)angle
 {
     _angle = angle;
@@ -271,15 +226,11 @@
     [self setNeedsDisplay];
 }
 
-/**
- *  重写state Setter
- */
 - (void)setState:(CircleState)state
 {
     _state = state;
     
     [self setNeedsDisplay];
 }
-
 
 @end
