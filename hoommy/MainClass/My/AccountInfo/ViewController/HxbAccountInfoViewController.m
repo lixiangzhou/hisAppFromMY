@@ -42,12 +42,15 @@ UITableViewDataSource
         return weakSelf.view;
     };
     [self.view addSubview:self.tableView];
+    [self prepareData];
+    [self.tableView reloadData];
     
 }
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
 //    self.isColourGradientNavigationBar = YES;
+    
     [self loadData_userInfo];///加载用户数据
 }
 
@@ -60,6 +63,18 @@ UITableViewDataSource
 }
 
 #pragma TableViewDelegate
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    if (section == 0) {
+        UILabel *bankInfo = [[UILabel alloc]initWithFrame:CGRectMake(kScrAdaptationW(52.5), kScrAdaptationH(20), kScrAdaptationW(120), kScrAdaptationH(20))];
+        bankInfo.font = NSTextAlignmentLeft;
+        bankInfo.font = kHXBFont_PINGFANGSC_REGULAR(14);
+        bankInfo.textColor = kHXBColor_FFFFFF_100;
+        bankInfo.text = @"恒丰银行存管信息";
+        return bankInfo;
+    } else {
+        return nil;
+    }
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -68,33 +83,39 @@ UITableViewDataSource
         switch (model.type) {
             case HXBAccountSecureTypeModifyPhone:
                 //绑定手机号
+                NSLog(@"绑定手机号");
                 break;
             case HXBAccountSecureTypeLoginPwd:
                 //登录密码
+                NSLog(@"登录密码");
                 break;
             case HXBAccountSecureTypeTransactionPwd:
                 //交易密码
+                NSLog(@"交易密码");
                 break;
             case HXBAccountSecureTypeGesturePwdModify:
                 //手势密码
+                NSLog(@"修改手势密码");
                 break;
             case HXBAccountSecureTypeGesturePwdSwitch:
                 //修改手势密码
+                NSLog(@"手势密码开关");
                 break;
             case HXBAccountSecureTypeCommonProblems:
                 //常见问题
+                NSLog(@"常见问题");
                 break;
             case HXBAccountSecureTypeAboutUs:
                 //关于我们
+                NSLog(@"关于我们");
                 break;
             default:
                 break;
         }
         
     } else {
-        if (model.type == HXBAccountSecureTypeExitAccount) {
-            [self signOutButtonButtonClick]; //退出账号
-        }
+        NSLog(@"退出账号");
+        [self signOutButtonButtonClick]; //退出账号
     }
 }
 
@@ -104,7 +125,7 @@ UITableViewDataSource
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (section == 0) {
-        return kScrAdaptationH(180);
+        return kScrAdaptationH(80);
     } else {
         return kScrAdaptationH(10);
     }
@@ -120,12 +141,18 @@ UITableViewDataSource
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     HXBAccountSecureCell *cell = [tableView dequeueReusableCellWithIdentifier:HXBAccountSecureCellID forIndexPath:indexPath];
-    cell.model = self.dataSource[indexPath.row];
-    if (cell.model.type == HXBAccountSecureTypeAboutUs || cell.model.type == HXBAccountSecureTypeExitAccount) {
-        cell.hiddenLine = YES;
+    if (indexPath.section == 0) {
+        cell.model = self.dataSource[indexPath.row];
+        cell.hiddenLine = cell.model.type == HXBAccountSecureTypeAboutUs ?:NO;
     } else {
-        cell.hiddenLine = NO;
+        [cell.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+        self.signOutLabel.frame = cell.bounds;
+        self.signOutLabel.width = kScreenWidth;
+        [cell.contentView addSubview:self.signOutLabel];
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.hiddenLine = YES;
     }
+    
     return cell;
     
     /*
@@ -219,7 +246,7 @@ UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     switch (section) {
         case 0:
-            return self.dataSource.count-1;
+            return self.dataSource.count;
             break;
         case 1:
             return 1;
@@ -325,15 +352,15 @@ UITableViewDataSource
     [data addObject:@{@"type":@(HXBAccountSecureTypeModifyPhone), @"title": @"修改手机号"}];
     [data addObject:@{@"type":@(HXBAccountSecureTypeLoginPwd), @"title": @"登录密码"}];
     [data addObject:@{@"type":@(HXBAccountSecureTypeTransactionPwd), @"title": @"交易密码"}];
-    [data addObject:@{@"type":@(HXBAccountSecureTypeGesturePwdSwitch), @"title": @"手势密码"}];
-    [data addObject:@{@"type":@(HXBAccountSecureTypeGesturePwdModify), @"title": @"手势密码"}];//暂时写上
+    [data addObject:@{@"type":@(HXBAccountSecureTypeGesturePwdSwitch), @"title": @"手势密码开关"}];
+    [data addObject:@{@"type":@(HXBAccountSecureTypeGesturePwdModify), @"title": @"修改手势密码"}];//暂时写上
     
 //    if ([KeyChain.skipGesture isEqual:kHXBGesturePwdSkipeNO]) {
 //        [data addObject:@{@"type":@(HXBAccountSecureTypeGesturePwdModify), @"title": @"修改手势密码"}];
 //    }
     [data addObject:@{@"type":@(HXBAccountSecureTypeCommonProblems), @"title": @"常见问题"}];
     [data addObject:@{@"type":@(HXBAccountSecureTypeAboutUs), @"title": @"关于我们"}];
-    [data addObject:@{@"type":@(HXBAccountSecureTypeExitAccount), @"title": @"退出红小宝账号"}];
+    
     
     self.dataSource = [NSMutableArray arrayWithCapacity:data.count];
     for (NSInteger i = 0; i < data.count; i++) {
@@ -412,7 +439,6 @@ UITableViewDataSource
     [self.userInfoViewModel downLoadUserInfo:YES resultBlock:^(id responseData, NSError *erro) {
         if (!erro) {
             weakSelf.userInfoViewModel = responseData;//weakSelf.viewModel.userInfoModel;
-            [weakSelf prepareData];
             [weakSelf.tableView reloadData];
         }
     }];

@@ -20,6 +20,8 @@ static NSString * const kTradePwd = @"tradePwd";
 static NSString * const kCiphertext = @"ciphertext";
 //H5页面的BaseURL
 static NSString *const hostH5 = @"hostH5";
+///手机号
+static NSString *const kMobile = @"kMobile";
 
 
 @interface KeyChainManage ()
@@ -29,6 +31,7 @@ static NSString *const hostH5 = @"hostH5";
 @end
 
 @implementation KeyChainManage
+@synthesize mobile = _mobile;
 
 + (instancetype)sharedInstance
 {
@@ -55,7 +58,14 @@ static NSString *const hostH5 = @"hostH5";
 {
     [self.keychain setItemForKey:hostH5 ForKey:h5host];
 }
-
+- (void)setMobile:(NSString *)mobile {
+    _mobile = mobile;
+    [self.keychain setItemForKey:mobile ForKey:kMobile];
+}
+- (NSString *)mobile {
+    NSString *mobile = [self.keychain itemForkey:kMobile];
+    return mobile?:@"";
+}
 - (void)signOut
 {
     KeyChainManage *manager = KeyChain;

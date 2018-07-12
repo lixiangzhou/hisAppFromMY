@@ -32,7 +32,7 @@
     [self loadData:^(NYBaseRequest *request) {
         request.showHud= isShowHud;
         request.hudDelegate = weakSelf;
-        request.requestUrl = [NSString stringWithFormat:@"http://192.168.1.31:3100%@",kHXBUser_UserInfoURL];//kHXBUser_UserInfoURL;//http://192.168.1.31:3100/transfer?page=1
+        request.requestUrl = [NSString stringWithFormat:@"http://192.168.1.29:3100%@",kHXBUser_UserInfoURL];//kHXBUser_UserInfoURL;//http://192.168.1.31:3100/transfer?page=1
         request.requestMethod = NYRequestMethodGet;
         request.modelType = NSClassFromString(@"HXBUserInfoModel");
     } responseResult:^(id responseData, NSError *erro) {

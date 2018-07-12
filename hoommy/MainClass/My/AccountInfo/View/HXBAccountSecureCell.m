@@ -44,7 +44,7 @@
         lab.font = NSTextAlignmentLeft;
         lab.font = kHXBFont_PINGFANGSC_REGULAR(14);
         lab.textColor = [UIColor colorWithRed:146/255.0f green:149/255.0f blue:162/255.0f alpha:1] ;
-        NSMutableString * phoneStr = [NSMutableString stringWithString:KeyChain.mobile];
+        NSMutableString * phoneStr = [NSMutableString stringWithString:@"15811111111"];//KeyChain.mobile
         [phoneStr replaceCharactersInRange:NSMakeRange(3, 4)  withString:@"****"];
         lab.text = [NSString stringWithFormat:@"%@",phoneStr];
         kWeakSelf

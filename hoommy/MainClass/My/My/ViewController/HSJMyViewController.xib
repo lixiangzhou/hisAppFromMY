@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HSJMyViewController">
             <connections>
+                <outlet property="loginOrSignout" destination="dWk-5L-dWc" id="0AM-46-9dZ"/>
                 <outlet property="view" destination="iN0-l3-epB" id="uxg-DG-12i"/>
             </connections>
         </placeholder>
