@@ -23,7 +23,8 @@
 @property (nonatomic, copy) NSString *h5host;
 //是否有网络
 @property (nonatomic, assign) BOOL ishaveNet;
-
+///记录修改登录密码的次数
+@property (nonatomic, copy) NSString *siginCount;
 
 
 

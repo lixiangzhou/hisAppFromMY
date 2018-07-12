@@ -16,6 +16,7 @@ static NSString * const kService = @"www.hoommy.com";
 static NSString *const kIsLogin = @"kIsLogin";
 static NSString * const kLoginPwd = @"loginPwd";
 static NSString * const kTradePwd = @"tradePwd";
+static NSString * const kSiginPwd = @"HXBSinInCount";
 //统一密文处理
 static NSString * const kCiphertext = @"ciphertext";
 //H5页面的BaseURL
@@ -66,7 +67,12 @@ static NSString *const kMobile = @"kMobile";
     NSString *mobile = [self.keychain itemForkey:kMobile];
     return mobile?:@"";
 }
-
+- (void)setSiginCount:(NSString *)siginCount {
+    [self.keychain setItem:siginCount ForKey:kSiginPwd];
+}
+- (NSString *)siginCount {
+    return [self.keychain itemForkey:kSiginPwd] ? : @"0";
+}
 - (void)signOut
 {
     KeyChainManage *manager = KeyChain;

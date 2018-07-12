@@ -18,6 +18,7 @@
 #import <YYModel.h>
 //#import "HXBBottomLineTableViewCell.h"
 #import "HXBBaseWKWebViewController.h"
+#import "HXBAccount_AlterLoginPassword_ViewController.h"
 
 @interface HxbAccountInfoViewController ()
 <
@@ -29,8 +30,7 @@ UITableViewDataSource
 //@property (nonatomic, strong) NSArray *itemArray;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) HXBAccountInfoViewModel *viewModel;
-//@property (nonatomic, strong) UIButton *signOutButton;
-//@property (nonatomic, strong) HXBRequestUserInfoViewModel *userInfoViewModel;
+
 @end
 
 @implementation HxbAccountInfoViewController
@@ -81,7 +81,7 @@ UITableViewDataSource
         nameLab.textAlignment = NSTextAlignmentLeft;
         nameLab.font = kHXBFont_PINGFANGSC_REGULAR(18);
         nameLab.textColor = COR28;
-        nameLab.text = @"--";//weakSelf.userInfoViewModel.userInfoModel.userInfo.username?:@"--";
+        nameLab.text = self.userInfoModel.userInfo.username?:@"--";
         [bgView addSubview:nameLab];
         
         UIImageView *hf_bgImgV = [[UIImageView alloc]initWithFrame:CGRectMake(kScrAdaptationW(15), kScrAdaptationH(89), kScreenWidth-2*kScrAdaptationW(15), kScrAdaptationH(70))];
@@ -89,7 +89,7 @@ UITableViewDataSource
         hf_bgImgV.userInteractionEnabled = YES;
         [bgView addSubview:hf_bgImgV];
         
-        if (NO) {//weakSelf.userInfoViewModel.userInfoModel.userInfo.isCreateEscrowAcc
+        if (self.userInfoModel.userInfo.isCreateEscrowAcc) {
             UIImageView *hfProtocolImg = [[UIImageView alloc]initWithFrame:CGRectMake(kScrAdaptationW(15), kScrAdaptationH(11), kScrAdaptationW(11), kScrAdaptationH(13))];
             hfProtocolImg.image = [UIImage imageNamed:@"home_bot_safety"];
             [hf_bgImgV addSubview:hfProtocolImg];
@@ -98,7 +98,7 @@ UITableViewDataSource
             name.textAlignment = NSTextAlignmentLeft;
             name.font = kHXBFont_PINGFANGSC_REGULAR(14);
             name.textColor = COR5;
-            NSString *str = @"--";//self.userInfoViewModel.userInfoModel.userInfo.realName
+            NSString *str = self.userInfoModel.userInfo.realName;
             NSMutableString * nameStr = [NSMutableString stringWithString:str];
             [nameStr replaceCharactersInRange:NSMakeRange(0, 1)  withString:@"*"];
             name.text = [NSString stringWithFormat:@"真实姓名：%@",nameStr];
@@ -154,9 +154,9 @@ UITableViewDataSource
                 //登录密码
             {
                 NSLog(@"登录密码");
-//                HXBAccount_AlterLoginPassword_ViewController *signUPVC = [[HXBAccount_AlterLoginPassword_ViewController alloc] init];
-//                signUPVC.type = HXBSignUPAndLoginRequest_sendSmscodeType_forgot;
-//                [weakSelf.navigationController pushViewController: signUPVC animated:YES];
+                HXBAccount_AlterLoginPassword_ViewController *signUPVC = [[HXBAccount_AlterLoginPassword_ViewController alloc] init];
+                signUPVC.type = HXBSignUPAndLoginRequest_sendSmscodeType_forgot;
+                [self.navigationController pushViewController: signUPVC animated:YES];
             }
                 break;
             case HXBAccountSecureTypeTransactionPwd:
@@ -354,12 +354,12 @@ UITableViewDataSource
 //进入绑卡界面
 - (void)bindBankCardClick
 {
-    if (self.userInfoViewModel.userInfoModel.userInfo.isUnbundling) {
+    if (self.userInfoModel.userInfo.isUnbundling) {
         //        [HXBAlertManager callupWithphoneNumber:kServiceMobile andWithTitle:@"温馨提示" Message:[NSString stringWithFormat:@"您的身份信息不完善，请联系客服 %@", kServiceMobile]];
         return;
     }
     
-    if ([self.userInfoViewModel.userInfoModel.userInfo.isCashPasswordPassed isEqualToString:@"1"])  {
+    if ([self.userInfoModel.userInfo.isCashPasswordPassed isEqualToString:@"1"])  {
         //        //    //进入绑卡界面
         //        HxbWithdrawCardViewController *withdrawCardViewController = [[HxbWithdrawCardViewController alloc]init];
         //        withdrawCardViewController.title = @"绑卡";
@@ -510,19 +510,19 @@ UITableViewDataSource
     return _tableView;
 }
 
-- (HXBRequestUserInfoViewModel *)userInfoViewModel {
-    if(!_userInfoViewModel) {
-        _userInfoViewModel = [[HXBRequestUserInfoViewModel alloc] init];
-    }
-    return _userInfoViewModel;
-}
+//- (HXBRequestUserInfoViewModel *)userInfoViewModel {
+//    if(!_userInfoViewModel) {
+//        _userInfoViewModel = [[HXBRequestUserInfoViewModel alloc] init];
+//    }
+//    return _userInfoViewModel;
+//}
 
 #pragma mark - 加载数据
 - (void)loadData_userInfo {
     kWeakSelf
-    [self.userInfoViewModel downLoadUserInfo:YES resultBlock:^(id responseData, NSError *erro) {
+    [self.viewModel downLoadUserInfo:YES resultBlock:^(id responseData, NSError *erro) {
         if (!erro) {
-            weakSelf.userInfoViewModel = responseData;//weakSelf.viewModel.userInfoModel;
+            weakSelf.userInfoModel = responseData;//weakSelf.viewModel.userInfoModel;
             [weakSelf.tableView reloadData];
         }
     }];
