@@ -143,6 +143,7 @@
     [self loadData:^(NYBaseRequest *request) {
         request.requestUrl = kHXBSetTransaction_MobifyPassword_CheckIdentitySmsURL;
         request.showHud = YES;
+        request.requestMethod = NYRequestMethodPost;
         request.requestArgument =  @{ @"identity" : idCard,
                                       @"action" : kTypeKey_tradpwd,
                                       @"smscode" : code };

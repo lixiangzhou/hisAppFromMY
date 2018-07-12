@@ -17,16 +17,32 @@
 #import "HXBBaseNavigationController.h"
 #import "HxbAccountInfoViewController.h"
 #import "HXBGeneralAlertVC.h"
+
+#import "HSJMyViewVCViewModel.h"
+
 @interface HSJMyViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *loginOrSignout;
 
+@property (nonatomic, strong) HSJMyViewVCViewModel *viewModel;
 @end
 
 @implementation HSJMyViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self setupData];
 }
+
+- (void)setupData {
+    self.viewModel = [[HSJMyViewVCViewModel alloc] init];
+    
+    kWeakSelf
+    [self.viewModel downLoadUserInfo:YES resultBlock:^(id responseData, NSError *erro) {
+        weakSelf.viewModel.userInfoModel = responseData;
+    }];
+}
+
 -(void)viewWillAppear:(BOOL)animated {
     if (!KeyChain.isLogin) {
         [self.loginOrSignout setTitle:@"登陆" forState:UIControlStateNormal];
@@ -62,6 +78,8 @@
 
 - (IBAction)bindPhoneAct:(UIButton *)sender {
     HXBBindPhoneViewController* vc = [[HXBBindPhoneViewController alloc] init];
+    vc.bindPhoneStepType = HXBBindPhoneStepFirst;
+    vc.userInfoModel = self.viewModel.userInfoModel;
     [self.navigationController pushViewController:vc animated:YES];
 
 }

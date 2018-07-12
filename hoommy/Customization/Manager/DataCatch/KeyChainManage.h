@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "HXBUserInfoModel.h"
+
 #define KeyChain [KeyChainManage sharedInstance]
 
 @interface KeyChainManage : NSObject
@@ -19,6 +21,8 @@
  h5根地址
  */
 @property (nonatomic, copy) NSString *h5host;
+//是否有网络
+@property (nonatomic, assign) BOOL ishaveNet;
 
 
 
