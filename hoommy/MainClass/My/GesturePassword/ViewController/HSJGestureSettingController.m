@@ -82,6 +82,7 @@
     [resetBtn setTitle:@"重新设置" forState:UIControlStateNormal];
     [resetBtn setTitleColor:UIColorFromRGB(0x9295a2) forState:UIControlStateNormal];
     [resetBtn addTarget:self action:@selector(reset) forControlEvents:UIControlEventTouchUpInside];
+    resetBtn.titleLabel.font = kHXBFont_28;
     resetBtn.hidden = YES;
     self.resetBtn = resetBtn;
     [self.view addSubview:resetBtn];
@@ -118,6 +119,7 @@
 - (void)circleView:(PCCircleView *)view type:(CircleViewType)type didCompleteSetFirstGesture:(NSString *)gesture
 {
     NSLog(@"获得第一个手势密码%@", gesture);
+    self.resetBtn.hidden = NO;
     [self.msgLabel showNormalMsg:gestureTextDrawAgain];
     [self infoViewSelectedSubviewsSameAsCircleView:view];
 }
@@ -127,11 +129,13 @@
     NSLog(@"获得第二个手势密码%@",gesture);
     self.resetBtn.hidden = equal;
     if (equal) {
+        KeyChain.gesturePwd = gesture;
         KeyChain.gesturePwdCount = 5;
         [self.msgLabel showWarnMsg:gestureTextSetSuccess];
         [PCCircleViewConst saveGesture:gesture Key:gestureFinalSaveKey];
         [self.navigationController popToRootViewControllerAnimated:YES];
     } else {
+        self.resetBtn.hidden = NO;
         [self.msgLabel showWarnMsgAndShake:gestureTextDrawAgainError];
     }
 }

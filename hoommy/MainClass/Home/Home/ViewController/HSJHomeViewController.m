@@ -13,6 +13,7 @@
 #import "HSJTestWebviewControllerViewController.h"
 #import "HSJDepositoryOpenTipController.h"
 #import "HSJGestureSettingController.h"
+#import "HSJGestureLoginController.h"
 
 @interface HSJHomeViewController ()
 
@@ -85,7 +86,7 @@
 }
 
 - (void)fragmentButtonClickAct:(UIButton*)button {
-    HSJFragmentViewController* vc = [[HSJFragmentViewController alloc] init];
+    HSJGestureLoginController* vc = [[HSJGestureLoginController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

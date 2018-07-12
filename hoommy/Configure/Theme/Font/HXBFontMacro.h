@@ -28,6 +28,7 @@
 #define kHXBFont_36         kHXBFont_PINGFANGSC_REGULAR_750(36)
 #define kHXBFont_38         kHXBFont_PINGFANGSC_REGULAR_750(38)
 #define kHXBFont_48         kHXBFont_PINGFANGSC_REGULAR_750(48)
+#define kHXBFont_64         kHXBFont_PINGFANGSC_REGULAR_750(64)
 #define kHXBFont_80         kHXBFont_PINGFANGSC_REGULAR_750(80)
 
 

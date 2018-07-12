@@ -30,6 +30,7 @@
 		8D60B4AF20F6EEFA00287E52 /* PCLockLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B4AD20F6EEF900287E52 /* PCLockLabel.m */; };
 		8D60B4B020F6EEFA00287E52 /* PCCircleInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B4AE20F6EEF900287E52 /* PCCircleInfoView.m */; };
 		8D60B4B320F7038600287E52 /* HSJGestureSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B4B220F7038600287E52 /* HSJGestureSettingController.m */; };
+		8D60B4B620F72D0200287E52 /* HSJGestureLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B4B520F72D0200287E52 /* HSJGestureLoginController.m */; };
 		8D7F480920F3493400F22312 /* HSJDepositoryOpenController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F480620F3493400F22312 /* HSJDepositoryOpenController.m */; };
 		8D7F480A20F3493400F22312 /* HSJDepositoryOpenTipController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F480820F3493400F22312 /* HSJDepositoryOpenTipController.m */; };
 		8D7F480E20F34B2C00F22312 /* HSJDepositoryOpenViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F480D20F34B2C00F22312 /* HSJDepositoryOpenViewModel.m */; };
@@ -237,6 +238,8 @@
 		8D60B4AE20F6EEF900287E52 /* PCCircleInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCCircleInfoView.m; sourceTree = "<group>"; };
 		8D60B4B120F7038600287E52 /* HSJGestureSettingController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJGestureSettingController.h; sourceTree = "<group>"; };
 		8D60B4B220F7038600287E52 /* HSJGestureSettingController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJGestureSettingController.m; sourceTree = "<group>"; };
+		8D60B4B420F72D0200287E52 /* HSJGestureLoginController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJGestureLoginController.h; sourceTree = "<group>"; };
+		8D60B4B520F72D0200287E52 /* HSJGestureLoginController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJGestureLoginController.m; sourceTree = "<group>"; };
 		8D7F480520F3493400F22312 /* HSJDepositoryOpenController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSJDepositoryOpenController.h; sourceTree = "<group>"; };
 		8D7F480620F3493400F22312 /* HSJDepositoryOpenController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSJDepositoryOpenController.m; sourceTree = "<group>"; };
 		8D7F480720F3493400F22312 /* HSJDepositoryOpenTipController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSJDepositoryOpenTipController.h; sourceTree = "<group>"; };
@@ -762,6 +765,8 @@
 			children = (
 				8D60B4B120F7038600287E52 /* HSJGestureSettingController.h */,
 				8D60B4B220F7038600287E52 /* HSJGestureSettingController.m */,
+				8D60B4B420F72D0200287E52 /* HSJGestureLoginController.h */,
+				8D60B4B520F72D0200287E52 /* HSJGestureLoginController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -2135,6 +2140,7 @@
 				9A97DA9B20EF420200688ADB /* IDPConfig.m in Sources */,
 				9A97DAA520EF420200688ADB /* NSString+IDPExtension.m in Sources */,
 				E13A0EF320F49E2500A3E364 /* HXBRequestUserInfoViewModel.m in Sources */,
+				8D60B4B620F72D0200287E52 /* HSJGestureLoginController.m in Sources */,
 				9A97DA8D20EF420200688ADB /* NSString+HXBPhonNumber.m in Sources */,
 				E13A0F0320F4C94900A3E364 /* HXBCommonProblemViewController.m in Sources */,
 				9A97DA7B20EF420200688ADB /* HXBWKWebviewViewModel.m in Sources */,
