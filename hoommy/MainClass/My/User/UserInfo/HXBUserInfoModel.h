@@ -10,7 +10,7 @@
 @class HXBRequestUserInfoAPI_UserAssets,HXBRequestUserInfoAPI_UserInfo;
 
 ///用户相关的Model
-@interface HXBUserInfoModel : NSObject
+@interface HXBUserInfoModel : Jastor
 ///资金相关
 @property (nonatomic,strong) HXBRequestUserInfoAPI_UserAssets *userAssets;
 ///用户相关
@@ -21,7 +21,7 @@
 
 
 ///用户资产
-@interface HXBRequestUserInfoAPI_UserAssets : NSObject
+@interface HXBRequestUserInfoAPI_UserAssets : Jastor
 /// 总资产
 @property (nonatomic,copy) NSString *assetsTotal;
 ///    累计收益
@@ -60,7 +60,7 @@
 @end
 
 
-@interface HXBRequestUserInfoAPI_UserInfo : NSObject
+@interface HXBRequestUserInfoAPI_UserInfo : Jastor
 
 ///    int    用户id
 @property (nonatomic,copy) NSString *userId;

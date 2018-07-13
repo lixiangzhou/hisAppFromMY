@@ -9,6 +9,7 @@
 #import "NSObject+HSNetRequestDelegate.h"
 #import <MBProgressHUD/MBProgressHUD.h>
 #import "SGInfoAlert.h"
+#import "HSJTokenManager.h"
 
 static const char kMBProgressHUDKey = '\0';
 static const char kNetRequestListKey = '\0';
@@ -119,6 +120,40 @@ static const char kNetRequestListKey = '\0';
  */
 - (BOOL)erroStateCodeDeal:(NYBaseRequest *)request response:(NSDictionary *)responseObject{
     
+    if([self handlingSpecialRequests:request]){
+        return NO;
+    }
+    
+    if ([responseObject[kResponseStatus] integerValue]) {
+        NSLog(@" ---------- %@",responseObject[kResponseStatus]);
+        
+        //当errorType字段不存在或者其值等于“TOAST”的时候， 才做错误处理
+        NSString *errorType = [[responseObject valueForKey:kResponseErrorData] valueForKey:@"errorType"];
+        if (!errorType || [errorType isEqualToString:@"TOAST"]) {
+            NSString *status = responseObject[kResponseStatus];
+            if (status.integerValue == kHXBCode_Enum_ProcessingField) {
+                NSDictionary *dic = responseObject[kResponseData];
+                __block NSString *error = @"";
+                [dic enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+                    NSArray *arr = obj;
+                    if([arr isKindOfClass:[NSArray class]] && arr.count>0) {
+                        error = arr[0];
+                        *stop = YES;
+                    }
+                }];
+                [self showToast:error];
+                return YES;
+            } else if(status.integerValue == kHXBCode_Enum_RequestOverrun){
+                if (![self handlingSpecialErrorCodes:request]) {
+                    [self showToast:responseObject[kResponseMessage]];
+                    return YES;
+                }
+            } else{
+                [self showToast:responseObject[kResponseMessage]];
+                return YES;
+            }
+        }
+    }
     return NO;
 }
 
@@ -132,6 +167,69 @@ static const char kNetRequestListKey = '\0';
  */
 - (BOOL)erroResponseCodeDeal:(NYBaseRequest *)request error:(NSError *)error{
     
+    if([self handlingSpecialRequests:request]){
+        return NO;
+    }
+    
+    switch (request.responseStatusCode) {
+        case kHXBCode_Enum_NotSigin:/// 没有登录
+        {
+            [[HSJTokenManager sharedInstance] processTokenInvidate];
+            return YES;
+        }
+        case kHXBCode_Enum_NoServerFaile:
+        {
+            [self showToast:@"网络连接失败，请稍后再试"];
+            return YES;
+        }
+        default:
+            break;
+    }
+    
+    if (!KeyChain.ishaveNet) {
+        [self showToast:@"暂无网络，请稍后再试"];
+        return YES;
+    }
+    
+    NSString *str = error.userInfo[@"NSLocalizedDescription"];
+    if (str.length > 0) {
+        if ([[str substringFromIndex:str.length - 1] isEqualToString:@"。"]) {
+            str = [str substringToIndex:str.length - 1];
+            if ([str containsString:@"请求超时"]) {
+                [self showToast:str];
+                return YES;
+            }
+        } else {
+            if (error.code != kHXBPurchase_Processing) { // 请求任务取消
+                [self showToast:str];
+                return YES;
+            }
+        }
+    }
+    return NO;
+}
+
+/**
+ 闪屏、升级和首页弹窗 不处理异常返回结果
+ */
+- (BOOL)handlingSpecialRequests:(NYBaseRequest *)request{
+    //闪屏、升级和首页弹窗 不处理异常返回结果
+//    if ([request.requestUrl isEqualToString:kHXBSplash] || [request.requestUrl isEqualToString:kHXBHome_PopView]||[request.requestUrl isEqualToString:kHXBMY_VersionUpdateURL]) {
+//        return YES;
+//    }
+    return NO;
+}
+
+/**
+ 处理不需要提示412问题
+ */
+- (BOOL)handlingSpecialErrorCodes:(NYBaseRequest *)request {
+    if ([request.requestUrl isEqualToString:kHXBUser_checkCardBin]) {
+        return YES;
+    }
+//    if ([request.requestUrl isEqualToString:kHXB_Coupon_Best]) {
+//        return YES;
+//    }
     return NO;
 }
 

@@ -88,4 +88,16 @@
     
     return statusCode;
 }
+
+/**
+ 获取网络错误消息
+ 
+ @param responseObj 网络响应数据
+ @return 消息
+ */
+- (NSString*)getErroMessage:(NSDictionary*)responseObj {
+    NSString *errMsg = [responseObj stringAtPath:@"message"];
+    
+    return errMsg;
+}
 @end
