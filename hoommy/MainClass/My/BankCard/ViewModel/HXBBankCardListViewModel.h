@@ -6,9 +6,9 @@
 //  Copyright © 2018年 hoomsun-miniX. All rights reserved.
 //
 
-#import "HXBBaseViewModel.h"
+#import "HSJBaseViewModel.h"
 
-@interface HXBBankCardListViewModel : HXBBaseViewModel
+@interface HXBBankCardListViewModel : HSJBaseViewModel
 
 @property (nonatomic, strong) NSMutableArray *bankListModels;
 

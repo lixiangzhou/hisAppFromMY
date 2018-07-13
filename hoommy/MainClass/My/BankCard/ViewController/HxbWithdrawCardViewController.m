@@ -9,7 +9,7 @@
 #import "HxbWithdrawCardViewController.h"
 #import "HxbWithdrawResultViewController.h"
 #import "HXBBankCardModel.h"
-#import "HXBModifyTransactionPasswordViewController.h"
+#import "HXBBindPhoneViewController.h"
 #import "HXBBankCardListViewController.h"
 #import "HXBWithdrawCardView.h"
 
@@ -51,9 +51,8 @@
         };
         
         _withdrawCardView.checkCardBin = ^(NSString *bankNumber) {
-            
-            [weakSelf.bindBankCardVM checkCardBinResultRequestWithBankNumber:bankNumber andisToastTip:NO andCallBack:^(BOOL isSuccess) {
-                if (isSuccess) {
+            [weakSelf.bindBankCardVM checkCardBinResultRequestWithBankNumber:bankNumber andisToastTip:NO andCallBack:^(id responseData, NSError *erro) {
+                if (!erro) {
                     [weakSelf checkCardBin:weakSelf.bindBankCardVM.cardBinModel];
                 }
                 else {
@@ -76,7 +75,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.isColourGradientNavigationBar = YES;
+    
     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     [self.view addSubview:self.withdrawCardView];
 }
@@ -131,8 +130,8 @@
  */
 - (void)openStorageWithArgument:(NSDictionary *)dic{
     kWeakSelf
-    [self.bindBankCardVM bindBankCardRequestWithArgument:dic andFinishBlock:^(BOOL isSuccess)  {
-        if (isSuccess) {
+    [self.bindBankCardVM bindBankCardRequestWithArgument:dic andFinishBlock:^(id responseData, NSError *erro) {
+        if (!erro) {
             [weakSelf bindBankCardRequest];
         }
     }];
@@ -162,9 +161,7 @@
 - (HXBBankCardViewModel *)bindBankCardVM {
     if (!_bindBankCardVM) {
         kWeakSelf
-        _bindBankCardVM = [[HXBBankCardViewModel alloc] initWithBlock:^UIView *{
-            return weakSelf.view;
-        }];
+        _bindBankCardVM = [[HXBBankCardViewModel alloc] init];
     }
     return _bindBankCardVM;
 }

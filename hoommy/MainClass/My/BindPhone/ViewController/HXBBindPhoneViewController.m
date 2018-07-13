@@ -9,6 +9,7 @@
 #import "HXBBindPhoneViewController.h"
 #import "HXBBindPhoneTableFootView.h"
 #import "HXBBindPhoneTableViewCell.h"
+#import "HXBCheckCaptchaViewController.h"
 
 @interface HXBBindPhoneViewController ()
 
@@ -16,6 +17,9 @@
 @property (nonatomic, strong) HXBBindPhoneTableFootView* footView;
 
 @property (nonatomic, strong) HXBBindPhoneVCViewModel* viewModel;
+
+//
+@property (nonatomic, copy) NSString *checkPaptcha;
 
 @end
 
@@ -91,8 +95,11 @@
             break;
         }
         case HXBBindPhoneStepSecond:
-            
+        {
+            NSString *phone = [self.viewModel getTextAtIndex:0];
+            NSString *smsCode = [self.viewModel getTextAtIndex:1];
             break;
+        }
             
         default:
             break;
@@ -203,6 +210,45 @@
     }
 }
 
+#pragma mark 修改绑定手机号的第二步操作
+/**
+进入图形验证码界面
+*/
+- (void)enterGraphicsCodeViewWithPhoneNumber:(NSString *)phoneNumber{
+    kWeakSelf
+    ///1. 如果要是已经图验过了，那就不需要图验了
+    HXBCheckCaptchaViewController *checkCaptchVC = [[HXBCheckCaptchaViewController alloc]init];
+    [self presentViewController:checkCaptchVC animated:YES completion:nil];
+    [checkCaptchVC checkCaptchaSucceedFunc:^(NSString *checkPaptcha){
+        weakSelf.checkPaptcha = checkPaptcha;
+        [weakSelf graphicSuccessWithPhoneNumber:phoneNumber andWithCheckPaptcha:checkPaptcha];
+        //        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 1.0 * NSEC_PER_SEC);
+        //        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        //        });
+    }];
+    
+}
+
+/**
+ 图形验证成功
+ 
+ @param phoneNumber 新手机号
+ @param checkPaptcha 图形验证码
+ */
+- (void)graphicSuccessWithPhoneNumber:(NSString *)phoneNumber andWithCheckPaptcha:(NSString *)checkPaptcha
+{
+    kWeakSelf
+    [self.viewModel getVerifyCodeRequesWithMobile:phoneNumber andAction:HXBSignUPAndLoginRequest_sendSmscodeType_newmobile andCaptcha:checkPaptcha andType:@"" andCallbackBlock:^(BOOL isSuccess, NSError *error) {
+        if (isSuccess) {
+            HXBBindPhoneTableViewCell *cell = [weakSelf.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+            [cell checkCodeCountDown:YES];
+        }
+        else {
+            NSLog(@"%@",error);
+        }
+    }];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.viewModel.cellDataList.count;
 }
@@ -217,12 +263,18 @@
     kWeakSelf
     if(!cell.checkCodeAct) {
         cell.checkCodeAct = ^(NSIndexPath *indexPath) {
-            NSString *idCard = @""; //身份证号
             if(weakSelf.bindPhoneStepType == HXBBindPhoneStepFirst) {
+                NSString *idCard = @""; //身份证号
                 HXBBindPhoneCellModel *cellModel = [weakSelf.viewModel.cellDataList safeObjectAtIndex:1];
                 idCard = cellModel.text;
+                [weakSelf authenticationWithIDCard:idCard indexPathForCell:indexPath];
             }
-            [weakSelf authenticationWithIDCard:idCard indexPathForCell:indexPath];
+            else if(weakSelf.bindPhoneStepType == HXBBindPhoneStepSecond) {
+                NSString *phone = @"";//新手机号
+                HXBBindPhoneCellModel *cellModel = [weakSelf.viewModel.cellDataList safeObjectAtIndex:0];
+                phone = cellModel.text;
+                [weakSelf enterGraphicsCodeViewWithPhoneNumber:phone];
+            }
         };
     }
     

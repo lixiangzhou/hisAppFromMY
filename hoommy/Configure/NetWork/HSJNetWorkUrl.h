@@ -66,8 +66,14 @@
 #define kHXBAccount_quickpay_smscode @"/account/smscode/" //代扣充值获取手机验证码
 #define kHXBAccount_Bindcard @"/account/bindcard" //绑卡
 #define kHXBUser_checkCardBin @"/user/checkCardBin" //卡bin校验
+#define kHXBWithdraw @"/account/withdraw" //提现页面
+#define kHXBAccount_quickpay @"/account/quickpay" //代扣充值接口 短验和语音统一为一个借口
 
-
+//MARK: ======================= 充值提现 =======================
+#define kHXBSetWithdrawals_withdrawURL   @"/account/withdraw"//提现
+#define kHXBSetWithdrawals_banklistURL   @"/banklist"//提现
+#define kHXBSetWithdrawals_withdrawArriveTimeURL   @"/account/withdraw/arriveTime"//到账时间
+#define kHXBSetWithdrawals_recordtURL    @"/account/withdraw/record"//提现记录
 
 
 //MARK: ======================= 用户 =======================
@@ -82,6 +88,11 @@
 
 //MARK: ======================= 账户信息 =======================
 #define kHXBUser_QuestionsURL           @"/questions"///常见问题
+
+
+
+//MARK: ======================= 协议 ==========================
+#define kHXB_Negotiate_thirdpart @"/agreement/thirdpart" ///《恒丰银行股份有限公司杭州分行网络交易资金账户三方协议》
 
 
 #endif /* HSJNetWorkUrl_h */

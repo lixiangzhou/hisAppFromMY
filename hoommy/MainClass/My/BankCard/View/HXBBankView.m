@@ -23,6 +23,8 @@
 
 @property (nonatomic, strong) UILabel *bankTip;
 
+@property (nonatomic, strong) UIButton *unBindBtn;
+
 
 @property (nonatomic, strong) HXBBankCardViewModel *viewModel;
 
@@ -33,15 +35,18 @@
 - (instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
-        self.backImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kScrAdaptationW(345), kScrAdaptationH(170))];
+        self.backImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 345, kScrAdaptationH(150))];
         self.backImageView.image = [UIImage imageNamed:@"hxb_card_bg"];
+        self.backImageView.backgroundColor = [UIColor orangeColor];
+        self.backImageView.userInteractionEnabled = YES;
         [self addSubview:self.backImageView];
 
         [self.backImageView addSubview:self.iconView];
         [self.backImageView addSubview:self.bankName];
-        [self.backImageView addSubview:self.realName];
+//        [self.backImageView addSubview:self.realName];
         [self.backImageView addSubview:self.bankNum];
         [self.backImageView addSubview:self.bankTip];
+        [self.backImageView addSubview:self.unBindBtn];
         [self setupSubViewFrame];
         [self loadBankData];
     }
@@ -51,32 +56,38 @@
 - (void)setupSubViewFrame
 {
     [self.iconView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self).offset(kScrAdaptationW(30));
-        make.top.equalTo(self).offset(kScrAdaptationH(20));
-        make.width.offset(kScrAdaptationW(40));
-        make.height.offset(kScrAdaptationW(40));
+        make.left.equalTo(self).offset(kScrAdaptationW(25));
+        make.top.equalTo(self).offset(kScrAdaptationH(18));
+        make.width.offset(kScrAdaptationW(30));
+        make.height.offset(kScrAdaptationW(30));
     }];
     [self.bankName mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.iconView.mas_right).offset(kScrAdaptationW(15));
+        make.left.equalTo(self.iconView.mas_right).offset(kScrAdaptationW(10));
         make.top.equalTo(self.iconView);
-        make.height.offset(kScrAdaptationH(20));
+        make.height.offset(kScrAdaptationH(32));
     }];
-    [self.realName mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.bankName.mas_left);
-        make.top.equalTo(self.bankName.mas_bottom).offset(kScrAdaptationH(4));
-        make.height.offset(kScrAdaptationH(16));
-    }];
+//    [self.realName mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(self.bankName.mas_left);
+//        make.top.equalTo(self.bankName.mas_bottom).offset(kScrAdaptationH(4));
+//        make.height.offset(kScrAdaptationH(16));
+//    }];
     [self.bankNum mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.iconView.mas_left);
         make.right.equalTo(self).offset(-kScrAdaptationH(30));
-        make.top.equalTo(self.iconView.mas_bottom).offset(kScrAdaptationH(20));
+        make.top.equalTo(self.iconView.mas_bottom).offset(kScrAdaptationH(22));
         make.height.offset(kScrAdaptationH(31));
     }];
     [self.bankTip mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.iconView.mas_left);
-        make.top.equalTo(self.bankNum.mas_bottom).offset(kScrAdaptationH(20));
+        make.top.equalTo(self.bankNum.mas_bottom).offset(kScrAdaptationH(15));
         make.right.equalTo(self).offset(-kScrAdaptationH(30));
         make.height.offset(kScrAdaptationH(16));
+    }];
+    [self.unBindBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.backImageView).offset(-kScrAdaptationW(15));
+        make.top.equalTo(self.backImageView).offset(kScrAdaptationH(18));
+        make.width.mas_equalTo(56);
+        make.height.mas_equalTo(24);
     }];
 }
 
@@ -123,6 +134,13 @@
     
 }
 
+#pragma mark 解绑动作
+- (void)unBindAct:(UIButton*)button {
+    if(self.unBindCardAct) {
+        self.unBindCardAct();
+    }
+}
+
 #pragma mark - 懒加载
 - (HXBBankCardViewModel *)viewModel {
     if (!_viewModel) {
@@ -140,12 +158,26 @@
     return _iconView;
 }
 
+- (UIButton *)unBindBtn
+{
+    if (!_unBindBtn) {
+        _unBindBtn  = [[UIButton alloc] init];
+        [_unBindBtn setTitle:@"解绑" forState:UIControlStateNormal];
+        _unBindBtn.titleLabel.font = kHXBFont_PINGFANGSC_REGULAR(16);
+        _unBindBtn.layer.borderWidth = 1;
+        _unBindBtn.layer.borderColor = [UIColor whiteColor].CGColor;
+        _unBindBtn.layer.cornerRadius = 2;
+        [_unBindBtn addTarget:self action:@selector(unBindAct:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _unBindBtn;
+}
+
 - (UILabel *)bankName
 {
     if (!_bankName) {
         _bankName = [[UILabel alloc] init];
-        _bankName.font = kHXBFont_PINGFANGSC_REGULAR(15);
-        _bankName.textColor = COR7;
+        _bankName.font = kHXBFont_PINGFANGSC_REGULAR(18);
+        _bankName.textColor = [UIColor whiteColor];
     }
     return _bankName;
 }
@@ -166,7 +198,7 @@
         _bankNum = [[UILabel alloc] init];
         _bankNum.font = kHXBFont_PINGFANGSC_REGULAR(24);
         _bankNum.numberOfLines = 1;
-        _bankNum.textColor = COR29;
+        _bankNum.textColor = [UIColor whiteColor];
     }
     return _bankNum;
 }
@@ -176,7 +208,7 @@
     if (!_bankTip) {
         _bankTip = [[UILabel alloc] init];
         _bankTip.font = kHXBFont_PINGFANGSC_REGULAR(12);
-        _bankTip.textColor = COR10;
+        _bankTip.textColor = [UIColor whiteColor];
     }
     return _bankTip;
 }

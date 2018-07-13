@@ -216,6 +216,7 @@
     _isWhiteColourGradientNavigationBar = isWhiteColourGradientNavigationBar;
     if (isWhiteColourGradientNavigationBar) {
         self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor], NSFontAttributeName: kHXBFont_PINGFANGSC_REGULAR(18)};
+        
         self.isTransparentNavigationBar = YES;
         self.navgationBarImageView.backgroundColor = [UIColor whiteColor];
 //        self.navgationBarImageView.image = [UIImage imageNamed:@"top"];
