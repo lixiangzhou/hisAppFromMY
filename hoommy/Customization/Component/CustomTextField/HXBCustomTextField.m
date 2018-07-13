@@ -115,6 +115,12 @@
         [self.idTextField mas_updateConstraints:^(MASConstraintMaker *make) {
             make.left.right.equalTo(self);
         }];
+        [self.line mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self);
+        }];
+        [self.eyeBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self);
+        }];
     }
     else{
         [self.leftImageView mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -132,6 +138,12 @@
         [self.idTextField mas_updateConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.leftImageView.mas_right).offset(kScrAdaptationW750(20));
             make.right.equalTo(self).offset(-kScrAdaptationW750(40));
+        }];
+        [self.line mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self).offset(kScrAdaptationW750(-40));
+        }];
+        [self.eyeBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self.mas_right).offset(kScrAdaptationW750(-40));
         }];
     }
 }
@@ -270,10 +282,8 @@
 - (void)setIsGetCode:(BOOL)isGetCode {
     _isGetCode = isGetCode;
     if (_isGetCode) {
-        [self.textField mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.leftImageView.mas_right).offset(kScrAdaptationW750(20));
-            make.right.equalTo(self).offset(-kScrAdaptationW(110));
-            make.top.bottom.equalTo(self);
+        [self.textField mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self).offset(-kScrAdaptationW(60));
         }];
     }
 }
@@ -446,7 +456,7 @@
 {
     if (!_line) {
         _line = [[UIView alloc] init];
-        _line.backgroundColor = kHXBSpacingLineColor_DDDDDD_100;
+        _line.backgroundColor = kHXBBackgroundColor;
     }
     return _line;
 }
