@@ -13,6 +13,8 @@
 #import "UITextField+HLNumberFormatTextField.h"
 #import "HXBAgreementView.h"
 #import "HxbHUDProgress.h"
+#import "HSJBankCardListViewController.h"
+#import "HSJDepositoryOpenViewModel.h"
 
 #define kInputHeight 50
 
@@ -32,6 +34,8 @@
 @property (nonatomic, weak) HXBCustomTextField *mobileView;
 
 @property (nonatomic, assign) BOOL isAgree;
+
+@property (nonatomic, strong) HSJDepositoryOpenViewModel *viewModel;
 @end
 
 @implementation HSJDepositoryOpenController
@@ -42,6 +46,7 @@
     [super viewDidLoad];
     self.title = @"开通存管账户";
 
+    self.viewModel = [HSJDepositoryOpenViewModel new];
     [self setUI];
 }
 
@@ -49,11 +54,8 @@
 
 - (void)setUI {
     [self setScrollView];
-
     [self setTopViews];
-
     [self setBankView];
-
     [self setBottomView];
 }
 
@@ -126,7 +128,7 @@
     bankNoView.block = ^(NSString *text) {
         NSString *bankNumber = [text stringByReplacingOccurrencesOfString:@" "  withString:@""];
         if (bankNumber.length>=12) {
-//            [weakSelf.viewModel checkCardBinResultRequestWithBankNumber:bankNumber andisToastTip:NO andCallBack:^(BOOL isSuccess) {
+            [weakSelf.viewModel checkCardBinResultRequestWithBankNumber:bankNumber andisToastTip:NO andCallBack:^(BOOL isSuccess) {
 //                if (isSuccess) {
 //                    if (weakSelf.viewModel.cardBinModel.creditCard) {
 //                        weakSelf.bankNameView.svgImageName = weakSelf.viewModel.cardBinModel.bankCode;
@@ -139,7 +141,7 @@
 //                } else {
 //                    [weakSelf hideBankNameView];
 //                }
-//            }];
+            }];
         }
     };
     [self.scrollView addSubview:bankNoView];
@@ -438,24 +440,29 @@
 
     NSString *username = [self.nameView.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSString *idNo = [self.idView.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString *transactionPwd = [self.transactionPwdView.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSString *bankNo = [self.bankNoView.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-
-    kWeakSelf
-//    [self.viewModel openDepositoryWithUsrname:username idNo:idNo bankNo:bankNo resultBlock:^(BOOL isSuccess) {
-//        if (isSuccess) {
-//            HXBLazyCatAccountWebViewController *webVC = [HXBLazyCatAccountWebViewController new];
-//            webVC.requestModel = weakSelf.viewModel.lazyCatReqModel;
-//            [weakSelf.navigationController pushViewController:webVC animated:YES];
-//        }
-//    }];
+    NSString *mobile = [self.mobileView.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    NSDictionary *param = @{ @"realName": username,
+                            @"identityCard": idNo,
+                            @"password": transactionPwd,
+                            @"bankCard": bankNo,
+                            @"bankReservedMobile": mobile,
+                            };
+    
+    [self.viewModel openDepositoryWithParam:param resultBlock:^(BOOL isSuccess) {
+        if (isSuccess) {
+            
+        }
+    }];
 }
 
 /// 查看银行限额
 - (void)checkBankLimit {
-    kWeakSelf
-//    HXBBankCardListViewController *bankCardListVC = [[HXBBankCardListViewController alloc] init];
-//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:bankCardListVC];
-//    [weakSelf presentViewController:nav animated:YES completion:nil];
+    HSJBankCardListViewController *VC = [[HSJBankCardListViewController alloc] init];
+    HXBBaseNavigationController *nav = [[HXBBaseNavigationController alloc] initWithRootViewController:VC];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 @end

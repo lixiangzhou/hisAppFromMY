@@ -14,6 +14,7 @@
 #import "HSJDepositoryOpenTipController.h"
 #import "HSJGestureSettingController.h"
 #import "HSJGestureLoginController.h"
+#import "HSJPlanDetailController.h"
 
 @interface HSJHomeViewController ()
 
@@ -91,7 +92,7 @@
 }
 
 - (void)webviewButtonClickAct:(UIButton*)button {
-    HSJTestWebviewControllerViewController* vc = [[HSJTestWebviewControllerViewController alloc] init];
+    HSJPlanDetailController* vc = [[HSJPlanDetailController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
