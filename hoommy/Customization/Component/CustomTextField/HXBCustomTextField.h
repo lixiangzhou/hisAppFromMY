@@ -12,6 +12,9 @@ typedef void(^isLimitText)(NSString *text1);
 
 @interface HXBCustomTextField : UIView
 
+@property (nonatomic, strong,readonly) UITextField *textField;
+@property (nonatomic, strong,readonly) UIImageView *leftImageView;
+
 
 @property (nonatomic, copy) NSString *text;
 @property (nonatomic, copy) NSString *placeholder;
@@ -54,6 +57,6 @@ typedef void(^isLimitText)(NSString *text1);
  */
 @property (nonatomic, copy) void(^btnClick)();
 //键盘编辑状态
-@property (nonatomic, copy) void(^keyBoardChange)(BOOL isEditState);
+@property (nonatomic, copy) void(^ keyBoardChange)(BOOL isEditState);
 
 @end

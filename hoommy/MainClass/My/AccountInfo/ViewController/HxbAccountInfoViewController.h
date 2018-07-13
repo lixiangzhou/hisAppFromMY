@@ -9,6 +9,7 @@
 #import "HXBBaseViewController.h"
 ///账户界面
 @interface HxbAccountInfoViewController : HXBBaseViewController
-@property (nonatomic, strong) HXBRequestUserInfoViewModel *userInfoViewModel;
+
+@property (nonatomic, strong) HXBUserInfoModel *userInfoModel;
 @property (nonatomic, assign) BOOL isDisplayAdvisor;// 是否有理财顾问
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "HXBAccountSecureCell.h"
+#import "NSString+HXBPhonNumber.h"
 #import <ReactiveObjC.h>
 @implementation HXBAccountSecureModel
 @end
@@ -38,15 +39,23 @@
             model.switchBlock(x.isOn);
         }];
         self.accessoryView = switchView;
-    } else if (model.type == HXBAccountSecureTypeModifyPhone) {
+    } else if (model.type == HXBAccountSecureTypeAboutUs || model.type == HXBAccountSecureTypeCommonProblems) {
+        self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        self.accessoryView = nil;
+    } else {
         UILabel *lab = [[UILabel alloc]initWithFrame:CGRectZero];
         [self.contentView addSubview:lab];
-        lab.font = NSTextAlignmentLeft;
+        lab.textAlignment = NSTextAlignmentRight;
         lab.font = kHXBFont_PINGFANGSC_REGULAR(14);
         lab.textColor = [UIColor colorWithRed:146/255.0f green:149/255.0f blue:162/255.0f alpha:1] ;
-        NSMutableString * phoneStr = [NSMutableString stringWithString:@"15811111111"];//KeyChain.mobile
-        [phoneStr replaceCharactersInRange:NSMakeRange(3, 4)  withString:@"****"];
-        lab.text = [NSString stringWithFormat:@"%@",phoneStr];
+        if (model.type == HXBAccountSecureTypeModifyPhone) {
+            NSMutableString * phoneStr = [NSMutableString stringWithString:@"15811111111"];//KeyChain.mobile
+            [phoneStr replaceCharactersInRange:NSMakeRange(3, 4)  withString:@"****"];
+            lab.text = phoneStr;
+        } else {
+            lab.text = @"修改";
+        }
+        
         kWeakSelf
         [lab mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(weakSelf.left).offset(kScrAdaptationW(250));
@@ -56,11 +65,7 @@
         }];
         self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         self.accessoryView = nil;
-    } else {
-        self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        self.accessoryView = nil;
     }
-    
 }
 
 @end

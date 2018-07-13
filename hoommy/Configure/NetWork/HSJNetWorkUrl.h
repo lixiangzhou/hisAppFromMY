@@ -90,4 +90,9 @@
 #define kHXBUser_QuestionsURL           @"/questions"///常见问题
 
 
+
+//MARK: ======================= 协议 ==========================
+#define kHXB_Negotiate_thirdpart @"/agreement/thirdpart" ///《恒丰银行股份有限公司杭州分行网络交易资金账户三方协议》
+
+
 #endif /* HSJNetWorkUrl_h */

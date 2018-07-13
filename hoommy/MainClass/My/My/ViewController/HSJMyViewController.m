@@ -61,7 +61,7 @@
 
 - (IBAction)settingAccount:(id)sender {
     HxbAccountInfoViewController *accountInfoVC = [[HxbAccountInfoViewController alloc]init];
-//    accountInfoVC.userInfoViewModel = self.viewModel.userInfoModel;
+    accountInfoVC.userInfoModel = self.viewModel.userInfoModel;
 //    accountInfoVC.isDisplayAdvisor = self.viewModel.userInfoModel.userInfoModel.userInfo.isDisplayAdvisor;
     [self.navigationController pushViewController:accountInfoVC animated:YES];
 }

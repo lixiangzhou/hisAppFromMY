@@ -11,6 +11,9 @@
 #import "HSJListViewController.h"
 #import "HSJFragmentViewController.h"
 #import "HSJTestWebviewControllerViewController.h"
+#import "HSJDepositoryOpenTipController.h"
+#import "HSJGestureSettingController.h"
+#import "HSJGestureLoginController.h"
 
 @interface HSJHomeViewController ()
 
@@ -73,17 +76,17 @@
 }
 
 - (void)buttonClickAct:(UIButton*)button {
-    HSJTestViewController* vc = [[HSJTestViewController alloc] init];
+    HSJDepositoryOpenTipController* vc = [[HSJDepositoryOpenTipController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)tableViewButtonClickAct:(UIButton*)button {
-    HSJListViewController* vc = [[HSJListViewController alloc] init];
+    HSJGestureSettingController* vc = [[HSJGestureSettingController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)fragmentButtonClickAct:(UIButton*)button {
-    HSJFragmentViewController* vc = [[HSJFragmentViewController alloc] init];
+    HSJGestureLoginController* vc = [[HSJGestureLoginController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
