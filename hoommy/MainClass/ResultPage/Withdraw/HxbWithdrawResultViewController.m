@@ -31,7 +31,6 @@
     
     // 禁用全屏滑动手势
     ((HXBBaseNavigationController *)self.navigationController).enableFullScreenGesture = NO;
-    self.isColourGradientNavigationBar = YES;
 }
 
 - (void)viewWillDisappear:(BOOL)animated

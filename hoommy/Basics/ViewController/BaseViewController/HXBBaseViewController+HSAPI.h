@@ -37,4 +37,7 @@
  @param scrollView 发生上拉的视图
  */
 - (void)footerRefreshAction:(UIScrollView *)scrollView;
+
+// 根据类名跳转返回页面
+- (void)popToViewControllerWithClassName:(NSString *)className;
 @end

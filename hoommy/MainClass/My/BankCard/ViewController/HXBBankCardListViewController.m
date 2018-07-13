@@ -37,10 +37,7 @@
     self.automaticallyAdjustsScrollViewInsets = YES;
     self.title = @"银行卡列表";
     [self.view addSubview:self.mainTableView];
-    kWeakSelf
-    self.viewModel = [[HXBBankCardListViewModel alloc] initWithBlock:^UIView *{
-        return weakSelf.view;
-    }];
+    self.viewModel = [[HXBBankCardListViewModel alloc] init];
     [self settupNav];
     [self setupNavLeftBtn];
     [self loadData];

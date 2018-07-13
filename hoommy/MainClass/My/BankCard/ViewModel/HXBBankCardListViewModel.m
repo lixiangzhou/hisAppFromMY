@@ -21,7 +21,7 @@
     [alterLoginPasswordAPI loadData:^(NYBaseRequest *request, NSDictionary *responseObject) {
         NSArray *bankArr = responseObject[@"data"][@"dataList"];
         [bankArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            [weakSelf.bankListModels addObject:[HXBBankList yy_modelWithJSON:obj]];
+            [weakSelf.bankListModels addObject:[[HXBBankList alloc] initWithDictionary:obj]];
         }];
         
         if (resultBlock) {

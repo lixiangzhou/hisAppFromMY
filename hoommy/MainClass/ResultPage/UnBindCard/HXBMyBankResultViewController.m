@@ -26,7 +26,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"解绑银行卡";
-    self.isRedColorWithNavigationBar = YES;
     [self setUI];
     [self setData];
 }

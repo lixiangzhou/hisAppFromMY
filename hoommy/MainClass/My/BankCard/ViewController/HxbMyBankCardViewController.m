@@ -32,6 +32,7 @@
 
 @property (nonatomic, strong) UIButton *phoneBtn;
 
+
 @end
 
 @implementation HxbMyBankCardViewController
@@ -40,18 +41,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = BACKGROUNDCOLOR;
-    [self.view addSubview:self.tipLabel];
+//    [self.view addSubview:self.tipLabel];
     self.viewModel = [[HXBBankCardViewModel alloc] init];
     if (self.isBank) {
         self.title = @"银行卡信息";
         self.tipLabel.text = @"您在红小宝平台充值，提现均会使用该卡";
         [self.view addSubview:self.bankView];
-        [self.view addSubview:self.phoneBtn];
-        [self setupRightBarBtn];
+//        [self.view addSubview:self.phoneBtn];
+//        [self setupRightBarBtn];
         kWeakSelf
         self.bankView.unbundBankBlock = ^(HXBBankCardModel *bankCardModel) {
             weakSelf.bankCardModel = bankCardModel;
         };
+        self.bankView.unBindCardAct = ^{
+            [weakSelf clickUnbundBankBtn:nil];
+        };
+        
         [self setupBankViewFrame];
     }else
     {
@@ -111,21 +116,22 @@
 
 - (void)setupBankViewFrame
 {
-    [self.tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.view);
-        make.top.equalTo(self.view).offset(69 + HXBStatusBarAdditionHeight);
-        make.height.offset(kScrAdaptationH(45));
-    }];
+//    [self.tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.right.equalTo(self.view);
+//        make.top.equalTo(self.view).offset(69 + HXBStatusBarAdditionHeight);
+//        make.height.offset(kScrAdaptationH(45));
+//    }];
     [self.bankView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).offset(kScrAdaptationW(15));
         make.right.equalTo(self.view).offset(kScrAdaptationW(-15));
-        make.top.equalTo(self.tipLabel.mas_bottom);
+//        make.top.equalTo(self.tipLabel.mas_bottom);
+        make.top.equalTo(self.view).offset(kScrAdaptationH(15) + HXBStatusBarAndNavigationBarHeight);
         make.height.offset(kScrAdaptationH(162));
     }];
-    [self.phoneBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view);
-        make.bottom.equalTo(self.view).offset(kScrAdaptationH(-30));
-    }];
+//    [self.phoneBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerX.equalTo(self.view);
+//        make.bottom.equalTo(self.view).offset(kScrAdaptationH(-30));
+//    }];
 }
 
 - (void)setupUserInfoViewFrame
@@ -133,14 +139,15 @@
     [self.userInfoView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view);
         make.right.equalTo(self.view);
-        make.top.equalTo(self.view).offset(kScrAdaptationH(45) + HXBStatusBarAndNavigationBarHeight);
+//        make.top.equalTo(self.view).offset(kScrAdaptationH(45) + HXBStatusBarAndNavigationBarHeight);
+        make.top.equalTo(self.view).offset(kScrAdaptationH(15) + HXBStatusBarAndNavigationBarHeight);
         make.height.offset(kScrAdaptationH(135));
     }];
-    [self.tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.view);
-        make.top.equalTo(self.view).offset(HXBStatusBarAndNavigationBarHeight);
-        make.bottom.equalTo(self.userInfoView.mas_top);
-    }];
+//    [self.tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.right.equalTo(self.view);
+//        make.top.equalTo(self.view).offset(HXBStatusBarAndNavigationBarHeight);
+//        make.bottom.equalTo(self.userInfoView.mas_top);
+//    }];
 }
 
 - (void)loadUserInfo
