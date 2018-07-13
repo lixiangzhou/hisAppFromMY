@@ -13,6 +13,7 @@
 @property (nonatomic, strong) UIColor *buttonBackGroundColor;
 @property (nonatomic, strong) UIImage *buttonBackGroundImage;
 @property (nonatomic, copy) NSString *buttonTitle;
+@property (nonatomic, copy) NSString* phoneInfo;
 
-@property (nonatomic, strong) void (^checkAct)();
+@property (nonatomic, strong) void (^checkAct)(void);
 @end

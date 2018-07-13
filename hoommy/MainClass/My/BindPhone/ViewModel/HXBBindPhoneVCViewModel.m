@@ -16,6 +16,7 @@
 - (void)buildCellDataList:(HXBBindPhoneStepType)bindPhoneStepType userInfoModel:(HXBUserInfoModel*)model {
     switch (bindPhoneStepType) {
         case HXBBindPhoneStepFirst:
+        case HXBBindPhoneTransactionPassword:
             self.cellDataList = [self buildFirstDataList:model];
             break;
         case HXBBindPhoneStepSecond:
@@ -30,7 +31,6 @@
 - (NSArray*)buildFirstDataList:(HXBUserInfoModel*)userModel {
     NSMutableArray *dataList = [NSMutableArray array];
     NSString *realName = [userModel.userInfo.realName replaceStringWithStartLocation:0 lenght:userModel.userInfo.realName.length - 1];
-    NSString *phoneNo = [userModel.userInfo.mobile replaceStringWithStartLocation:3 lenght:userModel.userInfo.mobile.length - 7];
     if(userModel.userInfo.idNo.length > 0) {
         HXBBindPhoneCellModel *cellModel = [[HXBBindPhoneCellModel alloc] initModel:@"身份验证" placeText:@"" isLastItem:NO text:realName];
         [dataList addObject:cellModel];
@@ -39,8 +39,6 @@
         cellModel.limtTextLenght = 18;
         cellModel.isCanEdit = YES;
         [dataList addObject:cellModel];
-        cellModel = [[HXBBindPhoneCellModel alloc] initModel:@"原手机号" placeText:@"" isLastItem:NO text:phoneNo];
-        [dataList addObject:cellModel];
         cellModel = [[HXBBindPhoneCellModel alloc] initModel:@"验证码" placeText:@"请输入验证码" isLastItem:YES text:@""];
         cellModel.isCanEdit = YES;
         cellModel.limtTextLenght = 6;
@@ -48,9 +46,7 @@
         [dataList addObject:cellModel];
     }
     else{
-        HXBBindPhoneCellModel *cellModel = [[HXBBindPhoneCellModel alloc] initModel:@"原手机号" placeText:@"" isLastItem:NO text:phoneNo];
-        [dataList addObject:cellModel];
-        cellModel = [[HXBBindPhoneCellModel alloc] initModel:@"验证码" placeText:@"请输入验证码" isLastItem:YES text:@""];
+        HXBBindPhoneCellModel *cellModel = [[HXBBindPhoneCellModel alloc] initModel:@"验证码" placeText:@"请输入验证码" isLastItem:YES text:@""];
         cellModel.keyboardType = UIKeyboardTypeNumberPad;
         cellModel.isCanEdit = YES;
         cellModel.limtTextLenght = 6;

@@ -10,6 +10,7 @@
 
 @interface HXBBindPhoneTableFootView()
 
+@property (nonatomic, strong) UILabel *phoneLb;
 @property (nonatomic, strong) UIButton *checkButton;
 @end
 
@@ -28,6 +29,11 @@
 - (void)setupUI {
     self.backgroundColor = [UIColor clearColor];
     
+    self.phoneLb = [[UILabel alloc] init];
+    self.phoneLb.textColor = kHXBFontColor_9295A2_100;
+    self.phoneLb.font = kHXBFont_PINGFANGSC_REGULAR(12);
+    [self addSubview:self.phoneLb];
+    
     self.checkButton = [[UIButton alloc] init];
     self.checkButton.layer.cornerRadius = 2;
     self.checkButton.titleLabel.font = kHXBFont_PINGFANGSC_REGULAR(15);
@@ -36,6 +42,11 @@
 }
 
 - (void)addConstraints {
+    [self.phoneLb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self).offset(kScrAdaptationW(15));
+        make.top.equalTo(self).offset(kScrAdaptationW(10));
+    }];
+    
     [self.checkButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self).offset(kScrAdaptationW(20));
         make.right.equalTo(self).offset(-kScrAdaptationW(20));
@@ -60,6 +71,12 @@
     _buttonBackGroundImage = buttonBackGroundImage;
     
     [self.checkButton setBackgroundImage:buttonBackGroundImage forState:UIControlStateNormal];
+}
+
+- (void)setPhoneInfo:(NSString *)phoneInfo {
+    _phoneInfo = [NSString stringWithFormat:@"短信验证码会发送至手机号%@", phoneInfo];
+    
+    self.phoneLb.text = _phoneInfo;
 }
 
 - (void)checkButtonAct:(UIButton *)button {

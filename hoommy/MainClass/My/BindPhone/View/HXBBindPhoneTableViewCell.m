@@ -16,6 +16,7 @@
 @property (nonatomic, strong) HXBCustomTextField* contentTf;
 @property (nonatomic, strong) UIButton *codeBt;
 @property (nonatomic, strong) UILabel *codeLb;
+@property (nonatomic, strong) UIImageView *topLineImv;
 @property (nonatomic, strong) UIImageView *lineImv;
 
 @property (nonatomic, strong) HXBNsTimerManager* timeManager;
@@ -53,28 +54,26 @@
     [self.contentView addSubview:self.contentTf];
     
     self.codeBt = [[UIButton alloc] init];
-    self.codeBt.layer.borderWidth = 1;
-    self.codeBt.layer.borderColor = kHXBColor_FF8359_100.CGColor;
-    self.codeBt.layer.masksToBounds = YES;
-    self.codeBt.layer.cornerRadius = 1.5;
     [self.codeBt setTitleColor:kHXBFontColor_FF413C_100 forState:UIControlStateNormal];
+    [self.codeBt setTitleColor:kHXBFontColor_FF413C_100 forState:UIControlStateHighlighted];
     self.codeBt.titleLabel.font = kHXBFont_PINGFANGSC_REGULAR(13);
     [self.codeBt addTarget:self action:@selector(codeButtonAct:) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:self.codeBt];
     [self enableCheckButton:NO];
     
     self.codeLb = [[UILabel alloc] init];
-    self.codeLb.layer.cornerRadius = 1.5;
-    self.codeLb.layer.masksToBounds = YES;
-    self.codeLb.backgroundColor = kHXBColor_ECECF0_100;
     self.codeLb.textColor = kHXBFontColor_9295A2_100;
     self.codeLb.font = kHXBFont_PINGFANGSC_REGULAR(12);
-    self.codeLb.textAlignment = NSTextAlignmentCenter;
+    self.codeLb.textAlignment = NSTextAlignmentRight;
     [self.contentView addSubview:self.codeLb];
     
     self.lineImv = [[UIImageView alloc] init];
     self.lineImv.backgroundColor = kHXBColor_EEEEF5_100;
     [self.contentView addSubview:self.lineImv];
+    
+    self.topLineImv = [[UIImageView alloc] init];
+    self.topLineImv.backgroundColor = kHXBColor_EEEEF5_100;
+    [self.contentView addSubview:self.topLineImv];
 }
 
 - (void)setupConstraints {
@@ -102,7 +101,14 @@
     }];
     
     [self.lineImv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.equalTo(self.contentView);
+        make.bottom.equalTo(self.contentView);
+        make.left.equalTo(self.contentView).offset(kScrAdaptationW(15));
+        make.right.equalTo(self.contentView).offset(-kScrAdaptationW(15));
+        make.height.mas_equalTo(0.5);
+    }];
+    
+    [self.topLineImv mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.equalTo(self.contentView);
         make.height.mas_equalTo(0.5);
     }];
 }
@@ -137,11 +143,17 @@
 }
 
 - (void)codeButtonAct:(UIButton*)button {
-    self.codeLb.hidden = NO;
-    self.codeBt.hidden = YES;
-    
+   
     if(self.checkCodeAct) {
         self.checkCodeAct(self.indexPath);
+    }
+}
+
+- (void)setIndexPath:(NSIndexPath *)indexPath {
+    _indexPath = indexPath;
+    
+    if(indexPath.row != 0) {
+        self.topLineImv.hidden = YES;
     }
 }
 
@@ -153,14 +165,6 @@
     self.contentTf.text = cellModel.text;
     _contentTf.keyboardType = UIKeyboardTypeDecimalPad;
     _contentTf.limitStringLength = cellModel.limtTextLenght;
-    
-    float leftLineDis = kScrAdaptationW(15);
-    if(cellModel.isLastItem) {
-        leftLineDis = 0;
-    }
-    [self.lineImv mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.contentView).offset(leftLineDis);
-    }];
     
     if(cellModel.isShowCheckCodeView) {
         [self.codeBt mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -194,6 +198,8 @@
 
 //校验码倒计时
 - (void)checkCodeCountDown:(BOOL)isStart {
+    self.codeLb.hidden = NO;
+    self.codeBt.hidden = YES;
     if(isStart) {
         kWeakSelf
         self.timeManager = [HXBNsTimerManager createTimer:1 startSeconds:60 countDownTime:YES notifyCall:^(NSString *times) {
@@ -218,12 +224,12 @@
 - (void)enableCheckButton:(BOOL)isEnable {
     self.codeBt.enabled = isEnable;
     if(isEnable) {
-        self.codeBt.layer.borderColor = kHXBColor_FF8359_100.CGColor;
         [self.codeBt setTitleColor:kHXBFontColor_FF413C_100 forState:UIControlStateNormal];
+        [self.codeBt setTitleColor:kHXBFontColor_FF413C_100 forState:UIControlStateHighlighted];
     }
     else {
-        self.codeBt.layer.borderColor = kHXBColor_ECECF0_100.CGColor;
         [self.codeBt setTitleColor:kHXBFontColor_9295A2_100 forState:UIControlStateNormal];
+        [self.codeBt setTitleColor:kHXBFontColor_9295A2_100 forState:UIControlStateHighlighted];
     }
 }
 
