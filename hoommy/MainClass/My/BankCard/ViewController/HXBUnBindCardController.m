@@ -8,7 +8,7 @@
 
 #import "HXBUnBindCardController.h"
 #import "HXBBankCardViewModel.h"
-#import "HXBModifyTransactionPasswordViewController.h"
+#import "HXBBindPhoneViewController.h"
 #import "HXBMyBankResultViewController.h"
 
 @interface HXBUnBindCardController ()
@@ -33,8 +33,6 @@
 
 - (void)setUI {
     self.title = @"解绑银行卡";
-    
-    self.isColourGradientNavigationBar = YES;
     
     [self setBankInfoView];
     [self setBottomView];
@@ -218,9 +216,8 @@
 
 #pragma mark - Action
 - (void)forgetPwd {
-    HXBModifyTransactionPasswordViewController *modifyTransactionPasswordVC = [HXBModifyTransactionPasswordViewController new];
-    modifyTransactionPasswordVC.title = @"修改交易密码";
-    modifyTransactionPasswordVC.type = HXBModifyTransactionPasswordType;
+    HXBBindPhoneViewController *modifyTransactionPasswordVC = [[HXBBindPhoneViewController alloc] init];
+    modifyTransactionPasswordVC.bindPhoneStepType = HXBBindPhoneTransactionPassword;
     [self.navigationController pushViewController:modifyTransactionPasswordVC animated:YES];
 }
 
@@ -231,14 +228,14 @@
     // 验证身份证号
     NSString *idCardNoMessage = [self.bankCardViewModel validateIdCardNo:idCardNo];
     if (idCardNoMessage) {
-        [HxbHUDProgress showMessageCenter:idCardNoMessage];
+        [HxbHUDProgress showTextWithMessage:idCardNoMessage];
         return;
     }
     
     // 验证交易密码
     NSString *transactionPwdMessage = [self.bankCardViewModel validateTransactionPwd:transactionPwd];
     if (transactionPwdMessage) {
-        [HxbHUDProgress showMessageCenter:transactionPwdMessage];
+        [HxbHUDProgress showTextWithMessage:transactionPwdMessage];
         return;
     }
     

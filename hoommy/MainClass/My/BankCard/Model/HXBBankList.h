@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface HXBBankList : NSObject
+@interface HXBBankList : Jastor
 
 /**
  name

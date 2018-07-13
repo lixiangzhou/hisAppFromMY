@@ -10,7 +10,7 @@
 
 @class HXBBankCardModel;
 
-@interface HXBWithdrawModel : NSObject
+@interface HXBWithdrawModel : Jastor
 /**
  可用余额
  */

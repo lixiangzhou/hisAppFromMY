@@ -15,6 +15,7 @@
 
 //当前使用的字体自适应
 #define kHXBFont_PINGFANGSC_REGULAR(s)            ([UIFont fontWithName:@"HelveticaNeue" size:kScrAdaptationW(s)])
+#define kHXBFont_Bold_PINGFANGSC_REGULAR(s)            ([UIFont fontWithName:@"HelveticaNeue-Bold" size:kScrAdaptationW(s)])
 #define kHXBFont_PINGFANGSC_REGULAR_750(s)        ([UIFont fontWithName:@"HelveticaNeue" size:kScrAdaptationW750(s)])
 
 //UI规范中的字体
