@@ -54,6 +54,7 @@
     [loginAPI loadData:^(NYBaseRequest *request, id responseObject) {
         if (resultBlock) {
             KeyChain.isLogin = YES;
+            KeyChain.mobile = mobile;
             resultBlock(YES);
         }
     } failure:^(NYBaseRequest *request, NSError *error) {

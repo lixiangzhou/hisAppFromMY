@@ -15,6 +15,7 @@
 #import "HxbHUDProgress.h"
 #import "HSJBankCardListViewController.h"
 #import "HSJDepositoryOpenViewModel.h"
+#import <ReactiveObjC/ReactiveObjC.h>
 
 #define kInputHeight 50
 
@@ -33,6 +34,8 @@
 /// 预留手机号
 @property (nonatomic, weak) HXBCustomTextField *mobileView;
 
+@property (nonatomic, weak) UIButton *bottomBtn;
+
 @property (nonatomic, assign) BOOL isAgree;
 
 @property (nonatomic, strong) HSJDepositoryOpenViewModel *viewModel;
@@ -47,6 +50,7 @@
     self.title = @"开通存管账户";
 
     self.viewModel = [HSJDepositoryOpenViewModel new];
+    self.isAgree = YES;
     [self setUI];
 }
 
@@ -57,6 +61,27 @@
     [self setTopViews];
     [self setBankView];
     [self setBottomView];
+    
+    kWeakSelf
+    [self.nameView.textField.rac_textSignal subscribeNext:^(NSString * _Nullable x) {
+        [weakSelf setBottomBtnState];
+    }];
+    
+    [self.idView.idTextField.rac_textSignal subscribeNext:^(NSString * _Nullable x) {
+        [weakSelf setBottomBtnState];
+    }];
+    
+    [self.transactionPwdView.textField.rac_textSignal subscribeNext:^(NSString * _Nullable x) {
+        [weakSelf setBottomBtnState];
+    }];
+    
+    [self.bankNoView.textField.rac_textSignal subscribeNext:^(NSString * _Nullable x) {
+        [weakSelf setBottomBtnState];
+    }];
+    
+    [self.mobileView.textField.rac_textSignal subscribeNext:^(NSString * _Nullable x) {
+        [weakSelf setBottomBtnState];
+    }];
 }
 
 - (void)setTopViews {
@@ -74,6 +99,7 @@
     idView.leftImage = [UIImage imageNamed:@"depository_id"];
     idView.placeholder = @"身份证号";
     idView.isIDCardTextField = YES;
+    idView.limitStringLength = 18;
     [self commonTextViewProp:idView];
     [self.scrollView addSubview:idView];
     self.idView = idView;
@@ -124,6 +150,7 @@
     bankNoView.leftImage = [UIImage imageNamed:@"depository_bank"];
     bankNoView.placeholder = @"银行卡号";
     bankNoView.limitStringLength = 31;
+    bankNoView.textFieldRightOffset = 70;
     bankNoView.keyboardType = UIKeyboardTypeNumberPad;
     [self commonTextViewProp:bankNoView];
     bankNoView.keyboardType = UIKeyboardTypeNumberPad;
@@ -133,18 +160,18 @@
         NSString *bankNumber = [text stringByReplacingOccurrencesOfString:@" "  withString:@""];
         if (bankNumber.length>=12) {
             [weakSelf.viewModel checkCardBinResultRequestWithBankNumber:bankNumber andisToastTip:NO andCallBack:^(BOOL isSuccess) {
-//                if (isSuccess) {
-//                    if (weakSelf.viewModel.cardBinModel.creditCard) {
-//                        weakSelf.bankNameView.svgImageName = weakSelf.viewModel.cardBinModel.bankCode;
-//                        weakSelf.bankNameView.text = @"此卡为信用卡，暂不支持";
-//                    } else {
-//                        weakSelf.bankNameView.svgImageName = weakSelf.viewModel.cardBinModel.bankCode;
-//                        weakSelf.bankNameView.text = [NSString stringWithFormat:@"%@：%@",weakSelf.viewModel.cardBinModel.bankName, weakSelf.viewModel.cardBinModel.quota];
-//                    }
-//                    [weakSelf showBankNameView];
-//                } else {
-//                    [weakSelf hideBankNameView];
-//                }
+                if (isSuccess) {
+                    if (weakSelf.viewModel.cardBinModel.creditCard) {
+                        weakSelf.bankNameView.svgImageName = weakSelf.viewModel.cardBinModel.bankCode;
+                        weakSelf.bankNameView.text = @"此卡为信用卡，暂不支持";
+                    } else {
+                        weakSelf.bankNameView.svgImageName = weakSelf.viewModel.cardBinModel.bankCode;
+                        weakSelf.bankNameView.text = [NSString stringWithFormat:@"%@：%@",weakSelf.viewModel.cardBinModel.bankName, weakSelf.viewModel.cardBinModel.quota];
+                    }
+                    [weakSelf showBankNameView];
+                } else {
+                    [weakSelf hideBankNameView];
+                }
             }];
         }
     };
@@ -230,7 +257,7 @@
 
 - (void)setBottomView {
     UIButton *bottomBtn = [[UIButton alloc] init];
-    bottomBtn.backgroundColor = UIColorFromRGB(0xD5B775);
+    bottomBtn.backgroundColor = kHXBColor_D5B775_50;
     [bottomBtn setTitle:@"开通恒丰银行存管账户" forState:UIControlStateNormal];
     [bottomBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     bottomBtn.titleLabel.font = kHXBFont_PINGFANGSC_REGULAR(16);
@@ -238,6 +265,7 @@
     bottomBtn.layer.masksToBounds = YES;
     [bottomBtn addTarget:self action:@selector(bottomBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [self.scrollView addSubview:bottomBtn];
+    self.bottomBtn = bottomBtn;
     
     
 //    我已查看并同意《红小宝认证服务协议》与《存管服务协议》
@@ -256,14 +284,7 @@
     agreementView.text = attributedString;
     agreementView.agreeBtnBlock = ^(BOOL isSelected){
         weakSelf.isAgree = isSelected;
-        if (isSelected) {
-            bottomBtn.backgroundColor = kHXBColor_E3BF80;
-            bottomBtn.enabled = YES;
-        }else
-        {
-            bottomBtn.backgroundColor = kHXBColor_D8D8D8_100;
-            bottomBtn.enabled = NO;
-        }
+        [weakSelf setBottomBtnState];
     };
     
     [self.scrollView addSubview:agreementView];
@@ -370,11 +391,19 @@
 
 - (BOOL)limitNumberCount:(UIView *)textField
 {
-    if (self.idView.text.length > 17 && self.idView == textField) {
+    if (self.idView.text.length >= self.idView.limitStringLength && self.idView == textField) {
+        return NO;
+    }
+    
+    if (self.transactionPwdView.text.length >= self.transactionPwdView.limitStringLength && self.idView == textField) {
         return NO;
     }
 
-    if (self.bankNoView.text.length > 31 && self.bankNoView == textField) {
+    if (self.bankNoView.text.length >= self.bankNoView.limitStringLength && self.bankNoView == textField) {
+        return NO;
+    }
+    
+    if (self.mobileView.text.length >= self.mobileView.limitStringLength && self.bankNoView == textField) {
         return NO;
     }
 
@@ -450,6 +479,28 @@
     textView.textColor = kHXBFontColor_333333_100;
     textView.bottomLineNormalColor = UIColorFromRGB(0xECECEC);
     textView.delegate = self;
+}
+
+- (void)setBottomBtnState {
+    NSString *username = [self.nameView.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString *idNo = [self.idView.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString *transactionPwd = [self.transactionPwdView.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString *bankNo = [self.bankNoView.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString *mobile = [self.mobileView.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    BOOL nameEnable = username.length >= 2;
+    BOOL idNoEnable = idNo.length >= self.idView.limitStringLength;
+    BOOL pwdEnable = transactionPwd.length >= self.transactionPwdView.limitStringLength;
+    BOOL bankNoEnable = bankNo.length >= 12;
+    BOOL mobileEnable = mobile.length >= self.mobileView.limitStringLength;
+    
+    if (nameEnable && idNoEnable && pwdEnable && bankNoEnable && mobileEnable && self.isAgree) {
+        self.bottomBtn.backgroundColor = kHXBColor_D5B775;
+        self.bottomBtn.enabled = YES;
+    } else {
+        self.bottomBtn.backgroundColor = kHXBColor_D5B775_50;
+        self.bottomBtn.enabled = NO;
+    }
 }
 
 #pragma mark - Action

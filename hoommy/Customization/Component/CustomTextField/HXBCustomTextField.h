@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BXTextField.h"
 
 typedef void(^isLimitText)(NSString *text1);
 
 @interface HXBCustomTextField : UIView
 
 @property (nonatomic, strong,readonly) UITextField *textField;
+@property (nonatomic, strong, readonly) BXTextField *idTextField;
 @property (nonatomic, strong,readonly) UIImageView *leftImageView;
 
 

@@ -8,7 +8,6 @@
 
 #import "HXBCustomTextField.h"
 #import "SVGKit/SVGKImage.h"
-#import "BXTextField.h"
 #import "UIImageView+HxbSDWebImage.h"
 @interface HXBCustomTextField ()<UITextFieldDelegate>
 {

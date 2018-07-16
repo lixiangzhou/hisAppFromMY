@@ -37,13 +37,15 @@
 #define kHXBColor_ECECF0_100                UIColorFromRGB(0xECECF0)
 #define kHXBColor_CBCBCB_100                UIColorFromRGB(0xCBCBCB)
 
+
 ///蓝色的背景色
 #define kHXBColor_73ADFF_100                RGBA(115, 173, 255, 1)
 
 /// 黄色背景色
 #define kHXBColor_E3BF80                    RGBA(227, 191, 128, 1)
 
-
+#define kHXBColor_D5B775                    UIColorFromRGB(0xD5B775)
+#define kHXBColor_D5B775_50                 RGBA(213, 183, 117, 0.5)
 
 ///用于色块之间的间隔底色填充
 #define kHXBSpacingColor_F5F5F9_100         kHXBBackgroundColor

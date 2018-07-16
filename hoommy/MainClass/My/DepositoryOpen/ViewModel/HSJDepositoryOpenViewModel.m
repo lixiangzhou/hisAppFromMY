@@ -37,6 +37,7 @@
         request.requestUrl = kHXBUser_checkCardBin;
         request.requestMethod = NYRequestMethodPost;
         request.modelType = [HXBCardBinModel class];
+        request.requestArgument = @{@"bankCard": bankNumber};
         
         weakSelf.cardBinIsShowTost = isToast;
         weakSelf.cardBinrequest = request;
@@ -48,7 +49,7 @@
 
 - (void)openDepositoryWithParam:(NSDictionary *)param resultBlock:(void (^)(BOOL))resultBlock {
     kWeakSelf
-    [self checkCardBinResultRequestWithBankNumber:param[@"cardNumber"] andisToastTip:YES andCallBack:^(BOOL isSuccess) {
+    [self checkCardBinResultRequestWithBankNumber:param[@"bankCard"] andisToastTip:YES andCallBack:^(BOOL isSuccess) {
         if (isSuccess) {
             NSMutableDictionary *dict = [param mutableCopy];
             dict[@"bankCode"] = weakSelf.cardBinModel.bankCode;

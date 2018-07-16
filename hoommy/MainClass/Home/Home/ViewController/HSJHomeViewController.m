@@ -15,6 +15,7 @@
 #import "HSJGestureSettingController.h"
 #import "HSJGestureLoginController.h"
 #import "HSJPlanDetailController.h"
+#import "HSJSignInViewController.h"
 
 @interface HSJHomeViewController ()
 
@@ -82,7 +83,9 @@
 }
 
 - (void)tableViewButtonClickAct:(UIButton*)button {
-    HSJGestureSettingController* vc = [[HSJGestureSettingController alloc] init];
+//    HSJGestureSettingController* vc = [[HSJGestureSettingController alloc] init];
+//    [self.navigationController pushViewController:vc animated:YES];
+    HSJSignInViewController *vc = [HSJSignInViewController new];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
