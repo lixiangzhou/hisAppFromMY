@@ -8,17 +8,33 @@
 
 #import "HSJSignUpViewController.h"
 #import "HXBCustomTextField.h"
+#import "HXBAgreementView.h"
+#import "HSJSignInButton.h"
+#import "TimerWeakTarget.h"
+#import "NSAttributedString+HxbAttributedString.h"
 @interface HSJSignUpViewController ()
 
 @property (nonatomic, strong) UILabel *phoneLabel;
 
 @property (nonatomic, strong) HXBCustomTextField *codeTextField;
 
-@property (nonatomic, strong) UILabel *passwordLabel;
-
 @property (nonatomic, strong) HXBCustomTextField *passwordTextField;
 
-@property (nonatomic, strong) UIButton *signUpButton;
+@property (nonatomic, strong) HSJSignInButton *signUpButton;
+
+@property (nonatomic, strong) UILabel *titleLabel;
+
+@property (nonatomic, strong) HXBAgreementView *agreementView;
+
+@property (nonatomic, strong) UIButton *codeButton;
+
+@property (nonatomic, strong) UIButton *voiceCodeButton;
+
+@property (nonatomic, strong) NSTimer *timer;
+
+@property (nonatomic, assign) int timeCount;
+
+@property (nonatomic, assign) BOOL isSelected;
 
 @end
 
@@ -26,53 +42,100 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.isSelected = YES;
     [self setupUI];
 }
 
 - (void)setupUI {
+    self.isWhiteColourGradientNavigationBar = YES;
+    [self.view addSubview:self.titleLabel];
     [self.view addSubview:self.phoneLabel];
     [self.view addSubview:self.codeTextField];
-    [self.view addSubview:self.passwordLabel];
     [self.view addSubview:self.passwordTextField];
     [self.view addSubview:self.signUpButton];
+    [self.view addSubview:self.agreementView];
+    [self.view addSubview:self.codeButton];
+    [self.view addSubview:self.voiceCodeButton];
+    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view).offset(kScrAdaptationW(25));
+        make.top.equalTo(self.view).offset(kScrAdaptationH(30) + HXBStatusBarAndNavigationBarHeight);
+    }];
     
     [self.phoneLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view).offset(kScrAdaptationW(15));
-        make.top.equalTo(self.view).offset(kScrAdaptationH(100));
+        make.left.equalTo(self.titleLabel);
+        make.top.equalTo(self.titleLabel.mas_bottom).offset(kScrAdaptationH(5));
     }];
     
     [self.codeTextField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.phoneLabel);
-        make.right.equalTo(self.view).offset(-kScrAdaptationW(15));
-        make.top.equalTo(self.phoneLabel.mas_bottom).offset(kScrAdaptationH(10));
+        make.top.equalTo(self.titleLabel.mas_bottom).offset(kScrAdaptationH(80));
+        make.left.equalTo(self.view).offset(kScrAdaptationW(25));
+        make.right.equalTo(self.view).offset(-kScrAdaptationW(25));
+        make.height.offset(kScrAdaptationH(40));
     }];
     
-    [self.passwordLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.phoneLabel);
-        make.top.equalTo(self.codeTextField).offset(kScrAdaptationH(40));
+    [self.codeButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.right.height.equalTo(self.codeTextField);
+        make.width.offset(kScrAdaptationW(60));
+    }];
+    
+    [self.voiceCodeButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.codeTextField);
+        make.top.equalTo(self.codeTextField.mas_bottom).offset(kScrAdaptationH(10));
     }];
     
     [self.passwordTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.codeTextField);
-        make.top.equalTo(self.passwordLabel.mas_bottom).offset(kScrAdaptationH(10));
+        make.top.equalTo(self.voiceCodeButton.mas_bottom).offset(kScrAdaptationH(25));
+        make.height.offset(kScrAdaptationH(40));
     }];
+    
+
     
     [self.signUpButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.codeTextField);
-        make.top.equalTo(self.passwordTextField.mas_bottom).offset(kScrAdaptationH(10));
+        make.top.equalTo(self.passwordTextField.mas_bottom).offset(kScrAdaptationH(60));
         make.height.offset(kScrAdaptationH(41));
+    }];
+    
+    [self.agreementView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self.codeTextField);
+        make.top.equalTo(self.signUpButton.mas_bottom).offset(kScrAdaptationH(20));
     }];
 }
 
 -(void)signUpButtonClick {
     NSLog(@"完成注册");
+    
+}
+
+- (void)getCode {
+    self.timeCount = 60;
+    self.codeButton.enabled = NO;
+    [self.codeButton setTitle:[NSString stringWithFormat:@"%ds",self.timeCount] forState:UIControlStateNormal];
+    [self.codeButton setTitleColor:kHXBFontColor_C7C7CD_100 forState:(UIControlStateNormal)];
+    self.timer = [TimerWeakTarget scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timeDown) userInfo:nil repeats:YES];
+}
+
+- (void)timeDown
+{
+    self.timeCount--;
+    [self.codeButton setTitle:[NSString stringWithFormat:@"%ds",self.timeCount] forState:UIControlStateNormal];
+    if (self.timeCount <= 0) {
+        self.codeButton.enabled = YES;
+        [self.timer invalidate];
+        self.timer = nil;
+        [self.codeButton setTitle:@"重新获取" forState:UIControlStateNormal];
+        [self.codeButton setTitleColor:kHXBFontColor_FB9561_100 forState:(UIControlStateNormal)];
+    }
+    
 }
 
 - (UILabel *)phoneLabel {
     if (!_phoneLabel) {
         _phoneLabel = [[UILabel alloc] init];
-        _phoneLabel.text = @"验证码已发送至 133 2098 746";
+        _phoneLabel.text = @"验证码已经发送发到";
+        _phoneLabel.font = kHXBFont_PINGFANGSC_REGULAR(14);
+        _phoneLabel.textColor = kHXBFontColor_555555_100;
     }
     return _phoneLabel;
 }
@@ -83,39 +146,123 @@
         _codeTextField.placeholder = @"请输入验证码";
         _codeTextField.isHidenLine = NO;
         _codeTextField.keyboardType = UIKeyboardTypeNumberPad;
+        _codeTextField.isHiddenLeftImage = YES;
+        kWeakSelf
+        _codeTextField.block = ^(NSString *text1) {
+            if (weakSelf.isSelected && weakSelf.codeTextField.text.length && weakSelf.passwordTextField.text.length) {
+                
+                weakSelf.signUpButton.enabled = YES;
+            }
+            else
+            {
+                weakSelf.signUpButton.enabled = NO;
+            }
+        };
+        
     }
     return _codeTextField;
 }
 
-- (UILabel *)passwordLabel {
-    if (!_passwordLabel) {
-        _passwordLabel = [[UILabel alloc] init];
-        _passwordLabel.text = @"为了您的账户安全请设置登陆密码";
-    }
-    return _passwordLabel;
-}
 
 - (HXBCustomTextField *)passwordTextField {
     if (!_passwordTextField) {
         _passwordTextField = [[HXBCustomTextField alloc] init];
-        _passwordTextField.placeholder = @"请输入密码";
+        _passwordTextField.placeholder = @"请设置8-20位数字+字母组合的密码";
         _passwordTextField.isHidenLine = NO;
         _passwordTextField.keyboardType = UIKeyboardTypeASCIICapable;
+        _passwordTextField.isHiddenLeftImage = YES;
         _passwordTextField.secureTextEntry = YES;
+        kWeakSelf
+        _passwordTextField.block = ^(NSString *text1) {
+            if (weakSelf.isSelected && weakSelf.codeTextField.text.length && weakSelf.passwordTextField.text.length) {
+                
+                weakSelf.signUpButton.enabled = YES;
+            }
+            else
+            {
+                weakSelf.signUpButton.enabled = NO;
+            }
+        };
     }
     return _passwordTextField;
 }
 
-- (UIButton *)signUpButton {
+- (HSJSignInButton *)signUpButton {
     if (!_signUpButton) {
-        _signUpButton = [[UIButton alloc] init];
+        _signUpButton = [[HSJSignInButton alloc] init];
         [_signUpButton addTarget:self action:@selector(signUpButtonClick) forControlEvents:(UIControlEventTouchUpInside)];
         [_signUpButton setTitle:@"完成注册" forState:(UIControlStateNormal)];
-        [_signUpButton setTitleColor:[UIColor redColor] forState:(UIControlStateNormal)];
-        _signUpButton.layer.borderWidth = 1;
-        _signUpButton.layer.borderColor = [UIColor redColor].CGColor;
     }
     return _signUpButton;
 }
+
+- (UILabel *)titleLabel {
+    if (!_titleLabel) {
+        _titleLabel = [[UILabel alloc] init];
+        _titleLabel.text = @"请输入登录密码";
+        _titleLabel.font = kHXBFont_PINGFANGSC_REGULAR(30);
+        _titleLabel.textColor = kHXBFontColor_505050_100;
+    }
+    return _titleLabel;
+}
+
+- (HXBAgreementView *)agreementView {
+    if (!_agreementView) {
+        _agreementView = [[HXBAgreementView alloc] initWithFrame:CGRectZero];
+        
+        NSAttributedString *attString = [[NSAttributedString alloc] initWithString:@"我已阅读并同意《红小宝注册服务协议》"];
+        
+        NSDictionary *linkAttributes = @{NSForegroundColorAttributeName:kHXBColor_73ADFF_100, NSFontAttributeName:kHXBFont_PINGFANGSC_REGULAR(12)};
+        NSMutableAttributedString *attributedString = [HXBAgreementView configureLinkAttributedString:attString withString:@"《红小宝注册服务协议》" sameStringEnable:NO linkAttributes:linkAttributes activeLinkAttributes:linkAttributes parameter:nil clickLinkBlock:^{
+            NSLog(@"《红小宝认证服务协议》");
+        }];
+        kWeakSelf
+        _agreementView.text = attributedString;
+        _agreementView.agreeBtnBlock = ^(BOOL isSelected){
+            weakSelf.isSelected = isSelected;
+            if (isSelected && weakSelf.codeTextField.text.length && weakSelf.passwordTextField.text.length) {
+                
+                weakSelf.signUpButton.enabled = YES;
+            }
+            else
+            {
+                weakSelf.signUpButton.enabled = NO;
+            }
+        };
+    }
+    return _agreementView;
+}
+
+- (UIButton *)codeButton {
+    if (!_codeButton) {
+        _codeButton = [[UIButton alloc] init];
+        [_codeButton setTitle:@"重新获取" forState:(UIControlStateNormal)];
+        [_codeButton addTarget:self action:@selector(getCode) forControlEvents:(UIControlEventTouchUpInside)];
+        [_codeButton setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
+        [_codeButton setTitleColor:kHXBFontColor_FB9561_100 forState:(UIControlStateNormal)];
+        _codeButton.titleLabel.font = kHXBFont_PINGFANGSC_REGULAR(15);
+    }
+    return _codeButton;
+}
+
+- (UIButton *)voiceCodeButton {
+    if (!_voiceCodeButton) {
+        _voiceCodeButton = [[UIButton alloc] init];
+        
+        NSString *messageStr = @"您也可以";
+        
+        NSMutableAttributedString *voiceCodeStr = [NSMutableAttributedString setupAttributeStringWithString:messageStr WithRange:NSMakeRange(0, messageStr.length) andAttributeColor:kHXBFontColor_555555_100 andAttributeFont:kHXBFont_PINGFANGSC_REGULAR(12)];
+        
+        messageStr = @"接听语音验证码";
+        
+        [voiceCodeStr appendAttributedString:[NSMutableAttributedString setupAttributeStringWithString:messageStr WithRange:NSMakeRange(0, messageStr.length) andAttributeColor:kHXBFontColor_FB9561_100 andAttributeFont:kHXBFont_PINGFANGSC_REGULAR(12)]];
+        
+        [_voiceCodeButton addTarget:self action:@selector(getCode) forControlEvents:(UIControlEventTouchUpInside)];
+        _voiceCodeButton.titleLabel.font = kHXBFont_PINGFANGSC_REGULAR(12);
+        [_voiceCodeButton setAttributedTitle:voiceCodeStr  forState:(UIControlStateNormal)];
+    }
+    return _voiceCodeButton;
+}
+
 
 @end

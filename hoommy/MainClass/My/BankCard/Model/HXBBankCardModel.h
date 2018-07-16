@@ -33,7 +33,7 @@
 /**
  是非是默认银行卡
  */
-@property (nonatomic, assign) BOOL *defaultBank;
+@property (nonatomic, assign) BOOL defaultBank;
 /**
  存款地点
  */

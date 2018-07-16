@@ -15,4 +15,5 @@ typedef void(^unbundBankBlock)(HXBBankCardModel *bankCardModel);//解绑block
 
 @property (nonatomic, copy) void (^unbundBankBlock)(HXBBankCardModel *bankCardModel);
 
+@property (nonatomic, strong) void (^unBindCardAct)(void);
 @end

@@ -17,11 +17,13 @@
 #import "HXBBaseNavigationController.h"
 #import "HxbAccountInfoViewController.h"
 #import "HXBGeneralAlertVC.h"
+#import "HxbMyBankCardViewController.h"
 
 #import "HSJMyViewVCViewModel.h"
 
 @interface HSJMyViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *loginOrSignout;
+@property (weak, nonatomic) IBOutlet UIButton *bankCardBt;
 
 @property (nonatomic, strong) HSJMyViewVCViewModel *viewModel;
 @end
@@ -40,6 +42,12 @@
     kWeakSelf
     [self.viewModel downLoadUserInfo:YES resultBlock:^(id responseData, NSError *erro) {
         weakSelf.viewModel.userInfoModel = responseData;
+        if(weakSelf.viewModel.userInfoModel.userInfo.hasBindCard.intValue == 1) {
+            [self.bankCardBt setTitle:@"银行卡(已绑定)" forState:UIControlStateNormal];
+        }
+        else {
+            [self.bankCardBt setTitle:@"银行卡(未绑定)" forState:UIControlStateNormal];
+        }
     }];
 }
 
@@ -82,6 +90,17 @@
 //    vc.userInfoModel = self.viewModel.userInfoModel;
 //    [self.navigationController pushViewController:vc animated:YES];
 
+}
+- (IBAction)bankCardAct:(UIButton *)sender {
+    if(self.viewModel.userInfoModel.userInfo.hasBindCard.intValue == 1) {
+        HxbMyBankCardViewController *vc = [[HxbMyBankCardViewController alloc] init];
+        vc.isCashPasswordPassed = self.viewModel.userInfoModel.userInfo.isCashPasswordPassed;//是否设定交易密码
+        vc.isBank = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    else {
+        
+    }
 }
 
 - (void)signOutButtonButtonClick{

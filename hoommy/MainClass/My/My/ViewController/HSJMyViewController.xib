@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HSJMyViewController">
             <connections>
+                <outlet property="bankCardBt" destination="nuL-dE-0ml" id="YJe-m6-ZNA"/>
                 <outlet property="loginOrSignout" destination="dWk-5L-dWc" id="0AM-46-9dZ"/>
                 <outlet property="view" destination="iN0-l3-epB" id="uxg-DG-12i"/>
             </connections>
@@ -67,7 +68,10 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nuL-dE-0ml">
                                     <rect key="frame" x="121.5" y="0.0" width="112" height="172"/>
                                     <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <state key="normal" title="待定"/>
+                                    <state key="normal" title="银行卡"/>
+                                    <connections>
+                                        <action selector="bankCardAct:" destination="-1" eventType="touchUpInside" id="EUO-ZI-unw"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jGu-C6-lKQ">
                                     <rect key="frame" x="243.5" y="0.0" width="111.5" height="172"/>
