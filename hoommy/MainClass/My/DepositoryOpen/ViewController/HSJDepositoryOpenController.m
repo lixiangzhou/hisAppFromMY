@@ -60,54 +60,57 @@
 }
 
 - (void)setTopViews {
-    UIView *sectionView1 = [self viewTitle:@"安全认证" description:@"按国家规定投资用户需满18岁"];
+    UIView *sectionView1 = [self viewTitle:@"安全认证" description:nil];
     [self.scrollView addSubview:sectionView1];
 
     HXBCustomTextField *nameView = [[HXBCustomTextField alloc] init];
-    nameView.svgImageName = @"name.svg";
+    nameView.leftImage = [UIImage imageNamed:@"depository_name"];
     nameView.placeholder = @"真实姓名";
-    nameView.delegate = self;
+    [self commonTextViewProp:nameView];
     [self.scrollView addSubview:nameView];
     self.nameView = nameView;
 
     HXBCustomTextField *idView = [[HXBCustomTextField alloc] init];
-    idView.leftImage = [SVGKImage imageNamed:@"id_number.svg"].UIImage;
+    idView.leftImage = [UIImage imageNamed:@"depository_id"];
     idView.placeholder = @"身份证号";
-    idView.delegate = self;
     idView.isIDCardTextField = YES;
+    [self commonTextViewProp:idView];
     [self.scrollView addSubview:idView];
     self.idView = idView;
     
     HXBCustomTextField *transactionPwdView = [[HXBCustomTextField alloc] init];
-    transactionPwdView.leftImage = [SVGKImage imageNamed:@"id_number.svg"].UIImage;
+    transactionPwdView.leftImage = [UIImage imageNamed:@"depository_transaction_pwd"];
     transactionPwdView.placeholder = @"交易密码";
-    transactionPwdView.delegate = self;
     transactionPwdView.limitStringLength = 6;
+    transactionPwdView.hideEye = NO;
+    transactionPwdView.textFieldRightOffset = 40;
+    transactionPwdView.secureTextEntry = YES;
+    [self commonTextViewProp:transactionPwdView];
     [self.scrollView addSubview:transactionPwdView];
     self.transactionPwdView = transactionPwdView;
 
     [sectionView1 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@40);
+        make.top.equalTo(self.scrollView);
         make.left.right.equalTo(self.view);
     }];
 
     [nameView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(sectionView1.mas_bottom).offset(30);
-        make.left.equalTo(sectionView1);
+        make.top.equalTo(sectionView1.mas_bottom);
+        make.left.equalTo(sectionView1).offset(-5);
         make.right.equalTo(sectionView1);
         make.height.equalTo(@kInputHeight);
     }];
 
     [idView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(nameView.mas_bottom);
-        make.left.equalTo(sectionView1);
+        make.left.equalTo(nameView);
         make.right.equalTo(sectionView1);
         make.height.equalTo(@kInputHeight);
     }];
     
     [transactionPwdView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(idView.mas_bottom);
-        make.left.equalTo(sectionView1);
+        make.left.equalTo(nameView);
         make.right.equalTo(sectionView1);
         make.height.equalTo(@kInputHeight);
     }];
@@ -118,10 +121,11 @@
     [self.scrollView addSubview:sectionView2];
 
     HXBCustomTextField *bankNoView = [[HXBCustomTextField alloc] init];
-    bankNoView.leftImage = [SVGKImage imageNamed:@"card.svg"].UIImage;
+    bankNoView.leftImage = [UIImage imageNamed:@"depository_bank"];
     bankNoView.placeholder = @"银行卡号";
-    bankNoView.delegate = self;
     bankNoView.limitStringLength = 31;
+    bankNoView.keyboardType = UIKeyboardTypeNumberPad;
+    [self commonTextViewProp:bankNoView];
     bankNoView.keyboardType = UIKeyboardTypeNumberPad;
 
     kWeakSelf
@@ -148,60 +152,59 @@
     self.bankNoView = bankNoView;
 
     UIButton *checkLimitBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [checkLimitBtn setTitle:@"查看银行限额" forState:(UIControlStateNormal)];
+    [checkLimitBtn setTitle:@"银行限额" forState:(UIControlStateNormal)];
     checkLimitBtn.backgroundColor = [UIColor whiteColor];
-    [checkLimitBtn setTitleColor:kHXBColor_73ADFF_100 forState:(UIControlStateNormal)];
+    [checkLimitBtn setTitleColor:kHXBFOntColor_4C66E7_100 forState:(UIControlStateNormal)];
     [checkLimitBtn addTarget:self action:@selector(checkBankLimit) forControlEvents:(UIControlEventTouchUpInside)];
     checkLimitBtn.titleLabel.font = kHXBFont_PINGFANGSC_REGULAR(14);
     [checkLimitBtn sizeToFit];
     [bankNoView addSubview:checkLimitBtn];
 
     HXBCustomTextField *bankNameView = [[HXBCustomTextField alloc] init];
-//    bankNameView.leftImage = [SVGKImage imageNamed:@"默认.svg"].UIImage;
     bankNameView.alpha = 0;
     bankNameView.placeholder = @"银行名称";
-    bankNameView.delegate = self;
     bankNameView.userInteractionEnabled = NO;
     bankNameView.textColor = kHXBColor_999999_100;
-    //    [self.scrollView addSubview:bankNameView];
+    bankNameView.bottomLineNormalColor = UIColorFromRGB(0xECECEC);
     [self.scrollView insertSubview:bankNameView belowSubview:bankNoView];
     self.bankNameView = bankNameView;
     
     HXBCustomTextField *mobileView = [[HXBCustomTextField alloc] init];
-    mobileView.leftImage = [SVGKImage imageNamed:@"id_number.svg"].UIImage;
-    mobileView.placeholder = @"交易密码";
-    mobileView.delegate = self;
+    mobileView.leftImage = [UIImage imageNamed:@"depository_mobile"];
+    mobileView.placeholder = @"预留手机号";
     mobileView.limitStringLength = 11;
+    mobileView.keyboardType = UIKeyboardTypeNumberPad;
+    [self commonTextViewProp:mobileView];
     [self.scrollView addSubview:mobileView];
     self.mobileView = mobileView;
 
     [sectionView2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.transactionPwdView.mas_bottom).offset(50);
+        make.top.equalTo(self.transactionPwdView.mas_bottom).offset(10);
         make.left.right.equalTo(self.view);
     }];
 
     [bankNoView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(sectionView2.mas_bottom).offset(30);
-        make.left.equalTo(sectionView2);
+        make.top.equalTo(sectionView2.mas_bottom);
+        make.left.equalTo(sectionView2).offset(-5);
         make.right.equalTo(sectionView2);
         make.height.equalTo(@kInputHeight);
     }];
 
     [checkLimitBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(bankNoView).offset(-20);
+        make.right.equalTo(bankNoView).offset(-15);
         make.centerY.equalTo(bankNoView);
     }];
 
     [bankNameView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(bankNoView).offset(0);
-        make.left.equalTo(sectionView2);
+        make.left.equalTo(bankNoView);
         make.right.equalTo(sectionView2);
         make.height.equalTo(@kInputHeight);
     }];
     
     [mobileView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(bankNameView.mas_bottom);
-        make.left.equalTo(sectionView2);
+        make.left.equalTo(bankNoView);
         make.right.equalTo(sectionView2);
         make.height.equalTo(@kInputHeight);
     }];
@@ -209,7 +212,7 @@
 
 - (void)setScrollView {
     UIScrollView *scrollView = [[UIScrollView alloc] init];
-    scrollView.backgroundColor = [UIColor whiteColor];
+    scrollView.backgroundColor = BACKGROUNDCOLOR;
     scrollView.alwaysBounceVertical = YES;
     scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     if (@available(iOS 11.0, *)) {
@@ -227,11 +230,11 @@
 
 - (void)setBottomView {
     UIButton *bottomBtn = [[UIButton alloc] init];
-    bottomBtn.backgroundColor = kHXBColor_E3BF80;
+    bottomBtn.backgroundColor = UIColorFromRGB(0xD5B775);
     [bottomBtn setTitle:@"开通恒丰银行存管账户" forState:UIControlStateNormal];
     [bottomBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     bottomBtn.titleLabel.font = kHXBFont_PINGFANGSC_REGULAR(16);
-    bottomBtn.layer.cornerRadius = 4;
+    bottomBtn.layer.cornerRadius = 2;
     bottomBtn.layer.masksToBounds = YES;
     [bottomBtn addTarget:self action:@selector(bottomBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [self.scrollView addSubview:bottomBtn];
@@ -240,7 +243,7 @@
 //    我已查看并同意《红小宝认证服务协议》与《存管服务协议》
     NSAttributedString *attString = [[NSAttributedString alloc] initWithString:@"我已查看并同意《红小宝认证服务协议》与《存管服务协议》"];
     
-    NSDictionary *linkAttributes = @{NSForegroundColorAttributeName:kHXBColor_73ADFF_100, NSFontAttributeName:kHXBFont_PINGFANGSC_REGULAR(12)};
+    NSDictionary *linkAttributes = @{NSForegroundColorAttributeName:kHXBFOntColor_4C66E7_100, NSFontAttributeName:kHXBFont_PINGFANGSC_REGULAR(12)};
     NSMutableAttributedString *attributedString = [HXBAgreementView configureLinkAttributedString:attString withString:@"《红小宝认证服务协议》" sameStringEnable:NO linkAttributes:linkAttributes activeLinkAttributes:linkAttributes parameter:nil clickLinkBlock:^{
         NSLog(@"《红小宝认证服务协议》");
     }];
@@ -267,13 +270,13 @@
     
     [agreementView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(bottomBtn);
-        make.bottom.equalTo(bottomBtn.mas_top).offset(-10);
+        make.bottom.equalTo(bottomBtn.mas_top).offset(-15);
     }];
 
     [bottomBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.mobileView.mas_bottom).offset(80);
-        make.left.equalTo(self.view).offset(35);
-        make.right.equalTo(self.view).offset(-35);
+        make.left.equalTo(self.view).offset(15);
+        make.right.equalTo(self.view).offset(-15);
         make.height.equalTo(@41);
     }];
 }
@@ -305,28 +308,37 @@
 #pragma mark - Helper
 - (UIView *)viewTitle:(NSString *)title description:(NSString *)description {
     UIView *view = [UIView new];
-
+    view.backgroundColor = [UIColor whiteColor];
+    
     UILabel *titleLabel = [UILabel new];
-    titleLabel.text = [NSString stringWithFormat:@"●  %@  ●", title];
+    titleLabel.text = [NSString stringWithFormat:@"%@", title];
     titleLabel.font = kHXBFont_30;
-    titleLabel.textColor = UIColorFromRGB(0x003D7E);
-    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.textColor = kHXBFontColor_333333_100;
     [view addSubview:titleLabel];
 
     UILabel *descLabel = [UILabel new];
     descLabel.text = description;
     descLabel.font = kHXBFont_24;
     descLabel.textColor = kHXBColor_999999_100;
-    descLabel.textAlignment = NSTextAlignmentCenter;
     [view addSubview:descLabel];
+    
+    if (description == nil) {
+        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:@"按国家规定投资用户必须"];
+        [attr appendAttributedString:[[NSAttributedString alloc] initWithString:@"18岁以上" attributes:@{NSForegroundColorAttributeName: RGB(236, 92, 32)}]];
+        [attr appendAttributedString:[[NSAttributedString alloc] initWithString:@"，实名认证一天最多"]];
+        [attr appendAttributedString:[[NSAttributedString alloc] initWithString:@"3" attributes:@{NSForegroundColorAttributeName: RGB(236, 92, 32)}]];
+        [attr appendAttributedString:[[NSAttributedString alloc] initWithString:@"次"]];
+        descLabel.attributedText = attr;
+    }
 
     [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.equalTo(view);
+        make.top.left.equalTo(@kScrAdaptationW(15));
     }];
 
     [descLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(titleLabel.mas_bottom).offset(10);
-        make.left.right.bottom.equalTo(view);
+        make.top.equalTo(titleLabel.mas_bottom).offset(6);
+        make.left.equalTo(titleLabel);
+        make.bottom.equalTo(@kScrAdaptationW(-15));
     }];
 
     return view;
@@ -429,6 +441,15 @@
     }
     
     return isNull;
+}
+
+- (void)commonTextViewProp:(HXBCustomTextField *)textView {
+    textView.bottomLineLeftOffset = 44;
+    textView.bottomLineRightOffset = 0;
+    textView.font = kHXBFont_28;
+    textView.textColor = kHXBFontColor_333333_100;
+    textView.bottomLineNormalColor = UIColorFromRGB(0xECECEC);
+    textView.delegate = self;
 }
 
 #pragma mark - Action
