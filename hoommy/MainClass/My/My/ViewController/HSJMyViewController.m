@@ -9,7 +9,7 @@
 #import "HSJMyViewController.h"
 #import "HSJBaseModel.h"
 
-#import "HXBBindPhoneViewController.h"
+//#import "HXBBindPhoneViewController.h"
 
 #import "HSJBankCardListViewController.h"
 #import "HSJRiskAssessmentViewController.h"
@@ -77,10 +77,10 @@
 }
 
 - (IBAction)bindPhoneAct:(UIButton *)sender {
-    HXBBindPhoneViewController* vc = [[HXBBindPhoneViewController alloc] init];
-    vc.bindPhoneStepType = HXBBindPhoneStepFirst;
-    vc.userInfoModel = self.viewModel.userInfoModel;
-    [self.navigationController pushViewController:vc animated:YES];
+//    HXBBindPhoneViewController* vc = [[HXBBindPhoneViewController alloc] init];
+//    vc.bindPhoneStepType = HXBBindPhoneStepFirst;
+//    vc.userInfoModel = self.viewModel.userInfoModel;
+//    [self.navigationController pushViewController:vc animated:YES];
 
 }
 

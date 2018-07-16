@@ -46,7 +46,7 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xJi-Va-dWS">
                                     <rect key="frame" x="243.5" y="0.0" width="111.5" height="172.5"/>
                                     <color key="backgroundColor" red="1" green="0.2564616448" blue="0.30075229850000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <state key="normal" title="绑定手机号"/>
+                                    <state key="normal" title="待定"/>
                                     <connections>
                                         <action selector="bindPhoneAct:" destination="-1" eventType="touchUpInside" id="keN-bK-vzZ"/>
                                     </connections>
