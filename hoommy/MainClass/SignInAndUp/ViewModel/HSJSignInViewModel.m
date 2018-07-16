@@ -7,59 +7,127 @@
 //
 
 #import "HSJSignInViewModel.h"
-
+#import "HSJSignInModel.h"
 @implementation HSJSignInViewModel
 
+
+- (BOOL)erroStateCodeDeal:(NYBaseRequest *)request response:(NSDictionary *)responseObject {
+    if ([request.requestUrl isEqualToString:kHXBUser_CheckExistMobileURL] && [responseObject[kResponseStatus]  isEqual: @1]) {
+        return NO;
+    }
+    
+    if ([request.requestUrl isEqualToString:kHXBUser_LoginURL] && [responseObject[kResponseStatus]  isEqual: @102]) {
+        return NO;
+    }
+    return [super erroStateCodeDeal:request response:responseObject];
+}
 /**
  校验手机号是否注册
  
  @param mobile 手机号
  @param resultBlock 返回
  */
-- (void)checkExistMobile:(NSString *)mobile resultBlock:(void (^)(BOOL, NYBaseRequest *request))resultBlock
+- (void)checkExistMobile:(NSString *)mobile resultBlock:(NetWorkResponseBlock)resultBlock
 {
-    NYBaseRequest *checkMobileAPI = [[NYBaseRequest alloc]init];
-    checkMobileAPI.requestMethod = NYRequestMethodPost;
-    checkMobileAPI.requestUrl = kHXBUser_CheckExistMobileURL;
-    checkMobileAPI.requestArgument = @{
-                                       @"mobile":mobile
-                                       };
     self.phoneNumber = mobile;
-    [checkMobileAPI loadData:^(NYBaseRequest *request, id responseObject) {
-        if (resultBlock) {
-            resultBlock(YES,request);
-        }
-    } failure:^(NYBaseRequest *request, NSError *error) {
-        if (resultBlock) {
-            resultBlock(NO,request);
+    [self loadData:^(NYBaseRequest *request) {
+        request.requestMethod = NYRequestMethodPost;
+        request.requestUrl = kHXBUser_CheckExistMobileURL;
+        request.requestArgument = @{
+                                 @"mobile":mobile
+                                 };
+        request.modelType = NSClassFromString(@"HSJSignInModel");
+    } responseResult:^(HSJSignInModel * responseData, NSError *erro) {
+        NSDictionary *response = erro.userInfo;
+        BOOL isSuccess = [response[kResponseStatus]  isEqual: @1] || responseData;
+        if (resultBlock && isSuccess) {
+            resultBlock(responseData,erro);
         }
     }];
+    
 }
 
 /**
  登录请求
  @param resultBlock 是否成功，是否需要弹图验
  */
-- (void)loginRequetWithMobile:(NSString *)mobile password:(NSString *)password resultBlock:(void (^)(BOOL))resultBlock
+- (void)loginRequetWithMobile: (NSString *)mobile password: (NSString *)password
+               andWithSmscode:(NSString *)smscode andWithCaptcha:(NSString *)captcha resultBlock:(void(^)(BOOL isSuccess ,BOOL isNeedCaptcha))resultBlock
 {
-    NYBaseRequest *loginAPI = [[NYBaseRequest alloc]initWithDelegate:self];
-    loginAPI.requestMethod = NYRequestMethodPost;
-    loginAPI.requestUrl = kHXBUser_LoginURL;
-    loginAPI.requestArgument = @{
-                                 @"mobile" : mobile,///         是    string    用户名
-                                 @"password" : password,///     是    string    密码
-                                 @"captcha" : @"",///       否    string    图验(只有在登录错误超过3次才需要输入图验)
-                                 };
-    
-    [loginAPI loadData:^(NYBaseRequest *request, id responseObject) {
-        if (resultBlock) {
+
+    [self loadData:^(NYBaseRequest *request) {
+        request.requestMethod = NYRequestMethodPost;
+        request.requestUrl = kHXBUser_LoginURL;
+        request.requestArgument = @{
+                                     @"mobile" : mobile,///         是    string    用户名
+                                     @"password" : password?:@"",///     是    string    密码
+                                     @"smscode" : smscode?:@"",
+                                     @"captcha" : captcha?:@"",///       否    string    图验(只有在登录错误超过3次才需要输入图验)
+                                     };
+    } responseResult:^(id responseData, NSError *erro) {
+        if (!erro) {
             KeyChain.isLogin = YES;
-            resultBlock(YES);
+            KeyChain.mobile = mobile;
+            resultBlock(YES,NO);
+        } else {
+            NSDictionary *response = erro.userInfo;
+            NSLog(@"%@",response[kResponseStatus]);
+            BOOL isNeedCaptcha = [response[kResponseStatus]  isEqual: @102];
+            resultBlock(NO,isNeedCaptcha);
         }
-    } failure:^(NYBaseRequest *request, NSError *error) {
-         resultBlock(NO);
     }];
 }
 
+- (void)getVerifyCodeRequesWithSignInWithAction:(NSString *)action
+                                    andWithType:(NSString *)type
+                                  andWithMobile:(NSString *)mobile
+                               andCallbackBlock: (void(^)(BOOL isSuccess,NSError *error))callbackBlock {
+    kWeakSelf
+    [self verifyCodeRequestWithResultBlock:^(NYBaseRequest *request) {
+        request.requestArgument = @{
+                                    @"action":action,
+                                    @"type":type,
+                                    @"mobile" : mobile
+                                    };
+        request.hudDelegate = weakSelf;
+        request.showHud = YES;
+    } resultBlock:^(id responseObject, NSError *error) {
+        if (error) {
+            callbackBlock(NO,error);
+        }
+        else {
+            callbackBlock(YES,nil);
+        }
+    }];
+}
+
+- (void)captchaRequestWithResultBlock:(void(^)(UIImage *captchaimage))callbackBlock {
+    
+    [self loadData:^(NYBaseRequest *request) {
+        request.requestUrl = kHXBUser_CaptchaURL;
+        request.requestMethod = NYRequestMethodGet;
+        request.isReturnJsonData = NO;
+    } responseResult:^(id responseData, NSError *erro) {
+        UIImage *captchaimage = [UIImage imageWithData:responseData];
+        callbackBlock(captchaimage);
+    }];
+}
+
+- (void)checkCaptchaRequestWithCaptcha:(NSString *)captcha resultBlock:(void (^)(BOOL, BOOL))resultBlock
+{
+    [self loadData:^(NYBaseRequest *request) {
+        request.requestUrl = kHXBUser_checkCaptchaURL;
+        request.requestMethod = NYRequestMethodPost;
+        request.requestArgument = @{
+                                        @"captcha" : captcha///图验Code
+                                    };
+    } responseResult:^(id responseData, NSError *erro) {
+        if (!erro) {
+            resultBlock(YES, NO);
+        } else {
+            resultBlock(NO, YES);
+        }
+    }];
+}
 
 @end

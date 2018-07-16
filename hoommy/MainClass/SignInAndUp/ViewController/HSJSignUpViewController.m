@@ -12,6 +12,8 @@
 #import "HSJSignInButton.h"
 #import "TimerWeakTarget.h"
 #import "NSAttributedString+HxbAttributedString.h"
+#import "HSJSignupViewModel.h"
+#import "HXBGeneralAlertVC.h"
 @interface HSJSignUpViewController ()
 
 @property (nonatomic, strong) UILabel *phoneLabel;
@@ -36,6 +38,8 @@
 
 @property (nonatomic, assign) BOOL isSelected;
 
+@property (nonatomic, strong) HSJSignupViewModel *viewModel;
+
 @end
 
 @implementation HSJSignUpViewController
@@ -43,7 +47,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.isSelected = YES;
+    self.viewModel = [[HSJSignupViewModel alloc] init];
     [self setupUI];
+    [self getCode];
 }
 
 - (void)setupUI {
@@ -104,16 +110,44 @@
 }
 
 -(void)signUpButtonClick {
-    NSLog(@"完成注册");
-    
+    kWeakSelf
+    [self.viewModel signUPRequetWithMobile:self.phoneNumber smscode:self.codeTextField.text password:self.passwordTextField.text resultBlock:^(id responseData, NSError *erro) {
+        if (responseData) {
+            KeyChain.isLogin = YES;
+            [weakSelf dismissViewControllerAnimated:YES completion:nil];
+        }
+    }];
+}
+
+- (void)getVoiceCode {
+    HXBGeneralAlertVC *alertVC = [[HXBGeneralAlertVC alloc] initWithMessageTitle:@"获取语音验证码" andSubTitle:@"我们将以电话形式告知验证码，请您注意接听" andLeftBtnName:@"暂不接听" andRightBtnName:@"现在接听" isHideCancelBtn:NO isClickedBackgroundDiss:NO];
+    [self presentViewController:alertVC animated:NO completion:nil];
+    kWeakSelf
+    [alertVC setLeftBtnBlock:^{
+        
+    }];
+    [alertVC setRightBtnBlock:^{
+        [weakSelf getVoiceCodeWithType:@"voice"];//获取语音验证码
+    }];
 }
 
 - (void)getCode {
+    [self getVoiceCodeWithType:@"sms"];
+}
+
+- (void)getVoiceCodeWithType:(NSString *)type {
     self.timeCount = 60;
     self.codeButton.enabled = NO;
+    self.voiceCodeButton.hidden = YES;
     [self.codeButton setTitle:[NSString stringWithFormat:@"%ds",self.timeCount] forState:UIControlStateNormal];
     [self.codeButton setTitleColor:kHXBFontColor_C7C7CD_100 forState:(UIControlStateNormal)];
-    self.timer = [TimerWeakTarget scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timeDown) userInfo:nil repeats:YES];
+
+    [self.viewModel getVerifyCodeRequesWithSignupWithAction:@"newsignup" andWithType:type andWithMobile:self.phoneNumber andCallbackBlock:^(BOOL isSuccess, NSError *error) {
+        if (error) {
+            [self getCodeField];
+        }
+    }];
+     self.timer = [TimerWeakTarget scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timeDown) userInfo:nil repeats:YES];
 }
 
 - (void)timeDown
@@ -121,19 +155,24 @@
     self.timeCount--;
     [self.codeButton setTitle:[NSString stringWithFormat:@"%ds",self.timeCount] forState:UIControlStateNormal];
     if (self.timeCount <= 0) {
-        self.codeButton.enabled = YES;
-        [self.timer invalidate];
-        self.timer = nil;
-        [self.codeButton setTitle:@"重新获取" forState:UIControlStateNormal];
-        [self.codeButton setTitleColor:kHXBFontColor_FB9561_100 forState:(UIControlStateNormal)];
+        [self getCodeField];
     }
     
+}
+
+- (void)getCodeField {
+    self.codeButton.enabled = YES;
+    self.voiceCodeButton.hidden = NO;
+    [self.timer invalidate];
+    self.timer = nil;
+    [self.codeButton setTitle:@"重新获取" forState:UIControlStateNormal];
+    [self.codeButton setTitleColor:kHXBFontColor_FB9561_100 forState:(UIControlStateNormal)];
 }
 
 - (UILabel *)phoneLabel {
     if (!_phoneLabel) {
         _phoneLabel = [[UILabel alloc] init];
-        _phoneLabel.text = @"验证码已经发送发到";
+        _phoneLabel.text = [NSString stringWithFormat:@"验证码已经发送发到%@",[self.phoneNumber hxb_hiddenPhonNumberWithMid]];
         _phoneLabel.font = kHXBFont_PINGFANGSC_REGULAR(14);
         _phoneLabel.textColor = kHXBFontColor_555555_100;
     }
@@ -147,6 +186,7 @@
         _codeTextField.isHidenLine = NO;
         _codeTextField.keyboardType = UIKeyboardTypeNumberPad;
         _codeTextField.isHiddenLeftImage = YES;
+        _codeTextField.limitStringLength = 6;
         kWeakSelf
         _codeTextField.block = ^(NSString *text1) {
             if (weakSelf.isSelected && weakSelf.codeTextField.text.length && weakSelf.passwordTextField.text.length) {
@@ -172,6 +212,7 @@
         _passwordTextField.keyboardType = UIKeyboardTypeASCIICapable;
         _passwordTextField.isHiddenLeftImage = YES;
         _passwordTextField.secureTextEntry = YES;
+        _passwordTextField.limitStringLength = 20;
         kWeakSelf
         _passwordTextField.block = ^(NSString *text1) {
             if (weakSelf.isSelected && weakSelf.codeTextField.text.length && weakSelf.passwordTextField.text.length) {
@@ -257,7 +298,7 @@
         
         [voiceCodeStr appendAttributedString:[NSMutableAttributedString setupAttributeStringWithString:messageStr WithRange:NSMakeRange(0, messageStr.length) andAttributeColor:kHXBFontColor_FB9561_100 andAttributeFont:kHXBFont_PINGFANGSC_REGULAR(12)]];
         
-        [_voiceCodeButton addTarget:self action:@selector(getCode) forControlEvents:(UIControlEventTouchUpInside)];
+        [_voiceCodeButton addTarget:self action:@selector(getVoiceCode) forControlEvents:(UIControlEventTouchUpInside)];
         _voiceCodeButton.titleLabel.font = kHXBFont_PINGFANGSC_REGULAR(12);
         [_voiceCodeButton setAttributedTitle:voiceCodeStr  forState:(UIControlStateNormal)];
     }
