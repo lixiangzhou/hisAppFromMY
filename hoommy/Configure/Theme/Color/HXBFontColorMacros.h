@@ -23,6 +23,7 @@
 #define kHXBFontColor_505050_100         UIColorFromRGB(0x505050)
 #define kHXBFontColor_555555_100         UIColorFromRGB(0x555555)
 #define kHXBFontColor_C7C7CD_100         UIColorFromRGB(0xC7C7CD)
+#define kHXBFontColor_2D2F46_100         UIColorFromRGB(0x2D2F46)
 ///蓝色字体
 #define kHXBFontColor_Blue_73ADFF_100          RGBA(115, 173, 255, 1)
 

@@ -33,6 +33,7 @@
 #pragma mark - UI
 
 - (void)setUI {
+    self.isWhiteColourGradientNavigationBar = YES;
     [self setupRightBarBtn];
 }
 
