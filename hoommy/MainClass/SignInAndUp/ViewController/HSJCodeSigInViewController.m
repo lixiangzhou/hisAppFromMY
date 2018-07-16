@@ -12,7 +12,7 @@
 #import "HSJSignInButton.h"
 #import "NSAttributedString+HxbAttributedString.h"
 #import "HSJSignInViewModel.h"
-#import "HXBCheckCaptcha.h"
+#import "HSJCheckCaptcha.h"
 #import "HXBGeneralAlertVC.h"
 @interface HSJCodeSigInViewController ()
 
@@ -28,7 +28,7 @@
 
 @property (nonatomic, strong) UIButton *voiceCodeButton;
 
-@property (nonatomic, strong) HXBCheckCaptcha *captchaView;
+@property (nonatomic, strong) HSJCheckCaptcha *captchaView;
 
 @property (nonatomic, copy) NSString *captcha;
 
@@ -251,10 +251,10 @@
     return _phoneNumberLabel;
 }
 
-- (HXBCheckCaptcha *)captchaView {
+- (HSJCheckCaptcha *)captchaView {
     if (!_captchaView) {
         kWeakSelf
-        _captchaView = [[HXBCheckCaptcha alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+        _captchaView = [[HSJCheckCaptcha alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
         _captchaView.cancelBlock = ^{
             [weakSelf.captchaView removeFromSuperview];
         };

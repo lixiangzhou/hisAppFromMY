@@ -1,17 +1,17 @@
 //
-//  HXBCheckCaptcha.m
+//  HSJCheckCaptcha.m
 //  hoomxb
 //
 //  Created by HXB on 2017/6/2.
 //  Copyright © 2017年 hoomsun-miniX. All rights reserved.
 //
 
-#import "HXBCheckCaptcha.h"
+#import "HSJCheckCaptcha.h"
 
 static NSString *const kPromptTetle = @"请输入下面的图形验证码";
 static NSString *const kTrueButtonTitle = @"确定";
 
-@interface HXBCheckCaptcha ()<UITextFieldDelegate>
+@interface HSJCheckCaptcha ()<UITextFieldDelegate>
 ///点击了确认按钮
 @property (nonatomic, copy) void(^clickTrueButtonBlock)(NSString *checkCaptChaStr);
 
@@ -28,7 +28,7 @@ static NSString *const kTrueButtonTitle = @"确定";
 @end
 
 
-@implementation HXBCheckCaptcha
+@implementation HSJCheckCaptcha
 - (void)setIsCorrect:(BOOL)isCorrect {
     _isCorrect = isCorrect;
     if(!isCorrect) {

@@ -10,7 +10,7 @@
 #import "HXBCustomTextField.h"
 #import "HSJCodeSigInViewController.h"
 #import "HSJSignInButton.h"
-#import "HXBCheckCaptcha.h"
+#import "HSJCheckCaptcha.h"
 @interface HSJPasswordSigInViewController ()
 
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -21,7 +21,7 @@
 
 @property (nonatomic, strong) UIButton *codeButton;
 
-@property (nonatomic, strong) HXBCheckCaptcha *captchaView;
+@property (nonatomic, strong) HSJCheckCaptcha *captchaView;
 
 @property (nonatomic, copy) NSString *captcha;
 
@@ -153,10 +153,10 @@
     return _titleLabel;
 }
 
-- (HXBCheckCaptcha *)captchaView {
+- (HSJCheckCaptcha *)captchaView {
     if (!_captchaView) {
         kWeakSelf
-        _captchaView = [[HXBCheckCaptcha alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+        _captchaView = [[HSJCheckCaptcha alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
         _captchaView.cancelBlock = ^{
             [weakSelf.captchaView removeFromSuperview];
         };

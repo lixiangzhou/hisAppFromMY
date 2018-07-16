@@ -1,5 +1,5 @@
 //
-//  HXBCheckCaptcha.h
+//  HSJCheckCaptcha.h
 //  hoomxb
 //
 //  Created by HXB on 2017/6/2.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 ///图形验证码的view
-@interface HXBCheckCaptcha : UIView
+@interface HSJCheckCaptcha : UIView
 @property (nonatomic, strong) UIImage *checkCaptchaImage;
 ///验证码是否正确
 @property (nonatomic, assign) BOOL isCorrect;
