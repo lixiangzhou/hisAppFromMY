@@ -16,6 +16,8 @@
 #import "HXBOpenDepositAccountViewController.h"
 #import "HXBBankCardViewModel.h"
 #import "HXBBaseWKWebViewController.h"
+#import "HXBBankCardListViewController.h"
+#import "HSJClientServeTelView.h"
 
 @interface HxbMyBankCardViewController ()
 
@@ -26,11 +28,13 @@
 @property (nonatomic, strong) HXBBankCardViewModel *viewModel;
 @property (nonatomic, strong) HXBUserInfoView *userInfoView;
 
+@property (nonatomic, strong) UIImageView *topLineImv;
 @property (nonatomic, strong) UILabel *tipLabel;
 
 @property (nonatomic, strong) HXBBankView *bankView;
 
 @property (nonatomic, strong) UIButton *phoneBtn;
+@property (nonatomic, strong) HSJClientServeTelView *clientServerView;
 
 
 @end
@@ -40,13 +44,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = BACKGROUNDCOLOR;
-//    [self.view addSubview:self.tipLabel];
+//    self.view.backgroundColor = BACKGROUNDCOLOR;
     self.viewModel = [[HXBBankCardViewModel alloc] init];
+    [self.view addSubview:self.topLineImv];
     if (self.isBank) {
         self.title = @"银行卡信息";
-        self.tipLabel.text = @"您在红小宝平台充值，提现均会使用该卡";
+        self.tipLabel.text = @"如银行卡暂时无法使用，或您需要更换其他银行卡均可解绑后重新绑定新的银行卡。";
+        [self.view addSubview:self.tipLabel];
         [self.view addSubview:self.bankView];
+        [self.view addSubview:self.clientServerView];
 //        [self.view addSubview:self.phoneBtn];
 //        [self setupRightBarBtn];
         kWeakSelf
@@ -55,6 +61,10 @@
         };
         self.bankView.unBindCardAct = ^{
             [weakSelf clickUnbundBankBtn:nil];
+        };
+        self.bankView.bankCardListAct = ^{
+            HXBBankCardListViewController *vc = [[HXBBankCardListViewController alloc] init];
+            [weakSelf.navigationController pushViewController:vc animated:YES];
         };
         
         [self setupBankViewFrame];
@@ -115,17 +125,29 @@
 
 - (void)setupBankViewFrame
 {
-//    [self.tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.right.equalTo(self.view);
-//        make.top.equalTo(self.view).offset(69 + HXBStatusBarAdditionHeight);
-//        make.height.offset(kScrAdaptationH(45));
-//    }];
+    [self.topLineImv mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view).offset(HXBStatusBarAndNavigationBarHeight);
+        make.left.right.equalTo(self.view);
+        make.height.mas_equalTo(0.5);
+    }];
+    
+    [self.tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view).offset(kScrAdaptationW(15));
+        make.right.equalTo(self.view).offset(kScrAdaptationW(-15));
+        make.top.equalTo(self.topLineImv.mas_bottom).offset(kScrAdaptationH(10));
+    }];
+    
     [self.bankView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).offset(kScrAdaptationW(15));
         make.right.equalTo(self.view).offset(kScrAdaptationW(-15));
-//        make.top.equalTo(self.tipLabel.mas_bottom);
-        make.top.equalTo(self.view).offset(kScrAdaptationH(15) + HXBStatusBarAndNavigationBarHeight);
-        make.height.offset(kScrAdaptationH(162));
+        make.top.equalTo(self.tipLabel.mas_bottom).offset(kScrAdaptationH(10));
+        make.height.mas_equalTo(kScrAdaptationH(200));
+    }];
+    
+    [self.clientServerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self.view);
+        make.bottom.equalTo(self.view).offset(-kScrAdaptationW(self.contentViewBottomNoTabbar+20));
+        make.height.mas_equalTo(kScrAdaptationH(62));
     }];
 //    [self.phoneBtn mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.centerX.equalTo(self.view);
@@ -135,15 +157,22 @@
 
 - (void)setupUserInfoViewFrame
 {
+    [self.topLineImv mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view).offset(HXBStatusBarAndNavigationBarHeight);
+        make.left.right.equalTo(self.view).offset(kScrAdaptationW(15));
+        make.height.mas_equalTo(0.5);
+    }];
+    
     [self.userInfoView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view);
         make.right.equalTo(self.view);
 //        make.top.equalTo(self.view).offset(kScrAdaptationH(45) + HXBStatusBarAndNavigationBarHeight);
-        make.top.equalTo(self.view).offset(kScrAdaptationH(15) + HXBStatusBarAndNavigationBarHeight);
+        make.top.equalTo(self.topLineImv.mas_bottom).offset(kScrAdaptationH(15));
         make.height.offset(kScrAdaptationH(135));
     }];
 //    [self.tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.right.equalTo(self.view);
+//    make.left.equalTo(self.view).offset(kScrAdaptationW(15));
+//    make.right.equalTo(self.view).offset(kScrAdaptationW(-15));
 //        make.top.equalTo(self.view).offset(HXBStatusBarAndNavigationBarHeight);
 //        make.bottom.equalTo(self.userInfoView.mas_top);
 //    }];
@@ -184,6 +213,16 @@
     }
     return _userInfoView;
 }
+
+- (UIImageView *)topLineImv {
+    if(!_topLineImv) {
+        _topLineImv = [[UIImageView alloc] init];
+        _topLineImv.backgroundColor = kHXBColor_EEEEF5_100;
+    }
+    
+    return _topLineImv;
+}
+
 - (HXBBankView *)bankView
 {
     if (!_bankView) {
@@ -192,14 +231,26 @@
     return _bankView;
 }
 
+- (HSJClientServeTelView *)clientServerView {
+    if(!_clientServerView) {
+        _clientServerView = [[HSJClientServeTelView alloc] init];
+        _clientServerView.callTelNumber = ^{
+            [HXBAlertManager callupWithphoneNumber:kServiceMobile andWithTitle:@"红小宝客服电话" Message:kServiceMobile];
+        };
+    }
+    
+    return _clientServerView;
+}
+
 - (UILabel *)tipLabel
 {
     if (!_tipLabel) {
         _tipLabel = [[UILabel alloc] init];
         
         _tipLabel.textColor = COR11;
-        _tipLabel.font = kHXBFont_PINGFANGSC_REGULAR(14);
-        _tipLabel.textAlignment = NSTextAlignmentCenter;
+        _tipLabel.font = kHXBFont_PINGFANGSC_REGULAR(12);
+        _tipLabel.numberOfLines = 0;
+        _tipLabel.lineBreakMode = NSLineBreakByCharWrapping;
     }
     return _tipLabel;
 }

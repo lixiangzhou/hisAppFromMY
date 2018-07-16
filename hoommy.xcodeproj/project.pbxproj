@@ -115,6 +115,8 @@
 		9A3749C920F882D100F39681 /* HXBBankCardListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3749C720F882D000F39681 /* HXBBankCardListViewModel.m */; };
 		9A3749CC20F8830400F39681 /* HXBBankList.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3749CB20F8830400F39681 /* HXBBankList.m */; };
 		9A3749D020F883E800F39681 /* HXBBankListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3749CE20F883E800F39681 /* HXBBankListCell.m */; };
+		9A3749D620FC3AAB00F39681 /* HXBBindCardCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3749D220FC3AAA00F39681 /* HXBBindCardCellModel.m */; };
+		9A3749D720FC3AAB00F39681 /* HXBBindCardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3749D520FC3AAA00F39681 /* HXBBindCardTableViewCell.m */; };
 		9A4B181520F34434006B83C7 /* HXBBindPhoneCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A4B180920F34433006B83C7 /* HXBBindPhoneCellModel.m */; };
 		9A4B181620F34434006B83C7 /* HXBBindPhoneTableFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A4B180C20F34433006B83C7 /* HXBBindPhoneTableFootView.m */; };
 		9A4B181720F34434006B83C7 /* HXBBindPhoneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A4B180E20F34433006B83C7 /* HXBBindPhoneTableViewCell.m */; };
@@ -252,6 +254,8 @@
 		9A97DAD320EF420200688ADB /* trading_record.svg in Resources */ = {isa = PBXBuildFile; fileRef = 9A97DA5C20EF420200688ADB /* trading_record.svg */; };
 		9A97DAD420EF420200688ADB /* transaction_password.svg in Resources */ = {isa = PBXBuildFile; fileRef = 9A97DA5D20EF420200688ADB /* transaction_password.svg */; };
 		9ACB2F3C20EF6E08005C3C3D /* HSJKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ACB2F3B20EF6E08005C3C3D /* HSJKeyChainStore.m */; };
+		9AF51DA120FC487D008A8CF4 /* HSJCALayerTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF51DA020FC487D008A8CF4 /* HSJCALayerTool.m */; };
+		9AF51DA420FC7458008A8CF4 /* HSJClientServeTelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF51DA320FC7458008A8CF4 /* HSJClientServeTelView.m */; };
 		E13A0E7C20F48D9F00A3E364 /* HXBGeneralAlertVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E13A0E7B20F48D9F00A3E364 /* HXBGeneralAlertVC.m */; };
 		E13A0E8420F48EF600A3E364 /* HXB_XYTools.m in Sources */ = {isa = PBXBuildFile; fileRef = E13A0E8320F48EF500A3E364 /* HXB_XYTools.m */; };
 		E13A0EF320F49E2500A3E364 /* HXBRequestUserInfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E13A0ED520F49E2500A3E364 /* HXBRequestUserInfoViewModel.m */; };
@@ -487,6 +491,10 @@
 		9A3749CB20F8830400F39681 /* HXBBankList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBBankList.m; sourceTree = "<group>"; };
 		9A3749CE20F883E800F39681 /* HXBBankListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBBankListCell.m; sourceTree = "<group>"; };
 		9A3749CF20F883E800F39681 /* HXBBankListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBBankListCell.h; sourceTree = "<group>"; };
+		9A3749D220FC3AAA00F39681 /* HXBBindCardCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBBindCardCellModel.m; sourceTree = "<group>"; };
+		9A3749D320FC3AAA00F39681 /* HXBBindCardTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBBindCardTableViewCell.h; sourceTree = "<group>"; };
+		9A3749D420FC3AAA00F39681 /* HXBBindCardCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBBindCardCellModel.h; sourceTree = "<group>"; };
+		9A3749D520FC3AAA00F39681 /* HXBBindCardTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBBindCardTableViewCell.m; sourceTree = "<group>"; };
 		9A4B180820F34433006B83C7 /* HXBBindPhoneCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBBindPhoneCellModel.h; sourceTree = "<group>"; };
 		9A4B180920F34433006B83C7 /* HXBBindPhoneCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBBindPhoneCellModel.m; sourceTree = "<group>"; };
 		9A4B180B20F34433006B83C7 /* HXBBindPhoneTableFootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBBindPhoneTableFootView.h; sourceTree = "<group>"; };
@@ -747,6 +755,10 @@
 		9A97DA5D20EF420200688ADB /* transaction_password.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = transaction_password.svg; sourceTree = "<group>"; };
 		9ACB2F3A20EF6E08005C3C3D /* HSJKeyChainStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJKeyChainStore.h; sourceTree = "<group>"; };
 		9ACB2F3B20EF6E08005C3C3D /* HSJKeyChainStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJKeyChainStore.m; sourceTree = "<group>"; };
+		9AF51D9F20FC487D008A8CF4 /* HSJCALayerTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJCALayerTool.h; sourceTree = "<group>"; };
+		9AF51DA020FC487D008A8CF4 /* HSJCALayerTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJCALayerTool.m; sourceTree = "<group>"; };
+		9AF51DA220FC7458008A8CF4 /* HSJClientServeTelView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJClientServeTelView.h; sourceTree = "<group>"; };
+		9AF51DA320FC7458008A8CF4 /* HSJClientServeTelView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJClientServeTelView.m; sourceTree = "<group>"; };
 		E13A0E7920F48D6D00A3E364 /* HXBColorMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBColorMacro.h; sourceTree = "<group>"; };
 		E13A0E7A20F48D9F00A3E364 /* HXBGeneralAlertVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBGeneralAlertVC.h; sourceTree = "<group>"; };
 		E13A0E7B20F48D9F00A3E364 /* HXBGeneralAlertVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBGeneralAlertVC.m; sourceTree = "<group>"; };
@@ -1446,10 +1458,22 @@
 		9A3749CD20F883CE00F39681 /* BankCardListCell */ = {
 			isa = PBXGroup;
 			children = (
+				9A3749D120FC398B00F39681 /* BindCardCell */,
 				9A3749CF20F883E800F39681 /* HXBBankListCell.h */,
 				9A3749CE20F883E800F39681 /* HXBBankListCell.m */,
 			);
 			path = BankCardListCell;
+			sourceTree = "<group>";
+		};
+		9A3749D120FC398B00F39681 /* BindCardCell */ = {
+			isa = PBXGroup;
+			children = (
+				9A3749D420FC3AAA00F39681 /* HXBBindCardCellModel.h */,
+				9A3749D220FC3AAA00F39681 /* HXBBindCardCellModel.m */,
+				9A3749D320FC3AAA00F39681 /* HXBBindCardTableViewCell.h */,
+				9A3749D520FC3AAA00F39681 /* HXBBindCardTableViewCell.m */,
+			);
+			path = BindCardCell;
 			sourceTree = "<group>";
 		};
 		9A4B180220F33D0C006B83C7 /* Home */ = {
@@ -1570,6 +1594,8 @@
 				9A0BD52720F6FC0400B1CC59 /* HXBBankView.h */,
 				9A0BD52620F6FC0400B1CC59 /* HXBBankView.m */,
 				9A4B186520F60C2A006B83C7 /* MyTopUpBankView */,
+				9AF51DA220FC7458008A8CF4 /* HSJClientServeTelView.h */,
+				9AF51DA320FC7458008A8CF4 /* HSJClientServeTelView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2094,6 +2120,7 @@
 		9A97D96620EF420100688ADB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				9AF51D9E20FC4849008A8CF4 /* CALayerTool */,
 				9A37490D20F7714600F39681 /* TransitioningManager */,
 				E13A0F0820F4DC2600A3E364 /* Middlekey */,
 				9A4B182C20F36D42006B83C7 /* StandardExtend */,
@@ -2509,6 +2536,15 @@
 			path = HSJKeyChainStore;
 			sourceTree = "<group>";
 		};
+		9AF51D9E20FC4849008A8CF4 /* CALayerTool */ = {
+			isa = PBXGroup;
+			children = (
+				9AF51D9F20FC487D008A8CF4 /* HSJCALayerTool.h */,
+				9AF51DA020FC487D008A8CF4 /* HSJCALayerTool.m */,
+			);
+			path = CALayerTool;
+			sourceTree = "<group>";
+		};
 		CF54BBECD744511DC299BD08 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -2873,6 +2909,7 @@
 				9A97DA8120EF420200688ADB /* HXBDeviceVersion.m in Sources */,
 				9A97DAA420EF420200688ADB /* NSDictionary+IDPExtension.m in Sources */,
 				9A3749B220F85D5500F39681 /* HXBBaseCountDownManager_lightweight.m in Sources */,
+				9A3749D720FC3AAB00F39681 /* HXBBindCardTableViewCell.m in Sources */,
 				9A37495C20F854CC00F39681 /* HXBWithdrawCardViewModel.m in Sources */,
 				9A4B189C20F60C2B006B83C7 /* HXBMyTopUpHeaderView.m in Sources */,
 				9A97DA8E20EF420200688ADB /* NSString+HxbSortDicMD5.m in Sources */,
@@ -2885,6 +2922,7 @@
 				9A37491920F84C7800F39681 /* HXBUnBindCardController.m in Sources */,
 				8D60B4DA20F7486300287E52 /* HSJGestureLoginController.m in Sources */,
 				8D60B4DB20F7486300287E52 /* HSJGestureSettingController.m in Sources */,
+				9AF51DA420FC7458008A8CF4 /* HSJClientServeTelView.m in Sources */,
 				9A97DA6D20EF420200688ADB /* HSJListViewController.m in Sources */,
 				9A4B18B120F620B8006B83C7 /* HXBCardBinModel.m in Sources */,
 				9A97DA7A20EF420200688ADB /* HXBWKWebViewProgressView.m in Sources */,
@@ -2995,6 +3033,7 @@
 				9A4B18A220F60C2B006B83C7 /* HxbMyBankCardViewController.m in Sources */,
 				9A97DA8720EF420200688ADB /* NSAttributedString+HxbAttributedString.m in Sources */,
 				9A4B189920F60C2B006B83C7 /* HXBGetValidationCodeView.m in Sources */,
+				9AF51DA120FC487D008A8CF4 /* HSJCALayerTool.m in Sources */,
 				9A97DA9C20EF420200688ADB /* IDPStorage.m in Sources */,
 				9A3749B120F85D5500F39681 /* HXBBaseContDownModel.m in Sources */,
 				9A97DA9D20EF420200688ADB /* IDPStorageFileInner.m in Sources */,
@@ -3009,6 +3048,7 @@
 				9A97DA8820EF420200688ADB /* NSString+CopiesTransfer.m in Sources */,
 				8D60B4D820F7486300287E52 /* PCCircleViewConst.m in Sources */,
 				9ACB2F3C20EF6E08005C3C3D /* HSJKeyChainStore.m in Sources */,
+				9A3749D620FC3AAB00F39681 /* HXBBindCardCellModel.m in Sources */,
 				9A3749CC20F8830400F39681 /* HXBBankList.m in Sources */,
 				9A97DA7220EF420200688ADB /* HSJTestWebviewControllerViewController.m in Sources */,
 				4EE6169820F4ADB40044B998 /* HSJPasswordSigInViewController.m in Sources */,
