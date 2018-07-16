@@ -10,7 +10,7 @@
 #import "HSJHomeViewController.h"
 #import "HSJMyViewController.h"
 #import "AXHNewFeatureController.h"
-
+#import "HXBVersionUpdateManager.h"
 #define AXHVersionKey @"version"
 
 @interface HXBRootVCManager ()
@@ -31,6 +31,8 @@
 /// 创建根控制器
 - (void)createRootVCAndMakeKeyWindow {
     
+    //升级弹框
+//    [[HXBVersionUpdateManager sharedInstance] checkVersionUpdate];
     NSString *currentVersion = [[[NSBundle mainBundle]infoDictionary]objectForKey:@"CFBundleShortVersionString"];
     NSString *lastVersion = [[NSUserDefaults standardUserDefaults] objectForKey:AXHVersionKey];
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];

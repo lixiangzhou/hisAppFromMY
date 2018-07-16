@@ -71,7 +71,6 @@
             resultBlock(YES,NO);
         } else {
             NSDictionary *response = erro.userInfo;
-            NSLog(@"%@",response[kResponseStatus]);
             BOOL isNeedCaptcha = [response[kResponseStatus]  isEqual: @102];
             resultBlock(NO,isNeedCaptcha);
         }

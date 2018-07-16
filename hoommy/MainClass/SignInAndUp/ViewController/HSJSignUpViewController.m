@@ -14,6 +14,7 @@
 #import "NSAttributedString+HxbAttributedString.h"
 #import "HSJSignupViewModel.h"
 #import "HXBGeneralAlertVC.h"
+#import "HSJCheckCaptcha.h"
 @interface HSJSignUpViewController ()
 
 @property (nonatomic, strong) UILabel *phoneLabel;
@@ -39,6 +40,10 @@
 @property (nonatomic, assign) BOOL isSelected;
 
 @property (nonatomic, strong) HSJSignupViewModel *viewModel;
+
+@property (nonatomic, strong) HSJCheckCaptcha *captchaView;
+
+@property (nonatomic, copy) NSString *captcha;
 
 @end
 
@@ -131,6 +136,27 @@
     }];
 }
 
+- (void) checkCaptcha{
+    kWeakSelf
+    [self.viewModel checkCaptchaRequestWithCaptcha:self.captcha resultBlock:^(BOOL isSuccess, BOOL needDownload) {
+        if (isSuccess) {
+            [weakSelf getCode];
+            [weakSelf.captchaView removeFromSuperview];
+        } else if (needDownload) {
+            [weakSelf getCaptcha];
+        } else {
+            [weakSelf.captchaView removeFromSuperview];
+        }
+    }];
+}
+
+- (void)getCaptcha {
+    kWeakSelf
+    [self.viewModel captchaRequestWithResultBlock:^(UIImage *captchaimage) {
+        weakSelf.captchaView.checkCaptchaImage = captchaimage;
+    }];
+}
+
 - (void)getCode {
     [self getVoiceCodeWithType:@"sms"];
 }
@@ -141,10 +167,15 @@
     self.voiceCodeButton.hidden = YES;
     [self.codeButton setTitle:[NSString stringWithFormat:@"%ds",self.timeCount] forState:UIControlStateNormal];
     [self.codeButton setTitleColor:kHXBFontColor_C7C7CD_100 forState:(UIControlStateNormal)];
-
-    [self.viewModel getVerifyCodeRequesWithSignupWithAction:@"newsignup" andWithType:type andWithMobile:self.phoneNumber andCallbackBlock:^(BOOL isSuccess, NSError *error) {
-        if (error) {
-            [self getCodeField];
+    kWeakSelf
+    [self.viewModel getVerifyCodeRequesWithSignupWithAction:@"newsignup" andWithType:type andWithMobile:self.phoneNumber andCallbackBlock:^(BOOL isSuccess, BOOL isNeedCaptcha) {
+        if (isNeedCaptcha) {
+            
+            [weakSelf.view addSubview:weakSelf.captchaView];
+            [weakSelf getCaptcha];
+            
+        } else if (!isSuccess) {
+            [weakSelf getCodeField];
         }
     }];
      self.timer = [TimerWeakTarget scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timeDown) userInfo:nil repeats:YES];
@@ -305,5 +336,25 @@
     return _voiceCodeButton;
 }
 
+- (HSJCheckCaptcha *)captchaView {
+    if (!_captchaView) {
+        kWeakSelf
+        _captchaView = [[HSJCheckCaptcha alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+        _captchaView.cancelBlock = ^{
+            [weakSelf.captchaView removeFromSuperview];
+        };
+        
+        [_captchaView clickTrueButtonFunc:^(NSString *checkCaptChaStr) {
+            weakSelf.captcha = checkCaptChaStr;
+            [weakSelf checkCaptcha];
+        }];
+        
+        [_captchaView clickCheckCaptchaImageViewFunc:^{
+            [weakSelf getCaptcha];
+        }];
+        
+    }
+    return _captchaView;
+}
 
 @end

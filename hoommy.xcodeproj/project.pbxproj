@@ -19,6 +19,7 @@
 		4E7EE27520F72D6F007D96E1 /* HSJSignInButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7EE27420F72D6F007D96E1 /* HSJSignInButton.m */; };
 		4E8DB75420F5AEE3000712D7 /* TimerWeakTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8DB75220F5AEE3000712D7 /* TimerWeakTarget.m */; };
 		4E8DB75820F5B63F000712D7 /* HSJSignInViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8DB75720F5B63F000712D7 /* HSJSignInViewModel.m */; };
+		4E94386D20FCA5C9004F7908 /* HXBXYAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E94386B20FCA5C8004F7908 /* HXBXYAlertViewController.m */; };
 		4EA57D0B20F338EA006FD573 /* HSJRiskAssessmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA57D0A20F338EA006FD573 /* HSJRiskAssessmentViewController.m */; };
 		4EA57D1B20F34C9A006FD573 /* BXTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA57D1920F34C99006FD573 /* BXTextField.m */; };
 		4EA57D2120F34D0D006FD573 /* HXBCustomTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA57D2020F34D0D006FD573 /* HXBCustomTextField.m */; };
@@ -312,6 +313,8 @@
 		4E8DB75320F5AEE3000712D7 /* TimerWeakTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerWeakTarget.h; sourceTree = "<group>"; };
 		4E8DB75620F5B63F000712D7 /* HSJSignInViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJSignInViewModel.h; sourceTree = "<group>"; };
 		4E8DB75720F5B63F000712D7 /* HSJSignInViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJSignInViewModel.m; sourceTree = "<group>"; };
+		4E94386B20FCA5C8004F7908 /* HXBXYAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBXYAlertViewController.m; sourceTree = "<group>"; };
+		4E94386C20FCA5C8004F7908 /* HXBXYAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBXYAlertViewController.h; sourceTree = "<group>"; };
 		4EA57D0920F338EA006FD573 /* HSJRiskAssessmentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJRiskAssessmentViewController.h; sourceTree = "<group>"; };
 		4EA57D0A20F338EA006FD573 /* HSJRiskAssessmentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJRiskAssessmentViewController.m; sourceTree = "<group>"; };
 		4EA57D1920F34C99006FD573 /* BXTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BXTextField.m; sourceTree = "<group>"; };
@@ -2135,6 +2138,8 @@
 		9A97D96720EF420100688ADB /* AlertView */ = {
 			isa = PBXGroup;
 			children = (
+				4E94386C20FCA5C8004F7908 /* HXBXYAlertViewController.h */,
+				4E94386B20FCA5C8004F7908 /* HXBXYAlertViewController.m */,
 				9A4B184F20F5FF84006B83C7 /* HxbHUDProgress.h */,
 				9A4B185020F5FF85006B83C7 /* HxbHUDProgress.m */,
 				E13A0F0520F4C9FF00A3E364 /* HXBAlertManager.h */,
@@ -3007,6 +3012,7 @@
 				E13A0E7C20F48D9F00A3E364 /* HXBGeneralAlertVC.m in Sources */,
 				9A97DAB420EF420200688ADB /* NYHTTPConnection.m in Sources */,
 				9A97DA7420EF420200688ADB /* HSJNotification.m in Sources */,
+				4E94386D20FCA5C9004F7908 /* HXBXYAlertViewController.m in Sources */,
 				9A37492820F8532100F39681 /* HXBPresentInformationView.m in Sources */,
 				4E43B06820EF7A80000BDAE7 /* HSJBankListModel.m in Sources */,
 				9A97DAB620EF420200688ADB /* NYNetworkConfig.m in Sources */,

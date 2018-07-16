@@ -10,10 +10,17 @@
 
 @implementation HSJSignupViewModel
 
+- (BOOL)erroStateCodeDeal:(NYBaseRequest *)request response:(NSDictionary *)responseObject {
+    if ([request.requestUrl isEqualToString:kHXBUser_smscodeURL] && [responseObject[kResponseStatus]  isEqual: @102]) {
+        return NO;
+    }
+    return [super erroStateCodeDeal:request response:responseObject];
+}
+
 - (void)getVerifyCodeRequesWithSignupWithAction:(NSString *)action
                                     andWithType:(NSString *)type
                                     andWithMobile:(NSString *)mobile
-                               andCallbackBlock: (void(^)(BOOL isSuccess,NSError *error))callbackBlock {
+                               andCallbackBlock: (void(^)(BOOL isSuccess,BOOL isNeedCaptcha))callbackBlock {
     kWeakSelf
     [self verifyCodeRequestWithResultBlock:^(NYBaseRequest *request) {
         request.requestArgument = @{
@@ -25,10 +32,12 @@
         request.showHud = YES;
     } resultBlock:^(id responseObject, NSError *error) {
         if (error) {
-            callbackBlock(NO,error);
+            NSDictionary *response = error.userInfo;
+            BOOL isNeedCaptcha = [response[kResponseStatus]  isEqual: @102];
+            callbackBlock(NO,isNeedCaptcha);
         }
         else {
-            callbackBlock(YES,nil);
+            callbackBlock(YES,NO);
         }
     }];
 }
@@ -51,5 +60,35 @@
         }
     }];
 }
+
+- (void)captchaRequestWithResultBlock:(void(^)(UIImage *captchaimage))callbackBlock {
+    
+    [self loadData:^(NYBaseRequest *request) {
+        request.requestUrl = kHXBUser_CaptchaURL;
+        request.requestMethod = NYRequestMethodGet;
+        request.isReturnJsonData = NO;
+    } responseResult:^(id responseData, NSError *erro) {
+        UIImage *captchaimage = [UIImage imageWithData:responseData];
+        callbackBlock(captchaimage);
+    }];
+}
+
+- (void)checkCaptchaRequestWithCaptcha:(NSString *)captcha resultBlock:(void (^)(BOOL, BOOL))resultBlock
+{
+    [self loadData:^(NYBaseRequest *request) {
+        request.requestUrl = kHXBUser_checkCaptchaURL;
+        request.requestMethod = NYRequestMethodPost;
+        request.requestArgument = @{
+                                    @"captcha" : captcha///图验Code
+                                    };
+    } responseResult:^(id responseData, NSError *erro) {
+        if (!erro) {
+            resultBlock(YES, NO);
+        } else {
+            resultBlock(NO, YES);
+        }
+    }];
+}
+
 
 @end
