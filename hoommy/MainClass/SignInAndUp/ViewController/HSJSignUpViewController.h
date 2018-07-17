@@ -10,4 +10,9 @@
 
 @interface HSJSignUpViewController : HXBBaseViewController
 
+/**
+ 注册的手机号
+ */
+@property (nonatomic, copy) NSString *phoneNumber;
+
 @end

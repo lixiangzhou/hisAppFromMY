@@ -52,7 +52,7 @@ static NSString *const X_HxbAuth_Token = @"X-Hxb-Auth-Token";
         _additionalHeaderFields = @{};
         self.baseUrl = @"";
         self.defaultAcceptableStatusCodes = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(200, 100)];
-        self.defaultAcceptableContentTypes = [NSSet setWithObjects:@"text/json", @"text/html", @"text/javascript", @"application/json",@"application/x-www-form-urlencoded",nil];
+        self.defaultAcceptableContentTypes = [NSSet setWithObjects:@"text/json", @"text/html", @"text/javascript", @"application/json",@"application/x-www-form-urlencoded",@"image/png",nil];
     }
     return self;
 }
@@ -72,7 +72,8 @@ static NSString *const X_HxbAuth_Token = @"X-Hxb-Auth-Token";
                            User_Agent:self.userAgent,
                            @"IDFA":[[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString],
                            @"X-Request-Id":[[[UIDevice currentDevice] identifierForVendor] UUIDString],
-                           @"X-Hxb-Auth-Timestamp": [NSDate milliSecondSince1970]
+                           @"X-Hxb-Auth-Timestamp": [NSDate milliSecondSince1970],
+                           @"X-Hxb-App-Name" : @"BABY"
                            };
 
     return dict;

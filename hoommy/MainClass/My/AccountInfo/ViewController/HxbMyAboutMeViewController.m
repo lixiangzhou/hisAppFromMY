@@ -22,7 +22,7 @@ UITableViewDelegate,UITableViewDataSource
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UIView *headerView;
 @property (nonatomic, strong) UIImageView *logoImageView;
-@property (nonatomic, strong) UIImageView *backgroundImageView;
+@property (nonatomic, strong) UILabel *titleLabel;
 @end
 
 @implementation HxbMyAboutMeViewController
@@ -30,6 +30,7 @@ UITableViewDelegate,UITableViewDataSource
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"关于我们";
+    self.isWhiteColourGradientNavigationBar = YES;
     [self.view addSubview:self.tableView];
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self setupSubViewFrame];
@@ -37,14 +38,15 @@ UITableViewDelegate,UITableViewDataSource
 
 - (void)setupSubViewFrame
 {
-    [self.backgroundImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.bottom.equalTo(self.headerView);
-    }];
     [self.logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.headerView).offset(kScrAdaptationH(110) + HXBStatusBarAdditionHeight);
+        make.top.equalTo(self.headerView).offset(kScrAdaptationH(82) + HXBStatusBarAndNavigationBarHeight);
         make.centerX.equalTo(self.headerView);
-        make.width.offset(kScrAdaptationW750(260));
-        make.height.offset(kScrAdaptationW750(260));
+        make.width.offset(kScrAdaptationW(100));
+        make.height.offset(kScrAdaptationH(100));
+    }];
+    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.logoImageView);
+        make.top.equalTo(self.logoImageView.mas_bottom).offset(kScrAdaptationH(15));
     }];
 }
 
@@ -105,51 +107,30 @@ UITableViewDelegate,UITableViewDataSource
     HXBBottomLineTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:celledStr ];
     if (cell == nil) {
         cell = [[HXBBottomLineTableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:celledStr];
-        cell.textLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(30);
-        cell.textLabel.textColor = COR6;
-        cell.detailTextLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(30);
-        cell.detailTextLabel.textColor = COR8;
+        cell.textLabel.font = kHXBFont_PINGFANGSC_REGULAR(14);
+        cell.textLabel.textColor = kHXBFontColor_2D2F46_100;
+        cell.detailTextLabel.font = kHXBFont_PINGFANGSC_REGULAR(14);
+        cell.detailTextLabel.textColor = kHXBFontColor_9295A2_100;
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
         if (indexPath.row == 0) {
-            cell.textLabel.attributedText = [self call];
+            cell.textLabel.text = @"红小宝客服";
             cell.detailTextLabel.text = kServiceMobile;
            
         }else if (indexPath.row == 1){
-            cell.textLabel.text = @"版本";
+            cell.textLabel.text = @"官方微信号";
+            cell.detailTextLabel.text = @"红小宝hoomsun";
+        }else if (indexPath.row == 2){
+            cell.textLabel.text = @"版本号";
             NSString *version = [[[NSBundle mainBundle]infoDictionary]objectForKey:@"CFBundleShortVersionString"];
             cell.detailTextLabel.text = [NSString stringWithFormat:@"v%@",version];
-        }else if (indexPath.row == 2){
-            cell.textLabel.text = @"常见问题";
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            cell.hiddenLine = YES;
         }else{
             cell.textLabel.text = @"意见反馈";
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
   
     return cell;
-}
-
-- (NSMutableAttributedString *)call
-{
-    NSString *str = @"客服热线（工作日9:00-18:00）";
-    NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc]initWithString:str];
-    
-    [attributedStr addAttribute:NSFontAttributeName
-     
-                          value:kHXBFont_PINGFANGSC_REGULAR_750(24)
-     
-                          range:NSMakeRange(4, str.length - 4)];
-    
-    [attributedStr addAttribute:NSForegroundColorAttributeName
-     
-                          value:COR10
-     
-                          range:NSMakeRange(4, str.length - 4)];
-
-    return attributedStr;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -174,10 +155,9 @@ UITableViewDelegate,UITableViewDataSource
 
 - (UIView *)headerView{
     if (!_headerView) {
-        _headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0 , kScreenWidth , kScrAdaptationH(300) + HXBStatusBarAdditionHeight)];
-       
-        [_headerView addSubview:self.backgroundImageView];
+        _headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0 , kScreenWidth , kScrAdaptationH(297) + HXBStatusBarAndNavigationBarHeight)];
         [_headerView addSubview:self.logoImageView];
+        [_headerView addSubview:self.titleLabel];
     }
     return _headerView;
 }
@@ -189,13 +169,14 @@ UITableViewDelegate,UITableViewDataSource
     }
     return _logoImageView;
 }
-
-- (UIImageView *)backgroundImageView
-{
-    if (!_backgroundImageView) {
-        _backgroundImageView = [[UIImageView alloc]initWithFrame:CGRectZero];
-        _backgroundImageView.svgImageString = @"bj";
+- (UILabel *)titleLabel {
+    if (!_titleLabel) {
+        _titleLabel = [[UILabel alloc] init];
+        _titleLabel.text = @"红小宝理财";
+        _titleLabel.textColor = kHXBFontColor_2D2F46_100;
+        _titleLabel.font = kHXBFont_PINGFANGSC_REGULAR(14);
     }
-    return _backgroundImageView;
+    return _titleLabel;
 }
+
 @end

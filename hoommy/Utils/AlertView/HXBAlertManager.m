@@ -12,7 +12,7 @@
 //#import "HXBRiskAssessmentViewController.h"
 //#import "HXBOpenDepositAccountViewController.h"
 //#import "HXBDepositoryAlertViewController.h"
-//#import "HXBXYAlertViewController.h"
+#import "HXBXYAlertViewController.h"
 #import "HXBRootVCManager.h"
 //#import "HXBHomePopViewManager.h"
 #import "HXBGeneralAlertVC.h"
@@ -194,27 +194,27 @@
 
 + (void)checkversionUpdateWith:(HXBVersionUpdateModel *)versionUpdateModel {
     if ([versionUpdateModel.force isEqualToString:@"1"]) {
-//        HXBXYAlertViewController *alertVC = [[HXBXYAlertViewController alloc] initWithTitle:@"红小宝发现新版本" Massage:versionUpdateModel.updateinfo force:[versionUpdateModel.force intValue] andLeftButtonMassage:@"" andRightButtonMassage:@"立即更新"];
-//        alertVC.isAutomaticDismiss = NO;
-//        [alertVC setClickXYRightButtonBlock:^{
-//            NSURL *url = [NSURL URLWithString:versionUpdateModel.url];
-//            [[UIApplication sharedApplication] openURL:url];
-//        }];
-//        [self promptPriorityWithAlertVC:alertVC];
+        HXBXYAlertViewController *alertVC = [[HXBXYAlertViewController alloc] initWithTitle:@"红小宝发现新版本" Massage:versionUpdateModel.updateinfo force:[versionUpdateModel.force intValue] andLeftButtonMassage:@"" andRightButtonMassage:@"立即更新"];
+        alertVC.isAutomaticDismiss = NO;
+        [alertVC setClickXYRightButtonBlock:^{
+            NSURL *url = [NSURL URLWithString:versionUpdateModel.url];
+            [[UIApplication sharedApplication] openURL:url];
+        }];
+        [self promptPriorityWithAlertVC:alertVC];
         
     } else if ([versionUpdateModel.force isEqualToString:@"2"] ) {
-//        HXBXYAlertViewController *alertVC = [[HXBXYAlertViewController alloc] initWithTitle:@"红小宝发现新版本" Massage:versionUpdateModel.updateinfo force:[versionUpdateModel.force intValue] andLeftButtonMassage:@"暂不更新" andRightButtonMassage:@"立即更新"];
-//        [alertVC setClickXYRightButtonBlock:^{
-//            NSURL *url = [NSURL URLWithString:versionUpdateModel.url];
-//            [[UIApplication sharedApplication] openURL:url];
+        HXBXYAlertViewController *alertVC = [[HXBXYAlertViewController alloc] initWithTitle:@"红小宝发现新版本" Massage:versionUpdateModel.updateinfo force:[versionUpdateModel.force intValue] andLeftButtonMassage:@"暂不更新" andRightButtonMassage:@"立即更新"];
+        [alertVC setClickXYRightButtonBlock:^{
+            NSURL *url = [NSURL URLWithString:versionUpdateModel.url];
+            [[UIApplication sharedApplication] openURL:url];
 //            [[HXBHomePopViewManager sharedInstance] popHomeViewfromController:[HXBRootVCManager manager].topVC];//展示首页弹窗
-//        }];
-//
-//        [alertVC setClickXYLeftButtonBlock:^{
-//            //点击取消处理
+        }];
+
+        [alertVC setClickXYLeftButtonBlock:^{
+            //点击取消处理
 //            [[HXBHomePopViewManager sharedInstance] popHomeViewfromController:[HXBRootVCManager manager].topVC];//展示首页弹窗
-//        }];
-//        [self promptPriorityWithAlertVC:alertVC];
+        }];
+        [self promptPriorityWithAlertVC:alertVC];
     } else {
 //        [[HXBHomePopViewManager sharedInstance] popHomeViewfromController:[HXBRootVCManager manager].topVC];//展示首页弹窗
     }
