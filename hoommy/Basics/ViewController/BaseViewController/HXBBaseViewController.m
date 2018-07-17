@@ -37,7 +37,8 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.safeAreaView.backgroundColor = [UIColor clearColor];
     if(self.navigationController) {
-       self.isRedColourGradientNavigationBar = YES;
+        self.isWhiteColourGradientNavigationBar = YES;
+        self.isShowSplitLine = NO;
     }
 }
 
@@ -198,6 +199,12 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)setIsShowSplitLine:(BOOL)isShowSplitLine {
+    _isShowSplitLine = isShowSplitLine;
+    
+    ((HXBBaseNavigationController*)self.navigationController).isShowSplitLine = isShowSplitLine;
+}
+
 #pragma mark - 导航bar的颜色设置方法
 
 ///透明naveBar
@@ -215,7 +222,7 @@
 - (void)setIsWhiteColourGradientNavigationBar:(BOOL)isWhiteColourGradientNavigationBar {
     _isWhiteColourGradientNavigationBar = isWhiteColourGradientNavigationBar;
     if (isWhiteColourGradientNavigationBar) {
-        self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor], NSFontAttributeName: kHXBFont_PINGFANGSC_REGULAR(18)};
+        self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: kHXBColor_333333_100, NSFontAttributeName: kHXBFont_PINGFANGSC_REGULAR(17)};
         
         self.isTransparentNavigationBar = YES;
         self.navgationBarImageView.backgroundColor = [UIColor whiteColor];
@@ -227,7 +234,7 @@
 - (void)setIsRedColourGradientNavigationBar:(BOOL)isRedColourGradientNavigationBar {
     _isRedColourGradientNavigationBar = isRedColourGradientNavigationBar;
     if (isRedColourGradientNavigationBar) {
-        self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:kHXBFont_PINGFANGSC_REGULAR(18)};
+        self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:kHXBFont_PINGFANGSC_REGULAR(17)};
         self.isTransparentNavigationBar = YES;
         self.navgationBarImageView.backgroundColor = [UIColor redColor];
 //        self.navgationBarImageView.image = [UIImage imageNamed:@""];

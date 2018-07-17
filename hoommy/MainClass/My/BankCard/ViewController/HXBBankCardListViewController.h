@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HXBBankCardListViewController : UIViewController
+@interface HXBBankCardListViewController : HXBBaseViewController
 
 /**
  获取银行卡回调

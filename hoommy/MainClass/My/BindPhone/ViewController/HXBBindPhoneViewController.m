@@ -10,6 +10,7 @@
 #import "HXBBindPhoneTableFootView.h"
 #import "HXBBindPhoneTableViewCell.h"
 #import "HXBCheckCaptchaViewController.h"
+#import "HXBTransactionPasswordConfirmationViewController.h"
 
 @interface HXBBindPhoneViewController ()
 
@@ -29,19 +30,35 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setupData];
-    [self setupUI];
-    [self addConstraints];
 }
 
 - (void)setupData {
     self.viewModel = [[HXBBindPhoneVCViewModel alloc] init];
-    [self.viewModel buildCellDataList:self.bindPhoneStepType userInfoModel:self.userInfoModel];
+    if(self.userInfoModel) {
+        [self.viewModel buildCellDataList:self.bindPhoneStepType userInfoModel:self.userInfoModel];
+        [self setupUI];
+        [self addConstraints];
+    }
+    else {
+        kWeakSelf
+        [self.viewModel downLoadUserInfo:YES resultBlock:^(id responseData, NSError *erro) {
+            if(!erro) {
+                weakSelf.userInfoModel = responseData;
+                [weakSelf.viewModel buildCellDataList:weakSelf.bindPhoneStepType userInfoModel:weakSelf.userInfoModel];
+                [weakSelf setupUI];
+                [weakSelf addConstraints];
+            }
+        }];
+    }
 }
 
 - (void)setupUI {
-    self.isWhiteColourGradientNavigationBar = YES;
-    self.title = @"绑定新手机号";
-    self.view.backgroundColor = kHXBFontColor_f3f4f5_100;
+    if(self.bindPhoneStepType == HXBBindPhoneTransactionPassword) {
+        self.title = @"修改交易密码";
+    }
+    else {
+        self.title = @"绑定新手机号";
+    }
     [self.safeAreaView addSubview:self.tableView];
     
     [self.tableView registerClass:[HXBBindPhoneTableViewCell class] forCellReuseIdentifier:@"HXBBindPhoneTableViewCell"];
@@ -71,9 +88,11 @@
 
 - (HXBBindPhoneTableFootView *)footView {
     if(!_footView) {
-        _footView = [[HXBBindPhoneTableFootView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScrAdaptationH(80))];
+        _footView = [[HXBBindPhoneTableFootView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScrAdaptationH(119))];
         _footView.buttonTitle = @"立即验证";
-        _footView.buttonBackGroundColor = [UIColor redColor];
+        NSString *phoneNo = [self.userInfoModel.userInfo.mobile replaceStringWithStartLocation:3 lenght:self.userInfoModel.userInfo.mobile.length - 7];
+        _footView.phoneInfo = phoneNo;
+        _footView.buttonBackGroundColor = kHXBColor_FF7055_100;
         
         kWeakSelf
         _footView.checkAct = ^{
@@ -85,12 +104,13 @@
 }
 
 - (void)checkButtonAct {
+    
     switch (self.bindPhoneStepType) {
         case HXBBindPhoneStepFirst:
         case HXBBindPhoneTransactionPassword:
         {
             NSString *idCard = [self.viewModel getTextAtIndex:1];
-            NSString *smsCode = [self.viewModel getTextAtIndex:3];
+            NSString *smsCode = [self.viewModel getTextAtIndex:(int)self.viewModel.cellDataList.count-1];
             [self verifyWithIDCard:idCard andCode:smsCode];
             break;
         }
@@ -98,6 +118,12 @@
         {
             NSString *phone = [self.viewModel getTextAtIndex:0];
             NSString *smsCode = [self.viewModel getTextAtIndex:1];
+            kWeakSelf
+            [self.viewModel mobifyPhoneNumberWithNewPhoneNumber:phone andWithNewsmscode:smsCode andWithCaptcha:self.checkPaptcha resultBlock:^(BOOL isSuccess) {
+                if (isSuccess) {
+                    [weakSelf checkIdentitySmsSuccessWithIDCard:nil andCode:nil];
+                }
+            }];
             break;
         }
             
@@ -168,27 +194,27 @@
         [self.navigationController pushViewController:vc animated:YES];
     }
     else if(self.bindPhoneStepType == HXBBindPhoneStepSecond) {
-        
+        KeyChain.mobile = self.viewModel.modifyPhoneModel.mobile;//phoneNumber;
+        [KeyChain removeGesture];
+        KeyChain.skipGesture = kHXBGesturePwdSkipeYES;
+        [KeyChain signOut];
+        self.tabBarController.selectedIndex = 0;
+        [HxbHUDProgress showTextWithMessage:@"修改成功，请用新手机号登录"];
+        [self.navigationController popToRootViewControllerAnimated:NO];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_ShowLoginVC object:nil];
     }
     else if(self.bindPhoneStepType == HXBBindPhoneTransactionPassword) {
-        
+        HXBTransactionPasswordConfirmationViewController *transactionPasswordVC = [[HXBTransactionPasswordConfirmationViewController alloc] init];
+        transactionPasswordVC.idcard = IDCard;
+        transactionPasswordVC.code = code;
+        [self.navigationController pushViewController:transactionPasswordVC animated:YES];
     }
-//    if (self.type == HXBModifyTransactionPasswordType) {
-//        HXBTransactionPasswordConfirmationViewController *transactionPasswordVC = [[HXBTransactionPasswordConfirmationViewController alloc] init];
-//        transactionPasswordVC.idcard = IDCard;
-//        transactionPasswordVC.code = code;
-//        [self.navigationController pushViewController:transactionPasswordVC animated:YES];
-//    }else if (self.type == HXBModifyPhoneType){
-//        HXBModifyPhoneViewController *modifyPhoneVC = [[HXBModifyPhoneViewController alloc] init];
-//        [self.navigationController pushViewController:modifyPhoneVC animated:YES];
-//    }
-
 }
 
 - (void)textChangeCheck:(NSIndexPath*)indexPath checkText:(NSString*)text{
     if(self.bindPhoneStepType==HXBBindPhoneStepFirst || self.bindPhoneStepType==HXBBindPhoneTransactionPassword) {
         if(indexPath.row == 1) {
-            HXBBindPhoneTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+            HXBBindPhoneTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:self.viewModel.cellDataList.count-1 inSection:0]];
             if(text.length > 17) {
                 [cell enableCheckButton:YES];
             }
@@ -199,7 +225,7 @@
     }
     else if(self.bindPhoneStepType == HXBBindPhoneStepSecond) {
         if(indexPath.row == 0) {
-            HXBBindPhoneTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+            HXBBindPhoneTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:(int)self.viewModel.cellDataList.count-1 inSection:0]];
             if(text.length > 10) {
                 [cell enableCheckButton:YES];
             }
@@ -259,14 +285,19 @@
     
     cell.indexPath = indexPath;
     cell.cellModel = cellModel;
+    if(self.viewModel.cellDataList.count == 1) {
+        [cell enableCheckButton:YES];
+    }
     
     kWeakSelf
     if(!cell.checkCodeAct) {
         cell.checkCodeAct = ^(NSIndexPath *indexPath) {
-            if(weakSelf.bindPhoneStepType == HXBBindPhoneStepFirst) {
+            if(weakSelf.bindPhoneStepType==HXBBindPhoneStepFirst || weakSelf.bindPhoneStepType==HXBBindPhoneTransactionPassword) {
                 NSString *idCard = @""; //身份证号
                 HXBBindPhoneCellModel *cellModel = [weakSelf.viewModel.cellDataList safeObjectAtIndex:1];
-                idCard = cellModel.text;
+                if(cellModel) {
+                    idCard = cellModel.text;
+                }
                 [weakSelf authenticationWithIDCard:idCard indexPathForCell:indexPath];
             }
             else if(weakSelf.bindPhoneStepType == HXBBindPhoneStepSecond) {
