@@ -36,6 +36,10 @@
 		4EE616A520F4B4F20044B998 /* AXHNewFeatureController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE6169F20F4B4F20044B998 /* AXHNewFeatureController.m */; };
 		4EE616A620F4B4F20044B998 /* AXHNewFeatureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE616A220F4B4F20044B998 /* AXHNewFeatureCell.m */; };
 		4EE616A720F4B4F20044B998 /* TAExampleDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE616A420F4B4F20044B998 /* TAExampleDotView.m */; };
+		8D142A9020FD9B4D00520728 /* HXBAdvertiseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D142A8920FD9B4D00520728 /* HXBAdvertiseManager.m */; };
+		8D142A9120FD9B4D00520728 /* HxbAdvertiseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D142A8C20FD9B4D00520728 /* HxbAdvertiseViewController.m */; };
+		8D142A9220FD9B4D00520728 /* HXBAdvertiseViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D142A8F20FD9B4D00520728 /* HXBAdvertiseViewModel.m */; };
+		8D142A9620FD9BE700520728 /* BannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D142A9520FD9BE700520728 /* BannerModel.m */; };
 		8D591BF120F84C57007CA4BE /* HSJPlanDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D591BF020F84C57007CA4BE /* HSJPlanDetailController.m */; };
 		8D591BF820F84D1C007CA4BE /* HSJPlanDetailTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D591BF720F84D1C007CA4BE /* HSJPlanDetailTopView.m */; };
 		8D591BFB20F84D66007CA4BE /* HSJPlanDetailRulerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D591BFA20F84D66007CA4BE /* HSJPlanDetailRulerView.m */; };
@@ -354,6 +358,14 @@
 		4EE616A420F4B4F20044B998 /* TAExampleDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAExampleDotView.m; sourceTree = "<group>"; };
 		54B20A0D6605B011D885333F /* Pods-hoommy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hoommy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-hoommy/Pods-hoommy.debug.xcconfig"; sourceTree = "<group>"; };
 		73C7B870EA4F77D826DA647B /* libPods-hoommy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-hoommy.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D142A8820FD9B4D00520728 /* HXBAdvertiseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBAdvertiseManager.h; sourceTree = "<group>"; };
+		8D142A8920FD9B4D00520728 /* HXBAdvertiseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBAdvertiseManager.m; sourceTree = "<group>"; };
+		8D142A8B20FD9B4D00520728 /* HxbAdvertiseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HxbAdvertiseViewController.h; sourceTree = "<group>"; };
+		8D142A8C20FD9B4D00520728 /* HxbAdvertiseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HxbAdvertiseViewController.m; sourceTree = "<group>"; };
+		8D142A8E20FD9B4D00520728 /* HXBAdvertiseViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBAdvertiseViewModel.h; sourceTree = "<group>"; };
+		8D142A8F20FD9B4D00520728 /* HXBAdvertiseViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBAdvertiseViewModel.m; sourceTree = "<group>"; };
+		8D142A9420FD9BE700520728 /* BannerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerModel.h; sourceTree = "<group>"; };
+		8D142A9520FD9BE700520728 /* BannerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerModel.m; sourceTree = "<group>"; };
 		8D591BEF20F84C57007CA4BE /* HSJPlanDetailController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJPlanDetailController.h; sourceTree = "<group>"; };
 		8D591BF020F84C57007CA4BE /* HSJPlanDetailController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJPlanDetailController.m; sourceTree = "<group>"; };
 		8D591BF620F84D1C007CA4BE /* HSJPlanDetailTopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJPlanDetailTopView.h; sourceTree = "<group>"; };
@@ -1054,6 +1066,51 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		8D142A8720FD9B4D00520728 /* Advertise */ = {
+			isa = PBXGroup;
+			children = (
+				8D142A8820FD9B4D00520728 /* HXBAdvertiseManager.h */,
+				8D142A8920FD9B4D00520728 /* HXBAdvertiseManager.m */,
+				8D142A8A20FD9B4D00520728 /* ViewController */,
+				8D142A8D20FD9B4D00520728 /* ViewModel */,
+			);
+			path = Advertise;
+			sourceTree = "<group>";
+		};
+		8D142A8A20FD9B4D00520728 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8D142A8B20FD9B4D00520728 /* HxbAdvertiseViewController.h */,
+				8D142A8C20FD9B4D00520728 /* HxbAdvertiseViewController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		8D142A8D20FD9B4D00520728 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8D142A8E20FD9B4D00520728 /* HXBAdvertiseViewModel.h */,
+				8D142A8F20FD9B4D00520728 /* HXBAdvertiseViewModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8D142A9320FD9BE700520728 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8D142A9420FD9BE700520728 /* BannerModel.h */,
+				8D142A9520FD9BE700520728 /* BannerModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8D142A9A20FD9CAC00520728 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		8D591BEC20F84C25007CA4BE /* PlanDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -1542,10 +1599,10 @@
 		9A4B180220F33D0C006B83C7 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				9A97D91420EF420000688ADB /* Model */,
+				8D142A9A20FD9CAC00520728 /* ViewModel */,
+				8D142A9320FD9BE700520728 /* Model */,
 				9A97D91520EF420000688ADB /* View */,
 				9A97D91620EF420000688ADB /* ViewController */,
-				9A97D91920EF420000688ADB /* ViewModel */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1882,6 +1939,7 @@
 		9A97D90C20EF420000688ADB /* MainClass */ = {
 			isa = PBXGroup;
 			children = (
+				8D142A8720FD9B4D00520728 /* Advertise */,
 				9A37498220F859A100F39681 /* AlertView */,
 				9A37497520F8594000F39681 /* securityCertification */,
 				9A37491A20F850FC00F39681 /* ResultPage */,
@@ -1938,13 +1996,6 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
-		9A97D91420EF420000688ADB /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		9A97D91520EF420000688ADB /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -1959,13 +2010,6 @@
 				9A97D91820EF420000688ADB /* HSJHomeViewController.m */,
 			);
 			path = ViewController;
-			sourceTree = "<group>";
-		};
-		9A97D91920EF420000688ADB /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		9A97D91A20EF420000688ADB /* My */ = {
@@ -2953,6 +2997,7 @@
 				4EE616A720F4B4F20044B998 /* TAExampleDotView.m in Sources */,
 				9A3749C620F882BD00F39681 /* HXBBankCardListViewController.m in Sources */,
 				9A97DA9220EF420200688ADB /* UIResponder+FindNext.m in Sources */,
+				8D142A9620FD9BE700520728 /* BannerModel.m in Sources */,
 				4EA57D3120F3500B006FD573 /* HSJMyViewController.m in Sources */,
 				9A3749A320F85CF700F39681 /* HXBWithdrawRecordModel.m in Sources */,
 				9A4B183220F36DCC006B83C7 /* UIView+HSJStandard.m in Sources */,
@@ -2964,7 +3009,6 @@
 				9A4B18B720F62209006B83C7 /* HXBBaseView_HaveLabel_TopBottomView.m in Sources */,
 				9A97DA8120EF420200688ADB /* HXBDeviceVersion.m in Sources */,
 				9A97DAA420EF420200688ADB /* NSDictionary+IDPExtension.m in Sources */,
-				9A97DAAF20EF420200688ADB /* NSData+CommonCrypto.m in Sources */,
 				8D591BFB20F84D66007CA4BE /* HSJPlanDetailRulerView.m in Sources */,
 				9A3749B220F85D5500F39681 /* HXBBaseCountDownManager_lightweight.m in Sources */,
 				9A37495C20F854CC00F39681 /* HXBWithdrawCardViewModel.m in Sources */,
@@ -2990,6 +3034,7 @@
 				E13A0EF320F49E2500A3E364 /* HXBRequestUserInfoViewModel.m in Sources */,
 				9A97DA8D20EF420200688ADB /* NSString+HXBPhonNumber.m in Sources */,
 				E13A0F0320F4C94900A3E364 /* HXBCommonProblemViewController.m in Sources */,
+				8D142A9120FD9B4D00520728 /* HxbAdvertiseViewController.m in Sources */,
 				9A37498920F859A100F39681 /* HBAlertPasswordView.m in Sources */,
 				9A97DA7B20EF420200688ADB /* HXBWKWebviewViewModel.m in Sources */,
 				9A97DA7320EF420200688ADB /* HSJMyViewModel.m in Sources */,
@@ -2997,6 +3042,7 @@
 				9A3749C320F881DA00F39681 /* UITextField+HxbTextField.m in Sources */,
 				9A6E0A6A20F84CA000598071 /* main.m in Sources */,
 				9A97DA6720EF420200688ADB /* HSJFragmentViewController.m in Sources */,
+				8D142A9020FD9B4D00520728 /* HXBAdvertiseManager.m in Sources */,
 				9A4B18AA20F60C2B006B83C7 /* HXBBankCardViewModel.m in Sources */,
 				E153B96520F74937002BE1AE /* HXBAccount_AlterLoginPassword_ViewController.m in Sources */,
 				9A97DA9920EF420200688ADB /* IDPLog.m in Sources */,
@@ -3062,6 +3108,7 @@
 				9A37498A20F859A100F39681 /* HXBVerificationCodeAlertVC.m in Sources */,
 				9A37491D20F8516300F39681 /* HXBMyBankResultViewController.m in Sources */,
 				9A3749A520F85CF700F39681 /* HXBWithdrawRecordViewController.m in Sources */,
+				8D142A9220FD9B4D00520728 /* HXBAdvertiseViewModel.m in Sources */,
 				9A97DA8F20EF420200688ADB /* UIColor+HxbColor.m in Sources */,
 				9A3749C220F881DA00F39681 /* UITextField+HLNumberFormatTextField.m in Sources */,
 				9A4B18B820F62209006B83C7 /* HXBLeftLabelTextView.m in Sources */,

@@ -10,7 +10,7 @@
 #define HSJNetWorkUrl_h
 
 #define kHXBMY_VersionUpdateURL @"/update"//版本更新
-
+#define kHXBSplash            @"/splash"///闪屏接口
 //MARK: ======================= 协议 ==========================
 //协议或合同名    端口号后链接    状态    账户内连接
 #define kHXB_Negotiate_SginUPURL @"/agreement/signup"///《注册服务协议》

@@ -15,4 +15,6 @@ typedef enum : NSUInteger {
 
 @interface HSJGestureLoginController : HXBBaseViewController
 @property (nonatomic, assign) HSJGestureType type;
+
+@property (nonatomic, strong) void (^dismissBlock)(BOOL delay, BOOL toActivity, BOOL popRightNow);
 @end
