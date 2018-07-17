@@ -13,6 +13,7 @@
 - (void)getVerifyCodeRequesWithSignupWithAction:(NSString *)action
                                     andWithType:(NSString *)type
                                   andWithMobile:(NSString *)mobile
+                                 andWithCaptcha:(NSString *)captcha
                                andCallbackBlock: (void(^)(BOOL isSuccess,BOOL isNeedCaptcha))callbackBlock;
 
 - (void)signUPRequetWithMobile: (NSString *)mobile smscode: (NSString *)smscode password: (NSString *)password resultBlock:(NetWorkResponseBlock)resultBlock;
