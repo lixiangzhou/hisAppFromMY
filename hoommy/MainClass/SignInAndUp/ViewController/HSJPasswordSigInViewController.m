@@ -65,7 +65,7 @@
     [self.viewModel loginRequetWithMobile:self.viewModel.phoneNumber password:self.passwordField.text andWithSmscode:@"" andWithCaptcha:weakSelf.captcha resultBlock:^(BOOL isSuccess,BOOL isNeedCaptcha) {
         if (isSuccess) {
             //登录成功
-            [self dismissViewControllerAnimated:YES completion:nil];
+            [weakSelf dismissViewControllerAnimated:YES completion:nil];
         } else if (isNeedCaptcha){
             //需要图验
             [weakSelf.view addSubview:weakSelf.captchaView];

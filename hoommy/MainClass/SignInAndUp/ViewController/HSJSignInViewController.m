@@ -129,12 +129,12 @@
             //进入登录页面
             HSJPasswordSigInViewController *passwordVC = [[HSJPasswordSigInViewController alloc] init];
             passwordVC.viewModel = weakSelf.viewModel;
-            [self.navigationController pushViewController:passwordVC animated:YES];
+            [weakSelf.navigationController pushViewController:passwordVC animated:YES];
         } else {
             //注册页面
             HSJSignUpViewController *signupVC = [[HSJSignUpViewController alloc] init];
             signupVC.phoneNumber = self.phoneTextField.text;
-            [self.navigationController pushViewController:signupVC animated:YES];
+            [weakSelf.navigationController pushViewController:signupVC animated:YES];
         }
     }];
     
