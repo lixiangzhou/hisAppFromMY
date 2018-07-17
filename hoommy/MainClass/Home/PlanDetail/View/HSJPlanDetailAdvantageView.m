@@ -49,13 +49,13 @@
     UIImageView *rightLine = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail_right_line"]];
     [self addSubview:rightLine];
     
-    NSArray *array1 = [self rowViewWithImage:[UIImage imageNamed:@"detail_ad_more"] title:@"收益更高" desc:@"平均历史年化收益率6%，更多零花钱任你花"];
+    NSArray *array1 = [self rowViewWithImage:[UIImage imageNamed:@"detail_ad_more"] title:@"收益更高" desc:@"平均历史年化收益率--，更多零花钱任你花"];
     UIView *rowView1 = array1.firstObject;
     [self addSubview:rowView1];
     self.moreLabel = array1[2];
     self.moreDescLabel = array1[3];
     
-    NSArray *array2 = [self rowViewWithImage:[UIImage imageNamed:@"detail_ad_exit"] title:@"退出灵活" desc:@"持有7天后，可随时申请退出"];
+    NSArray *array2 = [self rowViewWithImage:[UIImage imageNamed:@"detail_ad_exit"] title:@"退出灵活" desc:@"持有-天后，可随时申请退出"];
     UIView *rowView2 = array2.firstObject;
     [self addSubview:rowView2];
     self.exitLabel = array2[2];
@@ -141,6 +141,16 @@
 #pragma mark - Setter / Getter / Lazy
 - (void)setViewModel:(HSJPlanDetailViewModel *)viewModel {
     _viewModel = viewModel;
+    
+    self.moreLabel.text = @"收益更高";
+    self.moreDescLabel.text = [NSString stringWithFormat:@"平均历史年化收益率%@%%，更多零花钱任你花", viewModel.baseInterestString];
+    
+    self.exitLabel.text = @"退出灵活";
+    self.exitDescLabel.text = [NSString stringWithFormat:@"持有%@后，可随时申请退出", viewModel.lockString];
+    
+    self.bankLabel.text = @"银行存管";
+    self.bankDescLabel.text = @"恒丰银行资金存管，确保妈妈资金安全";
+    
 }
 
 @end

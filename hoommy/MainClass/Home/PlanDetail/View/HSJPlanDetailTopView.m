@@ -7,6 +7,9 @@
 //
 
 #import "HSJPlanDetailTopView.h"
+#import "HSJGlobalInfoManager.h"
+#import "HXBUserInfoModel.h"
+#import "NSString+HxbPerMilMoney.h"
 
 @interface HSJPlanDetailTopView ()
 @property (nonatomic, weak) UILabel *topLabel;
@@ -144,17 +147,54 @@
 - (void)setViewModel:(HSJPlanDetailViewModel *)viewModel {
     _viewModel = viewModel;
     
-    self.topLabel.text = @"6.3%+1.5%";
-    self.topDescLabel.text = @"今日年化收益";
+    if (viewModel.planModel.hasBuy) {
+        self.topLabel.text = @"0.00";
+        self.topDescLabel.text = @"昨日收益(元)";
+        
+        self.leftLabel.text = @"0.00";
+        self.leftDescLabel.text = @"总资产(元）";
+        
+        self.centerLabel.text = @"0.00";
+        self.centerDescLabel.text = @"累计收益(元)";
+        
+        self.rightLabel.text = viewModel.interestString;
+        self.rightDescLabel.text = @"今日预期年化";
+        
+        kWeakSelf
+        [self.viewModel downLoadUserInfo:NO resultBlock:^(id responseData, NSError *erro) {
+            if (responseData) {
+                HXBUserInfoModel *infoModel = (HXBUserInfoModel *)responseData;
+                
+                weakSelf.topLabel.text = [NSString stringWithFormat:@"%.2f", infoModel.userAssets.yesterdayInterest];
+                
+                NSString *assetsTotal = [NSString GetPerMilWithDouble: infoModel.userAssets.assetsTotal.doubleValue];
+                weakSelf.leftLabel.text = [assetsTotal isEqualToString:@"0"] ? @"0.00" : assetsTotal;
+                
+                NSString *earnTotal = [NSString GetPerMilWithDouble: infoModel.userAssets.earnTotal.doubleValue];
+                weakSelf.centerLabel.text = [earnTotal isEqualToString:@"0"] ? @"0.00" : earnTotal;
+            }
+        }];
+    } else {
+        self.topLabel.text = viewModel.interestString;
+        self.topDescLabel.text = @"今日预期年化";
+        
+        self.leftLabel.text = [NSString stringWithFormat:@"%@元", viewModel.planModel.tenThousandExceptedIncome];
+        self.leftDescLabel.text = @"万元日预期收益";
+        
+        self.centerLabel.text = [NSString stringWithFormat:@"%@后可退", viewModel.lockString];
+        self.centerDescLabel.text = @"期限灵活";
+        
+        self.rightLabel.text = @"0人";
+        self.rightDescLabel.text = @"近7日加入宝妈";
+        
+        // 更新近7日人数
+        kWeakSelf
+        [[HSJGlobalInfoManager shared] getData:^(HSJGlobalInfoModel *infoModel) {
+            weakSelf.rightLabel.text = [NSString stringWithFormat:@"%zd人", infoModel.financePlanSubPointCountIn7Days];
+        }];
+        
+    }
     
-    self.leftLabel.text = @"1.04元";
-    self.leftDescLabel.text = @"万元日预期收益";
-    
-    self.centerLabel.text = @"7日后可退";
-    self.centerDescLabel.text = @"期限灵活";
-    
-    self.rightLabel.text = @"328人";
-    self.rightDescLabel.text = @"近7日加入宝妈";
 }
 
 

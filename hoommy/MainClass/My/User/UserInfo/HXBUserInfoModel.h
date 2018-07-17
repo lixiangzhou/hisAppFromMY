@@ -30,6 +30,8 @@
 @property (nonatomic,copy) NSString *financePlanAssets;
 ///    红利计划-累计收益
 @property (nonatomic,copy) NSString *financePlanSumPlanInterest;
+/// 昨日收益
+@property (nonatomic, assign) CGFloat yesterdayInterest;
 ///    散标债权-持有资产
 @property (nonatomic,copy) NSString *lenderPrincipal;
 ///    散标债权-累计收益

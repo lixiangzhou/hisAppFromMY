@@ -11,6 +11,7 @@
 
 #define kHXBMY_VersionUpdateURL @"/update"//版本更新
 #define kHXBSplash            @"/splash"///闪屏接口
+#define kGlobal                 @"/global" /// 全局统计
 //MARK: ======================= 协议 ==========================
 //协议或合同名    端口号后链接    状态    账户内连接
 #define kHXB_Negotiate_SginUPURL @"/agreement/signup"///《注册服务协议》
@@ -81,7 +82,7 @@
 #define kHXBUser_UserInfoURL @"/account/info"///用户信息
 
 
-
+#define kHXBFinanc_PlanDetaileURL(planID) [NSString stringWithFormat:@"/plan/%ld",(planID)]///计划详情
 
 #define kHXBUser_signOutURL @"/logout" /// 登出
 

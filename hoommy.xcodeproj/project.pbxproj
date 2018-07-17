@@ -40,6 +40,9 @@
 		8D142A9120FD9B4D00520728 /* HxbAdvertiseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D142A8C20FD9B4D00520728 /* HxbAdvertiseViewController.m */; };
 		8D142A9220FD9B4D00520728 /* HXBAdvertiseViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D142A8F20FD9B4D00520728 /* HXBAdvertiseViewModel.m */; };
 		8D142A9620FD9BE700520728 /* BannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D142A9520FD9BE700520728 /* BannerModel.m */; };
+		8D142A9F20FDBF5E00520728 /* HSJGlobalInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D142A9E20FDBF5E00520728 /* HSJGlobalInfoManager.m */; };
+		8D142AA220FDC00100520728 /* HSJGlobalInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D142AA120FDC00100520728 /* HSJGlobalInfoModel.m */; };
+		8D142AA520FDCDEB00520728 /* HSJPlanModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D142AA420FDCDEB00520728 /* HSJPlanModel.m */; };
 		8D591BF120F84C57007CA4BE /* HSJPlanDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D591BF020F84C57007CA4BE /* HSJPlanDetailController.m */; };
 		8D591BF820F84D1C007CA4BE /* HSJPlanDetailTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D591BF720F84D1C007CA4BE /* HSJPlanDetailTopView.m */; };
 		8D591BFB20F84D66007CA4BE /* HSJPlanDetailRulerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D591BFA20F84D66007CA4BE /* HSJPlanDetailRulerView.m */; };
@@ -366,6 +369,12 @@
 		8D142A8F20FD9B4D00520728 /* HXBAdvertiseViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBAdvertiseViewModel.m; sourceTree = "<group>"; };
 		8D142A9420FD9BE700520728 /* BannerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerModel.h; sourceTree = "<group>"; };
 		8D142A9520FD9BE700520728 /* BannerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerModel.m; sourceTree = "<group>"; };
+		8D142A9D20FDBF5E00520728 /* HSJGlobalInfoManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJGlobalInfoManager.h; sourceTree = "<group>"; };
+		8D142A9E20FDBF5E00520728 /* HSJGlobalInfoManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJGlobalInfoManager.m; sourceTree = "<group>"; };
+		8D142AA020FDC00100520728 /* HSJGlobalInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJGlobalInfoModel.h; sourceTree = "<group>"; };
+		8D142AA120FDC00100520728 /* HSJGlobalInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJGlobalInfoModel.m; sourceTree = "<group>"; };
+		8D142AA320FDCDEB00520728 /* HSJPlanModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJPlanModel.h; sourceTree = "<group>"; };
+		8D142AA420FDCDEB00520728 /* HSJPlanModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJPlanModel.m; sourceTree = "<group>"; };
 		8D591BEF20F84C57007CA4BE /* HSJPlanDetailController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJPlanDetailController.h; sourceTree = "<group>"; };
 		8D591BF020F84C57007CA4BE /* HSJPlanDetailController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJPlanDetailController.m; sourceTree = "<group>"; };
 		8D591BF620F84D1C007CA4BE /* HSJPlanDetailTopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJPlanDetailTopView.h; sourceTree = "<group>"; };
@@ -1111,9 +1120,38 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		8D142A9B20FDBF0100520728 /* CommonApiTool */ = {
+			isa = PBXGroup;
+			children = (
+				8D142A9C20FDBF2C00520728 /* Global */,
+			);
+			path = CommonApiTool;
+			sourceTree = "<group>";
+		};
+		8D142A9C20FDBF2C00520728 /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				8D142A9D20FDBF5E00520728 /* HSJGlobalInfoManager.h */,
+				8D142A9E20FDBF5E00520728 /* HSJGlobalInfoManager.m */,
+				8D142AA020FDC00100520728 /* HSJGlobalInfoModel.h */,
+				8D142AA120FDC00100520728 /* HSJGlobalInfoModel.m */,
+			);
+			path = Global;
+			sourceTree = "<group>";
+		};
+		8D142AA620FDE92F00520728 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8D142AA320FDCDEB00520728 /* HSJPlanModel.h */,
+				8D142AA420FDCDEB00520728 /* HSJPlanModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		8D591BEC20F84C25007CA4BE /* PlanDetail */ = {
 			isa = PBXGroup;
 			children = (
+				8D142AA620FDE92F00520728 /* Model */,
 				8D591C0520F88502007CA4BE /* ViewModel */,
 				8D591BF220F84CC6007CA4BE /* View */,
 				8D591BED20F84C30007CA4BE /* ViewController */,
@@ -1939,6 +1977,7 @@
 		9A97D90C20EF420000688ADB /* MainClass */ = {
 			isa = PBXGroup;
 			children = (
+				8D142A9B20FDBF0100520728 /* CommonApiTool */,
 				8D142A8720FD9B4D00520728 /* Advertise */,
 				9A37498220F859A100F39681 /* AlertView */,
 				9A37497520F8594000F39681 /* securityCertification */,
@@ -3118,6 +3157,7 @@
 				9A4B181520F34434006B83C7 /* HXBBindPhoneCellModel.m in Sources */,
 				9A4B189D20F60C2B006B83C7 /* HXBRechargeFailView.m in Sources */,
 				4EE616A620F4B4F20044B998 /* AXHNewFeatureCell.m in Sources */,
+				8D142A9F20FDBF5E00520728 /* HSJGlobalInfoManager.m in Sources */,
 				9A97DA5E20EF420200688ADB /* KeyChainManage.m in Sources */,
 				8D591C0420F8591B007CA4BE /* HSJPlanDetailInfoView.m in Sources */,
 				9A37490620F7691500F39681 /* HXBCheckCaptchaViewModel.m in Sources */,
@@ -3143,6 +3183,7 @@
 				9A4B18A220F60C2B006B83C7 /* HxbMyBankCardViewController.m in Sources */,
 				9A97DA8720EF420200688ADB /* NSAttributedString+HxbAttributedString.m in Sources */,
 				9A4B189920F60C2B006B83C7 /* HXBGetValidationCodeView.m in Sources */,
+				8D142AA520FDCDEB00520728 /* HSJPlanModel.m in Sources */,
 				9A97DA9C20EF420200688ADB /* IDPStorage.m in Sources */,
 				9A3749B120F85D5500F39681 /* HXBBaseContDownModel.m in Sources */,
 				9A97DA9D20EF420200688ADB /* IDPStorageFileInner.m in Sources */,
@@ -3191,6 +3232,7 @@
 				9A4B185120F5FF85006B83C7 /* HxbHUDProgress.m in Sources */,
 				9A37490020F7682B00F39681 /* HXBCheckCaptchaViewController.m in Sources */,
 				8D60B4D920F7486300287E52 /* PCLockLabel.m in Sources */,
+				8D142AA220FDC00100520728 /* HSJGlobalInfoModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

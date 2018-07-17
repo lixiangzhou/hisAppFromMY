@@ -13,6 +13,7 @@
 #import "HXBVersionUpdateManager.h"
 #import "HXBAdvertiseManager.h"
 #import "HxbAdvertiseViewController.h"
+#import "HSJGlobalInfoManager.h"
 
 #define AXHVersionKey @"version"
 
@@ -38,6 +39,8 @@
 
 /// 创建根控制器
 - (void)createRootVCAndMakeKeyWindow {
+    [[HXBAdvertiseManager shared] getSplash];
+    [[HSJGlobalInfoManager shared] getData];
     
     //升级弹框
 //    [[HXBVersionUpdateManager sharedInstance] checkVersionUpdate];
@@ -55,8 +58,6 @@
         //保存当前版本，用偏好设置
         [[NSUserDefaults standardUserDefaults] setObject:currentVersion forKey:AXHVersionKey];
     }
-    
-    [[HXBAdvertiseManager shared] getSplash];
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
