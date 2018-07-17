@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BXTextField.h"
 
 typedef void(^isLimitText)(NSString *text1);
 
 @interface HXBCustomTextField : UIView
 
 @property (nonatomic, strong,readonly) UITextField *textField;
+@property (nonatomic, strong, readonly) BXTextField *idTextField;
 @property (nonatomic, strong,readonly) UIImageView *leftImageView;
 
 
@@ -33,6 +35,16 @@ typedef void(^isLimitText)(NSString *text1);
 @property (nonatomic, assign) int limitStringLength;
 @property (nonatomic, assign) BOOL disableEdit;
 @property (nonatomic, assign) BOOL hideEye;
+
+/// 底部分割线的颜色
+@property (nonatomic, strong) UIColor *bottomLineEditingColor;
+@property (nonatomic, strong) UIColor *bottomLineNormalColor;
+/// 底部分割线距离自身左右的距离
+@property (nonatomic, assign) CGFloat bottomLineRightOffset;
+@property (nonatomic, assign) CGFloat bottomLineLeftOffset;
+/// TextField 右边的距离
+@property (nonatomic, assign) CGFloat textFieldRightOffset;
+
 /// 清除按钮距离右边的距离
 @property (nonatomic, assign) NSInteger clearRightMargin;
 // 是否大字号展示
