@@ -10,6 +10,7 @@
 #import "HXBCustomTextField.h"
 #import "HSJCodeSigInViewController.h"
 #import "HSJSignInButton.h"
+#import "HSJCheckCaptcha.h"
 @interface HSJPasswordSigInViewController ()
 
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -20,7 +21,9 @@
 
 @property (nonatomic, strong) UIButton *codeButton;
 
+@property (nonatomic, strong) HSJCheckCaptcha *captchaView;
 
+@property (nonatomic, copy) NSString *captcha;
 
 @end
 
@@ -58,20 +61,48 @@
 
 
 - (void)nextButtonClick {
-    [self.viewModel loginRequetWithMobile:self.viewModel.phoneNumber password:self.passwordField.text resultBlock:^(BOOL isSuccess) {
+    kWeakSelf
+    [self.viewModel loginRequetWithMobile:self.viewModel.phoneNumber password:self.passwordField.text andWithSmscode:@"" andWithCaptcha:weakSelf.captcha resultBlock:^(BOOL isSuccess,BOOL isNeedCaptcha) {
         if (isSuccess) {
             //登录成功
-            [self dismissViewControllerAnimated:YES completion:nil];
+            [weakSelf dismissViewControllerAnimated:YES completion:nil];
+        } else if (isNeedCaptcha){
+            //需要图验
+            [weakSelf.view addSubview:weakSelf.captchaView];
+            [weakSelf getCaptcha];
+            
         } else {
             //登录失败
         }
     }];
     
-    
+}
+
+- (void) checkCaptcha{
+    kWeakSelf
+    [self.viewModel checkCaptchaRequestWithCaptcha:self.captcha resultBlock:^(BOOL isSuccess, BOOL needDownload) {
+        if (isSuccess) {
+            [weakSelf nextButtonClick];
+            [weakSelf.captchaView removeFromSuperview];
+        } else if (needDownload) {
+            [weakSelf getCaptcha];
+        } else {
+            [weakSelf.captchaView removeFromSuperview];
+        }
+    }];
+}
+
+- (void)getCaptcha {
+    kWeakSelf
+    [self.viewModel captchaRequestWithResultBlock:^(UIImage *captchaimage) {
+        weakSelf.captchaView.checkCaptchaImage = captchaimage;
+    }];
 }
 
 - (void)getCode {
-    [self.navigationController pushViewController:[[HSJCodeSigInViewController alloc] init] animated:YES];
+    HSJCodeSigInViewController *codeSigInVC = [[HSJCodeSigInViewController alloc] init];
+    codeSigInVC.viewModel = self.viewModel;
+    [self.navigationController pushViewController:codeSigInVC animated:YES];
 }
 
 - (HXBCustomTextField *)passwordField {
@@ -122,5 +153,25 @@
     return _titleLabel;
 }
 
+- (HSJCheckCaptcha *)captchaView {
+    if (!_captchaView) {
+        kWeakSelf
+        _captchaView = [[HSJCheckCaptcha alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+        _captchaView.cancelBlock = ^{
+            [weakSelf.captchaView removeFromSuperview];
+        };
+        
+        [_captchaView clickTrueButtonFunc:^(NSString *checkCaptChaStr) {
+            weakSelf.captcha = checkCaptChaStr;
+            [weakSelf checkCaptcha];
+        }];
+        
+        [_captchaView clickCheckCaptchaImageViewFunc:^{
+            [weakSelf getCaptcha];
+        }];
+        
+    }
+    return _captchaView;
+}
 
 @end

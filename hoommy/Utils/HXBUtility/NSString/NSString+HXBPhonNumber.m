@@ -14,7 +14,7 @@
         NSLog(@"🌶手机号 不是11位数");
         return self;
     }
-    return [self stringByReplacingOccurrencesOfString:[self substringWithRange:NSMakeRange(3,4)]withString:@"****"];
+    return [self stringByReplacingCharactersInRange:NSMakeRange(3,4) withString:@"****"];
 }
 
 - (NSString *) hxb_hiddenUserNameWithleft {

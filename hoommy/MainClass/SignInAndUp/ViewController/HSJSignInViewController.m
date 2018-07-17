@@ -13,6 +13,7 @@
 #import "HSJSignUpViewController.h"
 #import "HSJSignInViewModel.h"
 #import "HSJSignInButton.h"
+#import "HSJSignInModel.h"
 @interface HSJSignInViewController ()<UITextFieldDelegate>
 
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -123,17 +124,21 @@
 
 - (void)nextButtonClick {
     kWeakSelf
-    [self.viewModel checkExistMobile:self.phoneTextField.text resultBlock:^(BOOL isSuccess,NYBaseRequest *request) {
-            if (isSuccess) {
-                //进入登录页面
-                HSJPasswordSigInViewController *passwordVC = [[HSJPasswordSigInViewController alloc] init];
-                passwordVC.viewModel = weakSelf.viewModel;
-                [self.navigationController pushViewController:passwordVC animated:YES];
-            } else {
-                //注册页面
-                [self.navigationController pushViewController:[[HSJSignUpViewController alloc] init] animated:YES];
-            }
+    [self.viewModel checkExistMobile:self.phoneTextField.text resultBlock:^(HSJSignInModel *responseData, NSError *erro) {
+        if (responseData.exist) {
+            //进入登录页面
+            HSJPasswordSigInViewController *passwordVC = [[HSJPasswordSigInViewController alloc] init];
+            passwordVC.viewModel = weakSelf.viewModel;
+            [weakSelf.navigationController pushViewController:passwordVC animated:YES];
+        } else {
+            //注册页面
+            HSJSignUpViewController *signupVC = [[HSJSignUpViewController alloc] init];
+            signupVC.phoneNumber = self.phoneTextField.text;
+            [weakSelf.navigationController pushViewController:signupVC animated:YES];
+        }
     }];
+    
+
 }
 
 - (HXBCustomTextField *)phoneTextField {
@@ -208,7 +213,7 @@
 
 - (UIImageView *)rightLogo {
     if (!_rightLogo) {
-        _rightLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"hflogo"]];
+        _rightLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"signInhflogo"]];
         _rightLogo.contentMode = UIViewContentModeScaleAspectFit;
     }
     return _rightLogo;

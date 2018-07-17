@@ -13,4 +13,6 @@
 - (void)checkVersionUpdate:(NetWorkResponseBlock)resultBlock;
 
 - (void)downLoadUserInfo:(BOOL)isShowHud resultBlock:(NetWorkResponseBlock)resultBlock;
+
+- (void)verifyCodeRequestWithResultBlock:(void(^)(NYBaseRequest* request)) requestBlock resultBlock:(void(^)(id responseObject, NSError *error))resultBlock;
 @end

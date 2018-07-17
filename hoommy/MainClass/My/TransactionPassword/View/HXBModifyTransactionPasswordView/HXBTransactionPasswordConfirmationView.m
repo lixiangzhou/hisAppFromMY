@@ -99,7 +99,7 @@
     if (!_tipLabel) {
         _tipLabel = [[UILabel alloc] init];
         _tipLabel.text = @"修改密码";
-        _tipLabel.font = kHXBFont_24;
+        _tipLabel.font = kHXBFont_48;
         _tipLabel.textColor = kHXBFontColor_2D2F46_100;
     }
     return _tipLabel;
@@ -109,7 +109,7 @@
     if (!_subTipLabel) {
         _subTipLabel = [[UILabel alloc] init];
         _subTipLabel.text = @"请设置新的六位交易密码";
-        _subTipLabel.font = kHXBFont_14;
+        _subTipLabel.font = kHXBFont_28;
         _subTipLabel.textColor = kHXBFontColor_9295A2_100;
     }
     return _subTipLabel;

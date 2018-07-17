@@ -92,4 +92,14 @@
         }
     }
 }
+
+- (UIViewController *)popViewControllerAnimated:(BOOL)animated {
+    return [super popViewControllerAnimated:animated];
+}
+
+- (NSArray<UIViewController *> *)popToRootViewControllerAnimated:(BOOL)animated {
+    return [super popToRootViewControllerAnimated:animated];
+}
+
+
 @end

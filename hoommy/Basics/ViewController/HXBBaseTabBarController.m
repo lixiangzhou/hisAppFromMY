@@ -11,6 +11,7 @@
 #import "SVGKit/SVGKImage.h"
 #import "HSJMyViewController.h"
 #import "HSJSignInViewController.h"
+
 @interface HXBBaseTabBarController ()<UITabBarControllerDelegate>
 
 @end

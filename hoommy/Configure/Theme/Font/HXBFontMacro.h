@@ -19,19 +19,20 @@
 #define kHXBFont_PINGFANGSC_REGULAR_750(s)        ([UIFont fontWithName:@"HelveticaNeue" size:kScrAdaptationW750(s)])
 
 //UI规范中的字体
-#define kHXBFont_14         kHXBFont_PINGFANGSC_REGULAR(14)
-#define kHXBFont_20         kHXBFont_PINGFANGSC_REGULAR(20)
-#define kHXBFont_24         kHXBFont_PINGFANGSC_REGULAR(24)
-#define kHXBFont_26         kHXBFont_PINGFANGSC_REGULAR(26)
-#define kHXBFont_28         kHXBFont_PINGFANGSC_REGULAR(28)
-#define kHXBFont_30         kHXBFont_PINGFANGSC_REGULAR(30)
-#define kHXBFont_32         kHXBFont_PINGFANGSC_REGULAR(32)
-#define kHXBFont_34         kHXBFont_PINGFANGSC_REGULAR(34)
-#define kHXBFont_36         kHXBFont_PINGFANGSC_REGULAR(36)
-#define kHXBFont_38         kHXBFont_PINGFANGSC_REGULAR(38)
-#define kHXBFont_48         kHXBFont_PINGFANGSC_REGULAR(48)
-#define kHXBFont_64         kHXBFont_PINGFANGSC_REGULAR(64)
-#define kHXBFont_80         kHXBFont_PINGFANGSC_REGULAR(80)
+#define kHXBFont_20         kHXBFont_PINGFANGSC_REGULAR_750(20)
+#define kHXBFont_22         kHXBFont_PINGFANGSC_REGULAR_750(22)
+#define kHXBFont_24         kHXBFont_PINGFANGSC_REGULAR_750(24)
+#define kHXBFont_26         kHXBFont_PINGFANGSC_REGULAR_750(26)
+#define kHXBFont_28         kHXBFont_PINGFANGSC_REGULAR_750(28)
+#define kHXBFont_30         kHXBFont_PINGFANGSC_REGULAR_750(30)
+#define kHXBFont_32         kHXBFont_PINGFANGSC_REGULAR_750(32)
+#define kHXBFont_34         kHXBFont_PINGFANGSC_REGULAR_750(34)
+#define kHXBFont_36         kHXBFont_PINGFANGSC_REGULAR_750(36)
+#define kHXBFont_38         kHXBFont_PINGFANGSC_REGULAR_750(38)
+#define kHXBFont_40         kHXBFont_PINGFANGSC_REGULAR_750(40)
+#define kHXBFont_48         kHXBFont_PINGFANGSC_REGULAR_750(48)
+#define kHXBFont_64         kHXBFont_PINGFANGSC_REGULAR_750(64)
+#define kHXBFont_80         kHXBFont_PINGFANGSC_REGULAR_750(80)
 
 
 

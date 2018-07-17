@@ -36,6 +36,7 @@
 #define kHXBUser_UserInfoURL @"/account/info"///用户信息
 #define kHXBUser_LoginURL @"/user/login"//登录
 #define kHXBUser_SignUPURL @"/user/signup"//注册
+#define kHXBUser_CaptchaURL @"/captcha"//获取图验
 #define HXBAccount_ForgotPasswordURL @"/forgot"///忘记密码
 #define kHXBUser_checkCaptchaURL @"/checkCaptcha"///校验 图片验证码
 #define kHXBUser_smscodeURL @"/verifycode/send"//@"/send/smscode"///发送短信接口
