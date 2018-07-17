@@ -53,7 +53,7 @@
         if (isSuccess) {
             NSMutableDictionary *dict = [param mutableCopy];
             dict[@"bankCode"] = weakSelf.cardBinModel.bankCode;
-            [weakSelf inneropenDepositoryWithParam:param resultBlock:resultBlock];
+            [weakSelf inneropenDepositoryWithParam:dict resultBlock:resultBlock];
         } else {
         }
     }];
