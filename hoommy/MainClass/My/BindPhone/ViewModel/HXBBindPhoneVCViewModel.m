@@ -115,6 +115,7 @@
     [self loadData:^(NYBaseRequest *request) {
         request.requestUrl = kHXBSetTransaction_MobifyPassword_CheckIdentityAuthURL;
         request.requestArgument =  @{ @"identity" : idCard };
+        request.requestMethod = NYRequestMethodPost;
     } responseResult:^(id responseData, NSError *erro) {
         if (erro) {
             NSDictionary *respObj = erro.userInfo;

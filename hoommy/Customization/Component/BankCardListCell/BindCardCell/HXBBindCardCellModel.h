@@ -12,8 +12,8 @@
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *placeText;
 @property (nonatomic, copy) NSString* text;
+@property (nonatomic, copy) NSString* rightButtonText;
 
-@property (nonatomic, assign) BOOL isShowRightButton;
 @property (nonatomic, assign) BOOL isShowBottomView;
 @property (nonatomic, assign) int limtTextLenght;//默认值999999, 无限制
 @property (nonatomic, assign) BOOL isCanEdit;

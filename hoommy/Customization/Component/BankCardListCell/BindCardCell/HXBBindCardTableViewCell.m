@@ -16,6 +16,7 @@
 @property (nonatomic, strong) HXBCustomTextField* contentTf;
 @property (nonatomic, strong) UIButton *codeBt;
 @property (nonatomic, strong) UIImageView *lineImv;
+@property (nonatomic, strong) HXBCustomTextField* prompTf;
 
 @end
 
@@ -43,12 +44,13 @@
     [self.contentView addSubview:self.contentTf];
     
     self.codeBt = [[UIButton alloc] init];
-    [self.codeBt setTitleColor:kHXBFontColor_FF413C_100 forState:UIControlStateNormal];
-    [self.codeBt setTitleColor:kHXBFontColor_FF413C_100 forState:UIControlStateHighlighted];
-    self.codeBt.titleLabel.font = kHXBFont_PINGFANGSC_REGULAR(13);
+    [self.codeBt setTitleColor:kHXBFontColor_FE7E5E_100 forState:UIControlStateNormal];
+    self.codeBt.titleLabel.font = kHXBFont_PINGFANGSC_REGULAR(14);
+    self.codeBt.titleLabel.textAlignment = NSTextAlignmentRight;
     [self.codeBt addTarget:self action:@selector(codeButtonAct:) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:self.codeBt];
-    [self enableCheckButton:NO];
+    
+    [self.contentView addSubview:self.prompTf];
     
     self.lineImv = [[UIImageView alloc] init];
     self.lineImv.backgroundColor = kHXBColor_EEEEF5_100;
@@ -56,30 +58,39 @@
 }
 
 - (void)setupConstraints {
+
+    [self.prompTf mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.contentView);
+        make.left.right.equalTo(self.contentView);
+        make.height.mas_equalTo(0);
+    }];
+    
+    [self.lineImv mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.prompTf.mas_top);
+        make.left.equalTo(self.contentView).offset(kScrAdaptationW(15));
+        make.right.equalTo(self.contentView).offset(-kScrAdaptationW(15));
+        make.height.mas_equalTo(0.5);
+    }];
+    
+    [self.contentTf mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.titleLb.mas_right).offset(kScrAdaptationW(15));
+        make.top.equalTo(self.contentView);
+        make.bottom.equalTo(self.lineImv.mas_top);
+        make.right.equalTo(self.codeBt.mas_left).offset(kScrAdaptationW(5));
+    }];
+    
     [self.titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView).offset(kScrAdaptationW(15));
         make.width.mas_equalTo(kScrAdaptationW(56));
-        make.top.bottom.equalTo(self.contentView);
+        make.top.equalTo(self.contentView);
+        make.bottom.equalTo(self.lineImv.mas_top);
     }];
     
     [self.codeBt mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.contentView).offset(-kScrAdaptationW(13.5));
         make.width.mas_equalTo(kScrAdaptationW(0));
         make.height.mas_equalTo(kScrAdaptationH(34));
-        make.centerY.equalTo(self.contentView);
-    }];
-    
-    [self.contentTf mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.titleLb.mas_right).offset(kScrAdaptationW(15));
-        make.top.bottom.equalTo(self.contentView);
-        make.right.equalTo(self.codeBt.mas_left).offset(kScrAdaptationW(5));
-    }];
-    
-    [self.lineImv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.contentView);
-        make.left.equalTo(self.contentView).offset(kScrAdaptationW(15));
-        make.right.equalTo(self.contentView).offset(-kScrAdaptationW(15));
-        make.height.mas_equalTo(0.5);
+        make.centerY.equalTo(self.titleLb.mas_centerY);
     }];
 }
 
@@ -112,10 +123,27 @@
     return _contentTf;
 }
 
+- (HXBCustomTextField *)prompTf {
+    if(!_prompTf) {
+        _prompTf = [[HXBCustomTextField alloc] init];
+        _prompTf.font = kHXBFont_PINGFANGSC_REGULAR(12);
+        _prompTf.isHidenLine = YES;
+        _prompTf.hidden = YES;
+    }
+    return _prompTf;
+}
+
 - (void)codeButtonAct:(UIButton*)button {
    
     if(self.checkCodeAct) {
         self.checkCodeAct(self.indexPath);
+    }
+}
+
+- (void)setIsKeepKeyboardPop:(BOOL)isKeepKeyboardPop {
+    _isKeepKeyboardPop = isKeepKeyboardPop;
+    if(isKeepKeyboardPop) {
+        [self.contentTf.textField becomeFirstResponder];
     }
 }
 
@@ -128,7 +156,8 @@
     _contentTf.keyboardType = UIKeyboardTypeDecimalPad;
     _contentTf.limitStringLength = cellModel.limtTextLenght;
     
-    if(cellModel.isShowRightButton) {
+    if(cellModel.rightButtonText) {
+        [self.codeBt setTitle:cellModel.rightButtonText forState:UIControlStateNormal];
         [self.codeBt mas_updateConstraints:^(MASConstraintMaker *make) {
             make.width.mas_equalTo(kScrAdaptationW(90));
         }];
@@ -147,6 +176,23 @@
     else{
         self.contentTf.userInteractionEnabled = NO;
     }
+}
+
+- (void)bindPrompInfo:(NSString*)imgName prompText:(NSString*)text {
+    if(imgName.length > 0) {
+        [self.prompTf mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(37);
+        }];
+        self.prompTf.hidden = NO;
+    }
+    else{
+        self.prompTf.hidden = YES;
+        [self.prompTf mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(0);
+        }];
+    }
+    self.prompTf.leftImageView.svgImageString = imgName;
+    self.prompTf.placeholder = text;
 }
 
 //验证码按钮是否可用

@@ -14,7 +14,12 @@
 @property (nonatomic, strong) NSIndexPath *indexPath;
 @property (nonatomic, strong) HXBBindCardCellModel *cellModel;
 
+//
+@property (nonatomic, assign) BOOL isKeepKeyboardPop;
+
 @property (nonatomic, strong) void (^checkCodeAct)(NSIndexPath *indexPath);
 @property (nonatomic, strong) void (^textChange)(NSIndexPath *indexPath, NSString* text);
+
+- (void)bindPrompInfo:(NSString*)imgName prompText:(NSString*)text;
 
 @end

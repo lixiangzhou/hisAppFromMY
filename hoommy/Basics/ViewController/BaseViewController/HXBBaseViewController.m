@@ -37,7 +37,8 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.safeAreaView.backgroundColor = [UIColor clearColor];
     if(self.navigationController) {
-       self.isWhiteColourGradientNavigationBar = YES;
+        self.isWhiteColourGradientNavigationBar = YES;
+        self.isShowSplitLine = NO;
     }
 }
 
@@ -196,6 +197,12 @@
 - (void)leftBackBtnClick
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)setIsShowSplitLine:(BOOL)isShowSplitLine {
+    _isShowSplitLine = isShowSplitLine;
+    
+    ((HXBBaseNavigationController*)self.navigationController).isShowSplitLine = isShowSplitLine;
 }
 
 #pragma mark - 导航bar的颜色设置方法

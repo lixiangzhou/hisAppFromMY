@@ -20,6 +20,8 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) BOOL enableFullScreenGesture;
 //是否发生了向右滑动的手势动作
 @property (nonatomic, assign) RightSliderGestureAction rightGestureAction;
+//是否显示分割线
+@property (nonatomic, assign) BOOL isShowSplitLine;
 
 #pragma mark -自定义 pop & push 按钮
 /**

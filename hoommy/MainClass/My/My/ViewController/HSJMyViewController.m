@@ -101,7 +101,6 @@
     }
     else {
         HxbWithdrawCardViewController *withdrawCardViewController = [[HxbWithdrawCardViewController alloc]init];
-        withdrawCardViewController.title = @"绑卡";
         withdrawCardViewController.type = HXBRechargeAndWithdrawalsLogicalJudgment_Other;
         withdrawCardViewController.userInfoModel = self.viewModel.userInfoModel;
         [self.navigationController pushViewController:withdrawCardViewController animated:YES];

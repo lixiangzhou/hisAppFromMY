@@ -10,6 +10,7 @@
 #import "HXBBindPhoneTableFootView.h"
 #import "HXBBindPhoneTableViewCell.h"
 #import "HXBCheckCaptchaViewController.h"
+#import "HXBTransactionPasswordConfirmationViewController.h"
 
 @interface HXBBindPhoneViewController ()
 
@@ -91,7 +92,7 @@
         _footView.buttonTitle = @"立即验证";
         NSString *phoneNo = [self.userInfoModel.userInfo.mobile replaceStringWithStartLocation:3 lenght:self.userInfoModel.userInfo.mobile.length - 7];
         _footView.phoneInfo = phoneNo;
-        _footView.buttonBackGroundColor = [UIColor redColor];
+        _footView.buttonBackGroundColor = kHXBColor_FF7055_100;
         
         kWeakSelf
         _footView.checkAct = ^{
@@ -103,6 +104,7 @@
 }
 
 - (void)checkButtonAct {
+    
     switch (self.bindPhoneStepType) {
         case HXBBindPhoneStepFirst:
         case HXBBindPhoneTransactionPassword:
@@ -202,18 +204,11 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_ShowLoginVC object:nil];
     }
     else if(self.bindPhoneStepType == HXBBindPhoneTransactionPassword) {
-        
+        HXBTransactionPasswordConfirmationViewController *transactionPasswordVC = [[HXBTransactionPasswordConfirmationViewController alloc] init];
+        transactionPasswordVC.idcard = IDCard;
+        transactionPasswordVC.code = code;
+        [self.navigationController pushViewController:transactionPasswordVC animated:YES];
     }
-//    if (self.type == HXBModifyTransactionPasswordType) {
-//        HXBTransactionPasswordConfirmationViewController *transactionPasswordVC = [[HXBTransactionPasswordConfirmationViewController alloc] init];
-//        transactionPasswordVC.idcard = IDCard;
-//        transactionPasswordVC.code = code;
-//        [self.navigationController pushViewController:transactionPasswordVC animated:YES];
-//    }else if (self.type == HXBModifyPhoneType){
-//        HXBModifyPhoneViewController *modifyPhoneVC = [[HXBModifyPhoneViewController alloc] init];
-//        [self.navigationController pushViewController:modifyPhoneVC animated:YES];
-//    }
-
 }
 
 - (void)textChangeCheck:(NSIndexPath*)indexPath checkText:(NSString*)text{
