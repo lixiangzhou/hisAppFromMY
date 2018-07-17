@@ -20,6 +20,7 @@
 
 //UI规范中的字体
 #define kHXBFont_20         kHXBFont_PINGFANGSC_REGULAR_750(20)
+#define kHXBFont_22         kHXBFont_PINGFANGSC_REGULAR_750(22)
 #define kHXBFont_24         kHXBFont_PINGFANGSC_REGULAR_750(24)
 #define kHXBFont_26         kHXBFont_PINGFANGSC_REGULAR_750(26)
 #define kHXBFont_28         kHXBFont_PINGFANGSC_REGULAR_750(28)
@@ -28,6 +29,7 @@
 #define kHXBFont_34         kHXBFont_PINGFANGSC_REGULAR_750(34)
 #define kHXBFont_36         kHXBFont_PINGFANGSC_REGULAR_750(36)
 #define kHXBFont_38         kHXBFont_PINGFANGSC_REGULAR_750(38)
+#define kHXBFont_40         kHXBFont_PINGFANGSC_REGULAR_750(40)
 #define kHXBFont_48         kHXBFont_PINGFANGSC_REGULAR_750(48)
 #define kHXBFont_64         kHXBFont_PINGFANGSC_REGULAR_750(64)
 #define kHXBFont_80         kHXBFont_PINGFANGSC_REGULAR_750(80)
