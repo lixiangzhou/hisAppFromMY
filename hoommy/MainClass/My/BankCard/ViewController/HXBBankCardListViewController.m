@@ -24,7 +24,7 @@
 - (UITableView *)mainTableView
 {
     if (!_mainTableView) {
-        _mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - HXBStatusBarAndNavigationBarHeight)];
+        _mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, HXBStatusBarAndNavigationBarHeight, kScreenWidth, kScreenHeight - HXBStatusBarAndNavigationBarHeight)];
         _mainTableView.delegate = self;
         _mainTableView.dataSource = self;
         _mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -35,24 +35,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = YES;
+    self.isWhiteColourGradientNavigationBar = YES;
     self.title = @"银行卡列表";
     [self.view addSubview:self.mainTableView];
     self.viewModel = [[HXBBankCardListViewModel alloc] init];
-    [self settupNav];
     [self setupNavLeftBtn];
     [self loadData];
 }
 
-- (void)settupNav
-{
-    self.navigationController.navigationBar.titleTextAttributes=@{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:kHXBFont_PINGFANGSC_REGULAR(18)};
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_top_blue"] forBarMetrics:UIBarMetricsDefault];
-    
-}
 
 - (void)setupNavLeftBtn {
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 35)];
-    [button setImage:[SVGKImage imageNamed:@"back"].UIImage forState:UIControlStateNormal];
+    [button setImage:[UIImage imageNamed:@"back_hei"] forState:UIControlStateNormal];
     // 让按钮内部的所有内容左对齐
     button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [button addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];

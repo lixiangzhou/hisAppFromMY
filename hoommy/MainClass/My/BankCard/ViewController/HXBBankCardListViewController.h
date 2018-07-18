@@ -6,9 +6,9 @@
 //  Copyright © 2017年 hoomsun-miniX. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "HXBBaseViewController.h"
 
-@interface HXBBankCardListViewController : UIViewController
+@interface HXBBankCardListViewController : HXBBaseViewController
 
 /**
  获取银行卡回调
