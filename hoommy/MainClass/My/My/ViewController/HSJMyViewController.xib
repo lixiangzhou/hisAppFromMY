@@ -89,7 +89,10 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w68-gO-RSJ">
                                     <rect key="frame" x="0.0" y="0.0" width="111.5" height="172.5"/>
                                     <color key="backgroundColor" red="0.80089833210000005" green="1" blue="0.3301858111" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <state key="normal" title="待定"/>
+                                    <state key="normal" title="购买"/>
+                                    <connections>
+                                        <action selector="buyAct:" destination="-1" eventType="touchUpInside" id="mNB-rJ-zTB"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9RB-ZQ-6Wl">
                                     <rect key="frame" x="121.5" y="0.0" width="112" height="172.5"/>

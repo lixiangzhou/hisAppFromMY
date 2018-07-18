@@ -19,6 +19,7 @@
 #import "HXBGeneralAlertVC.h"
 #import "HxbMyBankCardViewController.h"
 #import "HxbWithdrawCardViewController.h"
+#import "HSJBuyViewController.h"
 
 #import "HSJMyViewVCViewModel.h"
 
@@ -111,6 +112,12 @@
     HXBBindPhoneViewController* vc = [[HXBBindPhoneViewController alloc] init];
     vc.bindPhoneStepType = HXBBindPhoneTransactionPassword;
     //    vc.userInfoModel = self.viewModel.userInfoModel;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (IBAction)buyAct:(UIButton *)sender {
+    HSJBuyViewController *vc = [[HSJBuyViewController alloc] init];
+    
     [self.navigationController pushViewController:vc animated:YES];
 }
 
