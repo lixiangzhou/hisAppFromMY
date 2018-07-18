@@ -57,8 +57,8 @@
     [self.view addSubview:dateLabel];
     
     UILabel *mobileLabel = [UILabel new];
-//    mobileLabel.text = [NSString stringWithFormat:@"欢迎回来 %@", [KeyChain.mobile replaceStringWithStartLocation:3 lenght:4]];
-    mobileLabel.text = @"欢迎回来 133****3213";
+    mobileLabel.text = [NSString stringWithFormat:@"欢迎回来 %@", [KeyChain.mobile replaceStringWithStartLocation:3 lenght:4]];
+//    mobileLabel.text = @"欢迎回来 133****3213";
     mobileLabel.textColor = kHXBColor_333333_100;
     mobileLabel.font = kHXBFont_28;
     mobileLabel.frame = CGRectMake(dateLabel.x, dateLabel.bottom, kScreenH - 50, 20);

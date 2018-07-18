@@ -12,6 +12,7 @@
 #import "HSJPlanDetailAdvantageView.h"
 #import "HSJPlanDetailInfoView.h"
 #import "HSJPlanDetailViewModel.h"
+#import "HSJRollOutController.h"
 
 @interface HSJPlanDetailController () <UIScrollViewDelegate>
 @property (nonatomic, weak) UIView *navView;
@@ -276,11 +277,13 @@
 
 #pragma mark - Action
 - (void)inClick {
-    
+    HSJRollOutController *vc = [HSJRollOutController new];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)outClick {
-    
+    HSJRollOutController *vc = [HSJRollOutController new];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)calClick {

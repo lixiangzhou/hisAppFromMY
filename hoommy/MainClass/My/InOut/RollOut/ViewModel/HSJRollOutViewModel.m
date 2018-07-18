@@ -46,11 +46,12 @@
         request.requestArgument = @{@"filter": @"1", @"page": @(page)};
     } responseResult:^(id responseData, NSError *erro) {
         if (responseData) {
-            self.totalCount = [responseData[@"totalCount"] integerValue];
-            self.pageSize = [responseData[@"pageSize"] integerValue];
-            self.pageNumber = [responseData[@"pageNumber"] integerValue];
+            NSDictionary *data = responseData[@"data"];
+            self.totalCount = [data[@"totalCount"] integerValue];
+            self.pageSize = [data[@"pageSize"] integerValue];
+            self.pageNumber = [data[@"pageNumber"] integerValue];
             
-            NSArray *dataList = responseData[@"dataList"];
+            NSArray *dataList = data[@"dataList"];
             
             NSMutableArray *temp = [NSMutableArray arrayWithCapacity:dataList.count];
             for (NSInteger i = 0; i < dataList.count; i++) {

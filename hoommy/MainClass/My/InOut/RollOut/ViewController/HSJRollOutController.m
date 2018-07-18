@@ -25,6 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.title = @"持有资产";
     self.viewModel = [HSJRollOutViewModel new];
     [self setUI];  
 }
@@ -32,6 +33,8 @@
 #pragma mark - UI
 
 - (void)setUI {
+    self.isWhiteColourGradientNavigationBar = YES;
+    
     UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     tableView.dataSource = self;
     tableView.delegate = self;
