@@ -49,6 +49,21 @@
 		8D591BFE20F84D8F007CA4BE /* HSJPlanDetailAdvantageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D591BFD20F84D8F007CA4BE /* HSJPlanDetailAdvantageView.m */; };
 		8D591C0420F8591B007CA4BE /* HSJPlanDetailInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D591C0320F8591B007CA4BE /* HSJPlanDetailInfoView.m */; };
 		8D591C0820F88521007CA4BE /* HSJPlanDetailViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D591C0720F88521007CA4BE /* HSJPlanDetailViewModel.m */; };
+		8D5D610320FEDEF2003F94D9 /* HSJRollOutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5D610220FEDEF2003F94D9 /* HSJRollOutController.m */; };
+		8D5D610920FEDFB1003F94D9 /* HSJRollOutHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5D610820FEDFB1003F94D9 /* HSJRollOutHeaderView.m */; };
+		8D5D610C20FEDFEB003F94D9 /* HSJRollOutViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5D610B20FEDFEB003F94D9 /* HSJRollOutViewModel.m */; };
+		8D5D610F20FEE006003F94D9 /* HSJRollOutModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5D610E20FEE006003F94D9 /* HSJRollOutModel.m */; };
+		8D5D611220FEE021003F94D9 /* HSJRollOutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5D611120FEE021003F94D9 /* HSJRollOutCell.m */; };
+		8D5D611820FEF1C5003F94D9 /* HSJPlanAssetsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5D611720FEF1C5003F94D9 /* HSJPlanAssetsModel.m */; };
+		8D5D611B20FF161E003F94D9 /* HSJRollOutHistoryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5D611A20FF161E003F94D9 /* HSJRollOutHistoryController.m */; };
+		8D5D611E20FF169F003F94D9 /* HSJRollOutHistoryViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5D611D20FF169F003F94D9 /* HSJRollOutHistoryViewModel.m */; };
+		8D5D612120FF1A90003F94D9 /* HSJRollOutPlanDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5D612020FF1A90003F94D9 /* HSJRollOutPlanDetailController.m */; };
+		8D5D612420FF1AD0003F94D9 /* HSJRollOutPlanDetailViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5D612320FF1AD0003F94D9 /* HSJRollOutPlanDetailViewModel.m */; };
+		8D5D612720FF1D34003F94D9 /* HSJRollOutPlanDetailRowModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5D612620FF1D34003F94D9 /* HSJRollOutPlanDetailRowModel.m */; };
+		8D5D612A20FF290A003F94D9 /* HSJRollOutConfirmController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5D612920FF290A003F94D9 /* HSJRollOutConfirmController.m */; };
+		8D5D612D20FF2AA0003F94D9 /* HXBCommonResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5D612C20FF2A9F003F94D9 /* HXBCommonResultController.m */; };
+		8D5D613020FF2BCE003F94D9 /* HSJRollOutConfirmViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5D612F20FF2BCE003F94D9 /* HSJRollOutConfirmViewModel.m */; };
+		8D5D613320FF2CA3003F94D9 /* HSJRollOutConfirmModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5D613220FF2CA3003F94D9 /* HSJRollOutConfirmModel.m */; };
 		8D60B4D420F7486300287E52 /* CALayer+Anim.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B4BA20F7486300287E52 /* CALayer+Anim.m */; };
 		8D60B4D520F7486300287E52 /* PCCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B4BC20F7486300287E52 /* PCCircle.m */; };
 		8D60B4D620F7486300287E52 /* PCCircleInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B4BE20F7486300287E52 /* PCCircleInfoView.m */; };
@@ -387,6 +402,36 @@
 		8D591C0320F8591B007CA4BE /* HSJPlanDetailInfoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJPlanDetailInfoView.m; sourceTree = "<group>"; };
 		8D591C0620F88521007CA4BE /* HSJPlanDetailViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJPlanDetailViewModel.h; sourceTree = "<group>"; };
 		8D591C0720F88521007CA4BE /* HSJPlanDetailViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJPlanDetailViewModel.m; sourceTree = "<group>"; };
+		8D5D610120FEDEF2003F94D9 /* HSJRollOutController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJRollOutController.h; sourceTree = "<group>"; };
+		8D5D610220FEDEF2003F94D9 /* HSJRollOutController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJRollOutController.m; sourceTree = "<group>"; };
+		8D5D610720FEDFB1003F94D9 /* HSJRollOutHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJRollOutHeaderView.h; sourceTree = "<group>"; };
+		8D5D610820FEDFB1003F94D9 /* HSJRollOutHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJRollOutHeaderView.m; sourceTree = "<group>"; };
+		8D5D610A20FEDFEB003F94D9 /* HSJRollOutViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJRollOutViewModel.h; sourceTree = "<group>"; };
+		8D5D610B20FEDFEB003F94D9 /* HSJRollOutViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJRollOutViewModel.m; sourceTree = "<group>"; };
+		8D5D610D20FEE006003F94D9 /* HSJRollOutModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJRollOutModel.h; sourceTree = "<group>"; };
+		8D5D610E20FEE006003F94D9 /* HSJRollOutModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJRollOutModel.m; sourceTree = "<group>"; };
+		8D5D611020FEE021003F94D9 /* HSJRollOutCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJRollOutCell.h; sourceTree = "<group>"; };
+		8D5D611120FEE021003F94D9 /* HSJRollOutCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJRollOutCell.m; sourceTree = "<group>"; };
+		8D5D611620FEF1C5003F94D9 /* HSJPlanAssetsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJPlanAssetsModel.h; sourceTree = "<group>"; };
+		8D5D611720FEF1C5003F94D9 /* HSJPlanAssetsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJPlanAssetsModel.m; sourceTree = "<group>"; };
+		8D5D611920FF161E003F94D9 /* HSJRollOutHistoryController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJRollOutHistoryController.h; sourceTree = "<group>"; };
+		8D5D611A20FF161E003F94D9 /* HSJRollOutHistoryController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJRollOutHistoryController.m; sourceTree = "<group>"; };
+		8D5D611C20FF169F003F94D9 /* HSJRollOutHistoryViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJRollOutHistoryViewModel.h; sourceTree = "<group>"; };
+		8D5D611D20FF169F003F94D9 /* HSJRollOutHistoryViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJRollOutHistoryViewModel.m; sourceTree = "<group>"; };
+		8D5D611F20FF1A90003F94D9 /* HSJRollOutPlanDetailController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJRollOutPlanDetailController.h; sourceTree = "<group>"; };
+		8D5D612020FF1A90003F94D9 /* HSJRollOutPlanDetailController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJRollOutPlanDetailController.m; sourceTree = "<group>"; };
+		8D5D612220FF1AD0003F94D9 /* HSJRollOutPlanDetailViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJRollOutPlanDetailViewModel.h; sourceTree = "<group>"; };
+		8D5D612320FF1AD0003F94D9 /* HSJRollOutPlanDetailViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJRollOutPlanDetailViewModel.m; sourceTree = "<group>"; };
+		8D5D612520FF1D34003F94D9 /* HSJRollOutPlanDetailRowModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJRollOutPlanDetailRowModel.h; sourceTree = "<group>"; };
+		8D5D612620FF1D34003F94D9 /* HSJRollOutPlanDetailRowModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJRollOutPlanDetailRowModel.m; sourceTree = "<group>"; };
+		8D5D612820FF290A003F94D9 /* HSJRollOutConfirmController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJRollOutConfirmController.h; sourceTree = "<group>"; };
+		8D5D612920FF290A003F94D9 /* HSJRollOutConfirmController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJRollOutConfirmController.m; sourceTree = "<group>"; };
+		8D5D612B20FF2A9F003F94D9 /* HXBCommonResultController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBCommonResultController.h; sourceTree = "<group>"; };
+		8D5D612C20FF2A9F003F94D9 /* HXBCommonResultController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBCommonResultController.m; sourceTree = "<group>"; };
+		8D5D612E20FF2BCE003F94D9 /* HSJRollOutConfirmViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJRollOutConfirmViewModel.h; sourceTree = "<group>"; };
+		8D5D612F20FF2BCE003F94D9 /* HSJRollOutConfirmViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJRollOutConfirmViewModel.m; sourceTree = "<group>"; };
+		8D5D613120FF2CA3003F94D9 /* HSJRollOutConfirmModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJRollOutConfirmModel.h; sourceTree = "<group>"; };
+		8D5D613220FF2CA3003F94D9 /* HSJRollOutConfirmModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJRollOutConfirmModel.m; sourceTree = "<group>"; };
 		8D60B4B920F7486300287E52 /* CALayer+Anim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+Anim.h"; sourceTree = "<group>"; };
 		8D60B4BA20F7486300287E52 /* CALayer+Anim.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+Anim.m"; sourceTree = "<group>"; };
 		8D60B4BB20F7486300287E52 /* PCCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCCircle.h; sourceTree = "<group>"; };
@@ -1190,6 +1235,81 @@
 				8D591C0720F88521007CA4BE /* HSJPlanDetailViewModel.m */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8D5D60FE20FEDE92003F94D9 /* InOut */ = {
+			isa = PBXGroup;
+			children = (
+				8D5D60FF20FEDEB2003F94D9 /* RollOut */,
+			);
+			path = InOut;
+			sourceTree = "<group>";
+		};
+		8D5D60FF20FEDEB2003F94D9 /* RollOut */ = {
+			isa = PBXGroup;
+			children = (
+				8D5D610620FEDF97003F94D9 /* Model */,
+				8D5D610520FEDF8F003F94D9 /* ViewModel */,
+				8D5D610420FEDF85003F94D9 /* View */,
+				8D5D610020FEDEC3003F94D9 /* ViewController */,
+			);
+			path = RollOut;
+			sourceTree = "<group>";
+		};
+		8D5D610020FEDEC3003F94D9 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8D5D610120FEDEF2003F94D9 /* HSJRollOutController.h */,
+				8D5D610220FEDEF2003F94D9 /* HSJRollOutController.m */,
+				8D5D611920FF161E003F94D9 /* HSJRollOutHistoryController.h */,
+				8D5D611A20FF161E003F94D9 /* HSJRollOutHistoryController.m */,
+				8D5D611F20FF1A90003F94D9 /* HSJRollOutPlanDetailController.h */,
+				8D5D612020FF1A90003F94D9 /* HSJRollOutPlanDetailController.m */,
+				8D5D612820FF290A003F94D9 /* HSJRollOutConfirmController.h */,
+				8D5D612920FF290A003F94D9 /* HSJRollOutConfirmController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		8D5D610420FEDF85003F94D9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8D5D610720FEDFB1003F94D9 /* HSJRollOutHeaderView.h */,
+				8D5D610820FEDFB1003F94D9 /* HSJRollOutHeaderView.m */,
+				8D5D611020FEE021003F94D9 /* HSJRollOutCell.h */,
+				8D5D611120FEE021003F94D9 /* HSJRollOutCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8D5D610520FEDF8F003F94D9 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8D5D610A20FEDFEB003F94D9 /* HSJRollOutViewModel.h */,
+				8D5D610B20FEDFEB003F94D9 /* HSJRollOutViewModel.m */,
+				8D5D611C20FF169F003F94D9 /* HSJRollOutHistoryViewModel.h */,
+				8D5D611D20FF169F003F94D9 /* HSJRollOutHistoryViewModel.m */,
+				8D5D612220FF1AD0003F94D9 /* HSJRollOutPlanDetailViewModel.h */,
+				8D5D612320FF1AD0003F94D9 /* HSJRollOutPlanDetailViewModel.m */,
+				8D5D612E20FF2BCE003F94D9 /* HSJRollOutConfirmViewModel.h */,
+				8D5D612F20FF2BCE003F94D9 /* HSJRollOutConfirmViewModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8D5D610620FEDF97003F94D9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8D5D610D20FEE006003F94D9 /* HSJRollOutModel.h */,
+				8D5D610E20FEE006003F94D9 /* HSJRollOutModel.m */,
+				8D5D611620FEF1C5003F94D9 /* HSJPlanAssetsModel.h */,
+				8D5D611720FEF1C5003F94D9 /* HSJPlanAssetsModel.m */,
+				8D5D612520FF1D34003F94D9 /* HSJRollOutPlanDetailRowModel.h */,
+				8D5D612620FF1D34003F94D9 /* HSJRollOutPlanDetailRowModel.m */,
+				8D5D613120FF2CA3003F94D9 /* HSJRollOutConfirmModel.h */,
+				8D5D613220FF2CA3003F94D9 /* HSJRollOutConfirmModel.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		8D60B4B720F7486300287E52 /* GesturePassword */ = {
@@ -2054,6 +2174,7 @@
 		9A97D91A20EF420000688ADB /* My */ = {
 			isa = PBXGroup;
 			children = (
+				8D5D60FE20FEDE92003F94D9 /* InOut */,
 				9A37499320F85CF600F39681 /* CasRegister(提现记录) */,
 				9A37495D20F8557A00F39681 /* AccountWithdraw */,
 				9A4B185220F60C2A006B83C7 /* BankCard */,
@@ -2216,6 +2337,8 @@
 		9A97D94E20EF420100688ADB /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				8D5D612B20FF2A9F003F94D9 /* HXBCommonResultController.h */,
+				8D5D612C20FF2A9F003F94D9 /* HXBCommonResultController.m */,
 				9A97D94F20EF420100688ADB /* BaseViewController */,
 				9A97D95620EF420100688ADB /* BaseWebViewController */,
 				9A97D95D20EF420100688ADB /* HXBBaseNavigationController.h */,
@@ -3015,6 +3138,7 @@
 				8D60B4E120F748BC00287E52 /* UITextField+HLNumberFormatTextField.m in Sources */,
 				9A0BD52E20F6FC9300B1CC59 /* HXBBaseView_MoreTopBottomView.m in Sources */,
 				4E53C8FA20F89C330040F830 /* HSJSignInModel.m in Sources */,
+				8D5D612A20FF290A003F94D9 /* HSJRollOutConfirmController.m in Sources */,
 				9A97DA9420EF420200688ADB /* UILabel+HxbLabel.m in Sources */,
 				9A4B181620F34434006B83C7 /* HXBBindPhoneTableFootView.m in Sources */,
 				9A37492120F851CF00F39681 /* HxbWithdrawResultViewController.m in Sources */,
@@ -3041,6 +3165,7 @@
 				9A3749A320F85CF700F39681 /* HXBWithdrawRecordModel.m in Sources */,
 				9A4B183220F36DCC006B83C7 /* UIView+HSJStandard.m in Sources */,
 				4EE6169420F4AD5A0044B998 /* HSJSignInViewController.m in Sources */,
+				8D5D613020FF2BCE003F94D9 /* HSJRollOutConfirmViewModel.m in Sources */,
 				8D60B4DC20F7486300287E52 /* HSJDepositoryOpenController.m in Sources */,
 				9A97DA9520EF420200688ADB /* UIView+HXBFrame.m in Sources */,
 				9A97DA7C20EF420200688ADB /* HXBBaseNavigationController.m in Sources */,
@@ -3062,11 +3187,13 @@
 				9A37491920F84C7800F39681 /* HXBUnBindCardController.m in Sources */,
 				8D60B4DA20F7486300287E52 /* HSJGestureLoginController.m in Sources */,
 				8D60B4DB20F7486300287E52 /* HSJGestureSettingController.m in Sources */,
+				8D5D610320FEDEF2003F94D9 /* HSJRollOutController.m in Sources */,
 				9A97DA6D20EF420200688ADB /* HSJListViewController.m in Sources */,
 				9A4B18B120F620B8006B83C7 /* HXBCardBinModel.m in Sources */,
 				9A97DA7A20EF420200688ADB /* HXBWKWebViewProgressView.m in Sources */,
 				8D60B4D520F7486300287E52 /* PCCircle.m in Sources */,
 				E13A0EF720F4A60400A3E364 /* HxbAccountInfoViewController.m in Sources */,
+				8D5D611E20FF169F003F94D9 /* HSJRollOutHistoryViewModel.m in Sources */,
 				9A97DA9B20EF420200688ADB /* IDPConfig.m in Sources */,
 				9A97DAA520EF420200688ADB /* NSString+IDPExtension.m in Sources */,
 				9A3749B020F85D5500F39681 /* HXBBaseContDownManager.m in Sources */,
@@ -3075,6 +3202,7 @@
 				E13A0F0320F4C94900A3E364 /* HXBCommonProblemViewController.m in Sources */,
 				8D142A9120FD9B4D00520728 /* HxbAdvertiseViewController.m in Sources */,
 				9A37498920F859A100F39681 /* HBAlertPasswordView.m in Sources */,
+				8D5D612420FF1AD0003F94D9 /* HSJRollOutPlanDetailViewModel.m in Sources */,
 				9A97DA7B20EF420200688ADB /* HXBWKWebviewViewModel.m in Sources */,
 				9A97DA7320EF420200688ADB /* HSJMyViewModel.m in Sources */,
 				9A97DA6220EF420200688ADB /* HXBRootVCManager.m in Sources */,
@@ -3088,6 +3216,7 @@
 				E153B96B20F74C39002BE1AE /* HXBAccountAlterLoginPasswordViewModel.m in Sources */,
 				E13A0F0620F4C9FF00A3E364 /* HXBAlertManager.m in Sources */,
 				9A3749B320F85D5500F39681 /* HXBBaseHandDate.m in Sources */,
+				8D5D612120FF1A90003F94D9 /* HSJRollOutPlanDetailController.m in Sources */,
 				9A97DAA220EF420200688ADB /* NSData+IDPExtension.m in Sources */,
 				9A3749A220F85CF700F39681 /* HXBWithdrawRecordListModel.m in Sources */,
 				9A3748EC20F763F100F39681 /* HXBModifyPhoneModel.m in Sources */,
@@ -3111,6 +3240,7 @@
 				9A97DAA720EF420200688ADB /* JastorRuntimeHelper.m in Sources */,
 				8D591BFE20F84D8F007CA4BE /* HSJPlanDetailAdvantageView.m in Sources */,
 				9A97DA6320EF420200688ADB /* NSObject+HSNetRequestDelegate.m in Sources */,
+				8D5D610C20FEDFEB003F94D9 /* HSJRollOutViewModel.m in Sources */,
 				9A97DAB220EF420200688ADB /* NSTimer+Addition.m in Sources */,
 				9A3749C920F882D100F39681 /* HXBBankCardListViewModel.m in Sources */,
 				9A97DA6F20EF420200688ADB /* HSJLoadClassTest.m in Sources */,
@@ -3119,6 +3249,7 @@
 				9A4B181720F34434006B83C7 /* HXBBindPhoneTableViewCell.m in Sources */,
 				4E7EE27520F72D6F007D96E1 /* HSJSignInButton.m in Sources */,
 				9A97DA8920EF420200688ADB /* NSString+HxbGeneral.m in Sources */,
+				8D5D612720FF1D34003F94D9 /* HSJRollOutPlanDetailRowModel.m in Sources */,
 				4EA57D2120F34D0D006FD573 /* HXBCustomTextField.m in Sources */,
 				9A97DA6120EF420200688ADB /* HXBThemAdapterManager.m in Sources */,
 				8D60B4D620F7486300287E52 /* PCCircleInfoView.m in Sources */,
@@ -3129,6 +3260,7 @@
 				4E43B06220EF78CA000BDAE7 /* HSJBankCardListViewModel.m in Sources */,
 				9A97DA7F20EF420200688ADB /* HSJBaseViewModel.m in Sources */,
 				9A37490920F7691D00F39681 /* HXBCheckCaptcha.m in Sources */,
+				8D5D611220FEE021003F94D9 /* HSJRollOutCell.m in Sources */,
 				9A97DA7620EF420200688ADB /* HXBBaseViewController+HSAPI.m in Sources */,
 				9A97DA6620EF420200688ADB /* UIScrollView+HXBScrollView.m in Sources */,
 				9A4B189E20F60C2B006B83C7 /* HXBRechargesuccessView.m in Sources */,
@@ -3152,6 +3284,7 @@
 				9A3749C220F881DA00F39681 /* UITextField+HLNumberFormatTextField.m in Sources */,
 				9A4B18B820F62209006B83C7 /* HXBLeftLabelTextView.m in Sources */,
 				9A37496E20F855CF00F39681 /* HxbWithdrawViewController.m in Sources */,
+				8D5D613320FF2CA3003F94D9 /* HSJRollOutConfirmModel.m in Sources */,
 				9A0BD52520F6FBB300B1CC59 /* HXBUserInfoView.m in Sources */,
 				9A97DA6520EF420200688ADB /* HSJTopFragmentNavgationView.m in Sources */,
 				9A4B181520F34434006B83C7 /* HXBBindPhoneCellModel.m in Sources */,
@@ -3179,8 +3312,10 @@
 				8D60B4D420F7486300287E52 /* CALayer+Anim.m in Sources */,
 				4E53C90020F8B9FD0040F830 /* HSJCheckCaptcha.m in Sources */,
 				9A97DA7920EF420200688ADB /* HXBBaseWKWebViewController.m in Sources */,
+				8D5D611B20FF161E003F94D9 /* HSJRollOutHistoryController.m in Sources */,
 				9A97DA7720EF420200688ADB /* HXBBaseViewController+UITableView.m in Sources */,
 				9A4B18A220F60C2B006B83C7 /* HxbMyBankCardViewController.m in Sources */,
+				8D5D610920FEDFB1003F94D9 /* HSJRollOutHeaderView.m in Sources */,
 				9A97DA8720EF420200688ADB /* NSAttributedString+HxbAttributedString.m in Sources */,
 				9A4B189920F60C2B006B83C7 /* HXBGetValidationCodeView.m in Sources */,
 				8D142AA520FDCDEB00520728 /* HSJPlanModel.m in Sources */,
@@ -3189,6 +3324,7 @@
 				9A97DA9D20EF420200688ADB /* IDPStorageFileInner.m in Sources */,
 				4EA57D2720F34F1F006FD573 /* UITextField+BXExtension.m in Sources */,
 				E13A0EFA20F4AB4400A3E364 /* HxbMyAboutMeViewController.m in Sources */,
+				8D5D612D20FF2AA0003F94D9 /* HXBCommonResultController.m in Sources */,
 				4EA57D2420F34F07006FD573 /* UIView+BXExtension.m in Sources */,
 				9A0BD52820F6FC0400B1CC59 /* HXBBankView.m in Sources */,
 				9A97DA7020EF420200688ADB /* HSJTestViewController.m in Sources */,
@@ -3217,12 +3353,14 @@
 				9A97DA6020EF420200688ADB /* HXBTokenModel.m in Sources */,
 				4EA57D3020F3500B006FD573 /* HXBVersionUpdateModel.m in Sources */,
 				4EE0C91320F6180E001A0BBB /* HXBVersionUpdateManager.m in Sources */,
+				8D5D610F20FEE006003F94D9 /* HSJRollOutModel.m in Sources */,
 				8D60B4DD20F7486300287E52 /* HSJDepositoryOpenTipController.m in Sources */,
 				9A97DA7520EF420200688ADB /* HSJBaseModel.m in Sources */,
 				9A6E0A5C20F84C9700598071 /* AppDelegate.m in Sources */,
 				4EE616A520F4B4F20044B998 /* AXHNewFeatureController.m in Sources */,
 				9A97DA9120EF420200688ADB /* UILabel+Util.m in Sources */,
 				8D60B4DE20F7486300287E52 /* HSJDepositoryOpenViewModel.m in Sources */,
+				8D5D611820FEF1C5003F94D9 /* HSJPlanAssetsModel.m in Sources */,
 				4E8DB75420F5AEE3000712D7 /* TimerWeakTarget.m in Sources */,
 				9A37495B20F854CC00F39681 /* HXBWithdrawCardView.m in Sources */,
 				4EA57D0B20F338EA006FD573 /* HSJRiskAssessmentViewController.m in Sources */,
