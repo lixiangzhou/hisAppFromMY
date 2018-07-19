@@ -24,7 +24,7 @@
 #import "HXBCommonProblemViewController.h"
 #import "HSJDepositoryOpenController.h"
 #import "HSJGestureSettingController.h"
-
+#import "NSString+HxbPerMilMoney.h"
 @interface HxbAccountInfoViewController ()
 <
 UITableViewDelegate,
@@ -104,14 +104,20 @@ UITableViewDataSource
             hfProtocolImg.image = [UIImage imageNamed:@"home_bot_safety"];
             [hf_bgImgV addSubview:hfProtocolImg];
             
-            UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(kScrAdaptationW(31), kScrAdaptationH(11), kScrAdaptationW(230), kScrAdaptationH(20))];
+            UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(kScrAdaptationW(31), kScrAdaptationH(11), kScrAdaptationW(300), kScrAdaptationH(20))];
             name.textAlignment = NSTextAlignmentLeft;
             name.font = kHXBFont_PINGFANGSC_REGULAR(14);
             name.textColor = COR5;
-            NSString *str = self.userInfoModel.userInfo.realName;
-            NSMutableString * nameStr = [NSMutableString stringWithString:str];
+            
+            NSMutableString * nameStr = [NSMutableString stringWithString:self.userInfoModel.userInfo.realName];
             [nameStr replaceCharactersInRange:NSMakeRange(0, 1)  withString:@"*"];
-            name.text = [NSString stringWithFormat:@"真实姓名：%@",nameStr];
+            
+            NSString *idNo = [NSString hiddenStr:self.userInfoModel.userInfo.idNo MidWithFistLenth:1 andLastLenth:1];
+            idNo = [NSMutableString stringWithFormat:@"（%@）",idNo];
+        
+            NSString *messageStr = [NSString stringWithFormat:@"真实姓名：%@%@",nameStr,idNo];
+            NSRange range = [messageStr rangeOfString:idNo];
+            name.attributedText = [NSMutableAttributedString setupAttributeStringWithString:messageStr WithRange:(NSRange)range andAttributeColor:COR12 andAttributeFont:kHXBFont_PINGFANGSC_REGULAR(14)];
             [hf_bgImgV addSubview:name];
             
             UILabel *bankProtocolLab = [[UILabel alloc]initWithFrame:CGRectMake(kScrAdaptationW(11), kScrAdaptationH(39), kScrAdaptationW(150), kScrAdaptationH(20))];
