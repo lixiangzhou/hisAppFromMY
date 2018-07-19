@@ -23,7 +23,6 @@
 		4EA57D2720F34F1F006FD573 /* UITextField+BXExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA57D2520F34F1E006FD573 /* UITextField+BXExtension.m */; };
 		4EA57D3020F3500B006FD573 /* HXBVersionUpdateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA57D2B20F3500B006FD573 /* HXBVersionUpdateModel.m */; };
 		4EA57D3120F3500B006FD573 /* HSJMyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA57D2E20F3500B006FD573 /* HSJMyViewController.m */; };
-		4EA57D3220F3500B006FD573 /* HSJMyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EA57D2F20F3500B006FD573 /* HSJMyViewController.xib */; };
 		4EE0C91320F6180E001A0BBB /* HXBVersionUpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE0C91120F6180E001A0BBB /* HXBVersionUpdateManager.m */; };
 		4EE6169420F4AD5A0044B998 /* HSJSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE6169020F4AD5A0044B998 /* HSJSignInViewController.m */; };
 		4EE6169520F4AD5A0044B998 /* HSJSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE6169220F4AD5A0044B998 /* HSJSignUpViewController.m */; };
@@ -263,10 +262,30 @@
 		E13A0F0320F4C94900A3E364 /* HXBCommonProblemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E13A0F0220F4C94900A3E364 /* HXBCommonProblemViewController.m */; };
 		E13A0F0620F4C9FF00A3E364 /* HXBAlertManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E13A0F0420F4C9FF00A3E364 /* HXBAlertManager.m */; };
 		E13A0F0B20F4DC2700A3E364 /* HXBMiddlekey.m in Sources */ = {isa = PBXBuildFile; fileRef = E13A0F0A20F4DC2600A3E364 /* HXBMiddlekey.m */; };
+		E14B9F9520FD8AF80084F007 /* HXBAccumulatedIncomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = E14B9F8420FD8AF70084F007 /* HXBAccumulatedIncomeView.m */; };
+		E14B9F9620FD8AF80084F007 /* HXBAssetsCustomVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = E14B9F8620FD8AF70084F007 /* HXBAssetsCustomVIew.m */; };
+		E14B9F9720FD8AF80084F007 /* HXBMy_AllFinance_TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E14B9F8820FD8AF70084F007 /* HXBMy_AllFinance_TableViewCell.m */; };
+		E14B9F9820FD8AF80084F007 /* HXBMY_AllFinanceView.m in Sources */ = {isa = PBXBuildFile; fileRef = E14B9F8A20FD8AF70084F007 /* HXBMY_AllFinanceView.m */; };
+		E14B9F9920FD8AF80084F007 /* HXBProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = E14B9F8C20FD8AF70084F007 /* HXBProgressView.m */; };
+		E14B9F9A20FD8AF80084F007 /* HXBProportionalBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = E14B9F8E20FD8AF70084F007 /* HXBProportionalBarView.m */; };
+		E14B9F9B20FD8AF80084F007 /* HXBMY_AllFinanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E14B9F9120FD8AF70084F007 /* HXBMY_AllFinanceViewController.m */; };
+		E14B9F9C20FD8AF80084F007 /* HXBMYAllFinanceViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E14B9F9420FD8AF70084F007 /* HXBMYAllFinanceViewModel.m */; };
 		E150F80020F5B4910006E0FE /* HXBAccountSecureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E150F7FE20F5B48F0006E0FE /* HXBAccountSecureCell.m */; };
+		E1539C5720FF2BB400BC4025 /* HSJMyHomeInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E1539C5620FF2BB400BC4025 /* HSJMyHomeInfoTableViewCell.m */; };
 		E153B96520F74937002BE1AE /* HXBAccount_AlterLoginPassword_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E153B96420F74937002BE1AE /* HXBAccount_AlterLoginPassword_ViewController.m */; };
 		E153B96820F74AD1002BE1AE /* HXBAccount_AlterLoginPassword_View.m in Sources */ = {isa = PBXBuildFile; fileRef = E153B96720F74AD1002BE1AE /* HXBAccount_AlterLoginPassword_View.m */; };
 		E153B96B20F74C39002BE1AE /* HXBAccountAlterLoginPasswordViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E153B96920F74C39002BE1AE /* HXBAccountAlterLoginPasswordViewModel.m */; };
+		E153B9B620FC8474002BE1AE /* HxbMyView.m in Sources */ = {isa = PBXBuildFile; fileRef = E153B9B520FC8473002BE1AE /* HxbMyView.m */; };
+		E153B9B920FC84A4002BE1AE /* HxbMyViewHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E153B9B720FC84A4002BE1AE /* HxbMyViewHeaderView.m */; };
+		E153B9C320FC8563002BE1AE /* HXBMY_Capital_Sift_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E153B9BD20FC8563002BE1AE /* HXBMY_Capital_Sift_ViewController.m */; };
+		E153B9C420FC8563002BE1AE /* HXBMY_CapitalRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E153B9BF20FC8563002BE1AE /* HXBMY_CapitalRecordViewController.m */; };
+		E153B9C520FC8563002BE1AE /* HXBMYCapitalRecordViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E153B9C220FC8563002BE1AE /* HXBMYCapitalRecordViewModel.m */; };
+		E153B9C820FC859C002BE1AE /* HXBMyHomeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E153B9C720FC859C002BE1AE /* HXBMyHomeViewCell.m */; };
+		E153B9D020FC8E15002BE1AE /* HXBMYCapitalRecord_TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E153B9CC20FC8E13002BE1AE /* HXBMYCapitalRecord_TableViewCell.m */; };
+		E153B9D120FC8E15002BE1AE /* HXBMYCapitalRecord_TableView.m in Sources */ = {isa = PBXBuildFile; fileRef = E153B9CE20FC8E14002BE1AE /* HXBMYCapitalRecord_TableView.m */; };
+		E153B9D220FC8E15002BE1AE /* HXBMYCapitalRecord_TableViewHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E153B9CF20FC8E14002BE1AE /* HXBMYCapitalRecord_TableViewHeaderView.m */; };
+		E153B9D620FC8EC1002BE1AE /* HXBMYModel_CapitalRecordDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E153B9D420FC8EC1002BE1AE /* HXBMYModel_CapitalRecordDetailModel.m */; };
+		E153B9D920FC8EFC002BE1AE /* HXBMYViewModel_MainCapitalRecordViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E153B9D820FC8EFC002BE1AE /* HXBMYViewModel_MainCapitalRecordViewModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -317,7 +336,6 @@
 		4EA57D2B20F3500B006FD573 /* HXBVersionUpdateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBVersionUpdateModel.m; sourceTree = "<group>"; };
 		4EA57D2D20F3500B006FD573 /* HSJMyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSJMyViewController.h; sourceTree = "<group>"; };
 		4EA57D2E20F3500B006FD573 /* HSJMyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSJMyViewController.m; sourceTree = "<group>"; };
-		4EA57D2F20F3500B006FD573 /* HSJMyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HSJMyViewController.xib; sourceTree = "<group>"; };
 		4EE0C91120F6180E001A0BBB /* HXBVersionUpdateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBVersionUpdateManager.m; sourceTree = "<group>"; };
 		4EE0C91220F6180E001A0BBB /* HXBVersionUpdateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBVersionUpdateManager.h; sourceTree = "<group>"; };
 		4EE6168F20F4AD5A0044B998 /* HSJSignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSJSignInViewController.h; sourceTree = "<group>"; };
@@ -771,14 +789,54 @@
 		E13A0F0720F4D25D00A3E364 /* MacroDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacroDefinition.h; sourceTree = "<group>"; };
 		E13A0F0920F4DC2600A3E364 /* HXBMiddlekey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBMiddlekey.h; sourceTree = "<group>"; };
 		E13A0F0A20F4DC2600A3E364 /* HXBMiddlekey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBMiddlekey.m; sourceTree = "<group>"; };
+		E14B9F8320FD8AF70084F007 /* HXBAccumulatedIncomeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBAccumulatedIncomeView.h; sourceTree = "<group>"; };
+		E14B9F8420FD8AF70084F007 /* HXBAccumulatedIncomeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBAccumulatedIncomeView.m; sourceTree = "<group>"; };
+		E14B9F8520FD8AF70084F007 /* HXBAssetsCustomVIew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBAssetsCustomVIew.h; sourceTree = "<group>"; };
+		E14B9F8620FD8AF70084F007 /* HXBAssetsCustomVIew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBAssetsCustomVIew.m; sourceTree = "<group>"; };
+		E14B9F8720FD8AF70084F007 /* HXBMy_AllFinance_TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBMy_AllFinance_TableViewCell.h; sourceTree = "<group>"; };
+		E14B9F8820FD8AF70084F007 /* HXBMy_AllFinance_TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBMy_AllFinance_TableViewCell.m; sourceTree = "<group>"; };
+		E14B9F8920FD8AF70084F007 /* HXBMY_AllFinanceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBMY_AllFinanceView.h; sourceTree = "<group>"; };
+		E14B9F8A20FD8AF70084F007 /* HXBMY_AllFinanceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBMY_AllFinanceView.m; sourceTree = "<group>"; };
+		E14B9F8B20FD8AF70084F007 /* HXBProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBProgressView.h; sourceTree = "<group>"; };
+		E14B9F8C20FD8AF70084F007 /* HXBProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBProgressView.m; sourceTree = "<group>"; };
+		E14B9F8D20FD8AF70084F007 /* HXBProportionalBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBProportionalBarView.h; sourceTree = "<group>"; };
+		E14B9F8E20FD8AF70084F007 /* HXBProportionalBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBProportionalBarView.m; sourceTree = "<group>"; };
+		E14B9F9020FD8AF70084F007 /* HXBMY_AllFinanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBMY_AllFinanceViewController.h; sourceTree = "<group>"; };
+		E14B9F9120FD8AF70084F007 /* HXBMY_AllFinanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBMY_AllFinanceViewController.m; sourceTree = "<group>"; };
+		E14B9F9320FD8AF70084F007 /* HXBMYAllFinanceViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBMYAllFinanceViewModel.h; sourceTree = "<group>"; };
+		E14B9F9420FD8AF70084F007 /* HXBMYAllFinanceViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBMYAllFinanceViewModel.m; sourceTree = "<group>"; };
 		E150F7FE20F5B48F0006E0FE /* HXBAccountSecureCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBAccountSecureCell.m; sourceTree = "<group>"; };
 		E150F7FF20F5B4910006E0FE /* HXBAccountSecureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBAccountSecureCell.h; sourceTree = "<group>"; };
+		E1539C5520FF2BB400BC4025 /* HSJMyHomeInfoTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJMyHomeInfoTableViewCell.h; sourceTree = "<group>"; };
+		E1539C5620FF2BB400BC4025 /* HSJMyHomeInfoTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJMyHomeInfoTableViewCell.m; sourceTree = "<group>"; };
 		E153B96320F74936002BE1AE /* HXBAccount_AlterLoginPassword_ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBAccount_AlterLoginPassword_ViewController.h; sourceTree = "<group>"; };
 		E153B96420F74937002BE1AE /* HXBAccount_AlterLoginPassword_ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBAccount_AlterLoginPassword_ViewController.m; sourceTree = "<group>"; };
 		E153B96620F74AD1002BE1AE /* HXBAccount_AlterLoginPassword_View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBAccount_AlterLoginPassword_View.h; sourceTree = "<group>"; };
 		E153B96720F74AD1002BE1AE /* HXBAccount_AlterLoginPassword_View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBAccount_AlterLoginPassword_View.m; sourceTree = "<group>"; };
 		E153B96920F74C39002BE1AE /* HXBAccountAlterLoginPasswordViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBAccountAlterLoginPasswordViewModel.m; sourceTree = "<group>"; };
 		E153B96A20F74C39002BE1AE /* HXBAccountAlterLoginPasswordViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBAccountAlterLoginPasswordViewModel.h; sourceTree = "<group>"; };
+		E153B9B420FC8473002BE1AE /* HxbMyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HxbMyView.h; sourceTree = "<group>"; };
+		E153B9B520FC8473002BE1AE /* HxbMyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HxbMyView.m; sourceTree = "<group>"; };
+		E153B9B720FC84A4002BE1AE /* HxbMyViewHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HxbMyViewHeaderView.m; sourceTree = "<group>"; };
+		E153B9B820FC84A4002BE1AE /* HxbMyViewHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HxbMyViewHeaderView.h; sourceTree = "<group>"; };
+		E153B9BC20FC8563002BE1AE /* HXBMY_Capital_Sift_ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBMY_Capital_Sift_ViewController.h; sourceTree = "<group>"; };
+		E153B9BD20FC8563002BE1AE /* HXBMY_Capital_Sift_ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBMY_Capital_Sift_ViewController.m; sourceTree = "<group>"; };
+		E153B9BE20FC8563002BE1AE /* HXBMY_CapitalRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBMY_CapitalRecordViewController.h; sourceTree = "<group>"; };
+		E153B9BF20FC8563002BE1AE /* HXBMY_CapitalRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBMY_CapitalRecordViewController.m; sourceTree = "<group>"; };
+		E153B9C120FC8563002BE1AE /* HXBMYCapitalRecordViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBMYCapitalRecordViewModel.h; sourceTree = "<group>"; };
+		E153B9C220FC8563002BE1AE /* HXBMYCapitalRecordViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBMYCapitalRecordViewModel.m; sourceTree = "<group>"; };
+		E153B9C620FC859B002BE1AE /* HXBMyHomeViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBMyHomeViewCell.h; sourceTree = "<group>"; };
+		E153B9C720FC859C002BE1AE /* HXBMyHomeViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBMyHomeViewCell.m; sourceTree = "<group>"; };
+		E153B9CA20FC8E13002BE1AE /* HXBMYCapitalRecord_TableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBMYCapitalRecord_TableView.h; sourceTree = "<group>"; };
+		E153B9CB20FC8E13002BE1AE /* HXBMYCapitalRecord_TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBMYCapitalRecord_TableViewCell.h; sourceTree = "<group>"; };
+		E153B9CC20FC8E13002BE1AE /* HXBMYCapitalRecord_TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBMYCapitalRecord_TableViewCell.m; sourceTree = "<group>"; };
+		E153B9CD20FC8E14002BE1AE /* HXBMYCapitalRecord_TableViewHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBMYCapitalRecord_TableViewHeaderView.h; sourceTree = "<group>"; };
+		E153B9CE20FC8E14002BE1AE /* HXBMYCapitalRecord_TableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBMYCapitalRecord_TableView.m; sourceTree = "<group>"; };
+		E153B9CF20FC8E14002BE1AE /* HXBMYCapitalRecord_TableViewHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBMYCapitalRecord_TableViewHeaderView.m; sourceTree = "<group>"; };
+		E153B9D420FC8EC1002BE1AE /* HXBMYModel_CapitalRecordDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBMYModel_CapitalRecordDetailModel.m; sourceTree = "<group>"; };
+		E153B9D520FC8EC1002BE1AE /* HXBMYModel_CapitalRecordDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBMYModel_CapitalRecordDetailModel.h; sourceTree = "<group>"; };
+		E153B9D720FC8EFC002BE1AE /* HXBMYViewModel_MainCapitalRecordViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBMYViewModel_MainCapitalRecordViewModel.h; sourceTree = "<group>"; };
+		E153B9D820FC8EFC002BE1AE /* HXBMYViewModel_MainCapitalRecordViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBMYViewModel_MainCapitalRecordViewModel.m; sourceTree = "<group>"; };
 		F3AA4ECD958918A00E682797 /* Pods-hoommy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hoommy.release.xcconfig"; path = "Pods/Target Support Files/Pods-hoommy/Pods-hoommy.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -921,7 +979,7 @@
 		4EA57D2820F3500B006FD573 /* My */ = {
 			isa = PBXGroup;
 			children = (
-				9A3748C120F70D9A00F39681 /* View */,
+				E153B9B320FC83B0002BE1AE /* View */,
 				9A3748C220F70D9B00F39681 /* ViewModel */,
 				4EA57D2920F3500B006FD573 /* Model */,
 				4EA57D2C20F3500B006FD573 /* ViewController */,
@@ -943,7 +1001,6 @@
 			children = (
 				4EA57D2D20F3500B006FD573 /* HSJMyViewController.h */,
 				4EA57D2E20F3500B006FD573 /* HSJMyViewController.m */,
-				4EA57D2F20F3500B006FD573 /* HSJMyViewController.xib */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1123,13 +1180,6 @@
 				9A0BD52D20F6FC9300B1CC59 /* HXBBaseView_TwoLable_View.m */,
 			);
 			path = LeftRightHaveLabel_View;
-			sourceTree = "<group>";
-		};
-		9A3748C120F70D9A00F39681 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		9A3748C220F70D9B00F39681 /* ViewModel */ = {
@@ -1882,6 +1932,8 @@
 		9A97D91A20EF420000688ADB /* My */ = {
 			isa = PBXGroup;
 			children = (
+				E14B9F8120FD8AF70084F007 /* MY_AllFinanceController */,
+				E153B9BA20FC8563002BE1AE /* MY_CapitalRecordController */,
 				9A37499320F85CF600F39681 /* CasRegister(提现记录) */,
 				9A37495D20F8557A00F39681 /* AccountWithdraw */,
 				9A4B185220F60C2A006B83C7 /* BankCard */,
@@ -2603,6 +2655,123 @@
 			path = Middlekey;
 			sourceTree = "<group>";
 		};
+		E14B9F8120FD8AF70084F007 /* MY_AllFinanceController */ = {
+			isa = PBXGroup;
+			children = (
+				E14B9F8220FD8AF70084F007 /* View */,
+				E14B9F8F20FD8AF70084F007 /* ViewController */,
+				E14B9F9220FD8AF70084F007 /* ViewModel */,
+			);
+			path = MY_AllFinanceController;
+			sourceTree = "<group>";
+		};
+		E14B9F8220FD8AF70084F007 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E14B9F8320FD8AF70084F007 /* HXBAccumulatedIncomeView.h */,
+				E14B9F8420FD8AF70084F007 /* HXBAccumulatedIncomeView.m */,
+				E14B9F8520FD8AF70084F007 /* HXBAssetsCustomVIew.h */,
+				E14B9F8620FD8AF70084F007 /* HXBAssetsCustomVIew.m */,
+				E14B9F8720FD8AF70084F007 /* HXBMy_AllFinance_TableViewCell.h */,
+				E14B9F8820FD8AF70084F007 /* HXBMy_AllFinance_TableViewCell.m */,
+				E14B9F8920FD8AF70084F007 /* HXBMY_AllFinanceView.h */,
+				E14B9F8A20FD8AF70084F007 /* HXBMY_AllFinanceView.m */,
+				E14B9F8B20FD8AF70084F007 /* HXBProgressView.h */,
+				E14B9F8C20FD8AF70084F007 /* HXBProgressView.m */,
+				E14B9F8D20FD8AF70084F007 /* HXBProportionalBarView.h */,
+				E14B9F8E20FD8AF70084F007 /* HXBProportionalBarView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E14B9F8F20FD8AF70084F007 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E14B9F9020FD8AF70084F007 /* HXBMY_AllFinanceViewController.h */,
+				E14B9F9120FD8AF70084F007 /* HXBMY_AllFinanceViewController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		E14B9F9220FD8AF70084F007 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				E14B9F9320FD8AF70084F007 /* HXBMYAllFinanceViewModel.h */,
+				E14B9F9420FD8AF70084F007 /* HXBMYAllFinanceViewModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E153B9B320FC83B0002BE1AE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E153B9C620FC859B002BE1AE /* HXBMyHomeViewCell.h */,
+				E153B9C720FC859C002BE1AE /* HXBMyHomeViewCell.m */,
+				E153B9B820FC84A4002BE1AE /* HxbMyViewHeaderView.h */,
+				E153B9B720FC84A4002BE1AE /* HxbMyViewHeaderView.m */,
+				E153B9B420FC8473002BE1AE /* HxbMyView.h */,
+				E153B9B520FC8473002BE1AE /* HxbMyView.m */,
+				E1539C5520FF2BB400BC4025 /* HSJMyHomeInfoTableViewCell.h */,
+				E1539C5620FF2BB400BC4025 /* HSJMyHomeInfoTableViewCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E153B9BA20FC8563002BE1AE /* MY_CapitalRecordController */ = {
+			isa = PBXGroup;
+			children = (
+				E153B9D320FC8EAB002BE1AE /* Model */,
+				E153B9C920FC8E0B002BE1AE /* View */,
+				E153B9BB20FC8563002BE1AE /* ViewController */,
+				E153B9C020FC8563002BE1AE /* ViewModel */,
+			);
+			path = MY_CapitalRecordController;
+			sourceTree = "<group>";
+		};
+		E153B9BB20FC8563002BE1AE /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E153B9BC20FC8563002BE1AE /* HXBMY_Capital_Sift_ViewController.h */,
+				E153B9BD20FC8563002BE1AE /* HXBMY_Capital_Sift_ViewController.m */,
+				E153B9BE20FC8563002BE1AE /* HXBMY_CapitalRecordViewController.h */,
+				E153B9BF20FC8563002BE1AE /* HXBMY_CapitalRecordViewController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		E153B9C020FC8563002BE1AE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				E153B9D720FC8EFC002BE1AE /* HXBMYViewModel_MainCapitalRecordViewModel.h */,
+				E153B9D820FC8EFC002BE1AE /* HXBMYViewModel_MainCapitalRecordViewModel.m */,
+				E153B9C120FC8563002BE1AE /* HXBMYCapitalRecordViewModel.h */,
+				E153B9C220FC8563002BE1AE /* HXBMYCapitalRecordViewModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E153B9C920FC8E0B002BE1AE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E153B9CA20FC8E13002BE1AE /* HXBMYCapitalRecord_TableView.h */,
+				E153B9CE20FC8E14002BE1AE /* HXBMYCapitalRecord_TableView.m */,
+				E153B9CB20FC8E13002BE1AE /* HXBMYCapitalRecord_TableViewCell.h */,
+				E153B9CC20FC8E13002BE1AE /* HXBMYCapitalRecord_TableViewCell.m */,
+				E153B9CD20FC8E14002BE1AE /* HXBMYCapitalRecord_TableViewHeaderView.h */,
+				E153B9CF20FC8E14002BE1AE /* HXBMYCapitalRecord_TableViewHeaderView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E153B9D320FC8EAB002BE1AE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E153B9D520FC8EC1002BE1AE /* HXBMYModel_CapitalRecordDetailModel.h */,
+				E153B9D420FC8EC1002BE1AE /* HXBMYModel_CapitalRecordDetailModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2735,7 +2904,6 @@
 				9A97DACF20EF420200688ADB /* name.svg in Resources */,
 				9A3748E420F74B3300F39681 /* 5006.svg in Resources */,
 				9A3748DB20F74B3300F39681 /* 0201.svg in Resources */,
-				4EA57D3220F3500B006FD573 /* HSJMyViewController.xib in Resources */,
 				9A97DACE20EF420200688ADB /* my_Unselected.svg in Resources */,
 				9A97DAB920EF420200688ADB /* Default-568h@2x.png in Resources */,
 				9A97DACA20EF420200688ADB /* investment_Unselected.svg in Resources */,
@@ -2843,12 +3011,15 @@
 				9A97DA9420EF420200688ADB /* UILabel+HxbLabel.m in Sources */,
 				9A4B181620F34434006B83C7 /* HXBBindPhoneTableFootView.m in Sources */,
 				9A37492120F851CF00F39681 /* HxbWithdrawResultViewController.m in Sources */,
+				E14B9F9920FD8AF80084F007 /* HXBProgressView.m in Sources */,
 				9A0BD53220F6FD1C00B1CC59 /* HXBEnumerateTransitionManager.m in Sources */,
 				9A37491420F7714700F39681 /* AnimatedTransition.m in Sources */,
 				9A4B181820F34434006B83C7 /* HXBBindPhoneViewController.m in Sources */,
+				E14B9F9620FD8AF80084F007 /* HXBAssetsCustomVIew.m in Sources */,
 				9A37498B20F859A100F39681 /* HXBVerificationCodeAlertView.m in Sources */,
 				9A97DA8C20EF420200688ADB /* NSString+HxbPerMilMoney.m in Sources */,
 				9A4B189820F60C2B006B83C7 /* HXBCardholderInformationView.m in Sources */,
+				E153B9D020FC8E15002BE1AE /* HXBMYCapitalRecord_TableViewCell.m in Sources */,
 				9A97DA6C20EF420200688ADB /* LazyCatLoadingView.m in Sources */,
 				9A97DA8620EF420200688ADB /* NSObject+HxbRunTime.m in Sources */,
 				9A37498120F8594000F39681 /* HXBSecurityCertificationViewModel.m in Sources */,
@@ -2859,6 +3030,7 @@
 				9A3748C520F70DE500F39681 /* HSJMyViewVCViewModel.m in Sources */,
 				9A97DAB720EF420200688ADB /* NYBaseRequest.m in Sources */,
 				4EE616A720F4B4F20044B998 /* TAExampleDotView.m in Sources */,
+				E153B9D920FC8EFC002BE1AE /* HXBMYViewModel_MainCapitalRecordViewModel.m in Sources */,
 				9A3749C620F882BD00F39681 /* HXBBankCardListViewController.m in Sources */,
 				9A97DA9220EF420200688ADB /* UIResponder+FindNext.m in Sources */,
 				4EA57D3120F3500B006FD573 /* HSJMyViewController.m in Sources */,
@@ -2881,6 +3053,7 @@
 				4E43B05F20EF77F8000BDAE7 /* HSJBankCardListViewController.m in Sources */,
 				9A3749D020F883E800F39681 /* HXBBankListCell.m in Sources */,
 				9A3749BC20F8808700F39681 /* HXBTipView.m in Sources */,
+				E14B9F9B20FD8AF80084F007 /* HXBMY_AllFinanceViewController.m in Sources */,
 				9A37499220F85ACF00F39681 /* HXBMy_Withdraw_notifitionView.m in Sources */,
 				9A37491920F84C7800F39681 /* HXBUnBindCardController.m in Sources */,
 				8D60B4DA20F7486300287E52 /* HSJGestureLoginController.m in Sources */,
@@ -2888,24 +3061,32 @@
 				9A97DA6D20EF420200688ADB /* HSJListViewController.m in Sources */,
 				9A4B18B120F620B8006B83C7 /* HXBCardBinModel.m in Sources */,
 				9A97DA7A20EF420200688ADB /* HXBWKWebViewProgressView.m in Sources */,
+				E153B9D220FC8E15002BE1AE /* HXBMYCapitalRecord_TableViewHeaderView.m in Sources */,
 				8D60B4D520F7486300287E52 /* PCCircle.m in Sources */,
+				E14B9F9820FD8AF80084F007 /* HXBMY_AllFinanceView.m in Sources */,
 				E13A0EF720F4A60400A3E364 /* HxbAccountInfoViewController.m in Sources */,
 				9A97DA9B20EF420200688ADB /* IDPConfig.m in Sources */,
 				9A97DAA520EF420200688ADB /* NSString+IDPExtension.m in Sources */,
 				9A3749B020F85D5500F39681 /* HXBBaseContDownManager.m in Sources */,
+				E153B9D120FC8E15002BE1AE /* HXBMYCapitalRecord_TableView.m in Sources */,
 				E13A0EF320F49E2500A3E364 /* HXBRequestUserInfoViewModel.m in Sources */,
 				9A97DA8D20EF420200688ADB /* NSString+HXBPhonNumber.m in Sources */,
 				E13A0F0320F4C94900A3E364 /* HXBCommonProblemViewController.m in Sources */,
 				9A37498920F859A100F39681 /* HBAlertPasswordView.m in Sources */,
 				9A97DA7B20EF420200688ADB /* HXBWKWebviewViewModel.m in Sources */,
 				9A97DA7320EF420200688ADB /* HSJMyViewModel.m in Sources */,
+				E153B9C820FC859C002BE1AE /* HXBMyHomeViewCell.m in Sources */,
+				E1539C5720FF2BB400BC4025 /* HSJMyHomeInfoTableViewCell.m in Sources */,
 				9A97DA6220EF420200688ADB /* HXBRootVCManager.m in Sources */,
 				9A3749C320F881DA00F39681 /* UITextField+HxbTextField.m in Sources */,
 				9A6E0A6A20F84CA000598071 /* main.m in Sources */,
+				E153B9C420FC8563002BE1AE /* HXBMY_CapitalRecordViewController.m in Sources */,
 				9A97DA6720EF420200688ADB /* HSJFragmentViewController.m in Sources */,
+				E153B9B920FC84A4002BE1AE /* HxbMyViewHeaderView.m in Sources */,
 				9A4B18AA20F60C2B006B83C7 /* HXBBankCardViewModel.m in Sources */,
 				E153B96520F74937002BE1AE /* HXBAccount_AlterLoginPassword_ViewController.m in Sources */,
 				9A97DA9920EF420200688ADB /* IDPLog.m in Sources */,
+				E14B9F9720FD8AF80084F007 /* HXBMy_AllFinance_TableViewCell.m in Sources */,
 				E153B96B20F74C39002BE1AE /* HXBAccountAlterLoginPasswordViewModel.m in Sources */,
 				E13A0F0620F4C9FF00A3E364 /* HXBAlertManager.m in Sources */,
 				9A3749B320F85D5500F39681 /* HXBBaseHandDate.m in Sources */,
@@ -2916,6 +3097,7 @@
 				9A97DA8020EF420200688ADB /* SGInfoAlert.m in Sources */,
 				9A3749B720F85EA200F39681 /* HXBNoDataView.m in Sources */,
 				9A4B189A20F60C2B006B83C7 /* HXBMyTopUpBankView.m in Sources */,
+				E153B9C520FC8563002BE1AE /* HXBMYCapitalRecordViewModel.m in Sources */,
 				9A37491620F7714700F39681 /* PYPresentationController.m in Sources */,
 				9A97DA6420EF420200688ADB /* HSJPageScrollView.m in Sources */,
 				9A4B189B20F60C2B006B83C7 /* HXBMyTopUpBaseView.m in Sources */,
@@ -2965,12 +3147,16 @@
 				9A37491D20F8516300F39681 /* HXBMyBankResultViewController.m in Sources */,
 				9A3749A520F85CF700F39681 /* HXBWithdrawRecordViewController.m in Sources */,
 				9A97DA8F20EF420200688ADB /* UIColor+HxbColor.m in Sources */,
+				E14B9F9A20FD8AF80084F007 /* HXBProportionalBarView.m in Sources */,
 				9A3749C220F881DA00F39681 /* UITextField+HLNumberFormatTextField.m in Sources */,
+				E153B9B620FC8474002BE1AE /* HxbMyView.m in Sources */,
 				9A4B18B820F62209006B83C7 /* HXBLeftLabelTextView.m in Sources */,
 				9A37496E20F855CF00F39681 /* HxbWithdrawViewController.m in Sources */,
 				9A0BD52520F6FBB300B1CC59 /* HXBUserInfoView.m in Sources */,
+				E153B9C320FC8563002BE1AE /* HXBMY_Capital_Sift_ViewController.m in Sources */,
 				9A97DA6520EF420200688ADB /* HSJTopFragmentNavgationView.m in Sources */,
 				9A4B181520F34434006B83C7 /* HXBBindPhoneCellModel.m in Sources */,
+				E14B9F9C20FD8AF80084F007 /* HXBMYAllFinanceViewModel.m in Sources */,
 				9A4B189D20F60C2B006B83C7 /* HXBRechargeFailView.m in Sources */,
 				4EE616A620F4B4F20044B998 /* AXHNewFeatureCell.m in Sources */,
 				9A97DA5E20EF420200688ADB /* KeyChainManage.m in Sources */,
@@ -3031,12 +3217,14 @@
 				9A97DA7520EF420200688ADB /* HSJBaseModel.m in Sources */,
 				9A6E0A5C20F84C9700598071 /* AppDelegate.m in Sources */,
 				4EE616A520F4B4F20044B998 /* AXHNewFeatureController.m in Sources */,
+				E153B9D620FC8EC1002BE1AE /* HXBMYModel_CapitalRecordDetailModel.m in Sources */,
 				9A97DA9120EF420200688ADB /* UILabel+Util.m in Sources */,
 				8D60B4DE20F7486300287E52 /* HSJDepositoryOpenViewModel.m in Sources */,
 				4E8DB75420F5AEE3000712D7 /* TimerWeakTarget.m in Sources */,
 				9A37495B20F854CC00F39681 /* HXBWithdrawCardView.m in Sources */,
 				4EA57D0B20F338EA006FD573 /* HSJRiskAssessmentViewController.m in Sources */,
 				E13A0EFD20F4ADAA00A3E364 /* HXBBottomLineTableViewCell.m in Sources */,
+				E14B9F9520FD8AF80084F007 /* HXBAccumulatedIncomeView.m in Sources */,
 				9A97DA9320EF420200688ADB /* UITextView+YLTextView.m in Sources */,
 				9A97DAB520EF420200688ADB /* NYNetworkAgent.m in Sources */,
 				9A4B185120F5FF85006B83C7 /* HxbHUDProgress.m in Sources */,

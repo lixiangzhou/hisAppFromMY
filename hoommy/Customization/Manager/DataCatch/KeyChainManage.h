@@ -31,7 +31,8 @@
 @property (nonatomic, assign) BOOL ishaveNet;
 ///记录修改登录密码的次数
 @property (nonatomic, copy) NSString *siginCount;
-
+///统一密文
+@property (nonatomic, strong) NSString *ciphertext;
 
 ///手势密码
 @property (nonatomic, copy) NSString  *gesturePwd;

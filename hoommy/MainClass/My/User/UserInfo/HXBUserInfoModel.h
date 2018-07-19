@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-@class HXBRequestUserInfoAPI_UserAssets,HXBRequestUserInfoAPI_UserInfo;
+@class HXBRequestUserInfoAPI_UserAssets,HXBRequestUserInfoAPI_UserInfo,HXBRequestUserInfoAPI_UserBank;
 
 ///用户相关的Model
 @interface HXBUserInfoModel : Jastor
@@ -15,10 +15,35 @@
 @property (nonatomic,strong) HXBRequestUserInfoAPI_UserAssets *userAssets;
 ///用户相关
 @property (nonatomic,strong) HXBRequestUserInfoAPI_UserInfo *userInfo;
+///银行卡
+@property (nonatomic,strong) HXBRequestUserInfoAPI_UserBank *userBank;
 
 
 @end
 
+///银行卡
+@interface HXBRequestUserInfoAPI_UserBank : Jastor
+@property (nonatomic,copy) NSString *enableUnbindReason; ///不允许解绑卡的原因
+@property (nonatomic,copy) NSString *bankCode; ///银行编码
+@property (nonatomic,copy) NSString *bankType; ///银行
+@property (nonatomic,copy) NSString *cardId; ///卡号
+@property (nonatomic,copy) NSString *city; ///城市编码
+@property (nonatomic,copy) NSString *createTime;///创建时间
+@property (nonatomic,copy) NSString *deposit; ///开户行
+@property (nonatomic,copy) NSString *mobile; ///预留手机号码
+@property (nonatomic,copy) NSString *name; ///名字
+@property (nonatomic,copy) NSString *status; ///
+@property (nonatomic,copy) NSString *bankArriveTimeText; ///预计到帐文本
+@property (nonatomic,copy) NSString *single; ///单笔充值限额
+@property (nonatomic,copy) NSString *day; ///一天内充值限额
+@property (nonatomic,copy) NSString *quota; ///限额文本
+@property (nonatomic, assign) BOOL enableUnbind;///是否允许解绑卡
+@property (nonatomic, assign) BOOL defaultBank;///
+@property (nonatomic, assign) int userBankId;///
+@property (nonatomic, assign) int userId;///用户 id
+@property (nonatomic, assign) BOOL quotaStatus;///银行状态 true:可用 false:禁用或者维护
+
+@end
 
 ///用户资产
 @interface HXBRequestUserInfoAPI_UserAssets : Jastor
@@ -149,7 +174,6 @@
  是否有理财顾问
  */
 @property (nonatomic,assign) BOOL isDisplayAdvisor;
-
 
 
 @end
