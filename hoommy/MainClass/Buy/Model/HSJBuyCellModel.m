@@ -10,4 +10,13 @@
 
 @implementation HSJBuyCellModel
 
+- (instancetype)initCellModel:(BOOL)isSvnImage showArrow:(BOOL)isShowArrow {
+    self = [super init];
+    if(self) {
+        self.isSvnImage = isSvnImage;
+        self.isShowArrow = isShowArrow;
+    }
+    
+    return self;
+}
 @end

@@ -7,7 +7,10 @@
 //
 
 #import "HSJBaseViewModel.h"
+#import "HSJBuyCellModel.h"
 
 @interface HSJBuyViewModel : HSJBaseViewModel
+@property (nonatomic, strong) NSArray *cellDataList;
 
+- (void)buildCellDataList;
 @end
