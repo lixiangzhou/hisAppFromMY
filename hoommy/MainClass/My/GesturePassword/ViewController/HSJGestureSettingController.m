@@ -71,8 +71,6 @@
     PCCircleView *lockView = [[PCCircleView alloc] init];
     lockView.delegate = self;
     lockView.arrow = NO;
-    lockView.top = msgLabel.bottom + 7;
-    lockView.centerX = kScreenW * 0.5;
     lockView.type = CircleViewTypeSetting;
     self.lockView = lockView;
     [self.view addSubview:lockView];
@@ -86,6 +84,12 @@
     resetBtn.hidden = YES;
     self.resetBtn = resetBtn;
     [self.view addSubview:resetBtn];
+    
+    [lockView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(msgLabel.mas_bottom).offset(7);
+        make.centerX.equalTo(self.view);
+        make.width.height.equalTo(@300);
+    }];
     
     [resetBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(@-65);

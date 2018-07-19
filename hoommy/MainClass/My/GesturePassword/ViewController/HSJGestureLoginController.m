@@ -15,6 +15,7 @@
 #import "NSString+HXBPhonNumber.h"
 #import "NSDate+IDPExtension.h"
 #import "HXBGeneralAlertVC.h"
+#import "HXBAdvertiseManager.h"
 
 @interface HSJGestureLoginController () <CircleViewDelegate>
 /**
@@ -41,7 +42,6 @@
     
     ((HXBBaseNavigationController *)self.navigationController).enableFullScreenGesture = NO;
     
-    self.type = HSJGestureTypeSetting;
     [self setUI];
 }
 
@@ -74,8 +74,6 @@
     PCCircleView *lockView = [[PCCircleView alloc] init];
     lockView.delegate = self;
     lockView.arrow = NO;
-    lockView.top = msgLabel.bottom + 7;
-    lockView.centerX = kScreenW * 0.5;
     self.lockView = lockView;
     [self.view addSubview:lockView];
     
@@ -106,20 +104,28 @@
             btn.hidden = YES;
             [btn setTitle:@"重新设置" forState:UIControlStateNormal];
             
-            UIButton *skipBtn = [UIButton new];
-            [skipBtn setTitle:@"跳过" forState:UIControlStateNormal];
-            [skipBtn setTitleColor:UIColorFromRGB(0x488CFF) forState:UIControlStateNormal];
-            [skipBtn addTarget:self action:@selector(skip) forControlEvents:UIControlEventTouchUpInside];
-            skipBtn.titleLabel.font = kHXBFont_28;
-            [skipBtn sizeToFit];
-            [self.view addSubview:skipBtn];
-            self.skipBtn = skipBtn;
-            [skipBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.bottom.centerX.equalTo(btn);
-            }];
+            if (self.showSkip) {            
+                UIButton *skipBtn = [UIButton new];
+                [skipBtn setTitle:@"跳过" forState:UIControlStateNormal];
+                [skipBtn setTitleColor:UIColorFromRGB(0x488CFF) forState:UIControlStateNormal];
+                [skipBtn addTarget:self action:@selector(skip) forControlEvents:UIControlEventTouchUpInside];
+                skipBtn.titleLabel.font = kHXBFont_28;
+                [skipBtn sizeToFit];
+                [self.view addSubview:skipBtn];
+                self.skipBtn = skipBtn;
+                [skipBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.bottom.centerX.equalTo(btn);
+                }];
+            }
         }
             break;
     }
+    
+    [lockView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(msgLabel.mas_bottom).offset(7);
+        make.centerX.equalTo(self.view);
+        make.width.height.equalTo(@300);
+    }];
     
     [btn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(@-111);
@@ -131,7 +137,11 @@
 - (void)click {
     switch (self.type) {
         case HSJGestureTypeLogin:
-            [self.navigationController popViewControllerAnimated:YES];
+            [KeyChain signOut];
+            [self.view removeFromSuperview];
+            [HXBAdvertiseManager shared].couldPopAtHomeAfterSlashOrGesturePwd = YES;
+            [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_RefreshHomeData object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_ShowLoginVC object:nil];
             break;
         case HSJGestureTypeSetting:
             self.btn.hidden = YES;
