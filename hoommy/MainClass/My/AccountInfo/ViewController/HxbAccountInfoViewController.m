@@ -20,6 +20,8 @@
 #import "HXBBaseWKWebViewController.h"
 #import "HXBAccount_AlterLoginPassword_ViewController.h"
 #import "HXBCommonProblemViewController.h"
+#import "HSJDepositoryOpenController.h"
+
 @interface HxbAccountInfoViewController ()
 <
 UITableViewDelegate,
@@ -388,6 +390,8 @@ UITableViewDataSource
 - (void)entryDepositoryAccount
 {
     NSLog(@"开通存管账户");
+    HSJDepositoryOpenController *VC = [HSJDepositoryOpenController new];
+    [self.navigationController pushViewController:VC animated:YES];
     /*
     if (self.userInfoViewModel.userInfoModel.userInfo.isUnbundling) {
         //        [HXBAlertManager callupWithphoneNumber:kServiceMobile andWithTitle:@"温馨提示" Message:[NSString stringWithFormat:@"您的身份信息不完善，请联系客服 %@", kServiceMobile]];
