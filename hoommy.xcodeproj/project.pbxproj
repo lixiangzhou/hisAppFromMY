@@ -327,6 +327,8 @@
 		E153B9D220FC8E15002BE1AE /* HXBMYCapitalRecord_TableViewHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E153B9CF20FC8E14002BE1AE /* HXBMYCapitalRecord_TableViewHeaderView.m */; };
 		E153B9D620FC8EC1002BE1AE /* HXBMYModel_CapitalRecordDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E153B9D420FC8EC1002BE1AE /* HXBMYModel_CapitalRecordDetailModel.m */; };
 		E153B9D920FC8EFC002BE1AE /* HXBMYViewModel_MainCapitalRecordViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E153B9D820FC8EFC002BE1AE /* HXBMYViewModel_MainCapitalRecordViewModel.m */; };
+		E15B4B8F2100703E00700C54 /* HSJCheckLoginPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E15B4B8D2100703E00700C54 /* HSJCheckLoginPasswordViewController.m */; };
+		E15B4B93210070E400700C54 /* HSJMyGestureViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E15B4B91210070E400700C54 /* HSJMyGestureViewModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -960,6 +962,10 @@
 		E153B9D520FC8EC1002BE1AE /* HXBMYModel_CapitalRecordDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBMYModel_CapitalRecordDetailModel.h; sourceTree = "<group>"; };
 		E153B9D720FC8EFC002BE1AE /* HXBMYViewModel_MainCapitalRecordViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBMYViewModel_MainCapitalRecordViewModel.h; sourceTree = "<group>"; };
 		E153B9D820FC8EFC002BE1AE /* HXBMYViewModel_MainCapitalRecordViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBMYViewModel_MainCapitalRecordViewModel.m; sourceTree = "<group>"; };
+		E15B4B8D2100703E00700C54 /* HSJCheckLoginPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSJCheckLoginPasswordViewController.m; sourceTree = "<group>"; };
+		E15B4B8E2100703E00700C54 /* HSJCheckLoginPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSJCheckLoginPasswordViewController.h; sourceTree = "<group>"; };
+		E15B4B91210070E400700C54 /* HSJMyGestureViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSJMyGestureViewModel.m; sourceTree = "<group>"; };
+		E15B4B92210070E400700C54 /* HSJMyGestureViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSJMyGestureViewModel.h; sourceTree = "<group>"; };
 		F3AA4ECD958918A00E682797 /* Pods-hoommy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hoommy.release.xcconfig"; path = "Pods/Target Support Files/Pods-hoommy/Pods-hoommy.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1348,6 +1354,7 @@
 		8D60B4B720F7486300287E52 /* GesturePassword */ = {
 			isa = PBXGroup;
 			children = (
+				E15B4B90210070D600700C54 /* ViewModel */,
 				8D60B4B820F7486300287E52 /* View */,
 				8D60B4C520F7486300287E52 /* ViewController */,
 			);
@@ -1376,6 +1383,8 @@
 		8D60B4C520F7486300287E52 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				E15B4B8E2100703E00700C54 /* HSJCheckLoginPasswordViewController.h */,
+				E15B4B8D2100703E00700C54 /* HSJCheckLoginPasswordViewController.m */,
 				8D60B4C620F7486300287E52 /* HSJGestureLoginController.h */,
 				8D60B4C720F7486300287E52 /* HSJGestureLoginController.m */,
 				8D60B4C820F7486300287E52 /* HSJGestureSettingController.h */,
@@ -3154,6 +3163,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		E15B4B90210070D600700C54 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				E15B4B92210070E400700C54 /* HSJMyGestureViewModel.h */,
+				E15B4B91210070E400700C54 /* HSJMyGestureViewModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -3497,6 +3515,7 @@
 				9A4B189A20F60C2B006B83C7 /* HXBMyTopUpBankView.m in Sources */,
 				E153B9C520FC8563002BE1AE /* HXBMYCapitalRecordViewModel.m in Sources */,
 				9A37491620F7714700F39681 /* PYPresentationController.m in Sources */,
+				E15B4B8F2100703E00700C54 /* HSJCheckLoginPasswordViewController.m in Sources */,
 				9A97DA6420EF420200688ADB /* HSJPageScrollView.m in Sources */,
 				9A4B189B20F60C2B006B83C7 /* HXBMyTopUpBaseView.m in Sources */,
 				E13A0F0020F4B45900A3E364 /* HXBAccountInfoViewModel.m in Sources */,
@@ -3564,6 +3583,7 @@
 				9A97DA6520EF420200688ADB /* HSJTopFragmentNavgationView.m in Sources */,
 				9A4B181520F34434006B83C7 /* HXBBindPhoneCellModel.m in Sources */,
 				E14B9F9C20FD8AF80084F007 /* HXBMYAllFinanceViewModel.m in Sources */,
+				E15B4B93210070E400700C54 /* HSJMyGestureViewModel.m in Sources */,
 				9A4B189D20F60C2B006B83C7 /* HXBRechargeFailView.m in Sources */,
 				4EE616A620F4B4F20044B998 /* AXHNewFeatureCell.m in Sources */,
 				8D142A9F20FDBF5E00520728 /* HSJGlobalInfoManager.m in Sources */,
