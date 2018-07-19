@@ -41,6 +41,7 @@
 		8D142A9F20FDBF5E00520728 /* HSJGlobalInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D142A9E20FDBF5E00520728 /* HSJGlobalInfoManager.m */; };
 		8D142AA220FDC00100520728 /* HSJGlobalInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D142AA120FDC00100520728 /* HSJGlobalInfoModel.m */; };
 		8D142AA520FDCDEB00520728 /* HSJPlanModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D142AA420FDCDEB00520728 /* HSJPlanModel.m */; };
+		8D2533212100994700CBF08A /* HSJRollOutCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D2533202100994700CBF08A /* HSJRollOutCellViewModel.m */; };
 		8D591BF120F84C57007CA4BE /* HSJPlanDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D591BF020F84C57007CA4BE /* HSJPlanDetailController.m */; };
 		8D591BF820F84D1C007CA4BE /* HSJPlanDetailTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D591BF720F84D1C007CA4BE /* HSJPlanDetailTopView.m */; };
 		8D591BFB20F84D66007CA4BE /* HSJPlanDetailRulerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D591BFA20F84D66007CA4BE /* HSJPlanDetailRulerView.m */; };
@@ -417,6 +418,8 @@
 		8D142AA120FDC00100520728 /* HSJGlobalInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJGlobalInfoModel.m; sourceTree = "<group>"; };
 		8D142AA320FDCDEB00520728 /* HSJPlanModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJPlanModel.h; sourceTree = "<group>"; };
 		8D142AA420FDCDEB00520728 /* HSJPlanModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJPlanModel.m; sourceTree = "<group>"; };
+		8D25331F2100994700CBF08A /* HSJRollOutCellViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJRollOutCellViewModel.h; sourceTree = "<group>"; };
+		8D2533202100994700CBF08A /* HSJRollOutCellViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJRollOutCellViewModel.m; sourceTree = "<group>"; };
 		8D591BEF20F84C57007CA4BE /* HSJPlanDetailController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJPlanDetailController.h; sourceTree = "<group>"; };
 		8D591BF020F84C57007CA4BE /* HSJPlanDetailController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJPlanDetailController.m; sourceTree = "<group>"; };
 		8D591BF620F84D1C007CA4BE /* HSJPlanDetailTopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJPlanDetailTopView.h; sourceTree = "<group>"; };
@@ -1328,6 +1331,8 @@
 			children = (
 				8D5D610A20FEDFEB003F94D9 /* HSJRollOutViewModel.h */,
 				8D5D610B20FEDFEB003F94D9 /* HSJRollOutViewModel.m */,
+				8D25331F2100994700CBF08A /* HSJRollOutCellViewModel.h */,
+				8D2533202100994700CBF08A /* HSJRollOutCellViewModel.m */,
 				8D5D612220FF1AD0003F94D9 /* HSJRollOutPlanDetailViewModel.h */,
 				8D5D612320FF1AD0003F94D9 /* HSJRollOutPlanDetailViewModel.m */,
 				8D5D612E20FF2BCE003F94D9 /* HSJRollOutConfirmViewModel.h */,
@@ -3502,6 +3507,7 @@
 				9A97DA9920EF420200688ADB /* IDPLog.m in Sources */,
 				E14B9F9720FD8AF80084F007 /* HXBMy_AllFinance_TableViewCell.m in Sources */,
 				E153B96B20F74C39002BE1AE /* HXBAccountAlterLoginPasswordViewModel.m in Sources */,
+				8D2533212100994700CBF08A /* HSJRollOutCellViewModel.m in Sources */,
 				E13A0F0620F4C9FF00A3E364 /* HXBAlertManager.m in Sources */,
 				9A3749B320F85D5500F39681 /* HXBBaseHandDate.m in Sources */,
 				8D5D612120FF1A90003F94D9 /* HSJRollOutPlanDetailController.m in Sources */,

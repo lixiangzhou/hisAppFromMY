@@ -9,6 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "NSObject+HSNetRequestDelegate.h"
 
+typedef enum : NSUInteger {
+    HSJRefreshFooterTypeMoreData,
+    HSJRefreshFooterTypeNoMoreData,
+    HSJRefreshFooterTypeNone,
+} HSJRefreshFooterType;
+
 //获取hud的父视图
 typedef UIView* (^HugViewBlock)(void);
 //业务层网络数据的统一返回标准

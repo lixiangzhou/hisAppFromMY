@@ -21,6 +21,8 @@
     self = [super init];
     if (self) {
         self.dataSource = [NSMutableArray new];
+        self.pageNumber = 0;
+        self.footerType = HSJRefreshFooterTypeMoreData;
     }
     return self;
 }
@@ -36,16 +38,12 @@
     }];
 }
 
-- (void)getPlans:(BOOL)isNew resultBlock:(void(^)(BOOL isSuccess))resultBlock {
-    NSUInteger page = 1;
-    if (isNew == NO) {
-        page = self.pageNumber + 1;
-    }
-    
+- (void)getPlans:(void(^)(BOOL isSuccess))resultBlock {
+    NSUInteger page = self.pageNumber + 1;;
     kWeakSelf
     [self loadData:^(NYBaseRequest *request) {
         request.requestUrl = kHXBMY_PlanListURL;
-        request.requestArgument = @{@"filter": @"1", @"page": @(page)};
+        request.requestArgument = @{@"filter": @"4", @"page": @(page)};
     } responseResult:^(id responseData, NSError *erro) {
         if (responseData) {
             NSDictionary *data = responseData[@"data"];
@@ -58,13 +56,20 @@
             NSMutableArray *temp = [NSMutableArray arrayWithCapacity:dataList.count];
             for (NSInteger i = 0; i < dataList.count; i++) {
                 HSJRollOutModel *model = [[HSJRollOutModel alloc] initWithDictionary:dataList[i]];
-                [temp addObject:model];
+                HSJRollOutCellViewModel *vm = [HSJRollOutCellViewModel new];
+                vm.model = model;
+                [temp addObject:vm];
+            }
+            if (temp.count > 0) {
+                [weakSelf.dataSource addObjectsFromArray:temp];
             }
             
-            if (isNew) {
-                weakSelf.dataSource = temp;
+            if (weakSelf.pageSize > weakSelf.totalCount) {
+                weakSelf.footerType = HSJRefreshFooterTypeNone;
+            } else if (weakSelf.pageSize * weakSelf.pageNumber > weakSelf.totalCount) {
+                self.footerType = HSJRefreshFooterTypeNoMoreData;
             } else {
-                [weakSelf.dataSource addObjectsFromArray:temp];
+                self.footerType = HSJRefreshFooterTypeNone;
             }
         }
         resultBlock(responseData != nil);

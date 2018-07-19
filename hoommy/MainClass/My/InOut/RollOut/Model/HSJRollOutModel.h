@@ -10,8 +10,6 @@
 
 @interface HSJRollOutModel : HSJBaseModel
 
-
-
 /// 待转让金额
 @property (nonatomic, copy) NSString *redProgressLeft;
 /// 加入金额
@@ -26,5 +24,12 @@
 @property (nonatomic, copy) NSString *quitDate;
 /// 预期收益
 @property (nonatomic, copy) NSString *totalInterest;
+/// 月升计划状态
+/// QUIT: 可退出
+/// NOQUIT: 不可退出
+/// QUITING: 退出中
+@property (nonatomic, copy) NSString *stepUpPlanStatus;
+/// 请求退出时间
+@property (nonatomic, copy) NSString *endLockingRequestTime;
 
 @end

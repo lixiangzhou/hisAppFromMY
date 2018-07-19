@@ -59,7 +59,7 @@ static NSString *const X_HxbAuth_Token = @"X-Hxb-Auth-Token";
 
 - (NSString *)baseUrl {
     if(_baseUrl.length <= 0) {
-        return @"http://192.168.1.31:3100";
+        return @"http://192.168.1.149:3100";
     }
     return _baseUrl;
 }

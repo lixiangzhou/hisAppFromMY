@@ -7,6 +7,7 @@
 //
 
 #import "HSJRollOutHeaderView.h"
+#import "NSString+HxbPerMilMoney.h"
 
 @interface HSJRollOutHeaderView ()
 /// 持有中
@@ -91,8 +92,11 @@
 }
 
 #pragma mark - Public
-- (void)updateData {
+- (void)setAssetsModel:(HSJPlanAssetsModel *)assetsModel {
+    _assetsModel = assetsModel;
     
+    self.holdAssetsLabel.text = [NSString GetPerMilWithDouble:assetsModel.currentStepupAmount];
+    self.rollOutAssetsLabel.text = [NSString GetPerMilWithDouble:assetsModel.currentStepupAmount];
 }
 
 @end

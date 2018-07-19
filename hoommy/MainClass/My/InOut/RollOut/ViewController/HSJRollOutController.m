@@ -28,14 +28,6 @@
     self.title = @"持有资产";
     self.viewModel = [HSJRollOutViewModel new];
     [self setUI];
-    
-    [self.viewModel getAssets:^(BOOL isSuccess) {
-        
-    }];
-    
-    [self.viewModel getPlans:YES resultBlock:^(BOOL isSuccess) {
-        
-    }];
 }
 
 #pragma mark - UI
@@ -48,23 +40,34 @@
     tableView.delegate = self;
     self.headerView = [HSJRollOutHeaderView new];
     tableView.tableHeaderView = self.headerView;
+    tableView.rowHeight = HSJRollOutCellHeight;
     [tableView registerClass:[HSJRollOutCell class] forCellReuseIdentifier:HSJRollOutCellIdentifier];
     [self.view addSubview:tableView];
     self.tableView = tableView;
 }
 
 #pragma mark - Network
-
+- (void)updateData {
+    kWeakSelf
+    [self.viewModel getAssets:^(BOOL isSuccess) {
+        weakSelf.headerView.assetsModel = weakSelf.viewModel.assetsModel;
+    }];
+    
+    [self.viewModel getPlans:^(BOOL isSuccess) {
+        [weakSelf.tableView reloadData];
+    }];
+}
 
 #pragma mark - Delegate Internal
 
 #pragma mark -
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return self.viewModel.dataSource.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     HSJRollOutCell *cell = [tableView dequeueReusableCellWithIdentifier:HSJRollOutCellIdentifier forIndexPath:indexPath];
+    cell.viewModel = self.viewModel.dataSource[indexPath.row];
     return cell;
 }
 

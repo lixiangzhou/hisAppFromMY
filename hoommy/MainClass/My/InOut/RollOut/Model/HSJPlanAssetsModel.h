@@ -9,5 +9,6 @@
 #import "HSJBaseModel.h"
 
 @interface HSJPlanAssetsModel : HSJBaseModel
-
+/// 月升当前持有资产
+@property (nonatomic, assign) CGFloat currentStepupAmount;
 @end
