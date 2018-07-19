@@ -19,6 +19,7 @@
 
 @end
 
+
 @interface HBAlertPasswordView : UIView
 
 /** 协议 */

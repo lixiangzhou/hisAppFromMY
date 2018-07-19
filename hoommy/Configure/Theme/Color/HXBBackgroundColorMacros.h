@@ -65,5 +65,9 @@
 
 ///粉红色
 #define kHXBColor_FF8359_100         UIColorFromRGB(0xFF8359)
+//
+#define kHXBColor_FE7E5E_100         UIColorFromRGB(0xFE7E5E)
+#define kHXBColor_FFE6A4_100         UIColorFromRGB(0xFFE6A4)
+#define kHXBColor_7F85A1_100         UIColorFromRGB(0x7F85A1)
 
 #endif /* HXBBackgroundColorMacros_h */

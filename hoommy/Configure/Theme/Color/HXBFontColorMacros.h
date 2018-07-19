@@ -38,4 +38,8 @@
 //粉红色
 #define kHXBFontColor_FF413C_100         UIColorFromRGB(0xFF413C)
 
+//
+#define kHXBFontColor_FE7E5E_100         UIColorFromRGB(0xFE7E5E)
+#define kHXBFontColor_7F85A1_100         UIColorFromRGB(0x7F85A1)
+
 #endif /* HXBFontColorMacros_h */

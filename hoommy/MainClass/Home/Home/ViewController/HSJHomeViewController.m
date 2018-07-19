@@ -83,6 +83,14 @@
         make.left.right.equalTo(self.view);
         make.height.mas_equalTo(44);
     }];
+    
+    NYBaseRequest *req = [NYBaseRequest new];
+    req.requestUrl = @"home/baby";
+    [req loadData:^(NYBaseRequest *request, id responseObject) {
+        
+    } failure:^(NYBaseRequest *request, NSError *error) {
+        
+    }];
 }
 
 - (void)setUI {

@@ -139,9 +139,9 @@
 - (void)setViewModel:(HSJPlanDetailViewModel *)viewModel {
     _viewModel = viewModel;
     
-    self.lockLabel.text = @"锁定7天";
-    self.startLabel.text = @"07:29\n开始计息";
-    self.exitLockLabel.text = @"07:32\n接触锁定";
+    self.lockLabel.text = [NSString stringWithFormat:@"锁定%@", viewModel.lockString];
+    self.startLabel.text = [NSString stringWithFormat:@"%@\n开始计息", viewModel.startDateString];
+    self.exitLockLabel.text = [NSString stringWithFormat:@"%@\n解除锁定", viewModel.endLockDateString];
 }
 
 @end

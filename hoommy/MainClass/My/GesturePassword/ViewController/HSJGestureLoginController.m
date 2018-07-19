@@ -14,6 +14,7 @@
 #import "PCCircle.h"
 #import "NSString+HXBPhonNumber.h"
 #import "NSDate+IDPExtension.h"
+#import "HXBGeneralAlertVC.h"
 
 @interface HSJGestureLoginController () <CircleViewDelegate>
 /**
@@ -27,6 +28,7 @@
 @property (nonatomic, weak) PCCircleView *lockView;
 
 @property (nonatomic, weak) UIButton *btn;
+@property (nonatomic, weak) UIButton *skipBtn;
 @end
 
 @implementation HSJGestureLoginController
@@ -55,8 +57,8 @@
     [self.view addSubview:dateLabel];
     
     UILabel *mobileLabel = [UILabel new];
-//    mobileLabel.text = [NSString stringWithFormat:@"欢迎回来 %@", [KeyChain.mobile replaceStringWithStartLocation:3 lenght:4]];
-    mobileLabel.text = @"欢迎回来 133****3213";
+    mobileLabel.text = [NSString stringWithFormat:@"欢迎回来 %@", [KeyChain.mobile replaceStringWithStartLocation:3 lenght:4]];
+//    mobileLabel.text = @"欢迎回来 133****3213";
     mobileLabel.textColor = kHXBColor_333333_100;
     mobileLabel.font = kHXBFont_28;
     mobileLabel.frame = CGRectMake(dateLabel.x, dateLabel.bottom, kScreenH - 50, 20);
@@ -111,6 +113,7 @@
             skipBtn.titleLabel.font = kHXBFont_28;
             [skipBtn sizeToFit];
             [self.view addSubview:skipBtn];
+            self.skipBtn = skipBtn;
             [skipBtn mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.bottom.centerX.equalTo(btn);
             }];
@@ -139,12 +142,20 @@
 }
 
 - (void)skip {
-    [self.navigationController popViewControllerAnimated:YES];
+    KeyChain.skipGesture = kHXBGesturePwdSkipeYES;
+    [KeyChain removeGesture];
+    if (self.dismissBlock) {
+        self.dismissBlock(NO, NO, YES);
+    }
+    // 只出现一次弹窗
+    KeyChain.skipGestureAlertAppeared = YES;
 }
 
 #pragma mark - CircleViewDelegate - Setting
 - (void)circleView:(PCCircleView *)view type:(CircleViewType)type connectCirclesLessThanNeedWithGesture:(NSString *)gesture
 {
+    self.skipBtn.hidden = YES;
+    
     NSString *gestureOne = gesture;
     
     // 看是否存在第一个密码
@@ -159,6 +170,8 @@
 
 - (void)circleView:(PCCircleView *)view type:(CircleViewType)type didCompleteSetFirstGesture:(NSString *)gesture
 {
+    self.skipBtn.hidden = YES;
+    
     NSLog(@"获得第一个手势密码%@", gesture);
     self.btn.hidden = NO;
     [self.msgLabel showNormalMsg:@"再次设置手势密码"];
@@ -169,11 +182,15 @@
     NSLog(@"获得第二个手势密码%@",gesture);
     
     if (equal) {
+        [self.msgLabel showWarnMsg:gestureTextSetSuccess];
+        
         KeyChain.gesturePwd = gesture;
         KeyChain.gesturePwdCount = 5;
-        [self.msgLabel showWarnMsg:gestureTextSetSuccess];
-        [PCCircleViewConst saveGesture:gesture Key:gestureFinalSaveKey];
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        KeyChain.skipGesture = kHXBGesturePwdSkipeNO;
+        
+        if (self.dismissBlock) {
+            self.dismissBlock(NO, NO, YES);
+        }
     } else {
         self.btn.hidden = NO;
         [self.msgLabel showWarnMsgAndShake:gestureTextDrawAgainError];
@@ -186,14 +203,37 @@
     if (equal) {
         NSLog(@"登陆成功！");
         KeyChain.gesturePwdCount = 5;
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        if (self.dismissBlock) {
+            self.dismissBlock(YES, YES, YES);
+        }
     } else {
         KeyChain.gesturePwdCount -= 1;
         if (KeyChain.gesturePwdCount <= 0) {
-            [self.navigationController popViewControllerAnimated:YES];
-            return;
+            HXBGeneralAlertVC *alertVC = [[HXBGeneralAlertVC alloc] initWithMessageTitle:@"温馨提示" andSubTitle:@"很抱歉，您的手势密码五次输入错误" andLeftBtnName:@"取消" andRightBtnName:@"确定" isHideCancelBtn:YES isClickedBackgroundDiss:NO];
+            alertVC.isCenterShow = YES;
+            [KeyChain removeGesture];
+            KeyChain.skipGesture = kHXBGesturePwdSkipeYES;
+            [KeyChain signOut];
+            
+            kWeakSelf
+            alertVC.leftBtnBlock = ^{
+                if (weakSelf.dismissBlock) {
+                    weakSelf.dismissBlock(NO, NO, YES);
+                }
+                [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_RefreshHomeData object:nil];
+            };
+            alertVC.rightBtnBlock = ^{
+                if (weakSelf.dismissBlock) {
+                    weakSelf.dismissBlock(NO, NO, NO);
+                }
+                [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_RefreshHomeData object:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_ShowLoginVC object:@{kHXBMY_VersionUpdateURL : @YES}];
+            };
+            
+            [self presentViewController:alertVC animated:NO completion:nil];
+        } else {
+            [self.msgLabel showWarnMsgAndShake:[NSString stringWithFormat:@"密码错了，还可输入%zd次", KeyChain.gesturePwdCount]];
         }
-        [self.msgLabel showWarnMsgAndShake:[NSString stringWithFormat:@"手势输入有误，还剩%zd次机会", KeyChain.gesturePwdCount]];
     }
 }
 

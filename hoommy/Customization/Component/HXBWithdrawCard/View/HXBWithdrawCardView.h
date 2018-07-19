@@ -23,7 +23,7 @@
 /**
  bankNameBtnClickBlock
  */
-@property (nonatomic, copy) void(^bankNameBtnClickBlock)();
+@property (nonatomic, copy) void(^bankNameBtnClickBlock)(void);
 
 /**
  nextButtonClickBlcok

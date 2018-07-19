@@ -12,6 +12,7 @@
 #import "HSJPlanDetailAdvantageView.h"
 #import "HSJPlanDetailInfoView.h"
 #import "HSJPlanDetailViewModel.h"
+#import "HSJRollOutController.h"
 
 @interface HSJPlanDetailController () <UIScrollViewDelegate>
 @property (nonatomic, weak) UIView *navView;
@@ -25,6 +26,7 @@
 @property (nonatomic, weak) HSJPlanDetailInfoView *infoView;
 
 @property (nonatomic, strong) HSJPlanDetailViewModel *viewModel;
+@property (nonatomic, weak) UIView *bottomView;
 @end
 
 @implementation HSJPlanDetailController
@@ -38,8 +40,7 @@
     self.viewModel = [HSJPlanDetailViewModel new];
     [self setUI];
     
-    self.topView.viewModel = self.viewModel;
-    self.rulerView.viewModel = self.viewModel;
+    [self getData];
 }
 
 #pragma mark - UI
@@ -134,33 +135,11 @@
     UIView *bottomView = [UIView new];
     bottomView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:bottomView];
+    self.bottomView = bottomView;
     
     UIView *sepLine = [UIView new];
     sepLine.backgroundColor = self.scrollView.backgroundColor;
     [bottomView addSubview:sepLine];
-    
-    UIButton *outBtn = [UIButton new];
-    [outBtn setTitle:@"转出" forState:UIControlStateNormal];
-    [outBtn setTitleColor:kHXBColor_FF7055_100 forState:UIControlStateNormal];
-    outBtn.layer.cornerRadius = 2;
-    outBtn.layer.borderColor = kHXBColor_FF7055_100.CGColor;
-    outBtn.layer.borderWidth = 0.5;
-    outBtn.layer.masksToBounds = YES;
-    outBtn.titleLabel.font = kHXBFont_32;
-    [outBtn addTarget:self action:@selector(outClick) forControlEvents:UIControlEventTouchUpInside];
-    
-    [bottomView addSubview:outBtn];
-    
-    UIButton *inBtn = [UIButton new];
-    [inBtn setTitle:@"转入" forState:UIControlStateNormal];
-    [inBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    inBtn.backgroundColor = kHXBColor_FF7055_100;
-    inBtn.layer.cornerRadius = 2;
-    inBtn.layer.masksToBounds = YES;
-    inBtn.titleLabel.font = kHXBFont_32;
-    [inBtn addTarget:self action:@selector(inClick) forControlEvents:UIControlEventTouchUpInside];
-    
-    [bottomView addSubview:inBtn];
     
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(@(-HXBTabbarSafeBottomMargin));
@@ -172,11 +151,84 @@
         make.top.left.right.equalTo(bottomView);
         make.height.equalTo(@1);
     }];
+}
+
+- (void)updateBottomView {
+    [self.bottomView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    
+    if (self.viewModel.planModel.hasBuy) {
+        [self setupBuyBottomView];
+    } else {
+        [self setupUnBuyBottomView];
+    }
+}
+
+- (void)setupUnBuyBottomView {
+    UIButton *calBtn = [UIButton new];
+    calBtn.adjustsImageWhenHighlighted = NO;
+    [calBtn setImage:[UIImage imageNamed:@"detail_cal"] forState:UIControlStateNormal];
+    [calBtn addTarget:self action:@selector(calClick) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.bottomView addSubview:calBtn];
+    
+    UIButton *inBtn = [UIButton new];
+    [inBtn setTitle:@"转入" forState:UIControlStateNormal];
+    [inBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    inBtn.backgroundColor = kHXBColor_FF7055_100;
+    inBtn.layer.cornerRadius = 2;
+    inBtn.layer.masksToBounds = YES;
+    inBtn.titleLabel.font = kHXBFont_32;
+    [inBtn addTarget:self action:@selector(inClick) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.bottomView addSubview:inBtn];
+    
+    [calBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(@kScrAdaptationW(15));
+        make.centerY.equalTo(self.bottomView);
+        make.width.height.equalTo(@kScrAdaptationW(35));
+    }];
+    
+    [inBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(@kScrAdaptationW(-15));
+        make.centerY.height.equalTo(calBtn);
+        make.left.equalTo(calBtn.mas_right).offset(15);
+    }];
+}
+
+- (void)setupBuyBottomView {
+    UIButton *outBtn = [UIButton new];
+    [outBtn setTitle:@"转出" forState:UIControlStateNormal];
+    [outBtn setTitleColor:kHXBColor_FF7055_100 forState:UIControlStateNormal];
+    outBtn.layer.cornerRadius = 2;
+    outBtn.layer.borderColor = kHXBColor_FF7055_100.CGColor;
+    outBtn.layer.borderWidth = 0.5;
+    outBtn.layer.masksToBounds = YES;
+    outBtn.titleLabel.font = kHXBFont_32;
+    [outBtn addTarget:self action:@selector(outClick) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.bottomView addSubview:outBtn];
+    
+    UIButton *inBtn = [UIButton new];
+    [inBtn setTitle:@"转入" forState:UIControlStateNormal];
+    [inBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    inBtn.backgroundColor = kHXBColor_FF7055_100;
+    inBtn.layer.cornerRadius = 2;
+    inBtn.layer.masksToBounds = YES;
+    inBtn.titleLabel.font = kHXBFont_32;
+    [inBtn addTarget:self action:@selector(inClick) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.bottomView addSubview:inBtn];
+    
+    [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(@(-HXBTabbarSafeBottomMargin));
+        make.left.right.equalTo(self.view);
+        make.height.equalTo(@kScrAdaptationW(64));
+    }];
     
     [outBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(@kScrAdaptationW(15));
         make.height.equalTo(@kScrAdaptationW(41));
-        make.centerY.equalTo(bottomView);
+        make.centerY.equalTo(self.bottomView);
     }];
     
     [inBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -188,7 +240,22 @@
 }
 
 #pragma mark - Network
+- (void)getData {
+    kWeakSelf
+    [self.viewModel getDataWithId:@"748" resultBlock:^(BOOL isSuccess) {
+        if (isSuccess) {
+            [weakSelf setData];
+        }
+    }];
+}
 
+- (void)setData {
+    self.topView.viewModel = self.viewModel;
+    self.rulerView.viewModel = self.viewModel;
+    self.advantageView.viewModel = self.viewModel;
+    
+    [self updateBottomView];
+}
 
 #pragma mark - Delegate Internal
 
@@ -210,10 +277,16 @@
 
 #pragma mark - Action
 - (void)inClick {
-    
+    HSJRollOutController *vc = [HSJRollOutController new];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)outClick {
+    HSJRollOutController *vc = [HSJRollOutController new];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)calClick {
     
 }
 
