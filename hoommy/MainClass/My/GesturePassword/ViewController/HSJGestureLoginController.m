@@ -214,15 +214,17 @@
             [KeyChain removeGesture];
             KeyChain.skipGesture = kHXBGesturePwdSkipeYES;
             [KeyChain signOut];
+            
+            kWeakSelf
             alertVC.leftBtnBlock = ^{
-                if (self.dismissBlock) {
-                    self.dismissBlock(NO, NO, YES);
+                if (weakSelf.dismissBlock) {
+                    weakSelf.dismissBlock(NO, NO, YES);
                 }
                 [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_RefreshHomeData object:nil];
             };
             alertVC.rightBtnBlock = ^{
-                if (self.dismissBlock) {
-                    self.dismissBlock(NO, NO, NO);
+                if (weakSelf.dismissBlock) {
+                    weakSelf.dismissBlock(NO, NO, NO);
                 }
                 [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_RefreshHomeData object:nil];
                 [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_ShowLoginVC object:@{kHXBMY_VersionUpdateURL : @YES}];

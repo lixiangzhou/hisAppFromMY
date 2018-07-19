@@ -11,11 +11,12 @@
 
 @implementation HSJRollOutPlanDetailViewModel
 - (void)getPlanDetail:(NSString *)planId resultBlock:(void(^)(BOOL isSuccess))resultBlock {
+    kWeakSelf
     [self loadData:^(NYBaseRequest *request) {
         request.requestUrl = kHXBMY_PlanDetaileURL(planId);
         request.modelType = [HSJRollOutModel class];
     } responseResult:^(id responseData, NSError *erro) {
-        self.model = responseData;
+        weakSelf.model = responseData;
         resultBlock(responseData != nil);
     }];
 }

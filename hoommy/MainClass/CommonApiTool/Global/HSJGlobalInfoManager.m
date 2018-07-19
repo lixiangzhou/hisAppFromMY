@@ -42,15 +42,15 @@
         request.requestUrl = kGlobal;
         request.modelType = [HSJGlobalInfoModel class];
     } responseResult:^(id responseData, NSError *erro) {
-        self.infoModel = responseData;
+        weakSelf.infoModel = responseData;
         
         if (resultBlock) {
-            self.retryCount = 0;
+            weakSelf.retryCount = 0;
             resultBlock(responseData);
         } else {
             if (responseData == nil) {
-                if (self.retryCount <= 3) {
-                    self.retryCount += 1;
+                if (weakSelf.retryCount <= 3) {
+                    weakSelf.retryCount += 1;
                     // 没有获取到数据就获取
                     [weakSelf getData:nil];
                 }

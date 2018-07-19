@@ -10,13 +10,14 @@
 
 @implementation HSJRollOutConfirmViewModel
 - (void)quitConfrim:(NSArray *)ids resultBlock:(void(^)(BOOL isSuccess))resultBlock {
+    kWeakSelf
     [self loadData:^(NYBaseRequest *request) {
         request.requestArgument = @{@"action": @"confirm", @"id": ids};
         request.requestUrl = kHXBMY_PlanQuit;
         request.requestMethod = NYRequestMethodPost;
         request.modelType = [HSJRollOutConfirmModel class];
     } responseResult:^(id responseData, NSError *erro) {
-        self.model = responseData;
+        weakSelf.model = responseData;
         resultBlock(responseData != nil);
     }];
 }

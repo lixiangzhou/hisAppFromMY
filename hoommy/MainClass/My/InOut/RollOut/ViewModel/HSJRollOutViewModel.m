@@ -26,11 +26,12 @@
 }
 
 - (void)getAssets:(void(^)(BOOL isSuccess))resultBlock {
+    kWeakSelf
     [self loadData:^(NYBaseRequest *request) {
         request.requestUrl = kHXBMY_PlanAccountRequestURL;
         request.modelType = [HSJPlanAssetsModel class];
     } responseResult:^(id responseData, NSError *erro) {
-        self.assetsModel = responseData;
+        weakSelf.assetsModel = responseData;
         resultBlock(responseData != nil);
     }];
 }
@@ -41,15 +42,16 @@
         page = self.pageNumber + 1;
     }
     
+    kWeakSelf
     [self loadData:^(NYBaseRequest *request) {
         request.requestUrl = kHXBMY_PlanListURL;
         request.requestArgument = @{@"filter": @"1", @"page": @(page)};
     } responseResult:^(id responseData, NSError *erro) {
         if (responseData) {
             NSDictionary *data = responseData[@"data"];
-            self.totalCount = [data[@"totalCount"] integerValue];
-            self.pageSize = [data[@"pageSize"] integerValue];
-            self.pageNumber = [data[@"pageNumber"] integerValue];
+            weakSelf.totalCount = [data[@"totalCount"] integerValue];
+            weakSelf.pageSize = [data[@"pageSize"] integerValue];
+            weakSelf.pageNumber = [data[@"pageNumber"] integerValue];
             
             NSArray *dataList = data[@"dataList"];
             
@@ -60,9 +62,9 @@
             }
             
             if (isNew) {
-                self.dataSource = temp;
+                weakSelf.dataSource = temp;
             } else {
-                [self.dataSource addObjectsFromArray:temp];
+                [weakSelf.dataSource addObjectsFromArray:temp];
             }
         }
         resultBlock(responseData != nil);
