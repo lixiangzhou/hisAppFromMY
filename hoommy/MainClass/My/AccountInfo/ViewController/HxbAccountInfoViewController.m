@@ -470,7 +470,7 @@ UITableViewDataSource
     [data addObject:@{@"type":@(HXBAccountSecureTypeCommonProblems), @"title": @"常见问题"}];
     [data addObject:@{@"type":@(HXBAccountSecureTypeAboutUs), @"title": @"关于我们"}];
     
-    
+    kWeakSelf
     self.dataSource = [NSMutableArray arrayWithCapacity:data.count];
     for (NSInteger i = 0; i < data.count; i++) {
         NSDictionary *dict = data[i];
@@ -480,7 +480,7 @@ UITableViewDataSource
             model.switchBlock = ^(BOOL isOn) {
                 HSJGestureSettingController *VC = [[HSJGestureSettingController alloc] init];
                 VC.switchType = isOn ? HXBAccountSecureSwitchTypeOn : HXBAccountSecureSwitchTypeOff;
-                [self.navigationController pushViewController:VC animated:YES];
+                [weakSelf.navigationController pushViewController:VC animated:YES];
             };
         }
         
