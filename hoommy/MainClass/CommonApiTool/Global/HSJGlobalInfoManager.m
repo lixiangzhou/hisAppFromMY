@@ -31,7 +31,9 @@
 
 - (void)getData:(void (^)(HSJGlobalInfoModel *))resultBlock {
     if (self.infoModel) {
-        resultBlock(self.infoModel);
+        if (resultBlock) {
+            resultBlock(self.infoModel);
+        }
         return;
     }
     kWeakSelf
@@ -46,7 +48,9 @@
         
         if (resultBlock) {
             weakSelf.retryCount = 0;
-            resultBlock(responseData);
+            if (resultBlock) {
+                resultBlock(self.infoModel);
+            }
         } else {
             if (responseData == nil) {
                 if (weakSelf.retryCount <= 3) {

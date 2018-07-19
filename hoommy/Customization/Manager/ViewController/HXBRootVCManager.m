@@ -43,7 +43,7 @@
     [[HSJGlobalInfoManager shared] getData];
     
     //升级弹框
-//    [[HXBVersionUpdateManager sharedInstance] checkVersionUpdate];
+    [[HXBVersionUpdateManager sharedInstance] checkVersionUpdate];
     NSString *currentVersion = [[[NSBundle mainBundle]infoDictionary]objectForKey:@"CFBundleShortVersionString"];
     NSString *lastVersion = [[NSUserDefaults standardUserDefaults] objectForKey:AXHVersionKey];
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
@@ -92,7 +92,7 @@
         } else {
             NSString *skip = KeyChain.skipGesture;
             BOOL skipGesturePwd = NO;
-            if (skip != nil) {
+            if (![skip isEqual:kHXBGesturePwdSkipeNONE]) {
                 skipGesturePwd = [skip isEqualToString:kHXBGesturePwdSkipeYES];
             }
             
@@ -103,6 +103,7 @@
             } else {
                 HSJGestureLoginController *gestureVC = [[HSJGestureLoginController alloc] init];
                 gestureVC.type = HSJGestureTypeSetting;
+                gestureVC.showSkip = YES;
                 VC = gestureVC;
             }
         }
@@ -127,7 +128,6 @@
 - (void)showSlash {
     [self.mainTabbarVC.view addSubview:self.advertiseVC.view];
     [self.advertiseVC addTimer];
-    [HXBAdvertiseManager shared].isShowed = YES;
 }
 
 - (void)popWindowsAtHomeAfterSlashOrGesturePwd {

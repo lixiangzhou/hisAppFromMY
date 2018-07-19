@@ -22,13 +22,18 @@
 #import "HXBBindPhoneViewController.h"
 
 #import "HXBCommonProblemViewController.h"
+
 #import "HxbWithdrawCardViewController.h"
+#import "HSJDepositoryOpenController.h"
+#import "HSJGestureSettingController.h"
 
 typedef enum : NSUInteger {
     USERINFO_UPDATE_FAILE,//失败
     USERINFO_UPDATE_ING, //正在更新
     USERINFO_UPDATE_SUCCESS,//成功
 }UserInfoUpdateState;
+
+
 
 @interface HxbAccountInfoViewController ()
 <
@@ -510,6 +515,8 @@ UITableViewDataSource
 - (void)entryDepositoryAccount
 {
     NSLog(@"开通存管账户");
+    HSJDepositoryOpenController *VC = [HSJDepositoryOpenController new];
+    [self.navigationController pushViewController:VC animated:YES];
     /*
     if (self.userInfoViewModel.userInfoModel.userInfo.isUnbundling) {
         //        [HXBAlertManager callupWithphoneNumber:kServiceMobile andWithTitle:@"温馨提示" Message:[NSString stringWithFormat:@"您的身份信息不完善，请联系客服 %@", kServiceMobile]];
@@ -574,27 +581,27 @@ UITableViewDataSource
     [data addObject:@{@"type":@(HXBAccountSecureTypeLoginPwd), @"title": @"登录密码"}];
     [data addObject:@{@"type":@(HXBAccountSecureTypeTransactionPwd), @"title": @"交易密码"}];
     [data addObject:@{@"type":@(HXBAccountSecureTypeGesturePwdSwitch), @"title": @"手势密码开关"}];
-    [data addObject:@{@"type":@(HXBAccountSecureTypeGesturePwdModify), @"title": @"修改手势密码"}];//暂时写上
+//    [data addObject:@{@"type":@(HXBAccountSecureTypeGesturePwdModify), @"title": @"修改手势密码"}];//暂时写上
     
-//    if ([KeyChain.skipGesture isEqual:kHXBGesturePwdSkipeNO]) {
-//        [data addObject:@{@"type":@(HXBAccountSecureTypeGesturePwdModify), @"title": @"修改手势密码"}];
-//    }
+    if ([KeyChain.skipGesture isEqual:kHXBGesturePwdSkipeNO]) {
+        [data addObject:@{@"type":@(HXBAccountSecureTypeGesturePwdModify), @"title": @"修改手势密码"}];
+    }
     [data addObject:@{@"type":@(HXBAccountSecureTypeCommonProblems), @"title": @"常见问题"}];
     [data addObject:@{@"type":@(HXBAccountSecureTypeAboutUs), @"title": @"关于我们"}];
     
-    
+    kWeakSelf
     self.dataSource = [NSMutableArray arrayWithCapacity:data.count];
     for (NSInteger i = 0; i < data.count; i++) {
         NSDictionary *dict = data[i];
         
         HXBAccountSecureModel *model = [HXBAccountSecureModel yy_modelWithJSON:dict];
-//        if (model.type == HXBAccountSecureTypeGesturePwdSwitch) {
-//            model.switchBlock = ^(BOOL isOn) {
-//                HXBCheckLoginPasswordViewController *checkLoginPasswordVC = [[HXBCheckLoginPasswordViewController alloc] init];
-//                checkLoginPasswordVC.switchType = isOn ? HXBAccountSecureSwitchTypeOn : HXBAccountSecureSwitchTypeOff;
-//                [self.navigationController pushViewController:checkLoginPasswordVC animated:YES];
-//            };
-//        }
+        if (model.type == HXBAccountSecureTypeGesturePwdSwitch) {
+            model.switchBlock = ^(BOOL isOn) {
+                HSJGestureSettingController *VC = [[HSJGestureSettingController alloc] init];
+                VC.switchType = isOn ? HXBAccountSecureSwitchTypeOn : HXBAccountSecureSwitchTypeOff;
+                [weakSelf.navigationController pushViewController:VC animated:YES];
+            };
+        }
         
         [self.dataSource addObject:model];
     }

@@ -22,7 +22,7 @@
 {
     self = [super init];
     if (self) {
-//        self.pageUrl = kHXBH5_RiskEvaluationURL;
+        self.pageUrl = kHXBH5_RiskEvaluationURL;
     }
     return self;
 }
@@ -38,7 +38,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.isRedColourGradientNavigationBar = YES;
+    self.isWhiteColourGradientNavigationBar = YES;
 }
 
 #pragma mark - 注册H5事件
@@ -59,7 +59,7 @@
                 *stop = YES;
             }
         }];
-        [weakSelf.navigationController popToViewController:vc animated:YES];
+        [weakSelf.navigationController popViewControllerAnimated:YES];
     }];
 }
 
@@ -73,6 +73,7 @@
     [rightBackBtn addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
     [rightBackBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     rightBackBtn.titleLabel.font = kHXBFont_PINGFANGSC_REGULAR(14);
+    [rightBackBtn setTitleColor:kHXBColor_333333_100 forState:(UIControlStateNormal)];
     // 修改导航栏左边的item
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBackBtn];
     rightBackBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;

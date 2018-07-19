@@ -524,9 +524,10 @@
                             @"bankReservedMobile": mobile,
                             };
     
+    kWeakSelf
     [self.viewModel openDepositoryWithParam:param resultBlock:^(BOOL isSuccess) {
         if (isSuccess) {
-            
+            [weakSelf.navigationController popToRootViewControllerAnimated:YES];
         }
     }];
 }
