@@ -29,11 +29,11 @@
     if (model.type == HXBAccountSecureTypeGesturePwdSwitch) {
         self.accessoryType = UITableViewCellAccessoryNone;
         UISwitch *switchView = [UISwitch new];
-//        NSString *skip = KeyChain.skipGesture;
+        NSString *skip = KeyChain.skipGesture;
         BOOL isOn = NO;
-//        if (skip != nil) {
-//            isOn = ![skip isEqualToString:kHXBGesturePwdSkipeYES];
-//        }
+        if (skip != nil) {
+            isOn = ![skip isEqualToString:kHXBGesturePwdSkipeYES];
+        }
         switchView.on = isOn;
         [[switchView rac_signalForControlEvents:UIControlEventValueChanged] subscribeNext:^(__kindof UISwitch * _Nullable x) {
             model.switchBlock(x.isOn);
@@ -49,9 +49,7 @@
         lab.font = kHXBFont_PINGFANGSC_REGULAR(14);
         lab.textColor = [UIColor colorWithRed:146/255.0f green:149/255.0f blue:162/255.0f alpha:1] ;
         if (model.type == HXBAccountSecureTypeModifyPhone) {
-            NSMutableString * phoneStr = [NSMutableString stringWithString:@"15811111111"];//KeyChain.mobile
-            [phoneStr replaceCharactersInRange:NSMakeRange(3, 4)  withString:@"****"];
-            lab.text = phoneStr;
+            lab.text = [KeyChain.mobile hxb_hiddenPhonNumberWithMid];
         } else {
             lab.text = @"修改";
         }

@@ -131,9 +131,24 @@
     if (equal) {
         KeyChain.gesturePwd = gesture;
         KeyChain.gesturePwdCount = 5;
+        KeyChain.skipGesture = kHXBGesturePwdSkipeNO;
+        
         [self.msgLabel showWarnMsg:gestureTextSetSuccess];
         [PCCircleViewConst saveGesture:gesture Key:gestureFinalSaveKey];
-        [self.navigationController popToRootViewControllerAnimated:YES];
+
+        __block UIViewController *popToVC = nil;
+        [self.navigationController.childViewControllers enumerateObjectsUsingBlock:^(__kindof UIViewController * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if ([obj isKindOfClass:NSClassFromString(@"HxbAccountInfoViewController")]) {
+                popToVC = obj;
+                *stop = YES;
+            }
+        }];
+        
+        if (popToVC && self.switchType == HXBAccountSecureSwitchTypeOn) {   // 从账户安全页进去的
+            [self.navigationController popToViewController:popToVC animated:YES];
+        } else if (self.switchType == HXBAccountSecureSwitchTypeChange) {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
     } else {
         self.resetBtn.hidden = NO;
         [self.msgLabel showWarnMsgAndShake:gestureTextDrawAgainError];
