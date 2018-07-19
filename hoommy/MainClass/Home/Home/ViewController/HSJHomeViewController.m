@@ -18,9 +18,12 @@
 #import "HSJSignInViewController.h"
 #import "HSJHomeCustomNavbarView.h"
 
+#import "HSJHomeHeaderView.h"
 @interface HSJHomeViewController ()
 
 @property (nonatomic, strong) HSJHomeCustomNavbarView *navView;
+
+@property (nonatomic, strong) HSJHomeHeaderView *headerView;
 
 @end
 
@@ -83,7 +86,10 @@
 }
 
 - (void)setUI {
+    [self.view addSubview:self.headerView];
     [self.view addSubview:self.navView];
+    
+  
 }
 
 - (void)buttonClickAct:(UIButton*)button {
@@ -131,6 +137,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+
+
+
+
 - (HSJHomeCustomNavbarView *)navView {
     if (!_navView) {
         _navView = [[HSJHomeCustomNavbarView alloc] init];
@@ -140,9 +151,18 @@
         _navView.noticeBlock = ^{
             IDPLogDebug(@"公告");
         };
-        
     }
     return _navView;
+}
+
+
+
+- (HSJHomeHeaderView *)headerView {
+    if (!_headerView) {
+        _headerView = [[HSJHomeHeaderView alloc] initWithFrame:CGRectMake(0, 350, kScreenWidth, kScrAdaptationH750(558))];
+        
+    }
+    return _headerView;
 }
 
 @end
