@@ -49,36 +49,6 @@
     [self setupSubView];
 }
 
-<<<<<<< HEAD
-- (void)setupData {
-    self.viewModel = [[HSJMyViewVCViewModel alloc] init];
-}
-
--(void)viewWillAppear:(BOOL)animated {
-    if (!KeyChain.isLogin) {
-        [self.loginOrSignout setTitle:@"登陆" forState:UIControlStateNormal];
-    } else {
-        [self.loginOrSignout setTitle:@"退出" forState:UIControlStateNormal];
-    }
-    
-    kWeakSelf
-    [self.viewModel downLoadUserInfo:YES resultBlock:^(id responseData, NSError *erro) {
-        weakSelf.viewModel.userInfoModel = responseData;
-        if(weakSelf.viewModel.userInfoModel.userInfo.hasBindCard.intValue == 1) {
-            [self.bankCardBt setTitle:@"银行卡(已绑定)" forState:UIControlStateNormal];
-        }
-        else {
-            [self.bankCardBt setTitle:@"银行卡(未绑定)" forState:UIControlStateNormal];
-        }
-    }];
-}
-
-- (IBAction)settingAccount:(id)sender {
-    HxbAccountInfoViewController *accountInfoVC = [[HxbAccountInfoViewController alloc]init];
-    accountInfoVC.userInfoModel = self.viewModel.userInfoModel;
-//    accountInfoVC.isDisplayAdvisor = self.viewModel.userInfoModel.userInfoModel.userInfo.isDisplayAdvisor;
-    [self.navigationController pushViewController:accountInfoVC animated:YES];
-=======
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -104,7 +74,6 @@
 - (void)setupSubView {
     [self setupMyView];
     [self clickAllFinanceButton];
->>>>>>> b667b504cb7b26684cf53b0d4a0378819b9e338f
 }
 
 - (void)setupMyView{
@@ -171,26 +140,12 @@
         } else {
             //未绑卡
             NSLog(@"进入绑卡页面");
+            HxbWithdrawCardViewController *withdrawCardViewController = [[HxbWithdrawCardViewController alloc]init];
+            withdrawCardViewController.type = HXBRechargeAndWithdrawalsLogicalJudgment_Other;
+            withdrawCardViewController.userInfoModel = self.viewModel.userInfoModel;
+            [self.navigationController pushViewController:withdrawCardViewController animated:YES];
         }
     }
-<<<<<<< HEAD
-    else {
-        HxbWithdrawCardViewController *withdrawCardViewController = [[HxbWithdrawCardViewController alloc]init];
-        withdrawCardViewController.type = HXBRechargeAndWithdrawalsLogicalJudgment_Other;
-        withdrawCardViewController.userInfoModel = self.viewModel.userInfoModel;
-        [self.navigationController pushViewController:withdrawCardViewController animated:YES];
-    }
-}
-
-- (IBAction)modifyTansePassAct:(UIButton *)sender {
-    HXBBindPhoneViewController* vc = [[HXBBindPhoneViewController alloc] init];
-    vc.bindPhoneStepType = HXBBindPhoneTransactionPassword;
-    //    vc.userInfoModel = self.viewModel.userInfoModel;
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
-- (void)signOutButtonButtonClick{
-=======
     if (type == 1) { //风险测评
         if (state) { //为测评
             NSLog(@"风险评测");
@@ -206,7 +161,6 @@
  */
 - (void)logicalJudgment:(HXBRechargeAndWithdrawalsLogicalJudgment)type
 {
->>>>>>> b667b504cb7b26684cf53b0d4a0378819b9e338f
     kWeakSelf
     [self.viewModel downLoadUserInfo:YES resultBlock:^(id responseData, NSError *erro) {
         if (!erro) {
