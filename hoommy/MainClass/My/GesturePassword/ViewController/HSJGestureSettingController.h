@@ -7,7 +7,8 @@
 //
 
 #import "HXBBaseViewController.h"
+#import "HSJCheckLoginPasswordViewController.h"
 
 @interface HSJGestureSettingController : HXBBaseViewController
-
+@property (nonatomic, assign) HXBAccountSecureSwitchType switchType;
 @end
