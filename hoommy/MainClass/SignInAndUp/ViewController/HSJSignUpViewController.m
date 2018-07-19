@@ -168,7 +168,7 @@
     [self.codeButton setTitle:[NSString stringWithFormat:@"%ds",self.timeCount] forState:UIControlStateNormal];
     [self.codeButton setTitleColor:kHXBFontColor_C7C7CD_100 forState:(UIControlStateNormal)];
     kWeakSelf
-    [self.viewModel getVerifyCodeRequesWithSignupWithAction:@"newsignup" andWithType:type andWithMobile:self.phoneNumber andCallbackBlock:^(BOOL isSuccess, BOOL isNeedCaptcha) {
+    [self.viewModel getVerifyCodeRequesWithSignupWithAction:@"newsignup" andWithType:type andWithMobile:self.phoneNumber andWithCaptcha:self.captcha andCallbackBlock:^(BOOL isSuccess, BOOL isNeedCaptcha) {
         if (isNeedCaptcha) {
             
             [weakSelf.view addSubview:weakSelf.captchaView];
@@ -218,6 +218,9 @@
         _codeTextField.keyboardType = UIKeyboardTypeNumberPad;
         _codeTextField.isHiddenLeftImage = YES;
         _codeTextField.limitStringLength = 6;
+        _codeTextField.isGetCode = YES;
+        _codeTextField.bottomLineEditingColor = kHXBSpacingColor_F5F5F9_100;
+        _codeTextField.bottomLineNormalColor = kHXBSpacingColor_F5F5F9_100;
         kWeakSelf
         _codeTextField.block = ^(NSString *text1) {
             if (weakSelf.isSelected && weakSelf.codeTextField.text.length && weakSelf.passwordTextField.text.length) {
@@ -241,9 +244,12 @@
         _passwordTextField.placeholder = @"请设置8-20位数字+字母组合的密码";
         _passwordTextField.isHidenLine = NO;
         _passwordTextField.keyboardType = UIKeyboardTypeASCIICapable;
-        _passwordTextField.isHiddenLeftImage = YES;
         _passwordTextField.secureTextEntry = YES;
+        _passwordTextField.isHiddenLeftImage = YES;
         _passwordTextField.limitStringLength = 20;
+        _passwordTextField.textColor = kHXBFontColor_555555_100;
+        _passwordTextField.bottomLineEditingColor = kHXBSpacingColor_F5F5F9_100;
+        _passwordTextField.bottomLineNormalColor = kHXBSpacingColor_F5F5F9_100;
         kWeakSelf
         _passwordTextField.block = ^(NSString *text1) {
             if (weakSelf.isSelected && weakSelf.codeTextField.text.length && weakSelf.passwordTextField.text.length) {

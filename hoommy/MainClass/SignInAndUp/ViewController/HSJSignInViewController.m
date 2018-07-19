@@ -151,6 +151,8 @@
         _phoneTextField.isHiddenLeftImage = YES;
         _phoneTextField.isCleanAllBtn = NO;
         _phoneTextField.textColor = kHXBFontColor_555555_100;
+        _phoneTextField.bottomLineEditingColor = kHXBSpacingColor_F5F5F9_100;
+        _phoneTextField.bottomLineNormalColor = kHXBSpacingColor_F5F5F9_100;
         kWeakSelf
         _phoneTextField.block = ^(NSString *text1) {
             weakSelf.nextButton.enabled = text1.length;
