@@ -10,6 +10,8 @@
 
 @interface HXBBaseNavigationController ()<UIGestureRecognizerDelegate>
 
+@property (nonatomic, strong) UIImageView *splitLineImv;
+
 @property (nonatomic, strong) UIPanGestureRecognizer *fullScreenGesture;
 @end
 
@@ -29,6 +31,26 @@
     self.enableFullScreenGesture = YES;
     // 关闭边缘触发手势 防止和原有边缘手势冲突
     [self.interactivePopGestureRecognizer setEnabled:NO];
+}
+
+- (void)setIsShowSplitLine:(BOOL)isShowSplitLine {
+    _isShowSplitLine = isShowSplitLine;
+    
+    if(isShowSplitLine) {
+        [self.navigationBar addSubview:self.splitLineImv];
+    }
+    else {
+        [self.splitLineImv removeFromSuperview];
+    }
+}
+
+- (UIImageView *)splitLineImv {
+    if(!_splitLineImv) {
+        _splitLineImv = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.navigationBar.height-0.5, kScreenWidth, 0.5)];
+        _splitLineImv.backgroundColor = kHXBColor_EEEEF5_100;
+    }
+    
+    return _splitLineImv;
 }
 
 #pragma mark - override push
@@ -70,4 +92,14 @@
         }
     }
 }
+
+- (UIViewController *)popViewControllerAnimated:(BOOL)animated {
+    return [super popViewControllerAnimated:animated];
+}
+
+- (NSArray<UIViewController *> *)popToRootViewControllerAnimated:(BOOL)animated {
+    return [super popToRootViewControllerAnimated:animated];
+}
+
+
 @end

@@ -14,6 +14,8 @@
 #import "HSJDepositoryOpenTipController.h"
 #import "HSJGestureSettingController.h"
 #import "HSJGestureLoginController.h"
+#import "HSJPlanDetailController.h"
+#import "HSJSignInViewController.h"
 
 @interface HSJHomeViewController ()
 
@@ -73,6 +75,14 @@
         make.left.right.equalTo(self.view);
         make.height.mas_equalTo(44);
     }];
+    
+    NYBaseRequest *req = [NYBaseRequest new];
+    req.requestUrl = @"home/baby";
+    [req loadData:^(NYBaseRequest *request, id responseObject) {
+        
+    } failure:^(NYBaseRequest *request, NSError *error) {
+        
+    }];
 }
 
 - (void)buttonClickAct:(UIButton*)button {
@@ -81,7 +91,9 @@
 }
 
 - (void)tableViewButtonClickAct:(UIButton*)button {
-    HSJGestureSettingController* vc = [[HSJGestureSettingController alloc] init];
+//    HSJGestureSettingController* vc = [[HSJGestureSettingController alloc] init];
+//    [self.navigationController pushViewController:vc animated:YES];
+    HSJSignInViewController *vc = [HSJSignInViewController new];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -91,7 +103,7 @@
 }
 
 - (void)webviewButtonClickAct:(UIButton*)button {
-    HSJTestWebviewControllerViewController* vc = [[HSJTestWebviewControllerViewController alloc] init];
+    HSJPlanDetailController* vc = [[HSJPlanDetailController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

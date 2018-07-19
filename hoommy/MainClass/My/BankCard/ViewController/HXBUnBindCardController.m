@@ -11,9 +11,23 @@
 #import "HXBBindPhoneViewController.h"
 #import "HXBMyBankResultViewController.h"
 
+#import "HSJUnBindCardHeadView.h"
+#import "HXBBindPhoneTableFootView.h"
+#import "HXBBindCardTableViewCell.h"
+
 @interface HXBUnBindCardController ()
-@property (nonatomic, weak) UIView *bankInfoView;
+
+@property (nonatomic, strong) UIImageView *topLineImv;
+@property (nonatomic, strong) HSJUnBindCardHeadView *headView;
+@property (nonatomic, strong) HXBBindPhoneTableFootView *footView;
+@property (nonatomic, strong) UITableView *tableView;
+
+//数据源
 @property (nonatomic, strong) HXBBankCardViewModel *bankCardViewModel;
+@property (nonatomic, strong) NSArray *cellDataList;
+
+//以下待删除
+@property (nonatomic, weak) UIView *bankInfoView;
 @property (nonatomic, weak) HXBCustomTextField *idCardTextField;
 @property (nonatomic, weak) HXBCustomTextField *transactionPwdTextField;
 @property (nonatomic, weak) UIButton *unBindBtn;
@@ -26,204 +40,120 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setUI];
+    [self setupData];
+    [self setupUI];
+    [self setupConstraints];
+}
+
+- (void)setupData {
+    self.bankCardViewModel = [[HXBBankCardViewModel alloc] init];
+    
+    //构建cell数据源列表
+    NSMutableArray *dataList = [NSMutableArray array];
+    self.cellDataList = dataList;
+    NSString *realName = [self.bankCardModel.name replaceStringWithStartLocation:0 lenght:self.bankCardModel.name.length - 1];
+    HXBBindCardCellModel *cellModel = [[HXBBindCardCellModel alloc] initModel:@"真实姓名" placeText:@"" text:realName];
+    [dataList addObject:cellModel];
+    
+    cellModel = [[HXBBindCardCellModel alloc] initModel:@"身份证号" placeText:@"请输入您的身份证号码" text:@""];
+    cellModel.isCanEdit = YES;
+    cellModel.keyboardType = UIKeyboardTypeNumberPad;
+    cellModel.limtTextLenght = 18;
+    [dataList addObject:cellModel];
+    
+    cellModel = [[HXBBindCardCellModel alloc] initModel:@"交易密码" placeText:@"请输入交易密码" text:@""];
+    cellModel.isCanEdit = YES;
+    cellModel.limtTextLenght = 6;
+    cellModel.keyboardType = UIKeyboardTypeNumberPad;
+    [dataList addObject:cellModel];
 }
 
 #pragma mark - UI
 
-- (void)setUI {
+- (void)setupUI {
     self.title = @"解绑银行卡";
     
-    [self setBankInfoView];
-    [self setBottomView];
+    [self.safeAreaView addSubview:self.topLineImv];
+    
+    [self.safeAreaView addSubview:self.tableView];
+    [self.tableView registerClass:[HXBBindCardTableViewCell class] forCellReuseIdentifier:@"HXBBindCardTableViewCell"];
 }
 
-- (void)setBankInfoView {
-    UIView *bankInfoView = [UIView new];
-    [self.view addSubview:bankInfoView];
-    self.bankInfoView = bankInfoView;
-    
-    // 银行卡图片
-    UIImageView *bankIconView = [UIImageView new];
-    bankIconView.svgImageString = self.bankCardViewModel.bankImageString;
-    [bankInfoView addSubview:bankIconView];
-    
-    // 银行卡名
-    UILabel *bankNameLabel = [UILabel new];
-    bankNameLabel.font = kHXBFont_PINGFANGSC_REGULAR(15);
-    bankNameLabel.textColor = COR6;
-    bankNameLabel.text = self.bankCardViewModel.bankName;
-    [bankInfoView addSubview:bankNameLabel];
-    
-    // 银行卡号
-    UILabel *bankNoLabel = [UILabel new];
-    bankNoLabel.font = kHXBFont_PINGFANGSC_REGULAR(12);
-    bankNoLabel.textColor = COR10;
-    bankNoLabel.text = self.bankCardViewModel.bankNoStarFormat;
-    [bankInfoView addSubview:bankNoLabel];
-    
-    // 分割线
-    UIView *sepLine = [UIView new];
-    sepLine.backgroundColor = BACKGROUND_COLOR;
-    [bankInfoView addSubview:sepLine];
-    
-    // 约束布局
-    [bankInfoView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@(HXBStatusBarAndNavigationBarHeight));
-        make.left.right.equalTo(self.view);
+- (void)setupConstraints {
+    [self.topLineImv mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.safeAreaView).offset(0.5);
+        make.left.right.equalTo(self.safeAreaView);
+        make.height.mas_equalTo(0.5);
     }];
     
-    [bankIconView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(@(kScrAdaptationW(15)));
-        make.top.equalTo(@(kScrAdaptationH(20)));
-        make.bottom.equalTo(sepLine.mas_top).offset(kScrAdaptationH(-20));
-        make.width.height.equalTo(@(kScrAdaptationW(40)));
-    }];
-    
-    [bankNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(bankIconView);
-        make.left.equalTo(bankIconView.mas_right).offset(kScrAdaptationW(18));
-    }];
-    
-    [bankNoLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(bankIconView);
-        make.left.equalTo(bankNameLabel);
-    }];
-    
-    [sepLine mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.left.right.equalTo(bankInfoView);
-        make.height.equalTo(@10);
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.topLineImv.mas_bottom).offset(0.5);
+        make.left.right.bottom.equalTo(self.safeAreaView);
     }];
 }
 
-- (void)setBottomView {
-    // 身份证号
-    UILabel *nameLabel = [UILabel new];
-    nameLabel.text = [NSString stringWithFormat:@"认证姓名：%@", self.bankCardViewModel.userNameOnlyLast];
-    nameLabel.textColor = COR6;
-    nameLabel.font = kHXBFont_PINGFANGSC_REGULAR(15);
-    [self.view addSubview:nameLabel];
+- (HSJUnBindCardHeadView *)headView {
+    if(!_headView) {
+        _headView = [[HSJUnBindCardHeadView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScrAdaptationH(140))];
+        _headView.bankCardModel = self.bankCardModel;
+    }
     
-    HXBCustomTextField *idCardTextField = [[HXBCustomTextField alloc] init];
-    idCardTextField.leftImage = [UIImage imageNamed:@"idcard"];
-    idCardTextField.placeholder = @"请输入身份证号";
-    idCardTextField.isIDCardTextField = YES;
-//    idCardTextField.keyboardType = UIKeyboardTypeNumberPad;
-    idCardTextField.limitStringLength = 18;
-    
-    [self.view addSubview:idCardTextField];
-    self.idCardTextField = idCardTextField;
-    
-    // 交易密码
-    UILabel *transactionPwdLabel = [UILabel new];
-    transactionPwdLabel.textColor = COR6;
-    transactionPwdLabel.font = kHXBFont_PINGFANGSC_REGULAR(15);
-    transactionPwdLabel.text = @"交易密码";
-    [self.view addSubview:transactionPwdLabel];
-    
-    HXBCustomTextField *transactionPwdTextField = [[HXBCustomTextField alloc] init];
-    transactionPwdTextField.leftImage = [UIImage imageNamed:@"password"];
-    transactionPwdTextField.placeholder = @"请输入交易密码";
-    transactionPwdTextField.limitStringLength = 6;
-    transactionPwdTextField.keyboardType = UIKeyboardTypeNumberPad;
-    transactionPwdTextField.clearRightMargin = 100;
-    transactionPwdTextField.secureTextEntry = YES;
-    transactionPwdTextField.hideEye = YES;
-    
-    [self.view addSubview:transactionPwdTextField];
-    self.transactionPwdTextField = transactionPwdTextField;
-    
-    UIButton *forgetPwdBtn = [UIButton buttonWithTitle:@"忘记密码?" andTarget:self andAction:@selector(forgetPwd) andFrameByCategory:CGRectZero];
-    forgetPwdBtn.titleLabel.font = kHXBFont_PINGFANGSC_REGULAR(12);
-    [forgetPwdBtn setTitleColor:kHXBColor_Blue040610 forState:UIControlStateNormal];
-    [transactionPwdTextField addSubview:forgetPwdBtn];
-    
-    UIImageView *tipIconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tip"]];
-    [self.view addSubview:tipIconView];
-    
-    // 底部描述
-    UILabel *descLabel = [UILabel hxb_labelWithText:[NSString stringWithFormat:@"您正在解绑尾号%@的银行卡。解绑后需重新绑定方可进行充值提现操作。", self.bankCardViewModel.bankNoLast4] fontSize:15 color:COR10];
-    [self.view addSubview:descLabel];
-
-    // 确认
-    UIButton *unBindBtn = [UIButton buttonWithTitle:@"确认解绑" andTarget:self andAction:@selector(unBind) andFrameByCategory:CGRectZero];
-    unBindBtn.titleLabel.font = kHXBFont_PINGFANGSC_REGULAR(16);
-    unBindBtn.backgroundColor = COR29;
-    [unBindBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    unBindBtn.layer.cornerRadius = 4;
-    unBindBtn.layer.masksToBounds = YES;
-    
-    [self.view addSubview:unBindBtn];
-    self.unBindBtn = unBindBtn;
-    
-    // 约束布局
-    [nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.bankInfoView.mas_bottom).offset(kScrAdaptationH(15));
-        make.left.equalTo(@(kScrAdaptationW(15)));
-    }];
-    
-    [idCardTextField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(nameLabel.mas_bottom).equalTo(@(kScrAdaptationH(17.5)));
-        make.left.right.equalTo(self.view);
-        make.height.equalTo(@(kScrAdaptationH(36)));
-    }];
-    
-    [transactionPwdLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(idCardTextField.mas_bottom).offset(kScrAdaptationH(35));
-        make.left.equalTo(nameLabel);
-    }];
-    
-    [transactionPwdTextField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(transactionPwdLabel.mas_bottom).offset(kScrAdaptationH(17.5));
-        make.left.right.height.equalTo(idCardTextField);
-    }];
-    
-    [forgetPwdBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(transactionPwdTextField).offset(-kScrAdaptationW(17));
-        make.centerY.equalTo(transactionPwdTextField);
-    }];
-    
-    [tipIconView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(nameLabel);
-        make.top.equalTo(transactionPwdTextField.mas_bottom).offset(kScrAdaptationH(35));
-        make.width.height.equalTo(@(kScrAdaptationW(13)));
-    }];
-    
-    [descLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(tipIconView).offset(-2);
-        make.left.equalTo(tipIconView.mas_right).offset(kScrAdaptationW(5));
-        make.right.equalTo(self.view).offset(kScrAdaptationW(-15));
-    }];
-    
-    [unBindBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view);
-        make.left.equalTo(@(kScrAdaptationW(20)));
-        make.right.equalTo(@(kScrAdaptationW(-20)));
-        make.height.equalTo(@(kScrAdaptationH(41)));
-        make.bottom.equalTo(@(kScrAdaptationH(-70)));
-    }];
+    return _headView;
 }
 
-#pragma mark - Delegate Internal
+- (HXBBindPhoneTableFootView *)footView {
+    if(!_footView) {
+        _footView = [[HXBBindPhoneTableFootView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScrAdaptationH(119))];
+        _footView.buttonTitle = @"确认解绑";
+        _footView.rightTopBtnTitle = @"忘记密码？";
+        _footView.buttonBackGroundColor = kHXBColor_FF7055_100;
+        
+        kWeakSelf
+        _footView.checkAct = ^{
+            [weakSelf unBind];
+        };
+        _footView.rightTopButtonAct = ^{
+            HXBBindPhoneViewController *modifyTransactionPasswordVC = [[HXBBindPhoneViewController alloc] init];
+            modifyTransactionPasswordVC.bindPhoneStepType = HXBBindPhoneTransactionPassword;
+            [weakSelf.navigationController pushViewController:modifyTransactionPasswordVC animated:YES];
+        };
+    }
+    
+    return _footView;
+}
 
-#pragma mark -
+- (UIImageView *)topLineImv {
+    if(!_topLineImv) {
+        _topLineImv = [[UIImageView alloc] init];
+        _topLineImv.backgroundColor = kHXBColor_EEEEF5_100;
+    }
+    
+    return _topLineImv;
+}
 
+- (UITableView *)tableView {
+    if(!_tableView) {
+        _tableView = [[UITableView alloc] init];
+        _tableView.backgroundColor = [UIColor clearColor];
+        _tableView.bounces = NO;
+        _tableView.separatorStyle = UITableViewCellSelectionStyleNone;
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.tableHeaderView = self.headView;
+        _tableView.tableFooterView = self.footView;
+    }
+    return _tableView;
+}
 
-#pragma mark - Delegate External
-
-#pragma mark -
-
-
-#pragma mark - Action
-- (void)forgetPwd {
-    HXBBindPhoneViewController *modifyTransactionPasswordVC = [[HXBBindPhoneViewController alloc] init];
-    modifyTransactionPasswordVC.bindPhoneStepType = HXBBindPhoneTransactionPassword;
-    [self.navigationController pushViewController:modifyTransactionPasswordVC animated:YES];
+- (void)textChangeCheck:(NSIndexPath*)indexPath checkText:(NSString*)text{
+    
 }
 
 - (void)unBind {
-    NSString *idCardNo = [self.idCardTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSString *transactionPwd = [self.transactionPwdTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    HXBBindCardCellModel *cellModel = [self.cellDataList safeObjectAtIndex:1];
+    NSString *idCardNo = [cellModel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    cellModel = [self.cellDataList safeObjectAtIndex:2];
+    NSString *transactionPwd = [cellModel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     
     // 验证身份证号
     NSString *idCardNoMessage = [self.bankCardViewModel validateIdCardNo:idCardNo];
@@ -270,12 +200,30 @@
     return _bankCardViewModel;
 }
 
-#pragma mark - Helper
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.cellDataList.count;
+}
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    HXBBindCardTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"HXBBindCardTableViewCell"];
+    HXBBindCardCellModel *cellModel = [self.cellDataList safeObjectAtIndex:indexPath.row];
+    
+    cell.indexPath = indexPath;
+    cell.cellModel = cellModel;
+    
+    kWeakSelf
+    if(!cell.textChange) {
+        cell.textChange = ^(NSIndexPath *indexPath, NSString *text) {
+            [weakSelf textChangeCheck:indexPath checkText:text];
+        };
+    }
+    
+    return cell;
+}
 
-#pragma mark - Other
-
-
-#pragma mark - Public
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return kScrAdaptationH(48);
+    
+}
 
 @end

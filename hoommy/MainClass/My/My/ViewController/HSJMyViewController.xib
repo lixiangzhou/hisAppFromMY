@@ -76,7 +76,10 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jGu-C6-lKQ">
                                     <rect key="frame" x="243.5" y="0.0" width="111.5" height="172"/>
                                     <color key="backgroundColor" red="1" green="0.2564616448" blue="0.30075229850000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <state key="normal" title="待定"/>
+                                    <state key="normal" title="修改交易密码"/>
+                                    <connections>
+                                        <action selector="modifyTansePassAct:" destination="-1" eventType="touchUpInside" id="I66-Gr-dxZ"/>
+                                    </connections>
                                 </button>
                             </subviews>
                         </stackView>

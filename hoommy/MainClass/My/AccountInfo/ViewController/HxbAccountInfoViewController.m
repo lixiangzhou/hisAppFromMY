@@ -21,6 +21,8 @@
 #import "HXBAccount_AlterLoginPassword_ViewController.h"
 #import "HXBBindPhoneViewController.h"
 
+#import "HXBCommonProblemViewController.h"
+
 @interface HxbAccountInfoViewController ()
 <
 UITableViewDelegate,
@@ -186,13 +188,20 @@ UITableViewDataSource
         NSInteger row =  [tableView numberOfRowsInSection:0] + indexPath.row;
         model = self.dataSource[row];
         switch (model.type) {
-        case HXBAccountSecureTypeCommonProblems:
-            //常见问题
-            NSLog(@"常见问题");
+            case HXBAccountSecureTypeCommonProblems:{
+                //常见问题HXBCommonProblemViewController
+                HXBCommonProblemViewController *commonProblemVC = [[HXBCommonProblemViewController alloc] init];
+                commonProblemVC.pageUrl = [NSString splicingH5hostWithURL:kHXBUser_QuestionsURL];
+                [self.navigationController pushViewController:commonProblemVC animated:YES];
+            }
             break;
         case HXBAccountSecureTypeAboutUs:
-            //关于我们
-            NSLog(@"关于我们");
+            {
+                //关于我们
+                HxbMyAboutMeViewController *myAboutMeViewController = [[HxbMyAboutMeViewController alloc] init];
+                [self.navigationController pushViewController:myAboutMeViewController animated:YES];
+            }
+            
             break;
         default:
             break;

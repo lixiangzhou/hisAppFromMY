@@ -11,6 +11,7 @@
 #import "HXBBankListCell.h"
 #import "SVGKit/SVGKImage.h"
 #import "HXBBankList.h"
+
 @interface HXBBankCardListViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *mainTableView;
@@ -38,31 +39,7 @@
     self.title = @"银行卡列表";
     [self.view addSubview:self.mainTableView];
     self.viewModel = [[HXBBankCardListViewModel alloc] init];
-    [self settupNav];
-    [self setupNavLeftBtn];
     [self loadData];
-}
-
-- (void)settupNav
-{
-    self.navigationController.navigationBar.titleTextAttributes=@{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:kHXBFont_PINGFANGSC_REGULAR(18)};
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_top_blue"] forBarMetrics:UIBarMetricsDefault];
-    
-}
-
-- (void)setupNavLeftBtn {
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 35)];
-    [button setImage:[SVGKImage imageNamed:@"back"].UIImage forState:UIControlStateNormal];
-    // 让按钮内部的所有内容左对齐
-    button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [button addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
-    [button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-    // 修改导航栏左边的item
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
-}
-- (void)back
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)loadData

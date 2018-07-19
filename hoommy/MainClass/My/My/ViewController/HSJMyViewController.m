@@ -18,8 +18,10 @@
 #import "HxbAccountInfoViewController.h"
 #import "HXBGeneralAlertVC.h"
 #import "HxbMyBankCardViewController.h"
+#import "HxbWithdrawCardViewController.h"
 
 #import "HSJMyViewVCViewModel.h"
+#import "HXBBindPhoneViewController.h"
 
 @interface HSJMyViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *loginOrSignout;
@@ -38,6 +40,14 @@
 
 - (void)setupData {
     self.viewModel = [[HSJMyViewVCViewModel alloc] init];
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    if (!KeyChain.isLogin) {
+        [self.loginOrSignout setTitle:@"登陆" forState:UIControlStateNormal];
+    } else {
+        [self.loginOrSignout setTitle:@"退出" forState:UIControlStateNormal];
+    }
     
     kWeakSelf
     [self.viewModel downLoadUserInfo:YES resultBlock:^(id responseData, NSError *erro) {
@@ -49,14 +59,6 @@
             [self.bankCardBt setTitle:@"银行卡(未绑定)" forState:UIControlStateNormal];
         }
     }];
-}
-
--(void)viewWillAppear:(BOOL)animated {
-    if (!KeyChain.isLogin) {
-        [self.loginOrSignout setTitle:@"登陆" forState:UIControlStateNormal];
-    } else {
-        [self.loginOrSignout setTitle:@"退出" forState:UIControlStateNormal];
-    }
 }
 
 - (IBAction)settingAccount:(id)sender {
@@ -99,8 +101,18 @@
         [self.navigationController pushViewController:vc animated:YES];
     }
     else {
-        
+        HxbWithdrawCardViewController *withdrawCardViewController = [[HxbWithdrawCardViewController alloc]init];
+        withdrawCardViewController.type = HXBRechargeAndWithdrawalsLogicalJudgment_Other;
+        withdrawCardViewController.userInfoModel = self.viewModel.userInfoModel;
+        [self.navigationController pushViewController:withdrawCardViewController animated:YES];
     }
+}
+
+- (IBAction)modifyTansePassAct:(UIButton *)sender {
+    HXBBindPhoneViewController* vc = [[HXBBindPhoneViewController alloc] init];
+    vc.bindPhoneStepType = HXBBindPhoneTransactionPassword;
+    //    vc.userInfoModel = self.viewModel.userInfoModel;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)signOutButtonButtonClick{

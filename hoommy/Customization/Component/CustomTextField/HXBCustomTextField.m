@@ -8,7 +8,6 @@
 
 #import "HXBCustomTextField.h"
 #import "SVGKit/SVGKImage.h"
-#import "BXTextField.h"
 #import "UIImageView+HxbSDWebImage.h"
 @interface HXBCustomTextField ()<UITextFieldDelegate>
 {
@@ -40,6 +39,9 @@
         self.limitStringLength = 20;
         self.bankNameBtn.hidden = YES;
         [self setupSubViewFrame];
+        self.bottomLineNormalColor = COR12;
+        self.bottomLineEditingColor = COR29;
+        
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(textFieldDidChangeValue:)
                                                      name:UITextFieldTextDidChangeNotification
@@ -194,7 +196,7 @@
 }
 #pragma mark - UITextFieldDelegate
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    self.line.backgroundColor = kHXBSpacingLineColor_DDDDDD_100;
+    self.line.backgroundColor = self.bottomLineNormalColor;
     if(self.keyBoardChange) {
         self.keyBoardChange(NO);
     }
@@ -203,7 +205,7 @@
 
 //这里可以通过发送object消息获取注册时指定的UITextField对象
 - (void)textFieldDidBeginEditing:(NSNotification *)notification {
-    self.line.backgroundColor = kHXBColor_F55151_100;
+    self.line.backgroundColor = self.bottomLineEditingColor;
     
     if(self.keyBoardChange) {
         self.keyBoardChange(YES);
@@ -211,7 +213,7 @@
 }
 
 - (void)textFieldDidEndEditing1:(NSNotification *)notification {
-    self.line.backgroundColor = kHXBSpacingLineColor_DDDDDD_100;
+    self.line.backgroundColor = self.bottomLineNormalColor;
     
     if(self.keyBoardChange) {
         self.keyBoardChange(NO);
@@ -387,6 +389,29 @@
     _keyboardType = keyboardType;
     _textField.keyboardType = keyboardType;
 }
+
+- (void)setBottomLineLeftOffset:(CGFloat)bottomLineLeftOffset {
+    _bottomLineLeftOffset = bottomLineLeftOffset;
+    
+    [self.line mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self).offset(bottomLineLeftOffset);
+    }];
+}
+
+- (void)setBottomLineRightOffset:(CGFloat)bottomLineRightOffset {
+    _bottomLineRightOffset = bottomLineRightOffset;
+    [self.line mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self).offset(kScrAdaptationW750(-bottomLineRightOffset));
+    }];
+}
+
+- (void)setTextFieldRightOffset:(CGFloat)textFieldRightOffset {
+    _textFieldRightOffset = textFieldRightOffset;
+    [self.textField mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self).offset(-textFieldRightOffset);//40
+    }];
+}
+
 #pragma mark - 懒加载
 - (UIButton *)eyeBtn
 {

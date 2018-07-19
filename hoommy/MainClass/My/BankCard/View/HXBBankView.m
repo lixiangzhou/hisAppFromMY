@@ -12,6 +12,7 @@
 @interface HXBBankView ()
 
 @property (nonatomic, strong) UIImageView *backImageView;
+@property (nonatomic, strong) UIButton *limitBtn; //限额按钮
 
 @property (nonatomic, strong) UIImageView *iconView;
 
@@ -36,10 +37,21 @@
 {
     if (self = [super initWithFrame:frame]) {
         self.backImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 345, kScrAdaptationH(150))];
-        self.backImageView.image = [UIImage imageNamed:@"hxb_card_bg"];
-        self.backImageView.backgroundColor = [UIColor orangeColor];
+//        self.backImageView.image = [UIImage imageNamed:@"hxb_card_bg"];
+//        self.backImageView.backgroundColor = [UIColor orangeColor];
+        CALayer *layer = [HSJCALayerTool gradualChangeColor:kHXBColor_FE7E5E_100 toColor:kHXBColor_FFE6A4_100 cornerRadius:4 layerSize:self.backImageView.size];
+        [self.backImageView.layer addSublayer:layer];
         self.backImageView.userInteractionEnabled = YES;
         [self addSubview:self.backImageView];
+        
+        //
+        self.limitBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, kScrAdaptationH(170), 112, kScrAdaptationH(30))];
+        [self.limitBtn setTitleColor:kHXBFontColor_FE7E5E_100 forState:UIControlStateNormal];
+        [self.limitBtn setTitleColor:kHXBFontColor_FE7E5E_100 forState:UIControlStateHighlighted];
+        self.limitBtn.titleLabel.font = kHXBFont_PINGFANGSC_REGULAR(14);
+        [self.limitBtn setTitle:@"查看其他银行限额" forState:UIControlStateNormal];
+        [self.limitBtn addTarget:self action:@selector(limitButtonAct:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:self.limitBtn];
 
         [self.backImageView addSubview:self.iconView];
         [self.backImageView addSubview:self.bankName];
@@ -52,6 +64,7 @@
     }
     return self;
 }
+
 
 - (void)setupSubViewFrame
 {
@@ -89,6 +102,12 @@
         make.width.mas_equalTo(56);
         make.height.mas_equalTo(24);
     }];
+}
+
+- (void)limitButtonAct:(UIButton*)button {
+    if(self.bankCardListAct) {
+        self.bankCardListAct();
+    }
 }
 
 - (void)loadBankData

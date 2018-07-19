@@ -10,7 +10,8 @@
 #define HSJNetWorkUrl_h
 
 #define kHXBMY_VersionUpdateURL @"/update"//版本更新
-
+#define kHXBSplash            @"/splash"///闪屏接口
+#define kGlobal                 @"/global" /// 全局统计
 //MARK: ======================= 协议 ==========================
 //协议或合同名    端口号后链接    状态    账户内连接
 #define kHXB_Negotiate_SginUPURL @"/agreement/signup"///《注册服务协议》
@@ -36,6 +37,7 @@
 #define kHXBUser_UserInfoURL @"/account/info"///用户信息
 #define kHXBUser_LoginURL @"/user/login"//登录
 #define kHXBUser_SignUPURL @"/user/signup"//注册
+#define kHXBUser_CaptchaURL @"/captcha"//获取图验
 #define HXBAccount_ForgotPasswordURL @"/forgot"///忘记密码
 #define kHXBUser_checkCaptchaURL @"/checkCaptcha"///校验 图片验证码
 #define kHXBUser_smscodeURL @"/verifycode/send"//@"/send/smscode"///发送短信接口
@@ -59,6 +61,11 @@
 #define kHXBUser_CheckExistMobileURL @"/checkExistMobile"///忘记密码校验手机号
 #define kHXBUser_LoginURL @"/user/login"//登录
 
+#define kHXBMY_PlanAccountRequestURL @"/account/planAssets"///账户内 账户内Plan资产
+#define kHXBMY_PlanListURL @"/account/plan"//账户内  planlist
+#define kHXBMY_PlanDetaileURL(planID) [NSString stringWithFormat:@"/account/plan/%@",(planID)]
+#define kHXBMY_PlanQuit @"/account/plan/quit"
+
 //MARK: ======================= 存管 ==========================
 #define kHXBOpenDepositAccount_Escrow @"/user/escrow" //用户开通存管账户
 #define kHXBUserInfo_UnbindBankCard @"/account/bankcard/unbind" // 解绑银行卡操作
@@ -80,7 +87,7 @@
 #define kHXBUser_UserInfoURL @"/account/info"///用户信息
 
 
-
+#define kHXBFinanc_PlanDetaileURL(planID) [NSString stringWithFormat:@"/plan/%ld",(planID)]///计划详情
 
 #define kHXBUser_signOutURL @"/logout" /// 登出
 
