@@ -7,6 +7,7 @@
 //
 
 #import "HSJDepositoryOpenViewModel.h"
+#import "HXBGeneralAlertVC.h"
 
 @interface HSJDepositoryOpenViewModel()
 @property (nonatomic, strong) NYBaseRequest *cardBinrequest;
@@ -67,7 +68,25 @@
         request.requestArgument = param;
         request.showHud = NO;
     } responseResult:^(id responseData, NSError *erro) {
-        resultBlock(responseData != nil);
+        NSInteger status =  [responseData[@"status"] integerValue];
+        if (status == kHXBOpenAccount_Outnumber) {
+            NSString *string = [NSString stringWithFormat:@"您今日开通存管错误次数已超限，请明日再试。如有疑问可联系客服 %@", kServiceMobile];
+            
+            HXBGeneralAlertVC *alertVC = [[HXBGeneralAlertVC alloc] initWithMessageTitle:@"" andSubTitle:string andLeftBtnName:@"取消" andRightBtnName:@"联系客服" isHideCancelBtn:YES isClickedBackgroundDiss:NO];
+            alertVC.isCenterShow = YES;
+            [alertVC setRightBtnBlock:^{
+                NSString *callPhone = [NSString stringWithFormat:@"telprompt://%@", kServiceMobile];
+                if (@available(iOS 10.0, *)) {
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:callPhone] options:@{} completionHandler:nil];
+                } else {
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:callPhone]];
+                }
+                
+            }];
+            [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertVC animated:NO completion:nil];
+        } else {        
+            resultBlock(responseData != nil);
+        }
     }];
 }
 

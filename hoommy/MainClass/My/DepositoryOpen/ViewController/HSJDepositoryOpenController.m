@@ -57,6 +57,7 @@
 #pragma mark - UI
 
 - (void)setUI {
+    self.isWhiteColourGradientNavigationBar = YES;
     [self setScrollView];
     [self setTopViews];
     [self setBankView];

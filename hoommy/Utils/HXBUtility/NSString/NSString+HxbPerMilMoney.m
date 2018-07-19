@@ -21,7 +21,7 @@
 +(NSString *)GetPerMilWithDouble:(double)number
 {
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    [numberFormatter setPositiveFormat:@"###,##0.00;"];
+    [numberFormatter setPositiveFormat:@"###,###.##;"];
     NSString *formattedNumberString = [numberFormatter stringFromNumber:[NSNumber numberWithDouble:number]];
     
     return formattedNumberString;
