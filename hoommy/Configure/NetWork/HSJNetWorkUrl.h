@@ -84,8 +84,7 @@
 
 
 //MARK: ======================= 用户 =======================
-#define kHXBUser_UserInfoURL @"/account/info"///用户信息
-
+#define kHXBMY_CapitalRecordURL @"/account/tradlist"///交易记录
 
 #define kHXBFinanc_PlanDetaileURL(planID) [NSString stringWithFormat:@"/plan/%ld",(planID)]///计划详情
 

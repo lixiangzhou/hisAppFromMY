@@ -70,7 +70,16 @@ static NSString *const hostH5 = @"hostH5";
     [manager.keychain removeItemForKey:kToken];
     [manager.keychain removeItemForKey:kCiphertext];
 }
+- (NSString *)ciphertext
+{
+    NSString *ciphertext = [self.keychain itemForkey:kCiphertext];
+    return ciphertext?:@"";
+}
 
+- (void)setCiphertext:(NSString *)ciphertext
+{
+    [self.keychain setItem:ciphertext ForKey:kCiphertext];
+}
 - (NSString *)h5host
 {
     NSString *h5Host = [self.keychain itemForkey:hostH5];
