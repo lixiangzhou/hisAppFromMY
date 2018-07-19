@@ -94,7 +94,8 @@
 //MARK: ======================= 账户信息 =======================
 #define kHXBUser_QuestionsURL           @"/questions"///常见问题
 
-
+//MARK: ======================= H5 =======================
+#define kHXBH5_RiskEvaluationURL [NSString stringWithFormat:@"%@/riskvail",[KeyChain h5host]]//风险评测
 
 //MARK: ======================= 协议 ==========================
 #define kHXB_Negotiate_thirdpart @"/agreement/thirdpart" ///《恒丰银行股份有限公司杭州分行网络交易资金账户三方协议》

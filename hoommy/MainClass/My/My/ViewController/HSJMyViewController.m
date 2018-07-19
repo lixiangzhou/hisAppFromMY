@@ -21,7 +21,7 @@
 
 #import "HSJMyViewVCViewModel.h"
 #import "HXBBindPhoneViewController.h"
-
+#import "HSJRiskAssessmentViewController.h"
 
 
 
@@ -39,7 +39,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.isFullScreenShow = YES;
-    
     kWeakSelf
     self.viewModel = [[HSJMyViewVCViewModel alloc] init];
     self.viewModel.hugViewBlock = ^UIView *{
@@ -149,7 +148,8 @@
         if (state) { //为测评
             NSLog(@"显示评测结果");
         } else {
-            NSLog(@"风险评测");
+            HSJRiskAssessmentViewController *riskAssessmentVC = [[HSJRiskAssessmentViewController alloc] init];
+            [self.navigationController pushViewController:riskAssessmentVC animated:YES];
         }
     }
 }
