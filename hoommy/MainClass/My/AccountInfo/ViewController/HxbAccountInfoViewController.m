@@ -19,7 +19,10 @@
 //#import "HXBBottomLineTableViewCell.h"
 #import "HXBBaseWKWebViewController.h"
 #import "HXBAccount_AlterLoginPassword_ViewController.h"
+#import "HXBBindPhoneViewController.h"
+
 #import "HXBCommonProblemViewController.h"
+
 @interface HxbAccountInfoViewController ()
 <
 UITableViewDelegate,
@@ -148,7 +151,13 @@ UITableViewDataSource
         switch (model.type) {
             case HXBAccountSecureTypeModifyPhone:
                 //绑定手机号
+            {
                 NSLog(@"绑定手机号");
+                HXBBindPhoneViewController* vc = [[HXBBindPhoneViewController alloc] init];
+                vc.bindPhoneStepType = HXBBindPhoneStepFirst;
+                vc.userInfoModel = self.userInfoModel;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
                 break;
             case HXBAccountSecureTypeLoginPwd:
                 //登录密码

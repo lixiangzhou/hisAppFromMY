@@ -56,7 +56,7 @@
         make.centerY.equalTo(weakSelf.password_Original);
         make.left.equalTo(weakSelf.password_Original.leftImageView);
         make.height.equalTo(weakSelf.password_Original.textField);
-        make.width.equalTo(@kScrAdaptationW(42));
+        make.width.equalTo(@kScrAdaptationW(46));
     }];
     [self.password_Original.textField mas_updateConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.password_Original_title.mas_right).offset(kScrAdaptationW(29));
@@ -72,7 +72,7 @@
         make.centerY.equalTo(weakSelf.password_New);
         make.left.equalTo(weakSelf.password_New.leftImageView);
         make.height.equalTo(weakSelf.password_New.textField);
-        make.width.equalTo(@kScrAdaptationW(42));
+        make.width.equalTo(@kScrAdaptationW(46));
     }];
     [self.password_New.textField mas_updateConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.password_New_title.mas_right).offset(kScrAdaptationW(29));
