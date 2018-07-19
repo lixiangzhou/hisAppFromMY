@@ -11,7 +11,6 @@
 
 //#import "HXBBindPhoneViewController.h"
 
-#import "HSJBankCardListViewController.h"
 #import "HSJRiskAssessmentViewController.h"
 #import "HSJSignInViewController.h"
 #import "HXBBaseNavigationController.h"
@@ -144,9 +143,9 @@
     }
     if (type == 1) { //风险测评
         if (state) { //为测评
-            NSLog(@"风险评测");
-        } else {
             NSLog(@"显示评测结果");
+        } else {
+            NSLog(@"风险评测");
         }
     }
 }

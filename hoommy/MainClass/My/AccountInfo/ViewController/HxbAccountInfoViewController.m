@@ -41,23 +41,29 @@ UITableViewDataSource
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"账户设置";
+    
     kWeakSelf
     self.viewModel = [[HXBAccountInfoViewModel alloc] init];
     self.viewModel.hugViewBlock = ^UIView *{
         return weakSelf.view;
     };
     [self.view addSubview:self.tableView];
+    [self setUpScrollFreshBlock:self.tableView];
+    [self setupConstraints];
     [self prepareData];
-    [self.tableView reloadData];
-    
+    self.isShowSplitLine = YES;
 }
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    self.automaticallyAdjustsScrollViewInsets = YES;
-    self.isWhiteColourGradientNavigationBar = YES;
+
+- (void)setupConstraints {
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(self.contentViewInsetNoTabbar);
+    }];
+}
+
+- (void)reLoadWhenViewAppear {
     [self loadData_userInfo];///加载用户数据
 }
+
 
 /**
  再次获取网络数据
@@ -514,14 +520,13 @@ UITableViewDataSource
 }
 - (UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView  alloc]initWithFrame:CGRectMake(0, kScrAdaptationH(80),kScreenWidth , kScreenHeight-kScrAdaptationH(80)) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView  alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
         [_tableView registerClass:[HXBAccountSecureCell class] forCellReuseIdentifier:HXBAccountSecureCellID];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _tableView.estimatedRowHeight = 0;
-        _tableView.sectionHeaderHeight = 0;
-        _tableView.sectionFooterHeight = 0;
+        _tableView.sectionHeaderHeight = 0.1;
+        _tableView.sectionFooterHeight = 0.1;
     }
     return _tableView;
 }

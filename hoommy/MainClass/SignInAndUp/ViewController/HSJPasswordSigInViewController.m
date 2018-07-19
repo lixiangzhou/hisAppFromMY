@@ -114,6 +114,8 @@
         _passwordField.secureTextEntry = YES;
         _passwordField.isHiddenLeftImage = YES;
         _passwordField.textColor = kHXBFontColor_555555_100;
+        _passwordField.bottomLineEditingColor = kHXBSpacingColor_F5F5F9_100;
+        _passwordField.bottomLineNormalColor = kHXBSpacingColor_F5F5F9_100;
         kWeakSelf
         _passwordField.block = ^(NSString *text1) {
             weakSelf.nextButton.enabled = text1.length;

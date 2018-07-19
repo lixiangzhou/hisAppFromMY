@@ -190,6 +190,8 @@
         _codeTextField.textColor = kHXBFontColor_555555_100;
         _codeTextField.font = kHXBFont_PINGFANGSC_REGULAR(15);
         _codeTextField.limitStringLength = 6;
+        _codeTextField.bottomLineEditingColor = kHXBSpacingColor_F5F5F9_100;
+        _codeTextField.bottomLineNormalColor = kHXBSpacingColor_F5F5F9_100;
         kWeakSelf
         _codeTextField.block = ^(NSString *text1) {
             weakSelf.signInButton.enabled = text1.length;

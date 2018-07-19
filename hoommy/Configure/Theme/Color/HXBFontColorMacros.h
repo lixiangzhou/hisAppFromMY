@@ -13,7 +13,7 @@
 ///红色字体
 #define kHXBFontColor_F55151_100               RGBA(245, 81, 81, 1)
 #define kHXBFontColor_FB9561_100         UIColorFromRGB(0xFB9561)
-
+#define kHXBColor_FB7F67_100                 RGBA(251, 127, 103,1)
 ///灰色系列字体
 #define kHXBFontColor_333333_100               RGBA(51, 51, 51, 1)
 #define kHXBFontColor_666666_100               RGBA(102, 102, 102, 1)
