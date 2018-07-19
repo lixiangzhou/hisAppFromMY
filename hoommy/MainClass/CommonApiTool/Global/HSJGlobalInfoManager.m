@@ -10,12 +10,17 @@
 
 #define kGlobalInfoKey @"kGlobalInfoKey"
 
+@interface HSJGlobalInfoManager ()
+@property (nonatomic, assign) NSInteger retryCount;
+@end
+
 @implementation HSJGlobalInfoManager
 + (instancetype)shared {
     static HSJGlobalInfoManager * manager;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         manager = [HSJGlobalInfoManager new];
+        manager.retryCount = 0;
     });
     return manager;
 }
@@ -40,11 +45,15 @@
         self.infoModel = responseData;
         
         if (resultBlock) {
+            self.retryCount = 0;
             resultBlock(responseData);
         } else {
             if (responseData == nil) {
-                // 没有获取到数据就一直获取
-                [weakSelf getData:nil];
+                if (self.retryCount <= 3) {
+                    self.retryCount += 1;
+                    // 没有获取到数据就获取
+                    [weakSelf getData:nil];
+                }
             }
         }
         
