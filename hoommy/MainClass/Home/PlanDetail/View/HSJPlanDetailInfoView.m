@@ -7,7 +7,7 @@
 //
 
 #import "HSJPlanDetailInfoView.h"
-
+#import "HSJGlobalInfoManager.h"
 @interface HSJPlanDetailInfoView ()
 @property (nonatomic, weak) UILabel *totalNumLabel;
 @property (nonatomic, weak) UILabel *totalMoneyLabel;
@@ -90,9 +90,16 @@
 
 #pragma mark - Helper
 - (void)setData {
-    NSInteger totalNum = 2355;
-    CGFloat totalMoney = 234151.32;
+    [self updateDataWithTotlaNum:0 totalMoney:0];
     
+    kWeakSelf
+    [[HSJGlobalInfoManager shared] getData:^(HSJGlobalInfoModel *infoModel) {
+        [weakSelf updateDataWithTotlaNum:infoModel.financePlanSubPointCount
+                          totalMoney:infoModel.financePlanEarnInterest];
+    }];
+}
+
+- (void)updateDataWithTotlaNum:(NSInteger)totalNum totalMoney:(CGFloat)totalMoney {
     NSMutableAttributedString *totalNumAttr = [[NSMutableAttributedString alloc] initWithString:@"共计 "];
     [totalNumAttr appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%zd", totalNum] attributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:12]}]];
     [totalNumAttr appendAttributedString:[[NSAttributedString alloc] initWithString:@" 名妈妈开启豪妈小金库"]];
@@ -104,6 +111,5 @@
     self.totalNumLabel.attributedText = totalNumAttr;
     self.totalMoneyLabel.attributedText = totalMoneyAttr;
 }
-
 
 @end
