@@ -12,9 +12,6 @@
 
 
 - (BOOL)erroStateCodeDeal:(NYBaseRequest *)request response:(NSDictionary *)responseObject {
-    if ([request.requestUrl isEqualToString:kHXBUser_CheckExistMobileURL] && [responseObject[kResponseStatus]  isEqual: @1]) {
-        return NO;
-    }
     
     if ([request.requestUrl isEqualToString:kHXBUser_LoginURL] && [responseObject[kResponseStatus]  isEqual: @102]) {
         return NO;
@@ -32,15 +29,13 @@
     self.phoneNumber = mobile;
     [self loadData:^(NYBaseRequest *request) {
         request.requestMethod = NYRequestMethodPost;
-        request.requestUrl = kHXBUser_CheckExistMobileURL;
+        request.requestUrl = kHXBUser_CheckMobileExistURL;
         request.requestArgument = @{
                                  @"mobile":mobile
                                  };
         request.modelType = NSClassFromString(@"HSJSignInModel");
     } responseResult:^(HSJSignInModel * responseData, NSError *erro) {
-        NSDictionary *response = erro.userInfo;
-        BOOL isSuccess = [response[kResponseStatus]  isEqual: @1] || responseData;
-        if (resultBlock && isSuccess) {
+        if (!erro) {
             resultBlock(responseData,erro);
         }
     }];

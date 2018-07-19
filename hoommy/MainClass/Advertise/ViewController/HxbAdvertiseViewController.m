@@ -46,7 +46,7 @@
     kWeakSelf
     [self.viewModel getSlash:^(BOOL isSuccess) {
         if (isSuccess) {
-            [[SDWebImageManager sharedManager] downloadImageWithURL:weakSelf.viewModel.imageUrl options:SDWebImageLowPriority progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+            [[SDWebImageManager sharedManager] loadImageWithURL:weakSelf.viewModel.imageUrl options:SDWebImageLowPriority progress:nil completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
                 if (image) {
                     CGFloat height = kScreenWidth / image.size.width * image.size.height;
                     weakSelf.topImageView.image = image;

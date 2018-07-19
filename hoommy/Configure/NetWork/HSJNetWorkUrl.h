@@ -42,7 +42,7 @@
 #define kHXBUser_checkCaptchaURL @"/checkCaptcha"///校验 图片验证码
 #define kHXBUser_smscodeURL @"/verifycode/send"//@"/send/smscode"///发送短信接口
 #define kHXBUser_CheckMobileURL @"/checkMobile"///校验手机号
-#define kHXBUser_CheckExistMobileURL @"/checkExistMobile"///忘记密码校验手机号
+#define kHXBUser_CheckMobileExistURL @"/checkMobileExist"///校验手机号是否注册
 #define kHXBUser_realnameURL @"/user/realname"///实名认证
 #define kHXBUser_riskModifyScoreURL @"/user/riskModifyScore"///风险评测
 #define kHXBUser_financialAdvisorURL @"/account/advisor" //获取理财顾问信息
@@ -58,7 +58,6 @@
 #define kHXBSetTransaction_MobifyPassword_CashpwdEditURL @"/account/cashpwd/edit"//修改交易密码--修改交易密码接口w
 #define kHXBSetTransaction_MobifyPhoneNumber_CashMobileEditURL @"/account/mobile"//修改手机号--修改手机号接口
 
-#define kHXBUser_CheckExistMobileURL @"/checkExistMobile"///忘记密码校验手机号
 #define kHXBUser_LoginURL @"/user/login"//登录
 
 #define kHXBMY_PlanAccountRequestURL @"/account/planAssets"///账户内 账户内Plan资产
@@ -84,8 +83,7 @@
 
 
 //MARK: ======================= 用户 =======================
-#define kHXBUser_UserInfoURL @"/account/info"///用户信息
-
+#define kHXBMY_CapitalRecordURL @"/account/tradlist"///交易记录
 
 #define kHXBFinanc_PlanDetaileURL(planID) [NSString stringWithFormat:@"/plan/%ld",(planID)]///计划详情
 

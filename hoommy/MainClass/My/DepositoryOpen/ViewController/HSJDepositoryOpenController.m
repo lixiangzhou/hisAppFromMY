@@ -13,7 +13,7 @@
 #import "UITextField+HLNumberFormatTextField.h"
 #import "HXBAgreementView.h"
 #import "HxbHUDProgress.h"
-#import "HSJBankCardListViewController.h"
+#import "HXBBankCardListViewController.h"
 #import "HSJDepositoryOpenViewModel.h"
 #import <ReactiveObjC/ReactiveObjC.h>
 
@@ -534,7 +534,7 @@
 
 /// 查看银行限额
 - (void)checkBankLimit {
-    HSJBankCardListViewController *VC = [[HSJBankCardListViewController alloc] init];
+    HXBBankCardListViewController *VC = [[HXBBankCardListViewController alloc] init];
     HXBBaseNavigationController *nav = [[HXBBaseNavigationController alloc] initWithRootViewController:VC];
     [self presentViewController:nav animated:YES completion:nil];
 }

@@ -21,6 +21,7 @@
 #define kHXBColor_FFFCF5_100                RGBA(255, 252, 245, 1)
 #define kHXBColor_FF9535_100                RGBA(255, 149, 53, 1)
 #define kHXBColor_FF6A0F_100                RGBA(255, 106, 15, 1)
+#define kHXBColor_FB7F67_10                 RGBA(251, 127, 103,0.1)
 
 /// 详情页的字体颜色
 #define kHXBColor_976A02_100                UIColorFromRGB(0x976A02)

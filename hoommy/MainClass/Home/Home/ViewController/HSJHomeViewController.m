@@ -16,8 +16,14 @@
 #import "HSJGestureLoginController.h"
 #import "HSJPlanDetailController.h"
 #import "HSJSignInViewController.h"
+#import "HSJHomeCustomNavbarView.h"
 
+#import "HSJHomeHeaderView.h"
 @interface HSJHomeViewController ()
+
+@property (nonatomic, strong) HSJHomeCustomNavbarView *navView;
+
+@property (nonatomic, strong) HSJHomeHeaderView *headerView;
 
 @end
 
@@ -27,6 +33,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.isFullScreenShow = YES;
+    
+    [self setUI];
 //    self.title = @"";
     UIButton* button =[[UIButton alloc] init];
     button.backgroundColor = [UIColor greenColor];
@@ -53,7 +61,7 @@
     [self.view addSubview:webviewButton];
     
     [button mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).offset(self.contentViewTop+44);
+        make.top.equalTo(self.view).offset(self.contentViewTop+HXBStatusBarAndNavigationBarHeight);
         make.left.right.equalTo(self.view);
         make.height.mas_equalTo(44);
     }];
@@ -83,6 +91,13 @@
     } failure:^(NYBaseRequest *request, NSError *error) {
         
     }];
+}
+
+- (void)setUI {
+    [self.view addSubview:self.headerView];
+    [self.view addSubview:self.navView];
+    
+  
 }
 
 - (void)buttonClickAct:(UIButton*)button {
@@ -130,14 +145,32 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+
+
+
+
+- (HSJHomeCustomNavbarView *)navView {
+    if (!_navView) {
+        _navView = [[HSJHomeCustomNavbarView alloc] init];
+        _navView.title = @"红小宝";
+        _navView.titleColor = kHXBColor_333333_100;
+        _navView.titleFount = kHXBFont_PINGFANGSC_REGULAR_750(40);
+        _navView.noticeBlock = ^{
+            IDPLogDebug(@"公告");
+        };
+    }
+    return _navView;
 }
-*/
+
+
+
+- (HSJHomeHeaderView *)headerView {
+    if (!_headerView) {
+        _headerView = [[HSJHomeHeaderView alloc] initWithFrame:CGRectMake(0, 350, kScreenWidth, kScrAdaptationH750(558))];
+        
+    }
+    return _headerView;
+}
 
 @end

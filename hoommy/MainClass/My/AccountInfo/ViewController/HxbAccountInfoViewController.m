@@ -19,8 +19,11 @@
 //#import "HXBBottomLineTableViewCell.h"
 #import "HXBBaseWKWebViewController.h"
 #import "HXBAccount_AlterLoginPassword_ViewController.h"
+#import "HXBBindPhoneViewController.h"
+
 #import "HXBCommonProblemViewController.h"
 #import "HSJDepositoryOpenController.h"
+#import "HSJGestureSettingController.h"
 
 @interface HxbAccountInfoViewController ()
 <
@@ -150,7 +153,13 @@ UITableViewDataSource
         switch (model.type) {
             case HXBAccountSecureTypeModifyPhone:
                 //绑定手机号
+            {
                 NSLog(@"绑定手机号");
+                HXBBindPhoneViewController* vc = [[HXBBindPhoneViewController alloc] init];
+                vc.bindPhoneStepType = HXBBindPhoneStepFirst;
+                vc.userInfoModel = self.userInfoModel;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
                 break;
             case HXBAccountSecureTypeLoginPwd:
                 //登录密码
@@ -456,27 +465,27 @@ UITableViewDataSource
     [data addObject:@{@"type":@(HXBAccountSecureTypeLoginPwd), @"title": @"登录密码"}];
     [data addObject:@{@"type":@(HXBAccountSecureTypeTransactionPwd), @"title": @"交易密码"}];
     [data addObject:@{@"type":@(HXBAccountSecureTypeGesturePwdSwitch), @"title": @"手势密码开关"}];
-    [data addObject:@{@"type":@(HXBAccountSecureTypeGesturePwdModify), @"title": @"修改手势密码"}];//暂时写上
+//    [data addObject:@{@"type":@(HXBAccountSecureTypeGesturePwdModify), @"title": @"修改手势密码"}];//暂时写上
     
-//    if ([KeyChain.skipGesture isEqual:kHXBGesturePwdSkipeNO]) {
-//        [data addObject:@{@"type":@(HXBAccountSecureTypeGesturePwdModify), @"title": @"修改手势密码"}];
-//    }
+    if ([KeyChain.skipGesture isEqual:kHXBGesturePwdSkipeNO]) {
+        [data addObject:@{@"type":@(HXBAccountSecureTypeGesturePwdModify), @"title": @"修改手势密码"}];
+    }
     [data addObject:@{@"type":@(HXBAccountSecureTypeCommonProblems), @"title": @"常见问题"}];
     [data addObject:@{@"type":@(HXBAccountSecureTypeAboutUs), @"title": @"关于我们"}];
     
-    
+    kWeakSelf
     self.dataSource = [NSMutableArray arrayWithCapacity:data.count];
     for (NSInteger i = 0; i < data.count; i++) {
         NSDictionary *dict = data[i];
         
         HXBAccountSecureModel *model = [HXBAccountSecureModel yy_modelWithJSON:dict];
-//        if (model.type == HXBAccountSecureTypeGesturePwdSwitch) {
-//            model.switchBlock = ^(BOOL isOn) {
-//                HXBCheckLoginPasswordViewController *checkLoginPasswordVC = [[HXBCheckLoginPasswordViewController alloc] init];
-//                checkLoginPasswordVC.switchType = isOn ? HXBAccountSecureSwitchTypeOn : HXBAccountSecureSwitchTypeOff;
-//                [self.navigationController pushViewController:checkLoginPasswordVC animated:YES];
-//            };
-//        }
+        if (model.type == HXBAccountSecureTypeGesturePwdSwitch) {
+            model.switchBlock = ^(BOOL isOn) {
+                HSJGestureSettingController *VC = [[HSJGestureSettingController alloc] init];
+                VC.switchType = isOn ? HXBAccountSecureSwitchTypeOn : HXBAccountSecureSwitchTypeOff;
+                [weakSelf.navigationController pushViewController:VC animated:YES];
+            };
+        }
         
         [self.dataSource addObject:model];
     }

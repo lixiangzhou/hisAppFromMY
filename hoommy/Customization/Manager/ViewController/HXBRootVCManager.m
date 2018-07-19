@@ -127,7 +127,6 @@
 - (void)showSlash {
     [self.mainTabbarVC.view addSubview:self.advertiseVC.view];
     [self.advertiseVC addTimer];
-    [HXBAdvertiseManager shared].isShowed = YES;
 }
 
 - (void)popWindowsAtHomeAfterSlashOrGesturePwd {

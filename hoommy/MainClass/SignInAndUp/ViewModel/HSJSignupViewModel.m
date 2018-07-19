@@ -20,13 +20,15 @@
 - (void)getVerifyCodeRequesWithSignupWithAction:(NSString *)action
                                     andWithType:(NSString *)type
                                     andWithMobile:(NSString *)mobile
+                                 andWithCaptcha:(NSString *)captcha
                                andCallbackBlock: (void(^)(BOOL isSuccess,BOOL isNeedCaptcha))callbackBlock {
     kWeakSelf
     [self verifyCodeRequestWithResultBlock:^(NYBaseRequest *request) {
         request.requestArgument = @{
                                     @"action":action,
                                     @"type":type,
-                                    @"mobile" : mobile
+                                    @"mobile" : mobile,
+                                    @"captcha" : captcha?:@""
                                     };
         request.hudDelegate = weakSelf;
         request.showHud = YES;
