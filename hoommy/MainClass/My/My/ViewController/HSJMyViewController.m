@@ -132,6 +132,10 @@
     if (type == 0) { //银行卡
         if (state) { //已绑卡
             //进入银行卡页面
+            HxbMyBankCardViewController *vc = [[HxbMyBankCardViewController alloc] init];
+            vc.isBank = YES;
+            vc.isCashPasswordPassed = @"1";
+            [self.navigationController pushViewController:vc animated:YES];
             NSLog(@"进入银行卡页面");
         } else {
             //未绑卡

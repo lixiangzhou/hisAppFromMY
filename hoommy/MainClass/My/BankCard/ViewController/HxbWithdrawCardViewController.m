@@ -56,13 +56,30 @@
     self.isDisableSliderBack = YES;
     
     [self setupData];
-    [self setupUI];
-    [self setupConstraints];
+    
 }
 
 - (void)setupData {
     self.bindBankCardVM = [[HXBBankCardViewModel alloc] init];
-    
+    if(!self.userInfoModel) {
+        kWeakSelf
+        [self.bindBankCardVM downLoadUserInfo:YES resultBlock:^(id responseData, NSError *erro) {
+            if(!erro) {
+                weakSelf.userInfoModel = responseData;
+                [weakSelf setupUI];
+                [weakSelf setupConstraints];
+                [weakSelf buildCellModelList];
+            }
+        }];
+    }
+    else {
+        [self setupUI];
+        [self setupConstraints];
+        [self buildCellModelList];
+    }
+}
+
+- (void)buildCellModelList {
     //构建cell数据源列表
     NSMutableArray *dataList = [NSMutableArray array];
     self.cellDataList = dataList;
@@ -82,7 +99,6 @@
     cellModel.keyboardType = UIKeyboardTypeNumberPad;
     [dataList addObject:cellModel];
 }
-
 #pragma mark - UI
 
 - (void)setupUI {

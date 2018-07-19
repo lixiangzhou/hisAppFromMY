@@ -120,11 +120,9 @@ UITableViewDataSource
                 
                 [self presentViewController:alertVC animated:NO completion:nil];
             }
-            //完善信息
-            //                HXBOpenDepositAccountViewController *openDepositAccountVC = [[HXBOpenDepositAccountViewController alloc] init];
-            //                openDepositAccountVC.title = @"完善信息";
-            //                openDepositAccountVC.type = HXBChangePhone;
-            //                [self.navigationController pushViewController:openDepositAccountVC animated:YES];
+            else{
+                //账户信息不完善
+            }
         }
     }
 }
@@ -141,23 +139,10 @@ UITableViewDataSource
     }else
     {
         if (!self.userInfoModel.userInfo.isCreateEscrowAcc) {
-            [HxbHUDProgress showTextInView:self.view text:@"请先开户"];
-//            HXBDepositoryAlertViewController *alertVC = [[HXBDepositoryAlertViewController alloc] init];
-//            kWeakSelf
-//            alertVC.immediateOpenBlock = ^{
-//                HXBOpenDepositAccountViewController *openDepositAccountVC = [[HXBOpenDepositAccountViewController alloc] init];
-//                openDepositAccountVC.title = @"开通存管账户";
-//                //                        openDepositAccountVC.userModel = viewModel;
-//                openDepositAccountVC.type = HXBRechargeAndWithdrawalsLogicalJudgment_Other;
-//                [weakSelf.navigationController pushViewController:openDepositAccountVC animated:YES];
-//            };
-//            [self presentViewController:alertVC animated:NO completion:nil];
-        }else
-        {
-//            HXBOpenDepositAccountViewController *openDepositAccountVC = [[HXBOpenDepositAccountViewController alloc] init];
-//            openDepositAccountVC.title = @"完善信息";
-//            openDepositAccountVC.type = HXBRechargeAndWithdrawalsLogicalJudgment_Other;
-//            [self.navigationController pushViewController:openDepositAccountVC animated:YES];
+            [self entryDepositoryAccount];
+        }
+        else{
+            //账户信息不完善
         }
     }
 }
