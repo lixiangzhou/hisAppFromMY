@@ -10,7 +10,7 @@
 #import "HXBVersionUpdateModel.h"
 #import "HXBRootVCManager.h"
 #import "HXBAlertManager.h"
-
+#import "HXBAdvertiseManager.h"
 @interface HXBVersionUpdateManager ()
 
 /**
@@ -54,9 +54,7 @@
         
         if ([[UIApplication sharedApplication].keyWindow.rootViewController isKindOfClass:NSClassFromString(@"HXBBaseTabBarController")]) {
             //获取顶部控制器
-            if (![[HXBRootVCManager manager].topVC isKindOfClass:NSClassFromString(@"HXBGesturePasswordViewController")]) {
-                [weakSelf show];
-            }
+            [weakSelf show];
         }
         
         if ([weakSelf.versionUpdateModel.force isEqualToString:@"1"]) {
@@ -73,7 +71,7 @@
 }
 
 - (void)show {
-    if (self.versionUpdateModel && (!self.isShow)) {
+    if (self.versionUpdateModel && (!self.isShow) && [[HXBAdvertiseManager shared] couldPopAtHomeAfterSlashOrGesturePwd]) {
         self.isShow = YES;
         [HXBAlertManager checkversionUpdateWith:self.versionUpdateModel];
     }
