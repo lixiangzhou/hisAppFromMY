@@ -119,7 +119,7 @@ MyViewHeaderDelegate
     };
     [mArr addObject:model];
     
-    state = ![self.userInfoModel.userInfo.riskType isEqualToString:@"立即评测"]?YES:NO;
+    state = !self.userInfoModel.userInfo.riskType||[self.userInfoModel.userInfo.riskType isEqualToString:@"立即评测"]?NO:YES;
     model.desc = state?self.userInfoModel.userInfo.riskType:[NSString stringWithFormat:@"立即评测"];
     model.infoBlock = ^(NSInteger type) {
         [weakSelf.delegate didMyHomeInfoClick:type state:state];
