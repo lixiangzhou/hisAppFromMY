@@ -39,6 +39,8 @@
 
 /// 创建根控制器
 - (void)createRootVCAndMakeKeyWindow {
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    
     [[HXBAdvertiseManager shared] getSplash];
     [[HSJGlobalInfoManager shared] getData];
     

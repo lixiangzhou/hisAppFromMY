@@ -416,7 +416,7 @@
         _yesterdayInterestLabel.textAlignment = NSTextAlignmentLeft;
         _yesterdayInterestLabel.font = kHXBFont_PINGFANGSC_REGULAR(35);
         _yesterdayInterestLabel.textColor = kHXBColor_333333_100;
-        _yesterdayInterestLabel.text = @"0.00元";
+        _yesterdayInterestLabel.text = @"0.00";
     }
     return _yesterdayInterestLabel;
 }
@@ -433,7 +433,7 @@
 - (UILabel *)accumulatedProfitLabel{
     if (!_accumulatedProfitLabel) {
         _accumulatedProfitLabel = [[UILabel alloc]initWithFrame:CGRectZero];
-        _accumulatedProfitLabel.text = @"0.00元";
+        _accumulatedProfitLabel.text = @"0.00";
         _accumulatedProfitLabel.textAlignment = NSTextAlignmentLeft;
         _accumulatedProfitLabel.font = kHXBFont_PINGFANGSC_REGULAR(20);
         _accumulatedProfitLabel.textColor = kHXBColor_333333_100;
@@ -453,7 +453,7 @@
 -(UILabel *)assetsTotalLabel{
     if (!_assetsTotalLabel) {
         _assetsTotalLabel = [[UILabel alloc]initWithFrame:CGRectZero];
-        _assetsTotalLabel.text = @"0.00元";
+        _assetsTotalLabel.text = @"0.00";
         _assetsTotalLabel.textAlignment = NSTextAlignmentLeft;
         _assetsTotalLabel.font = kHXBFont_PINGFANGSC_REGULAR(20);
         _assetsTotalLabel.textColor = kHXBColor_333333_100;

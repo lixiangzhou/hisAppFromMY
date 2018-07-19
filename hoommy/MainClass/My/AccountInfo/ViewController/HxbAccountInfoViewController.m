@@ -49,16 +49,21 @@ UITableViewDataSource
     };
     [self.view addSubview:self.tableView];
     [self prepareData];
-    [self.tableView reloadData];
-    
+    [self.tableView reloadData];    
 }
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleDefault;
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     self.automaticallyAdjustsScrollViewInsets = YES;
-    self.isWhiteColourGradientNavigationBar = YES;
+//    self.isWhiteColourGradientNavigationBar = YES;
     [self loadData_userInfo];///加载用户数据
 }
+
 
 /**
  再次获取网络数据
@@ -173,14 +178,15 @@ UITableViewDataSource
                 //交易密码
                 NSLog(@"交易密码");
                 break;
-            case HXBAccountSecureTypeGesturePwdModify:
-                //手势密码
-                NSLog(@"修改手势密码");
-                break;
             case HXBAccountSecureTypeGesturePwdSwitch:
-                //修改手势密码
+                //手势密码开关
                 NSLog(@"手势密码开关");
                 break;
+            case HXBAccountSecureTypeGesturePwdModify:
+                //修改手势密码
+                NSLog(@"修改手势密码");
+                break;
+            
             default:
                 break;
         }

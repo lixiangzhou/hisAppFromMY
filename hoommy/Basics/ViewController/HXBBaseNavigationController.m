@@ -101,5 +101,10 @@
     return [super popToRootViewControllerAnimated:animated];
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    UIViewController *topVC = self.topViewController;
+    return [topVC preferredStatusBarStyle];
+}
+
 
 @end
