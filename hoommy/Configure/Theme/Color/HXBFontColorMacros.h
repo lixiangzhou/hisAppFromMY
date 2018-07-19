@@ -41,5 +41,6 @@
 //
 #define kHXBFontColor_FE7E5E_100         UIColorFromRGB(0xFE7E5E)
 #define kHXBFontColor_7F85A1_100         UIColorFromRGB(0x7F85A1)
-
+#define kHXBFontColor_C5AB71_100         UIColorFromRGB(0xC5AB71)
+#define kHXBFontColor_4C7BFE_100          UIColorFromRGB(0x4C7BFE)
 #endif /* HXBFontColorMacros_h */

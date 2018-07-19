@@ -46,7 +46,9 @@
  @param scrollView 安装对象
  */
 - (void)setUpScrollFreshBlock:(UIScrollView *)scrollView {
-    
+    if (@available(iOS 11.0, *)) {
+        scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
     kWeakSelf
     scrollView.headerWithRefreshBlock = ^(UIScrollView *scrollView) {
         [weakSelf headerRefreshAction:scrollView];
