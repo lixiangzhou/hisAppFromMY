@@ -106,10 +106,10 @@
 }
 
 - (void)tableViewButtonClickAct:(UIButton*)button {
-//    HSJGestureSettingController* vc = [[HSJGestureSettingController alloc] init];
-//    [self.navigationController pushViewController:vc animated:YES];
-    HSJSignInViewController *vc = [HSJSignInViewController new];
+    HSJGestureSettingController* vc = [[HSJGestureSettingController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
+//    HSJSignInViewController *vc = [HSJSignInViewController new];
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)fragmentButtonClickAct:(UIButton*)button {

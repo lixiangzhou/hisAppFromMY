@@ -92,7 +92,7 @@
         } else {
             NSString *skip = KeyChain.skipGesture;
             BOOL skipGesturePwd = NO;
-            if (skip != nil) {
+            if (![skip isEqual:kHXBGesturePwdSkipeNONE]) {
                 skipGesturePwd = [skip isEqualToString:kHXBGesturePwdSkipeYES];
             }
             
@@ -103,6 +103,7 @@
             } else {
                 HSJGestureLoginController *gestureVC = [[HSJGestureLoginController alloc] init];
                 gestureVC.type = HSJGestureTypeSetting;
+                gestureVC.showSkip = YES;
                 VC = gestureVC;
             }
         }

@@ -31,7 +31,7 @@
         UISwitch *switchView = [UISwitch new];
         NSString *skip = KeyChain.skipGesture;
         BOOL isOn = NO;
-        if (skip != nil) {
+        if (![skip isEqual:kHXBGesturePwdSkipeNONE]) {
             isOn = ![skip isEqualToString:kHXBGesturePwdSkipeYES];
         }
         switchView.on = isOn;

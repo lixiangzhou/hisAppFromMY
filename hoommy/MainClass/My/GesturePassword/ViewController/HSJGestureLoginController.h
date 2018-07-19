@@ -15,6 +15,7 @@ typedef enum : NSUInteger {
 
 @interface HSJGestureLoginController : HXBBaseViewController
 @property (nonatomic, assign) HSJGestureType type;
-
+/// 是否显示 跳过 按钮
+@property (nonatomic, assign) BOOL showSkip;
 @property (nonatomic, strong) void (^dismissBlock)(BOOL delay, BOOL toActivity, BOOL popRightNow);
 @end

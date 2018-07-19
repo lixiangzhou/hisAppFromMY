@@ -61,6 +61,13 @@
                                      };
     } responseResult:^(id responseData, NSError *erro) {
         if (!erro) {
+            if ((![mobile isEqualToString:KeyChain.mobile]) && KeyChain.mobile) {
+                [KeyChain removeGesture];
+                KeyChain.skipGesture = kHXBGesturePwdSkipeNONE;
+                KeyChain.skipGestureAlertAppeared = NO;
+            }
+            KeyChain.gesturePwdCount = 5;
+            
             KeyChain.isLogin = YES;
             KeyChain.mobile = mobile;
             resultBlock(YES,NO);

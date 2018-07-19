@@ -14,8 +14,9 @@
 
 #define kHXBGesturePWD [NSString stringWithFormat:@"kHXBGesturePWD%@", KeyChain.mobile ?: @""]
 // 是否忽略手势密码
-#define kHXBGesturePwdSkipeYES @"kHXBGesturePwdSkipeYES"
-#define kHXBGesturePwdSkipeNO @"kHXBGesturePwdSkipeNO"
+#define kHXBGesturePwdSkipeYES @"kHXBGesturePwdSkipeYES"    // 忽略
+#define kHXBGesturePwdSkipeNO @"kHXBGesturePwdSkipeNO"      // 不忽略
+#define kHXBGesturePwdSkipeNONE @"kHXBGesturePwdSkipeNONE"  // 相当于没有决定
 
 @interface KeyChainManage : NSObject
 
