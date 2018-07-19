@@ -33,26 +33,6 @@
     [self.interactivePopGestureRecognizer setEnabled:NO];
 }
 
-- (void)setIsShowSplitLine:(BOOL)isShowSplitLine {
-    _isShowSplitLine = isShowSplitLine;
-    
-    if(isShowSplitLine) {
-        [self.navigationBar addSubview:self.splitLineImv];
-    }
-    else {
-        [self.splitLineImv removeFromSuperview];
-    }
-}
-
-- (UIImageView *)splitLineImv {
-    if(!_splitLineImv) {
-        _splitLineImv = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.navigationBar.height-0.5, kScreenWidth, 0.5)];
-        _splitLineImv.backgroundColor = kHXBColor_EEEEF5_100;
-    }
-    
-    return _splitLineImv;
-}
-
 #pragma mark - override push
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
 {

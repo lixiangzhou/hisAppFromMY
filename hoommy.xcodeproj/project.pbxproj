@@ -281,6 +281,13 @@
 		9A97DAD220EF420200688ADB /* sanbiao.svg in Resources */ = {isa = PBXBuildFile; fileRef = 9A97DA5B20EF420200688ADB /* sanbiao.svg */; };
 		9A97DAD320EF420200688ADB /* trading_record.svg in Resources */ = {isa = PBXBuildFile; fileRef = 9A97DA5C20EF420200688ADB /* trading_record.svg */; };
 		9A97DAD420EF420200688ADB /* transaction_password.svg in Resources */ = {isa = PBXBuildFile; fileRef = 9A97DA5D20EF420200688ADB /* transaction_password.svg */; };
+		9AA70B4120FEF323008B3007 /* HSJBuyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA70B4020FEF323008B3007 /* HSJBuyViewController.m */; };
+		9AA70B4420FEF369008B3007 /* HSJBuyViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA70B4320FEF369008B3007 /* HSJBuyViewModel.m */; };
+		9AA70B4720FEF3CC008B3007 /* HSJBuyHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA70B4620FEF3CC008B3007 /* HSJBuyHeadView.m */; };
+		9AA70B4A20FEF3EA008B3007 /* HSJBuyFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA70B4920FEF3EA008B3007 /* HSJBuyFootView.m */; };
+		9AA70B4D20FEF40F008B3007 /* HSJBuyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA70B4C20FEF40F008B3007 /* HSJBuyTableViewCell.m */; };
+		9AA70B5020FEF434008B3007 /* HSJBuyCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA70B4F20FEF434008B3007 /* HSJBuyCellModel.m */; };
+		9AA70B5320FF03D5008B3007 /* HSJBuySectionHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA70B5220FF03D5008B3007 /* HSJBuySectionHeadView.m */; };
 		9ACB2F3C20EF6E08005C3C3D /* HSJKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ACB2F3B20EF6E08005C3C3D /* HSJKeyChainStore.m */; };
 		9AF51DA120FC487D008A8CF4 /* HSJCALayerTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF51DA020FC487D008A8CF4 /* HSJCALayerTool.m */; };
 		9AF51DA420FC7458008A8CF4 /* HSJClientServeTelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF51DA320FC7458008A8CF4 /* HSJClientServeTelView.m */; };
@@ -868,6 +875,20 @@
 		9A97DA5B20EF420200688ADB /* sanbiao.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = sanbiao.svg; sourceTree = "<group>"; };
 		9A97DA5C20EF420200688ADB /* trading_record.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = trading_record.svg; sourceTree = "<group>"; };
 		9A97DA5D20EF420200688ADB /* transaction_password.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = transaction_password.svg; sourceTree = "<group>"; };
+		9AA70B3F20FEF323008B3007 /* HSJBuyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJBuyViewController.h; sourceTree = "<group>"; };
+		9AA70B4020FEF323008B3007 /* HSJBuyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJBuyViewController.m; sourceTree = "<group>"; };
+		9AA70B4220FEF369008B3007 /* HSJBuyViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJBuyViewModel.h; sourceTree = "<group>"; };
+		9AA70B4320FEF369008B3007 /* HSJBuyViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJBuyViewModel.m; sourceTree = "<group>"; };
+		9AA70B4520FEF3CC008B3007 /* HSJBuyHeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJBuyHeadView.h; sourceTree = "<group>"; };
+		9AA70B4620FEF3CC008B3007 /* HSJBuyHeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJBuyHeadView.m; sourceTree = "<group>"; };
+		9AA70B4820FEF3EA008B3007 /* HSJBuyFootView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJBuyFootView.h; sourceTree = "<group>"; };
+		9AA70B4920FEF3EA008B3007 /* HSJBuyFootView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJBuyFootView.m; sourceTree = "<group>"; };
+		9AA70B4B20FEF40F008B3007 /* HSJBuyTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJBuyTableViewCell.h; sourceTree = "<group>"; };
+		9AA70B4C20FEF40F008B3007 /* HSJBuyTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJBuyTableViewCell.m; sourceTree = "<group>"; };
+		9AA70B4E20FEF434008B3007 /* HSJBuyCellModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJBuyCellModel.h; sourceTree = "<group>"; };
+		9AA70B4F20FEF434008B3007 /* HSJBuyCellModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJBuyCellModel.m; sourceTree = "<group>"; };
+		9AA70B5120FF03D5008B3007 /* HSJBuySectionHeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJBuySectionHeadView.h; sourceTree = "<group>"; };
+		9AA70B5220FF03D5008B3007 /* HSJBuySectionHeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJBuySectionHeadView.m; sourceTree = "<group>"; };
 		9ACB2F3A20EF6E08005C3C3D /* HSJKeyChainStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJKeyChainStore.h; sourceTree = "<group>"; };
 		9ACB2F3B20EF6E08005C3C3D /* HSJKeyChainStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJKeyChainStore.m; sourceTree = "<group>"; };
 		9AF51D9F20FC487D008A8CF4 /* HSJCALayerTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJCALayerTool.h; sourceTree = "<group>"; };
@@ -2147,6 +2168,7 @@
 		9A97D90C20EF420000688ADB /* MainClass */ = {
 			isa = PBXGroup;
 			children = (
+				9AA70B3A20FEF0F6008B3007 /* Buy */,
 				8D142A9B20FDBF0100520728 /* CommonApiTool */,
 				8D142A8720FD9B4D00520728 /* Advertise */,
 				9A37498220F859A100F39681 /* AlertView */,
@@ -2858,6 +2880,59 @@
 			name = Other;
 			sourceTree = "<group>";
 		};
+		9AA70B3A20FEF0F6008B3007 /* Buy */ = {
+			isa = PBXGroup;
+			children = (
+				9AA70B3E20FEF13D008B3007 /* ViewModel */,
+				9AA70B3D20FEF12F008B3007 /* Model */,
+				9AA70B3C20FEF11F008B3007 /* ViewController */,
+				9AA70B3B20FEF116008B3007 /* View */,
+			);
+			path = Buy;
+			sourceTree = "<group>";
+		};
+		9AA70B3B20FEF116008B3007 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9AA70B4520FEF3CC008B3007 /* HSJBuyHeadView.h */,
+				9AA70B4620FEF3CC008B3007 /* HSJBuyHeadView.m */,
+				9AA70B4820FEF3EA008B3007 /* HSJBuyFootView.h */,
+				9AA70B4920FEF3EA008B3007 /* HSJBuyFootView.m */,
+				9AA70B4B20FEF40F008B3007 /* HSJBuyTableViewCell.h */,
+				9AA70B4C20FEF40F008B3007 /* HSJBuyTableViewCell.m */,
+				9AA70B5120FF03D5008B3007 /* HSJBuySectionHeadView.h */,
+				9AA70B5220FF03D5008B3007 /* HSJBuySectionHeadView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9AA70B3C20FEF11F008B3007 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9AA70B3F20FEF323008B3007 /* HSJBuyViewController.h */,
+				9AA70B4020FEF323008B3007 /* HSJBuyViewController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		9AA70B3D20FEF12F008B3007 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9AA70B4E20FEF434008B3007 /* HSJBuyCellModel.h */,
+				9AA70B4F20FEF434008B3007 /* HSJBuyCellModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9AA70B3E20FEF13D008B3007 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				9AA70B4220FEF369008B3007 /* HSJBuyViewModel.h */,
+				9AA70B4320FEF369008B3007 /* HSJBuyViewModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		9ACB2F3920EF6DB0005C3C3D /* HSJKeyChainStore */ = {
 			isa = PBXGroup;
 			children = (
@@ -3460,6 +3535,8 @@
 				9A97DA8E20EF420200688ADB /* NSString+HxbSortDicMD5.m in Sources */,
 				9A4B182B20F36997006B83C7 /* HXBAgreementView.m in Sources */,
 				9A97DA7D20EF420200688ADB /* HXBBaseTabBarController.m in Sources */,
+				9AA70B5020FEF434008B3007 /* HSJBuyCellModel.m in Sources */,
+				4E43B05F20EF77F8000BDAE7 /* HSJBankCardListViewController.m in Sources */,
 				9A3749D020F883E800F39681 /* HXBBankListCell.m in Sources */,
 				9A3749BC20F8808700F39681 /* HXBTipView.m in Sources */,
 				E14B9F9B20FD8AF80084F007 /* HXBMY_AllFinanceViewController.m in Sources */,
@@ -3515,6 +3592,7 @@
 				9A4B189A20F60C2B006B83C7 /* HXBMyTopUpBankView.m in Sources */,
 				E153B9C520FC8563002BE1AE /* HXBMYCapitalRecordViewModel.m in Sources */,
 				9A37491620F7714700F39681 /* PYPresentationController.m in Sources */,
+				9AA70B4420FEF369008B3007 /* HSJBuyViewModel.m in Sources */,
 				E15B4B8F2100703E00700C54 /* HSJCheckLoginPasswordViewController.m in Sources */,
 				9A97DA6420EF420200688ADB /* HSJPageScrollView.m in Sources */,
 				9A4B189B20F60C2B006B83C7 /* HXBMyTopUpBaseView.m in Sources */,
@@ -3528,6 +3606,7 @@
 				8D60B4D720F7486300287E52 /* PCCircleView.m in Sources */,
 				E13A0E8420F48EF600A3E364 /* HXB_XYTools.m in Sources */,
 				9A4B18AE20F60E89006B83C7 /* HXBBankCardModel.m in Sources */,
+				9AA70B4120FEF323008B3007 /* HSJBuyViewController.m in Sources */,
 				9A97DAA720EF420200688ADB /* JastorRuntimeHelper.m in Sources */,
 				8D591BFE20F84D8F007CA4BE /* HSJPlanDetailAdvantageView.m in Sources */,
 				9A97DA6320EF420200688ADB /* NSObject+HSNetRequestDelegate.m in Sources */,
@@ -3537,12 +3616,14 @@
 				9A97DA6F20EF420200688ADB /* HSJLoadClassTest.m in Sources */,
 				9A97DAB320EF420200688ADB /* HXBBaseRequestManager.m in Sources */,
 				9A97DA8420EF420200688ADB /* NSArray+HxbLog.m in Sources */,
+				9AA70B4720FEF3CC008B3007 /* HSJBuyHeadView.m in Sources */,
 				9A4B181720F34434006B83C7 /* HXBBindPhoneTableViewCell.m in Sources */,
 				4E7EE27520F72D6F007D96E1 /* HSJSignInButton.m in Sources */,
 				9A97DA8920EF420200688ADB /* NSString+HxbGeneral.m in Sources */,
 				8D5D612720FF1D34003F94D9 /* HSJRollOutPlanDetailRowModel.m in Sources */,
 				4EA57D2120F34D0D006FD573 /* HXBCustomTextField.m in Sources */,
 				9A97DA6120EF420200688ADB /* HXBThemAdapterManager.m in Sources */,
+				9AA70B4A20FEF3EA008B3007 /* HSJBuyFootView.m in Sources */,
 				8D60B4D620F7486300287E52 /* PCCircleInfoView.m in Sources */,
 				9A4B184E20F5AFB6006B83C7 /* HXBSignUPAndLoginRequest_EnumManager.m in Sources */,
 				9A37498020F8594000F39681 /* HxbSecurityCertificationViewController.m in Sources */,
@@ -3557,6 +3638,7 @@
 				9A37496B20F8557B00F39681 /* HXBMyTopUpVCViewModel.m in Sources */,
 				E153B96820F74AD1002BE1AE /* HXBAccount_AlterLoginPassword_View.m in Sources */,
 				E150F80020F5B4910006E0FE /* HXBAccountSecureCell.m in Sources */,
+				9AA70B5320FF03D5008B3007 /* HSJBuySectionHeadView.m in Sources */,
 				9A97DAB120EF420200688ADB /* HXBNsTimerManager.m in Sources */,
 				8D591BF120F84C57007CA4BE /* HSJPlanDetailController.m in Sources */,
 				9A0BD52F20F6FC9300B1CC59 /* HXBBaseView_TwoLable_View.m in Sources */,
@@ -3629,6 +3711,7 @@
 				9A97DA7820EF420200688ADB /* HXBBaseViewController.m in Sources */,
 				9A3749A420F85CF700F39681 /* HXBWithdrawRecordCell.m in Sources */,
 				4E8DB75820F5B63F000712D7 /* HSJSignInViewModel.m in Sources */,
+				9AA70B4D20FEF40F008B3007 /* HSJBuyTableViewCell.m in Sources */,
 				9A97DA8820EF420200688ADB /* NSString+CopiesTransfer.m in Sources */,
 				8D60B4D820F7486300287E52 /* PCCircleViewConst.m in Sources */,
 				9AF51EEB20FDCA65008A8CF4 /* HXBSetTransactionPasswordView.m in Sources */,

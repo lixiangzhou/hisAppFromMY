@@ -41,11 +41,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.isFullScreenShow = YES;
+
     kWeakSelf
     self.viewModel = [[HSJMyViewVCViewModel alloc] init];
-    self.viewModel.hugViewBlock = ^UIView *{
-        return weakSelf.view;
-    };
     [self setupSubView];
 }
 
@@ -142,6 +140,10 @@
     if (type == 0) { //银行卡
         if (state) { //已绑卡
             //进入银行卡页面
+            HxbMyBankCardViewController *vc = [[HxbMyBankCardViewController alloc] init];
+            vc.isBank = YES;
+            vc.isCashPasswordPassed = @"1";
+            [self.navigationController pushViewController:vc animated:YES];
             NSLog(@"进入银行卡页面");
         } else {
             //未绑卡
