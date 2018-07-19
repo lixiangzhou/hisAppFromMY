@@ -49,8 +49,6 @@ UITableViewDataSource
         return weakSelf.view;
     };
     [self.view addSubview:self.tableView];
-    [self prepareData];
-    [self.tableView reloadData];    
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -62,6 +60,8 @@ UITableViewDataSource
     [super viewWillAppear:animated];
     self.automaticallyAdjustsScrollViewInsets = YES;
 //    self.isWhiteColourGradientNavigationBar = YES;
+    [self prepareData];
+    [self.tableView reloadData];
     [self loadData_userInfo];///加载用户数据
 }
 
@@ -84,7 +84,7 @@ UITableViewDataSource
         UIImageView *iconImg = [[UIImageView alloc]initWithFrame:CGRectMake(kScrAdaptationW(25), kScrAdaptationH(20), kScrAdaptationW(50), kScrAdaptationW(50))];
         iconImg.layer.cornerRadius = kScrAdaptationW(25);
         iconImg.layer.masksToBounds = YES;
-        iconImg.image = [UIImage imageNamed:@"hflogo"];
+        iconImg.image = [UIImage imageNamed:@"personal_center"];
         [bgView addSubview:iconImg];
         
         UILabel *nameLab = [[UILabel alloc]initWithFrame:CGRectMake(kScrAdaptationW(90), kScrAdaptationH(32), kScrAdaptationW(150), kScrAdaptationH(25))];
@@ -185,9 +185,13 @@ UITableViewDataSource
                 break;
             case HXBAccountSecureTypeGesturePwdModify:
                 //修改手势密码
+            {
                 NSLog(@"修改手势密码");
+                HSJCheckLoginPasswordViewController *VC = [[HSJCheckLoginPasswordViewController alloc] init];
+                VC.switchType = HXBAccountSecureSwitchTypeChange;
+                [self.navigationController pushViewController:VC animated:YES];
+            }
                 break;
-            
             default:
                 break;
         }
@@ -487,7 +491,7 @@ UITableViewDataSource
         HXBAccountSecureModel *model = [HXBAccountSecureModel yy_modelWithJSON:dict];
         if (model.type == HXBAccountSecureTypeGesturePwdSwitch) {
             model.switchBlock = ^(BOOL isOn) {
-                HSJGestureSettingController *VC = [[HSJGestureSettingController alloc] init];
+                HSJCheckLoginPasswordViewController *VC = [[HSJCheckLoginPasswordViewController alloc] init];
                 VC.switchType = isOn ? HXBAccountSecureSwitchTypeOn : HXBAccountSecureSwitchTypeOff;
                 [weakSelf.navigationController pushViewController:VC animated:YES];
             };
