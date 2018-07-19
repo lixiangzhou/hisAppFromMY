@@ -118,7 +118,6 @@
     kWeakSelf
     [self.viewModel signUPRequetWithMobile:self.phoneNumber smscode:self.codeTextField.text password:self.passwordTextField.text resultBlock:^(id responseData, NSError *erro) {
         if (responseData) {
-            KeyChain.isLogin = YES;
             [weakSelf dismissViewControllerAnimated:YES completion:nil];
         }
     }];

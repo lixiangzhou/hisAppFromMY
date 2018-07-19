@@ -11,6 +11,7 @@
 #import "TAPageControl.h"
 #import "TAExampleDotView.h"
 #import "HXBRootVCManager.h"
+#import "HXBAdvertiseManager.h"
 
 @interface AXHNewFeatureController ()<TAPageControlDelegate>
 @property (strong, nonatomic) TAPageControl *pageControl;
@@ -109,7 +110,25 @@
 #pragma mark - Action
 - (void)start
 {
-    [[HXBRootVCManager manager] createRootVCAndMakeKeyWindow];
+    [[HXBRootVCManager manager] makeTabbarRootVC];
+    
+    if ([HXBAdvertiseManager shared].advertieseImage != nil) {
+        [[HXBRootVCManager manager] showSlash];
+    } else {
+        if ([HXBRootVCManager manager].gesturePwdVC) {
+            [[HXBRootVCManager manager] showGesturePwd];
+            [HXBRootVCManager manager].gesturePwdVC.dismissBlock = ^(BOOL delay, BOOL toActivity, BOOL popRightNow) {
+                [[HXBRootVCManager manager].gesturePwdVC.view removeFromSuperview];
+                if (popRightNow) {
+                    [[HXBRootVCManager manager] popWindowsAtHomeAfterSlashOrGesturePwd];
+                } else {
+                    [HXBAdvertiseManager shared].couldPopAtHomeAfterSlashOrGesturePwd = YES;
+                }
+            };
+        } else {
+            [HXBAdvertiseManager shared].couldPopAtHomeAfterSlashOrGesturePwd = YES;
+        }
+    }
 }
 
 

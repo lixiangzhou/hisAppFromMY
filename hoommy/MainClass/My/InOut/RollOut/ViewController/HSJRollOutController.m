@@ -27,7 +27,15 @@
     
     self.title = @"持有资产";
     self.viewModel = [HSJRollOutViewModel new];
-    [self setUI];  
+    [self setUI];
+    
+    [self.viewModel getAssets:^(BOOL isSuccess) {
+        
+    }];
+    
+    [self.viewModel getPlans:YES resultBlock:^(BOOL isSuccess) {
+        
+    }];
 }
 
 #pragma mark - UI
