@@ -23,6 +23,8 @@
 @property (nonatomic, assign) BOOL isDisableSliderBack;
 ///页面是否有底部的tabbar
 @property (nonatomic, assign) BOOL iswithTabbarInPage;
+//是否显示分割线
+@property (nonatomic, assign) BOOL isShowSplitLine;
 
 ///可以重写返回方法
 - (void)leftBackBtnClick;

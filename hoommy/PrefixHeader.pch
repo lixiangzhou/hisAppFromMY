@@ -54,5 +54,6 @@
 ////////////////////////////////////////////
 #import "HXBAlertManager.h"
 #import "HXBBaseHandDate.h"
+#import "HSJCALayerTool.h"
 
 #endif /* PrefixHeader_pch */
