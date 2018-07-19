@@ -33,6 +33,8 @@
 #pragma mark - UI
 
 - (void)setUI {
+    self.isWhiteColourGradientNavigationBar = YES;
+    
     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     self.automaticallyAdjustsScrollViewInsets = YES;
     
