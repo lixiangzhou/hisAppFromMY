@@ -11,7 +11,6 @@
 
 //#import "HXBBindPhoneViewController.h"
 
-#import "HSJBankCardListViewController.h"
 #import "HSJRiskAssessmentViewController.h"
 #import "HSJSignInViewController.h"
 #import "HXBBaseNavigationController.h"
