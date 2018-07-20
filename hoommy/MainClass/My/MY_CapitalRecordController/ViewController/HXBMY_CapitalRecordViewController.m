@@ -82,6 +82,7 @@ static NSInteger const defaultPageCount = 20;
 
 - (void)refresh {
     kWeakSelf
+    self.tableView.freshOption = ScrollViewFreshOptionDownPull;
     [self.tableView setHeaderWithRefreshBlock:^(UIScrollView *scrollView) {
         weakSelf.capitalRecordViewModel.capitalRecordPage = 1;
         [weakSelf downDataWithScreenType:weakSelf.screenType];

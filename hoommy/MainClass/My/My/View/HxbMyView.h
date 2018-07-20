@@ -21,7 +21,7 @@
 /**
  下拉加载回调的Block
  */
-@property (nonatomic, copy) void(^ _Nonnull homeRefreshHeaderBlock)();
+@property (nonatomic, copy) void(^ _Nonnull homeRefreshHeaderBlock)(void);
 /**
  是否停止刷新
  */

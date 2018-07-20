@@ -26,14 +26,14 @@
 #import "HxbWithdrawCardViewController.h"
 #import "HSJDepositoryOpenController.h"
 #import "HSJGestureSettingController.h"
+#import "NSString+HxbPerMilMoney.h"
+
 
 typedef enum : NSUInteger {
     USERINFO_UPDATE_FAILE,//失败
     USERINFO_UPDATE_ING, //正在更新
     USERINFO_UPDATE_SUCCESS,//成功
 }UserInfoUpdateState;
-
-
 
 @interface HxbAccountInfoViewController ()
 <
@@ -62,12 +62,7 @@ UITableViewDataSource
         return weakSelf.view;
     };
     [self.view addSubview:self.tableView];
-    [self setUpScrollFreshBlock:self.tableView];
-    [self setupConstraints];
-    [self prepareData];
-    
-    self.isShowSplitLine = YES;
-    self.userInfoUpdateState = USERINFO_UPDATE_FAILE;
+
 }
 
 - (void)setupConstraints {
@@ -77,7 +72,14 @@ UITableViewDataSource
 }
 
 - (void)reLoadWhenViewAppear {
+    self.automaticallyAdjustsScrollViewInsets = YES;
     self.actionType = HXBAccountSecureTypeNone;
+    [self setUpScrollFreshBlock:self.tableView];
+    [self setupConstraints];
+    [self prepareData];
+    [self.tableView reloadData];
+    self.isShowSplitLine = YES;
+    self.userInfoUpdateState = USERINFO_UPDATE_FAILE;
     [self loadData_userInfo];///加载用户数据
 }
 
@@ -214,7 +216,7 @@ UITableViewDataSource
         UIImageView *iconImg = [[UIImageView alloc]initWithFrame:CGRectMake(kScrAdaptationW(25), kScrAdaptationH(20), kScrAdaptationW(50), kScrAdaptationW(50))];
         iconImg.layer.cornerRadius = kScrAdaptationW(25);
         iconImg.layer.masksToBounds = YES;
-        iconImg.image = [UIImage imageNamed:@"hflogo"];
+        iconImg.image = [UIImage imageNamed:@"personal_center"];
         [bgView addSubview:iconImg];
         
         UILabel *nameLab = [[UILabel alloc]initWithFrame:CGRectMake(kScrAdaptationW(90), kScrAdaptationH(32), kScrAdaptationW(150), kScrAdaptationH(25))];
@@ -234,14 +236,20 @@ UITableViewDataSource
             hfProtocolImg.image = [UIImage imageNamed:@"home_bot_safety"];
             [hf_bgImgV addSubview:hfProtocolImg];
             
-            UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(kScrAdaptationW(31), kScrAdaptationH(11), kScrAdaptationW(230), kScrAdaptationH(20))];
+            UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(kScrAdaptationW(31), kScrAdaptationH(11), kScrAdaptationW(300), kScrAdaptationH(20))];
             name.textAlignment = NSTextAlignmentLeft;
             name.font = kHXBFont_PINGFANGSC_REGULAR(14);
             name.textColor = COR5;
-            NSString *str = self.userInfoModel.userInfo.realName;
-            NSMutableString * nameStr = [NSMutableString stringWithString:str];
+            
+            NSMutableString * nameStr = [NSMutableString stringWithString:self.userInfoModel.userInfo.realName];
             [nameStr replaceCharactersInRange:NSMakeRange(0, 1)  withString:@"*"];
-            name.text = [NSString stringWithFormat:@"真实姓名：%@",nameStr];
+            
+            NSString *idNo = [NSString hiddenStr:self.userInfoModel.userInfo.idNo MidWithFistLenth:1 andLastLenth:1];
+            idNo = [NSMutableString stringWithFormat:@"（%@）",idNo];
+        
+            NSString *messageStr = [NSString stringWithFormat:@"真实姓名：%@%@",nameStr,idNo];
+            NSRange range = [messageStr rangeOfString:idNo];
+            name.attributedText = [NSMutableAttributedString setupAttributeStringWithString:messageStr WithRange:(NSRange)range andAttributeColor:COR12 andAttributeFont:kHXBFont_PINGFANGSC_REGULAR(14)];
             [hf_bgImgV addSubview:name];
             
             UILabel *bankProtocolLab = [[UILabel alloc]initWithFrame:CGRectMake(kScrAdaptationW(11), kScrAdaptationH(39), kScrAdaptationW(150), kScrAdaptationH(20))];
@@ -286,7 +294,6 @@ UITableViewDataSource
     HXBAccountSecureModel *model = self.dataSource[indexPath.row];
     if (indexPath.section == 0) {
         [self dispathFirstSectionClickTask:model.type];
-        
     } else if (indexPath.section == 1) {
         NSInteger row =  [tableView numberOfRowsInSection:0] + indexPath.row;
         model = self.dataSource[row];
@@ -582,7 +589,7 @@ UITableViewDataSource
         HXBAccountSecureModel *model = [HXBAccountSecureModel yy_modelWithJSON:dict];
         if (model.type == HXBAccountSecureTypeGesturePwdSwitch) {
             model.switchBlock = ^(BOOL isOn) {
-                HSJGestureSettingController *VC = [[HSJGestureSettingController alloc] init];
+                HSJCheckLoginPasswordViewController *VC = [[HSJCheckLoginPasswordViewController alloc] init];
                 VC.switchType = isOn ? HXBAccountSecureSwitchTypeOn : HXBAccountSecureSwitchTypeOff;
                 [weakSelf.navigationController pushViewController:VC animated:YES];
             };
