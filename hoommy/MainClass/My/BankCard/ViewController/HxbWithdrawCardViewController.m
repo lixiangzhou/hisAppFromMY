@@ -173,7 +173,7 @@
                 NSDictionary *dic = @{
                                       @"bankCard" : cardCellModel.text,
                                       @"bankReservedMobile" : phoneCellModel.text,
-                                      @"bankCode" : weakSelf.carbinModel.bankCode
+                                      @"bankCode" : weakSelf.carbinModel.bankCode?:@""
                                       };
                 [weakSelf nextButtonClick:dic];
             }
@@ -218,7 +218,7 @@
 }
 
 - (void)textChangeCheck:(NSIndexPath*)indexPath checkText:(NSString*)text{
-    if (text.length >= 12) {
+    if (indexPath.row==1 && text.length >= 12) {
         kWeakSelf
         [self.bindBankCardVM checkCardBinResultRequestWithBankNumber:text andisToastTip:NO andCallBack:^(id responseData, NSError *erro) {
             if (erro) {
