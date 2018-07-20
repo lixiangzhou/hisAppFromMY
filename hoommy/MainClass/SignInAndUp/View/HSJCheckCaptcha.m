@@ -36,10 +36,22 @@ static NSString *const kTrueButtonTitle = @"确定";
         self.checkCaptchaTextField.text = @"";
     }
 }
+
+- (void)setIsFirstResponder:(BOOL)isFirstResponder {
+    if (isFirstResponder) {
+        [self.checkCaptchaTextField becomeFirstResponder];
+    }
+}
+
 - (void)setCheckCaptchaImage:(UIImage *)checkCaptchaImage {
     _checkCaptchaImage = checkCaptchaImage;
-    self.checkCaptchaImageView.image = checkCaptchaImage;
-    self.checkCaptchaImageView.contentMode = UIViewContentModeScaleAspectFit;
+    if (checkCaptchaImage) {
+        self.checkCaptchaImageView.image = checkCaptchaImage;
+    } else {
+        self.checkCaptchaImageView.image = [UIImage imageNamed:@"captcha"];
+    }
+     self.checkCaptchaImageView.contentMode = UIViewContentModeScaleAspectFit;
+    
 }
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -174,6 +186,7 @@ static NSString *const kTrueButtonTitle = @"确定";
 {
     if (self.cancelBlock) {
         self.cancelBlock();
+        self.checkCaptchaTextField.text = @"";
     }
 }
 
@@ -182,13 +195,9 @@ static NSString *const kTrueButtonTitle = @"确定";
 }
 
 - (void)clickTrueButton: (UIButton *)button {
-    ///请求验证码 是否争正确
-//    if (self.checkCaptchaTextField.text.length != 4) {
-//        self.promptLabel.text = @"请输入正确的验证码";
-//        return;
-//    }
     if (self.clickTrueButtonBlock) {
         self.clickTrueButtonBlock(self.checkCaptchaTextField.text);
+        self.checkCaptchaTextField.text = @"";
     }
 }
 
