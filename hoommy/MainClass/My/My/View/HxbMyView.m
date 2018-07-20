@@ -46,17 +46,8 @@ MyViewHeaderDelegate
     self = [super initWithFrame:frame];
     if (self) {
         [self addSubview:self.mainTableView];
-//        [self setConstraints];
     }
     return self;
-}
-- (void)setConstraints {
-    kWeakSelf
-    [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(weakSelf);
-        make.height.equalTo(@kScrAdaptationH750(202));
-        make.bottom.mas_equalTo(weakSelf.bottom).offset(-HXBTabbarHeight);
-    }];
 }
 
 /**
@@ -242,20 +233,21 @@ MyViewHeaderDelegate
     } else if ( section == 1) {
         return 1;
     } else {
-        return 1;
+        return 0;
     }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3;
+    return 2;//暂时写死
 }
 
 - (UITableView *)mainTableView{
     if (!_mainTableView) {
         
-        _mainTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kMainScreenWidth, kMainScreenHeight - 49 - HXBBottomAdditionHeight) style:UITableViewStyleGrouped];
+        _mainTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kMainScreenWidth, kMainScreenHeight - HXBTabbarHeight) style:UITableViewStyleGrouped];
         _mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _mainTableView.showsVerticalScrollIndicator = NO;
+        _mainTableView.showsHorizontalScrollIndicator = NO;
         _mainTableView.delegate = self;
         _mainTableView.dataSource = self;
         _mainTableView.tableHeaderView = self.headerView;
@@ -289,9 +281,9 @@ MyViewHeaderDelegate
 
 - (UIView *)bottomView {
     if (!_bottomView) {
-        _bottomView = [[UIView alloc]initWithFrame:CGRectZero];
+        _bottomView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kMainScreenWidth, kScrAdaptationH750(202))];
         _bottomView.userInteractionEnabled = YES;
-        _bottomView.backgroundColor = [UIColor clearColor];
+//        _bottomView.backgroundColor = [UIColor clearColor];
         UIButton *helpBtn = [[UIButton alloc]initWithFrame:CGRectZero];
         [_bottomView addSubview:helpBtn];
         [helpBtn setImage:[UIImage imageNamed:@"my_help"] forState:UIControlStateNormal];
