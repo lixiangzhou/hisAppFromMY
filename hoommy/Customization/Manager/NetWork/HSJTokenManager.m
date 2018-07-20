@@ -72,7 +72,7 @@ static NSString *const kTokenUrl = @"/token";
     KeyChain.isLogin = NO;
     UINavigationController* navVC =  [HXBRootVCManager manager].mainTabbarVC.selectedViewController;
     if(navVC.viewControllers.count>1) {
-        [navVC popToRootViewControllerAnimated:YES];
+        [navVC popToRootViewControllerAnimated:NO];
     }
     [HXBRootVCManager manager].mainTabbarVC.selectedIndex = 0;
 }
