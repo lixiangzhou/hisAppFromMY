@@ -3538,7 +3538,6 @@
 				9A4B182B20F36997006B83C7 /* HXBAgreementView.m in Sources */,
 				9A97DA7D20EF420200688ADB /* HXBBaseTabBarController.m in Sources */,
 				9AA70B5020FEF434008B3007 /* HSJBuyCellModel.m in Sources */,
-				4E43B05F20EF77F8000BDAE7 /* HSJBankCardListViewController.m in Sources */,
 				9A3749D020F883E800F39681 /* HXBBankListCell.m in Sources */,
 				9A3749BC20F8808700F39681 /* HXBTipView.m in Sources */,
 				E14B9F9B20FD8AF80084F007 /* HXBMY_AllFinanceViewController.m in Sources */,
@@ -3943,7 +3942,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/hoommy/Utils/Secretlib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hongshang.HSFrameProject.hoommy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hoomsun.muyingmoney;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -3968,7 +3967,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/hoommy/Utils/Secretlib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hongshang.HSFrameProject.hoommy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hoomsun.muyingmoney;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
