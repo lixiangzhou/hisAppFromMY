@@ -79,7 +79,12 @@ UITableViewDataSource
     
     self.automaticallyAdjustsScrollViewInsets = YES;
     self.actionType = HXBAccountSecureTypeNone;
-    [self loadData_userInfo];///加载用户数据
+    if(self.userInfoModel) {
+        [self loadData_userInfo:NO];///加载用户数据
+    }
+    else {
+        [self loadData_userInfo:YES];///加载用户数据
+    }
     [self prepareData];
     [self.tableView reloadData];
     [self setUpScrollFreshBlock:self.tableView];
@@ -93,7 +98,7 @@ UITableViewDataSource
  */
 - (void)getNetworkAgain
 {
-     [self loadData_userInfo];
+     [self loadData_userInfo:YES];
 }
 
 #pragma mark 绑定手机号
@@ -165,9 +170,7 @@ UITableViewDataSource
         return NO;
     }
     else {
-        if(self.userInfoUpdateState == USERINFO_UPDATE_FAILE) {
-            [self loadData_userInfo];
-        }
+        [self loadData_userInfo:YES];
     }
     self.actionType = acttionType;
     return YES;
@@ -649,10 +652,10 @@ UITableViewDataSource
 //}
 
 #pragma mark - 加载数据
-- (void)loadData_userInfo {
+- (void)loadData_userInfo:(BOOL)isShowLoading {
     self.userInfoUpdateState = USERINFO_UPDATE_ING;
     kWeakSelf
-    [self.viewModel downLoadUserInfo:YES resultBlock:^(id responseData, NSError *erro) {
+    [self.viewModel downLoadUserInfo:isShowLoading resultBlock:^(id responseData, NSError *erro) {
         if (!erro) {
             weakSelf.userInfoUpdateState = USERINFO_UPDATE_SUCCESS;
             weakSelf.userInfoModel = responseData;
