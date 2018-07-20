@@ -91,7 +91,7 @@ static NSString *const hostH5 = @"hostH5";
 
 - (void)setH5host:(NSString *)h5host
 {
-    [self.keychain setItem:hostH5 ForKey:h5host];
+    [self.keychain setItem:h5host ForKey:hostH5];
 }
 
 - (NSString *)mobile {
