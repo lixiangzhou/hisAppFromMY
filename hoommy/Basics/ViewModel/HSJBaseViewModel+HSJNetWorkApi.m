@@ -28,6 +28,9 @@
 }
 
 - (void)downLoadUserInfo:(BOOL)isShowHud resultBlock:(NetWorkResponseBlock)resultBlock {
+    if(!KeyChain.isLogin) {
+        return;
+    }
     kWeakSelf
     [self loadData:^(NYBaseRequest *request) {
         request.showHud= isShowHud;
