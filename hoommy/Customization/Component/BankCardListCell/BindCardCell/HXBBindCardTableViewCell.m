@@ -10,7 +10,7 @@
 #import "HXBCustomTextField.h"
 #import "HXBNsTimerManager.h"
 
-@interface HXBBindCardTableViewCell()
+@interface HXBBindCardTableViewCell()<UITextFieldDelegate>
 
 @property (nonatomic, strong) UILabel *titleLb;
 @property (nonatomic, strong) HXBCustomTextField* contentTf;
@@ -94,6 +94,15 @@
     }];
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if(textField == self.contentTf.textField) {
+        if(self.cellModel.isBankCardNoField) {
+            return [UITextField numberFormatTextField:textField shouldChangeCharactersInRange:range replacementString:string textFieldType:kBankCardNumberTextFieldType];
+        }
+    }
+    return YES;
+}
+
 - (HXBCustomTextField *)contentTf {
     if(!_contentTf) {
         _contentTf = [[HXBCustomTextField alloc] init];
@@ -101,6 +110,7 @@
         _contentTf.font = kHXBFont_PINGFANGSC_REGULAR(14);
         _contentTf.textColor = kHXBFontColor_333333_100;
         _contentTf.isHidenLine = YES;
+        _contentTf.delegate = self;
         
         kWeakSelf
         _contentTf.block = ^(NSString *text1) {
