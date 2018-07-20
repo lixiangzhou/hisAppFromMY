@@ -71,6 +71,11 @@ UITableViewDataSource
     }];
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleDefault;
+}
+
 - (void)reLoadWhenViewAppear {
     self.automaticallyAdjustsScrollViewInsets = YES;
     self.actionType = HXBAccountSecureTypeNone;
