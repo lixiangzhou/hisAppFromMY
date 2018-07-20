@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HSJPlanAssetsModel.h"
 
 @interface HSJRollOutHeaderView : UIView
-- (void)updateData;
+@property (nonatomic, strong) HSJPlanAssetsModel *assetsModel;
 @end

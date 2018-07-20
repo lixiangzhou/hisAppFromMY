@@ -8,23 +8,32 @@
 
 #import "HSJBaseModel.h"
 
+typedef enum : NSUInteger {
+    /// QUIT: 可退出
+    HSJStepUpStatusQUIT,
+    /// NOQUIT: 不可退出
+    HSJStepUpStatusNOQUIT,
+    /// QUITING: 退出中
+    HSJStepUpStatusQUITING,
+} HSJStepUpStatus;
+
 @interface HSJRollOutModel : HSJBaseModel
-
-
 
 /// 待转让金额
 @property (nonatomic, copy) NSString *redProgressLeft;
 /// 加入金额
 @property (nonatomic, copy) NSString *finalAmount;
-/// 状态（PURCHASE_END：锁定期，PURCHASEING：债转匹配中）, REDEMPTION_PERIOD: ‘开放期’,
-@property (nonatomic, copy) NSString *status;
 /// 已获收益 累计收益
 @property (nonatomic, copy) NSString *earnAmount;
 /// 加入时间
 @property (nonatomic, copy) NSString *registerTime;
-/// 实际退出日期
-@property (nonatomic, copy) NSString *quitDate;
+/// 退出日期
+@property (nonatomic, copy) NSString *endLockingTime;
 /// 预期收益
 @property (nonatomic, copy) NSString *totalInterest;
+/// 月升计划状态
+@property (nonatomic, copy) NSString *stepUpPlanStatus;
+/// 请求退出时间
+@property (nonatomic, copy) NSString *endLockingRequestTime;
 
 @end
