@@ -22,7 +22,7 @@
 #import "HSJMyViewVCViewModel.h"
 #import "HXBBindPhoneViewController.h"
 #import "HSJRiskAssessmentViewController.h"
-
+#import "HSJDepositoryOpenController.h"
 
 
 //==================
@@ -42,7 +42,6 @@
     [super viewDidLoad];
     self.isFullScreenShow = YES;
 
-    kWeakSelf
     self.viewModel = [[HSJMyViewVCViewModel alloc] init];
     [self setupSubView];
 }
@@ -135,23 +134,36 @@
 - (void)didClickHelp:(UIButton *)sender {
     [HXBAlertManager callupWithphoneNumber:kServiceMobile andWithTitle:@"红小宝客服电话" Message:kServiceMobile];
 }
+
+- (void)entryDepositoryAccount
+{
+    NSLog(@"开通存管账户");
+    HSJDepositoryOpenController *VC = [HSJDepositoryOpenController new];
+    [self.navigationController pushViewController:VC animated:YES];
+}
+
 /// 我的信息
 - (void)didMyHomeInfoClick:(NSInteger)type state:(BOOL)state {
     if (type == 0) { //银行卡
-        if (state) { //已绑卡
-            //进入银行卡页面
-            HxbMyBankCardViewController *vc = [[HxbMyBankCardViewController alloc] init];
-            vc.isBank = YES;
-            vc.isCashPasswordPassed = @"1";
-            [self.navigationController pushViewController:vc animated:YES];
-            NSLog(@"进入银行卡页面");
-        } else {
-            //未绑卡
-            NSLog(@"进入绑卡页面");
-            HxbWithdrawCardViewController *withdrawCardViewController = [[HxbWithdrawCardViewController alloc]init];
-            withdrawCardViewController.type = HXBRechargeAndWithdrawalsLogicalJudgment_Other;
-            withdrawCardViewController.userInfoModel = self.viewModel.userInfoModel;
-            [self.navigationController pushViewController:withdrawCardViewController animated:YES];
+        if(!self.myView.userInfoModel.userInfo.isCreateEscrowAcc) {
+            [self entryDepositoryAccount];
+        }
+        else{
+            if (1 == self.myView.userInfoModel.userInfo.hasBindCard.intValue) { //已绑卡
+                //进入银行卡页面
+                HxbMyBankCardViewController *vc = [[HxbMyBankCardViewController alloc] init];
+                vc.isBank = YES;
+                vc.isCashPasswordPassed = @"1";
+                [self.navigationController pushViewController:vc animated:YES];
+                NSLog(@"进入银行卡页面");
+            } else {
+                //未绑卡
+                NSLog(@"进入绑卡页面");
+                HxbWithdrawCardViewController *withdrawCardViewController = [[HxbWithdrawCardViewController alloc]init];
+                withdrawCardViewController.type = HXBRechargeAndWithdrawalsLogicalJudgment_Other;
+                withdrawCardViewController.userInfoModel = self.viewModel.userInfoModel;
+                [self.navigationController pushViewController:withdrawCardViewController animated:YES];
+            }
         }
     }
     if (type == 1) { //风险测评
