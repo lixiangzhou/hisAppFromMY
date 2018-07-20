@@ -29,6 +29,8 @@
 #import "HxbMyView.h"
 #import "HXBMY_AllFinanceViewController.h"
 #import "HXBMY_CapitalRecordViewController.h"
+#import "HSJDepositoryOpenController.h"
+
 @interface HSJMyViewController ()<MyViewDelegate>
 @property (nonatomic, strong) HxbMyView *myView;
 @property (nonatomic, strong) HSJMyViewVCViewModel *viewModel;
@@ -85,14 +87,20 @@
     [self.view addSubview:self.myView];
 }
 
-/// 查看总资产
+/// 查看总资产或开户
 - (void)clickAllFinanceButton {
     kWeakSelf
     [self.myView clickAllFinanceButtonWithBlock:^(UILabel * _Nullable button) {
         //跳转资产目录
         if (KeyChain.isLogin) {
-            HXBMY_AllFinanceViewController *allFinanceViewController = [[HXBMY_AllFinanceViewController alloc]init];
-            [weakSelf.navigationController pushViewController:allFinanceViewController animated:YES];
+            if (!weakSelf.viewModel.userInfoModel.userInfo.isCreateEscrowAcc) { //未开户
+                HSJDepositoryOpenController *openVC = [[HSJDepositoryOpenController alloc] init];
+                openVC.title = @"开通存管账户";
+                [self.navigationController pushViewController:openVC animated:YES];
+            } else { //已开户去账户资产页
+                HXBMY_AllFinanceViewController *allFinanceViewController = [[HXBMY_AllFinanceViewController alloc]init];
+                [weakSelf.navigationController pushViewController:allFinanceViewController animated:YES];
+            }
         }
     }];
 }

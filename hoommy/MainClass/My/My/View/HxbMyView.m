@@ -258,9 +258,10 @@ MyViewHeaderDelegate
         _mainTableView.tableHeaderView.userInteractionEnabled = YES;
         _mainTableView.backgroundColor = kHXBColor_BackGround;
         kWeakSelf
-        [_mainTableView setHeaderWithRefreshBlock:^(UIScrollView *scrollView) {
+        _mainTableView.freshOption = ScrollViewFreshOptionDownPull;
+        _mainTableView.headerWithRefreshBlock = ^(UIScrollView *scrollView) {
             if (weakSelf.homeRefreshHeaderBlock) weakSelf.homeRefreshHeaderBlock();
-        }];
+        };
     }
     return _mainTableView;
 }
