@@ -62,8 +62,6 @@ UITableViewDataSource
         return weakSelf.view;
     };
     [self.view addSubview:self.tableView];
-    [self setUpScrollFreshBlock:self.tableView];
-    [self setupConstraints];
 }
 
 - (void)setupConstraints {
@@ -84,7 +82,8 @@ UITableViewDataSource
     [self loadData_userInfo];///加载用户数据
     [self prepareData];
     [self.tableView reloadData];
-    
+    [self setUpScrollFreshBlock:self.tableView];
+    [self setupConstraints];
     self.isShowSplitLine = YES;
     self.userInfoUpdateState = USERINFO_UPDATE_FAILE;
 }
