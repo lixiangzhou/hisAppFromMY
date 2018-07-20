@@ -12,7 +12,8 @@
 + (NSDictionary *)modelContainerPropertyGenericClass {
     return @{
              @"userAssets" : [HXBRequestUserInfoAPI_UserAssets class],
-             @"userInfo" : [HXBRequestUserInfoAPI_UserInfo class]
+             @"userInfo" : [HXBRequestUserInfoAPI_UserInfo class],
+             @"userBank" : [HXBRequestUserInfoAPI_UserBank class]
              };
 }
 @end
@@ -71,5 +72,7 @@
 - (NSString *)minWithdrawAmount_new {
     return [NSString stringWithFormat:@"%.2f", (float)_minWithdrawAmount];
 }
+@end
 
+@implementation HXBRequestUserInfoAPI_UserBank
 @end

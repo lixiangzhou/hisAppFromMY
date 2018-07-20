@@ -252,6 +252,7 @@
     kWeakSelf
     [self.viewModel downLoadUserInfo:NO resultBlock:^(id responseData, NSError *erro) {
         if (!erro) {
+            weakSelf.viewModel.userInfoModel = responseData;
             weakSelf.myView.userInfoModel = responseData;
         }
         weakSelf.myView.isStopRefresh_Home = YES;

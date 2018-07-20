@@ -86,25 +86,25 @@
     [self addSubview:lockRightBottomLabel];
     
     [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@kScrAdaptationW(30));
+        make.top.equalTo(@30);
         make.centerX.equalTo(self);
     }];
     
     [leftLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(titleLabel);
-        make.right.equalTo(titleLabel.mas_left).offset(-kScrAdaptationW(10));
+        make.right.equalTo(titleLabel.mas_left).offset(-10);
     }];
     
     [rightLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(titleLabel);
-        make.left.equalTo(titleLabel.mas_right).offset(-kScrAdaptationW(10));
+        make.left.equalTo(titleLabel.mas_right).offset(-10);
     }];
     
     [bgLineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(@kScrAdaptationW(30));
-        make.right.equalTo(@kScrAdaptationW(-30));
-        make.top.equalTo(titleLabel.mas_bottom).offset(kScrAdaptationW(25));
-        make.height.equalTo(@kScrAdaptationW(24));
+        make.left.equalTo(@30);
+        make.right.equalTo(@-30);
+        make.top.equalTo(titleLabel.mas_bottom).offset(25);
+        make.height.equalTo(@24);
     }];
     
     [lockLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -118,9 +118,9 @@
     }];
     
     [startLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(bgLineView).offset(kScrAdaptationW(2));
-        make.top.equalTo(bgLineView.mas_bottom).offset(kScrAdaptationW(4));
-        make.height.equalTo(@kScrAdaptationW(26));
+        make.left.equalTo(bgLineView).offset(2);
+        make.top.equalTo(bgLineView.mas_bottom).offset(2);
+        make.height.equalTo(@30);
         make.bottom.equalTo(self);
     }];
     

@@ -12,6 +12,8 @@
 @property (nonatomic, strong) UIImage *checkCaptchaImage;
 ///验证码是否正确
 @property (nonatomic, assign) BOOL isCorrect;
+///成为第一响应者
+@property (nonatomic, assign) BOOL isFirstResponder;
 
 /**
  点击了取消

@@ -66,7 +66,7 @@
         request.requestUrl = kHXBOpenDepositAccount_Escrow;
         request.requestMethod = NYRequestMethodPost;
         request.requestArgument = param;
-        request.showHud = NO;
+        request.showHud = YES;
     } responseResult:^(id responseData, NSError *erro) {
         NSInteger status =  [responseData[@"status"] integerValue];
         if (status == kHXBOpenAccount_Outnumber) {
