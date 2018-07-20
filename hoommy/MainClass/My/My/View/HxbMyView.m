@@ -21,7 +21,7 @@
 #import "UIResponder+FindNext.h"
 #import "UIScrollView+HXBScrollView.h"
 #import "HSJMyHomeInfoTableViewCell.h"
-
+#import "HXBMiddlekey.h"
 
 @interface HxbMyView ()
 <
@@ -208,12 +208,14 @@ MyViewHeaderDelegate
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             cell.textLabel.text = @"恒丰银行账户余额";
-            cell.desc = [NSString hxb_getPerMilWithDouble:[self.userInfoModel.userAssets.assetsTotal doubleValue]];
+            NSString *str = [NSString hxb_getPerMilWithDouble:[self.userInfoModel.userAssets.assetsTotal doubleValue]];
+            cell.desc = [str isEqualToString:@"0元"]?@"0.00元":str;
             cell.isShowLine = YES;
             cell.imageName = @"me_hongli_asset";
         } else {
             cell.textLabel.text = @"红利计划";
-            cell.desc = [NSString hxb_getPerMilWithDouble:[self.userInfoModel.userAssets.financePlanAssets doubleValue]];
+            NSString *str = [NSString hxb_getPerMilWithDouble:[self.userInfoModel.userAssets.financePlanAssets doubleValue]];
+            cell.desc = [str isEqualToString:@"0元"]?@"0.00元":str;
             cell.isShowLine = NO;
             cell.imageName = @"me_hongli";
         }
@@ -260,6 +262,7 @@ MyViewHeaderDelegate
         _mainTableView.tableFooterView = self.bottomView;
         _mainTableView.tableHeaderView.userInteractionEnabled = YES;
         _mainTableView.backgroundColor = kHXBColor_BackGround;
+        [HXBMiddlekey AdaptationiOS11WithTableView:_mainTableView];
         kWeakSelf
         _mainTableView.freshOption = ScrollViewFreshOptionDownPull;
         _mainTableView.headerWithRefreshBlock = ^(UIScrollView *scrollView) {

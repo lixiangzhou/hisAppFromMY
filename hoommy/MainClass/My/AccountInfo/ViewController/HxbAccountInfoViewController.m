@@ -202,7 +202,12 @@ UITableViewDataSource
             break;
         case HXBAccountSecureTypeGesturePwdModify:
             //手势密码
+        {
             NSLog(@"修改手势密码");
+            HSJCheckLoginPasswordViewController *VC = [[HSJCheckLoginPasswordViewController alloc] init];
+            VC.switchType = HXBAccountSecureSwitchTypeChange;
+            [self.navigationController pushViewController:VC animated:YES];
+        }
             break;
         case HXBAccountSecureTypeGesturePwdSwitch:
             //修改手势密码
