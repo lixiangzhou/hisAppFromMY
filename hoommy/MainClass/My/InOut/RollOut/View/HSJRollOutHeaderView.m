@@ -21,7 +21,7 @@
 #pragma mark - Life Cycle
 
 - (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:CGRectMake(0, kScrAdaptationW(15.5), kScreenWidth, kScrAdaptationW(135))];
+    self = [super initWithFrame:CGRectMake(0, 15.5, kScreenWidth, 135)];
     if (self) {
         [self setUI];
     }
@@ -32,9 +32,9 @@
 
 - (void)setUI {
     UIImageView *bgView = [[UIImageView alloc] init];
+    bgView.image = [UIImage imageNamed:@"account_plan_list_top_bg"];
     bgView.layer.cornerRadius = 2;
     bgView.layer.masksToBounds = YES;
-    bgView.backgroundColor = [UIColor redColor];
     [self addSubview:bgView];
     
     UILabel *holdDescAssetsLabel = [UILabel new];
@@ -64,30 +64,30 @@
     self.rollOutAssetsLabel = rollOutAssetsLabel;
     
     [bgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.equalTo(@kScrAdaptationW(15));
-        make.right.equalTo(@kScrAdaptationW(-15));
+        make.top.left.equalTo(@15);
+        make.right.equalTo(@-15);
         make.bottom.equalTo(self);
     }];
     
     
     [holdDescAssetsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@kScrAdaptationW(41.5));
+        make.top.equalTo(@41.5);
         make.centerX.equalTo(self.mas_left).offset(self.width * 0.25);
     }];
     
     [holdAssetsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(holdDescAssetsLabel);
-        make.bottom.equalTo(@kScrAdaptationW(-41.5));
+        make.bottom.equalTo(@-41.5);
     }];
     
     [rollOutDescAssetsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@kScrAdaptationW(41.5));
+        make.top.equalTo(@41.5);
         make.centerX.equalTo(self.mas_left).offset(self.width * 0.75);
     }];
     
     [rollOutAssetsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(rollOutDescAssetsLabel);
-        make.bottom.equalTo(@kScrAdaptationW(-41.5));
+        make.bottom.equalTo(@-41.5);
     }];
 }
 
@@ -95,8 +95,11 @@
 - (void)setAssetsModel:(HSJPlanAssetsModel *)assetsModel {
     _assetsModel = assetsModel;
     
-    self.holdAssetsLabel.text = [NSString GetPerMilWithDouble:assetsModel.currentStepupAmount];
-    self.rollOutAssetsLabel.text = [NSString GetPerMilWithDouble:assetsModel.currentStepupAmount];
+    NSString *currentStepupAmount = [NSString GetPerMilWithDouble:assetsModel.currentStepupAmount];
+    self.holdAssetsLabel.text = [currentStepupAmount isEqualToString:@"0"] ? @"0.00" : currentStepupAmount;
+    
+    NSString *stepUpCanSaleAmount = [NSString GetPerMilWithDouble:assetsModel.stepUpCanSaleAmount];
+    self.rollOutAssetsLabel.text = [stepUpCanSaleAmount isEqualToString:@"0"] ? @"0.00" : stepUpCanSaleAmount;
 }
 
 @end

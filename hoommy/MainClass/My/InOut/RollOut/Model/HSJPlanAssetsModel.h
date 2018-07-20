@@ -11,4 +11,6 @@
 @interface HSJPlanAssetsModel : HSJBaseModel
 /// 月升当前持有资产
 @property (nonatomic, assign) CGFloat currentStepupAmount;
+/// 月升可转出总额
+@property (nonatomic, assign) CGFloat stepUpCanSaleAmount;
 @end

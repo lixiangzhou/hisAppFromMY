@@ -32,12 +32,15 @@
 
 ///灰色系列的背景色
 #define kHXBColor_333333_100                RGBA(51, 51, 51, 1)
+#define kHXBColor_333333_40                RGBA(51, 51, 51, 0.5)
 #define kHXBColor_666666_100                RGBA(102, 102, 102, 1)
 #define kHXBColor_999999_100                RGBA(153, 153, 153, 1)
+#define kHXBColor_999999_40                RGBA(153, 153, 153, 0.4)
 #define kHXBColor_D8D8D8_100                RGBA(216, 216, 216, 1)
 #define kHXBColor_ECECF0_100                UIColorFromRGB(0xECECF0)
 #define kHXBColor_CBCBCB_100                UIColorFromRGB(0xCBCBCB)
 
+#define kHXBColor_ECECEC_100                UIColorFromRGB(0xECECEC)
 
 ///蓝色的背景色
 #define kHXBColor_73ADFF_100                RGBA(115, 173, 255, 1)

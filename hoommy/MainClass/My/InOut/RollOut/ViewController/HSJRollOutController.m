@@ -28,6 +28,7 @@
     self.title = @"持有资产";
     self.viewModel = [HSJRollOutViewModel new];
     [self setUI];
+    [self updateData];
 }
 
 #pragma mark - UI
