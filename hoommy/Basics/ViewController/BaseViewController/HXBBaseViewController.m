@@ -90,13 +90,11 @@
 
 - (void)didMoveToParentViewController:(UIViewController *)parent {
     [super didMoveToParentViewController:parent];
-    
-    HXBBaseNavigationController *navVC = (HXBBaseNavigationController *)self.navigationController;
-    if(navVC) {
-        if(!parent) {
-            navVC.rightGestureAction = RightSliderGestureEnd;
-            [self sliderBackAction];
-        }
+
+    if(!parent) {
+        HXBBaseNavigationController *navVC = (HXBBaseNavigationController *)[HXBRootVCManager manager].mainTabbarVC.selectedViewController;
+        navVC.rightGestureAction = RightSliderGestureEnd;
+        [self sliderBackAction];
     }
     
 }
