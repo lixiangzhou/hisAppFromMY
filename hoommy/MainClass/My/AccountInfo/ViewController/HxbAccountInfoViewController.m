@@ -22,7 +22,18 @@
 #import "HXBBindPhoneViewController.h"
 
 #import "HXBCommonProblemViewController.h"
+
+#import "HxbWithdrawCardViewController.h"
+#import "HSJDepositoryOpenController.h"
 #import "HSJGestureSettingController.h"
+#import "NSString+HxbPerMilMoney.h"
+
+
+typedef enum : NSUInteger {
+    USERINFO_UPDATE_FAILE,//失败
+    USERINFO_UPDATE_ING, //正在更新
+    USERINFO_UPDATE_SUCCESS,//成功
+}UserInfoUpdateState;
 
 @interface HxbAccountInfoViewController ()
 <
@@ -35,6 +46,8 @@ UITableViewDataSource
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) HXBAccountInfoViewModel *viewModel;
 
+@property (nonatomic, assign) UserInfoUpdateState userInfoUpdateState;
+@property (nonatomic, assign) HXBAccountSecureType actionType;
 @end
 
 @implementation HxbAccountInfoViewController
@@ -42,23 +55,34 @@ UITableViewDataSource
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"账户设置";
+    
     kWeakSelf
     self.viewModel = [[HXBAccountInfoViewModel alloc] init];
     self.viewModel.hugViewBlock = ^UIView *{
         return weakSelf.view;
     };
     [self.view addSubview:self.tableView];
+
+}
+
+- (void)setupConstraints {
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(self.contentViewInsetNoTabbar);
+    }];
+}
+
+- (void)reLoadWhenViewAppear {
+    self.automaticallyAdjustsScrollViewInsets = YES;
+    self.actionType = HXBAccountSecureTypeNone;
+    [self setUpScrollFreshBlock:self.tableView];
+    [self setupConstraints];
     [self prepareData];
     [self.tableView reloadData];
-    
-}
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    self.automaticallyAdjustsScrollViewInsets = YES;
-    self.isWhiteColourGradientNavigationBar = YES;
+    self.isShowSplitLine = YES;
+    self.userInfoUpdateState = USERINFO_UPDATE_FAILE;
     [self loadData_userInfo];///加载用户数据
 }
+
 
 /**
  再次获取网络数据
@@ -66,6 +90,120 @@ UITableViewDataSource
 - (void)getNetworkAgain
 {
      [self loadData_userInfo];
+}
+
+#pragma mark 绑定手机号
+
+- (void)bindPhone
+{
+    if (!self.userInfoModel.userInfo.isCreateEscrowAcc) {
+        if ([self.userInfoModel.userInfo.isMobilePassed isEqualToString:@"1"]) {
+            [self entryBindPhonePage:HXBBindPhoneStepFirst];
+        }
+    } else {
+        if (self.userInfoModel.userInfo.isUnbundling) {
+            [HXBAlertManager callupWithphoneNumber:kServiceMobile andWithTitle:@"温馨提示" Message:[NSString stringWithFormat:@"您的身份信息不完善，请联系客服 %@", kServiceMobile]];
+            return;
+        }
+        if ([self.userInfoModel.userInfo.hasBindCard isEqualToString:@"1"]) {
+            if ([self.userInfoModel.userInfo.isMobilePassed isEqualToString:@"1"]) {
+                [self entryBindPhonePage:HXBBindPhoneStepFirst];
+            }
+        } else {
+            if ([self.userInfoModel.userInfo.isCashPasswordPassed isEqualToString:@"1"]) {
+                HXBGeneralAlertVC *alertVC = [[HXBGeneralAlertVC alloc] initWithMessageTitle:@"温馨提示" andSubTitle:@"由于银行限制，您需要绑定银行卡后方可修改手机号" andLeftBtnName:@"暂不绑定" andRightBtnName:@"立即绑定" isHideCancelBtn:YES isClickedBackgroundDiss:NO];
+                alertVC.isCenterShow = YES;
+                [alertVC setRightBtnBlock:^{
+                    //进入绑卡界面
+                    HxbWithdrawCardViewController *withdrawCardViewController = [[HxbWithdrawCardViewController alloc]init];
+                    withdrawCardViewController.type = HXBRechargeAndWithdrawalsLogicalJudgment_Other;
+                    [self.navigationController pushViewController:withdrawCardViewController animated:YES];
+                }];
+                
+                [self presentViewController:alertVC animated:NO completion:nil];
+            }
+            else{
+                //账户信息不完善
+            }
+        }
+    }
+}
+
+#pragma mark 修改交易密码
+- (void)modifyTransactionPwd {
+    if (self.userInfoModel.userInfo.isUnbundling) {
+        [HXBAlertManager callupWithphoneNumber:kServiceMobile andWithTitle:@"温馨提示" Message:[NSString stringWithFormat:@"您的身份信息不完善，请联系客服 %@", kServiceMobile]];
+        return;
+    }
+    
+    if ([self.userInfoModel.userInfo.isCashPasswordPassed isEqualToString:@"1"]) {
+        [self entryBindPhonePage:HXBBindPhoneTransactionPassword];
+    }else
+    {
+        if (!self.userInfoModel.userInfo.isCreateEscrowAcc) {
+            [self entryDepositoryAccount];
+        }
+        else{
+            //账户信息不完善
+        }
+    }
+}
+
+- (void)entryBindPhonePage:(HXBBindPhoneStepType)stepType {
+    HXBBindPhoneViewController* vc = [[HXBBindPhoneViewController alloc] init];
+    vc.bindPhoneStepType = stepType;
+    vc.userInfoModel = self.userInfoModel;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (BOOL)preLoadUserInfo:(HXBAccountSecureType)acttionType {
+    if(self.userInfoUpdateState == USERINFO_UPDATE_SUCCESS) {
+        return NO;
+    }
+    else {
+        if(self.userInfoUpdateState == USERINFO_UPDATE_FAILE) {
+            [self loadData_userInfo];
+        }
+    }
+    self.actionType = acttionType;
+    return YES;
+}
+
+- (void)dispathFirstSectionClickTask:(HXBAccountSecureType)acttionType {
+    switch (acttionType) {
+        case HXBAccountSecureTypeModifyPhone:
+            //绑定手机号
+            if(![self preLoadUserInfo:acttionType]) {
+                [self bindPhone];
+            }
+            break;
+        case HXBAccountSecureTypeLoginPwd:
+            //登录密码
+        {
+            if(![self preLoadUserInfo:acttionType]) {
+                NSLog(@"登录密码");
+                HXBAccount_AlterLoginPassword_ViewController *signUPVC = [[HXBAccount_AlterLoginPassword_ViewController alloc] init];
+                signUPVC.type = HXBSignUPAndLoginRequest_sendSmscodeType_forgot;
+                [self.navigationController pushViewController: signUPVC animated:YES];
+            }
+        }
+            break;
+        case HXBAccountSecureTypeTransactionPwd:
+            if(![self preLoadUserInfo:acttionType]) {
+                [self modifyTransactionPwd];
+            }
+            break;
+        case HXBAccountSecureTypeGesturePwdModify:
+            //手势密码
+            NSLog(@"修改手势密码");
+            break;
+        case HXBAccountSecureTypeGesturePwdSwitch:
+            //修改手势密码
+            NSLog(@"手势密码开关");
+            break;
+        default:
+            break;
+    }
 }
 
 #pragma TableViewDelegate
@@ -78,7 +216,7 @@ UITableViewDataSource
         UIImageView *iconImg = [[UIImageView alloc]initWithFrame:CGRectMake(kScrAdaptationW(25), kScrAdaptationH(20), kScrAdaptationW(50), kScrAdaptationW(50))];
         iconImg.layer.cornerRadius = kScrAdaptationW(25);
         iconImg.layer.masksToBounds = YES;
-        iconImg.image = [UIImage imageNamed:@"hflogo"];
+        iconImg.image = [UIImage imageNamed:@"personal_center"];
         [bgView addSubview:iconImg];
         
         UILabel *nameLab = [[UILabel alloc]initWithFrame:CGRectMake(kScrAdaptationW(90), kScrAdaptationH(32), kScrAdaptationW(150), kScrAdaptationH(25))];
@@ -98,14 +236,20 @@ UITableViewDataSource
             hfProtocolImg.image = [UIImage imageNamed:@"home_bot_safety"];
             [hf_bgImgV addSubview:hfProtocolImg];
             
-            UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(kScrAdaptationW(31), kScrAdaptationH(11), kScrAdaptationW(230), kScrAdaptationH(20))];
+            UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(kScrAdaptationW(31), kScrAdaptationH(11), kScrAdaptationW(300), kScrAdaptationH(20))];
             name.textAlignment = NSTextAlignmentLeft;
             name.font = kHXBFont_PINGFANGSC_REGULAR(14);
             name.textColor = COR5;
-            NSString *str = self.userInfoModel.userInfo.realName;
-            NSMutableString * nameStr = [NSMutableString stringWithString:str];
+            
+            NSMutableString * nameStr = [NSMutableString stringWithString:self.userInfoModel.userInfo.realName];
             [nameStr replaceCharactersInRange:NSMakeRange(0, 1)  withString:@"*"];
-            name.text = [NSString stringWithFormat:@"真实姓名：%@",nameStr];
+            
+            NSString *idNo = [NSString hiddenStr:self.userInfoModel.userInfo.idNo MidWithFistLenth:1 andLastLenth:1];
+            idNo = [NSMutableString stringWithFormat:@"（%@）",idNo];
+        
+            NSString *messageStr = [NSString stringWithFormat:@"真实姓名：%@%@",nameStr,idNo];
+            NSRange range = [messageStr rangeOfString:idNo];
+            name.attributedText = [NSMutableAttributedString setupAttributeStringWithString:messageStr WithRange:(NSRange)range andAttributeColor:COR12 andAttributeFont:kHXBFont_PINGFANGSC_REGULAR(14)];
             [hf_bgImgV addSubview:name];
             
             UILabel *bankProtocolLab = [[UILabel alloc]initWithFrame:CGRectMake(kScrAdaptationW(11), kScrAdaptationH(39), kScrAdaptationW(150), kScrAdaptationH(20))];
@@ -149,42 +293,7 @@ UITableViewDataSource
     
     HXBAccountSecureModel *model = self.dataSource[indexPath.row];
     if (indexPath.section == 0) {
-        switch (model.type) {
-            case HXBAccountSecureTypeModifyPhone:
-                //绑定手机号
-            {
-                NSLog(@"绑定手机号");
-                HXBBindPhoneViewController* vc = [[HXBBindPhoneViewController alloc] init];
-                vc.bindPhoneStepType = HXBBindPhoneStepFirst;
-                vc.userInfoModel = self.userInfoModel;
-                [self.navigationController pushViewController:vc animated:YES];
-            }
-                break;
-            case HXBAccountSecureTypeLoginPwd:
-                //登录密码
-            {
-                NSLog(@"登录密码");
-                HXBAccount_AlterLoginPassword_ViewController *signUPVC = [[HXBAccount_AlterLoginPassword_ViewController alloc] init];
-                signUPVC.type = HXBSignUPAndLoginRequest_sendSmscodeType_forgot;
-                [self.navigationController pushViewController: signUPVC animated:YES];
-            }
-                break;
-            case HXBAccountSecureTypeTransactionPwd:
-                //交易密码
-                NSLog(@"交易密码");
-                break;
-            case HXBAccountSecureTypeGesturePwdModify:
-                //手势密码
-                NSLog(@"修改手势密码");
-                break;
-            case HXBAccountSecureTypeGesturePwdSwitch:
-                //修改手势密码
-                NSLog(@"手势密码开关");
-                break;
-            default:
-                break;
-        }
-        
+        [self dispathFirstSectionClickTask:model.type];
     } else if (indexPath.section == 1) {
         NSInteger row =  [tableView numberOfRowsInSection:0] + indexPath.row;
         model = self.dataSource[row];
@@ -398,6 +507,8 @@ UITableViewDataSource
 - (void)entryDepositoryAccount
 {
     NSLog(@"开通存管账户");
+    HSJDepositoryOpenController *VC = [HSJDepositoryOpenController new];
+    [self.navigationController pushViewController:VC animated:YES];
     /*
     if (self.userInfoViewModel.userInfoModel.userInfo.isUnbundling) {
         //        [HXBAlertManager callupWithphoneNumber:kServiceMobile andWithTitle:@"温馨提示" Message:[NSString stringWithFormat:@"您的身份信息不完善，请联系客服 %@", kServiceMobile]];
@@ -478,7 +589,7 @@ UITableViewDataSource
         HXBAccountSecureModel *model = [HXBAccountSecureModel yy_modelWithJSON:dict];
         if (model.type == HXBAccountSecureTypeGesturePwdSwitch) {
             model.switchBlock = ^(BOOL isOn) {
-                HSJGestureSettingController *VC = [[HSJGestureSettingController alloc] init];
+                HSJCheckLoginPasswordViewController *VC = [[HSJCheckLoginPasswordViewController alloc] init];
                 VC.switchType = isOn ? HXBAccountSecureSwitchTypeOn : HXBAccountSecureSwitchTypeOff;
                 [weakSelf.navigationController pushViewController:VC animated:YES];
             };
@@ -515,14 +626,13 @@ UITableViewDataSource
 }
 - (UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView  alloc]initWithFrame:CGRectMake(0, kScrAdaptationH(80),kScreenWidth , kScreenHeight-kScrAdaptationH(80)) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView  alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
         [_tableView registerClass:[HXBAccountSecureCell class] forCellReuseIdentifier:HXBAccountSecureCellID];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _tableView.estimatedRowHeight = 0;
-        _tableView.sectionHeaderHeight = 0;
-        _tableView.sectionFooterHeight = 0;
+        _tableView.sectionHeaderHeight = 0.1;
+        _tableView.sectionFooterHeight = 0.1;
     }
     return _tableView;
 }
@@ -536,12 +646,20 @@ UITableViewDataSource
 
 #pragma mark - 加载数据
 - (void)loadData_userInfo {
+    self.userInfoUpdateState = USERINFO_UPDATE_ING;
     kWeakSelf
     [self.viewModel downLoadUserInfo:YES resultBlock:^(id responseData, NSError *erro) {
         if (!erro) {
-            weakSelf.userInfoModel = responseData;//weakSelf.viewModel.userInfoModel;
+            weakSelf.userInfoUpdateState = USERINFO_UPDATE_SUCCESS;
+            weakSelf.userInfoModel = responseData;
             [weakSelf.tableView reloadData];
+            [weakSelf dispathFirstSectionClickTask:self.actionType];
         }
+        else{
+            weakSelf.userInfoUpdateState = USERINFO_UPDATE_FAILE;
+        }
+        
+        weakSelf.actionType = HXBAccountSecureTypeNone;
     }];
 }
 

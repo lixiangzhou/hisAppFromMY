@@ -11,7 +11,7 @@
 
 #import <Security/Security.h>
 
-#define kGesturePwd self.mobile
+#define kGesturePwd [NSString stringWithFormat:@"kGesturePwd%@", KeyChain.mobile ?: @""]
 // 是否忽略手势密码
 #define kHXBGesturePwdSkipeKey [NSString stringWithFormat:@"kHXBGesturePwdSkipeKey%@", KeyChain.mobile ?: @""]
 // 是否出现过忽略手势密码弹窗
@@ -69,6 +69,7 @@ static NSString *const hostH5 = @"hostH5";
     [manager.keychain removeItemForKey:kTradePwd];
     [manager.keychain removeItemForKey:kToken];
     [manager.keychain removeItemForKey:kCiphertext];
+    [KeyChain removeGesture];
 }
 - (NSString *)ciphertext
 {

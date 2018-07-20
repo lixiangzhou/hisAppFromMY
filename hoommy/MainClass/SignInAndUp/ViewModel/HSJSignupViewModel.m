@@ -58,6 +58,15 @@
                                       };
     } responseResult:^(id responseData, NSError *erro) {
         if (resultBlock) {
+            if (responseData) {
+                [KeyChain removeGesture];
+                KeyChain.skipGesture = kHXBGesturePwdSkipeNONE;
+                KeyChain.skipGestureAlertAppeared = NO;
+                
+                KeyChain.mobile = mobile;
+                KeyChain.isLogin = YES;
+                KeyChain.ciphertext = @"0";
+            }
             resultBlock(responseData,erro);
         }
     }];

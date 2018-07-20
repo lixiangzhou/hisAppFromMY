@@ -12,7 +12,8 @@ NSString *const HSJRollOutCellIdentifier = @"HSJRollOutCellIdentifier";
 const CGFloat HSJRollOutCellHeight = 44;
 
 @interface HSJRollOutCell ()
-
+@property (nonatomic, weak) UILabel *leftAccountLabel;
+@property (nonatomic, weak) UILabel *leftDescAccountLabel;
 @end
 
 @implementation HSJRollOutCell

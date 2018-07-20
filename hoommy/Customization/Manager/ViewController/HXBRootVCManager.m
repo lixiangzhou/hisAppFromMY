@@ -39,6 +39,8 @@
 
 /// 创建根控制器
 - (void)createRootVCAndMakeKeyWindow {
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    
     [[HXBAdvertiseManager shared] getSplash];
     [[HSJGlobalInfoManager shared] getData];
     
@@ -92,7 +94,7 @@
         } else {
             NSString *skip = KeyChain.skipGesture;
             BOOL skipGesturePwd = NO;
-            if (skip != nil) {
+            if (![skip isEqual:kHXBGesturePwdSkipeNONE]) {
                 skipGesturePwd = [skip isEqualToString:kHXBGesturePwdSkipeYES];
             }
             
@@ -103,6 +105,7 @@
             } else {
                 HSJGestureLoginController *gestureVC = [[HSJGestureLoginController alloc] init];
                 gestureVC.type = HSJGestureTypeSetting;
+                gestureVC.showSkip = YES;
                 VC = gestureVC;
             }
         }
@@ -127,7 +130,6 @@
 - (void)showSlash {
     [self.mainTabbarVC.view addSubview:self.advertiseVC.view];
     [self.advertiseVC addTimer];
-    [HXBAdvertiseManager shared].isShowed = YES;
 }
 
 - (void)popWindowsAtHomeAfterSlashOrGesturePwd {
