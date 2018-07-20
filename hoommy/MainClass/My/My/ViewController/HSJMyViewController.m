@@ -167,12 +167,8 @@
         }
     }
     if (type == 1) { //风险测评
-        if (state) { //为测评
-            NSLog(@"显示评测结果");
-        } else {
-            HSJRiskAssessmentViewController *riskAssessmentVC = [[HSJRiskAssessmentViewController alloc] init];
-            [self.navigationController pushViewController:riskAssessmentVC animated:YES];
-        }
+        HSJRiskAssessmentViewController *riskAssessmentVC = [[HSJRiskAssessmentViewController alloc] init];
+        [self.navigationController pushViewController:riskAssessmentVC animated:YES];
     }
 }
 
