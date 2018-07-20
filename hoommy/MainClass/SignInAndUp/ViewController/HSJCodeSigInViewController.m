@@ -32,7 +32,7 @@
 
 @property (nonatomic, copy) NSString *captcha;
 
-@property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, weak) NSTimer *timer;
 
 @property (nonatomic, assign) int timeCount;
 
@@ -95,12 +95,14 @@
 - (void)signInButtonClick {
     kWeakSelf
     [self.viewModel loginRequetWithMobile:self.viewModel.phoneNumber password:@"" andWithSmscode:self.codeTextField.text andWithCaptcha:self.captcha resultBlock:^(BOOL isSuccess,BOOL isNeedCaptcha) {
+        weakSelf.captcha = @"";
         if (isSuccess) {
             //登录成功
             [self dismissViewControllerAnimated:YES completion:nil];
         } else if (isNeedCaptcha) {
            //需要图验
             [weakSelf.view addSubview:weakSelf.captchaView];
+            weakSelf.captchaView.isFirstResponder = YES;
             [weakSelf getCaptcha];
             
         } else {
@@ -147,7 +149,7 @@
 }
 
 - (void)getVoiceCodeWithType:(NSString *)type {
-    self.timeCount = 60;
+    self.timeCount = 5;
     self.codeButton.enabled = NO;
     self.voiceCodeButton.hidden = YES;
     [self.codeButton setTitle:[NSString stringWithFormat:@"%ds",self.timeCount] forState:UIControlStateNormal];
@@ -266,6 +268,7 @@
         _captchaView = [[HSJCheckCaptcha alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
         _captchaView.cancelBlock = ^{
             [weakSelf.captchaView removeFromSuperview];
+            weakSelf.captcha = @"";
         };
         
         [_captchaView clickTrueButtonFunc:^(NSString *checkCaptChaStr) {

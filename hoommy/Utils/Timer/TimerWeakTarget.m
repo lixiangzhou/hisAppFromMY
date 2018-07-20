@@ -28,7 +28,7 @@
 
 -(void)fire:(NSTimer *)timer{
     
-    if (self.target) {
+    if (self.target && self.timer.isValid) {
         [self.target performSelector:self.selector withObject:timer.userInfo];
     } else {
         
