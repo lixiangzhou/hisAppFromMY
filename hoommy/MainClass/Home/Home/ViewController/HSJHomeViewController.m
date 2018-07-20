@@ -126,6 +126,11 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    if (KeyChain.isLogin) {
+        self.planView.frame = CGRectMake(0, 300, kScreenWidth, kScrAdaptationH750(578));
+    } else {
+        self.planView.frame = CGRectMake(0, 300, kScreenWidth, kScrAdaptationH750(656));
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -172,7 +177,7 @@
 
 - (HSJHomePlanView *)planView {
     if (!_planView) {
-        _planView = [[HSJHomePlanView alloc] initWithFrame:CGRectMake(0, 350, kScreenWidth, kScrAdaptationH750(558))];
+        _planView = [[HSJHomePlanView alloc] initWithFrame:CGRectMake(0, 350, kScreenWidth, kScrAdaptationH750(578))];
     }
     return _planView;
 }
