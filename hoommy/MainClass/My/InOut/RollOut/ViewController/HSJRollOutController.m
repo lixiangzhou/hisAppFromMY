@@ -40,7 +40,7 @@
 #pragma mark - UI
 
 - (void)setUI {
-    UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     tableView.dataSource = self;
     tableView.delegate = self;
     self.headerView = [HSJRollOutHeaderView new];
@@ -48,7 +48,7 @@
     tableView.rowHeight = kScrAdaptationW(84);
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [tableView registerClass:[HSJRollOutCell class] forCellReuseIdentifier:HSJRollOutCellIdentifier];
-    [self.view addSubview:tableView];
+    [self.safeAreaView addSubview:tableView];
     self.tableView = tableView;
     
     UIButton *batchBtn = [[UIButton alloc] init];
@@ -59,23 +59,23 @@
     [batchBtn addTarget:self action:@selector(batchProcess) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:batchBtn];
     self.batchBtn = batchBtn;
-    
+
     // 底部视图
     UIView *bottomView = [UIView new];
-    [self.view addSubview:bottomView];
+    [self.safeAreaView addSubview:bottomView];
     self.bottomView = bottomView;
-    
+
     UIView *topLine = [UIView new];
     topLine.backgroundColor = kHXBColor_ECECEC_100;
     [bottomView addSubview:topLine];
-    
+
     UILabel *rollOutLabel = [UILabel new];
     rollOutLabel.text = @"待转出金额0.00元";
     rollOutLabel.font = kHXBFont_28;
     rollOutLabel.textColor = kHXBColor_333333_100;
     [bottomView addSubview:rollOutLabel];
     self.rollOutLabel = rollOutLabel;
-    
+
     UIButton *rollOutBtn = [UIButton new];
     [rollOutBtn setTitle:@"转出" forState:UIControlStateNormal];
     [rollOutBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -84,23 +84,22 @@
     rollOutBtn.layer.masksToBounds = YES;
     [bottomView addSubview:rollOutBtn];
     self.rollOutBtn = rollOutBtn;
-    
+
     [tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view);
-        make.left.right.equalTo(self.view);
+        make.top.left.right.equalTo(self.safeAreaView);
     }];
-    
+
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(tableView.mas_bottom);
-        make.right.left.bottom.equalTo(self.view);
+        make.right.left.bottom.equalTo(self.safeAreaView);
         make.height.equalTo(@0);
     }];
-    
+
     [rollOutLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.top.equalTo(bottomView);
         make.bottom.equalTo(rollOutBtn.mas_top);
     }];
-    
+
     [rollOutBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(@kScrAdaptationW(15));
         make.bottom.right.equalTo(@kScrAdaptationW(-15));
