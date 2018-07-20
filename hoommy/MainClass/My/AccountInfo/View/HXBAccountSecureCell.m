@@ -11,6 +11,9 @@
 #import <ReactiveObjC.h>
 @implementation HXBAccountSecureModel
 @end
+@interface HXBAccountSecureCell ()
+@property (nonatomic,strong) UILabel *lab;
+@end
 
 @implementation HXBAccountSecureCell
 
@@ -18,6 +21,9 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.textLabel.font = kHXBFont_PINGFANGSC_REGULAR(15);
         self.textLabel.textColor = COR6;
+        _lab = [[UILabel alloc]initWithFrame:CGRectZero];
+        [self.contentView addSubview:_lab];
+        _lab.hidden = YES;
     }
     return self;
 }
@@ -43,19 +49,18 @@
         self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         self.accessoryView = nil;
     } else {
-        UILabel *lab = [[UILabel alloc]initWithFrame:CGRectZero];
-        [self.contentView addSubview:lab];
-        lab.textAlignment = NSTextAlignmentRight;
-        lab.font = kHXBFont_PINGFANGSC_REGULAR(14);
-        lab.textColor = [UIColor colorWithRed:146/255.0f green:149/255.0f blue:162/255.0f alpha:1] ;
+        _lab.hidden = NO;
+        _lab.textAlignment = NSTextAlignmentRight;
+        _lab.font = kHXBFont_PINGFANGSC_REGULAR(14);
+        _lab.textColor = [UIColor colorWithRed:146/255.0f green:149/255.0f blue:162/255.0f alpha:1] ;
         if (model.type == HXBAccountSecureTypeModifyPhone) {
-            lab.text = [KeyChain.mobile hxb_hiddenPhonNumberWithMid];
+            _lab.text = [KeyChain.mobile hxb_hiddenPhonNumberWithMid];
         } else {
-            lab.text = @"修改";
+            _lab.text = @"修改";
         }
         
         kWeakSelf
-        [lab mas_makeConstraints:^(MASConstraintMaker *make) {
+        [_lab mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(weakSelf.left).offset(kScrAdaptationW(250));
             make.centerY.equalTo(weakSelf);
             make.height.equalTo(@kScrAdaptationH(18));

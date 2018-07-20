@@ -47,6 +47,7 @@
 
 - (void)setupData {
     self.bankCardViewModel = [[HXBBankCardViewModel alloc] init];
+    self.bankCardViewModel.bankCardModel = self.bankCardModel;
     
     //构建cell数据源列表
     NSMutableArray *dataList = [NSMutableArray array];

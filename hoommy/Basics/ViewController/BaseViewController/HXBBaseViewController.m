@@ -90,13 +90,11 @@
 
 - (void)didMoveToParentViewController:(UIViewController *)parent {
     [super didMoveToParentViewController:parent];
-    
-    HXBBaseNavigationController *navVC = (HXBBaseNavigationController *)self.navigationController;
-    if(navVC) {
-        if(!parent) {
-            navVC.rightGestureAction = RightSliderGestureEnd;
-            [self sliderBackAction];
-        }
+
+    if(!parent) {
+        HXBBaseNavigationController *navVC = (HXBBaseNavigationController *)[HXBRootVCManager manager].mainTabbarVC.selectedViewController;
+        navVC.rightGestureAction = RightSliderGestureEnd;
+        [self sliderBackAction];
     }
     
 }
@@ -106,7 +104,7 @@
     [super viewWillAppear:animated];
     
     if(self.navigationController) {
-        self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+        self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
         
         //适配iphoneX上的tabbar
         if(HXBIPhoneX) {
@@ -279,7 +277,7 @@
 ///白色的电池栏
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
-    return UIStatusBarStyleLightContent;
+    return UIStatusBarStyleDefault;
 }
 
 #pragma mark 子类中可以重写以下方法完成相应的功能

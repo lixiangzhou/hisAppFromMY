@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSInteger, HSJMyHomeInfoType) {
-    HSJMyHomeInfoTypeModifyBank = 0,    /// 修改手机号
+    HSJMyHomeInfoTypeModifyBank = 0,    /// 银行卡绑定
     HSJMyHomeInfoTypeLoginEvaluating,   /// 风险测评
 };
 
