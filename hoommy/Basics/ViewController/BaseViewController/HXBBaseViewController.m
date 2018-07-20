@@ -104,7 +104,7 @@
     [super viewWillAppear:animated];
     
     if(self.navigationController) {
-        self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+        self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
         
         //适配iphoneX上的tabbar
         if(HXBIPhoneX) {
@@ -277,7 +277,7 @@
 ///白色的电池栏
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
-    return UIStatusBarStyleLightContent;
+    return UIStatusBarStyleDefault;
 }
 
 #pragma mark 子类中可以重写以下方法完成相应的功能
