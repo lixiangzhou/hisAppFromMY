@@ -99,13 +99,13 @@
     }];
     
     [topLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@(kScrAdaptationW(90) + HXBStatusBarAdditionHeight));
+        make.top.equalTo(@(90 + HXBStatusBarAdditionHeight));
         make.centerX.equalTo(self);
-//        make.height.equalTo(@kScrAdaptationW(20));
+//        make.height.equalTo(@20));
     }];
     
     [topDescLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(topLabel.mas_bottom).offset(kScrAdaptationW(4));
+        make.top.equalTo(topLabel.mas_bottom).offset(4);
         make.centerX.equalTo(self);
     }];
     
@@ -116,7 +116,7 @@
     }];
     
     [leftDescLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(leftLabel.mas_bottom).offset(kScrAdaptationW(4));
+        make.top.equalTo(leftLabel.mas_bottom).offset(4);
         make.left.greaterThanOrEqualTo(@15);
     }];
     
@@ -127,19 +127,19 @@
     }];
     
     [rightDescLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(rightLabel.mas_bottom).offset(kScrAdaptationW(4));
+        make.top.equalTo(rightLabel.mas_bottom).offset(4);
         make.right.greaterThanOrEqualTo(@-15);
     }];
     
     [centerLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(topDescLabel.mas_bottom).offset(kScrAdaptationW(44));
+        make.top.equalTo(topDescLabel.mas_bottom).offset(44);
         make.centerX.equalTo(self);
     }];
     
     [centerDescLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(centerLabel.mas_bottom).offset(kScrAdaptationW(4));
+        make.top.equalTo(centerLabel.mas_bottom).offset(4);
         make.centerX.equalTo(centerLabel);
-        make.bottom.equalTo(@kScrAdaptationW(-38));
+        make.bottom.equalTo(@-38);
     }];
 }
 

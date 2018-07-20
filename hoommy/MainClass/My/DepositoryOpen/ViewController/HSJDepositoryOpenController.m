@@ -193,7 +193,7 @@
     bankNameView.placeholder = @"银行名称";
     bankNameView.userInteractionEnabled = NO;
     bankNameView.textColor = kHXBColor_999999_100;
-    bankNameView.bottomLineNormalColor = UIColorFromRGB(0xECECEC);
+    bankNameView.bottomLineNormalColor = kHXBColor_ECECEC_100;
     [self.scrollView insertSubview:bankNameView belowSubview:bankNoView];
     self.bankNameView = bankNameView;
     
@@ -396,7 +396,7 @@
         return NO;
     }
     
-    if (self.transactionPwdView.text.length >= self.transactionPwdView.limitStringLength && self.idView == textField) {
+    if (self.transactionPwdView.text.length >= self.transactionPwdView.limitStringLength && self.transactionPwdView == textField) {
         return NO;
     }
 
@@ -404,7 +404,7 @@
         return NO;
     }
     
-    if (self.mobileView.text.length >= self.mobileView.limitStringLength && self.bankNoView == textField) {
+    if (self.mobileView.text.length >= self.mobileView.limitStringLength && self.mobileView == textField) {
         return NO;
     }
 
@@ -478,7 +478,7 @@
     textView.bottomLineRightOffset = 0;
     textView.font = kHXBFont_28;
     textView.textColor = kHXBFontColor_333333_100;
-    textView.bottomLineNormalColor = UIColorFromRGB(0xECECEC);
+    textView.bottomLineNormalColor = kHXBColor_ECECEC_100;
     textView.delegate = self;
 }
 
