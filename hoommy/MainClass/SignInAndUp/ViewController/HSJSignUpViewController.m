@@ -54,6 +54,11 @@
     self.isSelected = YES;
     self.viewModel = [[HSJSignupViewModel alloc] init];
     [self setupUI];
+   
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     [self getCode];
 }
 
@@ -161,12 +166,7 @@
 }
 
 - (void)getVoiceCodeWithType:(NSString *)type {
-    self.timeCount = 60;
-    self.codeButton.enabled = NO;
-    self.voiceCodeButton.hidden = YES;
-    [self.codeButton setTitle:[NSString stringWithFormat:@"%ds",self.timeCount] forState:UIControlStateNormal];
-    [self.codeButton setTitleColor:kHXBFontColor_C7C7CD_100 forState:(UIControlStateNormal)];
-    self.timer = [TimerWeakTarget scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timeDown) userInfo:nil repeats:YES];
+
     kWeakSelf
     [self.viewModel getVerifyCodeRequesWithSignupWithAction:@"newsignup" andWithType:type andWithMobile:self.phoneNumber andWithCaptcha:self.captcha andCallbackBlock:^(BOOL isSuccess, BOOL isNeedCaptcha) {
         if (isNeedCaptcha) {
@@ -174,13 +174,25 @@
             [weakSelf.view addSubview:weakSelf.captchaView];
             weakSelf.captchaView.isFirstResponder = YES;
             [weakSelf getCaptcha];
+            [weakSelf getCodeField];
             
-        } else if (!isSuccess) {
+        } else if (isSuccess) {
+            
+            weakSelf.timeCount = 60;
+            weakSelf.codeButton.enabled = NO;
+            weakSelf.voiceCodeButton.hidden = YES;
+            [weakSelf.codeButton setTitle:[NSString stringWithFormat:@"%ds",self.timeCount] forState:UIControlStateNormal];
+            [weakSelf.codeButton setTitleColor:kHXBFontColor_C7C7CD_100 forState:(UIControlStateNormal)];
+            weakSelf.timer = [TimerWeakTarget scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timeDown) userInfo:nil repeats:YES];
+            
+        } else {
             [weakSelf getCodeField];
         }
     }];
     
 }
+
+
 
 - (void)timeDown
 {
@@ -204,7 +216,7 @@
 - (UILabel *)phoneLabel {
     if (!_phoneLabel) {
         _phoneLabel = [[UILabel alloc] init];
-        _phoneLabel.text = [NSString stringWithFormat:@"验证码已经发送发到%@",[self.phoneNumber hxb_hiddenPhonNumberWithMid]];
+        _phoneLabel.text = [NSString stringWithFormat:@"验证码已发送至%@",[self.phoneNumber hxb_hiddenPhonNumberWithMid]];
         _phoneLabel.font = kHXBFont_PINGFANGSC_REGULAR(14);
         _phoneLabel.textColor = kHXBFontColor_555555_100;
     }
@@ -278,7 +290,7 @@
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
-        _titleLabel.text = @"请输入登录密码";
+        _titleLabel.text = @"请输入验证码";
         _titleLabel.font = kHXBFont_PINGFANGSC_REGULAR(30);
         _titleLabel.textColor = kHXBFontColor_505050_100;
     }
