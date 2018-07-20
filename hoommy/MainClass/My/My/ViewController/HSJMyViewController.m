@@ -149,7 +149,7 @@
             [self entryDepositoryAccount];
         }
         else{
-            if (state) { //已绑卡
+            if (1 == self.myView.userInfoModel.userInfo.hasBindCard.intValue) { //已绑卡
                 //进入银行卡页面
                 HxbMyBankCardViewController *vc = [[HxbMyBankCardViewController alloc] init];
                 vc.isBank = YES;
