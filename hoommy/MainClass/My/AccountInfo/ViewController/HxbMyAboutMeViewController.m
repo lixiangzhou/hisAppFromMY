@@ -60,28 +60,6 @@ UITableViewDelegate,UITableViewDataSource
             [HXBAlertManager callupWithphoneNumber:kServiceMobile andWithTitle:@"红小宝客服电话" Message:kServiceMobile];
         }
             break;
-        case 1:
-        {
-            
-        }
-            break;
-        case 2:
-        {
-            //跳转常见问题
-            HXBCommonProblemViewController *commonProblemVC = [[HXBCommonProblemViewController alloc] init];
-            commonProblemVC.pageUrl = [NSString splicingH5hostWithURL:kHXBUser_QuestionsURL];
-            [self.navigationController pushViewController:commonProblemVC animated:YES];
-        }
-            break;
-        case 3:
-        {
-//            //意见反馈
-//            HXBFeedbackViewController *feedbackVC = [[HXBFeedbackViewController alloc]init];
-//            [self.navigationController pushViewController:feedbackVC animated:YES];
-        }
-            break;
-        default:
-            break;
     }
     
     
