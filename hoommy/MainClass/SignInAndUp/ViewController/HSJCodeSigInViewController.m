@@ -149,7 +149,7 @@
 }
 
 - (void)getVoiceCodeWithType:(NSString *)type {
-    self.timeCount = 5;
+    self.timeCount = 60;
     self.codeButton.enabled = NO;
     self.voiceCodeButton.hidden = YES;
     [self.codeButton setTitle:[NSString stringWithFormat:@"%ds",self.timeCount] forState:UIControlStateNormal];
