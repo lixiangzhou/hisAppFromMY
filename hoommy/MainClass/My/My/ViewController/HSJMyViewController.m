@@ -31,6 +31,9 @@
 #import "HXBMY_CapitalRecordViewController.h"
 #import "HSJDepositoryOpenController.h"
 
+
+#import "HSJBuyViewController.h"
+
 @interface HSJMyViewController ()<MyViewDelegate>
 @property (nonatomic, strong) HxbMyView *myView;
 @property (nonatomic, strong) HSJMyViewVCViewModel *viewModel;
@@ -167,6 +170,9 @@
         }
     }
     if (type == 1) { //风险测评
+        HSJBuyViewController *vc = [[HSJBuyViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+        return;
         HSJRiskAssessmentViewController *riskAssessmentVC = [[HSJRiskAssessmentViewController alloc] init];
         [self.navigationController pushViewController:riskAssessmentVC animated:YES];
     }

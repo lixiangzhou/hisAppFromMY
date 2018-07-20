@@ -35,6 +35,34 @@
 }
 
 /**
+ 获取以屏幕宽适配的比例
+ 
+ @return 比例值
+ */
++ (CGFloat)getAdaterScreenWidthScale
+{
+    
+    
+    CGSize screenSize = [UIScreen mainScreen].bounds.size;
+    //以iphone6为基准
+    CGFloat baseWidth = 375.0;
+    
+    return screenSize.width/baseWidth;
+    
+//    CGFloat scale = 1;
+//    if(baseWidth != screenSize.width) {
+//        if(screenSize.width > baseWidth) {
+//            scale = (screenSize.width+100)/baseWidth;
+//        }
+//        else {
+//            scale = (screenSize.width)/baseWidth;
+//        }
+//    }
+//
+//    return scale;
+}
+
+/**
  获取状态栏高度
  
  @return 适配后的高度

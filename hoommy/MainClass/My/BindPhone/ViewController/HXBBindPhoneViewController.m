@@ -143,12 +143,10 @@
     if ([self.userInfoModel.userInfo.isIdPassed isEqualToString:@"1"] && self.bindPhoneStepType == HXBBindPhoneTransactionPassword) {
         [self.viewModel modifyTransactionPasswordWithIdCard:IDCard resultBlock:^(id responseData, NSError *erro) {
             if(!erro) {
-                [cell checkCodeCountDown:YES];
                 [weakSelf getValidationCode:indexPath];
             }
         }];
     } else {
-        [cell checkCodeCountDown:YES];
         [weakSelf getValidationCode:indexPath];
     }
     
@@ -164,9 +162,9 @@
     
     kWeakSelf
     [self.viewModel myTraderPasswordGetverifyCodeWithAction:action resultBlock:^(id responseData, NSError *erro) {
-        if(erro) {
+        if(!erro) {
             HXBBindPhoneTableViewCell *cell = [weakSelf.tableView cellForRowAtIndexPath:indexPath];
-            [cell checkCodeCountDown:NO];
+            [cell checkCodeCountDown:YES];
         }
     }];
 }

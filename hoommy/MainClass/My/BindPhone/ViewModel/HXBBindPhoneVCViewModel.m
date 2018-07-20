@@ -103,6 +103,7 @@
         request.requestUrl = kHXBUser_smscodeURL;
         request.requestMethod = NYRequestMethodPost;
         request.requestArgument = @{@"action" : action};
+        request.showHud = YES;
     } responseResult:^(id responseData, NSError *erro) {
         if(resultBlock) {
             resultBlock(responseData, erro);
