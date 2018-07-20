@@ -17,13 +17,16 @@
 #import "HSJPlanDetailController.h"
 #import "HSJSignInViewController.h"
 #import "HSJHomeCustomNavbarView.h"
-
 #import "HSJHomeHeaderView.h"
+#import "HSJHomePlanView.h"
+
 @interface HSJHomeViewController ()
 
 @property (nonatomic, strong) HSJHomeCustomNavbarView *navView;
 
 @property (nonatomic, strong) HSJHomeHeaderView *headerView;
+
+@property (nonatomic, strong) HSJHomePlanView *planView;
 
 @end
 
@@ -96,8 +99,7 @@
 - (void)setUI {
     [self.view addSubview:self.headerView];
     [self.view addSubview:self.navView];
-    
-  
+    [self.view addSubview:self.planView];
 }
 
 - (void)buttonClickAct:(UIButton*)button {
@@ -147,9 +149,6 @@
 
 
 
-
-
-
 - (HSJHomeCustomNavbarView *)navView {
     if (!_navView) {
         _navView = [[HSJHomeCustomNavbarView alloc] init];
@@ -171,6 +170,13 @@
         
     }
     return _headerView;
+}
+
+- (HSJHomePlanView *)planView {
+    if (!_planView) {
+        _planView = [[HSJHomePlanView alloc] initWithFrame:CGRectMake(0, 350, kScreenWidth, kScrAdaptationH750(558))];
+    }
+    return _planView;
 }
 
 @end

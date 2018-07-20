@@ -13,6 +13,8 @@
 		4E53C8FA20F89C330040F830 /* HSJSignInModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E53C8F920F89C330040F830 /* HSJSignInModel.m */; };
 		4E53C90020F8B9FD0040F830 /* HSJCheckCaptcha.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E53C8FF20F8B9FD0040F830 /* HSJCheckCaptcha.m */; };
 		4E79DB692100420800837A0F /* HSJHomeHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E79DB682100420800837A0F /* HSJHomeHeaderView.m */; };
+		4E79DB6C2100804A00837A0F /* HSJUnLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E79DB6B2100804A00837A0F /* HSJUnLogin.m */; };
+		4E79DB6F21008AD300837A0F /* HSJHomePlanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E79DB6E21008AD300837A0F /* HSJHomePlanView.m */; };
 		4E7EE27520F72D6F007D96E1 /* HSJSignInButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7EE27420F72D6F007D96E1 /* HSJSignInButton.m */; };
 		4E8A4DE520FDDA5F001B9ADA /* HSJHomeCustomNavbarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8A4DE420FDDA5F001B9ADA /* HSJHomeCustomNavbarView.m */; };
 		4E8A5D8020FF4218001E6125 /* HSJTitleCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8A5D7F20FF4218001E6125 /* HSJTitleCollectionViewCell.m */; };
@@ -276,8 +278,6 @@
 		9A97DACD20EF420200688ADB /* my_Selected.svg in Resources */ = {isa = PBXBuildFile; fileRef = 9A97DA5620EF420200688ADB /* my_Selected.svg */; };
 		9A97DACE20EF420200688ADB /* my_Unselected.svg in Resources */ = {isa = PBXBuildFile; fileRef = 9A97DA5720EF420200688ADB /* my_Unselected.svg */; };
 		9A97DACF20EF420200688ADB /* name.svg in Resources */ = {isa = PBXBuildFile; fileRef = 9A97DA5820EF420200688ADB /* name.svg */; };
-		9A97DAD020EF420200688ADB /* password_eye_close.svg in Resources */ = {isa = PBXBuildFile; fileRef = 9A97DA5920EF420200688ADB /* password_eye_close.svg */; };
-		9A97DAD120EF420200688ADB /* password_eye_open.svg in Resources */ = {isa = PBXBuildFile; fileRef = 9A97DA5A20EF420200688ADB /* password_eye_open.svg */; };
 		9A97DAD220EF420200688ADB /* sanbiao.svg in Resources */ = {isa = PBXBuildFile; fileRef = 9A97DA5B20EF420200688ADB /* sanbiao.svg */; };
 		9A97DAD320EF420200688ADB /* trading_record.svg in Resources */ = {isa = PBXBuildFile; fileRef = 9A97DA5C20EF420200688ADB /* trading_record.svg */; };
 		9A97DAD420EF420200688ADB /* transaction_password.svg in Resources */ = {isa = PBXBuildFile; fileRef = 9A97DA5D20EF420200688ADB /* transaction_password.svg */; };
@@ -366,6 +366,10 @@
 		4E53C8FF20F8B9FD0040F830 /* HSJCheckCaptcha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSJCheckCaptcha.m; sourceTree = "<group>"; };
 		4E79DB672100420800837A0F /* HSJHomeHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJHomeHeaderView.h; sourceTree = "<group>"; };
 		4E79DB682100420800837A0F /* HSJHomeHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJHomeHeaderView.m; sourceTree = "<group>"; };
+		4E79DB6A2100804A00837A0F /* HSJUnLogin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJUnLogin.h; sourceTree = "<group>"; };
+		4E79DB6B2100804A00837A0F /* HSJUnLogin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJUnLogin.m; sourceTree = "<group>"; };
+		4E79DB6D21008AD300837A0F /* HSJHomePlanView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJHomePlanView.h; sourceTree = "<group>"; };
+		4E79DB6E21008AD300837A0F /* HSJHomePlanView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJHomePlanView.m; sourceTree = "<group>"; };
 		4E7EE27320F72D6F007D96E1 /* HSJSignInButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJSignInButton.h; sourceTree = "<group>"; };
 		4E7EE27420F72D6F007D96E1 /* HSJSignInButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJSignInButton.m; sourceTree = "<group>"; };
 		4E8A4DE320FDDA5F001B9ADA /* HSJHomeCustomNavbarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJHomeCustomNavbarView.h; sourceTree = "<group>"; };
@@ -870,8 +874,6 @@
 		9A97DA5620EF420200688ADB /* my_Selected.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = my_Selected.svg; sourceTree = "<group>"; };
 		9A97DA5720EF420200688ADB /* my_Unselected.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = my_Unselected.svg; sourceTree = "<group>"; };
 		9A97DA5820EF420200688ADB /* name.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = name.svg; sourceTree = "<group>"; };
-		9A97DA5920EF420200688ADB /* password_eye_close.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = password_eye_close.svg; sourceTree = "<group>"; };
-		9A97DA5A20EF420200688ADB /* password_eye_open.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = password_eye_open.svg; sourceTree = "<group>"; };
 		9A97DA5B20EF420200688ADB /* sanbiao.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = sanbiao.svg; sourceTree = "<group>"; };
 		9A97DA5C20EF420200688ADB /* trading_record.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = trading_record.svg; sourceTree = "<group>"; };
 		9A97DA5D20EF420200688ADB /* transaction_password.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = transaction_password.svg; sourceTree = "<group>"; };
@@ -2236,6 +2238,10 @@
 				4E8A5D7F20FF4218001E6125 /* HSJTitleCollectionViewCell.m */,
 				4E79DB672100420800837A0F /* HSJHomeHeaderView.h */,
 				4E79DB682100420800837A0F /* HSJHomeHeaderView.m */,
+				4E79DB6A2100804A00837A0F /* HSJUnLogin.h */,
+				4E79DB6B2100804A00837A0F /* HSJUnLogin.m */,
+				4E79DB6D21008AD300837A0F /* HSJHomePlanView.h */,
+				4E79DB6E21008AD300837A0F /* HSJHomePlanView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2856,8 +2862,6 @@
 				9A97DA5620EF420200688ADB /* my_Selected.svg */,
 				9A97DA5720EF420200688ADB /* my_Unselected.svg */,
 				9A97DA5820EF420200688ADB /* name.svg */,
-				9A97DA5920EF420200688ADB /* password_eye_close.svg */,
-				9A97DA5A20EF420200688ADB /* password_eye_open.svg */,
 				9A97DA5B20EF420200688ADB /* sanbiao.svg */,
 				9A97DA5C20EF420200688ADB /* trading_record.svg */,
 				9A97DA5D20EF420200688ADB /* transaction_password.svg */,
@@ -3392,7 +3396,6 @@
 				9A97DAC220EF420200688ADB /* close.svg in Resources */,
 				9A97DAD420EF420200688ADB /* transaction_password.svg in Resources */,
 				9A3748E620F74B3300F39681 /* 5008.svg in Resources */,
-				9A97DAD120EF420200688ADB /* password_eye_open.svg in Resources */,
 				9A3748E720F74B3300F39681 /* 5009.svg in Resources */,
 				9A97DAC320EF420200688ADB /* explain.svg in Resources */,
 				9A97DAC820EF420200688ADB /* id_number.svg in Resources */,
@@ -3405,7 +3408,6 @@
 				9A97DABC20EF420200688ADB /* audit_status.svg in Resources */,
 				9A97DABD20EF420200688ADB /* back.svg in Resources */,
 				9A97DA7120EF420200688ADB /* HSJTestViewController.xib in Resources */,
-				9A97DAD020EF420200688ADB /* password_eye_close.svg in Resources */,
 				9A6E0A6220F84C9700598071 /* Main.storyboard in Resources */,
 				9A3748DD20F74B3300F39681 /* 0220.svg in Resources */,
 				9A3748E320F74B3300F39681 /* 5005.svg in Resources */,
@@ -3641,6 +3643,7 @@
 				9AA70B5320FF03D5008B3007 /* HSJBuySectionHeadView.m in Sources */,
 				9A97DAB120EF420200688ADB /* HXBNsTimerManager.m in Sources */,
 				8D591BF120F84C57007CA4BE /* HSJPlanDetailController.m in Sources */,
+				4E79DB6C2100804A00837A0F /* HSJUnLogin.m in Sources */,
 				9A0BD52F20F6FC9300B1CC59 /* HXBBaseView_TwoLable_View.m in Sources */,
 				4EE6169520F4AD5A0044B998 /* HSJSignUpViewController.m in Sources */,
 				9A37497120F856D900F39681 /* HXBAccountWithdrawViewModel.m in Sources */,
@@ -3747,6 +3750,7 @@
 				8D5D611820FEF1C5003F94D9 /* HSJPlanAssetsModel.m in Sources */,
 				4E8DB75420F5AEE3000712D7 /* TimerWeakTarget.m in Sources */,
 				9A37495B20F854CC00F39681 /* HXBWithdrawCardView.m in Sources */,
+				4E79DB6F21008AD300837A0F /* HSJHomePlanView.m in Sources */,
 				4EA57D0B20F338EA006FD573 /* HSJRiskAssessmentViewController.m in Sources */,
 				E13A0EFD20F4ADAA00A3E364 /* HXBBottomLineTableViewCell.m in Sources */,
 				E14B9F9520FD8AF80084F007 /* HXBAccumulatedIncomeView.m in Sources */,
