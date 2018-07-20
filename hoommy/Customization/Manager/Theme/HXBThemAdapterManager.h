@@ -17,6 +17,13 @@
 + (CGFloat)getAdaterScreenHeightScale;
 
 /**
+ 获取以屏幕宽适配的比例
+ 
+ @return 比例值
+ */
++ (CGFloat)getAdaterScreenWidthScale;
+
+/**
  获取状态栏高度
 
  @return 适配后的高度

@@ -38,6 +38,7 @@
     self.rightTopBtn = [[UIButton alloc] init];
     [self.rightTopBtn setTitleColor:kHXBFontColor_FE7E5E_100 forState:UIControlStateNormal];
     self.rightTopBtn.titleLabel.font = kHXBFont_PINGFANGSC_REGULAR(12);
+    self.rightTopBtn.contentMode = UIViewContentModeRight;
     [self.rightTopBtn addTarget:self action:@selector(rightTopButtonAct:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.rightTopBtn];
     
@@ -57,7 +58,7 @@
     [self.rightTopBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self).offset(-kScrAdaptationW(15));
         make.top.equalTo(self).offset(kScrAdaptationW(10));
-        make.width.mas_equalTo(kScrAdaptationW(60));
+        make.width.mas_equalTo(kScrAdaptationW(62));
         make.height.mas_equalTo(kScrAdaptationH(17));
     }];
     

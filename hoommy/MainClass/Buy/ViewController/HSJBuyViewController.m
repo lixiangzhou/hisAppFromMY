@@ -34,7 +34,8 @@
 }
 
 - (void)setupData {
-    
+    self.viewModel = [[HSJBuyViewModel alloc] init];
+    [self.viewModel buildCellDataList];
 }
 
 - (void)setupUI {
@@ -77,6 +78,25 @@
     return _headView;
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.viewModel.cellDataList.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    HSJBuyTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"HSJBuyTableViewCell"];
+    BOOL isLastItem = NO;
+    if(indexPath.row >= self.viewModel.cellDataList.count-1) {
+        isLastItem = YES;
+    }
+    HSJBuyCellModel *cellModel = [self.viewModel.cellDataList safeObjectAtIndex:indexPath.row];
+    [cell bindData:isLastItem cellDataModel:cellModel];
+    
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return kScrAdaptationH(64);
+}
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     HSJBuySectionHeadView *sectionView = [self.tableView dequeueReusableHeaderFooterViewWithIdentifier:@"HSJBuySectionHeadView"];

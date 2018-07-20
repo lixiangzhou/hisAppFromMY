@@ -32,6 +32,10 @@
 //cell 专用对勾选择button
 +(UIButton *)buttonWithImageName:(NSString *)imageName andSelectImageName:(NSString *)hlImageName andTarget:(id)target andAction:(SEL)action andFrameByCategory:(CGRect)rect;
 
+- (void)setEnlargeEdgeWithTop:(CGFloat) top right:(CGFloat) right bottom:(CGFloat) bottom left:(CGFloat) left;
+
+- (void)setEnlargeEdge:(CGFloat) size;
+
 //颜色
 @property (nonatomic,assign) BOOL isColourGradientView;
 @end

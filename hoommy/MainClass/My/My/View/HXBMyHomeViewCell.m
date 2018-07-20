@@ -25,11 +25,6 @@
         [self.contentView addSubview:self.descLab];
         [self.contentView addSubview:self.leftImageView];
         [self setupSubViewFrame];
-        [self.textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.left.equalTo(self.imageView.mas_right).offset(kScrAdaptationW(10));
-            make.left.equalTo(@kScrAdaptationW(51));
-            make.centerY.equalTo(self.contentView);
-        }];
     }
     return self;
 }
@@ -39,8 +34,13 @@
     kWeakSelf
     [self.leftImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf.textLabel);
-        make.left.equalTo(@kScrAdaptationW(15));
-        make.width.height.equalTo(@kScrAdaptationW(17));
+        make.left.equalTo(@kScrAdaptationW750(39));
+        make.width.height.equalTo(@kScrAdaptationW750(34));
+    }];
+    [self.textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        //            make.left.equalTo(self.imageView.mas_right).offset(kScrAdaptationW(10));
+        make.left.equalTo(weakSelf.leftImageView.mas_right).offset(kScrAdaptationW750(14));
+        make.centerY.equalTo(weakSelf.contentView);
     }];
     [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.bottom.equalTo(weakSelf);
@@ -51,8 +51,8 @@
     [self.descLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf.textLabel);
         make.height.equalTo(@kScrAdaptationH750(24));
-        make.left.equalTo(@kScrAdaptationW750(750-66-300));
-        make.width.equalTo(@kScrAdaptationW750(300));
+        make.left.equalTo(weakSelf.textLabel.mas_right).offset(kScrAdaptationW750(15));
+        make.right.equalTo(weakSelf.contentView.mas_right).offset(kScrAdaptationW750(5));
     }];
 }
 
