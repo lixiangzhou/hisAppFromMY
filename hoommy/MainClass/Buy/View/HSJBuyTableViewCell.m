@@ -34,6 +34,7 @@
 }
 
 - (void)setupUI {
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.iconImv = [[UIImageView alloc] init];
     [self.contentView addSubview:self.iconImv];
     
@@ -87,7 +88,7 @@
         make.top.bottom.equalTo(self.contentView);
     }];
     [self.lineImv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.titleLb);
+        make.left.equalTo(self.contentView);
         make.height.mas_equalTo(0.5);
         make.right.bottom.equalTo(self.contentView);
     }];
@@ -101,7 +102,7 @@
     }
     else {
         [self.lineImv mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.titleLb);
+            make.left.equalTo(self.iconImv.mas_right).offset(kScrAdaptationW(10.5));
         }];
     }
     
