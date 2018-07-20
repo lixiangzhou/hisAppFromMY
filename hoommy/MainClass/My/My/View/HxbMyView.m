@@ -108,23 +108,26 @@ MyViewHeaderDelegate
 
 - (NSArray *)getUserInfoModelArray {
     kWeakSelf
-    HSJMyHomeInfoModel *model = [HSJMyHomeInfoModel new];
+    HSJMyHomeInfoModel *bankModel = [HSJMyHomeInfoModel new];
     NSMutableArray *mArr = [NSMutableArray arrayWithCapacity:2];
     
     NSString *bankDesc = self.userInfoModel.userBank.cardId.length>4?[self.userInfoModel.userBank.cardId substringFromIndex:self.userInfoModel.userBank.cardId.length-4]:@"--";
     BOOL state = [self.userInfoModel.userInfo.hasBindCard isEqualToString:@"1"]?YES:NO;
-    model.desc = state?[NSString stringWithFormat:@"尾号%@",bankDesc]:@"立即绑定";
-    model.infoBlock = ^(NSInteger type) {
+    bankModel.desc = state?[NSString stringWithFormat:@"尾号%@",bankDesc]:@"立即绑定";
+    bankModel.type = HSJMyHomeInfoTypeModifyBank;
+    bankModel.infoBlock = ^(NSInteger type) {
         [weakSelf.delegate didMyHomeInfoClick:type state:state];
     };
-    [mArr addObject:model];
+    [mArr addObject:bankModel];
     
+    HSJMyHomeInfoModel *infoModel = [HSJMyHomeInfoModel new];
     state = !self.userInfoModel.userInfo.riskType||[self.userInfoModel.userInfo.riskType isEqualToString:@"立即评测"]?NO:YES;
-    model.desc = state?self.userInfoModel.userInfo.riskType:[NSString stringWithFormat:@"立即评测"];
-    model.infoBlock = ^(NSInteger type) {
+    infoModel.desc = state?self.userInfoModel.userInfo.riskType:[NSString stringWithFormat:@"立即评测"];
+    infoModel.type = HSJMyHomeInfoTypeLoginEvaluating;
+    infoModel.infoBlock = ^(NSInteger type) {
         [weakSelf.delegate didMyHomeInfoClick:type state:state];
     };
-    [mArr addObject:model];
+    [mArr addObject:infoModel];
     
     return mArr;
 }
@@ -258,9 +261,10 @@ MyViewHeaderDelegate
         _mainTableView.tableHeaderView.userInteractionEnabled = YES;
         _mainTableView.backgroundColor = kHXBColor_BackGround;
         kWeakSelf
-        [_mainTableView setHeaderWithRefreshBlock:^(UIScrollView *scrollView) {
+        _mainTableView.freshOption = ScrollViewFreshOptionDownPull;
+        _mainTableView.headerWithRefreshBlock = ^(UIScrollView *scrollView) {
             if (weakSelf.homeRefreshHeaderBlock) weakSelf.homeRefreshHeaderBlock();
-        }];
+        };
     }
     return _mainTableView;
 }

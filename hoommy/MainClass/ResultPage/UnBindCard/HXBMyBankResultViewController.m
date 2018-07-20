@@ -109,14 +109,14 @@
         withdrawCardViewController.type = HXBRechargeAndWithdrawalsLogicalJudgment_Other;
         [self.navigationController pushViewController:withdrawCardViewController animated:YES];
     } else {
-        [self popToViewControllerWithClassName:@"HxbMyBankCardViewController"];
+        [self popToViewControllerWithClassName:@"HSJMyViewController"];
     }
 
 }
 
 // 点击我的账户按钮
 - (void)myAccountButtonClick:(UIButton *)sender {
-    [self popToViewControllerWithClassName:@"HxbAccountInfoViewController"];
+    [self popToViewControllerWithClassName:@"HSJMyViewController"];
 }
 
 #pragma mark - Setter / Getter / Lazy

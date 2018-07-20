@@ -417,8 +417,8 @@
 {
     if (!_eyeBtn) {
         _eyeBtn = [[UIButton alloc] init];
-        [_eyeBtn setImage:[SVGKImage imageNamed:@"password_eye_close.svg"].UIImage forState:UIControlStateNormal];
-        [_eyeBtn setImage:[SVGKImage imageNamed:@"password_eye_open.svg"].UIImage forState:UIControlStateSelected];
+        [_eyeBtn setImage:[UIImage imageNamed:@"my_closedEyes"] forState:UIControlStateNormal];
+        [_eyeBtn setImage:[UIImage imageNamed:@"my_eyes"] forState:UIControlStateSelected];
         [_eyeBtn addTarget:self action:@selector(eyeBtnClick) forControlEvents:UIControlEventTouchUpInside];
         _eyeBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
         _eyeBtn.hidden = YES;

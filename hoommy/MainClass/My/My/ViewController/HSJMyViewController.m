@@ -22,13 +22,15 @@
 #import "HSJMyViewVCViewModel.h"
 #import "HXBBindPhoneViewController.h"
 #import "HSJRiskAssessmentViewController.h"
-
+#import "HSJDepositoryOpenController.h"
 
 
 //==================
 #import "HxbMyView.h"
 #import "HXBMY_AllFinanceViewController.h"
 #import "HXBMY_CapitalRecordViewController.h"
+#import "HSJDepositoryOpenController.h"
+
 @interface HSJMyViewController ()<MyViewDelegate>
 @property (nonatomic, strong) HxbMyView *myView;
 @property (nonatomic, strong) HSJMyViewVCViewModel *viewModel;
@@ -39,11 +41,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.isFullScreenShow = YES;
-    kWeakSelf
+
     self.viewModel = [[HSJMyViewVCViewModel alloc] init];
-    self.viewModel.hugViewBlock = ^UIView *{
-        return weakSelf.view;
-    };
     [self setupSubView];
 }
 
@@ -88,14 +87,20 @@
     [self.view addSubview:self.myView];
 }
 
-/// 查看总资产
+/// 查看总资产或开户
 - (void)clickAllFinanceButton {
     kWeakSelf
     [self.myView clickAllFinanceButtonWithBlock:^(UILabel * _Nullable button) {
         //跳转资产目录
         if (KeyChain.isLogin) {
-            HXBMY_AllFinanceViewController *allFinanceViewController = [[HXBMY_AllFinanceViewController alloc]init];
-            [weakSelf.navigationController pushViewController:allFinanceViewController animated:YES];
+            if (!weakSelf.viewModel.userInfoModel.userInfo.isCreateEscrowAcc) { //未开户
+                HSJDepositoryOpenController *openVC = [[HSJDepositoryOpenController alloc] init];
+                openVC.title = @"开通存管账户";
+                [self.navigationController pushViewController:openVC animated:YES];
+            } else { //已开户去账户资产页
+                HXBMY_AllFinanceViewController *allFinanceViewController = [[HXBMY_AllFinanceViewController alloc]init];
+                [weakSelf.navigationController pushViewController:allFinanceViewController animated:YES];
+            }
         }
     }];
 }
@@ -129,28 +134,41 @@
 - (void)didClickHelp:(UIButton *)sender {
     [HXBAlertManager callupWithphoneNumber:kServiceMobile andWithTitle:@"红小宝客服电话" Message:kServiceMobile];
 }
+
+- (void)entryDepositoryAccount
+{
+    NSLog(@"开通存管账户");
+    HSJDepositoryOpenController *VC = [HSJDepositoryOpenController new];
+    [self.navigationController pushViewController:VC animated:YES];
+}
+
 /// 我的信息
 - (void)didMyHomeInfoClick:(NSInteger)type state:(BOOL)state {
     if (type == 0) { //银行卡
-        if (state) { //已绑卡
-            //进入银行卡页面
-            NSLog(@"进入银行卡页面");
-        } else {
-            //未绑卡
-            NSLog(@"进入绑卡页面");
-            HxbWithdrawCardViewController *withdrawCardViewController = [[HxbWithdrawCardViewController alloc]init];
-            withdrawCardViewController.type = HXBRechargeAndWithdrawalsLogicalJudgment_Other;
-            withdrawCardViewController.userInfoModel = self.viewModel.userInfoModel;
-            [self.navigationController pushViewController:withdrawCardViewController animated:YES];
+        if(!self.myView.userInfoModel.userInfo.isCreateEscrowAcc) {
+            [self entryDepositoryAccount];
+        }
+        else{
+            if (1 == self.myView.userInfoModel.userInfo.hasBindCard.intValue) { //已绑卡
+                //进入银行卡页面
+                HxbMyBankCardViewController *vc = [[HxbMyBankCardViewController alloc] init];
+                vc.isBank = YES;
+                vc.isCashPasswordPassed = @"1";
+                [self.navigationController pushViewController:vc animated:YES];
+                NSLog(@"进入银行卡页面");
+            } else {
+                //未绑卡
+                NSLog(@"进入绑卡页面");
+                HxbWithdrawCardViewController *withdrawCardViewController = [[HxbWithdrawCardViewController alloc]init];
+                withdrawCardViewController.type = HXBRechargeAndWithdrawalsLogicalJudgment_Other;
+                withdrawCardViewController.userInfoModel = self.viewModel.userInfoModel;
+                [self.navigationController pushViewController:withdrawCardViewController animated:YES];
+            }
         }
     }
     if (type == 1) { //风险测评
-        if (state) { //为测评
-            NSLog(@"显示评测结果");
-        } else {
-            HSJRiskAssessmentViewController *riskAssessmentVC = [[HSJRiskAssessmentViewController alloc] init];
-            [self.navigationController pushViewController:riskAssessmentVC animated:YES];
-        }
+        HSJRiskAssessmentViewController *riskAssessmentVC = [[HSJRiskAssessmentViewController alloc] init];
+        [self.navigationController pushViewController:riskAssessmentVC animated:YES];
     }
 }
 
@@ -228,6 +246,7 @@
     kWeakSelf
     [self.viewModel downLoadUserInfo:NO resultBlock:^(id responseData, NSError *erro) {
         if (!erro) {
+            weakSelf.viewModel.userInfoModel = responseData;
             weakSelf.myView.userInfoModel = responseData;
         }
         weakSelf.myView.isStopRefresh_Home = YES;

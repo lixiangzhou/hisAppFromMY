@@ -33,7 +33,7 @@
 
 @property (nonatomic, strong) UIButton *voiceCodeButton;
 
-@property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, weak) NSTimer *timer;
 
 @property (nonatomic, assign) int timeCount;
 
@@ -166,18 +166,20 @@
     self.voiceCodeButton.hidden = YES;
     [self.codeButton setTitle:[NSString stringWithFormat:@"%ds",self.timeCount] forState:UIControlStateNormal];
     [self.codeButton setTitleColor:kHXBFontColor_C7C7CD_100 forState:(UIControlStateNormal)];
+    self.timer = [TimerWeakTarget scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timeDown) userInfo:nil repeats:YES];
     kWeakSelf
     [self.viewModel getVerifyCodeRequesWithSignupWithAction:@"newsignup" andWithType:type andWithMobile:self.phoneNumber andWithCaptcha:self.captcha andCallbackBlock:^(BOOL isSuccess, BOOL isNeedCaptcha) {
         if (isNeedCaptcha) {
             
             [weakSelf.view addSubview:weakSelf.captchaView];
+            weakSelf.captchaView.isFirstResponder = YES;
             [weakSelf getCaptcha];
             
         } else if (!isSuccess) {
             [weakSelf getCodeField];
         }
     }];
-     self.timer = [TimerWeakTarget scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timeDown) userInfo:nil repeats:YES];
+    
 }
 
 - (void)timeDown
@@ -187,12 +189,12 @@
     if (self.timeCount <= 0) {
         [self getCodeField];
     }
-    
 }
 
 - (void)getCodeField {
     self.codeButton.enabled = YES;
     self.voiceCodeButton.hidden = NO;
+    self.captcha = @"";
     [self.timer invalidate];
     self.timer = nil;
     [self.codeButton setTitle:@"重新获取" forState:UIControlStateNormal];

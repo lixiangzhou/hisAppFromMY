@@ -9,6 +9,7 @@
 #import "HSJHomeHeaderView.h"
 #import "SDCycleScrollView.h"
 #import "HSJTitleCollectionViewCell.h"
+#import "HSJUnLogin.h"
 @interface HSJHomeHeaderView()<SDCycleScrollViewDelegate>
 
 @property (nonatomic, strong) SDCycleScrollView *titleCycleScrollView;
@@ -16,6 +17,10 @@
 @property (nonatomic, strong) SDCycleScrollView *bannerView;
 
 @property (nonatomic, strong) UIButton *titleCycleRightBtn;
+
+@property (nonatomic, strong) HSJUnLogin *unLoginView;
+
+@property (nonatomic, strong) UIView *segmentLineView;
 
 @end
 
@@ -39,6 +44,21 @@
         make.width.height.offset(kScrAdaptationH750(32));
         make.right.equalTo(self.titleCycleScrollView.mas_right).offset(-kScrAdaptationW750(30));
     }];
+    if (!KeyChain.isLogin) {
+        [self addSubview:self.unLoginView];
+        [self addSubview:self.segmentLineView];
+        [self.unLoginView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.equalTo(self);
+            make.top.equalTo(self.titleCycleScrollView.mas_bottom).offset(kScrAdaptationH750(32));
+            make.height.offset(kScrAdaptationH750(93));
+        }];
+        [self.segmentLineView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.equalTo(self);
+        make.top.equalTo(self.unLoginView.mas_bottom).offset(kScrAdaptationH750(32));
+            make.height.offset(kScrAdaptationH750(20));
+        }];
+    }
+    
 }
 - (void)setupBannerView {
     self.bannerView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectZero delegate:self placeholderImage:[UIImage imageNamed:@"placeholder"]];
@@ -93,6 +113,21 @@
         [_titleCycleRightBtn setImage:[UIImage imageNamed:@"Home_rightBtn"] forState:(UIControlStateNormal)];
     }
     return _titleCycleRightBtn;
+}
+
+- (HSJUnLogin *)unLoginView {
+    if (!_unLoginView) {
+        _unLoginView = [[HSJUnLogin alloc] init];
+    }
+    return _unLoginView;
+}
+
+- (UIView *)segmentLineView {
+    if (!_segmentLineView) {
+        _segmentLineView = [[UIView alloc] init];
+        _segmentLineView.backgroundColor = kHXBBackgroundColor;
+    }
+    return _segmentLineView;
 }
 
 @end

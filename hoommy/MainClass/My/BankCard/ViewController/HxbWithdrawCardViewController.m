@@ -56,13 +56,30 @@
     self.isDisableSliderBack = YES;
     
     [self setupData];
-    [self setupUI];
-    [self setupConstraints];
+    
 }
 
 - (void)setupData {
     self.bindBankCardVM = [[HXBBankCardViewModel alloc] init];
-    
+    if(!self.userInfoModel) {
+        kWeakSelf
+        [self.bindBankCardVM downLoadUserInfo:YES resultBlock:^(id responseData, NSError *erro) {
+            if(!erro) {
+                weakSelf.userInfoModel = responseData;
+                [weakSelf setupUI];
+                [weakSelf setupConstraints];
+                [weakSelf buildCellModelList];
+            }
+        }];
+    }
+    else {
+        [self setupUI];
+        [self setupConstraints];
+        [self buildCellModelList];
+    }
+}
+
+- (void)buildCellModelList {
     //构建cell数据源列表
     NSMutableArray *dataList = [NSMutableArray array];
     self.cellDataList = dataList;
@@ -73,6 +90,7 @@
     cellModel = [[HXBBindCardCellModel alloc] initModel:@"银行卡号" placeText:@"请输入银行卡号" text:@""];
     cellModel.isCanEdit = YES;
     cellModel.keyboardType = UIKeyboardTypeNumberPad;
+    cellModel.isBankCardNoField = YES;
     cellModel.rightButtonText = @"查看银行限额";
     [dataList addObject:cellModel];
     
@@ -82,7 +100,6 @@
     cellModel.keyboardType = UIKeyboardTypeNumberPad;
     [dataList addObject:cellModel];
 }
-
 #pragma mark - UI
 
 - (void)setupUI {
@@ -154,10 +171,11 @@
             if(![weakSelf judgeIsNull]) {
                 HXBBindCardCellModel *cardCellModel = [weakSelf.cellDataList safeObjectAtIndex:1];
                 HXBBindCardCellModel *phoneCellModel = [weakSelf.cellDataList safeObjectAtIndex:2];
+                NSString *cardNo = [cardCellModel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
                 NSDictionary *dic = @{
-                                      @"bankCard" : cardCellModel.text,
+                                      @"bankCard" : cardNo,
                                       @"bankReservedMobile" : phoneCellModel.text,
-                                      @"bankCode" : weakSelf.carbinModel.bankCode
+                                      @"bankCode" : weakSelf.carbinModel.bankCode?:@""
                                       };
                 [weakSelf nextButtonClick:dic];
             }
@@ -202,9 +220,10 @@
 }
 
 - (void)textChangeCheck:(NSIndexPath*)indexPath checkText:(NSString*)text{
-    if (text.length >= 12) {
+    if (indexPath.row==1 && text.length >= 12) {
         kWeakSelf
-        [self.bindBankCardVM checkCardBinResultRequestWithBankNumber:text andisToastTip:NO andCallBack:^(id responseData, NSError *erro) {
+        NSString *cardNo = [text stringByReplacingOccurrencesOfString:@" " withString:@""];
+        [self.bindBankCardVM checkCardBinResultRequestWithBankNumber:cardNo andisToastTip:NO andCallBack:^(id responseData, NSError *erro) {
             if (erro) {
                 weakSelf.bindBankCardVM.cardBinModel = nil;
             }

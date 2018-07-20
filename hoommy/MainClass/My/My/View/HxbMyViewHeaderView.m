@@ -188,15 +188,17 @@
 
 - (void)clickAllFinanceButton: (UITapGestureRecognizer *)tap {
     if (self.clickAllFinanceButtonBlock) {
+        self.clickAllFinanceButtonBlock((UILabel *)tap.view);
         
-        if (!self.userInfoModel.userInfo.isCreateEscrowAcc) { // 未开户
-//            HXBOpenDepositAccountViewController *openDepositAccountVC = [[HXBOpenDepositAccountViewController alloc] init];
-//            openDepositAccountVC.title = @"开通存管账户";
-//            openDepositAccountVC.type = HXBRechargeAndWithdrawalsLogicalJudgment_Other;
-//             [[HXBRootVCManager manager].topVC.navigationController pushViewController:openDepositAccountVC animated:YES];
-        } else {
-            self.clickAllFinanceButtonBlock((UILabel *)tap.view);
-        }
+//        if (!self.userInfoModel.userInfo.isCreateEscrowAcc) { // 未开户
+////            HSJDepositoryOpenController *openDepositAccountVC = [[HSJDepositoryOpenController alloc] init];
+////            openDepositAccountVC.title = @"开通存管账户";
+////            openDepositAccountVC.type = HXBRechargeAndWithdrawalsLogicalJudgment_Other;
+////             [[HXBRootVCManager manager].topVC.navigationController pushViewController:openDepositAccountVC animated:YES];
+//
+//        } else {
+//            self.clickAllFinanceButtonBlock((UILabel *)tap.view);
+//        }
     }
 }
 
@@ -383,10 +385,10 @@
 }
 - (UIImageView *)noAccountOpeningBackgroundImage {
     if (!_noAccountOpeningBackgroundImage) {
-        _noAccountOpeningBackgroundImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"noAccountOpeningBackgroundImage"]];
+        _noAccountOpeningBackgroundImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"my_notEscrowAcc"]];
         _noAccountOpeningBackgroundImage.userInteractionEnabled = YES;
-        _noAccountOpeningBackgroundImage.layer.cornerRadius = 3;
-        _noAccountOpeningBackgroundImage.layer.masksToBounds = YES;
+//        _noAccountOpeningBackgroundImage.layer.cornerRadius = 3;
+//        _noAccountOpeningBackgroundImage.layer.masksToBounds = YES;
     }
     return _noAccountOpeningBackgroundImage;
 }
@@ -416,7 +418,7 @@
         _yesterdayInterestLabel.textAlignment = NSTextAlignmentLeft;
         _yesterdayInterestLabel.font = kHXBFont_PINGFANGSC_REGULAR(35);
         _yesterdayInterestLabel.textColor = kHXBColor_333333_100;
-        _yesterdayInterestLabel.text = @"0.00元";
+        _yesterdayInterestLabel.text = @"0.00";
     }
     return _yesterdayInterestLabel;
 }
@@ -433,7 +435,7 @@
 - (UILabel *)accumulatedProfitLabel{
     if (!_accumulatedProfitLabel) {
         _accumulatedProfitLabel = [[UILabel alloc]initWithFrame:CGRectZero];
-        _accumulatedProfitLabel.text = @"0.00元";
+        _accumulatedProfitLabel.text = @"0.00";
         _accumulatedProfitLabel.textAlignment = NSTextAlignmentLeft;
         _accumulatedProfitLabel.font = kHXBFont_PINGFANGSC_REGULAR(20);
         _accumulatedProfitLabel.textColor = kHXBColor_333333_100;
@@ -453,7 +455,7 @@
 -(UILabel *)assetsTotalLabel{
     if (!_assetsTotalLabel) {
         _assetsTotalLabel = [[UILabel alloc]initWithFrame:CGRectZero];
-        _assetsTotalLabel.text = @"0.00元";
+        _assetsTotalLabel.text = @"0.00";
         _assetsTotalLabel.textAlignment = NSTextAlignmentLeft;
         _assetsTotalLabel.font = kHXBFont_PINGFANGSC_REGULAR(20);
         _assetsTotalLabel.textColor = kHXBColor_333333_100;

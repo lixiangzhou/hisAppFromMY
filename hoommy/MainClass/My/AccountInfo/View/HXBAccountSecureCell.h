@@ -9,6 +9,7 @@
 #import "HXBBottomLineTableViewCell.h"
 
 typedef NS_ENUM(NSUInteger, HXBAccountSecureType) {
+    HXBAccountSecureTypeNone = 0,
     HXBAccountSecureTypeModifyPhone = 1,    /// 修改手机号
     HXBAccountSecureTypeLoginPwd,   /// 登录密码
     HXBAccountSecureTypeTransactionPwd, // 交易密码

@@ -22,7 +22,8 @@
 @property (nonatomic,strong) UIImageView *navgationBarImageView;
 //当前颜色视图
 @property (nonatomic, strong) UIView* curNavColorView;
-
+//分割线
+@property (nonatomic,strong) UIImageView *splitLineImv;
 
 @end
 
@@ -33,6 +34,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.automaticallyAdjustsScrollViewInsets = YES;
     [self buildSafeAreaView];
     self.view.backgroundColor = [UIColor whiteColor];
     self.safeAreaView.backgroundColor = [UIColor clearColor];
@@ -42,10 +44,20 @@
     }
 }
 
+- (UIImageView *)splitLineImv {
+    if(!_splitLineImv) {
+        _splitLineImv = [[UIImageView alloc] init];
+        _splitLineImv.backgroundColor = kHXBColor_EEEEF5_100;
+    }
+    
+    return _splitLineImv;
+}
+
 - (void)buildSafeAreaView {
     _safeAreaView = [[UIView alloc] init];
     [self.view addSubview:_safeAreaView];
     [self.view sendSubviewToBack:_safeAreaView];
+    [self.view addSubview:self.splitLineImv];
     if(self.iswithTabbarInPage) {
         [_safeAreaView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.mas_equalTo(self.contentViewInsetWithTabbar);
@@ -56,7 +68,10 @@
             make.edges.mas_equalTo(self.contentViewInsetNoTabbar);
         }];
     }
-    
+    [self.splitLineImv mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.equalTo(self.safeAreaView);
+        make.height.mas_equalTo(0.5);
+    }];
 }
 
 - (void)willMoveToParentViewController:(UIViewController *)parent {
@@ -75,13 +90,11 @@
 
 - (void)didMoveToParentViewController:(UIViewController *)parent {
     [super didMoveToParentViewController:parent];
-    
-    HXBBaseNavigationController *navVC = (HXBBaseNavigationController *)self.navigationController;
-    if(navVC) {
-        if(!parent) {
-            navVC.rightGestureAction = RightSliderGestureEnd;
-            [self sliderBackAction];
-        }
+
+    if(!parent) {
+        HXBBaseNavigationController *navVC = (HXBBaseNavigationController *)[HXBRootVCManager manager].mainTabbarVC.selectedViewController;
+        navVC.rightGestureAction = RightSliderGestureEnd;
+        [self sliderBackAction];
     }
     
 }
@@ -91,7 +104,7 @@
     [super viewWillAppear:animated];
     
     if(self.navigationController) {
-        self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+        self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
         
         //适配iphoneX上的tabbar
         if(HXBIPhoneX) {
@@ -202,7 +215,10 @@
 - (void)setIsShowSplitLine:(BOOL)isShowSplitLine {
     _isShowSplitLine = isShowSplitLine;
     
-    ((HXBBaseNavigationController*)self.navigationController).isShowSplitLine = isShowSplitLine;
+    self.splitLineImv.hidden = !isShowSplitLine;
+    if(self.isShowSplitLine) {
+        [self.view bringSubviewToFront:self.splitLineImv];
+    }
 }
 
 #pragma mark - 导航bar的颜色设置方法
@@ -261,7 +277,7 @@
 ///白色的电池栏
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
-    return UIStatusBarStyleLightContent;
+    return UIStatusBarStyleDefault;
 }
 
 #pragma mark 子类中可以重写以下方法完成相应的功能
