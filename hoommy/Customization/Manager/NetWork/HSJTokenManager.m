@@ -71,9 +71,9 @@ static NSString *const kTokenUrl = @"/token";
 - (void)processTokenInvidate {
     KeyChain.isLogin = NO;
     UINavigationController* navVC =  [HXBRootVCManager manager].mainTabbarVC.selectedViewController;
-    if(navVC.viewControllers.count>1 || [HXBRootVCManager manager].mainTabbarVC.selectedIndex!=1) {
+    if(navVC.viewControllers.count>1) {
         [navVC popToRootViewControllerAnimated:YES];
-        [HXBRootVCManager manager].mainTabbarVC.selectedIndex = 0;
     }
+    [HXBRootVCManager manager].mainTabbarVC.selectedIndex = 0;
 }
 @end
