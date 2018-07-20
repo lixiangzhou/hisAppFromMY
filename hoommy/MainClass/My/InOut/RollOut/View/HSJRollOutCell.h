@@ -10,10 +10,15 @@
 #import "HSJRollOutCellViewModel.h"
 
 UIKIT_EXTERN NSString *const HSJRollOutCellIdentifier;
-UIKIT_EXTERN const CGFloat HSJRollOutCellHeight;
 
 @interface HSJRollOutCell : UITableViewCell
 
 @property (nonatomic, strong) HSJRollOutCellViewModel *viewModel;
+
+/// Cell 中的转出按钮
+@property (nonatomic, copy) void(^rollOutBlock)(HSJRollOutCellViewModel *viewModel);
+
+/// Cell 中的选中按钮
+@property (nonatomic, copy) void(^selectBlock)(HSJRollOutCellViewModel *viewModel);
 
 @end

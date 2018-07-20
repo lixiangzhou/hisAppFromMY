@@ -16,6 +16,11 @@
 @property (nonatomic, strong) HSJRollOutViewModel *viewModel;
 
 @property (nonatomic, weak) UITableView *tableView;
+@property (nonatomic, weak) UIButton *batchBtn;
+
+@property (nonatomic, weak) UIView *bottomView;
+@property (nonatomic, weak) UILabel *rollOutLabel;
+@property (nonatomic, weak) UIButton *rollOutBtn;
 @end
 
 @implementation HSJRollOutController
@@ -26,6 +31,7 @@
     [super viewDidLoad];
     
     self.title = @"持有资产";
+    
     self.viewModel = [HSJRollOutViewModel new];
     [self setUI];
     [self updateData];
@@ -34,17 +40,72 @@
 #pragma mark - UI
 
 - (void)setUI {
-    self.isWhiteColourGradientNavigationBar = YES;
-    
     UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     tableView.dataSource = self;
     tableView.delegate = self;
     self.headerView = [HSJRollOutHeaderView new];
     tableView.tableHeaderView = self.headerView;
-    tableView.rowHeight = HSJRollOutCellHeight;
+    tableView.rowHeight = kScrAdaptationW(84);
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [tableView registerClass:[HSJRollOutCell class] forCellReuseIdentifier:HSJRollOutCellIdentifier];
     [self.view addSubview:tableView];
     self.tableView = tableView;
+    
+    UIButton *batchBtn = [[UIButton alloc] init];
+    [batchBtn setTitleColor:kHXBColor_488CFF_100 forState:UIControlStateNormal];
+    [batchBtn setTitle:@"批量转出" forState:UIControlStateNormal];
+    [batchBtn setTitle:@"       取消" forState:UIControlStateSelected];
+    batchBtn.titleLabel.font = kHXBFont_28;
+    [batchBtn addTarget:self action:@selector(batchProcess) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:batchBtn];
+    self.batchBtn = batchBtn;
+    
+    // 底部视图
+    UIView *bottomView = [UIView new];
+    [self.view addSubview:bottomView];
+    self.bottomView = bottomView;
+    
+    UIView *topLine = [UIView new];
+    topLine.backgroundColor = kHXBColor_ECECEC_100;
+    [bottomView addSubview:topLine];
+    
+    UILabel *rollOutLabel = [UILabel new];
+    rollOutLabel.text = @"待转出金额0.00元";
+    rollOutLabel.font = kHXBFont_28;
+    rollOutLabel.textColor = kHXBColor_333333_100;
+    [bottomView addSubview:rollOutLabel];
+    self.rollOutLabel = rollOutLabel;
+    
+    UIButton *rollOutBtn = [UIButton new];
+    [rollOutBtn setTitle:@"转出" forState:UIControlStateNormal];
+    [rollOutBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    rollOutBtn.backgroundColor = kHXBColor_FF7055_100;
+    rollOutBtn.layer.cornerRadius = 2;
+    rollOutBtn.layer.masksToBounds = YES;
+    [bottomView addSubview:rollOutBtn];
+    self.rollOutBtn = rollOutBtn;
+    
+    [tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view);
+        make.left.right.equalTo(self.view);
+    }];
+    
+    [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(tableView.mas_bottom);
+        make.right.left.bottom.equalTo(self.view);
+        make.height.equalTo(@0);
+    }];
+    
+    [rollOutLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.top.equalTo(bottomView);
+        make.bottom.equalTo(rollOutBtn.mas_top);
+    }];
+    
+    [rollOutBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(@kScrAdaptationW(15));
+        make.bottom.right.equalTo(@kScrAdaptationW(-15));
+        make.height.equalTo(@kScrAdaptationW(41));
+    }];
 }
 
 #pragma mark - Network
@@ -69,7 +130,24 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     HSJRollOutCell *cell = [tableView dequeueReusableCellWithIdentifier:HSJRollOutCellIdentifier forIndexPath:indexPath];
     cell.viewModel = self.viewModel.dataSource[indexPath.row];
+
+    kWeakSelf
+    cell.rollOutBlock = ^(HSJRollOutCellViewModel *viewModel) {
+        NSLog(@"单个转出");
+    };
+
+    cell.selectBlock = ^(HSJRollOutCellViewModel *viewModel) {
+        NSLog(@"单个选中");
+        [weakSelf updateAmount];
+    };
+    
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.viewModel.editing == NO) {
+        NSLog(@"详情");
+    }
 }
 
 #pragma mark - Delegate External
@@ -78,7 +156,24 @@
 
 
 #pragma mark - Action
+- (void)batchProcess {
+    self.batchBtn.selected = !self.batchBtn.isSelected;
+    
+    self.viewModel.editing = self.batchBtn.selected;
+    
+    [self.tableView reloadData];
+    self.bottomView.hidden = !self.viewModel.editing;
+    [self.bottomView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@(self.viewModel.editing ? 90 : 0));
+    }];
+    
+    [self updateAmount];
+}
 
+- (void)updateAmount {
+    [self.viewModel calAmount];
+    self.rollOutLabel.text = self.viewModel.amount;
+}
 
 #pragma mark - Setter / Getter / Lazy
 

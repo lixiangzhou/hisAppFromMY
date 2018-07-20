@@ -107,7 +107,7 @@
             if (self.showSkip) {            
                 UIButton *skipBtn = [UIButton new];
                 [skipBtn setTitle:@"跳过" forState:UIControlStateNormal];
-                [skipBtn setTitleColor:UIColorFromRGB(0x488CFF) forState:UIControlStateNormal];
+                [skipBtn setTitleColor:kHXBColor_488CFF_100 forState:UIControlStateNormal];
                 [skipBtn addTarget:self action:@selector(skip) forControlEvents:UIControlEventTouchUpInside];
                 skipBtn.titleLabel.font = kHXBFont_28;
                 [skipBtn sizeToFit];

@@ -19,6 +19,7 @@
 #import "HSJHomeCustomNavbarView.h"
 #import "HSJHomeHeaderView.h"
 #import "HSJHomePlanView.h"
+#import "HSJRollOutController.h"
 
 @interface HSJHomeViewController ()
 
@@ -108,10 +109,8 @@
 }
 
 - (void)tableViewButtonClickAct:(UIButton*)button {
-    HSJGestureSettingController* vc = [[HSJGestureSettingController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-//    HSJSignInViewController *vc = [HSJSignInViewController new];
-//    [self.navigationController pushViewController:vc animated:YES];
+    HSJRollOutController *VC = [HSJRollOutController new];
+    [self.navigationController pushViewController:VC animated:YES];
 }
 
 - (void)fragmentButtonClickAct:(UIButton*)button {

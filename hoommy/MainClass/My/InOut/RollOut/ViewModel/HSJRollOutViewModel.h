@@ -16,8 +16,16 @@
 @property (nonatomic, strong) NSMutableArray<HSJRollOutCellViewModel *> *dataSource;
 @property (nonatomic, assign) HSJRefreshFooterType footerType;
 
+@property (nonatomic, assign) BOOL editing;
+
+/// 待转让金额
+@property (nonatomic, copy) NSString *amount;
+
 /// 资产统计
 - (void)getAssets:(void(^)(BOOL isSuccess))resultBlock;
 /// 计划列表
 - (void)getPlans:(void(^)(BOOL isSuccess))resultBlock;
+
+/// 计算金额
+- (void)calAmount;
 @end

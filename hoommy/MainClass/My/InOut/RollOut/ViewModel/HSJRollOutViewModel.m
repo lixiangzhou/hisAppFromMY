@@ -7,6 +7,7 @@
 //
 
 #import "HSJRollOutViewModel.h"
+#import "NSString+HxbPerMilMoney.h"
 
 @interface HSJRollOutViewModel ()
 @property (nonatomic, assign) NSUInteger pageNumber;
@@ -74,6 +75,27 @@
         }
         resultBlock(responseData != nil);
     }];
+}
+
+- (void)setEditing:(BOOL)editing {
+    _editing = editing;
+    
+    [self.dataSource enumerateObjectsUsingBlock:^(HSJRollOutCellViewModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        obj.isEditing = editing;
+    }];
+}
+
+- (void)calAmount {
+    CGFloat value = 0;
+    for (HSJRollOutCellViewModel *vm in self.dataSource) {
+        if (vm.isSelected) {        
+            value += vm.model.redProgressLeft.floatValue;
+        }
+    }
+    
+    NSString *valueString = [NSString GetPerMilWithDouble:value];
+    valueString = [valueString isEqualToString:@"0"] ? @"0.00" : valueString;
+    self.amount = [NSString stringWithFormat:@"待转出金额%@元", valueString];
 }
 
 @end

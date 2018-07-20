@@ -52,7 +52,7 @@ static NSString *const X_HxbAuth_Token = @"X-Hxb-Auth-Token";
         _additionalHeaderFields = @{};
         self.baseUrl = @"";
         self.defaultAcceptableStatusCodes = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(200, 100)];
-        self.defaultAcceptableContentTypes = [NSSet setWithObjects:@"text/json", @"text/html", @"text/javascript", @"application/json",@"application/x-www-form-urlencoded",@"image/png",nil];
+        self.defaultAcceptableContentTypes = [NSSet setWithObjects:@"text/json", @"text/html", @"text/javascript", @"application/json",@"application/x-www-form-urlencoded",@"image/png", @"text/plain",nil];
     }
     return self;
 }

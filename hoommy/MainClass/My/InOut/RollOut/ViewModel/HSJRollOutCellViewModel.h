@@ -28,6 +28,10 @@
 @property (nonatomic, assign) BOOL statusBtnEnabled;
 @property (nonatomic, assign) NSInteger statusLineNum;
 
+/// 左边选择的按钮图标
+@property (nonatomic, strong) UIImage *selectImage;
+@property (nonatomic, assign) BOOL selectBtnEnabled;
+
 /// Cell 背景色
 @property (nonatomic, strong) UIColor *backgroundColor;
 /// 状态颜色
