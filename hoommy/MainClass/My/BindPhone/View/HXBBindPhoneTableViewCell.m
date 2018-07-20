@@ -79,7 +79,7 @@
 - (void)setupConstraints {
     [self.titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView).offset(kScrAdaptationW(15));
-        make.width.mas_equalTo(kScrAdaptationW(56));
+        make.width.mas_equalTo(kScrAdaptationW(58));
         make.top.bottom.equalTo(self.contentView);
     }];
     
@@ -91,7 +91,7 @@
     }];
     
     [self.contentTf mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.titleLb.mas_right).offset(kScrAdaptationW(15));
+        make.left.equalTo(self.titleLb.mas_right).offset(kScrAdaptationW(13));
         make.top.bottom.equalTo(self.contentView);
         make.right.equalTo(self.codeBt.mas_left).offset(kScrAdaptationW(5));
     }];

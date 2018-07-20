@@ -34,6 +34,7 @@
                                  @"mobile":mobile
                                  };
         request.modelType = NSClassFromString(@"HSJSignInModel");
+        request.showHud = YES;
     } responseResult:^(HSJSignInModel * responseData, NSError *erro) {
         if (!erro) {
             resultBlock(responseData,erro);

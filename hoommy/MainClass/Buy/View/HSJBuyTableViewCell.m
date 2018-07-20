@@ -34,6 +34,7 @@
 }
 
 - (void)setupUI {
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.iconImv = [[UIImageView alloc] init];
     [self.contentView addSubview:self.iconImv];
     
@@ -87,7 +88,7 @@
         make.top.bottom.equalTo(self.contentView);
     }];
     [self.lineImv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.titleLb);
+        make.left.equalTo(self.contentView);
         make.height.mas_equalTo(0.5);
         make.right.bottom.equalTo(self.contentView);
     }];
@@ -101,7 +102,7 @@
     }
     else {
         [self.lineImv mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.titleLb);
+            make.left.equalTo(self.iconImv.mas_right).offset(kScrAdaptationW(10.5));
         }];
     }
     
@@ -111,6 +112,27 @@
 - (void)setCellModel:(HSJBuyCellModel *)cellModel {
     _cellModel = cellModel;
     
+    if(cellModel.isSvnImage) {
+        self.iconImv.svgImageString = cellModel.iconName;
+    }
+    else{
+        self.iconImv.image = [UIImage imageNamed:cellModel.iconName];
+    }
+    
+    self.titleLb.attributedText = cellModel.title;
+    self.descripLb.text = cellModel.descripText;
+    self.arrowLb.text = cellModel.arrowText;
+    
+    if(cellModel.isShowArrow) {
+        self.arrowImv.hidden = NO;
+        self.descripLb.hidden = YES;
+        self.arrowLb.hidden = NO;
+    }
+    else {
+        self.arrowImv.hidden = YES;
+        self.descripLb.hidden = NO;
+        self.arrowLb.hidden = YES;
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

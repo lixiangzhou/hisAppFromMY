@@ -17,7 +17,7 @@
 #define kScreenHeight ([UIScreen mainScreen].bounds.size.height)
 
 #define kScreenAdaptation_Height_7 [HXBThemAdapterManager getAdaterScreenHeightScale]
-#define kScreenAdaptation_Width_7 (kScreenWidth/375.0)
+#define kScreenAdaptation_Width_7 [HXBThemAdapterManager getAdaterScreenWidthScale]
 
 //#define kScreenAdaptation_Width_7P (kScreenHeight/736.0)
 //#define kScreenAdaptation_Height_7P (kScreenWidth/414.0)

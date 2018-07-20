@@ -91,7 +91,7 @@
     cellModel.isCanEdit = YES;
     cellModel.keyboardType = UIKeyboardTypeNumberPad;
     cellModel.isBankCardNoField = YES;
-    cellModel.rightButtonText = @"查看银行限额";
+    cellModel.rightButtonText = @"查看限额";
     [dataList addObject:cellModel];
     
     cellModel = [[HXBBindCardCellModel alloc] initModel:@"手机号" placeText:@"请输入银行预留手机号" text:@""];

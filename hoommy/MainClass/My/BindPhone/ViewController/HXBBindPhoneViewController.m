@@ -56,6 +56,9 @@
     if(self.bindPhoneStepType == HXBBindPhoneTransactionPassword) {
         self.title = @"修改交易密码";
     }
+    else if(self.bindPhoneStepType == HXBBindPhoneStepFirst) {
+        self.title = @"解绑原手机号";
+    }
     else {
         self.title = @"绑定新手机号";
     }
@@ -89,9 +92,18 @@
 - (HXBBindPhoneTableFootView *)footView {
     if(!_footView) {
         _footView = [[HXBBindPhoneTableFootView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScrAdaptationH(119))];
-        _footView.buttonTitle = @"立即验证";
         NSString *phoneNo = [self.userInfoModel.userInfo.mobile replaceStringWithStartLocation:3 lenght:self.userInfoModel.userInfo.mobile.length - 7];
-        _footView.phoneInfo = phoneNo;
+        switch (self.bindPhoneStepType) {
+            case HXBBindPhoneStepFirst:
+            case HXBBindPhoneTransactionPassword:
+                _footView.buttonTitle = @"下一步";
+                _footView.phoneInfo = phoneNo;
+                break;
+            case HXBBindPhoneStepSecond:
+                _footView.buttonTitle = @"确认修改";
+                break;
+        }
+
         _footView.buttonBackGroundColor = kHXBColor_FF7055_100;
         
         kWeakSelf
@@ -143,12 +155,10 @@
     if ([self.userInfoModel.userInfo.isIdPassed isEqualToString:@"1"] && self.bindPhoneStepType == HXBBindPhoneTransactionPassword) {
         [self.viewModel modifyTransactionPasswordWithIdCard:IDCard resultBlock:^(id responseData, NSError *erro) {
             if(!erro) {
-                [cell checkCodeCountDown:YES];
                 [weakSelf getValidationCode:indexPath];
             }
         }];
     } else {
-        [cell checkCodeCountDown:YES];
         [weakSelf getValidationCode:indexPath];
     }
     
@@ -164,9 +174,9 @@
     
     kWeakSelf
     [self.viewModel myTraderPasswordGetverifyCodeWithAction:action resultBlock:^(id responseData, NSError *erro) {
-        if(erro) {
+        if(!erro) {
             HXBBindPhoneTableViewCell *cell = [weakSelf.tableView cellForRowAtIndexPath:indexPath];
-            [cell checkCodeCountDown:NO];
+            [cell checkCodeCountDown:YES];
         }
     }];
 }

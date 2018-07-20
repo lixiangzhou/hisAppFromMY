@@ -26,6 +26,8 @@
 
 @property (nonatomic, strong) UIButton *unBindBtn;
 
+@property (nonatomic, strong) CALayer *colorLayer;
+
 
 @property (nonatomic, strong) HXBBankCardViewModel *viewModel;
 
@@ -39,8 +41,7 @@
         self.backImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 345, kScrAdaptationH(150))];
 //        self.backImageView.image = [UIImage imageNamed:@"hxb_card_bg"];
 //        self.backImageView.backgroundColor = [UIColor orangeColor];
-        CALayer *layer = [HSJCALayerTool gradualChangeColor:kHXBColor_FE7E5E_100 toColor:kHXBColor_FFE6A4_100 cornerRadius:4 layerSize:self.backImageView.size];
-        [self.backImageView.layer addSublayer:layer];
+        
         self.backImageView.userInteractionEnabled = YES;
         [self addSubview:self.backImageView];
         
@@ -65,9 +66,28 @@
     return self;
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    [self.colorLayer removeFromSuperlayer];
+    self.colorLayer = [HSJCALayerTool gradualChangeColor:kHXBColor_FE7E5E_100 toColor:kHXBColor_FFE6A4_100 cornerRadius:4 layerSize:self.backImageView.size];
+    [self.backImageView.layer insertSublayer:self.colorLayer atIndex:0];
+}
 
 - (void)setupSubViewFrame
 {
+    //self
+    [self.backImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.equalTo(self);
+        make.height.offset(kScrAdaptationW(150));
+    }];
+    [self.limitBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.backImageView.mas_bottom).offset(kScrAdaptationW(10));
+        make.left.equalTo(self.backImageView);
+        make.height.offset(kScrAdaptationW(30));
+        make.width.offset(kScrAdaptationW(112));
+    }];
+    //backImageView
     [self.iconView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self).offset(kScrAdaptationW(25));
         make.top.equalTo(self).offset(kScrAdaptationH(18));
