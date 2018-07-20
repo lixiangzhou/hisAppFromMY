@@ -67,9 +67,9 @@
             if (weakSelf.pageSize > weakSelf.totalCount) {
                 weakSelf.footerType = HSJRefreshFooterTypeNone;
             } else if (weakSelf.pageSize * weakSelf.pageNumber > weakSelf.totalCount) {
-                self.footerType = HSJRefreshFooterTypeNoMoreData;
+                weakSelf.footerType = HSJRefreshFooterTypeNoMoreData;
             } else {
-                self.footerType = HSJRefreshFooterTypeNone;
+                weakSelf.footerType = HSJRefreshFooterTypeNone;
             }
         }
         resultBlock(responseData != nil);
