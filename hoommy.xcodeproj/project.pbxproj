@@ -311,6 +311,8 @@
 		E13A0F0320F4C94900A3E364 /* HXBCommonProblemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E13A0F0220F4C94900A3E364 /* HXBCommonProblemViewController.m */; };
 		E13A0F0620F4C9FF00A3E364 /* HXBAlertManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E13A0F0420F4C9FF00A3E364 /* HXBAlertManager.m */; };
 		E13A0F0B20F4DC2700A3E364 /* HXBMiddlekey.m in Sources */ = {isa = PBXBuildFile; fileRef = E13A0F0A20F4DC2600A3E364 /* HXBMiddlekey.m */; };
+		E1425BB72101E6E70049C3F4 /* HSJMyAccountBalanceController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1425BB62101E6E70049C3F4 /* HSJMyAccountBalanceController.m */; };
+		E1425BBC2101E94E0049C3F4 /* HSJMyAccountBalanceHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1425BBB2101E94E0049C3F4 /* HSJMyAccountBalanceHeadView.m */; };
 		E14B9F9520FD8AF80084F007 /* HXBAccumulatedIncomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = E14B9F8420FD8AF70084F007 /* HXBAccumulatedIncomeView.m */; };
 		E14B9F9620FD8AF80084F007 /* HXBAssetsCustomVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = E14B9F8620FD8AF70084F007 /* HXBAssetsCustomVIew.m */; };
 		E14B9F9720FD8AF80084F007 /* HXBMy_AllFinance_TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E14B9F8820FD8AF70084F007 /* HXBMy_AllFinance_TableViewCell.m */; };
@@ -940,6 +942,10 @@
 		E13A0F0720F4D25D00A3E364 /* MacroDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacroDefinition.h; sourceTree = "<group>"; };
 		E13A0F0920F4DC2600A3E364 /* HXBMiddlekey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBMiddlekey.h; sourceTree = "<group>"; };
 		E13A0F0A20F4DC2600A3E364 /* HXBMiddlekey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBMiddlekey.m; sourceTree = "<group>"; };
+		E1425BB52101E6E70049C3F4 /* HSJMyAccountBalanceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJMyAccountBalanceController.h; sourceTree = "<group>"; };
+		E1425BB62101E6E70049C3F4 /* HSJMyAccountBalanceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJMyAccountBalanceController.m; sourceTree = "<group>"; };
+		E1425BBA2101E94E0049C3F4 /* HSJMyAccountBalanceHeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJMyAccountBalanceHeadView.h; sourceTree = "<group>"; };
+		E1425BBB2101E94E0049C3F4 /* HSJMyAccountBalanceHeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJMyAccountBalanceHeadView.m; sourceTree = "<group>"; };
 		E14B9F8320FD8AF70084F007 /* HXBAccumulatedIncomeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBAccumulatedIncomeView.h; sourceTree = "<group>"; };
 		E14B9F8420FD8AF70084F007 /* HXBAccumulatedIncomeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBAccumulatedIncomeView.m; sourceTree = "<group>"; };
 		E14B9F8520FD8AF70084F007 /* HXBAssetsCustomVIew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBAssetsCustomVIew.h; sourceTree = "<group>"; };
@@ -2263,6 +2269,7 @@
 		9A97D91A20EF420000688ADB /* My */ = {
 			isa = PBXGroup;
 			children = (
+				E1425BB42101E6900049C3F4 /* AccountBalance */,
 				8D5D60FE20FEDE92003F94D9 /* InOut */,
 				9AF51ED220FDCA64008A8CF4 /* TransactionPassword */,
 				E14B9F8120FD8AF70084F007 /* MY_AllFinanceController */,
@@ -3130,6 +3137,33 @@
 			path = Middlekey;
 			sourceTree = "<group>";
 		};
+		E1425BB42101E6900049C3F4 /* AccountBalance */ = {
+			isa = PBXGroup;
+			children = (
+				E1425BB92101E71E0049C3F4 /* View */,
+				E1425BB82101E7060049C3F4 /* ViewController */,
+			);
+			path = AccountBalance;
+			sourceTree = "<group>";
+		};
+		E1425BB82101E7060049C3F4 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E1425BB52101E6E70049C3F4 /* HSJMyAccountBalanceController.h */,
+				E1425BB62101E6E70049C3F4 /* HSJMyAccountBalanceController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		E1425BB92101E71E0049C3F4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E1425BBA2101E94E0049C3F4 /* HSJMyAccountBalanceHeadView.h */,
+				E1425BBB2101E94E0049C3F4 /* HSJMyAccountBalanceHeadView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		E14B9F8120FD8AF70084F007 /* MY_AllFinanceController */ = {
 			isa = PBXGroup;
 			children = (
@@ -3543,7 +3577,6 @@
 				9A4B182B20F36997006B83C7 /* HXBAgreementView.m in Sources */,
 				9A97DA7D20EF420200688ADB /* HXBBaseTabBarController.m in Sources */,
 				9AA70B5020FEF434008B3007 /* HSJBuyCellModel.m in Sources */,
-				4E43B05F20EF77F8000BDAE7 /* HSJBankCardListViewController.m in Sources */,
 				9A3749D020F883E800F39681 /* HXBBankListCell.m in Sources */,
 				9A3749BC20F8808700F39681 /* HXBTipView.m in Sources */,
 				E14B9F9B20FD8AF80084F007 /* HXBMY_AllFinanceViewController.m in Sources */,
@@ -3587,6 +3620,7 @@
 				E14B9F9720FD8AF80084F007 /* HXBMy_AllFinance_TableViewCell.m in Sources */,
 				E153B96B20F74C39002BE1AE /* HXBAccountAlterLoginPasswordViewModel.m in Sources */,
 				8D2533212100994700CBF08A /* HSJRollOutCellViewModel.m in Sources */,
+				E1425BBC2101E94E0049C3F4 /* HSJMyAccountBalanceHeadView.m in Sources */,
 				E13A0F0620F4C9FF00A3E364 /* HXBAlertManager.m in Sources */,
 				9A3749B320F85D5500F39681 /* HXBBaseHandDate.m in Sources */,
 				8D5D612120FF1A90003F94D9 /* HSJRollOutPlanDetailController.m in Sources */,
@@ -3706,6 +3740,7 @@
 				9A4B189920F60C2B006B83C7 /* HXBGetValidationCodeView.m in Sources */,
 				8D142AA520FDCDEB00520728 /* HSJPlanModel.m in Sources */,
 				9AF51DA120FC487D008A8CF4 /* HSJCALayerTool.m in Sources */,
+				E1425BB72101E6E70049C3F4 /* HSJMyAccountBalanceController.m in Sources */,
 				9A97DA9C20EF420200688ADB /* IDPStorage.m in Sources */,
 				9A3749B120F85D5500F39681 /* HXBBaseContDownModel.m in Sources */,
 				9AF51EEE20FDCA65008A8CF4 /* HXBTransactionPasswordConfirmationViewController.m in Sources */,
