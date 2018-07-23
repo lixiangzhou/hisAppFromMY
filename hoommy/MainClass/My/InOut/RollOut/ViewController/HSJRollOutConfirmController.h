@@ -10,5 +10,6 @@
 
 /// 转出确认页
 @interface HSJRollOutConfirmController : HXBBaseViewController
-
+@property (nonatomic, strong) NSArray *ids;
+@property (nonatomic, copy) NSString *money;
 @end

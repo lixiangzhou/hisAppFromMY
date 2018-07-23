@@ -10,6 +10,8 @@
 #import "HSJRollOutHeaderView.h"
 #import "HSJRollOutViewModel.h"
 #import "HSJRollOutCell.h"
+#import "HSJRollOutPlanDetailController.h"
+#import "HSJRollOutConfirmController.h"
 
 @interface HSJRollOutController ()
 @property (nonatomic, strong) HSJRollOutHeaderView *headerView;
@@ -35,6 +37,7 @@
     self.viewModel = [HSJRollOutViewModel new];
     [self setUI];
     [self updateData];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateData) name:kHXBNotification_RefreshAccountPlanList object:nil];
 }
 
 #pragma mark - UI
@@ -82,6 +85,7 @@
     rollOutBtn.backgroundColor = kHXBColor_FF7055_100;
     rollOutBtn.layer.cornerRadius = 2;
     rollOutBtn.layer.masksToBounds = YES;
+    [rollOutBtn addTarget:self action:@selector(rollOutAction) forControlEvents:UIControlEventTouchUpInside];
     [bottomView addSubview:rollOutBtn];
     self.rollOutBtn = rollOutBtn;
 
@@ -93,6 +97,11 @@
         make.top.equalTo(tableView.mas_bottom);
         make.right.left.bottom.equalTo(self.safeAreaView);
         make.height.equalTo(@0);
+    }];
+    
+    [topLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.equalTo(bottomView);
+        make.height.equalTo(@kScrAdaptationW(0.5));
     }];
 
     [rollOutLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -114,10 +123,30 @@
         weakSelf.headerView.assetsModel = weakSelf.viewModel.assetsModel;
     }];
     
-    [self.viewModel getPlans:^(BOOL isSuccess) {
-        [weakSelf.tableView reloadData];
+    [self getListData:YES];
+}
+
+- (void)getListData:(BOOL)isNew {
+    kWeakSelf
+    [self.viewModel getPlans:isNew resultBlock:^(BOOL isSuccess) {
+        if (isSuccess) {
+            [weakSelf.tableView reloadData];
+            if (weakSelf.viewModel.footerType == HSJRefreshFooterTypeMoreData) {
+                [weakSelf.tableView.mj_footer endRefreshing];
+                weakSelf.tableView.footerWithRefreshBlock = ^(UIScrollView *scrollView) {
+                    [weakSelf getListData:NO];
+                };
+            } else if (weakSelf.viewModel.footerType == HSJRefreshFooterTypeNoMoreData) {
+                [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
+            } else {
+                [weakSelf.tableView.mj_footer endRefreshing];
+                weakSelf.tableView.mj_footer = nil;
+            }
+        }
     }];
 }
+
+
 
 #pragma mark - Delegate Internal
 
@@ -132,11 +161,12 @@
 
     kWeakSelf
     cell.rollOutBlock = ^(HSJRollOutCellViewModel *viewModel) {
-        NSLog(@"单个转出");
+        HSJRollOutConfirmController *VC = [HSJRollOutConfirmController new];
+        VC.ids = @[viewModel.model.id];
+        [weakSelf.navigationController pushViewController:VC animated:YES];
     };
 
     cell.selectBlock = ^(HSJRollOutCellViewModel *viewModel) {
-        NSLog(@"单个选中");
         [weakSelf updateAmount];
     };
     
@@ -145,14 +175,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.viewModel.editing == NO) {
-        NSLog(@"详情");
+        HSJRollOutPlanDetailController *VC = [HSJRollOutPlanDetailController new];
+        HSJRollOutCellViewModel *vm = self.viewModel.dataSource[indexPath.row];
+        VC.planId = vm.model.id;
+        [self.navigationController pushViewController:VC animated:YES];
     }
 }
-
-#pragma mark - Delegate External
-
-#pragma mark -
-
 
 #pragma mark - Action
 - (void)batchProcess {
@@ -168,21 +196,27 @@
     
     [self updateAmount];
 }
-
-- (void)updateAmount {
-    [self.viewModel calAmount];
-    self.rollOutLabel.text = self.viewModel.amount;
-}
-
-#pragma mark - Setter / Getter / Lazy
-
+     
+ - (void)rollOutAction {
+     if (self.viewModel.hasQuitPlans) {         
+         if (self.viewModel.selectedIds.count == 0) {
+             [HxbHUDProgress showTextWithMessage:@"请选择要转出的内容"];
+         } else {
+             HSJRollOutConfirmController *VC = [HSJRollOutConfirmController new];
+             VC.ids = self.viewModel.selectedIds;
+             [self.navigationController pushViewController:VC animated:YES];
+         }
+     } else {
+         [HxbHUDProgress showTextWithMessage:@"当前无可转出内容"];
+     }
+     
+ }
 
 #pragma mark - Helper
+ - (void)updateAmount {
+     [self.viewModel calAmount];
+     self.rollOutLabel.text = self.viewModel.amount;
+ }
 
-
-#pragma mark - Other
-
-
-#pragma mark - Public
 
 @end

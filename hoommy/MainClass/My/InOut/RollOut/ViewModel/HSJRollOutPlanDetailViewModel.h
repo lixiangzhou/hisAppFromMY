@@ -13,4 +13,10 @@
 @property (nonatomic, strong) HSJRollOutModel *model;
 
 @property (nonatomic, strong) NSArray *dataSource;
+
+@property (nonatomic, assign) HSJStepUpStatus stepupStatus;
+
+@property (nonatomic, assign) BOOL hideBottomView;
+
+- (void)getPlanDetail:(NSString *)planId resultBlock:(void(^)(BOOL isSuccess))resultBlock;
 @end

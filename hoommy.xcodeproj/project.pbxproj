@@ -75,6 +75,7 @@
 		8D60B4DD20F7486300287E52 /* HSJDepositoryOpenTipController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B4D020F7486300287E52 /* HSJDepositoryOpenTipController.m */; };
 		8D60B4DE20F7486300287E52 /* HSJDepositoryOpenViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B4D320F7486300287E52 /* HSJDepositoryOpenViewModel.m */; };
 		8D60B4E120F748BC00287E52 /* UITextField+HLNumberFormatTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B4E020F748BC00287E52 /* UITextField+HLNumberFormatTextField.m */; };
+		8DB77F6A210585A5003EE881 /* HSJRollOutDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB77F69210585A5003EE881 /* HSJRollOutDetailCell.m */; };
 		9A0BD51D20F6F8ED00B1CC59 /* UIButton+HxbButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A0BD51C20F6F8ED00B1CC59 /* UIButton+HxbButton.m */; };
 		9A0BD52120F6FA0E00B1CC59 /* HXBColourGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A0BD52020F6FA0E00B1CC59 /* HXBColourGradientView.m */; };
 		9A0BD52520F6FBB300B1CC59 /* HXBUserInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A0BD52420F6FBB300B1CC59 /* HXBUserInfoView.m */; };
@@ -493,6 +494,8 @@
 		8D60B4D320F7486300287E52 /* HSJDepositoryOpenViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSJDepositoryOpenViewModel.m; sourceTree = "<group>"; };
 		8D60B4DF20F748BC00287E52 /* UITextField+HLNumberFormatTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+HLNumberFormatTextField.h"; sourceTree = "<group>"; };
 		8D60B4E020F748BC00287E52 /* UITextField+HLNumberFormatTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+HLNumberFormatTextField.m"; sourceTree = "<group>"; };
+		8DB77F68210585A5003EE881 /* HSJRollOutDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJRollOutDetailCell.h; sourceTree = "<group>"; };
+		8DB77F69210585A5003EE881 /* HSJRollOutDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJRollOutDetailCell.m; sourceTree = "<group>"; };
 		9A0BD51A20F6F75000B1CC59 /* MacrosInBusiness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacrosInBusiness.h; sourceTree = "<group>"; };
 		9A0BD51B20F6F8ED00B1CC59 /* UIButton+HxbButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+HxbButton.h"; sourceTree = "<group>"; };
 		9A0BD51C20F6F8ED00B1CC59 /* UIButton+HxbButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+HxbButton.m"; sourceTree = "<group>"; };
@@ -1345,6 +1348,8 @@
 				8D5D610820FEDFB1003F94D9 /* HSJRollOutHeaderView.m */,
 				8D5D611020FEE021003F94D9 /* HSJRollOutCell.h */,
 				8D5D611120FEE021003F94D9 /* HSJRollOutCell.m */,
+				8DB77F68210585A5003EE881 /* HSJRollOutDetailCell.h */,
+				8DB77F69210585A5003EE881 /* HSJRollOutDetailCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3516,6 +3521,7 @@
 				9A3748C520F70DE500F39681 /* HSJMyViewVCViewModel.m in Sources */,
 				9A97DAB720EF420200688ADB /* NYBaseRequest.m in Sources */,
 				4EE616A720F4B4F20044B998 /* TAExampleDotView.m in Sources */,
+				8DB77F6A210585A5003EE881 /* HSJRollOutDetailCell.m in Sources */,
 				9AF51EF320FDCB9D008A8CF4 /* HXBModifyTransactionPasswordAgent.m in Sources */,
 				E153B9D920FC8EFC002BE1AE /* HXBMYViewModel_MainCapitalRecordViewModel.m in Sources */,
 				9A3749C620F882BD00F39681 /* HXBBankCardListViewController.m in Sources */,
@@ -3543,7 +3549,6 @@
 				9A4B182B20F36997006B83C7 /* HXBAgreementView.m in Sources */,
 				9A97DA7D20EF420200688ADB /* HXBBaseTabBarController.m in Sources */,
 				9AA70B5020FEF434008B3007 /* HSJBuyCellModel.m in Sources */,
-				4E43B05F20EF77F8000BDAE7 /* HSJBankCardListViewController.m in Sources */,
 				9A3749D020F883E800F39681 /* HXBBankListCell.m in Sources */,
 				9A3749BC20F8808700F39681 /* HXBTipView.m in Sources */,
 				E14B9F9B20FD8AF80084F007 /* HXBMY_AllFinanceViewController.m in Sources */,

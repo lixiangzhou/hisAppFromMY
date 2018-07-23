@@ -39,12 +39,15 @@
     }];
 }
 
-- (void)getPlans:(void(^)(BOOL isSuccess))resultBlock {
-    NSUInteger page = self.pageNumber + 1;;
+- (void)getPlans:(BOOL)isNew resultBlock:(void(^)(BOOL isSuccess))resultBlock {
+    NSUInteger page = 1;
+    if (isNew == NO) {
+        page = self.pageNumber + 1;
+    }
     kWeakSelf
     [self loadData:^(NYBaseRequest *request) {
         request.requestUrl = kHXBMY_PlanListURL;
-        request.requestArgument = @{@"filter": @"4", @"page": @(page)};
+        request.requestArgument = @{@"filter": @"1", @"page": @(page)};
     } responseResult:^(id responseData, NSError *erro) {
         if (responseData) {
             NSDictionary *data = responseData[@"data"];
@@ -61,7 +64,10 @@
                 vm.model = model;
                 [temp addObject:vm];
             }
-            if (temp.count > 0) {
+            
+            if (isNew) {
+                weakSelf.dataSource = temp;
+            } else {
                 [weakSelf.dataSource addObjectsFromArray:temp];
             }
             
@@ -79,23 +85,46 @@
 
 - (void)setEditing:(BOOL)editing {
     _editing = editing;
-    
+    [self.selectedViewModels removeAllObjects];
+    [self.selectedIds removeAllObjects];
+    kWeakSelf
     [self.dataSource enumerateObjectsUsingBlock:^(HSJRollOutCellViewModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         obj.isEditing = editing;
+        [weakSelf.selectedViewModels addObject:obj];
+        [weakSelf.selectedIds addObject:obj.model.id];
     }];
 }
 
 - (void)calAmount {
     CGFloat value = 0;
+    
+    self.hasQuitPlans = NO;
     for (HSJRollOutCellViewModel *vm in self.dataSource) {
         if (vm.isSelected) {        
             value += vm.model.redProgressLeft.floatValue;
+        }
+        if (vm.stepupStatus == HSJStepUpStatusQUIT) {
+            self.hasQuitPlans = YES;
         }
     }
     
     NSString *valueString = [NSString GetPerMilWithDouble:value];
     valueString = [valueString isEqualToString:@"0"] ? @"0.00" : valueString;
     self.amount = [NSString stringWithFormat:@"待转出金额%@元", valueString];
+}
+
+- (NSMutableArray *)selectedIds {
+    if (_selectedIds == nil) {
+        _selectedIds = [NSMutableArray array];
+    }
+    return _selectedIds;
+}
+
+- (NSMutableArray *)selectedViewModels {
+    if (_selectedViewModels == nil) {
+        _selectedViewModels = [NSMutableArray array];
+    }
+    return _selectedViewModels;
 }
 
 @end

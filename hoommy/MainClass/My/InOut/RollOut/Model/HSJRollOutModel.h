@@ -19,6 +19,8 @@ typedef enum : NSUInteger {
 
 @interface HSJRollOutModel : HSJBaseModel
 
+/// 计划ID
+@property (nonatomic, copy) NSString *id;
 /// 待转让金额
 @property (nonatomic, copy) NSString *redProgressLeft;
 /// 加入金额

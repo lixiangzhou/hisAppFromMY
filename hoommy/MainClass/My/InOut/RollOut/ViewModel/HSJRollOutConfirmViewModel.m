@@ -42,4 +42,10 @@
     }];
 }
 
+- (void)setModel:(HSJRollOutConfirmModel *)model {
+    _model = model;
+    NSString *amountAndTotalEarnInterest = [NSString GetPerMilWithDouble:model.amountAndTotalEarnInterest.doubleValue];
+    self.amountAndTotalEarnInterest = [amountAndTotalEarnInterest isEqualToString:@"0"] ? @"0.00" : amountAndTotalEarnInterest;
+}
+
 @end

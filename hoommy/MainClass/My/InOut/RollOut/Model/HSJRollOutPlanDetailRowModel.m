@@ -17,6 +17,7 @@
     self.right = right;
     self.protocol = protocol;
     self.className = className;
+    self.rightLabelColor = kHXBColor_666666_100;
     
     return self;
 }
