@@ -73,7 +73,7 @@
     }];
     
     [self.contentTf mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.titleLb.mas_right).offset(kScrAdaptationW(15));
+        make.left.equalTo(self.titleLb.mas_right).offset(kScrAdaptationW(13));
         make.top.equalTo(self.contentView);
         make.bottom.equalTo(self.lineImv.mas_top);
         make.right.equalTo(self.codeBt.mas_left).offset(kScrAdaptationW(5));
@@ -81,7 +81,7 @@
     
     [self.titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView).offset(kScrAdaptationW(15));
-        make.width.mas_equalTo(kScrAdaptationW(56));
+        make.width.mas_equalTo(kScrAdaptationW(58));
         make.top.equalTo(self.contentView);
         make.bottom.equalTo(self.lineImv.mas_top);
     }];
@@ -168,8 +168,9 @@
     
     if(cellModel.rightButtonText) {
         [self.codeBt setTitle:cellModel.rightButtonText forState:UIControlStateNormal];
+        CGFloat width = [cellModel.rightButtonText caleFontWidhSize:self.codeBt.titleLabel.font forViewHeight:self.codeBt.height];
         [self.codeBt mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.width.mas_equalTo(kScrAdaptationW(90));
+            make.width.mas_equalTo(kScrAdaptationW(width+5));
         }];
         self.codeBt.hidden = NO;
     }

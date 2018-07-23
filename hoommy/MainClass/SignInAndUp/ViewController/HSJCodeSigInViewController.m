@@ -149,15 +149,16 @@
 }
 
 - (void)getVoiceCodeWithType:(NSString *)type {
-    self.timeCount = 60;
-    self.codeButton.enabled = NO;
-    self.voiceCodeButton.hidden = YES;
-    [self.codeButton setTitle:[NSString stringWithFormat:@"%ds",self.timeCount] forState:UIControlStateNormal];
-    [self.codeButton setTitleColor:kHXBFontColor_C7C7CD_100 forState:(UIControlStateNormal)];
     kWeakSelf
     [self.viewModel getVerifyCodeRequesWithSignInWithAction:@"login" andWithType:type andWithMobile:self.viewModel.phoneNumber andCallbackBlock:^(BOOL isSuccess, NSError *error) {
         if (error) {
             [weakSelf getCodeField];
+        } else {
+            weakSelf.timeCount = 60;
+            weakSelf.codeButton.enabled = NO;
+            weakSelf.voiceCodeButton.hidden = YES;
+            [weakSelf.codeButton setTitle:[NSString stringWithFormat:@"%ds",self.timeCount] forState:UIControlStateNormal];
+            [weakSelf.codeButton setTitleColor:kHXBFontColor_C7C7CD_100 forState:(UIControlStateNormal)];
         }
     }];
     self.timer = [TimerWeakTarget scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timeDown) userInfo:nil repeats:YES];

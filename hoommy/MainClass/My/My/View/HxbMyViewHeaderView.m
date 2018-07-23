@@ -215,12 +215,13 @@
     NSString *accumulatedProfitStr = userInfoModel.userAssets.earnTotal? [NSString GetPerMilWithDouble:[userInfoModel.userAssets.earnTotal doubleValue]]: @"0.00";
     NSString *balance = userInfoModel.userAssets.availablePoint ? [NSString GetPerMilWithDouble:[userInfoModel.userAssets.availablePoint doubleValue]] : @"0.00";
     NSString *yesterdayInterest = [NSString GetPerMilWithDouble:[userInfoModel.userAssets.earnTotal doubleValue]];
+    NSString *assetsTotal = [NSString GetPerMilWithDouble:[userInfoModel.userAssets.assetsTotal doubleValue]];
     if ([KeyChain.ciphertext isEqualToString:@"0"]) {
         self.securyButton.selected = NO;
-        self.yesterdayInterestLabel.text = yesterdayInterest;
-        self.accumulatedProfitLabel.text = accumulatedProfitStr;
-        self.balanceLabel.text = balance;
-        self.assetsTotalLabel.text = [NSString GetPerMilWithDouble:[userInfoModel.userAssets.assetsTotal doubleValue]];
+        self.yesterdayInterestLabel.text = [yesterdayInterest isEqualToString:@"0"]?@"0.00":yesterdayInterest;
+        self.accumulatedProfitLabel.text = [accumulatedProfitStr isEqualToString:@"0"]?@"0.00":accumulatedProfitStr;
+        self.balanceLabel.text = [balance isEqualToString:@"0"]?@"0.00":balance;
+        self.assetsTotalLabel.text = [assetsTotal isEqualToString:@"0"]?@"0.00":assetsTotal;
     } else {
         self.securyButton.selected = YES;
         self.accumulatedProfitLabel.text = kSecuryText;
@@ -281,6 +282,7 @@
     NSString *accumulatedProfitStr = _userInfoModel.userAssets.earnTotal? [NSString GetPerMilWithDouble:[_userInfoModel.userAssets.earnTotal doubleValue]]: @"0.00";
     NSString *balance = _userInfoModel.userAssets.availablePoint ? [NSString GetPerMilWithDouble:[_userInfoModel.userAssets.availablePoint doubleValue]] : @"0.00";
     NSString *yesterdayInterest = [NSString GetPerMilWithDouble:[_userInfoModel.userAssets.earnTotal doubleValue]];
+    NSString *assetsTotal = [NSString GetPerMilWithDouble:[_userInfoModel.userAssets.assetsTotal doubleValue]];
     
     if ([KeyChain.ciphertext isEqualToString:@"0"]){
         KeyChain.ciphertext = @"1";
@@ -293,10 +295,10 @@
     {
         KeyChain.ciphertext = @"0";
         self.securyButton.selected = NO;
-        self.accumulatedProfitLabel.text = accumulatedProfitStr;
-        self.balanceLabel.text = balance;
-        self.yesterdayInterestLabel.text = yesterdayInterest;
-        self.assetsTotalLabel.text = [NSString GetPerMilWithDouble:[_userInfoModel.userAssets.assetsTotal doubleValue]];
+        self.accumulatedProfitLabel.text = [accumulatedProfitStr isEqualToString:@"0"]?@"0.00":accumulatedProfitStr;
+        self.balanceLabel.text = [balance isEqualToString:@"0"]?@"0.00":balance;
+        self.yesterdayInterestLabel.text = [yesterdayInterest isEqualToString:@"0"]?@"0.00":yesterdayInterest;
+        self.assetsTotalLabel.text = [assetsTotal isEqualToString:@"0"]?@"0.00":assetsTotal;
     }
 }
 
@@ -407,6 +409,7 @@
         _securyButton = [[UIButton alloc]initWithFrame:CGRectZero];
         [_securyButton setImage:[UIImage imageNamed:@"my_eyes"] forState:UIControlStateNormal];
         [_securyButton setImage:[UIImage imageNamed:@"my_closedEyes"] forState:UIControlStateSelected];
+        [_securyButton setEnlargeEdgeWithTop:20 right:20 bottom:20 left:20];
         _securyButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
         [_securyButton addTarget:self action:@selector(securyButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     }

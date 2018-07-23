@@ -3954,7 +3954,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/hoommy/Utils/Secretlib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hongshang.HSFrameProject.hoommy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hoomsun.muyingmoney;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -3979,7 +3979,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/hoommy/Utils/Secretlib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hongshang.HSFrameProject.hoommy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hoomsun.muyingmoney;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

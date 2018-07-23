@@ -21,7 +21,7 @@
 #import "UIResponder+FindNext.h"
 #import "UIScrollView+HXBScrollView.h"
 #import "HSJMyHomeInfoTableViewCell.h"
-
+#import "HXBMiddlekey.h"
 
 @interface HxbMyView ()
 <
@@ -46,17 +46,8 @@ MyViewHeaderDelegate
     self = [super initWithFrame:frame];
     if (self) {
         [self addSubview:self.mainTableView];
-//        [self setConstraints];
     }
     return self;
-}
-- (void)setConstraints {
-    kWeakSelf
-    [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(weakSelf);
-        make.height.equalTo(@kScrAdaptationH750(202));
-        make.bottom.mas_equalTo(weakSelf.bottom).offset(-HXBTabbarHeight);
-    }];
 }
 
 /**
@@ -208,12 +199,14 @@ MyViewHeaderDelegate
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             cell.textLabel.text = @"恒丰银行账户余额";
-            cell.desc = [NSString hxb_getPerMilWithDouble:[self.userInfoModel.userAssets.assetsTotal doubleValue]];
+            NSString *str = [NSString hxb_getPerMilWithDouble:[self.userInfoModel.userAssets.assetsTotal doubleValue]];
+            cell.desc = [str isEqualToString:@"0元"]?@"0.00元":str;
             cell.isShowLine = YES;
             cell.imageName = @"me_hongli_asset";
         } else {
             cell.textLabel.text = @"红利计划";
-            cell.desc = [NSString hxb_getPerMilWithDouble:[self.userInfoModel.userAssets.financePlanAssets doubleValue]];
+            NSString *str = [NSString hxb_getPerMilWithDouble:[self.userInfoModel.userAssets.financePlanAssets doubleValue]];
+            cell.desc = [str isEqualToString:@"0元"]?@"0.00元":str;
             cell.isShowLine = NO;
             cell.imageName = @"me_hongli";
         }
@@ -240,26 +233,28 @@ MyViewHeaderDelegate
     } else if ( section == 1) {
         return 1;
     } else {
-        return 1;
+        return 0;
     }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3;
+    return 2;//暂时写死
 }
 
 - (UITableView *)mainTableView{
     if (!_mainTableView) {
         
-        _mainTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kMainScreenWidth, kMainScreenHeight - 49 - HXBBottomAdditionHeight) style:UITableViewStyleGrouped];
+        _mainTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kMainScreenWidth, kMainScreenHeight - HXBTabbarHeight) style:UITableViewStyleGrouped];
         _mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _mainTableView.showsVerticalScrollIndicator = NO;
+        _mainTableView.showsHorizontalScrollIndicator = NO;
         _mainTableView.delegate = self;
         _mainTableView.dataSource = self;
         _mainTableView.tableHeaderView = self.headerView;
         _mainTableView.tableFooterView = self.bottomView;
         _mainTableView.tableHeaderView.userInteractionEnabled = YES;
         _mainTableView.backgroundColor = kHXBColor_BackGround;
+        [HXBMiddlekey AdaptationiOS11WithTableView:_mainTableView];
         kWeakSelf
         _mainTableView.freshOption = ScrollViewFreshOptionDownPull;
         _mainTableView.headerWithRefreshBlock = ^(UIScrollView *scrollView) {
@@ -286,9 +281,9 @@ MyViewHeaderDelegate
 
 - (UIView *)bottomView {
     if (!_bottomView) {
-        _bottomView = [[UIView alloc]initWithFrame:CGRectZero];
+        _bottomView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kMainScreenWidth, kScrAdaptationH750(202))];
         _bottomView.userInteractionEnabled = YES;
-        _bottomView.backgroundColor = [UIColor clearColor];
+//        _bottomView.backgroundColor = [UIColor clearColor];
         UIButton *helpBtn = [[UIButton alloc]initWithFrame:CGRectZero];
         [_bottomView addSubview:helpBtn];
         [helpBtn setImage:[UIImage imageNamed:@"my_help"] forState:UIControlStateNormal];
