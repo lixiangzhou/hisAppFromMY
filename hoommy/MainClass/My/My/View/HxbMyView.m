@@ -22,6 +22,7 @@
 #import "UIScrollView+HXBScrollView.h"
 #import "HSJMyHomeInfoTableViewCell.h"
 #import "HXBMiddlekey.h"
+#import "HSJMyAccountBalanceController.h"
 
 @interface HxbMyView ()
 <
@@ -129,6 +130,10 @@ MyViewHeaderDelegate
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             NSLog(@"恒丰银行账户余额");
+            HSJMyAccountBalanceController *vc = [HSJMyAccountBalanceController new];
+            vc.userInfoModel = self.userInfoModel;
+            HSJMyViewController *VC = (HSJMyViewController *)[UIResponder findNextResponderForClass:[HSJMyViewController class] ByFirstResponder:self];
+            [VC.navigationController pushViewController:vc animated:YES];
         } else {
             NSLog(@"红利计划");
 //            [HXBUmengManagar HXB_clickEventWithEnevtId:kHXBUmeng_invite_entrance];

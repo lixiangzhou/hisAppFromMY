@@ -31,4 +31,6 @@
 
 + (NSMutableAttributedString *)setupAttributeStringWithString:(NSString *)string WithRange: (NSRange)range andAttributeColor: (UIColor *)color;
 
++ (NSMutableAttributedString *)setupAttributeStringWithBeforeString:(NSString *)beforeString WithBeforeRange: (NSRange)beforeStringRange andAttributeColor: (UIColor *)beforeStringColor andAttributeFont: (UIFont *)beforeStringFont afterString:(NSString *)afterString WithAfterRange: (NSRange)afterStringRange andAttributeColor: (UIColor *)afterStringColor andAttributeFont: (UIFont *)afterStringFont;
+
 @end

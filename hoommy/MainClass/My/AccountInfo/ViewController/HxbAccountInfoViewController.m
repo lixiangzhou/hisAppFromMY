@@ -253,8 +253,7 @@ UITableViewDataSource
             name.font = kHXBFont_PINGFANGSC_REGULAR(14);
             name.textColor = COR5;
             
-            NSMutableString * nameStr = [NSMutableString stringWithString:self.userInfoModel.userInfo.realName];
-            [nameStr replaceCharactersInRange:NSMakeRange(0, 1)  withString:@"*"];
+            NSString * nameStr = [self.userInfoModel.userInfo.realName hxb_hiddenUserNameWithleft];
             
             NSString *idNo = [NSString hiddenStr:self.userInfoModel.userInfo.idNo MidWithFistLenth:1 andLastLenth:1];
             idNo = [NSMutableString stringWithFormat:@"（%@）",idNo];
@@ -355,7 +354,8 @@ UITableViewDataSource
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    HXBAccountSecureCell *cell = [tableView dequeueReusableCellWithIdentifier:HXBAccountSecureCellID forIndexPath:indexPath];
+    HXBAccountSecureCell *cell = [[HXBAccountSecureCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:HXBAccountSecureCellID];
+//    HXBAccountSecureCell *cell = [tableView dequeueReusableCellWithIdentifier:HXBAccountSecureCellID forIndexPath:indexPath];
     if (indexPath.section == 0) {
         cell.model = self.dataSource[indexPath.row];
         cell.hiddenLine = cell.model.type == HXBAccountSecureTypeGesturePwdModify ?:NO;
@@ -365,11 +365,13 @@ UITableViewDataSource
         cell.hiddenLine = cell.model.type == HXBAccountSecureTypeAboutUs ?:NO;
     } else {
         [cell.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-        self.signOutLabel.frame = cell.bounds;
-        self.signOutLabel.width = kScreenWidth;
         [cell.contentView addSubview:self.signOutLabel];
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.hiddenLine = YES;
+        
+        [self.signOutLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.centerX.height.width.equalTo(cell.contentView);
+        }];
     }
     
     return cell;
@@ -628,7 +630,7 @@ UITableViewDataSource
 {
     if (!_signOutLabel) {
         _signOutLabel = [[UILabel alloc] init];
-        _signOutLabel.text = @"退出登陆";
+        _signOutLabel.text = @"退出登录";
         _signOutLabel.textColor = kHXBColor_666666_100;
         _signOutLabel.font = kHXBFont_PINGFANGSC_REGULAR(14);
         _signOutLabel.textAlignment = NSTextAlignmentCenter;
@@ -639,7 +641,7 @@ UITableViewDataSource
 - (UITableView *)tableView{
     if (!_tableView) {
         _tableView = [[UITableView  alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
-        [_tableView registerClass:[HXBAccountSecureCell class] forCellReuseIdentifier:HXBAccountSecureCellID];
+//        [_tableView registerClass:[HXBAccountSecureCell class] forCellReuseIdentifier:HXBAccountSecureCellID];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

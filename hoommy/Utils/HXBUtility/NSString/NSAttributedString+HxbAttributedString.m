@@ -56,4 +56,13 @@
     [attr addAttribute:NSForegroundColorAttributeName value:color range:range];
     return attr;
 }
+
++ (NSMutableAttributedString *)setupAttributeStringWithBeforeString:(NSString *)beforeString WithBeforeRange: (NSRange)beforeStringRange andAttributeColor: (UIColor *)beforeStringColor andAttributeFont: (UIFont *)beforeStringFont afterString:(NSString *)afterString WithAfterRange: (NSRange)afterStringRange andAttributeColor: (UIColor *)afterStringColor andAttributeFont: (UIFont *)afterStringFont{
+    
+    NSMutableAttributedString *resultString = [NSMutableAttributedString setupAttributeStringWithString:beforeString WithRange:beforeStringRange andAttributeColor:beforeStringColor andAttributeFont:beforeStringFont];
+    [resultString appendAttributedString:[NSMutableAttributedString setupAttributeStringWithString:afterString WithRange:afterStringRange andAttributeColor:afterStringColor andAttributeFont:afterStringFont]];
+    
+    return resultString;
+}
+
 @end
