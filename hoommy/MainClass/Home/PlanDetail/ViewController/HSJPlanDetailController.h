@@ -9,5 +9,6 @@
 #import "HXBBaseViewController.h"
 
 @interface HSJPlanDetailController : HXBBaseViewController
-
+/// 计划ID
+@property (nonatomic, copy) NSString *planId;
 @end
