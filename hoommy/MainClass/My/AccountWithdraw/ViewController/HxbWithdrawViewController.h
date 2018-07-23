@@ -8,7 +8,7 @@
 
 #import "HXBBaseViewController.h"
 @class HXBBankCardModel;
-@interface WithdrawBankView : UIView
+@interface WithdrawBankView : UIImageView
 /**
  数据模型
  */
