@@ -47,7 +47,7 @@
     kWeakSelf
     [self loadData:^(NYBaseRequest *request) {
         request.requestUrl = kHXBMY_PlanListURL;
-        request.requestArgument = @{@"filter": @"1", @"page": @(page)};
+        request.requestArgument = @{@"filter": @"4", @"page": @(page)};
     } responseResult:^(id responseData, NSError *erro) {
         if (responseData) {
             NSDictionary *data = responseData[@"data"];
@@ -90,6 +90,7 @@
     kWeakSelf
     [self.dataSource enumerateObjectsUsingBlock:^(HSJRollOutCellViewModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         obj.isEditing = editing;
+        obj.isSelected = !editing;
         [weakSelf.selectedViewModels addObject:obj];
         [weakSelf.selectedIds addObject:obj.model.id];
     }];
