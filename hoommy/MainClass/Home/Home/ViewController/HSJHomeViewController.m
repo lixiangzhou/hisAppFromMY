@@ -21,6 +21,8 @@
 #import "HSJHomePlanView.h"
 #import "HSJRollOutController.h"
 #import "HXBCommonResultController.h"
+#import "HSJDepositoryOpenTipView.h"
+#import "HSJDepositoryOpenController.h"
 
 @interface HSJHomeViewController ()
 
@@ -105,8 +107,8 @@
 }
 
 - (void)buttonClickAct:(UIButton*)button {
-    HSJDepositoryOpenTipController* vc = [[HSJDepositoryOpenTipController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    [HSJDepositoryOpenTipView show];
+    
 }
 
 - (void)tableViewButtonClickAct:(UIButton*)button {

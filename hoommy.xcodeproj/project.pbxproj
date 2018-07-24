@@ -76,6 +76,7 @@
 		8D60B4DE20F7486300287E52 /* HSJDepositoryOpenViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B4D320F7486300287E52 /* HSJDepositoryOpenViewModel.m */; };
 		8D60B4E120F748BC00287E52 /* UITextField+HLNumberFormatTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B4E020F748BC00287E52 /* UITextField+HLNumberFormatTextField.m */; };
 		8DB77F6A210585A5003EE881 /* HSJRollOutDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB77F69210585A5003EE881 /* HSJRollOutDetailCell.m */; };
+		8DD6B9B22106C27C00E8980F /* HSJDepositoryOpenTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD6B9B12106C27C00E8980F /* HSJDepositoryOpenTipView.m */; };
 		9A0BD51D20F6F8ED00B1CC59 /* UIButton+HxbButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A0BD51C20F6F8ED00B1CC59 /* UIButton+HxbButton.m */; };
 		9A0BD52120F6FA0E00B1CC59 /* HXBColourGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A0BD52020F6FA0E00B1CC59 /* HXBColourGradientView.m */; };
 		9A0BD52520F6FBB300B1CC59 /* HXBUserInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A0BD52420F6FBB300B1CC59 /* HXBUserInfoView.m */; };
@@ -498,6 +499,8 @@
 		8D60B4E020F748BC00287E52 /* UITextField+HLNumberFormatTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+HLNumberFormatTextField.m"; sourceTree = "<group>"; };
 		8DB77F68210585A5003EE881 /* HSJRollOutDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJRollOutDetailCell.h; sourceTree = "<group>"; };
 		8DB77F69210585A5003EE881 /* HSJRollOutDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJRollOutDetailCell.m; sourceTree = "<group>"; };
+		8DD6B9B02106C27C00E8980F /* HSJDepositoryOpenTipView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJDepositoryOpenTipView.h; sourceTree = "<group>"; };
+		8DD6B9B12106C27C00E8980F /* HSJDepositoryOpenTipView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJDepositoryOpenTipView.m; sourceTree = "<group>"; };
 		9A0BD51A20F6F75000B1CC59 /* MacrosInBusiness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacrosInBusiness.h; sourceTree = "<group>"; };
 		9A0BD51B20F6F8ED00B1CC59 /* UIButton+HxbButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+HxbButton.h"; sourceTree = "<group>"; };
 		9A0BD51C20F6F8ED00B1CC59 /* UIButton+HxbButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+HxbButton.m"; sourceTree = "<group>"; };
@@ -1445,6 +1448,8 @@
 		8D60B4CB20F7486300287E52 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8DD6B9B02106C27C00E8980F /* HSJDepositoryOpenTipView.h */,
+				8DD6B9B12106C27C00E8980F /* HSJDepositoryOpenTipView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3732,6 +3737,7 @@
 				4E94386D20FCA5C9004F7908 /* HXBXYAlertViewController.m in Sources */,
 				9A37492820F8532100F39681 /* HXBPresentInformationView.m in Sources */,
 				9A97DAB620EF420200688ADB /* NYNetworkConfig.m in Sources */,
+				8DD6B9B22106C27C00E8980F /* HSJDepositoryOpenTipView.m in Sources */,
 				9A3748F920F7661B00F39681 /* HXBOpenDepositAccountAgent.m in Sources */,
 				9A97DA7E20EF420200688ADB /* HSJBaseViewModel+HSJNetWorkApi.m in Sources */,
 				9A97DA9A20EF420200688ADB /* IDPCache.m in Sources */,
