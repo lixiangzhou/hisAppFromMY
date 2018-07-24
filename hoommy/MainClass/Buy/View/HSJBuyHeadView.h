@@ -10,6 +10,8 @@
 
 @interface HSJBuyHeadView : UIView
 @property (nonatomic, copy) NSString *inputMoney;
+@property (nonatomic, assign) float addUpLimitMoney;
+@property (nonatomic, assign) BOOL isKeepKeyboard;
 
 @property (nonatomic, strong) void (^textChange)(NSString  *text);
 @end

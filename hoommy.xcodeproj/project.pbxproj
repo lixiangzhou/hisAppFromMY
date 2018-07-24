@@ -289,6 +289,7 @@
 		9AA70B4D20FEF40F008B3007 /* HSJBuyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA70B4C20FEF40F008B3007 /* HSJBuyTableViewCell.m */; };
 		9AA70B5020FEF434008B3007 /* HSJBuyCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA70B4F20FEF434008B3007 /* HSJBuyCellModel.m */; };
 		9AA70B5320FF03D5008B3007 /* HSJBuySectionHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA70B5220FF03D5008B3007 /* HSJBuySectionHeadView.m */; };
+		9AB9D069210718CB00B366A7 /* HSJAgreementsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB9D068210718CB00B366A7 /* HSJAgreementsViewController.m */; };
 		9ACB2F3C20EF6E08005C3C3D /* HSJKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ACB2F3B20EF6E08005C3C3D /* HSJKeyChainStore.m */; };
 		9AF51DA120FC487D008A8CF4 /* HSJCALayerTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF51DA020FC487D008A8CF4 /* HSJCALayerTool.m */; };
 		9AF51DA420FC7458008A8CF4 /* HSJClientServeTelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF51DA320FC7458008A8CF4 /* HSJClientServeTelView.m */; };
@@ -894,6 +895,8 @@
 		9AA70B4F20FEF434008B3007 /* HSJBuyCellModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJBuyCellModel.m; sourceTree = "<group>"; };
 		9AA70B5120FF03D5008B3007 /* HSJBuySectionHeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJBuySectionHeadView.h; sourceTree = "<group>"; };
 		9AA70B5220FF03D5008B3007 /* HSJBuySectionHeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJBuySectionHeadView.m; sourceTree = "<group>"; };
+		9AB9D067210718CB00B366A7 /* HSJAgreementsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJAgreementsViewController.h; sourceTree = "<group>"; };
+		9AB9D068210718CB00B366A7 /* HSJAgreementsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJAgreementsViewController.m; sourceTree = "<group>"; };
 		9ACB2F3A20EF6E08005C3C3D /* HSJKeyChainStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJKeyChainStore.h; sourceTree = "<group>"; };
 		9ACB2F3B20EF6E08005C3C3D /* HSJKeyChainStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJKeyChainStore.m; sourceTree = "<group>"; };
 		9AF51D9F20FC487D008A8CF4 /* HSJCALayerTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJCALayerTool.h; sourceTree = "<group>"; };
@@ -2920,6 +2923,8 @@
 			children = (
 				9AA70B3F20FEF323008B3007 /* HSJBuyViewController.h */,
 				9AA70B4020FEF323008B3007 /* HSJBuyViewController.m */,
+				9AB9D067210718CB00B366A7 /* HSJAgreementsViewController.h */,
+				9AB9D068210718CB00B366A7 /* HSJAgreementsViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -3520,6 +3525,7 @@
 				E153B9D920FC8EFC002BE1AE /* HXBMYViewModel_MainCapitalRecordViewModel.m in Sources */,
 				9A3749C620F882BD00F39681 /* HXBBankCardListViewController.m in Sources */,
 				9A97DA9220EF420200688ADB /* UIResponder+FindNext.m in Sources */,
+				9AB9D069210718CB00B366A7 /* HSJAgreementsViewController.m in Sources */,
 				8D142A9620FD9BE700520728 /* BannerModel.m in Sources */,
 				9AF51EE920FDCA65008A8CF4 /* HXBModifyTransactionPasswordHomeView.m in Sources */,
 				4EA57D3120F3500B006FD573 /* HSJMyViewController.m in Sources */,

@@ -30,3 +30,5 @@ extern NSString *const kHXBNotification_PlanAndLoan_Fragment;
 extern NSString *const kHXBNotification_starCountDown;
 //注册开始倒计时
 extern NSString *const kHXBNotification_registrationStartCountdown;
+//解绑卡结果通知
+extern NSString *const kHXBNotification_unBindBankCard;

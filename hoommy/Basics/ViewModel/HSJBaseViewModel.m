@@ -26,6 +26,15 @@
     }
 }
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.isFilterHugHidden = YES;
+    }
+    return self;
+}
+
 //重写基类获取hug父视图的方法
 - (UIView *)getHugView {
     if(self.hugViewBlock) {
@@ -44,6 +53,10 @@
     else {
         [super hideProgress:request];
     }
+}
+
+- (BOOL)isLoadingData {
+    return [[HXBBaseRequestManager sharedInstance] isSendingRequest:self];
 }
 /**
  viewmodel中统一的网络数据加载方法

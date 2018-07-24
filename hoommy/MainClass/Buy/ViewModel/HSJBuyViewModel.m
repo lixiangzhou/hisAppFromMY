@@ -8,10 +8,64 @@
 
 #import "HSJBuyViewModel.h"
 
+@interface HSJBuyViewModel()
+@property (nonatomic, assign, readonly) BOOL isAbleleftMoneyCellItem;
+@property (nonatomic, assign, readonly) BOOL isAbleBankCellItem;
+@end
+
 @implementation HSJBuyViewModel
 #pragma mark 数据请求处理
+- (instancetype)init {
+    self = [super init];
+    if(self) {
+        self.isFilterHugHidden = NO;
+    }
+    return self;
+}
+
+- (void)hideProgress:(NYBaseRequest *)request {
+    if(!self.isLoadingData) {
+        [super hideProgress:request];
+    }
+}
 
 #pragma  mark 逻辑处理
+
+- (BOOL)isAbleBankCellItem {
+    double money = self.inputMoney.doubleValue;
+    BOOL isAble = YES;
+    if(self.userInfoModel.userAssets.availablePoint.doubleValue > money) {
+        isAble = NO;
+    }
+    return isAble;
+}
+
+- (BOOL)isIsAbleleftMoneyCellItem {
+    BOOL isAble = YES;
+    if(0 == self.userInfoModel.userAssets.availablePoint.doubleValue) {
+        isAble = NO;
+    }
+    return isAble;
+    
+}
+
+- (BOOL)isShowRiskAgeement {
+    double money = self.inputMoney.doubleValue;
+    return (money > self.userInfoModel.userAssets.userRiskAmount.doubleValue - self.userInfoModel.userAssets.holdingAmount);
+}
+
+- (NSString *)buttonShowContent {
+    NSString *content = @"添加银行卡";
+    if(self.userInfoModel.userInfo.hasBindCard.boolValue) {
+        double money = self.inputMoney.doubleValue;
+        content = @"立即转入";
+        if(money > 0) {
+            content = [NSString stringWithFormat:@"%@%.2lf元", content, money];
+        }
+    }
+    return content;
+}
+
 - (NSArray *)cellDataList {
     if(!_cellDataList) {
         NSMutableArray *dataList = [NSMutableArray arrayWithCapacity:2];
@@ -20,26 +74,84 @@
         HSJBuyCellModel *cellModel = [[HSJBuyCellModel alloc] initCellModel:NO showArrow:NO];
         [dataList addObject:cellModel];
         
-        cellModel = [[HSJBuyCellModel alloc] initCellModel:NO showArrow:YES];
+        cellModel = [[HSJBuyCellModel alloc] initCellModel:NO showArrow:NO];
         [dataList addObject:cellModel];
     }
     
     return _cellDataList;
 }
 
-- (void)buildCellDataList {
+- (float)addUpLimit {
+    float remainAmount = self.planModel.remainAmount.floatValue;
+    float userRemainAmount = self.planModel.userRemainAmount.floatValue;
+    float creditor = MIN(remainAmount, userRemainAmount);
+    
+    return creditor;
+}
 
+- (void)buildCellDataList {
+    [self buildLeftMoneyCellItem];
+    [self buildBankCellItem];
+}
+
+- (void)buildLeftMoneyCellItem {
+    //余额信息
     HSJBuyCellModel *cellModel = [self.cellDataList safeObjectAtIndex:0];
     cellModel.iconName = @"leftMoneyNormal";
     NSString *str1 = @"可用余额";
-    NSString *str2 = @"\n3,122.00元";
-    cellModel.title = [self buildAttributedString:str1 secondString:str2 state:YES];
+    NSString *str2 = [NSString stringWithFormat:@"\n%.2f元", self.userInfoModel.userAssets.availablePoint.floatValue];
+    if(self.isAbleleftMoneyCellItem) {
+        cellModel.iconName = @"leftMoneySelect";
+    }
+    cellModel.title = [self buildAttributedString:str1 secondString:str2 state:self.isAbleleftMoneyCellItem];
     
-    cellModel = [self.cellDataList safeObjectAtIndex:1];
-    cellModel.iconName = @"leftMoneySelect";
-    str1 = @"上海银行 (*432)";
-    str2 = @"\n单笔限5万，日单限20万";
-    cellModel.title = [self buildAttributedString:str1 secondString:str2 state:NO];
+    //描述信息
+    double money = self.inputMoney.doubleValue;
+    if(money>0 && self.isAbleleftMoneyCellItem) {
+        double inputmoney = self.userInfoModel.userAssets.availablePoint.floatValue>money? money:self.userInfoModel.userAssets.availablePoint.floatValue;
+        cellModel.descripText = [NSString stringWithFormat:@"转入%.2lf元", inputmoney];
+    }
+    else{
+        cellModel.descripText = @"";
+    }
+}
+
+- (void)buildBankCellItem {
+    HSJBuyCellModel *cellModel = [self.cellDataList safeObjectAtIndex:1];
+    if(!self.userInfoModel.userInfo.hasBindCard.boolValue) {//绑卡
+        cellModel.iconName = @"bindBankCard";
+        cellModel.isShowArrow = YES;
+        cellModel.isSvnImage = NO;
+        NSString *str1 = @"绑定银行卡";
+        NSString *str2 = @"";
+        cellModel.title = [self buildAttributedString:str1 secondString:str2 state:YES];
+    }
+    else{
+        //描述信息
+        cellModel.iconName = self.userInfoModel.userBank.bankCode;
+        cellModel.isSvnImage = YES;
+        NSString *tempStr = [self.userInfoModel.userBank.cardId substringFromIndex:self.userInfoModel.userBank.cardId.length-4];
+        NSString *str1 = [NSString stringWithFormat:@"%@", self.userInfoModel.userBank.name];
+        NSString *str2 = [NSString stringWithFormat:@" (**%@)\n%@", tempStr, self.userInfoModel.userBank.quota];
+        cellModel.title = [self buildAttributedString:str1 secondString:str2 state:self.isAbleBankCellItem];
+        
+        if(self.userInfoModel.userBank.quotaStatus) {//银行卡可用
+            cellModel.isShowArrow = NO;
+            double money = self.inputMoney.doubleValue;
+            if(money > self.userInfoModel.userAssets.availablePoint.floatValue) {
+                double inputmoney = money-self.userInfoModel.userAssets.availablePoint.floatValue;
+                cellModel.descripText = [NSString stringWithFormat:@"转入%.2lf元", inputmoney];
+            }
+            else{
+                cellModel.descripText = @"";
+            }
+        }
+        else {//换卡
+            cellModel.isShowArrow = YES;
+            cellModel.arrowText = @"换卡";
+        }
+    }
+    
 }
 
 - (NSAttributedString*)buildAttributedString:(NSString*)str1 secondString:(NSString*)str2 state:(BOOL)isCanSelected {
@@ -49,7 +161,7 @@
         [tempStr setAttributes:@{NSFontAttributeName:kHXBFont_26, NSForegroundColorAttributeName:kHXBFontColor_9295A2_100} range:NSMakeRange(str1.length, str2.length)];
     }
     else {
-        [tempStr setAttributes:@{NSFontAttributeName:kHXBFont_28, NSForegroundColorAttributeName:[UIColor blackColor]} range:NSMakeRange(0, str1.length)];
+        [tempStr setAttributes:@{NSFontAttributeName:kHXBFont_28, NSForegroundColorAttributeName:kHXBFontColor_9295A2_100} range:NSMakeRange(0, str1.length)];
         [tempStr setAttributes:@{NSFontAttributeName:kHXBFont_26, NSForegroundColorAttributeName:kHXBFontColor_9295A2_100} range:NSMakeRange(str1.length, str2.length)];
     }
     

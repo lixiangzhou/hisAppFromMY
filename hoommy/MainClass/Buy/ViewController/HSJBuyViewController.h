@@ -7,7 +7,9 @@
 //
 
 #import "HXBBaseViewController.h"
+#import "HSJPlanModel.h"
 
 @interface HSJBuyViewController : HXBBaseViewController
-
+@property (nonatomic, strong) HSJPlanModel *planModel;
+@property (nonatomic, copy) NSString *planId;
 @end
