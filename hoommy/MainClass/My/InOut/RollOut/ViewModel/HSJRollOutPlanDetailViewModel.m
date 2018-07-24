@@ -39,7 +39,7 @@
     self.hideBottomView = self.stepupStatus != HSJStepUpStatusQUIT;
     
     // 转入金额
-    NSString *joinInString = [NSString GetPerMilWithDouble:self.model.finalAmount.doubleValue];
+    NSString *joinInString = [NSString GetPerMilWithDouble:self.model.amount.doubleValue];
     joinInString = [joinInString isEqualToString:@"0"] ? @"0.00" : joinInString;
     joinInString = [NSString stringWithFormat:@"%@元", joinInString];
     
