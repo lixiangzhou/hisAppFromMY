@@ -37,7 +37,7 @@
 
 //黑色字体
 #define kHXBFontColor_2D2F46_100         UIColorFromRGB(0x2D2F46)
-
+#define kHXBFontColor_7F85A1_100         UIColorFromRGB(0x7F85A1)
 //粉红色
 #define kHXBFontColor_FF413C_100         UIColorFromRGB(0xFF413C)
 

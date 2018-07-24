@@ -9,7 +9,6 @@
 #import "HSJRollOutCell.h"
 
 NSString *const HSJRollOutCellIdentifier = @"HSJRollOutCellIdentifier";
-const CGFloat HSJRollOutCellHeight = 85;
 
 @interface HSJRollOutCell ()
 /// 待转金额
@@ -48,6 +47,7 @@ const CGFloat HSJRollOutCellHeight = 85;
 
 - (void)setUI {
     UIButton *selectBtn = [[UIButton alloc] init];
+    [selectBtn addTarget:self action:@selector(selectAction) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:selectBtn];
     self.selectBtn = selectBtn;
     
@@ -79,6 +79,7 @@ const CGFloat HSJRollOutCellHeight = 85;
     UILabel *joinInLabel = [UILabel new];
     joinInLabel.textColor = kHXBColor_333333_100;
     joinInLabel.font = kHXBFont_24;
+    joinInLabel.text = @"0.00元";
     [self.infoView addSubview:joinInLabel];
     self.joinInLabel = joinInLabel;
     
@@ -92,11 +93,14 @@ const CGFloat HSJRollOutCellHeight = 85;
     UILabel *earnAmountLabel = [UILabel new];
     earnAmountLabel.textColor = kHXBColor_333333_100;
     earnAmountLabel.font = kHXBFont_24;
+    earnAmountLabel.text = @"0.00元";
     [self.infoView addSubview:earnAmountLabel];
     self.earnAmountLabel = earnAmountLabel;
     
     UIButton *statusBtn = [[UIButton alloc] init];
     statusBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [statusBtn addTarget:self action:@selector(statusAction) forControlEvents:UIControlEventTouchUpInside];
+    [statusBtn setTitle:@" " forState:UIControlStateNormal];
     [self.infoView addSubview:statusBtn];
     self.statusBtn = statusBtn;
     
@@ -105,39 +109,39 @@ const CGFloat HSJRollOutCellHeight = 85;
     [infoView addSubview:bottomLine];
     
     [selectBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@10);
-        make.bottom.equalTo(@-10);
+        make.top.equalTo(@kScrAdaptationW(10));
+        make.bottom.equalTo(@kScrAdaptationW(-10));
         make.left.equalTo(self.contentView);
         make.width.equalTo(@0);//@45
     }];
     
     [infoView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(@15);
+        make.left.equalTo(@kScrAdaptationW(15));
         make.top.bottom.right.equalTo(self.contentView);
     }];
     
     [leftAccountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@25);
+        make.top.equalTo(@kScrAdaptationW(25));
         make.left.equalTo(infoView);
     }];
     
     [leftAccountDescLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(leftAccountLabel);
-        make.bottom.equalTo(@-25);
+        make.bottom.equalTo(@kScrAdaptationW(-25));
     }];
     
     [joinInDescLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@26.5);
-        make.right.equalTo(joinInLabel.mas_left).offset(-5);
+        make.top.equalTo(@kScrAdaptationW(26.5));
+        make.right.equalTo(joinInLabel.mas_left).offset(kScrAdaptationW(-5));
     }];
     
     [joinInLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(joinInDescLabel);
-        make.left.equalTo(self.contentView.mas_centerX);
+        make.left.equalTo(self.contentView.mas_centerX).offset(0);
     }];
     
     [earnAmountDescLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(@-26.5);
+        make.bottom.equalTo(@kScrAdaptationW(-26.5));
         make.right.equalTo(joinInDescLabel);
     }];
     
@@ -147,59 +151,85 @@ const CGFloat HSJRollOutCellHeight = 85;
     }];
     
     [statusBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(@-15);
+        make.right.equalTo(@kScrAdaptationW(-15));
         make.centerY.equalTo(infoView);
     }];
     
     [bottomLine mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.left.bottom.equalTo(infoView);
-        make.right.equalTo(@-15);
-        make.height.equalTo(@0.5);
+        make.bottom.left.equalTo(infoView);
+        make.right.equalTo(@kScrAdaptationW(-15));
+        make.height.equalTo(@kScrAdaptationW(0.5));
     }];
+    
+    [self layoutIfNeeded];
 }
 
 #pragma mark - Action
+- (void)selectAction {
+    self.viewModel.isSelected = !self.viewModel.isSelected;
+    [self updateViews];
+    
+    if (self.selectBlock) {
+        self.selectBlock(self.viewModel);
+    }
+}
 
+- (void)statusAction {
+    if (self.rollOutBlock) {
+        self.rollOutBlock(self.viewModel);
+    }
+}
 
 #pragma mark - Setter / Getter / Lazy
 - (void)setViewModel:(HSJRollOutCellViewModel *)viewModel {
     _viewModel = viewModel;
     
-    self.selectBtn.backgroundColor = viewModel.backgroundColor;
-    self.selectBtn.hidden = !viewModel.isEditing;
-    self.infoView.backgroundColor = viewModel.backgroundColor;
-    
-    self.leftAccountLabel.text = viewModel.leftAccountString;
-    self.leftAccountLabel.textColor = viewModel.leftAccountColor;
-    self.leftAccountDescLabel.textColor = viewModel.leftAccountDescColor;
-    
-    self.joinInLabel.text = viewModel.joinInString;
-    self.joinInLabel.textColor = viewModel.joinInColor;
-    self.joinInDescLabel.textColor = viewModel.joinInDescColor;
-    
-    self.earnAmountLabel.text = viewModel.earnInterestString;
-    self.earnAmountLabel.textColor = viewModel.earnAccountColor;
-    self.earnAmountDescLabel.textColor = viewModel.earnAccountDescColor;
-    
-    self.statusBtn.enabled = viewModel.statusBtnEnabled;
-    [self.statusBtn setTitle:viewModel.statusString forState:UIControlStateNormal];
-    [self.statusBtn setTitleColor:viewModel.statusTextColor forState:UIControlStateNormal];
-//    self.statusBtn.text = viewModel.statusString;
-//    self.statusBtn.textColor = viewModel.statusTextColor;
-    self.statusBtn.titleLabel.font = viewModel.statusFont;
-    self.statusBtn.titleLabel.numberOfLines = viewModel.statusLineNum;
-    
-    [self.selectBtn mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(@(viewModel.isEditing ? 45 : 0));
-    }];
-    [self.infoView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(@(viewModel.isEditing ? 45 : 15));
-    }];
+    [self updateViews];
 }
 
 
 #pragma mark - Helper
-
+- (void)updateViews {
+    self.contentView.backgroundColor = self.viewModel.backgroundColor;
+    self.selectBtn.hidden = !self.viewModel.isEditing;
+    [self.selectBtn setImage:self.viewModel.selectImage forState:UIControlStateNormal];
+    self.selectBtn.enabled = self.viewModel.selectBtnEnabled;
+    
+    self.leftAccountLabel.text = self.viewModel.leftAccountString;
+    self.leftAccountLabel.textColor = self.viewModel.leftAccountColor;
+    self.leftAccountDescLabel.textColor = self.viewModel.leftAccountDescColor;
+    
+    self.joinInLabel.text = self.viewModel.joinInString;
+    self.joinInLabel.textColor = self.viewModel.joinInColor;
+    self.joinInDescLabel.textColor = self.viewModel.joinInDescColor;
+    
+    self.earnAmountLabel.text = self.viewModel.earnInterestString;
+    self.earnAmountLabel.textColor = self.viewModel.earnAccountColor;
+    self.earnAmountDescLabel.textColor = self.viewModel.earnAccountDescColor;
+    
+    self.statusBtn.enabled = self.viewModel.statusBtnEnabled;
+    [self.statusBtn setTitle:self.viewModel.statusString forState:UIControlStateNormal];
+    [self.statusBtn setTitleColor:self.viewModel.statusTextColor forState:UIControlStateNormal];
+    self.statusBtn.titleLabel.font = self.viewModel.statusFont;
+    self.statusBtn.titleLabel.numberOfLines = self.viewModel.statusLineNum;
+    self.statusBtn.enabled = self.viewModel.statusBtnEnabled;
+    
+    [self.selectBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@(self.viewModel.isEditing ? 45 : 0));
+    }];
+    
+    [self.infoView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(@(self.viewModel.isEditing ? 45 : 15));
+    }];
+    
+    [self.joinInLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.contentView.mas_centerX).offset(self.viewModel.isEditing ? 20 : 0);
+    }];
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        [self layoutIfNeeded];
+    }];
+}
 
 #pragma mark - Other
 

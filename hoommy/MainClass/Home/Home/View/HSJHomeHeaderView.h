@@ -7,7 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "HSJHomeModel.h"
 @interface HSJHomeHeaderView : UIView
+
+@property (nonatomic, strong) HSJHomeModel *homeModel;
+
+@property (nonatomic, strong) void(^bannerDidSelectItemAtIndex)(NSInteger index);
+
+@property (nonatomic, strong) void(^titleDidSelectItemAtIndex)(NSInteger index);
+
+
+- (void)updateUI;
 
 @end

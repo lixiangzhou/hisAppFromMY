@@ -10,5 +10,7 @@
 
 /// 计划详情
 @interface HSJRollOutPlanDetailController : HXBBaseViewController
+/// 计划ID
+@property (nonatomic, copy) NSString *planId;
 
 @end

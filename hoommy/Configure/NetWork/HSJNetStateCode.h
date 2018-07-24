@@ -38,5 +38,25 @@ typedef enum : NSUInteger {
     kHXBPurchase_Processing = -999,
 } HSJNetStateCode;
 
+/**
+ code 码
+ */
+static NSString *const kHXBUmeng_loginToRegist = @"1000";
+static NSString *const kHXBUmeng_registFirst = @"1001";
+static NSString *const kHXBUmeng_registSuccess = @"1002";
+static NSString *const kHXBUmeng_registSuccess_lead = @"1003";
+static NSString *const kHXBUmeng_registSuccess_return = @"1004";
+static NSString *const kHXBUmeng_alertBtn = @"1005";
+static NSString *const kHXBUmeng_commitBtn = @"1006";
+static NSString *const kHXBUmeng_topup_money = @"1007";
+static NSString *const kHXBUmeng_withdraw_money = @"1008";
+static NSString *const kHXBUmeng_invite_entrance = @"1009";
+static NSString *const kHXBUmeng_invite_alert = @"1010";
+static NSString *const kHXBUmeng_invite_weChat = @"1011";
+static NSString *const kHXBUmeng_invite_friendCircle = @"1012";
+static NSString *const kHXBUmeng_invite_QQ = @"1013";
+static NSString *const kHXBUmeng_invite_QQSpace = @"1014";
+static NSString *const kHXBUmeng_investSucess_seeResult = @"1015";
+static NSString *const kHXBUmeng_inviteSucess_share = @"1016";
 
 #endif /* HSJNetStateCode_h */
