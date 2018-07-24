@@ -31,3 +31,5 @@ NSString *const kHXBNotification_starCountDown = @"kHXBNotification_starCountDow
 NSString *const kHXBNotification_registrationStartCountdown = @"kHXBNotification_registrationStartCountdown";
 //解绑卡结果通知
 NSString *const kHXBNotification_unBindBankCard = @"kHXBNotification_unBindBankCardResult";
+
+NSString *const kHXBNotification_RefreshAccountPlanList = @"kHXBNotification_RefreshAccountPlanList";

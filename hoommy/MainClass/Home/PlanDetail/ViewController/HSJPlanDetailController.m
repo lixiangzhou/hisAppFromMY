@@ -13,6 +13,7 @@
 #import "HSJPlanDetailInfoView.h"
 #import "HSJPlanDetailViewModel.h"
 #import "HSJRollOutController.h"
+#import "HSJBuyViewController.h"
 
 @interface HSJPlanDetailController () <UIScrollViewDelegate>
 @property (nonatomic, weak) UIView *navView;
@@ -242,7 +243,7 @@
 #pragma mark - Network
 - (void)getData {
     kWeakSelf
-    [self.viewModel getDataWithId:@"748" resultBlock:^(BOOL isSuccess) {
+    [self.viewModel getDataWithId:self.planId resultBlock:^(BOOL isSuccess) {
         if (isSuccess) {
             [weakSelf setData];
         }
@@ -277,7 +278,7 @@
 
 #pragma mark - Action
 - (void)inClick {
-    HSJRollOutController *vc = [HSJRollOutController new];
+    HSJBuyViewController *vc = [HSJBuyViewController new];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

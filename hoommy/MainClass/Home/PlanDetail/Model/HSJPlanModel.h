@@ -40,4 +40,6 @@
 @property (nonatomic, copy) NSString *userRemainAmount;
 //剩余可投
 @property (nonatomic, copy) NSString *remainAmount;
+/// 活动文案
+@property (nonatomic, copy) NSString *tag;
 @end

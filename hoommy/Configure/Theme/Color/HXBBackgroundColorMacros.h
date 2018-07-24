@@ -22,7 +22,7 @@
 #define kHXBColor_FF9535_100                RGBA(255, 149, 53, 1)
 #define kHXBColor_FF6A0F_100                RGBA(255, 106, 15, 1)
 #define kHXBColor_FB7F67_10                 RGBA(251, 127, 103,0.1)
-
+#define kHXBColor_FCF7F6_100                UIColorFromRGB(0xFCF7F6)
 /// 详情页的字体颜色
 #define kHXBColor_976A02_100                UIColorFromRGB(0x976A02)
 #define kHXBColor_564727_100                UIColorFromRGB(0x564727)
@@ -44,7 +44,7 @@
 
 ///蓝色的背景色
 #define kHXBColor_73ADFF_100                RGBA(115, 173, 255, 1)
-
+#define kHXBColor_F5F7FF_100                UIColorFromRGB(0xF5F7FF)
 /// 黄色背景色
 #define kHXBColor_E3BF80                    RGBA(227, 191, 128, 1)
 
@@ -58,6 +58,8 @@
 #define kHXBSpacingLineColor_DDDDDD_100     RGBA(221, 221, 221, 1)
 #define kHXBColor_EEEEF5_100         UIColorFromRGB(0xEEEEF5)
 #define kHXBColor_ECECEC_100         UIColorFromRGB(0xECECEC)
+
+#define kHXBColor_488CFF_100                UIColorFromRGB(0x488CFF)
 
 ///白色的背景色
 #define kHXBColor_FFFFFF_100                RGBA(255, 255, 255, 1)

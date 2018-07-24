@@ -35,6 +35,7 @@
 @property (nonatomic, strong) UILabel *reminderLabel;
 @property (nonatomic, strong) HXBMy_Withdraw_notifitionView *notifitionView;
 
+@property (nonatomic, strong) UIView *bottomView;
 /**
  数据模型
  */
@@ -65,7 +66,8 @@
             return weakSelf.view;
         }
     };
-    self.view.backgroundColor = BACKGROUNDCOLOR;
+    
+    self.view.backgroundColor = [UIColor whiteColor];;
     [self.view addSubview:self.notifitionView];
     [self.view addSubview:self.backView];
     [self.view addSubview:self.mybankView];
@@ -78,6 +80,7 @@
     [self.view addSubview:self.promptLabel];
     [self.view addSubview:self.tiedCardLabel];
     [self.view addSubview:self.reminderLabel];
+    [self.view addSubview:self.bottomView];
     [self setCardViewFrame];
     //增加提现记录的按钮
     [self setupRightBarBtn];
@@ -113,8 +116,8 @@
 - (void)setupRightBarBtn {
     UIButton *cashRegisterBtn = [[UIButton alloc] init];
     [cashRegisterBtn setTitle:@"提现记录" forState:(UIControlStateNormal)];
-    [cashRegisterBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-    cashRegisterBtn.titleLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(30);
+    [cashRegisterBtn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
+    cashRegisterBtn.titleLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(28);
     [cashRegisterBtn addTarget:self action:@selector(pushCashRegisterVC) forControlEvents:(UIControlEventTouchUpInside)];
     [cashRegisterBtn sizeToFit];
     UIBarButtonItem *cashRegisterItem = [[UIBarButtonItem alloc] initWithCustomView:cashRegisterBtn];
@@ -131,78 +134,91 @@
 
 - (void)setCardViewFrame{
 
+    kWeakSelf
     [self.notifitionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.view);
-        make.top.equalTo(self.view).offset(HXBStatusBarAndNavigationBarHeight);
+        make.left.right.equalTo(weakSelf.view);
+        make.top.equalTo(weakSelf.view).offset(HXBStatusBarAndNavigationBarHeight);
         make.height.offset(kScrAdaptationH750(0));
     }];
     
     [self.mybankView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.left.equalTo(self.view);
-        make.top.equalTo(self.notifitionView.mas_bottom);
+        make.left.equalTo(weakSelf.view).offset(kScrAdaptationW750(20));
+        make.right.equalTo(weakSelf.view).offset(kScrAdaptationW750(-20));
+        make.top.equalTo(weakSelf.notifitionView.mas_bottom).offset(kScrAdaptationH750(30));
         make.height.offset(kScrAdaptationH750(160));
     }];
     
-    [self.availableBalanceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(kScrAdaptationW750(30));
-        make.top.equalTo(self.mybankView.mas_bottom).offset(kScrAdaptationH750(20));
+    [self.freeTipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(kScrAdaptationH750(30));
+        make.top.equalTo(weakSelf.mybankView.mas_bottom).offset(kScrAdaptationH750(60));
+        make.height.offset(kScrAdaptationH750(30));
+        make.width.equalTo(@kScrAdaptationW750(220));
     }];
     
-    [self.freeTipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-kScrAdaptationH750(30));
-        make.centerY.equalTo(self.availableBalanceLabel);
+    [self.amountTextField mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(weakSelf.freeTipLabel.mas_bottom).offset(kScrAdaptationH750(37));
+        make.left.equalTo(weakSelf.tipImage.mas_right).offset(kScrAdaptationW750(30));
+        make.right.equalTo(weakSelf.view).offset(kScrAdaptationW750(-30));
+        make.height.offset(kScrAdaptationH750(130));
     }];
-
     [self.tipImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(kScrAdaptationH750(30));
         make.width.offset(kScrAdaptationW750(27));
         make.height.offset(kScrAdaptationH750(37));
-        make.centerY.equalTo(self.amountTextField);
-    }];
-    
-    [self.amountTextField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.availableBalanceLabel.mas_bottom).offset(kScrAdaptationH750(20));
-        make.left.equalTo(self.tipImage.mas_right).offset(kScrAdaptationW750(30));
-        make.right.equalTo(self.view).offset(kScrAdaptationW750(-30));
-        make.height.offset(kScrAdaptationH750(130));
+        make.centerY.equalTo(weakSelf.amountTextField);
     }];
     
     [self.backView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.availableBalanceLabel.mas_bottom).offset(kScrAdaptationH750(20));
-        make.left.equalTo(self.view);
-        make.right.equalTo(self.view);
-        make.height.offset(kScrAdaptationH750(130));
+        make.top.equalTo(weakSelf.amountTextField.mas_bottom).offset(kScrAdaptationH750(20));
+        make.left.right.equalTo(weakSelf.mybankView);
+        make.height.offset(kScrAdaptationH750(1));
+    }];
+    
+    //可提金额
+    [self.availableBalanceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(kScrAdaptationW750(30));
+        make.top.equalTo(weakSelf.backView.mas_bottom).offset(kScrAdaptationH750(20));
     }];
     
     [self.nextButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.amountTextField.mas_bottom).offset(kScrAdaptationH750(100));
-        make.left.equalTo(self.view).offset(kScrAdaptationW750(40));
-        make.right.equalTo(self.view).offset(kScrAdaptationW750(-40));
+        make.top.equalTo(weakSelf.availableBalanceLabel.mas_bottom).offset(kScrAdaptationH750(116));
+        make.left.equalTo(weakSelf.view).offset(kScrAdaptationW750(40));
+        make.right.equalTo(weakSelf.view).offset(kScrAdaptationW750(-40));
         make.height.offset(kScrAdaptationH750(82));
     }];
     
     [self.callPhoneView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.view).offset(kScrAdaptationH750(-100));
-        make.left.equalTo(self.view).offset(kScrAdaptationW750(40));
+        make.bottom.equalTo(weakSelf.view).offset(kScrAdaptationH750(-100));
+        make.left.equalTo(weakSelf.view).offset(kScrAdaptationW750(40));
     }];
     
     [self.promptLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.callPhoneView.mas_top).offset(kScrAdaptationH750(-10));
-        make.left.equalTo(self.view).offset(kScrAdaptationW750(40));
-        make.right.equalTo(self.view).offset(-kScrAdaptationW750(40));
+        make.bottom.equalTo(weakSelf.callPhoneView.mas_top).offset(kScrAdaptationH750(-10));
+        make.left.equalTo(weakSelf.view).offset(kScrAdaptationW750(40));
+        make.right.equalTo(weakSelf.view).offset(-kScrAdaptationW750(40));
     }];
     
     [self.tiedCardLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.promptLabel.mas_top).offset(kScrAdaptationH750(-10));
-        make.left.equalTo(self.view).offset(kScrAdaptationW750(40));
-        make.right.equalTo(self.view).offset(-kScrAdaptationW750(40));
+        make.bottom.equalTo(weakSelf.promptLabel.mas_top).offset(kScrAdaptationH750(-10));
+        make.left.equalTo(weakSelf.view).offset(kScrAdaptationW750(40));
+        make.right.equalTo(weakSelf.view).offset(-kScrAdaptationW750(40));
     }];
     
     [self.reminderLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.tiedCardLabel.mas_top).offset(kScrAdaptationH750(-20));
-        make.left.equalTo(self.view).offset(kScrAdaptationW750(40));
+        make.bottom.equalTo(weakSelf.tiedCardLabel.mas_top).offset(kScrAdaptationH750(-20));
+        make.left.equalTo(weakSelf.view).offset(kScrAdaptationW750(40));
     }];
 
+    [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(weakSelf.view.mas_bottom);
+        make.left.right.equalTo(weakSelf.view);
+        make.height.equalTo(@kScrAdaptationH750(202));
+    }];
+    
+    self.callPhoneView.hidden = YES;
+    self.promptLabel.hidden = YES;
+    self.tiedCardLabel.hidden = YES;
+    self.reminderLabel.hidden = YES;
 }
 
 - (void)withdrawals
@@ -338,7 +354,16 @@
 #pragma mark - Setter
 - (void)setWithdrawModel:(HXBWithdrawModel *)withdrawModel {
     _withdrawModel = withdrawModel;
-    self.availableBalanceLabel.text =  [NSString stringWithFormat:@"可提金额：%@",[NSString hxb_getPerMilWithDouble:withdrawModel.balanceAmount]];
+    
+    NSString *str = @"可提金额：";
+    NSMutableAttributedString *info = [NSAttributedString setupAttributeStringWithString:str WithRange:NSMakeRange(0, str.length) andAttributeColor:RGB(146, 149, 162) andAttributeFont:kHXBFont_PINGFANGSC_REGULAR_750(24)];
+    
+    NSString *yuanStr = @"元";
+    NSString *amount = [NSString GetPerMilWithDouble:withdrawModel.balanceAmount];
+    NSAttributedString *info2 = [NSAttributedString setupAttributeStringWithBeforeString:amount  WithBeforeRange:NSMakeRange(0, amount.length) andAttributeColor:HXBC_Red_Light andAttributeFont:kHXBFont_PINGFANGSC_REGULAR_750(24) afterString:yuanStr WithAfterRange:NSMakeRange(0, yuanStr.length) andAttributeColor:RGB(146, 149, 162) andAttributeFont:kHXBFont_PINGFANGSC_REGULAR_750(24)];
+    [info appendAttributedString:info2];
+    self.availableBalanceLabel.attributedText = info;
+    
     self.amountTextField.placeholder = [NSString stringWithFormat:@"最小提现金额为%d.00元",self.withdrawModel.minWithdrawAmount];
     self.mybankView.bankCardModel = withdrawModel.bankCard;
     if (withdrawModel.inprocessCount > 0) {
@@ -358,11 +383,56 @@
     
 }
 
+- (void)didClickHelp:(UIButton *)sender {
+    [HXBAlertManager callupWithphoneNumber:kServiceMobile andWithTitle:@"红小宝客服电话" Message:kServiceMobile];
+}
 
 #pragma mark - Getter
+- (UIView *)bottomView {
+    if (!_bottomView) {
+        _bottomView = [[UIView alloc]initWithFrame:CGRectZero];
+        _bottomView.userInteractionEnabled = YES;
+        UIButton *helpBtn = [[UIButton alloc]initWithFrame:CGRectZero];
+        [_bottomView addSubview:helpBtn];
+        [helpBtn setImage:[UIImage imageNamed:@"my_help"] forState:UIControlStateNormal];
+        [helpBtn setTitle:@"红小宝客服" forState:UIControlStateNormal];
+        [helpBtn addTarget:self action:@selector(didClickHelp:) forControlEvents:UIControlEventTouchUpInside];
+        helpBtn.layer.cornerRadius = 5;
+        helpBtn.layer.masksToBounds = YES;
+        [helpBtn setImageEdgeInsets:UIEdgeInsetsMake(0.0, -10, 0.0, 0.0)];
+        [helpBtn setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 10, 0.0, 0)];
+        [helpBtn setTitleColor:RGB(127, 133, 161) forState:UIControlStateNormal];
+        helpBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+        [helpBtn.titleLabel setFont:kHXBFont_PINGFANGSC_REGULAR_750(24)];
+        helpBtn.backgroundColor = kHXBColor_FFFFFF_100;
+        
+        [helpBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self->_bottomView);
+            make.width.equalTo(@kScrAdaptationW750(230));
+            make.height.equalTo(@kScrAdaptationH750(70));
+            make.bottom.offset(kScrAdaptationH750(-92));
+        }];
+        
+        UILabel * lab = [UILabel new];
+        lab.textAlignment = NSTextAlignmentCenter;
+        [lab setFont:kHXBFont_PINGFANGSC_REGULAR_750(20)];
+        lab.textColor = RGB(127, 133, 161);
+        lab.text = @"客服电话时间：工作日9:00-18:00";
+        [_bottomView addSubview:lab];
+        [lab mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self->_bottomView);
+            make.width.equalTo(@kScrAdaptationW750(320));
+            make.height.equalTo(@kScrAdaptationH750(28));
+            make.bottom.offset(kScrAdaptationH750(-40));
+        }];
+    }
+    return _bottomView;
+}
+
 - (WithdrawBankView *)mybankView{
     if (!_mybankView) {
-        _mybankView = [[WithdrawBankView alloc]initWithFrame:CGRectMake(0, 64, kScreenWidth, kScrAdaptationH750(160))];
+        _mybankView = [[WithdrawBankView alloc]initWithFrame:CGRectZero];
+        _mybankView.image = [UIImage imageNamed:@"AccountWithdraw_bg"];
     }
     return _mybankView;
 }
@@ -371,7 +441,7 @@
 {
     if (!_backView) {
         _backView = [[UIView alloc] init];
-        _backView.backgroundColor = [UIColor whiteColor];
+        _backView.backgroundColor = COR12;
     }
     return _backView;
 }
@@ -413,7 +483,7 @@
     if (!_availableBalanceLabel) {
         _availableBalanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, self.amountTextField.bottom + 20, 0, 0)];
         _availableBalanceLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(24);
-        _availableBalanceLabel.textColor = RGB(51, 51, 51);
+        _availableBalanceLabel.textColor = RGB(146, 149, 162);
         _availableBalanceLabel.text = @"可提金额：--";
     }
     return _availableBalanceLabel;
@@ -423,9 +493,9 @@
 {
     if (!_freeTipLabel) {
         _freeTipLabel = [[UILabel alloc] init];
-        _freeTipLabel.text = @"提现免手续费";
-        _freeTipLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(24);
-        _freeTipLabel.textColor = COR11;
+        _freeTipLabel.text = @"提现金额(元)";
+        _freeTipLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(28);
+        _freeTipLabel.textColor = kHXBColor_333333_100;
     }
     return _freeTipLabel;
 }
@@ -502,7 +572,7 @@
 - (HXBMy_Withdraw_notifitionView *)notifitionView {
     kWeakSelf
     if (!_notifitionView) {
-        _notifitionView = [[HXBMy_Withdraw_notifitionView alloc] initWithFrame:CGRectMake(0, HXBStatusBarAndNavigationBarHeight, kScreenWidth, kScrAdaptationH750(70))];
+        _notifitionView = [[HXBMy_Withdraw_notifitionView alloc] initWithFrame:CGRectZero];//CGRectMake(0, HXBStatusBarAndNavigationBarHeight, kScreenWidth, kScrAdaptationH750(70))
         _notifitionView.hidden = YES;
     }
     _notifitionView.block = ^{
@@ -541,7 +611,7 @@
 {
     _bankCardModel = bankCardModel;
     self.bankNameLabel.text = self.bankCardModel.bankType;
-    self.bankCardNumLabel.text = [NSString stringWithFormat:@"(尾号%@)",[self.bankCardModel.cardId substringFromIndex:self.bankCardModel.cardId.length - 4]];
+    self.bankCardNumLabel.text = [NSString stringWithFormat:@"（尾号%@）",[self.bankCardModel.cardId substringFromIndex:self.bankCardModel.cardId.length - 4]];
     self.bankLogoImageView.svgImageString = self.bankCardModel.bankCode;
     
     self.arrivalDateLabel.text = bankCardModel.bankArriveTimeText;
@@ -574,7 +644,7 @@
         _arrivalDateLabel = [[UILabel alloc] init];
 //        _arrivalDateLabel.text = [NSString stringWithFormat:@"预计%@(T+2工作日)到账",[[HXBBaseHandDate sharedHandleDate] stringFromDate:[NSDate date] andDateFormat:@"yyyy-MM-dd"]];
         _arrivalDateLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(24);
-        _arrivalDateLabel.textColor = RGB(153, 153, 153);
+        _arrivalDateLabel.textColor = kHXBColor_FFFFFF_100;
         _arrivalDateLabel.text = @"--";
     }
     return _arrivalDateLabel;
@@ -592,7 +662,7 @@
     if (!_bankNameLabel) {
         _bankNameLabel = [[UILabel alloc] init];
         _bankNameLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(30);
-        _bankNameLabel.textColor = RGB(51, 51, 51);
+        _bankNameLabel.textColor = kHXBColor_FFFFFF_100;
         _bankNameLabel.text = @"--";
     }
     return _bankNameLabel;
@@ -602,7 +672,7 @@
     if (!_bankCardNumLabel) {
         _bankCardNumLabel = [[UILabel alloc] init];
         _bankCardNumLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(30);
-        _bankCardNumLabel.textColor = RGB(51, 51, 51);
+        _bankCardNumLabel.textColor = kHXBColor_FFFFFF_100;
     }
     return _bankCardNumLabel;
 }

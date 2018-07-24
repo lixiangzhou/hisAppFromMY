@@ -80,31 +80,36 @@
     self.earnAccountColor = kHXBColor_333333_100;
     self.earnAccountDescColor = kHXBColor_999999_100;
     
+    self.statusLineNum = self.stepupStatus == HSJStepUpStatusNOQUIT ? 2 : 1;
+    
+    self.selectBtnEnabled = NO;
+    
     switch (self.stepupStatus) {
         case HSJStepUpStatusQUITING:
         {
             self.statusTextColor = kHXBColor_999999_100;
             self.statusFont = kHXBFont_28;
+            self.statusBtnEnabled = NO;
         }
             break;
         case HSJStepUpStatusQUIT:
         {
             self.statusTextColor = kHXBColor_D1A666_100;
             self.statusFont = kHXBFont_28;
+            self.statusBtnEnabled = YES;
         }
             break;
         case HSJStepUpStatusNOQUIT:
         {
             self.statusTextColor = kHXBColor_999999_100;
             self.statusFont = kHXBFont_24;
+            self.statusBtnEnabled = NO;
         }
             break;
     }
     
-    self.statusLineNum = self.stepupStatus == HSJStepUpStatusNOQUIT ? 2 : 1;
-    self.statusBtnEnabled = !self.isEditing;
-    
     if (self.isEditing) {
+        self.statusBtnEnabled = NO;
         if (self.stepupStatus == HSJStepUpStatusQUITING || self.stepupStatus == HSJStepUpStatusNOQUIT) {
             self.leftAccountColor = kHXBColor_FF7055_40;
             self.leftAccountDescColor = kHXBColor_999999_40;
@@ -117,12 +122,20 @@
             
             self.statusTextColor = kHXBColor_999999_40;
             self.statusFont = self.stepupStatus == HSJStepUpStatusNOQUIT ? kHXBFont_24 : kHXBFont_28;
+            
+            self.selectImage = [UIImage imageNamed:@"account_plan_list_disable"];
         } else {
-            if (!self.isSelected) {
+            self.selectBtnEnabled = YES;
+            
+            self.statusTextColor = kHXBColor_D1A666_40;
+            if (self.isSelected == NO) {
+                self.statusFont = kHXBFont_28;
+                
+                self.selectImage = [UIImage imageNamed:@"account_plan_list_unselected"];
+            } else {
                 self.backgroundColor = UIColorFromRGB(0xFFF9F8);
                 
-                self.statusTextColor = kHXBColor_D1A666_40;
-                self.statusFont = kHXBFont_28;
+                self.selectImage = [UIImage imageNamed:@"account_plan_list_selected"];
             }
         }
     }

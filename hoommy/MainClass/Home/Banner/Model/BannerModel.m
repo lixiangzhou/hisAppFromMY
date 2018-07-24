@@ -10,11 +10,11 @@
 
 @implementation BannerModel
 
-//+ modelContainerPropertyGenericClass {
-//    return @{
-//             @"share":[HXBUMShareModel class]
-//             };
-//}
++ modelContainerPropertyGenericClass {
+    return @{
+             @"share":[HXBUMShareModel class]
+             };
+}
 
 + (NSDictionary *)modelCustomPropertyMapper {
     return @{@"ID" : @"id"};
