@@ -6,133 +6,82 @@
 //  Copyright © 2018年 caihongji. All rights reserved.
 //
 
+NSString *const HSJHomePlanCellIdentifier = @"HSJHomePlanCellIdentifier";
+NSString *const HSJHomeActivityCellIdentifier = @"HSJHomeActivityCellIdentifier";
+
 #import "HSJHomeViewController.h"
-#import "HSJTestViewController.h"
-#import "HSJListViewController.h"
-#import "HSJFragmentViewController.h"
-#import "HSJTestWebviewControllerViewController.h"
-#import "HSJDepositoryOpenTipController.h"
-#import "HSJGestureSettingController.h"
-#import "HSJGestureLoginController.h"
 #import "HSJPlanDetailController.h"
-#import "HSJSignInViewController.h"
 #import "HSJHomeCustomNavbarView.h"
 #import "HSJHomeHeaderView.h"
-#import "HSJHomePlanView.h"
-#import "HSJRollOutController.h"
-#import "HXBCommonResultController.h"
-#import "HSJDepositoryOpenTipView.h"
-#import "HSJDepositoryOpenController.h"
-
-@interface HSJHomeViewController ()
+#import "HSJHomePlanTableViewCell.h"
+#import "HSJHomeActivityCell.h"
+#import "HSJHomeFooterView.h"
+#import "HSJHomeVCViewModel.h"
+#import "HXBExtensionMethodTool.h"
+#import "UIScrollView+HXBScrollView.h"
+#import "HXBNoticeViewController.h"
+@interface HSJHomeViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) HSJHomeCustomNavbarView *navView;
 
 @property (nonatomic, strong) HSJHomeHeaderView *headerView;
 
-@property (nonatomic, strong) HSJHomePlanView *planView;
+@property (nonatomic, strong) UITableView *mainTabelView;
+
+@property (nonatomic, strong) HSJHomeFooterView *footerView;
+
+@property (nonatomic, strong) HSJHomeVCViewModel *viewModel;
 
 @end
 
 @implementation HSJHomeViewController
 
 - (void)viewDidLoad {
+    self.isFullScreenShow = YES;
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.isFullScreenShow = YES;
-    
     [self setUI];
-//    self.title = @"";
-    UIButton* button =[[UIButton alloc] init];
-    button.backgroundColor = [UIColor greenColor];
-    [button setTitle:@"HSJTestViewController" forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(buttonClickAct:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:button];
     
-    UIButton* tableViewbutton =[[UIButton alloc] init];
-    tableViewbutton.backgroundColor = [UIColor greenColor];
-    [tableViewbutton setTitle:@"HSJListViewController" forState:UIControlStateNormal];
-    [tableViewbutton addTarget:self action:@selector(tableViewButtonClickAct:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:tableViewbutton];
-    
-    UIButton* fragmentButton =[[UIButton alloc] init];
-    fragmentButton.backgroundColor = [UIColor greenColor];
-    [fragmentButton setTitle:@"HSJFragmentViewController" forState:UIControlStateNormal];
-    [fragmentButton addTarget:self action:@selector(fragmentButtonClickAct:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:fragmentButton];
-    
-    UIButton* webviewButton =[[UIButton alloc] init];
-    webviewButton.backgroundColor = [UIColor greenColor];
-    [webviewButton setTitle:@"HSJTestWebviewControllerViewController" forState:UIControlStateNormal];
-    [webviewButton addTarget:self action:@selector(webviewButtonClickAct:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:webviewButton];
-    
-    [button mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).offset(self.contentViewTop+HXBStatusBarAndNavigationBarHeight);
-        make.left.right.equalTo(self.view);
-        make.height.mas_equalTo(44);
-    }];
-    
-    [tableViewbutton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(button.mas_bottom).offset(20);
-        make.left.right.equalTo(self.view);
-        make.height.mas_equalTo(44);
-    }];
-    
-    [fragmentButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(tableViewbutton.mas_bottom).offset(20);
-        make.left.right.equalTo(self.view);
-        make.height.mas_equalTo(44);
-    }];
-    
-    [webviewButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(fragmentButton.mas_bottom).offset(20);
-        make.left.right.equalTo(self.view);
-        make.height.mas_equalTo(44);
-    }];
-    
-    NYBaseRequest *req = [NYBaseRequest new];
-    req.requestUrl = @"home/baby";
-    [req loadData:^(NYBaseRequest *request, id responseObject) {
-        
-    } failure:^(NYBaseRequest *request, NSError *error) {
-        
-    }];
-}
-
-- (void)setUI {
-    [self.view addSubview:self.headerView];
-    [self.view addSubview:self.navView];
-    [self.view addSubview:self.planView];
-}
-
-- (void)buttonClickAct:(UIButton*)button {
-    [HSJDepositoryOpenTipView show];
-    
-}
-
-- (void)tableViewButtonClickAct:(UIButton*)button {
-    HSJRollOutController *VC = [HSJRollOutController new];
-    [self.navigationController pushViewController:VC animated:YES];
-}
-
-- (void)fragmentButtonClickAct:(UIButton*)button {
-    HXBCommonResultController *VC = [HXBCommonResultController new];
-    HXBCommonResultContentModel *model = [[HXBCommonResultContentModel alloc] initWithImageName:@"result_success" titleString:@"成功" descString:@"这是一个小测试" firstBtnTitle:@"First"];
-    model.btnDescString = @"测试测试测试";
-    model.btnDescHasMark = YES;
-    VC.contentModel = model;
-    [self.navigationController pushViewController:VC animated:YES];
-}
-
-- (void)webviewButtonClickAct:(UIButton*)button {
-    HSJPlanDetailController* vc = [[HSJPlanDetailController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self getHomeData];
+    [self updateUI];
 }
+
+
+- (void)setUI {
+    [self.safeAreaView addSubview:self.navView];
+    [self.safeAreaView addSubview:self.mainTabelView];
+    [self.mainTabelView registerClass:[HSJHomePlanTableViewCell class] forCellReuseIdentifier:HSJHomePlanCellIdentifier];
+    [self.mainTabelView registerClass:[HSJHomeActivityCell class] forCellReuseIdentifier:HSJHomeActivityCellIdentifier];
+    [self.mainTabelView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.navView.mas_bottom);
+        make.left.right.bottom.equalTo(self.safeAreaView);
+    }];
+}
+
+- (void)getHomeData {
+    kWeakSelf
+    [self.viewModel getHomeDataWithResultBlock:^(id responseData, NSError *erro) {
+        weakSelf.headerView.homeModel = weakSelf.viewModel.homeModel;
+        [weakSelf.mainTabelView reloadData];
+        [weakSelf.mainTabelView endRefresh:YES];
+    }];
+}
+
+- (void)updateUI {
+    if (KeyChain.isLogin) {
+        self.headerView.height = kScrAdaptationH750(400);
+    } else {
+        self.headerView.height =  kScrAdaptationH750(558);
+    }
+    [self.headerView updateUI];
+    self.mainTabelView.tableHeaderView = self.headerView;
+}
+
+
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -146,12 +95,70 @@
     [super viewDidDisappear:animated];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - UITableViewDelegate,UITableViewDataSource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (section == 0) {
+        return self.viewModel.homeModel.dataList.count;
+    }
+    return 2;
+}
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        HSJHomePlanTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:HSJHomePlanCellIdentifier];
+        cell.planModel = self.viewModel.homeModel.dataList[indexPath.row];
+        return cell;
+    } else {
+        HSJHomeActivityCell *cell = [tableView dequeueReusableCellWithIdentifier:HSJHomeActivityCellIdentifier];
+        return cell;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        if (KeyChain.isLogin) {
+            return kScrAdaptationH750(656);
+        } else {
+            return kScrAdaptationH750(578);
+        }
+    } else {
+        return kScrAdaptationH750(200);
+    }
+    
+    
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 0.01;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (section == 1) {
+        return kScrAdaptationH750(20);
+    }
+    return 0.01;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    return [[UIView alloc] init];
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    return [[UIView alloc] init];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        HSJPlanDetailController* vc = [[HSJPlanDetailController alloc] init];
+        vc.planId = self.viewModel.homeModel.dataList[indexPath.row].id;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
 
 - (HSJHomeCustomNavbarView *)navView {
     if (!_navView) {
@@ -159,8 +166,10 @@
         _navView.title = @"红小宝";
         _navView.titleColor = kHXBColor_333333_100;
         _navView.titleFount = kHXBFont_PINGFANGSC_REGULAR_750(40);
+        kWeakSelf
         _navView.noticeBlock = ^{
-            IDPLogDebug(@"公告");
+            HXBNoticeViewController *noticeVC = [[HXBNoticeViewController alloc] init];
+            [weakSelf.navigationController pushViewController:noticeVC animated:YES];
         };
     }
     return _navView;
@@ -170,17 +179,53 @@
 
 - (HSJHomeHeaderView *)headerView {
     if (!_headerView) {
-        _headerView = [[HSJHomeHeaderView alloc] initWithFrame:CGRectMake(0, 350, kScreenWidth, kScrAdaptationH750(558))];
+        _headerView = [[HSJHomeHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScrAdaptationH750(558))];
+        kWeakSelf
+        _headerView.bannerDidSelectItemAtIndex = ^(NSInteger index) {
+            [HXBExtensionMethodTool pushToViewControllerWithModel:weakSelf.viewModel.homeModel.bannerList[index] andWithFromVC:weakSelf];
+        };
+        
+        _headerView.titleDidSelectItemAtIndex = ^(NSInteger index) {
+            IDPLogDebug(@"标题滚动");
+        };
         
     }
     return _headerView;
 }
 
-- (HSJHomePlanView *)planView {
-    if (!_planView) {
-        _planView = [[HSJHomePlanView alloc] initWithFrame:CGRectMake(0, 350, kScreenWidth, kScrAdaptationH750(558))];
+- (HSJHomeFooterView *)footerView {
+    if (!_footerView) {
+        _footerView = [[HSJHomeFooterView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScrAdaptationH750(630))];
     }
-    return _planView;
+    return _footerView;
+}
+
+
+
+- (UITableView *)mainTabelView {
+    if (!_mainTabelView) {
+        _mainTabelView = [[UITableView alloc] initWithFrame:self.view.bounds style:(UITableViewStylePlain)];
+        _mainTabelView.backgroundColor = kHXBBackgroundColor;
+        _mainTabelView.tableHeaderView = self.headerView;
+        _mainTabelView.tableFooterView = self.footerView;
+        _mainTabelView.delegate = self;
+        _mainTabelView.dataSource = self;
+        _mainTabelView.showsVerticalScrollIndicator = NO;
+        _mainTabelView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        kWeakSelf
+        _mainTabelView.freshOption = ScrollViewFreshOptionDownPull;
+        _mainTabelView.headerWithRefreshBlock = ^(UIScrollView *scrollView) {
+            [weakSelf getHomeData];
+        };
+    }
+    return _mainTabelView;
+}
+
+- (HSJHomeVCViewModel *)viewModel {
+    if (!_viewModel) {
+        _viewModel = [[HSJHomeVCViewModel alloc] init];
+    }
+    return _viewModel;
 }
 
 @end

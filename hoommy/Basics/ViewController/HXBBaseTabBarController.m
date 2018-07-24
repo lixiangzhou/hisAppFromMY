@@ -21,6 +21,7 @@
 #pragma mark - LifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tabBar.backgroundColor = kHXBColor_FFFFFF_100;
     ///注册通知
     [self registerNotification];
 

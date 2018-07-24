@@ -12,6 +12,7 @@
 #define kHXBMY_VersionUpdateURL @"/update"//版本更新
 #define kHXBSplash            @"/splash"///闪屏接口
 #define kGlobal                 @"/global" /// 全局统计
+#define kHSJHomeBaby            @"/home/baby" /// 全局统计
 //MARK: ======================= 协议 ==========================
 //协议或合同名    端口号后链接    状态    账户内连接
 #define kHXB_Negotiate_SginUPURL @"/agreement/signup"///《注册服务协议》
@@ -64,6 +65,8 @@
 #define kHXBMY_PlanListURL @"/account/plan"//账户内  planlist
 #define kHXBMY_PlanDetaileURL(planID) [NSString stringWithFormat:@"/account/plan/%@",(planID)]
 #define kHXBMY_PlanQuit @"/account/plan/quit"
+
+#define kHXBHome_AnnounceURL @"/announce"//公告
 
 //MARK: ======================= 存管 ==========================
 #define kHXBOpenDepositAccount_Escrow @"/user/escrow" //用户开通存管账户
