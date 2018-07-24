@@ -36,6 +36,7 @@
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = kHXBColor_FFFFFF_100;
         [self setupUI];
+        [self updateUI];
     }
     return self;
 }
@@ -53,6 +54,7 @@
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self).offset(kScrAdaptationW750(30));
         make.top.equalTo(self).offset(kScrAdaptationH750(40));
+        make.height.offset(kScrAdaptationH750(48));
     }];
     [self.segmentLineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.titleLabel.mas_right).offset(kScrAdaptationW750(16));
@@ -67,7 +69,8 @@
     [self.planBackgroundImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self).offset(kScrAdaptationW750(30));
         make.right.equalTo(self).offset(-kScrAdaptationW750(30));
-        make.top.equalTo(self.titleLabel.mas_bottom).offset(50);
+        make.top.equalTo(self.titleLabel.mas_bottom).offset(kScrAdaptationH750(40));
+        make.bottom.equalTo(self).offset(-kScrAdaptationH750(50));
     }];
     [self.expectedRateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.planBackgroundImageView);
@@ -98,12 +101,29 @@
     }];
 }
 
+- (void)updateUI {
+    if (KeyChain.isLogin) {
+        self.planBackgroundImageView.image = [UIImage imageNamed:@"Home_Invest_Plan_Bg"];
+        self.intoLabel.hidden = NO;
+    } else {
+        self.planBackgroundImageView.image = [UIImage imageNamed:@"Home_Signup_Plan_Bg"];
+        self.intoLabel.hidden = YES;
+    }
+}
+
+- (void)setPlanModel:(HSJPlanModel *)planModel {
+    _planModel = planModel;
+    self.expectedRateLabel.text = [NSString stringWithFormat:@"%@%%",planModel.baseInterestRate];
+    self.titleLabel.text = planModel.name;
+    self.messageLabel.text = planModel.tag;
+}
+
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(34);
         _titleLabel.textColor = kHXBFontColor_333333_100;
-        _titleLabel.text = @"存钱罐";
+        _titleLabel.text = @"__";
     }
     return _titleLabel;
 }
@@ -136,7 +156,7 @@
 - (UILabel *)expectedRateLabel {
     if (!_expectedRateLabel) {
         _expectedRateLabel = [[UILabel alloc] init];
-        _expectedRateLabel.text = @"6%";
+        _expectedRateLabel.text = @"__";
         _expectedRateLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(100);
         _expectedRateLabel.textColor = kHXBColor_FF7055_100;
     }

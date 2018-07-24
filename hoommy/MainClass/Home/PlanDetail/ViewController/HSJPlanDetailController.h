@@ -10,4 +10,9 @@
 
 @interface HSJPlanDetailController : HXBBaseViewController
 
+/**
+ 计划id
+ */
+@property (nonatomic, copy) NSString *planID;
+
 @end
