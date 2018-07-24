@@ -14,6 +14,7 @@
 #import "HSJPlanDetailViewModel.h"
 #import "HSJRollOutController.h"
 #import "HSJBuyViewController.h"
+#import "HSJEarningCalculatorView.h"
 
 @interface HSJPlanDetailController () <UIScrollViewDelegate>
 @property (nonatomic, weak) UIView *navView;
@@ -288,7 +289,9 @@
 }
 
 - (void)calClick {
-    
+    [HSJEarningCalculatorView showWithInterest:self.viewModel.interest buyBlock:^(NSString *value) {
+        
+    }];
 }
 
 #pragma mark - Setter / Getter / Lazy

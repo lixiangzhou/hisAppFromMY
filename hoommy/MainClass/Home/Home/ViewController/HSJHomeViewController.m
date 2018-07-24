@@ -23,6 +23,8 @@
 #import "HXBCommonResultController.h"
 #import "HSJDepositoryOpenTipView.h"
 #import "HSJDepositoryOpenController.h"
+#import "HSJRollOutPlanDetailController.h"
+#import "HSJEarningCalculatorView.h"
 
 @interface HSJHomeViewController ()
 
@@ -107,8 +109,10 @@
 }
 
 - (void)buttonClickAct:(UIButton*)button {
-    [HSJDepositoryOpenTipView show];
-    
+//    [HSJDepositoryOpenTipView show];
+    [HSJEarningCalculatorView showWithBuyBlock:^{
+        NSLog(@"buy");
+    }];
 }
 
 - (void)tableViewButtonClickAct:(UIButton*)button {

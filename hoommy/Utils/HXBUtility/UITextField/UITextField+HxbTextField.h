@@ -10,6 +10,8 @@
 
 @interface UITextField (HxbTextField)
 
+@property (nonatomic, assign) NSRange selectedRange;
+
 + (UITextField *)hxb_lineTextFieldWithFrame:(CGRect)frame;
 
 @end

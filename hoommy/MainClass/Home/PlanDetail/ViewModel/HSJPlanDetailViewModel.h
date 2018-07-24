@@ -26,6 +26,8 @@
 @property (nonatomic, copy) NSString *startDateString;
 /// 锁定期结束时间，解除锁定时间
 @property (nonatomic, copy) NSString *endLockDateString;
+/// 利率 用于计算器计算用
+@property (nonatomic, assign) double interest;
 
 - (void)getDataWithId:(NSString *)planId resultBlock:(void(^)(BOOL isSuccess))resultBlock;
 

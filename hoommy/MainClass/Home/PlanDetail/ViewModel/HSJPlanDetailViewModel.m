@@ -35,6 +35,7 @@
     self.lockString = [self getLockString];
     self.startDateString = [self getStartDateString];
     self.endLockDateString = [self getEndLockDateString];
+    self.interest = [self getInterestValue];
 }
 
 - (NSString *)getInterestString {
@@ -50,6 +51,14 @@
         return self.planModel.expectedRate;
     } else {
         return self.planModel.baseInterestRate;
+    }
+}
+
+- (double)getInterestValue {
+    if (self.isNew && self.planModel.expectedRate.length > 0) {
+        return (self.planModel.expectedRate.doubleValue + self.planModel.subsidyInterestRate.doubleValue) * 0.01;
+    } else {
+        return (self.planModel.baseInterestRate.doubleValue + self.planModel.extraInterestRate.doubleValue) * 0.01;
     }
 }
 
