@@ -38,6 +38,17 @@
     }];
 }
 
+- (void)setAmountStr:(NSString *)amountStr {
+    _amountStr = amountStr;
+    NSRange range = NSMakeRange(amountStr.length - 2, 2);
+    self.amountLabel.attributedText = [NSMutableAttributedString setupAttributeStringWithString:amountStr WithRange:(NSRange)range andAttributeColor:kHXBFontColor_7F85A1_100 andAttributeFont:kHXBFont_PINGFANGSC_REGULAR_750(30)];
+}
+
+- (void)setDescribeStr:(NSString *)describeStr {
+    _describeStr = describeStr;
+    self.tipLabel.text = describeStr;
+}
+
 - (UILabel *)amountLabel {
     if (!_amountLabel) {
         _amountLabel = [[UILabel alloc] init];

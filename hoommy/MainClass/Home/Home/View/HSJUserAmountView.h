@@ -10,4 +10,14 @@
 
 @interface HSJUserAmountView : UIView
 
+/**
+ 累计金额
+ */
+@property (nonatomic, copy) NSString *amountStr;
+
+/**
+ 描述文案
+ */
+@property (nonatomic, copy) NSString *describeStr;
+
 @end

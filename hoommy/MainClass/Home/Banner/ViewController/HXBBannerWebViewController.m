@@ -15,7 +15,7 @@
 #import "HXBUMengShareManager.h"
 #import "HXBUMShareViewModel.h"
 #import "HXBUMShareModel.h"
-//#import "HXBDepositoryAlertViewController.h"//开户弹框
+#import "HSJDepositoryOpenTipView.h"//开户弹框
 #import "HXBBannerViewModel.h"
 #import "HXBXYAlertViewController.h"
 #import "NSObject+YYModel.h"
@@ -173,7 +173,7 @@ static NSString *const HXB_Dialog = @"dialog";
         tabBarVC.selectedIndex = 1;
         [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_PlanAndLoan_Fragment object:@{@"selectedIndex" : @2}];
     }else if ([path isEqualToString:kEscrowdialogActivityVC]){
-//        [HXBDepositoryAlertViewController showEscrowDialogActivityWithVCTitle:@"开通存管账户" andType:(HXBRechargeAndWithdrawalsLogicalJudgment_Other) andWithFromController:self.navigationController];
+        [HSJDepositoryOpenTipView show];
     }
    
 }

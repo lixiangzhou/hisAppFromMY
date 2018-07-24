@@ -10,12 +10,7 @@ NSString *const HSJHomePlanCellIdentifier = @"HSJHomePlanCellIdentifier";
 NSString *const HSJHomeActivityCellIdentifier = @"HSJHomeActivityCellIdentifier";
 
 #import "HSJHomeViewController.h"
-#import "HSJTestViewController.h"
-#import "HSJListViewController.h"
-#import "HSJFragmentViewController.h"
-#import "HSJTestWebviewControllerViewController.h"
 #import "HSJPlanDetailController.h"
-#import "HSJSignInViewController.h"
 #import "HSJHomeCustomNavbarView.h"
 #import "HSJHomeHeaderView.h"
 #import "HSJHomePlanTableViewCell.h"
@@ -25,11 +20,6 @@ NSString *const HSJHomeActivityCellIdentifier = @"HSJHomeActivityCellIdentifier"
 #import "HXBExtensionMethodTool.h"
 #import "UIScrollView+HXBScrollView.h"
 #import "HXBNoticeViewController.h"
-#import "HSJHomePlanView.h"
-#import "HSJRollOutController.h"
-#import "HXBCommonResultController.h"
-#import "HSJDepositoryOpenTipView.h"
-#import "HSJDepositoryOpenController.h"
 @interface HSJHomeViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) HSJHomeCustomNavbarView *navView;
@@ -194,6 +184,11 @@ NSString *const HSJHomeActivityCellIdentifier = @"HSJHomeActivityCellIdentifier"
         _headerView.bannerDidSelectItemAtIndex = ^(NSInteger index) {
             [HXBExtensionMethodTool pushToViewControllerWithModel:weakSelf.viewModel.homeModel.bannerList[index] andWithFromVC:weakSelf];
         };
+        
+        _headerView.titleDidSelectItemAtIndex = ^(NSInteger index) {
+            IDPLogDebug(@"标题滚动");
+        };
+        
     }
     return _headerView;
 }

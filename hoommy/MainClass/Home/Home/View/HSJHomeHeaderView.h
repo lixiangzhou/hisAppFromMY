@@ -14,6 +14,9 @@
 
 @property (nonatomic, strong) void(^bannerDidSelectItemAtIndex)(NSInteger index);
 
+@property (nonatomic, strong) void(^titleDidSelectItemAtIndex)(NSInteger index);
+
+
 - (void)updateUI;
 
 @end

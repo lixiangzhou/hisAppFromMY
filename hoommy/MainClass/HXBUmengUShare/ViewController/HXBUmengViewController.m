@@ -163,9 +163,10 @@
     //    shareObject.thumbImage = [UIImage imageNamed:@"icon"];
     [shareObject setShareImage:self.shareVM.shareModel.image];
     messageObject.shareObject = shareObject;
+    kWeakSelf
     [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
         if (error) {
-            [self.shareVM sharFailureStringWithCode:error.code];
+            [weakSelf.shareVM sharFailureStringWithCode:error.code];
         } else {
             NSLog(@"response data is %@",data);
         }

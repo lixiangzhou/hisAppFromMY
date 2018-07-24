@@ -127,6 +127,10 @@
         if (self.bannerDidSelectItemAtIndex) {
             self.bannerDidSelectItemAtIndex(index);
         }
+    } else if (cycleScrollView == self.titleCycleScrollView) {
+        if (self.titleDidSelectItemAtIndex) {
+            self.titleDidSelectItemAtIndex(index);
+        }
     }
 }
 

@@ -136,6 +136,8 @@
     if (!_platformAmountView) {
         _platformAmountView = [[HSJUserAmountView alloc] init];
         _platformAmountView.backgroundColor = kHXBColor_FCF7F6_100;
+        _platformAmountView.amountStr = @"15.20亿元";
+        _platformAmountView.describeStr = @"累计成交金额";
     }
     return _platformAmountView;
 }
@@ -144,6 +146,8 @@
     if (!_userAmountView) {
         _userAmountView = [[HSJUserAmountView alloc] init];
         _userAmountView.backgroundColor = kHXBColor_F5F7FF_100;
+        _userAmountView.amountStr = @"4435万元";
+        _userAmountView.describeStr = @"累计为用户赚取";
     }
     return _userAmountView;
 }

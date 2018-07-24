@@ -45,7 +45,7 @@
     [[HSJGlobalInfoManager shared] getData];
     
     //升级弹框
-//    [[HXBVersionUpdateManager sharedInstance] checkVersionUpdate];
+    [[HXBVersionUpdateManager sharedInstance] checkVersionUpdate];
     NSString *currentVersion = [[[NSBundle mainBundle]infoDictionary]objectForKey:@"CFBundleShortVersionString"];
     NSString *lastVersion = [[NSUserDefaults standardUserDefaults] objectForKey:AXHVersionKey];
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
