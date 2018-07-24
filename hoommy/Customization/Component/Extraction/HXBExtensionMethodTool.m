@@ -27,7 +27,7 @@
                 vc = noticeVC;
             } else if ([path isEqualToString:kPlanDetailVC]) { // 计划详情
                 HSJPlanDetailController *planVC = [HSJPlanDetailController new];
-                planVC.planID = paramDic[@"productId"];
+                planVC.planId = paramDic[@"productId"];
                 vc = planVC;
             }  else if ([path isEqualToString:kRegisterVC]) { //跳转登录注册
                 [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_ShowSignUpVC object:nil];

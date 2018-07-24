@@ -146,7 +146,7 @@ static NSString *const HXB_Dialog = @"dialog";
         HSJPlanDetailController *planDetailsVC = [[HSJPlanDetailController alloc]init];
         NSString *productId = data[@"productId"];
         if (productId != nil) {
-            planDetailsVC.planID = productId;
+            planDetailsVC.planId = productId;
             [self.navigationController pushViewController:planDetailsVC animated:YES];
         }
     }else if ([path isEqualToString:kLoginVC]){

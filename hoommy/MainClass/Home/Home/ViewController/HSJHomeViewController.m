@@ -25,6 +25,11 @@ NSString *const HSJHomeActivityCellIdentifier = @"HSJHomeActivityCellIdentifier"
 #import "HXBExtensionMethodTool.h"
 #import "UIScrollView+HXBScrollView.h"
 #import "HXBNoticeViewController.h"
+#import "HSJHomePlanView.h"
+#import "HSJRollOutController.h"
+#import "HXBCommonResultController.h"
+#import "HSJDepositoryOpenTipView.h"
+#import "HSJDepositoryOpenController.h"
 @interface HSJHomeViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) HSJHomeCustomNavbarView *navView;
@@ -160,7 +165,7 @@ NSString *const HSJHomeActivityCellIdentifier = @"HSJHomeActivityCellIdentifier"
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         HSJPlanDetailController* vc = [[HSJPlanDetailController alloc] init];
-        vc.planID = self.viewModel.homeModel.dataList[indexPath.row].id;
+        vc.planId = self.viewModel.homeModel.dataList[indexPath.row].id;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

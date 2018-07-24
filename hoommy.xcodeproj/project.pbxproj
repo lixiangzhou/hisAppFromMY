@@ -104,6 +104,8 @@
 		8D60B4DD20F7486300287E52 /* HSJDepositoryOpenTipController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B4D020F7486300287E52 /* HSJDepositoryOpenTipController.m */; };
 		8D60B4DE20F7486300287E52 /* HSJDepositoryOpenViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B4D320F7486300287E52 /* HSJDepositoryOpenViewModel.m */; };
 		8D60B4E120F748BC00287E52 /* UITextField+HLNumberFormatTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B4E020F748BC00287E52 /* UITextField+HLNumberFormatTextField.m */; };
+		8DB77F6A210585A5003EE881 /* HSJRollOutDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB77F69210585A5003EE881 /* HSJRollOutDetailCell.m */; };
+		8DD6B9B22106C27C00E8980F /* HSJDepositoryOpenTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD6B9B12106C27C00E8980F /* HSJDepositoryOpenTipView.m */; };
 		9A0BD51D20F6F8ED00B1CC59 /* UIButton+HxbButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A0BD51C20F6F8ED00B1CC59 /* UIButton+HxbButton.m */; };
 		9A0BD52120F6FA0E00B1CC59 /* HXBColourGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A0BD52020F6FA0E00B1CC59 /* HXBColourGradientView.m */; };
 		9A0BD52520F6FBB300B1CC59 /* HXBUserInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A0BD52420F6FBB300B1CC59 /* HXBUserInfoView.m */; };
@@ -340,6 +342,8 @@
 		E13A0F0320F4C94900A3E364 /* HXBCommonProblemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E13A0F0220F4C94900A3E364 /* HXBCommonProblemViewController.m */; };
 		E13A0F0620F4C9FF00A3E364 /* HXBAlertManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E13A0F0420F4C9FF00A3E364 /* HXBAlertManager.m */; };
 		E13A0F0B20F4DC2700A3E364 /* HXBMiddlekey.m in Sources */ = {isa = PBXBuildFile; fileRef = E13A0F0A20F4DC2600A3E364 /* HXBMiddlekey.m */; };
+		E1425BB72101E6E70049C3F4 /* HSJMyAccountBalanceController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1425BB62101E6E70049C3F4 /* HSJMyAccountBalanceController.m */; };
+		E1425BBC2101E94E0049C3F4 /* HSJMyAccountBalanceHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1425BBB2101E94E0049C3F4 /* HSJMyAccountBalanceHeadView.m */; };
 		E14B9F9520FD8AF80084F007 /* HXBAccumulatedIncomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = E14B9F8420FD8AF70084F007 /* HXBAccumulatedIncomeView.m */; };
 		E14B9F9620FD8AF80084F007 /* HXBAssetsCustomVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = E14B9F8620FD8AF70084F007 /* HXBAssetsCustomVIew.m */; };
 		E14B9F9720FD8AF80084F007 /* HXBMy_AllFinance_TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E14B9F8820FD8AF70084F007 /* HXBMy_AllFinance_TableViewCell.m */; };
@@ -580,6 +584,10 @@
 		8D60B4D320F7486300287E52 /* HSJDepositoryOpenViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSJDepositoryOpenViewModel.m; sourceTree = "<group>"; };
 		8D60B4DF20F748BC00287E52 /* UITextField+HLNumberFormatTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+HLNumberFormatTextField.h"; sourceTree = "<group>"; };
 		8D60B4E020F748BC00287E52 /* UITextField+HLNumberFormatTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+HLNumberFormatTextField.m"; sourceTree = "<group>"; };
+		8DB77F68210585A5003EE881 /* HSJRollOutDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJRollOutDetailCell.h; sourceTree = "<group>"; };
+		8DB77F69210585A5003EE881 /* HSJRollOutDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJRollOutDetailCell.m; sourceTree = "<group>"; };
+		8DD6B9B02106C27C00E8980F /* HSJDepositoryOpenTipView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJDepositoryOpenTipView.h; sourceTree = "<group>"; };
+		8DD6B9B12106C27C00E8980F /* HSJDepositoryOpenTipView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJDepositoryOpenTipView.m; sourceTree = "<group>"; };
 		9A0BD51A20F6F75000B1CC59 /* MacrosInBusiness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacrosInBusiness.h; sourceTree = "<group>"; };
 		9A0BD51B20F6F8ED00B1CC59 /* UIButton+HxbButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+HxbButton.h"; sourceTree = "<group>"; };
 		9A0BD51C20F6F8ED00B1CC59 /* UIButton+HxbButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+HxbButton.m"; sourceTree = "<group>"; };
@@ -1027,6 +1035,10 @@
 		E13A0F0720F4D25D00A3E364 /* MacroDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacroDefinition.h; sourceTree = "<group>"; };
 		E13A0F0920F4DC2600A3E364 /* HXBMiddlekey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBMiddlekey.h; sourceTree = "<group>"; };
 		E13A0F0A20F4DC2600A3E364 /* HXBMiddlekey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBMiddlekey.m; sourceTree = "<group>"; };
+		E1425BB52101E6E70049C3F4 /* HSJMyAccountBalanceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJMyAccountBalanceController.h; sourceTree = "<group>"; };
+		E1425BB62101E6E70049C3F4 /* HSJMyAccountBalanceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJMyAccountBalanceController.m; sourceTree = "<group>"; };
+		E1425BBA2101E94E0049C3F4 /* HSJMyAccountBalanceHeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJMyAccountBalanceHeadView.h; sourceTree = "<group>"; };
+		E1425BBB2101E94E0049C3F4 /* HSJMyAccountBalanceHeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJMyAccountBalanceHeadView.m; sourceTree = "<group>"; };
 		E14B9F8320FD8AF70084F007 /* HXBAccumulatedIncomeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBAccumulatedIncomeView.h; sourceTree = "<group>"; };
 		E14B9F8420FD8AF70084F007 /* HXBAccumulatedIncomeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBAccumulatedIncomeView.m; sourceTree = "<group>"; };
 		E14B9F8520FD8AF70084F007 /* HXBAssetsCustomVIew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBAssetsCustomVIew.h; sourceTree = "<group>"; };
@@ -1626,6 +1638,8 @@
 				8D5D610820FEDFB1003F94D9 /* HSJRollOutHeaderView.m */,
 				8D5D611020FEE021003F94D9 /* HSJRollOutCell.h */,
 				8D5D611120FEE021003F94D9 /* HSJRollOutCell.m */,
+				8DB77F68210585A5003EE881 /* HSJRollOutDetailCell.h */,
+				8DB77F69210585A5003EE881 /* HSJRollOutDetailCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1715,6 +1729,8 @@
 		8D60B4CB20F7486300287E52 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8DD6B9B02106C27C00E8980F /* HSJDepositoryOpenTipView.h */,
+				8DD6B9B12106C27C00E8980F /* HSJDepositoryOpenTipView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2560,6 +2576,7 @@
 		9A97D91A20EF420000688ADB /* My */ = {
 			isa = PBXGroup;
 			children = (
+				E1425BB42101E6900049C3F4 /* AccountBalance */,
 				8D5D60FE20FEDE92003F94D9 /* InOut */,
 				9AF51ED220FDCA64008A8CF4 /* TransactionPassword */,
 				E14B9F8120FD8AF70084F007 /* MY_AllFinanceController */,
@@ -3427,6 +3444,33 @@
 			path = Middlekey;
 			sourceTree = "<group>";
 		};
+		E1425BB42101E6900049C3F4 /* AccountBalance */ = {
+			isa = PBXGroup;
+			children = (
+				E1425BB92101E71E0049C3F4 /* View */,
+				E1425BB82101E7060049C3F4 /* ViewController */,
+			);
+			path = AccountBalance;
+			sourceTree = "<group>";
+		};
+		E1425BB82101E7060049C3F4 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E1425BB52101E6E70049C3F4 /* HSJMyAccountBalanceController.h */,
+				E1425BB62101E6E70049C3F4 /* HSJMyAccountBalanceController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		E1425BB92101E71E0049C3F4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E1425BBA2101E94E0049C3F4 /* HSJMyAccountBalanceHeadView.h */,
+				E1425BBB2101E94E0049C3F4 /* HSJMyAccountBalanceHeadView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		E14B9F8120FD8AF70084F007 /* MY_AllFinanceController */ = {
 			isa = PBXGroup;
 			children = (
@@ -3816,6 +3860,7 @@
 				9A3748C520F70DE500F39681 /* HSJMyViewVCViewModel.m in Sources */,
 				9A97DAB720EF420200688ADB /* NYBaseRequest.m in Sources */,
 				4EE616A720F4B4F20044B998 /* TAExampleDotView.m in Sources */,
+				8DB77F6A210585A5003EE881 /* HSJRollOutDetailCell.m in Sources */,
 				9AF51EF320FDCB9D008A8CF4 /* HXBModifyTransactionPasswordAgent.m in Sources */,
 				E153B9D920FC8EFC002BE1AE /* HXBMYViewModel_MainCapitalRecordViewModel.m in Sources */,
 				9A3749C620F882BD00F39681 /* HXBBankCardListViewController.m in Sources */,
@@ -3895,6 +3940,7 @@
 				4EA610D52105E69F008580DD /* HXBNoticeVCViewModel.m in Sources */,
 				E153B96B20F74C39002BE1AE /* HXBAccountAlterLoginPasswordViewModel.m in Sources */,
 				8D2533212100994700CBF08A /* HSJRollOutCellViewModel.m in Sources */,
+				E1425BBC2101E94E0049C3F4 /* HSJMyAccountBalanceHeadView.m in Sources */,
 				E13A0F0620F4C9FF00A3E364 /* HXBAlertManager.m in Sources */,
 				9A3749B320F85D5500F39681 /* HXBBaseHandDate.m in Sources */,
 				4ED047B2210577D600BE1753 /* HSJHomePlanTableViewCell.m in Sources */,
@@ -4013,6 +4059,7 @@
 				4E94386D20FCA5C9004F7908 /* HXBXYAlertViewController.m in Sources */,
 				9A37492820F8532100F39681 /* HXBPresentInformationView.m in Sources */,
 				9A97DAB620EF420200688ADB /* NYNetworkConfig.m in Sources */,
+				8DD6B9B22106C27C00E8980F /* HSJDepositoryOpenTipView.m in Sources */,
 				9A3748F920F7661B00F39681 /* HXBOpenDepositAccountAgent.m in Sources */,
 				9A97DA7E20EF420200688ADB /* HSJBaseViewModel+HSJNetWorkApi.m in Sources */,
 				9A97DA9A20EF420200688ADB /* IDPCache.m in Sources */,
@@ -4029,6 +4076,7 @@
 				8D142AA520FDCDEB00520728 /* HSJPlanModel.m in Sources */,
 				4EA610C12105E40E008580DD /* TYCyclePagerView.m in Sources */,
 				9AF51DA120FC487D008A8CF4 /* HSJCALayerTool.m in Sources */,
+				E1425BB72101E6E70049C3F4 /* HSJMyAccountBalanceController.m in Sources */,
 				9A97DA9C20EF420200688ADB /* IDPStorage.m in Sources */,
 				9A3749B120F85D5500F39681 /* HXBBaseContDownModel.m in Sources */,
 				9AF51EEE20FDCA65008A8CF4 /* HXBTransactionPasswordConfirmationViewController.m in Sources */,

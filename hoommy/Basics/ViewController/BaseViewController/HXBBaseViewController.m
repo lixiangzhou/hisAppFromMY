@@ -34,7 +34,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.automaticallyAdjustsScrollViewInsets = YES;
+    self.automaticallyAdjustsScrollViewInsets = NO;
     [self buildSafeAreaView];
     self.view.backgroundColor = [UIColor whiteColor];
     self.safeAreaView.backgroundColor = [UIColor clearColor];

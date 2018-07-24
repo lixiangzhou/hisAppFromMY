@@ -59,6 +59,8 @@
 #define kHXBColor_EEEEF5_100         UIColorFromRGB(0xEEEEF5)
 #define kHXBColor_ECECEC_100         UIColorFromRGB(0xECECEC)
 
+#define kHXBColor_488CFF_100                UIColorFromRGB(0x488CFF)
+
 ///白色的背景色
 #define kHXBColor_FFFFFF_100                RGBA(255, 255, 255, 1)
 #define kHXBColor_FFFFFF_50                 RGBA(255, 255, 255, 0.5)

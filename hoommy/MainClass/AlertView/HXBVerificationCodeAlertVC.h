@@ -33,11 +33,11 @@
 @property (nonatomic, copy) void(^sureBtnClick)(NSString *pwd);
 
 //getSpeechVerificationCodeBlock获取语音验证码
-@property (nonatomic, copy) void (^getSpeechVerificationCodeBlock)();
+@property (nonatomic, copy) void (^getSpeechVerificationCodeBlock)(void);
 /**
  getVerificationCodeBlock
  */
-@property (nonatomic, copy) void(^getVerificationCodeBlock)();
-@property (nonatomic, copy) void (^cancelBtnClickBlock)();
+@property (nonatomic, copy) void(^getVerificationCodeBlock)(void);
+@property (nonatomic, copy) void (^cancelBtnClickBlock)(void);
 
 @end
