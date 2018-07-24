@@ -30,3 +30,5 @@ extern NSString *const kHXBNotification_PlanAndLoan_Fragment;
 extern NSString *const kHXBNotification_starCountDown;
 //注册开始倒计时
 extern NSString *const kHXBNotification_registrationStartCountdown;
+/// 刷新资产列表页（账户内计划列表页）
+extern NSString *const kHXBNotification_RefreshAccountPlanList;

@@ -19,6 +19,8 @@
 #import "HSJHomeCustomNavbarView.h"
 #import "HSJHomeHeaderView.h"
 #import "HSJHomePlanView.h"
+#import "HSJRollOutController.h"
+#import "HXBCommonResultController.h"
 
 @interface HSJHomeViewController ()
 
@@ -108,15 +110,17 @@
 }
 
 - (void)tableViewButtonClickAct:(UIButton*)button {
-    HSJGestureSettingController* vc = [[HSJGestureSettingController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-//    HSJSignInViewController *vc = [HSJSignInViewController new];
-//    [self.navigationController pushViewController:vc animated:YES];
+    HSJRollOutController *VC = [HSJRollOutController new];
+    [self.navigationController pushViewController:VC animated:YES];
 }
 
 - (void)fragmentButtonClickAct:(UIButton*)button {
-    HSJGestureLoginController* vc = [[HSJGestureLoginController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    HXBCommonResultController *VC = [HXBCommonResultController new];
+    HXBCommonResultContentModel *model = [[HXBCommonResultContentModel alloc] initWithImageName:@"result_success" titleString:@"成功" descString:@"这是一个小测试" firstBtnTitle:@"First"];
+    model.btnDescString = @"测试测试测试";
+    model.btnDescHasMark = YES;
+    VC.contentModel = model;
+    [self.navigationController pushViewController:VC animated:YES];
 }
 
 - (void)webviewButtonClickAct:(UIButton*)button {

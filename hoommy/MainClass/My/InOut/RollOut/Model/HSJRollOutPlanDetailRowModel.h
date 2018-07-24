@@ -27,7 +27,8 @@ typedef enum : NSUInteger {
 @property (nonatomic, copy) NSString *protocol;
 /// HSJRollOutPlanDetailRowTypeAction 时有值
 @property (nonatomic, copy) NSString *className;
-
+/// 
+@property (nonatomic, strong) UIColor *rightLabelColor;
 /// type
 @property (nonatomic, assign) HSJRollOutPlanDetailRowType type;
 

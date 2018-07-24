@@ -68,37 +68,37 @@
     self.bankDescLabel = array3[3];
     
     [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@30);
+        make.top.equalTo(@kScrAdaptationW(30));
         make.centerX.equalTo(self);
     }];
     
     [leftLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(titleLabel);
-        make.right.equalTo(titleLabel.mas_left).offset(-10);
+        make.right.equalTo(titleLabel.mas_left).offset(-kScrAdaptationW(10));
     }];
     
     [rightLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(titleLabel);
-        make.left.equalTo(titleLabel.mas_right).offset(-10);
+        make.left.equalTo(titleLabel.mas_right).offset(-kScrAdaptationW(10));
     }];
     
     [rowView1 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(titleLabel.mas_bottom).offset(25);
-        make.left.equalTo(@30);
-        make.right.equalTo(@-30);
+        make.top.equalTo(titleLabel.mas_bottom).offset(kScrAdaptationW(25));
+        make.left.equalTo(@kScrAdaptationW(30));
+        make.right.equalTo(@kScrAdaptationW(-30));
     }];
     
     [rowView2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(rowView1.mas_bottom).offset(30);
+        make.top.equalTo(rowView1.mas_bottom).offset(kScrAdaptationW(30));
         make.left.equalTo(rowView1);
         make.right.equalTo(rowView1);
     }];
     
     [rowView3 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(rowView2.mas_bottom).offset(30);
+        make.top.equalTo(rowView2.mas_bottom).offset(kScrAdaptationW(30));
         make.left.equalTo(rowView1);
         make.right.equalTo(rowView1);
-        make.bottom.equalTo(@-25);
+        make.bottom.equalTo(@kScrAdaptationW(-25));
     }];
 }
 
@@ -122,12 +122,12 @@
     
     [iconView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.bottom.equalTo(view);
-        make.width.height.equalTo(@40);
+        make.width.height.equalTo(@kScrAdaptationW(40));
     }];
     
     [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(iconView);
-        make.left.equalTo(iconView.mas_right).offset(15);
+        make.left.equalTo(iconView.mas_right).offset(kScrAdaptationW(15));
     }];
     
     [descLabel mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -59,32 +59,32 @@
     [bgView addSubview:iconView];
     
     [descLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@17.5);
-        make.left.equalTo(@15);
-        make.right.equalTo(@-15);
+        make.top.equalTo(@kScrAdaptationW(17.5));
+        make.left.equalTo(@kScrAdaptationW(15));
+        make.right.equalTo(@kScrAdaptationW(-15));
     }];
     
     [bgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(descLabel.mas_bottom).offset(17.5);
+        make.top.equalTo(descLabel.mas_bottom).offset(kScrAdaptationW(17.5));
         make.left.right.equalTo(descLabel);
-        make.bottom.equalTo(@-37);
+        make.bottom.equalTo(@kScrAdaptationW(-37));
     }];
     
     [totalNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.equalTo(@20);
+        make.top.left.equalTo(@kScrAdaptationW(20));
     }];
     
     [totalMoneyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(totalNumLabel);
-        make.top.equalTo(totalNumLabel.mas_bottom).offset(14);
-        make.bottom.equalTo(@-20);
+        make.top.equalTo(totalNumLabel.mas_bottom).offset(kScrAdaptationW(14));
+        make.bottom.equalTo(@kScrAdaptationW(-20));
     }];
     
     [iconView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(bgView);
-        make.right.equalTo(@-20);
-        make.width.equalTo(@80);
-        make.height.equalTo(@50);
+        make.right.equalTo(@kScrAdaptationW(-20));
+        make.width.equalTo(@kScrAdaptationW(80));
+        make.height.equalTo(@kScrAdaptationW(50));
     }];
 }
 

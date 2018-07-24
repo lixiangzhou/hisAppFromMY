@@ -37,18 +37,23 @@
 @property (nonatomic, weak) UIImageView *iconView;
 /// 大号文字
 @property (nonatomic, weak) UILabel *titleLabel;
+
 /// 小号描述文字容器
 @property (nonatomic, weak) UIView *descView;
 /// !
 @property (nonatomic, weak) UIImageView *maskView;
 /// 小号描述文字
 @property (nonatomic, weak) UILabel *descLabel;
+
 /// 中间比较特殊的View，需要自定义
 @property (nonatomic, weak) UIView *customView;
 /// 第一个按钮
 @property (nonatomic, weak) UIButton *firstBtn;
 /// 第二个按钮
 @property (nonatomic, weak) UIButton *secondBtn;
+
+/// 按钮底部的小号描述文字
+@property (nonatomic, weak) UILabel *btnDescLabel;
 @end
 
 @implementation HXBCommonResultController
@@ -86,13 +91,13 @@
     
     UILabel *descLabel = [UILabel new];
     descLabel.numberOfLines = 0;
-    descLabel.font = kHXBFont_30;
+    descLabel.font = kHXBFont_28;
     descLabel.textColor = kHXBColor_999999_100;
     [descView addSubview:descLabel];
     self.descLabel = descLabel;
     
     // ！
-    UIImageView *maskView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tip"]];
+    UIImageView *maskView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"result_prompt"]];
     [descView addSubview:maskView];
     self.maskView = maskView;
     
@@ -100,42 +105,57 @@
     [self.view addSubview:customView];
     self.customView = customView;
     
-    // 第一个按钮
-    UIButton *firstBtn = [UIButton new];
-    firstBtn.layer.cornerRadius = 4;
-    firstBtn.layer.masksToBounds = YES;
-    [firstBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    firstBtn.backgroundColor = kHXBColor_F55151_100;
-    [firstBtn addTarget:self action:@selector(firstBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:firstBtn];
-    self.firstBtn = firstBtn;
+    if (self.contentModel.firstBtnTitle) {
+        // 第一个按钮
+        UIButton *firstBtn = [UIButton new];
+        firstBtn.layer.cornerRadius = 4;
+        firstBtn.layer.masksToBounds = YES;
+        [firstBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        firstBtn.backgroundColor = kHXBColor_FF7055_100;
+        firstBtn.titleLabel.font = kHXBFont_32;
+        [firstBtn addTarget:self action:@selector(firstBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:firstBtn];
+        
+        self.firstBtn = firstBtn;
+    }
+    
     
     // 如果有第二个按钮就显示，否则不显示
     if (self.contentModel.secondBtnTitle) {
         UIButton *secondBtn = [UIButton new];
         secondBtn.layer.cornerRadius = 4;
         secondBtn.layer.masksToBounds = YES;
-        [secondBtn setTitleColor:kHXBColor_F55151_100 forState:UIControlStateNormal];
+        [secondBtn setTitleColor:kHXBColor_FF7055_100 forState:UIControlStateNormal];
         secondBtn.backgroundColor = [UIColor whiteColor];
-        secondBtn.layer.borderColor = kHXBColor_F55151_100.CGColor;
+        secondBtn.layer.borderColor = kHXBColor_FF7055_100.CGColor;
         secondBtn.layer.borderWidth = kXYBorderWidth;
+        secondBtn.titleLabel.font = kHXBFont_32;
         [secondBtn addTarget:self action:@selector(secondBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:secondBtn];
         
         self.secondBtn = secondBtn;
     }
+    
+    if (self.contentModel.btnDescString) {
+        UILabel *btnDescLabel = [UILabel new];
+        btnDescLabel.numberOfLines = 0;
+        btnDescLabel.font = kHXBFont_24;
+        btnDescLabel.textColor = kHXBColor_999999_100;
+        [self.view addSubview:btnDescLabel];
+        self.btnDescLabel = btnDescLabel;
+    }
 }
 - (void)setConstraints {
     kWeakSelf
     [self.iconView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@(HXBStatusBarAndNavigationBarHeight + kScrAdaptationH750(150)));
+        make.top.equalTo(@(HXBStatusBarAndNavigationBarHeight + kScrAdaptationH750(120)));
         make.centerX.equalTo(weakSelf.view);
-        make.width.equalTo(@(kScrAdaptationW750(295)));
-        make.height.equalTo(@(kScrAdaptationH750(182)));
+//        make.width.equalTo(@(kScrAdaptationW750(295)));
+//        make.height.equalTo(@(kScrAdaptationH750(182)));
     }];
     
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.iconView.mas_bottom).offset(kScrAdaptationH(30));
+        make.top.equalTo(self.iconView.mas_bottom).offset(kScrAdaptationH(40));
         make.centerX.equalTo(weakSelf.view);
     }];
     
@@ -183,12 +203,16 @@
         make.height.equalTo(@0);
     }];
     
-    [self.firstBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.customView.mas_bottom).offset(50);
-        make.left.equalTo(@20);
-        make.right.equalTo(@-20);
-        make.height.equalTo(@41);
-    }];
+    UIButton *btn = nil;
+    if (self.contentModel.firstBtnTitle) {    
+        [self.firstBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.customView.mas_bottom).offset(40);
+            make.left.equalTo(@20);
+            make.right.equalTo(@-20);
+            make.height.equalTo(@41);
+        }];
+        btn = self.firstBtn;
+    }
     
     // 如果有第二个按钮就显示，否则不显示
     if (self.contentModel.secondBtnTitle) {
@@ -198,7 +222,15 @@
             make.right.equalTo(@-20);
             make.height.equalTo(@41);
         }];
+        
+        btn = self.secondBtn;
     }
+    
+    [self.btnDescLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(btn.mas_bottom).offset(10);
+        make.left.equalTo(btn);
+    }];
+    
 }
 
 - (void)setData {
@@ -230,6 +262,18 @@
     
     if (self.configCustomView) {
         self.configCustomView(self.customView);
+    }
+    
+    if (self.contentModel.btnDescString) {
+        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] init];
+        if (self.contentModel.btnDescHasMark) {
+            NSTextAttachment *attachment = [NSTextAttachment new];
+            attachment.image = [UIImage imageNamed:@"result_prompt"];
+            attachment.bounds = CGRectMake(0, -3, attachment.image.size.width, attachment.image.size.height);
+            [attr appendAttributedString:[NSAttributedString attributedStringWithAttachment:attachment]];
+        }
+        [attr appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@", self.contentModel.btnDescString] attributes:nil]];
+        self.btnDescLabel.attributedText = attr;
     }
 }
 

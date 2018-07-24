@@ -11,10 +11,14 @@
 @class HXBCommonResultController;
 
 @interface HXBCommonResultContentModel : NSObject
+
 /// 图片名
 @property (nonatomic, copy) NSString *imageName;
+
+
 /// 大号标题
 @property (nonatomic, copy) NSString *titleString;
+
 
 /// 小字号描述
 @property (nonatomic, copy) NSString *descString;
@@ -23,6 +27,8 @@
 /// 小字号描述 是否有左边的 ！图标，默认没有
 @property (nonatomic, assign) BOOL descHasMark;
 
+
+/// note: 第一个按钮若设置了Title就显示，否则不显示
 /// 第一个按钮的Title
 @property (nonatomic, copy) NSString *firstBtnTitle;
 /// 第一个按钮的回调
@@ -30,11 +36,15 @@
 
 
 /// note: 第二个按钮若设置了Title就显示，否则不显示
-
 /// 第二个按钮的Title
 @property (nonatomic, copy) NSString *secondBtnTitle;
 /// 第二个按钮的回调
 @property (nonatomic, copy) void (^secondBtnBlock)(HXBCommonResultController *resultController);
+
+/// 按钮小字号描述
+@property (nonatomic, copy) NSString *btnDescString;
+/// 按钮小字号描述 是否有左边的 ！图标，默认有
+@property (nonatomic, assign) BOOL btnDescHasMark;
 
 
 /// 导航栏返回的回调，按照需要提供，提供就执行
