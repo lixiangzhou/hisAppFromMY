@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+typedef void (^forgotPasswordBlock)(void);
 
 @interface HXBAccount_AlterLoginPassword_View : UIView
+@property (nonatomic,copy)forgotPasswordBlock forgotPasswordBlock;
 ////点击了确认修改密码
 - (void)clickAlterButtonWithBlock: (void(^)(NSString *password_Original, NSString *password_New))clickAlterButtonBlock;
 @end

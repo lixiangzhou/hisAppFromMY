@@ -30,6 +30,8 @@ typedef enum : NSUInteger {
     kHXBCode_Enum_NotSigin = 402,
     /// token 单点登录
     kHXBCode_Enum_SingleLogin = 409,
+    ///图验次数超限
+    kHXBCode_Enum_CaptchaTransfinite = 411,
     //服务器错误
     kHXBCode_Enum_NoServerFaile = 500,
     //购买处理中
