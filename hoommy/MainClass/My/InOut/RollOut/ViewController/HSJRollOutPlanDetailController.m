@@ -11,6 +11,7 @@
 #import "HSJRollOutDetailCell.h"
 #import "HSJRollOutConfirmController.h"
 #import "HXBBaseWKWebViewController.h"
+#import "HSJFinAddRecortdViewController.h"
 
 @interface HSJRollOutPlanDetailController ()
 @property (nonatomic, strong) HSJRollOutPlanDetailViewModel *viewModel;
@@ -85,6 +86,10 @@
     HSJRollOutPlanDetailRowModel *model = self.viewModel.dataSource[indexPath.section][indexPath.row];
     
     if (model.type == HSJRollOutPlanDetailRowTypeAction) {
+        
+        HSJFinAddRecortdViewController *vc = [HSJFinAddRecortdViewController new];
+        vc.planId = self.planId;
+        [self.navigationController pushViewController:vc animated:YES];
         
     } else if (model.type == HSJRollOutPlanDetailRowTypeProtocol) {
         NSString *url = kHXB_Negotiate_ServePlan_AccountURL(self.planId);

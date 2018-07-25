@@ -95,7 +95,6 @@
     [self presentViewController:alertVC animated:NO completion:nil];
     kWeakSelf
     [alertVC setLeftBtnBlock:^{
-        [weakSelf.navigationController popViewControllerAnimated:YES];
     }];
     [alertVC setRightBtnBlock:^{
         //去手机号修改登陆密码页   HXBSignUPAndLoginRequest_sendSmscodeType_forgot
