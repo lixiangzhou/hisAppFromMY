@@ -23,10 +23,83 @@
     return self;
 }
 
+- (BOOL)erroStateCodeDeal:(NYBaseRequest *)request response:(NSDictionary *)responseObject {
+    if([request.requestUrl containsString:@"/result"]) {
+        return NO;
+    }
+    
+    return [super erroStateCodeDeal:request response:responseObject];
+}
+
 - (void)hideProgress:(NYBaseRequest *)request {
     if(!self.isLoadingData) {
         [super hideProgress:request];
     }
+}
+
+/**
+ 计划购买
+ 
+ @param planID 计划id
+ @param parameter 请求参数
+ @param resultBlock 返回数据
+ */
+- (void)planBuyReslutWithPlanID: (NSString *)planID
+                     parameter : (NSDictionary *)parameter
+                    resultBlock: (void(^)(BOOL isSuccess))resultBlock {
+    NYBaseRequest *request = [[NYBaseRequest alloc] initWithDelegate:self];
+    request.requestMethod = NYRequestMethodPost;
+    request.requestUrl = kHXBFin_Plan_ConfirmBuyReslutURL(planID);
+    request.requestArgument = parameter;
+    request.showHud = YES;
+    request.hudShowContent = @"安全支付";
+    kWeakSelf
+    [request loadData:^(NYBaseRequest *request, NSDictionary *responseObject) {
+        NSDictionary *data = responseObject[kResponseData];
+        weakSelf.resultModel = [[HXBFinModel_BuyResoult_PlanModel alloc] initWithDictionary:data];
+        if (resultBlock) resultBlock(YES);
+    } failure:^(NYBaseRequest *request, NSError *error) {
+        NSDictionary *responseObject = error.userInfo;
+        if (responseObject) {
+            NSInteger status = [responseObject[kResponseStatus] integerValue];
+            weakSelf.buyErrorMessage = responseObject[kResponseMessage];
+            NSString *errorType = responseObject[kResponseErrorData][@"errorType"];
+            if (status) {
+                if ([errorType isEqualToString:@"TOAST"]) {
+                    [HxbHUDProgress showTextWithMessage:responseObject[@"message"]];
+                    status = kBuy_Toast;
+                } else if ([errorType isEqualToString:@"RESULT"]) {
+                    status = kBuy_Result;
+                } else if ([errorType isEqualToString:@"PROCESSING"]) {
+                    status = kBuy_Processing;
+                }
+                weakSelf.buyErrorCode = status;
+            }
+        }
+        if (resultBlock) resultBlock(NO);
+    }];
+}
+
+/**
+ 获取充值短验
+ @param amount 充值金额
+ @param action 判断是否为提现或者充值
+ @param type 短信验证码或是语言验证码
+ @param resultBlock 请求回调
+ */
+- (void)getVerifyCodeRequesWithRechargeAmount:(NSString *)amount andWithType:(NSString *)type  andWithAction:(NSString *)action resultBlock:(NetWorkResponseBlock)resultBlock {
+    [self verifyCodeRequestWithResultBlock:^(NYBaseRequest *request) {
+        request.requestArgument = @{
+                                    @"amount" : amount,
+                                    @"action":action,
+                                    @"type":type
+                                    };
+        request.showHud = YES;
+    } resultBlock:^(id responseObject, NSError *error) {
+        if(resultBlock) {
+            resultBlock(responseObject, error);
+        }
+    }];
 }
 
 #pragma  mark 逻辑处理
@@ -67,14 +140,34 @@
 
 - (NSString *)buttonShowContent {
     NSString *content = @"添加银行卡";
-    if(self.userInfoModel.userInfo.hasBindCard.boolValue) {
+    switch (self.buttonType) {
+        case HSJBUYBUTTON_WITHMONEY:
+        {
+            double money = self.inputMoney.doubleValue;
+            content = [NSString stringWithFormat:@"立即转入%.2lf元", money];
+            break;
+        }
+        case HSJBUYBUTTON_NOMONEY:
+            content = @"立即转入";
+            break;
+            
+        default:
+            break;
+    }
+    
+    return content;
+}
+
+- (HSJBUYBUTTON_TYPE)buttonType {
+    HSJBUYBUTTON_TYPE buttonType = HSJBUYBUTTON_BINDCARD;
+    if(self.userInfoModel.userInfo.hasBindCard.boolValue || !self.isAbleBankCellItem) {
         double money = self.inputMoney.doubleValue;
-        content = @"立即转入";
+        buttonType = HSJBUYBUTTON_NOMONEY;
         if(money > 0) {
-            content = [NSString stringWithFormat:@"%@%.2lf元", content, money];
+            buttonType = HSJBUYBUTTON_WITHMONEY;
         }
     }
-    return content;
+    return buttonType;
 }
 
 - (NSArray *)cellDataList {
@@ -98,6 +191,14 @@
     float creditor = MIN(remainAmount, userRemainAmount);
     
     return creditor;
+}
+
+- (NSString *)buyType {
+    NSString *buyType = @"balance";//余额购买
+    if(self.isAbleBankCellItem) {
+        buyType = @"recharge";
+    }
+    return buyType;
 }
 
 - (void)buildCellDataList {
@@ -180,20 +281,23 @@
 }
 
 //校验数据
-- (BOOL)checkMoney:(void (^)(BOOL isLess))LessthanStartMoneyBLock {
+- (BOOL)checkMoney:(void (^)(BOOL isLess))lessthanStartMoneyBLock {
     BOOL result = YES;
     double money = self.inputMoney.doubleValue;
     NSString *erroInfo = @"";
     
     //校验金额
     if(money > 0) {
-        if(money < self.planModel.minRegisterAmount.doubleValue) {
-            erroInfo = [NSString stringWithFormat:@"起投金额需为%@", [NSString hxb_getPerMilWithIntegetNumber:self.planModel.minRegisterAmount.doubleValue]];
-        }
-        else if(money > self.addUpLimit) {
+        if(money > self.addUpLimit) {
             erroInfo = @"转入金额已超上限";
         }
-        else {
+        if(money<self.planModel.minRegisterAmount.doubleValue && self.addUpLimit>self.planModel.minRegisterAmount.doubleValue) {
+            erroInfo = [NSString stringWithFormat:@"起投金额需为%@", [NSString hxb_getPerMilWithIntegetNumber:self.planModel.minRegisterAmount.doubleValue]];
+            if(lessthanStartMoneyBLock) {
+                lessthanStartMoneyBLock(YES);
+            }
+        }
+        if(money>self.planModel.minRegisterAmount.doubleValue && self.addUpLimit>self.planModel.registerMultipleAmount.doubleValue) {
             int leftValue = money-self.planModel.minRegisterAmount.doubleValue;
             if(leftValue % self.planModel.registerMultipleAmount.intValue != 0) {
                 erroInfo = [NSString stringWithFormat:@"转入金额需%@起投，%@倍数递增；", [NSString hxb_getPerMilWithIntegetNumber:self.planModel.minRegisterAmount.doubleValue], [NSString hxb_getPerMilWithIntegetNumber:self.planModel.registerMultipleAmount.doubleValue]];
@@ -221,7 +325,7 @@
         result = NO;
         erroInfo = @"请同意协议组";
     }
-    else if(self.isShowRiskAgeement && !isAgreeRiskApplyAgreement) {
+    if(self.isShowRiskAgeement && !isAgreeRiskApplyAgreement) {
         result = NO;
         erroInfo = @"请同意风险承受说明";
     }

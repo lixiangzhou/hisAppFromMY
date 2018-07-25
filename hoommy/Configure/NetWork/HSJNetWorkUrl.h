@@ -103,5 +103,7 @@
 //MARK: ======================= 协议 ==========================
 #define kHXB_Negotiate_thirdpart @"/agreement/thirdpart" ///《恒丰银行股份有限公司杭州分行网络交易资金账户三方协议》
 
+//MARK: ======================= 购买 ==========================
+#define kHXBFin_Plan_ConfirmBuyReslutURL(planID) [NSString stringWithFormat:@"/plan/%@/result",(planID)]//确认购买
 
 #endif /* HSJNetWorkUrl_h */

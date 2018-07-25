@@ -141,10 +141,7 @@
         
         kWeakSelf
         _contentTf.block = ^(NSString *text1) {
-            weakSelf.inputMoney = text1;
-            if(weakSelf.textChange) {
-                weakSelf.textChange(text1);
-            }
+            [weakSelf textChange:text1];
         };
         
         _contentTf.keyBoardChange = ^(BOOL isEditState) {
@@ -158,6 +155,13 @@
     }
     
     return _contentTf;
+}
+
+- (void)textChange:(NSString*)text {
+    _inputMoney = text;
+    if(self.textChange) {
+        self.textChange(text);
+    }
 }
 
 - (void)setAddUpLimitMoney:(float)addUpLimitMoney {
@@ -179,6 +183,12 @@
     _addCondition = [addCondition copy];
     
     self.contentTf.placeholder = addCondition;
+}
+
+- (void)setInputMoney:(NSString *)inputMoney {
+    _inputMoney = inputMoney;
+    
+    self.contentTf.text = inputMoney;
 }
 /*
 // Only override drawRect: if you perform custom drawing.

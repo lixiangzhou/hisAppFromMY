@@ -10,4 +10,11 @@
 
 @implementation HSJPlanModel
 
+- (NSMutableDictionary *)map {
+    NSMutableDictionary *dic = [super map];
+    [dic setValue:@"id" forKey:@"planId"];
+    
+    return dic;
+}
+
 @end

@@ -38,6 +38,12 @@ typedef enum : NSUInteger {
     kHXBPurchase_Processing = -999,
 } HSJNetStateCode;
 
+typedef enum : NSUInteger {
+    kBuy_Toast = 10001,
+    kBuy_Result = 10002,
+    kBuy_Processing = 10003,
+} KHXBBuy_Code;
+
 /**
  code 码
  */

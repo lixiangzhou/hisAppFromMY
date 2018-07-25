@@ -18,7 +18,6 @@
 ///银行卡
 @property (nonatomic,strong) HXBRequestUserInfoAPI_UserBank *userBank;
 
-
 @end
 
 ///银行卡
@@ -43,6 +42,8 @@
 @property (nonatomic, assign) int userId;///用户 id
 @property (nonatomic, assign) BOOL quotaStatus;///银行状态 true:可用 false:禁用或者维护
 
+//安全手机号
+@property (nonatomic, strong) NSString *securyMobile;
 @end
 
 ///用户资产
