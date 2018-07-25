@@ -16,6 +16,7 @@
 #import "HXBBankCardListViewController.h"
 #import "HSJDepositoryOpenViewModel.h"
 #import <ReactiveObjC/ReactiveObjC.h>
+#import <IQKeyboardManager.h>
 
 #define kInputHeight 50
 
@@ -39,6 +40,8 @@
 @property (nonatomic, assign) BOOL isAgree;
 
 @property (nonatomic, strong) HSJDepositoryOpenViewModel *viewModel;
+
+@property (nonatomic, weak) UITextField *currentField;
 @end
 
 @implementation HSJDepositoryOpenController
@@ -52,6 +55,20 @@
     self.viewModel = [HSJDepositoryOpenViewModel new];
     self.isAgree = YES;
     [self setUI];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [IQKeyboardManager sharedManager].enable = NO;
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [IQKeyboardManager sharedManager].enable = YES;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - UI
@@ -206,6 +223,8 @@
     [self.scrollView addSubview:mobileView];
     self.mobileView = mobileView;
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
+
     [sectionView2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.transactionPwdView.mas_bottom).offset(10);
         make.left.right.equalTo(self.view);
@@ -305,6 +324,10 @@
 
 
 #pragma mark - UITextFieldDelegate
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    self.currentField = textField;
+}
+
 - (BOOL)textFieldShouldClear:(UITextField *)textField
 {
     if (self.bankNoView == textField.superview) {
@@ -325,6 +348,24 @@
         }
         return [self limitNumberCount:textField.superview];
     }
+}
+
+- (void)willChangeFrame:(NSNotification *)notification {
+    [UIView animateWithDuration:0.25 animations:^{
+        if ([self.currentField isEqual:self.mobileView.textField]) {
+            CGFloat endY = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].origin.y;
+            if (endY == kScreenHeight) {
+                self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+            } else {
+                CGRect rect = [self.currentField convertRect:self.currentField.bounds toView:[UIApplication sharedApplication].keyWindow];
+                CGFloat maxY = CGRectGetMaxY(rect);
+                
+                self.scrollView.contentInset = UIEdgeInsetsMake(-MAX(15, maxY - endY), 0, 0, 0);
+            }
+        } else {
+            self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        }
+    }];
 }
 
 #pragma mark - Helper
