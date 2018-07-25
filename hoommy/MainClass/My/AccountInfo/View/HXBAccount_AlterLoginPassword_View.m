@@ -16,6 +16,8 @@
 @property (nonatomic,strong) UILabel *password_New_title;
 ///新密码的textField
 @property (nonatomic, strong) HXBCustomTextField *password_New;
+/// 忘记密码
+@property (nonatomic,strong) UIButton *forgotPasswordButton;
 ///确认修改密码
 @property (nonatomic,strong) UIButton *alterButton;
 
@@ -45,11 +47,12 @@
     [self addSubview:self.password_New];
     [self.password_New addSubview: self.password_New_title];
     [self addSubview:self.alterButton];
+    [self addSubview:self.forgotPasswordButton];
     
     [self.password_Original mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf).offset(kScrAdaptationH(28));
         make.left.equalTo(weakSelf);
-        make.right.equalTo(self);
+        make.right.equalTo(weakSelf);
         make.height.equalTo(@(kScrAdaptationH(60)));
     }];
     [self.password_Original_title mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -63,9 +66,9 @@
     }];
     
     [self.password_New mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.password_Original.mas_bottom);
-        make.left.equalTo(self);
-        make.right.equalTo(self);
+        make.top.equalTo(weakSelf.password_Original.mas_bottom);
+        make.left.equalTo(weakSelf);
+        make.right.equalTo(weakSelf);
         make.height.offset(kScrAdaptationH(60));
     }];
     [self.password_New_title mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -77,8 +80,14 @@
     [self.password_New.textField mas_updateConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.password_New_title.mas_right).offset(kScrAdaptationW(29));
     }];
+    [self.forgotPasswordButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.offset(kScrAdaptationW(-15));
+        make.height.equalTo(@(kScrAdaptationH(17)));
+        make.top.equalTo(weakSelf.password_New_title.mas_bottom).offset(kScrAdaptationH(26));
+        make.width.equalTo(@kScrAdaptationW(80));
+    }];
     [self.alterButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.password_New.mas_bottom).offset(kScrAdaptationH(50));
+        make.top.equalTo(weakSelf.password_New.mas_bottom).offset(kScrAdaptationH(100));
         make.left.equalTo(weakSelf).offset(kScrAdaptationW(20));
         make.right.equalTo(weakSelf).offset(kScrAdaptationW(-20));
         make.height.equalTo(@(kScrAdaptationH(41)));
@@ -92,7 +101,24 @@
 - (void)clickAlterButtonWithBlock:(void (^)(NSString *password_Original, NSString *password_New))clickAlterButtonBlock {
     self.clickAlterButtonBlock = clickAlterButtonBlock;
 }
+- (void)forgotPasswordButtonClick:(UIButton *)sender {
+    if (self.forgotPasswordBlock) {
+        self.forgotPasswordBlock();
+    }
+}
+
 #pragma mark - 懒加载
+- (UIButton *)forgotPasswordButton {
+    if (!_forgotPasswordButton) {
+        _forgotPasswordButton = [UIButton new];
+        [_forgotPasswordButton setTitle:@"忘记密码?" forState:UIControlStateNormal];
+        [_forgotPasswordButton addTarget:self action:@selector(forgotPasswordButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [_forgotPasswordButton setTitleColor:RGB(254, 126, 94) forState:UIControlStateNormal];
+        [_forgotPasswordButton.titleLabel setFont:kHXBFont_PINGFANGSC_REGULAR(12)];
+        _forgotPasswordButton.titleLabel.textAlignment = NSTextAlignmentRight;
+    }
+    return _forgotPasswordButton;
+}
 - (UILabel *)password_New_title {
     if (!_password_New_title) {
         _password_New_title = [[UILabel alloc] init];
