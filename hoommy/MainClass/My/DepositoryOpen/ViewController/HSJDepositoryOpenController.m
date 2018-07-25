@@ -128,8 +128,8 @@
     transactionPwdView.limitStringLength = 6;
     transactionPwdView.hideEye = NO;
     transactionPwdView.textFieldRightOffset = 40;
-    transactionPwdView.keyboardType = UIKeyboardTypeNumberPad;
     transactionPwdView.secureTextEntry = YES;
+    transactionPwdView.keyboardType = UIKeyboardTypeNumberPad;
     [self commonTextViewProp:transactionPwdView];
     [self.scrollView addSubview:transactionPwdView];
     self.transactionPwdView = transactionPwdView;
@@ -172,7 +172,6 @@
     bankNoView.textFieldRightOffset = 70;
     bankNoView.keyboardType = UIKeyboardTypeNumberPad;
     [self commonTextViewProp:bankNoView];
-    bankNoView.keyboardType = UIKeyboardTypeNumberPad;
 
     kWeakSelf
     bankNoView.block = ^(NSString *text) {
@@ -356,21 +355,29 @@
 }
 
 - (void)willChangeFrame:(NSNotification *)notification {
-    
-        if ([self.currentField isEqual:self.mobileView.textField]) {
-            CGFloat endY = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].origin.y;
-            if (endY == kScreenHeight) {
-                self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
-            } else {
-                CGRect rect = [self.mobileView convertRect:self.currentField.frame toView:[UIApplication sharedApplication].keyWindow];
-                CGFloat maxY = CGRectGetMaxY(rect);
-                
-                self.scrollView.contentInset = UIEdgeInsetsMake(-MAX(10, maxY - endY + 10), 0, 0, 0);
-            }
-        } else {
+    if ([self.currentField isEqual:self.mobileView.textField]) {
+        CGFloat endY = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].origin.y;
+        if (endY == kScreenHeight) {
             self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        } else {
+            CGRect rect = [self.mobileView convertRect:self.currentField.frame toView:[UIApplication sharedApplication].keyWindow];
+            CGFloat maxY = CGRectGetMaxY(rect);
+            
+            self.scrollView.contentInset = UIEdgeInsetsMake(-MAX(10, maxY - endY + 10 + self.scrollView.contentOffset.y), 0, 0, 0);
         }
-    
+    } else if ([self.currentField isEqual:self.bankNoView.textField]) {
+        CGFloat endY = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].origin.y;
+        if (endY == kScreenHeight) {
+            self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        } else {
+            CGRect rect = [self.bankNoView convertRect:self.currentField.frame toView:[UIApplication sharedApplication].keyWindow];
+            CGFloat maxY = CGRectGetMaxY(rect);
+            
+            self.scrollView.contentInset = UIEdgeInsetsMake(-MAX(10, maxY - endY + 10 + self.scrollView.contentOffset.y), 0, 0, 0);
+        }
+    } else {
+        self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    }
 }
 
 #pragma mark - Helper
