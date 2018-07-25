@@ -47,7 +47,7 @@
 
 - (void)setupData {
     self.viewModel = [[HSJBuyViewModel alloc] init];
-    self.planId = @"748";
+//    self.planId = @"748";
     self.viewModel.inputMoney = self.startMoney;
     if(!self.planModel) {
         kWeakSelf
