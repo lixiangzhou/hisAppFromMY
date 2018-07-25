@@ -42,4 +42,10 @@
 @property (nonatomic, copy) NSString *remainAmount;
 /// 活动文案
 @property (nonatomic, copy) NSString *tag;
+/// 是否首次够买
+@property (nonatomic, copy) NSString *isFirst;
+/// 最小注册金额
+@property (nonatomic, copy) NSString *minRegisterAmount;
+/// 加入倍数金额
+@property (nonatomic, copy) NSString *registerMultipleAmount;
 @end

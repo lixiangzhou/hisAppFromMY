@@ -54,6 +54,17 @@
     return (money > self.userInfoModel.userAssets.userRiskAmount.doubleValue - self.userInfoModel.userAssets.holdingAmount);
 }
 
+- (NSString *)addCondition {
+    NSString *addCondition = nil;
+    if (self.planModel.isFirst.boolValue) {
+        addCondition = [NSString stringWithFormat:@"%@起投，%@递增",[NSString hxb_getPerMilWithIntegetNumber:self.planModel.minRegisterAmount.doubleValue],[NSString hxb_getPerMilWithIntegetNumber:self.planModel.registerMultipleAmount.doubleValue]];
+    } else {
+        addCondition = [NSString stringWithFormat:@"%@的倍数递增",[NSString hxb_getPerMilWithIntegetNumber:self.planModel.registerMultipleAmount.doubleValue]];
+        
+    }
+    return addCondition;
+}
+
 - (NSString *)buttonShowContent {
     NSString *content = @"添加银行卡";
     if(self.userInfoModel.userInfo.hasBindCard.boolValue) {
@@ -166,5 +177,60 @@
     }
     
     return tempStr;
+}
+
+//校验数据
+- (BOOL)checkMoney:(void (^)(BOOL isLess))LessthanStartMoneyBLock {
+    BOOL result = YES;
+    double money = self.inputMoney.doubleValue;
+    NSString *erroInfo = @"";
+    
+    //校验金额
+    if(money > 0) {
+        if(money < self.planModel.minRegisterAmount.doubleValue) {
+            erroInfo = [NSString stringWithFormat:@"起投金额需为%@", [NSString hxb_getPerMilWithIntegetNumber:self.planModel.minRegisterAmount.doubleValue]];
+        }
+        else if(money > self.addUpLimit) {
+            erroInfo = @"转入金额已超上限";
+        }
+        else {
+            int leftValue = money-self.planModel.minRegisterAmount.doubleValue;
+            if(leftValue % self.planModel.registerMultipleAmount.intValue != 0) {
+                erroInfo = [NSString stringWithFormat:@"转入金额需%@起投，%@倍数递增；", [NSString hxb_getPerMilWithIntegetNumber:self.planModel.minRegisterAmount.doubleValue], [NSString hxb_getPerMilWithIntegetNumber:self.planModel.registerMultipleAmount.doubleValue]];
+            }
+        }
+    }
+    else {
+        erroInfo = @"请输入转入金额";
+    }
+    
+    //显示错误提示
+    if(erroInfo.length > 0) {
+        result = NO;
+        [self showToast:erroInfo];
+    }
+    return result;
+}
+
+//校验协议勾选
+- (BOOL)checkAgreement:(BOOL)isAgreementGroup agreeRiskApplyAgreement:(BOOL)isAgreeRiskApplyAgreement {
+    BOOL result = YES;
+    NSString *erroInfo = @"";
+    
+    if(!isAgreementGroup) {
+        result = NO;
+        erroInfo = @"请同意协议组";
+    }
+    else if(self.isShowRiskAgeement && !isAgreeRiskApplyAgreement) {
+        result = NO;
+        erroInfo = @"请同意风险承受说明";
+    }
+    
+    //显示错误提示
+    if(erroInfo.length > 0) {
+        result = NO;
+        [self showToast:erroInfo];
+    }
+    return result;
 }
 @end

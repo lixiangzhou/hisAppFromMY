@@ -15,6 +15,8 @@
 @property (nonatomic, assign) BOOL isAgreeRiskApplyAgreement;
 @property (nonatomic, assign) BOOL isAgreementGroup;
 @property (nonatomic, assign) BOOL isShowAgreeRiskApplyAgreementView;
+@property (nonatomic, assign) BOOL enableAddButton;
+
 
 @property (nonatomic, strong) void (^addAction)(void);
 @property (nonatomic, strong) void (^lookUpAgreement)(void);

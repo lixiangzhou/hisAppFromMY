@@ -73,7 +73,7 @@
         kWeakSelf
         _riskApplyAgreementView.text = attributedString;
         _riskApplyAgreementView.agreeBtnBlock = ^(BOOL isSelected){
-            
+            weakSelf.isAgreeRiskApplyAgreement = isSelected;
         };
     }
     return _riskApplyAgreementView;
@@ -95,7 +95,7 @@
         }];
         _agreementGroupView.text = attributedString;
         _agreementGroupView.agreeBtnBlock = ^(BOOL isSelected){
-            
+            weakSelf.isAgreementGroup = isSelected;
         };
     }
     return _agreementGroupView;
@@ -155,6 +155,12 @@
     }
     
     self.riskApplyAgreementView.hidden = !isShowAgreeRiskApplyAgreementView;
+}
+
+- (void)setEnableAddButton:(BOOL)enableAddButton {
+    _enableAddButton = enableAddButton;
+    
+    self.actionBtn.enabled = enableAddButton;
 }
 /*
 // Only override drawRect: if you perform custom drawing.

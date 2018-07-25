@@ -12,4 +12,6 @@
 @interface HSJBuyViewController : HXBBaseViewController
 @property (nonatomic, strong) HSJPlanModel *planModel;
 @property (nonatomic, copy) NSString *planId;
+//起始金额
+@property (nonatomic, copy) NSString *startMoney;
 @end

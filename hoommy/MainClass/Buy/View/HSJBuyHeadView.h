@@ -12,6 +12,8 @@
 @property (nonatomic, copy) NSString *inputMoney;
 @property (nonatomic, assign) float addUpLimitMoney;
 @property (nonatomic, assign) BOOL isKeepKeyboard;
+///加入条件加入金额%@元起，%@元的整数倍递增
+@property (nonatomic, copy) NSString *addCondition;
 
 @property (nonatomic, strong) void (^textChange)(NSString  *text);
 @end

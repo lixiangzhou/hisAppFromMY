@@ -44,6 +44,7 @@
 - (void)setupData {
     self.viewModel = [[HSJBuyViewModel alloc] init];
     self.planId = @"748";
+    self.viewModel.inputMoney = self.startMoney;
     if(!self.planModel) {
         kWeakSelf
         [self.viewModel getDataWithId:self.planId showHug:YES resultBlock:^(id responseData, NSError *erro) {
@@ -132,6 +133,7 @@
 - (HSJBuyHeadView *)headView {
     if(!_headView) {
         _headView = [[HSJBuyHeadView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScrAdaptationH(155.5))];
+        _headView.inputMoney = self.startMoney;
         kWeakSelf
         _headView.textChange = ^(NSString *text) {
             weakSelf.viewModel.inputMoney = text;
@@ -165,11 +167,20 @@
 
 - (void)updateHeadView {
     self.headView.addUpLimitMoney = self.viewModel.addUpLimit;
+    self.headView.addCondition = self.viewModel.addCondition;
 }
 
 - (void)updateFootView {
     self.footView.isShowAgreeRiskApplyAgreementView = self.viewModel.isShowRiskAgeement;
     self.footView.btnContent = self.viewModel.buttonShowContent;
+    
+    if(0 == self.viewModel.inputMoney.doubleValue) {
+        self.footView.enableAddButton = NO;
+    }
+    else {
+        self.footView.enableAddButton = YES;
+    }
+    
     if(0 == self.viewModel.inputMoney.floatValue) {
         self.footView.isTransparentBtnColor = YES;
     }
@@ -179,7 +190,12 @@
 }
 
 - (void)addAction {
-    
+    BOOL checkResult = [self.viewModel checkMoney:^(BOOL isLess) {
+        
+    }];
+    if(checkResult) {//数据校验通过
+        
+    }
 }
 
 - (void)lookUpAgreement {
