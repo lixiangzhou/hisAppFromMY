@@ -154,7 +154,7 @@ NSString *const HSJHomeActivityCellIdentifier = @"HSJHomeActivityCellIdentifier"
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         HSJPlanDetailController* vc = [[HSJPlanDetailController alloc] init];
-        vc.planId = self.viewModel.homeModel.dataList[indexPath.row].id;
+        vc.planId = self.viewModel.homeModel.dataList[indexPath.row].planId;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

@@ -9,14 +9,12 @@
 #import "HXBMyBankResultViewController.h"
 #import "HxbWithdrawCardViewController.h"
 #import "HxbMyBankCardViewController.h"
+#import "HXBCommonResultController.h"
 
 @interface HXBMyBankResultViewController ()
 
-@property (nonatomic, strong) UIImageView *bankImageView;
-@property (nonatomic, strong) UILabel *bankTileLabel;
-@property (nonatomic, strong) UILabel *bankDescribeLabel;
-@property (nonatomic, strong) UIButton *actionButton;
-@property (nonatomic, strong) UIButton *myAccountButton;
+@property (nonatomic, strong) HXBCommonResultController *resultController;
+
 @end
 
 @implementation HXBMyBankResultViewController
@@ -26,72 +24,46 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"解绑银行卡";
-    [self setUI];
-    [self setData];
+    [self setupData];
+    [self setupUI];
+    [self setupConstraints];
 }
 
 #pragma mark - UI
 
-- (void)setUI {
-    [self.view addSubview:self.bankImageView];
-    [self.view addSubview:self.bankTileLabel];
-    [self.view addSubview:self.bankDescribeLabel];
-    [self.view addSubview:self.actionButton];
-    [self.view addSubview:self.myAccountButton];
-    [self displayFrame];
+- (void)setupData {
+    HXBCommonResultController *VC = [[HXBCommonResultController alloc] init];
+    VC.isFullScreenShow = YES;
+    self.resultController = VC;
+    kWeakSelf
+    HXBCommonResultContentModel *contentModel = nil;
+    if (self.isSuccess) {
+        NSString *tempStr = [NSString stringWithFormat:@"尾号%@的银行卡解绑成功", _mobileText];
+        contentModel = [[HXBCommonResultContentModel alloc] initWithImageName:@"result_success" titleString:@"解绑成功" descString:tempStr firstBtnTitle:@"绑定新卡"];
+    } else {
+        contentModel = [[HXBCommonResultContentModel alloc] initWithImageName:@"result_failure" titleString:@"解绑失败" descString:self.describeText firstBtnTitle:@"重新解绑"];
+    }
+    contentModel.secondBtnTitle = @"我的账户";
+    
+    contentModel.firstBtnBlock = ^(HXBCommonResultController *resultController) {
+        [weakSelf actionButtonClick];
+    };
+    contentModel.secondBtnBlock = ^(HXBCommonResultController *resultController) {
+        [weakSelf myAccountButtonClick];
+    };
+    VC.contentModel = contentModel;
 }
 
-// 布局
-- (void)displayFrame {
-    kWeakSelf
-    [self.bankImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@(HXBStatusBarAndNavigationBarHeight + kScrAdaptationH750(150)));
-        make.centerX.equalTo(weakSelf.view);
-        make.width.equalTo(@(kScrAdaptationW750(295)));
-        make.height.equalTo(@(kScrAdaptationH750(182)));
-    }];
-    
-    [self.bankTileLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.bankImageView.mas_bottom).offset(kScrAdaptationH(30));
-        make.centerX.equalTo(weakSelf.view);
-    }];
-    
-    [self.bankDescribeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.bankTileLabel.mas_bottom).offset(kScrAdaptationH(10));
-        make.centerX.equalTo(weakSelf.view);
-        make.width.offset(kScreenWidth - kScrAdaptationW(30));
-    }];
-    
-    [self.actionButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.bankDescribeLabel.mas_bottom).offset(kScrAdaptationH(50));
-        make.centerX.equalTo(weakSelf.view);
-        make.width.equalTo(@(kScrAdaptationW750(670)));
-        make.height.equalTo(@(kScrAdaptationH750(82)));
-    }];
-    
-    [self.myAccountButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.actionButton.mas_bottom).offset(kScrAdaptationH(20));
-        make.centerX.equalTo(weakSelf.view);
-        make.width.equalTo(@(kScrAdaptationW750(670)));
-        make.height.equalTo(@(kScrAdaptationH750(82)));
+- (void)setupUI {
+    [self.safeAreaView addSubview:self.resultController.view];
+}
+
+- (void)setupConstraints {
+    [self.resultController.view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.safeAreaView);
     }];
 }
-#pragma mark - Network
-- (void)setData {
-    if (_isSuccess) {
-        _bankImageView.image = [UIImage imageNamed:@"successful"];
-        [_actionButton setTitle:@"绑定新卡" forState:(UIControlStateNormal)];
-        _bankTileLabel.text = @"解绑成功";
-        _bankDescribeLabel.text = [NSString stringWithFormat:@"尾号%@的银行卡解绑成功", _mobileText];
-    } else {
-        _bankImageView.image = [UIImage imageNamed:@"failure"];
-        [_actionButton setTitle:@"重新解绑" forState:(UIControlStateNormal)];
-        _bankTileLabel.text = @"解绑失败";
-        _bankDescribeLabel.text = _describeText;
-    }
-    [_myAccountButton setTitle:@"我的账户" forState:(UIControlStateNormal)];
-    
-}
+
 
 #pragma mark - Action
 // 点击返回
@@ -100,7 +72,7 @@
 }
 
 // 点击重新绑卡按钮
-- (void)actionButtonClick:(UIButton *)sender {
+- (void)actionButtonClick {
     if (_isSuccess) {
         //进入绑卡界面
         HxbWithdrawCardViewController *withdrawCardViewController = [[HxbWithdrawCardViewController alloc] init];
@@ -115,64 +87,8 @@
 }
 
 // 点击我的账户按钮
-- (void)myAccountButtonClick:(UIButton *)sender {
+- (void)myAccountButtonClick {
     [self popToViewControllerWithClassName:@"HSJMyViewController"];
-}
-
-#pragma mark - Setter / Getter / Lazy
-- (UIImageView *)bankImageView {
-    if (!_bankImageView) {
-        _bankImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-        _bankImageView.contentMode = UIViewContentModeScaleAspectFit;
-    }
-    return _bankImageView;
-}
-
-- (UILabel *)bankTileLabel {
-    if (!_bankTileLabel) {
-        _bankTileLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _bankTileLabel.font = kHXBFont_PINGFANGSC_REGULAR(19);
-        _bankTileLabel.textColor = COR6;
-    }
-    return _bankTileLabel;
-}
-
-- (UILabel *)bankDescribeLabel {
-    if (!_bankDescribeLabel) {
-        _bankDescribeLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _bankDescribeLabel.font = kHXBFont_PINGFANGSC_REGULAR(15);
-        _bankDescribeLabel.textAlignment = NSTextAlignmentCenter;
-        _bankDescribeLabel.textColor = COR10;
-    }
-    return _bankDescribeLabel;
-}
-
-- (UIButton *)actionButton {
-    if (!_actionButton) {
-        _actionButton = [[UIButton alloc]init];
-        _actionButton.layer.masksToBounds = YES;
-        _actionButton.layer.cornerRadius = kScrAdaptationW750(5);
-        _actionButton.backgroundColor = kHXBColor_Red_090303;
-        _actionButton.titleLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(32);
-        [_actionButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_actionButton addTarget:self action:@selector(actionButtonClick:) forControlEvents:(UIControlEventTouchUpInside)];
-    }
-    return _actionButton;
-}
-
-- (UIButton *)myAccountButton {
-    if (!_myAccountButton) {
-        _myAccountButton = [[UIButton alloc]initWithFrame:CGRectZero];
-        _myAccountButton.layer.masksToBounds = YES;
-        _myAccountButton.layer.cornerRadius = kScrAdaptationW750(5);
-        _myAccountButton.backgroundColor = [UIColor whiteColor];
-        _myAccountButton.layer.borderWidth = kXYBorderWidth;
-        _myAccountButton.layer.borderColor = COR29.CGColor;
-        _myAccountButton.titleLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(32);
-        [_myAccountButton setTitleColor:COR29 forState:UIControlStateNormal];
-        [_myAccountButton addTarget:self action:@selector(myAccountButtonClick:) forControlEvents:(UIControlEventTouchUpInside)];
-    }
-    return _myAccountButton;
 }
 
 @end

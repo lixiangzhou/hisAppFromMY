@@ -15,12 +15,16 @@
 #import "HSJAgreementsViewController.h"
 #import "HxbMyBankCardViewController.h"
 #import "HxbWithdrawCardViewController.h"
+#import "HXBTransactionPasswordView.h"
+#import "HXBVerificationCodeAlertVC.h"
 
 @interface HSJBuyViewController ()
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) HSJBuyFootView *footView;
 @property (nonatomic, strong) HSJBuyHeadView *headView;
+@property (nonatomic, strong) HXBTransactionPasswordView *passwordView;
+@property (nonatomic, strong) HXBVerificationCodeAlertVC *alertVC;
 
 @property (nonatomic, strong) HSJBuyViewModel *viewModel;
 
@@ -43,7 +47,7 @@
 
 - (void)setupData {
     self.viewModel = [[HSJBuyViewModel alloc] init];
-    self.planId = @"748";
+//    self.planId = @"748";
     self.viewModel.inputMoney = self.startMoney;
     if(!self.planModel) {
         kWeakSelf
@@ -174,12 +178,12 @@
     self.footView.isShowAgreeRiskApplyAgreementView = self.viewModel.isShowRiskAgeement;
     self.footView.btnContent = self.viewModel.buttonShowContent;
     
-    if(0 == self.viewModel.inputMoney.doubleValue) {
-        self.footView.enableAddButton = NO;
-    }
-    else {
-        self.footView.enableAddButton = YES;
-    }
+//    if(0 == self.viewModel.inputMoney.doubleValue) {
+//        self.footView.enableAddButton = NO;
+//    }
+//    else {
+//        self.footView.enableAddButton = YES;
+//    }
     
     if(0 == self.viewModel.inputMoney.floatValue) {
         self.footView.isTransparentBtnColor = YES;
@@ -190,12 +194,111 @@
 }
 
 - (void)addAction {
-    BOOL checkResult = [self.viewModel checkMoney:^(BOOL isLess) {
-        
-    }];
-    if(checkResult) {//数据校验通过
-        
+    if(self.viewModel.buttonType == HSJBUYBUTTON_BINDCARD) {
+        HxbWithdrawCardViewController *vc = [[HxbWithdrawCardViewController alloc] init];
+        vc.type = HXBRechargeAndWithdrawalsLogicalJudgment_Other;
+        vc.userInfoModel = self.viewModel.userInfoModel;
+        kWeakSelf
+        vc.block = ^(BOOL isBlindSuccess) {
+            [weakSelf loadUserInfo];
+        };
+        [self.navigationController pushViewController:vc animated:YES];
     }
+    else {
+        kWeakSelf
+        BOOL moneyCheckResult = [self.viewModel checkMoney:^(BOOL isLess) {
+            if(isLess) {
+                weakSelf.headView.inputMoney = weakSelf.viewModel.planModel.minRegisterAmount;
+            }
+        }];
+        BOOL agreementCheckResult = [self.viewModel checkAgreement:self.footView.isAgreementGroup agreeRiskApplyAgreement:self.footView.isAgreeRiskApplyAgreement];
+        if(moneyCheckResult && agreementCheckResult) {//校验通过
+            if([self.viewModel.buyType isEqualToString:@"balance"]) {//余额购买
+                [self alertPassWord];
+            }
+            else {
+                [self showRechargeAlertVC];
+            }
+        }
+    }
+    
+}
+
+- (void)alertPassWord {
+    kWeakSelf
+    self.passwordView = [[HXBTransactionPasswordView alloc] init];
+    [self.passwordView showInView:self.view];
+    self.passwordView.getTransactionPasswordBlock = ^(NSString *password) {
+        NSDictionary *dic = nil;
+        dic = @{@"amount": weakSelf.viewModel.inputMoney,
+                @"cashType": weakSelf.viewModel.planModel.cashType,
+                @"buyType": weakSelf.viewModel.buyType,
+                @"tradPassword": password,
+                @"willingToBuy": @"1",
+                //@"couponId": weakSelf.couponid
+                };
+        [weakSelf planBuy:dic];
+    };
+}
+
+- (void)showRechargeAlertVC {
+    if (!self.presentedViewController) {
+        self.alertVC = [[HXBVerificationCodeAlertVC alloc] init];
+        self.alertVC.isCleanPassword = YES;
+        double rechargeMoney = [self.viewModel.inputMoney doubleValue] - self.viewModel.userInfoModel.userAssets.availablePoint.floatValue;
+        self.alertVC.messageTitle = @"请输入短信验证码";
+        self.alertVC.subTitle = [NSString stringWithFormat:@"已发送到%@上，请查收", [self.viewModel.userInfoModel.userBank.securyMobile replaceStringWithStartLocation:3 lenght:4]];
+        kWeakSelf
+        self.alertVC.sureBtnClick = ^(NSString *pwd) {
+            [weakSelf.alertVC.view endEditing:YES];
+            NSDictionary *dic = nil;
+            dic = @{@"amount": self.viewModel.inputMoney,
+                    @"cashType": weakSelf.viewModel.planModel.cashType,
+                    @"buyType": weakSelf.viewModel.buyType,
+                    @"balanceAmount": weakSelf.viewModel.userInfoModel.userAssets.availablePoint,
+                    @"smsCode": pwd,
+                    @"willingToBuy": @"1",
+//                    @"couponId": weakSelf.couponid
+                    };
+            [weakSelf planBuy:dic];
+        };
+        self.alertVC.getVerificationCodeBlock = ^{
+            [weakSelf.alertVC.verificationCodeAlertView enabledBtns];
+            [weakSelf sendSmsCodeWithMoney:rechargeMoney];
+        };
+        self.alertVC.getSpeechVerificationCodeBlock = ^{
+            [weakSelf.alertVC.verificationCodeAlertView enabledBtns];
+            [weakSelf sendSmsCodeWithMoney:rechargeMoney];
+        };
+        self.alertVC.cancelBtnClickBlock = ^{
+        };
+        [self presentViewController:self.alertVC animated:NO completion:nil];
+    }
+}
+
+- (void)sendSmsCodeWithMoney:(double)topupMoney {
+    kWeakSelf
+    [self.viewModel getVerifyCodeRequesWithRechargeAmount:[NSString stringWithFormat:@"%.2f", topupMoney] andWithType:@"sms" andWithAction:@"buy" resultBlock:^(id responseData, NSError *erro) {
+        if (!erro) {
+            weakSelf.alertVC.subTitle = [NSString stringWithFormat:@"已发送到%@上，请查收", [weakSelf.viewModel.userInfoModel.userBank.securyMobile replaceStringWithStartLocation:3 lenght:4]];
+            [weakSelf showRechargeAlertVC];
+            [weakSelf.alertVC.verificationCodeAlertView disEnabledBtns];
+        }
+        else {
+            [weakSelf.alertVC.verificationCodeAlertView enabledBtns];
+        }
+    }];
+}
+
+- (void)planBuy:(NSDictionary*)paramDic {
+    [self.viewModel planBuyReslutWithPlanID:self.viewModel.planModel.planId parameter:paramDic resultBlock:^(BOOL isSuccess) {
+        if(isSuccess) {
+            
+        }
+        else {
+            
+        }
+    }];
 }
 
 - (void)lookUpAgreement {

@@ -148,7 +148,13 @@
 - (void)setConstraints {
     kWeakSelf
     [self.iconView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@(HXBStatusBarAndNavigationBarHeight + kScrAdaptationH750(120)));
+        if(self.isFullScreenShow) {
+            make.top.mas_equalTo(kScrAdaptationH750(120));
+        }
+        else{
+            make.top.equalTo(@(HXBStatusBarAndNavigationBarHeight + kScrAdaptationH750(120)));
+        }
+        
         make.centerX.equalTo(weakSelf.view);
 //        make.width.equalTo(@(kScrAdaptationW750(295)));
 //        make.height.equalTo(@(kScrAdaptationH750(182)));

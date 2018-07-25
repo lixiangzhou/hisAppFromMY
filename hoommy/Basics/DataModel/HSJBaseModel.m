@@ -16,9 +16,10 @@
 
  @return 映射结果
  */
-- (NSDictionary *)map {
-    NSMutableDictionary* dic = [NSMutableDictionary dictionaryWithDictionary:[super map]];
-    [dic setObject:@"id" forKey:@"message"];
-    return [NSDictionary dictionaryWithDictionary:dic];
+- (NSMutableDictionary *)map {
+    NSMutableDictionary *dic = [super map];
+    
+    return dic;
 }
+
 @end
