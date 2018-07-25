@@ -68,6 +68,7 @@
 ///按钮长按的颜色
 #define kHXBColor_000000_30                 RGBA(0, 0, 0, 0.3)
 #define kHXBColor_000000_10                 RGBA(0, 0, 0, 0.1)
+#define kHXBColor_000000_50                 RGBA(0, 0, 0, 0.5)
 
 ///粉红色
 #define kHXBColor_FF8359_100         UIColorFromRGB(0xFF8359)

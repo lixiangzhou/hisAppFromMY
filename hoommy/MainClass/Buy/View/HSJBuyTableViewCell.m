@@ -127,11 +127,13 @@
         self.arrowImv.hidden = NO;
         self.descripLb.hidden = YES;
         self.arrowLb.hidden = NO;
+        self.userInteractionEnabled = YES;
     }
     else {
         self.arrowImv.hidden = YES;
         self.descripLb.hidden = NO;
         self.arrowLb.hidden = YES;
+        self.userInteractionEnabled = NO;
     }
 }
 

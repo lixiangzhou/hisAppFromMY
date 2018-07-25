@@ -12,11 +12,7 @@
 
 - (void)getDataWithId:(NSString *)planId resultBlock:(void (^)(BOOL))resultBlock {
     kWeakSelf
-    [self loadData:^(NYBaseRequest *request) {
-        request.modelType = [HSJPlanModel class];
-        request.requestUrl = kHXBFinanc_PlanDetaileURL(planId.integerValue);
-        request.showHud = YES;
-    } responseResult:^(id responseData, NSError *erro) {
+    [self getDataWithId:planId showHug:YES resultBlock:^(id responseData, NSError *erro) {
         weakSelf.planModel = responseData;
         resultBlock(responseData != nil);
     }];

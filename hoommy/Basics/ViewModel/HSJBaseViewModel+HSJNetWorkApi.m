@@ -69,5 +69,17 @@
     }];
 }
 
+- (void)getDataWithId:(NSString *)planId showHug:(BOOL)isShow resultBlock:(NetWorkResponseBlock)resultBlock {
+    kWeakSelf
+    [self loadData:^(NYBaseRequest *request) {
+        request.modelType = NSClassFromString(@"HSJPlanModel");
+        request.requestUrl = kHXBFinanc_PlanDetaileURL(planId.integerValue);
+        request.showHud = isShow;
+    } responseResult:^(id responseData, NSError *erro) {
+        if(resultBlock) {
+            resultBlock(responseData, erro);
+        }
+    }];
+}
 
 @end
