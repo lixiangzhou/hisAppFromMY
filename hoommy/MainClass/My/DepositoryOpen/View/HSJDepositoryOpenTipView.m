@@ -111,8 +111,8 @@
         }
     } else {
         [[HXBRootVCManager manager].curNavigationVC pushViewController:[HSJDepositoryOpenController new] animated:YES];
-        [self closeBtnClick];
     }
+    [self closeBtnClick];
 }
 
 - (void)closeBtnClick {

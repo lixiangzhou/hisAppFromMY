@@ -25,6 +25,8 @@ typedef void(^NetWorkResponseBlock)(id responseData, NSError* erro);
 
 //是否在hug隐藏的方法中进行过滤
 @property (nonatomic, assign) BOOL isFilterHugHidden;
+//是否正在请求数据
+@property (nonatomic, assign, readonly) BOOL isLoadingData;
 
 @property (nonatomic, strong) HugViewBlock hugViewBlock;
 

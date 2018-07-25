@@ -9,6 +9,52 @@
 #import "NSString+HxbPerMilMoney.h"
 
 @implementation NSString (HxbPerMilMoney)
+
+/// 123,456,789.12
++ (NSString *)hsj_simpleMoneyValue:(double)number {
+    NSNumberFormatter *nf = [NSNumberFormatter new];
+    nf.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_Hans_CN"];
+    nf.numberStyle = kCFNumberFormatterCurrencyStyle;
+    nf.positivePrefix = @"";
+    return [nf stringFromNumber:@(number)];
+}
+
+/// ¥123,456,789.12
++ (NSString *)hsj_moneyValuePrefix:(double)number {
+    NSNumberFormatter *nf = [NSNumberFormatter new];
+    nf.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_Hans_CN"];
+    nf.numberStyle = kCFNumberFormatterCurrencyStyle;
+    return [nf stringFromNumber:@(number)];
+}
+
+/// 123,456,789.12元
++ (NSString *)hsj_moneyValueSuffix:(double)number {
+    NSNumberFormatter *nf = [NSNumberFormatter new];
+    nf.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_Hans_CN"];
+    nf.numberStyle = kCFNumberFormatterCurrencyStyle;
+    nf.positivePrefix = @"";
+    nf.positiveSuffix = @"元";
+    return [nf stringFromNumber:@(number)];
+}
+
+/// ¥123,456,789.12元
++ (NSString *)hsj_moneyValue:(double)number {
+    NSNumberFormatter *nf = [NSNumberFormatter new];
+    nf.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_Hans_CN"];
+    nf.numberStyle = kCFNumberFormatterCurrencyStyle;
+    nf.positiveSuffix = @"元";
+    return [nf stringFromNumber:@(number)];
+}
+
+/// ¥123,456,789 没有小数点
++ (NSString *)hsj_moneyValuePrefixNoPoint:(double)number {
+    NSNumberFormatter *nf = [NSNumberFormatter new];
+    nf.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_Hans_CN"];
+    nf.numberStyle = kCFNumberFormatterCurrencyStyle;
+    nf.maximumFractionDigits = 0;
+    return [nf stringFromNumber:@(number)];
+}
+
 ///没有小数点
 + (NSString *)hxb_getPerMilWithDoubleNum:(double)number
 {

@@ -39,6 +39,7 @@
 
 /// 创建根控制器
 - (void)createRootVCAndMakeKeyWindow {
+    [[UITextField appearance] setTintColor:[UIColor blackColor]];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
     [[HXBAdvertiseManager shared] getSplash];

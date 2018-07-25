@@ -11,4 +11,6 @@
 
 @interface HXBUnBindCardController : HXBBaseViewController
 @property (nonatomic, strong) HXBBankCardModel *bankCardModel;
+// 返回的页面类名
+@property (nonatomic, copy) NSString *className;
 @end
