@@ -272,11 +272,6 @@
     }
 }
 
-#pragma mark - Delegate External
-
-#pragma mark -
-
-
 #pragma mark - Action
 - (void)inClick {
     HSJBuyViewController *vc = [HSJBuyViewController new];
@@ -290,19 +285,9 @@
 
 - (void)calClick {
     [HSJEarningCalculatorView showWithInterest:self.viewModel.interest buyBlock:^(NSString *value) {
-        
+        HSJBuyViewController *vc = [HSJBuyViewController new];
+        [self.navigationController pushViewController:vc animated:YES];
     }];
 }
-
-#pragma mark - Setter / Getter / Lazy
-
-
-#pragma mark - Helper
-
-
-#pragma mark - Other
-
-
-#pragma mark - Public
 
 @end

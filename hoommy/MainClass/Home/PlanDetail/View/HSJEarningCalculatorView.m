@@ -365,7 +365,7 @@
 - (void)updateEarning {
     NSString *money = [self getFieldValue];
     NSString *time = self.selectTimeBtn.currentTitle;
-    double value = money.doubleValue * time.integerValue * (self.interest) / 365;
+    double value = money.doubleValue * time.integerValue * self.interest / 365;
     self.earnLabel.text = [NSString hsj_moneyValuePrefix:value];
 }
 
