@@ -64,6 +64,7 @@
 #define kHXBMY_PlanAccountRequestURL @"/account/planAssets"///账户内 账户内Plan资产
 #define kHXBMY_PlanListURL @"/account/plan"//账户内  planlist
 #define kHXBMY_PlanDetaileURL(planID) [NSString stringWithFormat:@"/account/plan/%@",(planID)]
+#define kHXBMY_LoanRecordURL(planID) [NSString stringWithFormat:@"/account/plan/%@/loanRecord",(planID)] ///我的计划投标记录
 #define kHXBMY_PlanQuit @"/account/plan/quit"
 
 #define kHXBHome_AnnounceURL @"/announce"//公告

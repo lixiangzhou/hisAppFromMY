@@ -376,6 +376,10 @@
 		E153B9D920FC8EFC002BE1AE /* HXBMYViewModel_MainCapitalRecordViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E153B9D820FC8EFC002BE1AE /* HXBMYViewModel_MainCapitalRecordViewModel.m */; };
 		E15B4B8F2100703E00700C54 /* HSJCheckLoginPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E15B4B8D2100703E00700C54 /* HSJCheckLoginPasswordViewController.m */; };
 		E15B4B93210070E400700C54 /* HSJMyGestureViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E15B4B91210070E400700C54 /* HSJMyGestureViewModel.m */; };
+		E1BC17C421081C2F00AF8D0F /* HSJFinAddRecortdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1BC17C321081C2F00AF8D0F /* HSJFinAddRecortdViewController.m */; };
+		E1BC17C721081E8900AF8D0F /* HSJFinAddRecortdViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E1BC17C621081E8900AF8D0F /* HSJFinAddRecortdViewModel.m */; };
+		E1BC17CA2108207C00AF8D0F /* HSJFinAddRecortdCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E1BC17C92108207C00AF8D0F /* HSJFinAddRecortdCell.m */; };
+		E1BC17CD2108262600AF8D0F /* HSJFinAddRecortdModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E1BC17CC2108262600AF8D0F /* HSJFinAddRecortdModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1109,6 +1113,14 @@
 		E15B4B8E2100703E00700C54 /* HSJCheckLoginPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSJCheckLoginPasswordViewController.h; sourceTree = "<group>"; };
 		E15B4B91210070E400700C54 /* HSJMyGestureViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSJMyGestureViewModel.m; sourceTree = "<group>"; };
 		E15B4B92210070E400700C54 /* HSJMyGestureViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSJMyGestureViewModel.h; sourceTree = "<group>"; };
+		E1BC17C221081C2F00AF8D0F /* HSJFinAddRecortdViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJFinAddRecortdViewController.h; sourceTree = "<group>"; };
+		E1BC17C321081C2F00AF8D0F /* HSJFinAddRecortdViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJFinAddRecortdViewController.m; sourceTree = "<group>"; };
+		E1BC17C521081E8900AF8D0F /* HSJFinAddRecortdViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJFinAddRecortdViewModel.h; sourceTree = "<group>"; };
+		E1BC17C621081E8900AF8D0F /* HSJFinAddRecortdViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJFinAddRecortdViewModel.m; sourceTree = "<group>"; };
+		E1BC17C82108207C00AF8D0F /* HSJFinAddRecortdCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJFinAddRecortdCell.h; sourceTree = "<group>"; };
+		E1BC17C92108207C00AF8D0F /* HSJFinAddRecortdCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJFinAddRecortdCell.m; sourceTree = "<group>"; };
+		E1BC17CB2108262600AF8D0F /* HSJFinAddRecortdModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJFinAddRecortdModel.h; sourceTree = "<group>"; };
+		E1BC17CC2108262600AF8D0F /* HSJFinAddRecortdModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJFinAddRecortdModel.m; sourceTree = "<group>"; };
 		F3AA4ECD958918A00E682797 /* Pods-hoommy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hoommy.release.xcconfig"; path = "Pods/Target Support Files/Pods-hoommy/Pods-hoommy.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1647,6 +1659,8 @@
 				8D5D612020FF1A90003F94D9 /* HSJRollOutPlanDetailController.m */,
 				8D5D612820FF290A003F94D9 /* HSJRollOutConfirmController.h */,
 				8D5D612920FF290A003F94D9 /* HSJRollOutConfirmController.m */,
+				E1BC17C221081C2F00AF8D0F /* HSJFinAddRecortdViewController.h */,
+				E1BC17C321081C2F00AF8D0F /* HSJFinAddRecortdViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1660,6 +1674,8 @@
 				8D5D611120FEE021003F94D9 /* HSJRollOutCell.m */,
 				8DB77F68210585A5003EE881 /* HSJRollOutDetailCell.h */,
 				8DB77F69210585A5003EE881 /* HSJRollOutDetailCell.m */,
+				E1BC17C82108207C00AF8D0F /* HSJFinAddRecortdCell.h */,
+				E1BC17C92108207C00AF8D0F /* HSJFinAddRecortdCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1675,6 +1691,8 @@
 				8D5D612320FF1AD0003F94D9 /* HSJRollOutPlanDetailViewModel.m */,
 				8D5D612E20FF2BCE003F94D9 /* HSJRollOutConfirmViewModel.h */,
 				8D5D612F20FF2BCE003F94D9 /* HSJRollOutConfirmViewModel.m */,
+				E1BC17C521081E8900AF8D0F /* HSJFinAddRecortdViewModel.h */,
+				E1BC17C621081E8900AF8D0F /* HSJFinAddRecortdViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1690,6 +1708,8 @@
 				8D5D612620FF1D34003F94D9 /* HSJRollOutPlanDetailRowModel.m */,
 				8D5D613120FF2CA3003F94D9 /* HSJRollOutConfirmModel.h */,
 				8D5D613220FF2CA3003F94D9 /* HSJRollOutConfirmModel.m */,
+				E1BC17CB2108262600AF8D0F /* HSJFinAddRecortdModel.h */,
+				E1BC17CC2108262600AF8D0F /* HSJFinAddRecortdModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3916,6 +3936,7 @@
 				8D591BFB20F84D66007CA4BE /* HSJPlanDetailRulerView.m in Sources */,
 				9A3749B220F85D5500F39681 /* HXBBaseCountDownManager_lightweight.m in Sources */,
 				9A3749D720FC3AAB00F39681 /* HXBBindCardTableViewCell.m in Sources */,
+				E1BC17CA2108207C00AF8D0F /* HSJFinAddRecortdCell.m in Sources */,
 				4ED047C12105AA3300BE1753 /* HSJBottomPromptView.m in Sources */,
 				9A37495C20F854CC00F39681 /* HXBWithdrawCardViewModel.m in Sources */,
 				9A4B189C20F60C2B006B83C7 /* HXBMyTopUpHeaderView.m in Sources */,
@@ -4033,6 +4054,7 @@
 				9A4B184E20F5AFB6006B83C7 /* HXBSignUPAndLoginRequest_EnumManager.m in Sources */,
 				9A37498020F8594000F39681 /* HxbSecurityCertificationViewController.m in Sources */,
 				9A97DAA620EF420200688ADB /* Jastor.m in Sources */,
+				E1BC17C421081C2F00AF8D0F /* HSJFinAddRecortdViewController.m in Sources */,
 				9A0BD51D20F6F8ED00B1CC59 /* UIButton+HxbButton.m in Sources */,
 				9A97DA7F20EF420200688ADB /* HSJBaseViewModel.m in Sources */,
 				9A37490920F7691D00F39681 /* HXBCheckCaptcha.m in Sources */,
@@ -4063,6 +4085,7 @@
 				9A37498A20F859A100F39681 /* HXBVerificationCodeAlertVC.m in Sources */,
 				9A37491D20F8516300F39681 /* HXBMyBankResultViewController.m in Sources */,
 				9A3749A520F85CF700F39681 /* HXBWithdrawRecordViewController.m in Sources */,
+				E1BC17CD2108262600AF8D0F /* HSJFinAddRecortdModel.m in Sources */,
 				8D142A9220FD9B4D00520728 /* HXBAdvertiseViewModel.m in Sources */,
 				9A97DA8F20EF420200688ADB /* UIColor+HxbColor.m in Sources */,
 				4E0019A42106C7D200D6F4DE /* HSJNoticeListModel.m in Sources */,
@@ -4134,6 +4157,7 @@
 				9AF51EEB20FDCA65008A8CF4 /* HXBSetTransactionPasswordView.m in Sources */,
 				9ACB2F3C20EF6E08005C3C3D /* HSJKeyChainStore.m in Sources */,
 				9A3749D620FC3AAB00F39681 /* HXBBindCardCellModel.m in Sources */,
+				E1BC17C721081E8900AF8D0F /* HSJFinAddRecortdViewModel.m in Sources */,
 				9A3749CC20F8830400F39681 /* HXBBankList.m in Sources */,
 				9A97DA7220EF420200688ADB /* HSJTestWebviewControllerViewController.m in Sources */,
 				4EE6169820F4ADB40044B998 /* HSJPasswordSigInViewController.m in Sources */,
