@@ -7,6 +7,7 @@
 //
 
 #import "HXBAccountAlterLoginPasswordViewModel.h"
+#import "HXBOpenDepositAccountAgent.h"
 
 @implementation HXBAccountAlterLoginPasswordViewModel
 
@@ -33,6 +34,33 @@
     
     
     
+}
+
+- (void)getVerifyCodeRequesWithMobile: (NSString *)mobile
+                            andAction: (HXBSignUPAndLoginRequest_sendSmscodeType)action
+                           andCaptcha: (NSString *)captcha
+                              andType: (NSString *)type
+                     andCallbackBlock: (void(^)(BOOL isSuccess,NSError *error))callbackBlock {
+    
+    kWeakSelf
+    [HXBOpenDepositAccountAgent verifyCodeRequestWithResultBlock:^(NYBaseRequest *request) {
+        NSString *actionStr = [HXBSignUPAndLoginRequest_EnumManager getKeyWithHXBSignUPAndLoginRequest_sendSmscodeType:action];
+        request.requestArgument = @{
+                                    @"mobile":mobile ?: @"",///     是    string    用户名
+                                    @"action":actionStr ?: @"",///     是    string    signup(参照通用短信发送类型)
+                                    @"captcha":captcha ?: @"",///    是    string    校验图片二维码
+                                    @"type":type ?: @""
+                                    };
+        request.hudDelegate = weakSelf;
+        request.showHud = YES;
+    } resultBlock:^(id responseObject, NSError *error) {
+        if (error) {
+            callbackBlock(NO,error);
+        }
+        else {
+            callbackBlock(YES,nil);
+        }
+    }];
 }
 
 @end
