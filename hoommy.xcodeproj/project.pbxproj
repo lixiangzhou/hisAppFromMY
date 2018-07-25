@@ -106,6 +106,7 @@
 		8D60B4E120F748BC00287E52 /* UITextField+HLNumberFormatTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B4E020F748BC00287E52 /* UITextField+HLNumberFormatTextField.m */; };
 		8DB77F6A210585A5003EE881 /* HSJRollOutDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB77F69210585A5003EE881 /* HSJRollOutDetailCell.m */; };
 		8DD6B9B22106C27C00E8980F /* HSJDepositoryOpenTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD6B9B12106C27C00E8980F /* HSJDepositoryOpenTipView.m */; };
+		8DD6B9B52106D90C00E8980F /* HSJEarningCalculatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD6B9B42106D90C00E8980F /* HSJEarningCalculatorView.m */; };
 		9A0BD51D20F6F8ED00B1CC59 /* UIButton+HxbButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A0BD51C20F6F8ED00B1CC59 /* UIButton+HxbButton.m */; };
 		9A0BD52120F6FA0E00B1CC59 /* HXBColourGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A0BD52020F6FA0E00B1CC59 /* HXBColourGradientView.m */; };
 		9A0BD52520F6FBB300B1CC59 /* HXBUserInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A0BD52420F6FBB300B1CC59 /* HXBUserInfoView.m */; };
@@ -593,6 +594,8 @@
 		8DB77F69210585A5003EE881 /* HSJRollOutDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJRollOutDetailCell.m; sourceTree = "<group>"; };
 		8DD6B9B02106C27C00E8980F /* HSJDepositoryOpenTipView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJDepositoryOpenTipView.h; sourceTree = "<group>"; };
 		8DD6B9B12106C27C00E8980F /* HSJDepositoryOpenTipView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJDepositoryOpenTipView.m; sourceTree = "<group>"; };
+		8DD6B9B32106D90C00E8980F /* HSJEarningCalculatorView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJEarningCalculatorView.h; sourceTree = "<group>"; };
+		8DD6B9B42106D90C00E8980F /* HSJEarningCalculatorView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJEarningCalculatorView.m; sourceTree = "<group>"; };
 		9A0BD51A20F6F75000B1CC59 /* MacrosInBusiness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacrosInBusiness.h; sourceTree = "<group>"; };
 		9A0BD51B20F6F8ED00B1CC59 /* UIButton+HxbButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+HxbButton.h"; sourceTree = "<group>"; };
 		9A0BD51C20F6F8ED00B1CC59 /* UIButton+HxbButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+HxbButton.m"; sourceTree = "<group>"; };
@@ -1601,6 +1604,8 @@
 				8D591BFD20F84D8F007CA4BE /* HSJPlanDetailAdvantageView.m */,
 				8D591C0220F8591B007CA4BE /* HSJPlanDetailInfoView.h */,
 				8D591C0320F8591B007CA4BE /* HSJPlanDetailInfoView.m */,
+				8DD6B9B32106D90C00E8980F /* HSJEarningCalculatorView.h */,
+				8DD6B9B42106D90C00E8980F /* HSJEarningCalculatorView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3949,6 +3954,7 @@
 				8D5D612420FF1AD0003F94D9 /* HSJRollOutPlanDetailViewModel.m in Sources */,
 				9A97DA7B20EF420200688ADB /* HXBWKWebviewViewModel.m in Sources */,
 				9A97DA7320EF420200688ADB /* HSJMyViewModel.m in Sources */,
+				8DD6B9B52106D90C00E8980F /* HSJEarningCalculatorView.m in Sources */,
 				4ED047BE21059DED00BE1753 /* HSJUserAmountView.m in Sources */,
 				E153B9C820FC859C002BE1AE /* HXBMyHomeViewCell.m in Sources */,
 				E1539C5720FF2BB400BC4025 /* HSJMyHomeInfoTableViewCell.m in Sources */,

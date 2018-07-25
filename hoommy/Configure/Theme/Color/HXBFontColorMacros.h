@@ -35,6 +35,8 @@
 #define kHXBColor_D1A666_100            UIColorFromRGB(0xD1A666)
 #define kHXBColor_D1A666_40            RGBA(209, 166, 102, 0.4)
 
+#define kHXBColor_D9B171_100            UIColorFromRGB(0xD9B171)
+
 //黑色字体
 #define kHXBFontColor_2D2F46_100         UIColorFromRGB(0x2D2F46)
 #define kHXBFontColor_7F85A1_100         UIColorFromRGB(0x7F85A1)

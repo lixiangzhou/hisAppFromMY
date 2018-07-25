@@ -9,6 +9,17 @@
 #import <Foundation/Foundation.h>
 
 @interface NSString (HxbPerMilMoney)
+/// 123,456,789.12
++ (NSString *)hsj_simpleMoneyValue:(double)number;
+/// ¥123,456,789.12
++ (NSString *)hsj_moneyValuePrefix:(double)number;
+/// 123,456,789.12元
++ (NSString *)hsj_moneyValueSuffix:(double)number;
+/// ¥123,456,789.12元
++ (NSString *)hsj_moneyValue:(double)number;
+/// ¥123,456,789 没有小数点
++ (NSString *)hsj_moneyValuePrefixNoPoint:(double)number;
+
 ///科学技术
 +(NSString *)GetPerMilWithDouble:(double)number;
 ///后面拼接了 元
