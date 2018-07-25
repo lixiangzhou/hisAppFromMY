@@ -36,4 +36,6 @@
 @property (nonatomic, copy) NSString *subsidyInterestRate;
 /// 新手产品锁定期（天）
 @property (nonatomic, assign) int lockDays;
+/// 活动文案
+@property (nonatomic, copy) NSString *tag;
 @end

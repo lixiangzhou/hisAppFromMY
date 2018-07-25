@@ -38,34 +38,41 @@
 - (void)setupUI {
     [self setupBannerView];
     [self setupCycleScrollView];
+    [self addSubview:self.unLoginView];
+    [self addSubview:self.segmentLineView];
     [self.titleCycleScrollView addSubview:self.titleCycleRightBtn];
     [self.titleCycleRightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.titleCycleScrollView);
         make.width.height.offset(kScrAdaptationH750(32));
         make.right.equalTo(self.titleCycleScrollView.mas_right).offset(-kScrAdaptationW750(30));
     }];
-    if (!KeyChain.isLogin) {
-        [self addSubview:self.unLoginView];
-        [self addSubview:self.segmentLineView];
-        [self.unLoginView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.equalTo(self);
-            make.top.equalTo(self.titleCycleScrollView.mas_bottom).offset(kScrAdaptationH750(32));
-            make.height.offset(kScrAdaptationH750(93));
-        }];
-        [self.segmentLineView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.equalTo(self);
+    [self.unLoginView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self);
+        make.top.equalTo(self.titleCycleScrollView.mas_bottom).offset(kScrAdaptationH750(32));
+        make.height.offset(kScrAdaptationH750(93));
+    }];
+    [self.segmentLineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self);
         make.top.equalTo(self.unLoginView.mas_bottom).offset(kScrAdaptationH750(32));
-            make.height.offset(kScrAdaptationH750(20));
-        }];
-    }
+        make.height.offset(kScrAdaptationH750(20));
+    }];
     
 }
+
+- (void)updateUI {
+    if (KeyChain.isLogin) {
+        self.unLoginView.hidden = YES;
+        self.segmentLineView.hidden = YES;
+    } else {
+        self.unLoginView.hidden = NO;
+        self.segmentLineView.hidden = NO;
+    }
+}
+
 - (void)setupBannerView {
     self.bannerView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectZero delegate:self placeholderImage:[UIImage imageNamed:@"placeholder"]];
     self.bannerView.pageControlAliment = SDCycleScrollViewPageContolAlimentRight;
     self.bannerView.showPageControl = NO;
-    self.bannerView.imageURLStringsGroup = @[@"https://ss0.baidu.com/-Po3dSag_xI4khGko9WTAnF6hhy/super/whfpf%3D425%2C260%2C50/sign=a41eb338dd33c895a62bcb3bb72e47c2/5fdf8db1cb134954a2192ccb524e9258d1094a1e.jpg",
-                                             @"https://ss0.baidu.com/-Po3dSag_xI4khGko9WTAnF6hhy/super/whfpf%3D425%2C260%2C50/sign=a41eb338dd33c895a62bcb3bb72e47c2/5fdf8db1cb134954a2192ccb524e9258d1094a1e.jpg",];
     [self addSubview:self.bannerView];
     [self.bannerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self).offset(kScrAdaptationW750(30));
@@ -90,6 +97,15 @@
     }];
 }
 
+- (void)setHomeModel:(HSJHomeModel *)homeModel {
+    _homeModel = homeModel;
+    NSMutableArray *imageArray = [NSMutableArray array];
+    for (BannerModel *bannerModel in homeModel.bannerList) {
+        [imageArray addObject:bannerModel.image];
+    }
+    self.bannerView.imageURLStringsGroup = imageArray;
+}
+
 // 如果要实现自定义cell的轮播图，必须先实现customCollectionViewCellClassForCycleScrollView:和setupCustomCell:forIndex:代理方法
 
 - (Class)customCollectionViewCellClassForCycleScrollView:(SDCycleScrollView *)view
@@ -106,6 +122,17 @@
     myCell.imageName = @"home_message";
 }
 
+- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index {
+    if (cycleScrollView == self.bannerView) {
+        if (self.bannerDidSelectItemAtIndex) {
+            self.bannerDidSelectItemAtIndex(index);
+        }
+    } else if (cycleScrollView == self.titleCycleScrollView) {
+        if (self.titleDidSelectItemAtIndex) {
+            self.titleDidSelectItemAtIndex(index);
+        }
+    }
+}
 
 - (UIButton *)titleCycleRightBtn {
     if (!_titleCycleRightBtn) {

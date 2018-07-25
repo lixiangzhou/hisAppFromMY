@@ -38,7 +38,7 @@
     NSString *amount = [NSString GetPerMilWithDouble:[self.userInfoModel.userAssets.userRiskAmount doubleValue]];
     self.balanceLab.attributedText = [NSAttributedString setupAttributeStringWithBeforeString:amount  WithBeforeRange:NSMakeRange(0, amount.length) andAttributeColor:RGB(96, 103, 122) andAttributeFont:kHXBFont_PINGFANGSC_REGULAR_750(76) afterString:yuanStr WithAfterRange:NSMakeRange(0, yuanStr.length) andAttributeColor:RGB(96, 103, 122) andAttributeFont:kHXBFont_PINGFANGSC_REGULAR_750(36)];
     
-    self.nameLab.text = [NSString stringWithFormat:@"真实姓名：%@",[self.userInfoModel.userInfo.realName hxb_hiddenUserNameWithleft]];
+    self.nameLab.text = [NSString stringWithFormat:@"真实姓名：%@",[self.userInfoModel.userInfo.realName replaceStringWithStartLocation:0 lenght:self.userInfoModel.userInfo.realName.length - 1]];
     
     self.userIdLab.text = [NSString stringWithFormat:@"身份证号：%@",[NSString hiddenStr:self.userInfoModel.userInfo.idNo MidWithFistLenth:1 andLastLenth:1]];;
 }

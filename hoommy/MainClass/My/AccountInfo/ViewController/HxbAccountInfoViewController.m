@@ -253,7 +253,7 @@ UITableViewDataSource
             name.font = kHXBFont_PINGFANGSC_REGULAR(14);
             name.textColor = COR5;
             
-            NSString * nameStr = [self.userInfoModel.userInfo.realName hxb_hiddenUserNameWithleft];
+            NSString * nameStr = [self.userInfoModel.userInfo.realName replaceStringWithStartLocation:0 lenght:self.userInfoModel.userInfo.realName.length - 1];
             
             NSString *idNo = [NSString hiddenStr:self.userInfoModel.userInfo.idNo MidWithFistLenth:1 andLastLenth:1];
             idNo = [NSMutableString stringWithFormat:@"（%@）",idNo];
