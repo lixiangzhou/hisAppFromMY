@@ -50,4 +50,11 @@
 @property (nonatomic, copy) NSString *registerMultipleAmount;
 //收益类型
 @property (nonatomic, copy) NSString *cashType;
+// 计划状态
+@property (nonatomic, copy) NSString *unifyStatus;
+/// 开始销售时间
+@property (nonatomic, copy) NSString *beginSellingTime;
+/// 倒计时时间戳
+@property (nonatomic, copy) NSString *diffTime;
+
 @end
