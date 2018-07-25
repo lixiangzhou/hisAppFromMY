@@ -62,7 +62,7 @@
         make.width.equalTo(@kScrAdaptationW(46));
     }];
     [self.password_Original.textField mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(weakSelf.password_Original_title.mas_right).offset(kScrAdaptationW(29));
+        make.left.equalTo(weakSelf.password_Original_title).offset(kScrAdaptationW(29+46));
     }];
     
     [self.password_New mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -78,7 +78,7 @@
         make.width.equalTo(@kScrAdaptationW(46));
     }];
     [self.password_New.textField mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(weakSelf.password_New_title.mas_right).offset(kScrAdaptationW(29));
+        make.left.equalTo(weakSelf.password_New_title).offset(kScrAdaptationW(29+46));
     }];
     [self.forgotPasswordButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.offset(kScrAdaptationW(-15));
