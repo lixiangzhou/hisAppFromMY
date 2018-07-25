@@ -128,6 +128,7 @@
     transactionPwdView.limitStringLength = 6;
     transactionPwdView.hideEye = NO;
     transactionPwdView.textFieldRightOffset = 40;
+    transactionPwdView.keyboardType = UIKeyboardTypeNumberPad;
     transactionPwdView.secureTextEntry = YES;
     [self commonTextViewProp:transactionPwdView];
     [self.scrollView addSubview:transactionPwdView];
@@ -320,6 +321,10 @@
         make.right.equalTo(self.view).offset(-15);
         make.height.equalTo(@41);
     }];
+    
+    [self.view layoutIfNeeded];
+    
+    self.scrollView.contentSize = CGSizeMake(0, CGRectGetMaxY(bottomBtn.frame) + 30);
 }
 
 
@@ -351,21 +356,21 @@
 }
 
 - (void)willChangeFrame:(NSNotification *)notification {
-    [UIView animateWithDuration:0.25 animations:^{
+    
         if ([self.currentField isEqual:self.mobileView.textField]) {
             CGFloat endY = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].origin.y;
             if (endY == kScreenHeight) {
                 self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
             } else {
-                CGRect rect = [self.currentField convertRect:self.currentField.bounds toView:[UIApplication sharedApplication].keyWindow];
+                CGRect rect = [self.mobileView convertRect:self.currentField.frame toView:[UIApplication sharedApplication].keyWindow];
                 CGFloat maxY = CGRectGetMaxY(rect);
                 
-                self.scrollView.contentInset = UIEdgeInsetsMake(-MAX(15, maxY - endY), 0, 0, 0);
+                self.scrollView.contentInset = UIEdgeInsetsMake(-MAX(10, maxY - endY + 10), 0, 0, 0);
             }
         } else {
             self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
         }
-    }];
+    
 }
 
 #pragma mark - Helper
@@ -412,10 +417,12 @@
     [self.bankNameView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.bankNoView).offset(kInputHeight);
     }];
-
+    
     [UIView animateWithDuration:0.25 animations:^{
         self.bankNameView.alpha = 1;
         [self.view layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        self.scrollView.contentSize = CGSizeMake(0, CGRectGetMaxY(self.bottomBtn.frame) + 30);
     }];
 }
 
@@ -424,10 +431,12 @@
     [self.bankNameView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.bankNoView).offset(0);
     }];
-
+    
     [UIView animateWithDuration:0.25 animations:^{
         self.bankNameView.alpha = 0;
         [self.view layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        self.scrollView.contentSize = CGSizeMake(0, CGRectGetMaxY(self.bottomBtn.frame) + 30);
     }];
 }
 

@@ -48,4 +48,11 @@
 @property (nonatomic, copy) NSString *minRegisterAmount;
 /// 加入倍数金额
 @property (nonatomic, copy) NSString *registerMultipleAmount;
+// 计划状态
+@property (nonatomic, copy) NSString *unifyStatus;
+/// 开始销售时间
+@property (nonatomic, copy) NSString *beginSellingTime;
+/// 倒计时时间戳
+@property (nonatomic, copy) NSString *diffTime;
+
 @end

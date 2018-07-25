@@ -29,6 +29,7 @@
 
 @property (nonatomic, strong) HSJPlanDetailViewModel *viewModel;
 @property (nonatomic, weak) UIView *bottomView;
+@property (nonatomic, weak) UIButton *inBtn;
 @end
 
 @implementation HSJPlanDetailController
@@ -40,9 +41,15 @@
     [super viewDidLoad];
     
     self.viewModel = [HSJPlanDetailViewModel new];
+    
     [self setUI];
     
     [self getData];
+    
+    kWeakSelf
+    self.viewModel.timerBlock = ^(void) {
+        [weakSelf updateInBtnState];
+    };
 }
 
 #pragma mark - UI
@@ -128,9 +135,7 @@
     
     [self.view layoutIfNeeded];
     
-    
     scrollView.contentSize = CGSizeMake(kScreenWidth, CGRectGetMaxY(infoView.frame) + 100);
-    
 }
 
 - (void)setupBottomView {
@@ -163,6 +168,15 @@
     } else {
         [self setupUnBuyBottomView];
     }
+    
+    [self updateInBtnState];
+}
+
+- (void)updateInBtnState {
+    [self.inBtn setTitle:self.viewModel.inText forState:UIControlStateNormal];
+    [self.inBtn setTitleColor:self.viewModel.inTextColor forState:UIControlStateNormal];
+    [self.inBtn setBackgroundImage:self.viewModel.inBackgroundImage forState:UIControlStateNormal];
+    self.inBtn.enabled = self.viewModel.inEnabled;
 }
 
 - (void)setupUnBuyBottomView {
@@ -175,12 +189,10 @@
     
     UIButton *inBtn = [UIButton new];
     [inBtn setTitle:@"转入" forState:UIControlStateNormal];
-    [inBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    inBtn.backgroundColor = kHXBColor_FF7055_100;
-    inBtn.layer.cornerRadius = 2;
-    inBtn.layer.masksToBounds = YES;
     inBtn.titleLabel.font = kHXBFont_32;
+    inBtn.adjustsImageWhenHighlighted = NO;
     [inBtn addTarget:self action:@selector(inClick) forControlEvents:UIControlEventTouchUpInside];
+    self.inBtn = inBtn;
     
     [self.bottomView addSubview:inBtn];
     
@@ -201,11 +213,9 @@
     UIButton *outBtn = [UIButton new];
     [outBtn setTitle:@"转出" forState:UIControlStateNormal];
     [outBtn setTitleColor:kHXBColor_FF7055_100 forState:UIControlStateNormal];
-    outBtn.layer.cornerRadius = 2;
-    outBtn.layer.borderColor = kHXBColor_FF7055_100.CGColor;
-    outBtn.layer.borderWidth = 0.5;
-    outBtn.layer.masksToBounds = YES;
+    [outBtn setBackgroundImage:[UIImage imageNamed:@"plandetail_btn_empty_bg"] forState:UIControlStateNormal];
     outBtn.titleLabel.font = kHXBFont_32;
+    outBtn.adjustsImageWhenHighlighted = NO;
     [outBtn addTarget:self action:@selector(outClick) forControlEvents:UIControlEventTouchUpInside];
     
     [self.bottomView addSubview:outBtn];
@@ -217,7 +227,9 @@
     inBtn.layer.cornerRadius = 2;
     inBtn.layer.masksToBounds = YES;
     inBtn.titleLabel.font = kHXBFont_32;
+    inBtn.adjustsImageWhenHighlighted = NO;
     [inBtn addTarget:self action:@selector(inClick) forControlEvents:UIControlEventTouchUpInside];
+    self.inBtn = inBtn;
     
     [self.bottomView addSubview:inBtn];
     
@@ -286,6 +298,7 @@
 - (void)calClick {
     [HSJEarningCalculatorView showWithInterest:self.viewModel.interest buyBlock:^(NSString *value) {
         HSJBuyViewController *vc = [HSJBuyViewController new];
+        vc.startMoney = value;
         [self.navigationController pushViewController:vc animated:YES];
     }];
 }

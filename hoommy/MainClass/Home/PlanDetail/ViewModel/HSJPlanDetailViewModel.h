@@ -29,6 +29,15 @@
 /// 利率 用于计算器计算用
 @property (nonatomic, assign) double interest;
 
+/// 转入的属性
+@property (nonatomic, strong) UIColor *inTextColor;
+@property (nonatomic, strong) UIImage *inBackgroundImage;
+@property (nonatomic, copy) NSString *inText;
+@property (nonatomic, assign) BOOL inEnabled;
+
+@property (nonatomic, copy) void (^timerBlock)(void);
+
+
 - (void)getDataWithId:(NSString *)planId resultBlock:(void(^)(BOOL isSuccess))resultBlock;
 
 @end

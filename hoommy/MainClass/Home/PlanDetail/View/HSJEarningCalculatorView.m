@@ -350,6 +350,8 @@
     if (self.buyBlock) {
         self.buyBlock([self getFieldValue]);
     }
+    
+    [self closeAction];
 }
 
 #pragma mark - Setter / Getter / Lazy
