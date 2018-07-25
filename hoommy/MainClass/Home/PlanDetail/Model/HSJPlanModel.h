@@ -36,6 +36,16 @@
 @property (nonatomic, copy) NSString *subsidyInterestRate;
 /// 新手产品锁定期（天）
 @property (nonatomic, assign) int lockDays;
+//剩余可追加金额
+@property (nonatomic, copy) NSString *userRemainAmount;
+//剩余可投
+@property (nonatomic, copy) NSString *remainAmount;
 /// 活动文案
 @property (nonatomic, copy) NSString *tag;
+/// 是否首次够买
+@property (nonatomic, copy) NSString *isFirst;
+/// 最小注册金额
+@property (nonatomic, copy) NSString *minRegisterAmount;
+/// 加入倍数金额
+@property (nonatomic, copy) NSString *registerMultipleAmount;
 @end

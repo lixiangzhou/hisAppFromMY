@@ -132,9 +132,12 @@
     if(!_contentTf) {
         _contentTf = [[HXBCustomTextField alloc] init];
         _contentTf.isHiddenLeftImage = YES;
-        _contentTf.font = kHXBFont_50;
+        _contentTf.font = kHXBFont_30;
         _contentTf.textColor = kHXBFontColor_333333_100;
+        _contentTf.placeholder = @"1000元起投，100元递增";
         _contentTf.isHidenLine = YES;
+        _contentTf.limitStringLength = 9;
+        _contentTf.keyboardType = UIKeyboardTypeNumberPad;
         
         kWeakSelf
         _contentTf.block = ^(NSString *text1) {
@@ -157,6 +160,26 @@
     return _contentTf;
 }
 
+- (void)setAddUpLimitMoney:(float)addUpLimitMoney {
+    _addUpLimitMoney = addUpLimitMoney;
+    
+    NSString *tempStr = [NSString hxb_getPerMilWithIntegetNumber:addUpLimitMoney];
+    self.prompLb.text = [NSString stringWithFormat:@"可转入上限：%@", tempStr];
+}
+
+- (void)setIsKeepKeyboard:(BOOL)isKeepKeyboard {
+    _isKeepKeyboard = isKeepKeyboard;
+    
+    if(self.contentTf.textField.isFirstResponder) {
+        [self.contentTf becomeFirstResponder];
+    }
+}
+
+- (void)setAddCondition:(NSString *)addCondition {
+    _addCondition = [addCondition copy];
+    
+    self.contentTf.placeholder = addCondition;
+}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

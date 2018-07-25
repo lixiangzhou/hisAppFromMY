@@ -17,6 +17,8 @@
 */
 @property (readwrite, nonatomic, copy) id text;
 
+@property (nonatomic, assign) BOOL selectState;
+
 /**
  点击对号按钮回调的Block
  */
@@ -43,4 +45,12 @@
                                               clickLinkBlock:(void(^)())clickLinkBlock;
 
 
++ (NSMutableAttributedString *)configureLinkAttributedString:(NSAttributedString *)attrStr
+                                       withDefaultAttributes:(NSDictionary*)defaultAttributes
+                                                  withString:(NSString *)withString
+                                            sameStringEnable:(BOOL)sameStringEnable
+                                              linkAttributes:(NSDictionary *)linkAttributes
+                                        activeLinkAttributes:(NSDictionary *)activeLinkAttributes
+                                                   parameter:(id)parameter
+                                              clickLinkBlock:(void(^)(void))clickLinkBlock;
 @end
