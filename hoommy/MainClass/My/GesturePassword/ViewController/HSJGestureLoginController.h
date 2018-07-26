@@ -9,7 +9,7 @@
 #import "HXBBaseViewController.h"
 
 typedef enum : NSUInteger {
-     HSJGestureTypeLogin,
+    HSJGestureTypeLogin,
     HSJGestureTypeSetting,
 } HSJGestureType;
 

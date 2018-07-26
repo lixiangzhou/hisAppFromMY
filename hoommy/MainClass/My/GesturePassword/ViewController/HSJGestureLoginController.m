@@ -224,7 +224,7 @@
     } else {
         KeyChain.gesturePwdCount -= 1;
         if (KeyChain.gesturePwdCount <= 0) {
-            HXBGeneralAlertVC *alertVC = [[HXBGeneralAlertVC alloc] initWithMessageTitle:@"温馨提示" andSubTitle:@"很抱歉，您的手势密码五次输入错误" andLeftBtnName:@"取消" andRightBtnName:@"确定" isHideCancelBtn:YES isClickedBackgroundDiss:NO];
+            HXBGeneralAlertVC *alertVC = [[HXBGeneralAlertVC alloc] initWithMessageTitle:@"温馨提示" andSubTitle:@"很抱歉，您的手势密码输入超限，是否使用登录密码？" andLeftBtnName:@"暂不使用" andRightBtnName:@"立即登录" isHideCancelBtn:YES isClickedBackgroundDiss:NO];
             alertVC.isCenterShow = YES;
             [KeyChain removeGesture];
             KeyChain.skipGesture = kHXBGesturePwdSkipeYES;
@@ -247,7 +247,7 @@
             
             [self presentViewController:alertVC animated:NO completion:nil];
         } else {
-            [self.msgLabel showWarnMsgAndShake:[NSString stringWithFormat:@"密码错了，还可输入%zd次", KeyChain.gesturePwdCount]];
+            [self.msgLabel showWarnMsgAndShake:[NSString stringWithFormat:@"手势输入有误 ，还剩%zd次机会", KeyChain.gesturePwdCount]];
         }
     }
 }
