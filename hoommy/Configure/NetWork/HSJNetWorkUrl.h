@@ -64,6 +64,7 @@
 #define kHXBMY_PlanAccountRequestURL @"/account/planAssets"///账户内 账户内Plan资产
 #define kHXBMY_PlanListURL @"/account/plan"//账户内  planlist
 #define kHXBMY_PlanDetaileURL(planID) [NSString stringWithFormat:@"/account/plan/%@",(planID)]
+#define kHXBMY_LoanRecordURL(planID) [NSString stringWithFormat:@"/account/plan/%@/loanRecord",(planID)] ///我的计划投标记录
 #define kHXBMY_PlanQuit @"/account/plan/quit"
 
 #define kHXBHome_AnnounceURL @"/announce"//公告
@@ -103,5 +104,7 @@
 //MARK: ======================= 协议 ==========================
 #define kHXB_Negotiate_thirdpart @"/agreement/thirdpart" ///《恒丰银行股份有限公司杭州分行网络交易资金账户三方协议》
 
+//MARK: ======================= 购买 ==========================
+#define kHXBFin_Plan_ConfirmBuyReslutURL(planID) [NSString stringWithFormat:@"/plan/%@/result",(planID)]//确认购买
 
 #endif /* HSJNetWorkUrl_h */

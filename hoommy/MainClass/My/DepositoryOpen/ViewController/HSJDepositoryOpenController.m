@@ -16,6 +16,7 @@
 #import "HXBBankCardListViewController.h"
 #import "HSJDepositoryOpenViewModel.h"
 #import <ReactiveObjC/ReactiveObjC.h>
+#import <IQKeyboardManager.h>
 
 #define kInputHeight 50
 
@@ -39,6 +40,8 @@
 @property (nonatomic, assign) BOOL isAgree;
 
 @property (nonatomic, strong) HSJDepositoryOpenViewModel *viewModel;
+
+@property (nonatomic, weak) UITextField *currentField;
 @end
 
 @implementation HSJDepositoryOpenController
@@ -52,6 +55,20 @@
     self.viewModel = [HSJDepositoryOpenViewModel new];
     self.isAgree = YES;
     [self setUI];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [IQKeyboardManager sharedManager].enable = NO;
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [IQKeyboardManager sharedManager].enable = YES;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - UI
@@ -112,6 +129,7 @@
     transactionPwdView.hideEye = NO;
     transactionPwdView.textFieldRightOffset = 40;
     transactionPwdView.secureTextEntry = YES;
+    transactionPwdView.keyboardType = UIKeyboardTypeNumberPad;
     [self commonTextViewProp:transactionPwdView];
     [self.scrollView addSubview:transactionPwdView];
     self.transactionPwdView = transactionPwdView;
@@ -154,7 +172,6 @@
     bankNoView.textFieldRightOffset = 70;
     bankNoView.keyboardType = UIKeyboardTypeNumberPad;
     [self commonTextViewProp:bankNoView];
-    bankNoView.keyboardType = UIKeyboardTypeNumberPad;
 
     kWeakSelf
     bankNoView.block = ^(NSString *text) {
@@ -205,6 +222,8 @@
     [self commonTextViewProp:mobileView];
     [self.scrollView addSubview:mobileView];
     self.mobileView = mobileView;
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
 
     [sectionView2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.transactionPwdView.mas_bottom).offset(10);
@@ -301,10 +320,18 @@
         make.right.equalTo(self.view).offset(-15);
         make.height.equalTo(@41);
     }];
+    
+    [self.view layoutIfNeeded];
+    
+    self.scrollView.contentSize = CGSizeMake(0, CGRectGetMaxY(bottomBtn.frame) + 30);
 }
 
 
 #pragma mark - UITextFieldDelegate
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    self.currentField = textField;
+}
+
 - (BOOL)textFieldShouldClear:(UITextField *)textField
 {
     if (self.bankNoView == textField.superview) {
@@ -324,6 +351,32 @@
             return NO;
         }
         return [self limitNumberCount:textField.superview];
+    }
+}
+
+- (void)willChangeFrame:(NSNotification *)notification {
+    if ([self.currentField isEqual:self.mobileView.textField]) {
+        CGFloat endY = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].origin.y;
+        if (endY == kScreenHeight) {
+            self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        } else {
+            CGRect rect = [self.mobileView convertRect:self.currentField.frame toView:[UIApplication sharedApplication].keyWindow];
+            CGFloat maxY = CGRectGetMaxY(rect);
+            
+            self.scrollView.contentInset = UIEdgeInsetsMake(-MAX(10, maxY - endY + 10 + self.scrollView.contentOffset.y), 0, 0, 0);
+        }
+    } else if ([self.currentField isEqual:self.bankNoView.textField]) {
+        CGFloat endY = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].origin.y;
+        if (endY == kScreenHeight) {
+            self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        } else {
+            CGRect rect = [self.bankNoView convertRect:self.currentField.frame toView:[UIApplication sharedApplication].keyWindow];
+            CGFloat maxY = CGRectGetMaxY(rect);
+            
+            self.scrollView.contentInset = UIEdgeInsetsMake(-MAX(10, maxY - endY + 10 + self.scrollView.contentOffset.y), 0, 0, 0);
+        }
+    } else {
+        self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     }
 }
 
@@ -371,10 +424,12 @@
     [self.bankNameView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.bankNoView).offset(kInputHeight);
     }];
-
+    
     [UIView animateWithDuration:0.25 animations:^{
         self.bankNameView.alpha = 1;
         [self.view layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        self.scrollView.contentSize = CGSizeMake(0, CGRectGetMaxY(self.bottomBtn.frame) + 30);
     }];
 }
 
@@ -383,10 +438,12 @@
     [self.bankNameView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.bankNoView).offset(0);
     }];
-
+    
     [UIView animateWithDuration:0.25 animations:^{
         self.bankNameView.alpha = 0;
         [self.view layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        self.scrollView.contentSize = CGSizeMake(0, CGRectGetMaxY(self.bottomBtn.frame) + 30);
     }];
 }
 

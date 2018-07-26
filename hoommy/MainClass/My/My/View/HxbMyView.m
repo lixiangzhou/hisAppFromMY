@@ -209,8 +209,8 @@ MyViewHeaderDelegate
             cell.isShowLine = YES;
             cell.imageName = @"me_hongli_asset";
         } else {
-            cell.textLabel.text = @"红利计划";
-            NSString *str = [NSString hxb_getPerMilWithDouble:[self.userInfoModel.userAssets.financePlanAssets doubleValue]];
+            cell.textLabel.text = @"零钱罐";
+            NSString *str = [NSString hxb_getPerMilWithDouble:self.userInfoModel.userAssets.stepUpAssets];
             cell.desc = [str isEqualToString:@"0元"]?@"0.00元":str;
             cell.isShowLine = NO;
             cell.imageName = @"me_hongli";

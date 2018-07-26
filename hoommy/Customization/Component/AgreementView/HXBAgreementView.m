@@ -71,9 +71,26 @@
                                 //点击事件
                                 clickLinkBlock();
                             }];
+    
     return attributedString;
 }
 
++ (NSMutableAttributedString *)configureLinkAttributedString:(NSAttributedString *)attrStr
+                                            withDefaultAttributes:(NSDictionary*)defaultAttributes
+                                                  withString:(NSString *)withString
+                                            sameStringEnable:(BOOL)sameStringEnable
+                                              linkAttributes:(NSDictionary *)linkAttributes
+                                        activeLinkAttributes:(NSDictionary *)activeLinkAttributes
+                                                   parameter:(id)parameter
+                                              clickLinkBlock:(void(^)(void))clickLinkBlock
+{
+    NSMutableAttributedString *attributedString = [self configureLinkAttributedString:attrStr withString:withString sameStringEnable:sameStringEnable linkAttributes:linkAttributes activeLinkAttributes:activeLinkAttributes parameter:parameter clickLinkBlock:clickLinkBlock];
+    NSRange range = [attrStr.string rangeOfString:withString];
+    if(range.location != NSNotFound) {
+        [attributedString addAttributes:defaultAttributes range:NSMakeRange(0, range.location)];
+    }
+    return attributedString;
+}
 
 - (void)setText:(id)text
 {
@@ -104,9 +121,16 @@
 - (void)agreeBtnClick
 {
     self.agreeBtn.selected = !self.agreeBtn.selected;
+    self.selectState = self.agreeBtn.selected;
     if (self.agreeBtnBlock) {
         self.agreeBtnBlock(self.agreeBtn.selected);
     }
+}
+
+- (void)setSelectState:(BOOL)selectState {
+    _selectState = selectState;
+    
+    self.agreeBtn.selected = selectState;
 }
 
 - (CJLabel *)negotiateView

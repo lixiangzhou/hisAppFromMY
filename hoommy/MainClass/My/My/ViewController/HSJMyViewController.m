@@ -170,9 +170,6 @@
         }
     }
     if (type == 1) { //风险测评
-//        HSJBuyViewController *vc = [[HSJBuyViewController alloc] init];
-//        [self.navigationController pushViewController:vc animated:YES];
-//        return;
         HSJRiskAssessmentViewController *riskAssessmentVC = [[HSJRiskAssessmentViewController alloc] init];
         [self.navigationController pushViewController:riskAssessmentVC animated:YES];
     }

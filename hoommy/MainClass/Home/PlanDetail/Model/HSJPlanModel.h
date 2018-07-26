@@ -27,7 +27,7 @@
 /// 锁定结束时间
 @property (nonatomic, copy) NSString *endLockingTime;
 /// 计划 id
-@property (nonatomic, copy) NSString *id;
+@property (nonatomic, copy) NSString *planId;
 /// 加息利率
 @property (nonatomic, copy) NSString *extraInterestRate;
 /// 计划名称
@@ -36,6 +36,25 @@
 @property (nonatomic, copy) NSString *subsidyInterestRate;
 /// 新手产品锁定期（天）
 @property (nonatomic, assign) int lockDays;
+//剩余可追加金额
+@property (nonatomic, copy) NSString *userRemainAmount;
+//剩余可投
+@property (nonatomic, copy) NSString *remainAmount;
 /// 活动文案
 @property (nonatomic, copy) NSString *tag;
+/// 是否首次够买
+@property (nonatomic, copy) NSString *isFirst;
+/// 最小注册金额
+@property (nonatomic, copy) NSString *minRegisterAmount;
+/// 加入倍数金额
+@property (nonatomic, copy) NSString *registerMultipleAmount;
+//收益类型
+@property (nonatomic, copy) NSString *cashType;
+// 计划状态
+@property (nonatomic, copy) NSString *unifyStatus;
+/// 开始销售时间
+@property (nonatomic, copy) NSString *beginSellingTime;
+/// 倒计时时间戳
+@property (nonatomic, copy) NSString *diffTime;
+
 @end

@@ -50,7 +50,6 @@
     [self updateUI];
 }
 
-
 - (void)setUI {
     [self.safeAreaView addSubview:self.navView];
     [self.safeAreaView addSubview:self.mainTabelView];

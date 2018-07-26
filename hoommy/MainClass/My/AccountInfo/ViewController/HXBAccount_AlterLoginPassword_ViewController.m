@@ -9,6 +9,9 @@
 #import "HXBAccount_AlterLoginPassword_ViewController.h"
 #import "HXBAccount_AlterLoginPassword_View.h"///修改登录密码的view
 #import "HXBAccountAlterLoginPasswordViewModel.h"///修改密码接口
+#import "HXBGeneralAlertVC.h"
+#import "HXBSendSmscodeViewController.h"
+#import "HXBCheckCaptchaViewController.h"
 
 @interface HXBAccount_AlterLoginPassword_ViewController ()
 @property (nonatomic,strong) HXBAccount_AlterLoginPassword_View *alterLoginPasswordView;
@@ -32,55 +35,97 @@
 }
 
 - (void)setUPView {
-kWeakSelf
+    kWeakSelf
     self.alterLoginPasswordView = [[HXBAccount_AlterLoginPassword_View alloc]init];
     [self.view addSubview:self.alterLoginPasswordView];
     self.alterLoginPasswordView.frame = CGRectMake(0, HXBStatusBarAndNavigationBarHeight, kScreenWidth, kScreenHeight - HXBStatusBarAndNavigationBarHeight);
     
+//    KeyChain.siginCount = @(0).description;
+    
+    self.alterLoginPasswordView.forgotPasswordBlock = ^{
+        NSLog(@"点击了忘记密码");
+        HXBCheckCaptchaViewController *checkCaptchVC = [[HXBCheckCaptchaViewController alloc] init];
+        [checkCaptchVC checkCaptchaSucceedFunc:^(NSString *checkPaptcha){
+            //发送短信vc
+            HXBSendSmscodeViewController *sendSmscodeVC = [[HXBSendSmscodeViewController alloc]init];
+            sendSmscodeVC.title = weakSelf.title;
+            sendSmscodeVC.phonNumber = KeyChain.mobile;
+            sendSmscodeVC.captcha = checkPaptcha;
+            sendSmscodeVC.type = weakSelf.type;
+            [weakSelf.navigationController pushViewController:sendSmscodeVC animated:YES];
+        }];
+        [weakSelf presentViewController:checkCaptchVC animated:YES completion:nil];
+    };
+    
     [self.alterLoginPasswordView clickAlterButtonWithBlock:^(NSString *password_Original, NSString *password_New) {
         //验证密码
-//        if (KeyChain.siginCount.integerValue == 4) {
-//            [self alertVC_4];
-//        }
-//        if (KeyChain.siginCount.integerValue > 5) {
-//            [self alertVC_5];
-//        }
         NSString * message = [NSString isOrNoPasswordStyle:password_New];
         if (message.length > 0) {
             [HxbHUDProgress showTextWithMessage:message];
             return;
         }
-        [self.viewModel mobifyPassword_LoginRequest_requestWithOldPwd:password_Original andNewPwd:password_New andSuccessBlock:^{
-            KeyChain.siginCount = @(0).description;
-            [KeyChain signOut];
-            weakSelf.tabBarController.selectedIndex = 0;
-            [HxbHUDProgress showTextWithMessage:@"密码修改成功，请用新密码号登录"];
-            [weakSelf.navigationController popToRootViewControllerAnimated:NO];
-            [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_ShowLoginVC object:nil];
-        } andFailureBlock:^(NSError *error) {
-            KeyChain.siginCount = @(KeyChain.siginCount.integerValue + 1).description;
-        }];
+        NSLog(@"---%ld---",KeyChain.siginCount.integerValue);
+        if (KeyChain.siginCount.integerValue >= 3) {
+            [self alertVC_4];
+        } else {
+            
+            [self.viewModel mobifyPassword_LoginRequest_requestWithOldPwd:password_Original andNewPwd:password_New andSuccessBlock:^{
+                KeyChain.siginCount = @(0).description;
+                [KeyChain signOut];
+                weakSelf.tabBarController.selectedIndex = 0;
+                [HxbHUDProgress showTextWithMessage:@"密码修改成功，请用新密码号登录"];
+                [weakSelf.navigationController popToRootViewControllerAnimated:NO];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_ShowLoginVC object:nil];
+            } andFailureBlock:^(NSError *error) {
+                KeyChain.siginCount = @(KeyChain.siginCount.integerValue + 1).description;
+            }];
+        }
+        
+//        if (KeyChain.siginCount.integerValue > 5) {
+//            [self alertVC_5];
+//        }
+        
     }];
     
 }
 
 - (void)alertVC_4 {
-    //弹窗提示是否找回，点击找回退出登录到登录页面
-    UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"是否找回密码" message:@"" preferredStyle:UIAlertControllerStyleAlert];
-    //            [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-    //
-    //            }];
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        ///退出登录
-        [KeyChain signOut];
-        //到登录界面
-        [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_ShowLoginVC object:nil];
+    //弹窗提示是否找回，点击确定到手机验证码更改登录密码页面
+    HXBGeneralAlertVC *alertVC = [[HXBGeneralAlertVC alloc] initWithMessageTitle:@"是否需要找回登录密码" andSubTitle:@"" andLeftBtnName:@"取消" andRightBtnName:@"找回登录密码" isHideCancelBtn:NO isClickedBackgroundDiss:NO];
+    [self presentViewController:alertVC animated:NO completion:nil];
+    kWeakSelf
+    [alertVC setLeftBtnBlock:^{
     }];
-    
-    UIAlertAction *cancalAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-    [alertController addAction:okAction];
-    [alertController addAction:cancalAction];
-    [self presentViewController:alertController animated:YES completion:nil];
+    [alertVC setRightBtnBlock:^{
+        //去手机号修改登陆密码页   HXBSignUPAndLoginRequest_sendSmscodeType_forgot
+        HXBCheckCaptchaViewController *checkCaptchVC = [[HXBCheckCaptchaViewController alloc] init];
+        [checkCaptchVC checkCaptchaSucceedFunc:^(NSString *checkPaptcha){
+            //发送短信vc
+            HXBSendSmscodeViewController *sendSmscodeVC = [[HXBSendSmscodeViewController alloc]init];
+            sendSmscodeVC.title = weakSelf.title;
+            sendSmscodeVC.phonNumber = KeyChain.mobile;
+            sendSmscodeVC.captcha = checkPaptcha;
+            sendSmscodeVC.type = weakSelf.type;
+            [weakSelf.navigationController pushViewController:sendSmscodeVC animated:YES];
+            
+//            [weakSelf.viewModel getVerifyCodeRequesWithMobile:KeyChain.mobile andAction:weakSelf.type andCaptcha:checkPaptcha andType:@"" andCallbackBlock:^(BOOL isSuccess, NSError *error) {
+//            NSLog(@"发送 验证码");
+//            if (isSuccess) {
+//
+//                }
+//                else {
+//
+//                }
+//            }];
+        }];
+        [weakSelf presentViewController:checkCaptchVC animated:YES completion:nil];
+        
+        
+        //        ///退出登录
+        //        [KeyChain signOut];
+        //        //到登录界面
+        //        [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_ShowLoginVC object:nil];
+    }];
 }
 
 - (void)alertVC_5 {

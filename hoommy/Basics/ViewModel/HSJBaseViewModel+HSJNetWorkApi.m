@@ -52,7 +52,7 @@
  @param resultBlock 请求结果回调的block
  */
 - (void)verifyCodeRequestWithResultBlock:(void(^)(NYBaseRequest* request)) requestBlock resultBlock:(void(^)(id responseObject, NSError *error))resultBlock {
-    NYBaseRequest *versionUpdateAPI = [[NYBaseRequest alloc] init];
+    NYBaseRequest *versionUpdateAPI = [[NYBaseRequest alloc] initWithDelegate:self];
     versionUpdateAPI.requestUrl = kHXBUser_smscodeURL;
     versionUpdateAPI.requestMethod = NYRequestMethodPost;
     if (requestBlock) {
@@ -69,5 +69,17 @@
     }];
 }
 
+- (void)getDataWithId:(NSString *)planId showHug:(BOOL)isShow resultBlock:(NetWorkResponseBlock)resultBlock {
+    kWeakSelf
+    [self loadData:^(NYBaseRequest *request) {
+        request.modelType = NSClassFromString(@"HSJPlanModel");
+        request.requestUrl = kHXBFinanc_PlanDetaileURL(planId.integerValue);
+        request.showHud = isShow;
+    } responseResult:^(id responseData, NSError *erro) {
+        if(resultBlock) {
+            resultBlock(responseData, erro);
+        }
+    }];
+}
 
 @end

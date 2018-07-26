@@ -30,11 +30,19 @@ typedef enum : NSUInteger {
     kHXBCode_Enum_NotSigin = 402,
     /// token 单点登录
     kHXBCode_Enum_SingleLogin = 409,
+    ///图验次数超限
+    kHXBCode_Enum_CaptchaTransfinite = 411,
     //服务器错误
     kHXBCode_Enum_NoServerFaile = 500,
     //购买处理中
     kHXBPurchase_Processing = -999,
 } HSJNetStateCode;
+
+typedef enum : NSUInteger {
+    kBuy_Toast = 10001,
+    kBuy_Result = 10002,
+    kBuy_Processing = 10003,
+} KHXBBuy_Code;
 
 /**
  code 码

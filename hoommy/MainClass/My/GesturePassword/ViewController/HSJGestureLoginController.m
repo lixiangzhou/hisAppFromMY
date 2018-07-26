@@ -53,7 +53,7 @@
     UILabel *dateLabel = [UILabel new];
     dateLabel.attributedText = [self getDateAttributeString];
     dateLabel.textColor = kHXBColor_333333_100;
-    dateLabel.frame = CGRectMake(25, 64 + HXBStatusBarAdditionHeight, kScreenH - 50, 45);
+    dateLabel.frame = CGRectMake(25, kScrAdaptationW(HXBStatusBarAndNavigationBarHeight), kScreenH - 50, 45);
     [self.view addSubview:dateLabel];
     
     UILabel *mobileLabel = [UILabel new];
@@ -65,7 +65,7 @@
     [self.view addSubview:mobileLabel];
     
     PCLockLabel *msgLabel = [[PCLockLabel alloc] init];
-    msgLabel.frame = CGRectMake(0, mobileLabel.bottom + 40, kScreenW, 20);
+    msgLabel.frame = CGRectMake(0, mobileLabel.bottom + kScrAdaptationW(40), kScreenW, 20);
     msgLabel.font = kHXBFont_PINGFANGSC_REGULAR(14);
     self.msgLabel = msgLabel;
     [self.view addSubview:msgLabel];
@@ -127,8 +127,13 @@
         make.width.height.equalTo(@300);
     }];
     
+    [self.view layoutIfNeeded];
+    
+    CGFloat maxY = CGRectGetMaxY(lockView.frame);
+    CGFloat padding = (kScreenH - maxY) * 0.6;
+    
     [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(@-111);
+        make.bottom.equalTo(@(-padding));
         make.centerX.equalTo(self.view);
     }];
 }
