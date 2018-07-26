@@ -247,7 +247,7 @@
             
             [self presentViewController:alertVC animated:NO completion:nil];
         } else {
-            [self.msgLabel showWarnMsgAndShake:[NSString stringWithFormat:@"密码错了，还可输入%zd次", KeyChain.gesturePwdCount]];
+            [self.msgLabel showWarnMsgAndShake:[NSString stringWithFormat:@"手势输入有误 ，还剩%zd次机会", KeyChain.gesturePwdCount]];
         }
     }
 }
