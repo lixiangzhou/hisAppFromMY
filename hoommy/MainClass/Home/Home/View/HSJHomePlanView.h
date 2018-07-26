@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "HXBRequestUserInfoViewModel.h"
-#import "HSJPlanModel.h"
+#import "HSJHomePlanModel.h"
 
 @interface HSJHomePlanView : UIView
 
-@property (nonatomic, strong) HSJPlanModel *planModel;
+@property (nonatomic, strong) HSJHomePlanModel *planModel;
 
 @property (nonatomic, strong) HXBRequestUserInfoViewModel *userViewModel;
 

@@ -11,11 +11,15 @@
 @implementation HSJHomeModel
 
 + (Class)dataList_class {
-    return [HSJPlanModel class];
+    return [HSJHomePlanModel class];
 }
 
 + (Class)bannerList_class {
     return [BannerModel class];
+}
+
++ (Class)articleList_class {
+   return [HSJHomeArtileModel class];
 }
 
 @end

@@ -246,7 +246,7 @@
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
-        _titleLabel.text = @"请输入登录密码";
+        _titleLabel.text = @"请输入验证码";
         _titleLabel.font = kHXBFont_PINGFANGSC_REGULAR(30);
         _titleLabel.textColor = kHXBFontColor_505050_100;
     }

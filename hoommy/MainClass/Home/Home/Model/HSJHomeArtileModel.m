@@ -1,15 +1,14 @@
 //
-//  HSJHomePlanModel.m
+//  HSJHomeArtileModel.m
 //  hoommy
 //
-//  Created by HXB-C on 2018/7/23.
+//  Created by HXB-C on 2018/7/24.
 //  Copyright © 2018年 caihongji. All rights reserved.
 //
 
-#import "HSJHomePlanModel.h"
-#import <UIImageView+WebCache.h>
+#import "HSJHomeArtileModel.h"
 
-@implementation HSJHomePlanModel
+@implementation HSJHomeArtileModel
 
 - (NSDictionary *)map {
     NSMutableDictionary* dic = [NSMutableDictionary dictionaryWithDictionary:[super map]];

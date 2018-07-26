@@ -11,7 +11,7 @@
 #import "SVGKit/SVGKImage.h"
 #import "HSJMyViewController.h"
 #import "HSJSignInViewController.h"
-
+#import "HSJHomeViewController.h"
 @interface HXBBaseTabBarController ()<UITabBarControllerDelegate>
 
 @end
@@ -138,7 +138,10 @@
 #pragma mark - tabBarDelegate
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {
-//    DLog(@"select item === %lu",(unsigned long)tabBarController.selectedIndex);
+    HXBBaseNavigationController *vc = (HXBBaseNavigationController *)viewController ;
+    if ([vc.topViewController isMemberOfClass:[HSJHomeViewController class]]) {
+        [HXBUmengManagar HXB_clickEventWithEnevtId:kHSJUmeng_HomeTabClick];
+    }
 }
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController

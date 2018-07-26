@@ -28,6 +28,8 @@
 
 @property (nonatomic, strong) UILabel *intoLabel;
 
+@property (nonatomic, strong) UIView *segmentBottomLine;
+
 @end
 
 @implementation HSJHomePlanView
@@ -51,6 +53,7 @@
     [self addSubview:self.depositoryLabel];
     [self addSubview:self.refundableLabel];
     [self addSubview:self.intoLabel];
+    [self addSubview:self.segmentBottomLine];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self).offset(kScrAdaptationW750(30));
         make.top.equalTo(self).offset(kScrAdaptationH750(40));
@@ -81,17 +84,19 @@
         make.centerX.equalTo(self.expectedRateLabel);
         make.top.equalTo(self.expectedRateLabel.mas_bottom);
     }];
+    
+    CGSize depositoryLabelSize = [self.depositoryLabel.text sizeWithAttributes:@{NSFontAttributeName:self.refundableLabel.font}];
+    
     [self.depositoryLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.expectedRateLabel.mas_centerX).offset(-kScrAdaptationW750(6));
         make.top.equalTo(self.annualizedTextLabel.mas_bottom).offset(kScrAdaptationH750(30));
         make.height.offset(kScrAdaptationH750(39));
-        make.width.offset(kScrAdaptationH750(172));
+        make.width.offset(depositoryLabelSize.width + 2 * kScrAdaptationW750(14));
     }];
     [self.refundableLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.expectedRateLabel.mas_centerX).offset(kScrAdaptationW750(6));
         make.centerY.equalTo(self.depositoryLabel);
         make.height.offset(kScrAdaptationH750(39));
-        make.width.offset(kScrAdaptationH750(172));
     }];
     [self.intoLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.expectedRateLabel);
@@ -99,6 +104,12 @@
         make.width.offset(kScrAdaptationW750(280));
         make.bottom.equalTo(self.planBackgroundImageView.mas_bottom).offset(-kScrAdaptationH750(50));
     }];
+    [self.segmentBottomLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self);
+        make.bottom.equalTo(self.mas_bottom);
+        make.height.offset(kScrAdaptationH750(20));
+    }];
+
 }
 
 - (void)updateUI {
@@ -111,19 +122,38 @@
     }
 }
 
-- (void)setPlanModel:(HSJPlanModel *)planModel {
+- (void)setPlanModel:(HSJHomePlanModel *)planModel {
     _planModel = planModel;
     self.expectedRateLabel.text = [NSString stringWithFormat:@"%@%%",planModel.baseInterestRate];
-    self.titleLabel.text = planModel.name;
-    self.messageLabel.text = planModel.tag;
+    
+    self.refundableLabel.text = [self getLockString];
+    
+    CGSize refundableLabelSize = [self.refundableLabel.text sizeWithAttributes:@{NSFontAttributeName:self.refundableLabel.font}];
+    [self.refundableLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.width.offset(refundableLabelSize.width + 2 * kScrAdaptationW750(14));
+    }];
+    
 }
+
+- (NSString *)getLockString {
+    if (self.planModel.lockPeriod.length) {
+        return [NSString stringWithFormat:@"%@个月后随时可退", self.planModel.lockPeriod];
+    }
+    
+    if (self.planModel.lockDays) {
+        return [NSString stringWithFormat:@"%@天后随时可退", self.planModel.lockDays];
+    }
+    
+    return  @"--";
+}
+
 
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(34);
         _titleLabel.textColor = kHXBFontColor_333333_100;
-        _titleLabel.text = @"__";
+        _titleLabel.text = @"存钱罐";
     }
     return _titleLabel;
 }
@@ -156,7 +186,7 @@
 - (UILabel *)expectedRateLabel {
     if (!_expectedRateLabel) {
         _expectedRateLabel = [[UILabel alloc] init];
-        _expectedRateLabel.text = @"__";
+        _expectedRateLabel.text = @"--";
         _expectedRateLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(100);
         _expectedRateLabel.textColor = kHXBColor_FF7055_100;
     }
@@ -176,7 +206,7 @@
 - (UILabel *)depositoryLabel {
     if (!_depositoryLabel) {
         _depositoryLabel = [[UILabel alloc] init];
-        _depositoryLabel.text = @"恒丰银行存管";
+        _depositoryLabel.text = @"恒丰银行存管 ";
         _depositoryLabel.textAlignment = NSTextAlignmentCenter;
         _depositoryLabel.textColor = kHXBColor_FB7F67_100;
         _depositoryLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(24);
@@ -210,5 +240,14 @@
     }
     return _intoLabel;
 }
+
+- (UIView *)segmentBottomLine {
+    if (!_segmentBottomLine) {
+        _segmentBottomLine = [[UIView alloc] init];
+        _segmentBottomLine.backgroundColor = kHXBBackgroundColor;
+    }
+    return _segmentBottomLine;
+}
+
 
 @end
