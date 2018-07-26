@@ -15,6 +15,9 @@ typedef enum : NSUInteger {
     HSJBUYBUTTON_BINDCARD,
     HSJBUYBUTTON_NOMONEY,
     HSJBUYBUTTON_WITHMONEY,
+    HSJBUYBUTTON_TIMER,
+    HSJBUYBUTTON_JOIN,
+    HSJBUYBUTTON_EXITED
 } HSJBUYBUTTON_TYPE;
 
 @interface HSJBuyViewModel : HSJBaseViewModel
@@ -50,6 +53,10 @@ typedef enum : NSUInteger {
 - (BOOL)checkMoney:(void (^)(BOOL isLess))lessthanStartMoneyBLock;
 //校验协议勾选
 - (BOOL)checkAgreement:(BOOL)isAgreementGroup agreeRiskApplyAgreement:(BOOL)isAgreeRiskApplyAgreement;
+//开启倒计时
+- (BOOL)startCountDownTimer:(void (^)(void)) timerBlock;
+
+#pragma mark 网络接口
 //购买
 - (void)planBuyReslutWithPlanID: (NSString *)planID
                      parameter : (NSDictionary *)parameter

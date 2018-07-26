@@ -190,6 +190,12 @@
     
     self.contentTf.text = inputMoney;
 }
+
+- (void)setEnableContentTf:(BOOL)enableContentTf {
+    _enableContentTf = enableContentTf;
+    
+    self.contentTf.userInteractionEnabled = enableContentTf;
+}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

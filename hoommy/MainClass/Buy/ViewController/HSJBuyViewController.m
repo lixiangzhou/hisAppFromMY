@@ -17,6 +17,7 @@
 #import "HxbWithdrawCardViewController.h"
 #import "HXBTransactionPasswordView.h"
 #import "HXBVerificationCodeAlertVC.h"
+#import "HSJPlanBuyResultViewController.h"
 
 @interface HSJBuyViewController ()
 
@@ -47,13 +48,14 @@
 
 - (void)setupData {
     self.viewModel = [[HSJBuyViewModel alloc] init];
-//    self.planId = @"748";
+    self.planId = @"1216";
     self.viewModel.inputMoney = self.startMoney;
     if(!self.planModel) {
         kWeakSelf
         [self.viewModel getDataWithId:self.planId showHug:YES resultBlock:^(id responseData, NSError *erro) {
             if(!erro) {
                 weakSelf.viewModel.planModel = responseData;
+                [weakSelf startSaleTimer];
                 [weakSelf resultDeal];
             }
         }];
@@ -86,21 +88,6 @@
     }];
 }
 
-- (void)resultDeal {
-    if(!self.viewModel.isLoadingData) {
-        [self.viewModel buildCellDataList];
-        self.tableView.hidden = NO;
-        [self reload];
-        [self updateHeadView];
-        [self updateFootView];
-    }
-}
-
-- (void)reload {
-    [self.tableView reloadData];
-    self.headView.isKeepKeyboard = YES;
-}
-
 - (void)setupUI {
     self.title = @"转入";
     self.isShowSplitLine = YES;
@@ -117,6 +104,36 @@
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.safeAreaView);
     }];
+}
+
+- (void)resultDeal {
+    if(!self.viewModel.isLoadingData) {
+        if(self.viewModel.planModel && self.viewModel.userInfoModel) {
+            [self.viewModel buildCellDataList];
+            self.tableView.hidden = NO;
+            [self reload];
+            [self updateHeadView];
+            [self updateFootView];
+        }
+    }
+}
+
+- (void)startSaleTimer {
+    kWeakSelf
+    [self.viewModel startCountDownTimer:^() {
+        if(weakSelf.viewModel.buttonType != HSJBUYBUTTON_TIMER) {
+            [weakSelf updateFootView];
+            [weakSelf updateHeadView];
+        }
+        else {
+            weakSelf.footView.btnContent = weakSelf.viewModel.buttonShowContent;
+        }
+    }];
+}
+
+- (void)reload {
+    [self.tableView reloadData];
+    self.headView.isKeepKeyboard = YES;
 }
 
 - (UITableView *)tableView {
@@ -155,7 +172,6 @@
         _footView.isAgreementGroup = YES;
         _footView.isShowAgreeRiskApplyAgreementView = NO;
         _footView.isAgreeRiskApplyAgreement = NO;
-        _footView.isTransparentBtnColor = YES;
         _footView.btnContent = @"立即转入";
         kWeakSelf
         _footView.addAction = ^{
@@ -172,24 +188,30 @@
 - (void)updateHeadView {
     self.headView.addUpLimitMoney = self.viewModel.addUpLimit;
     self.headView.addCondition = self.viewModel.addCondition;
+    
+    if(HSJBUYBUTTON_EXITED==self.viewModel.buttonType || HSJBUYBUTTON_TIMER==self.viewModel.buttonType) {
+        self.headView.enableContentTf = NO;
+    }
+    else {
+        self.headView.enableContentTf = YES;
+    }
 }
 
 - (void)updateFootView {
     self.footView.isShowAgreeRiskApplyAgreementView = self.viewModel.isShowRiskAgeement;
     self.footView.btnContent = self.viewModel.buttonShowContent;
     
-//    if(0 == self.viewModel.inputMoney.doubleValue) {
-//        self.footView.enableAddButton = NO;
-//    }
-//    else {
-//        self.footView.enableAddButton = YES;
-//    }
-    
-    if(0 == self.viewModel.inputMoney.floatValue) {
-        self.footView.isTransparentBtnColor = YES;
+    if(HSJBUYBUTTON_EXITED == self.viewModel.buttonType) {
+        self.footView.enableAddButton = NO;
+        self.footView.buttonBackGroundColor = kHXBColor_ECECF0_100;
     }
-    else{
-        self.footView.isTransparentBtnColor = NO;
+    else if(HSJBUYBUTTON_TIMER == self.viewModel.buttonType) {
+        self.footView.enableAddButton = NO;
+        self.footView.buttonBackGroundColor = kHXBColor_FF7055_40;
+    }
+    else {
+        self.footView.enableAddButton = YES;
+        self.footView.buttonBackGroundColor = kHXBColor_FF7055_100;
     }
 }
 
@@ -208,7 +230,9 @@
         kWeakSelf
         BOOL moneyCheckResult = [self.viewModel checkMoney:^(BOOL isLess) {
             if(isLess) {
-                weakSelf.headView.inputMoney = weakSelf.viewModel.planModel.minRegisterAmount;
+                weakSelf.viewModel.inputMoney = weakSelf.viewModel.planModel.minRegisterAmount;
+                [weakSelf updateHeadView];
+                [weakSelf updateFootView];
             }
         }];
         BOOL agreementCheckResult = [self.viewModel checkAgreement:self.footView.isAgreementGroup agreeRiskApplyAgreement:self.footView.isAgreeRiskApplyAgreement];
@@ -291,14 +315,27 @@
 }
 
 - (void)planBuy:(NSDictionary*)paramDic {
+    kWeakSelf
     [self.viewModel planBuyReslutWithPlanID:self.viewModel.planModel.planId parameter:paramDic resultBlock:^(BOOL isSuccess) {
         if(isSuccess) {
-            
+            [weakSelf buyResult:0];
         }
         else {
-            
+            [weakSelf buyResult:weakSelf.viewModel.buyErrorCode];
         }
     }];
+}
+
+- (void)buyResult:(NSInteger)state {
+    HSJPlanBuyResultViewController  *vc = [[HSJPlanBuyResultViewController alloc] init];
+    vc.state = state;
+    if(0 == state) {
+        vc.lockStart = self.viewModel.resultModel.lockStart;
+    }
+    else {
+        vc.erroInfo = self.viewModel.buyErrorMessage;
+    }
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)lookUpAgreement {

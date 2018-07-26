@@ -10,8 +10,8 @@
 
 @interface HSJBuyFootView : UIView
 @property (nonatomic, copy) NSString *btnContent;
+@property (nonatomic, strong) UIColor *buttonBackGroundColor;
 
-@property (nonatomic, assign) BOOL isTransparentBtnColor;
 @property (nonatomic, assign) BOOL isAgreeRiskApplyAgreement;
 @property (nonatomic, assign) BOOL isAgreementGroup;
 @property (nonatomic, assign) BOOL isShowAgreeRiskApplyAgreementView;
