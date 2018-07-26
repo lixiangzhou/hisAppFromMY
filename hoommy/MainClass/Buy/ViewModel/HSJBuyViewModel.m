@@ -7,13 +7,23 @@
 //
 
 #import "HSJBuyViewModel.h"
+#import "HXBNsTimerManager.h"
 
 @interface HSJBuyViewModel()
 @property (nonatomic, assign, readonly) BOOL isAbleleftMoneyCellItem;
 @property (nonatomic, assign, readonly) BOOL isAbleBankCellItem;
+
+@property (nonatomic, strong) HXBNsTimerManager *timerManager;
+//倒计时,对应的文本变化
+@property (nonatomic, strong) NSString *timerContent;
 @end
 
 @implementation HSJBuyViewModel
+- (void)dealloc
+{
+    [self.timerManager stopTimer];
+}
+
 #pragma mark 数据请求处理
 - (instancetype)init {
     self = [super init];
@@ -113,7 +123,7 @@
     return isAble;
 }
 
-- (BOOL)isIsAbleleftMoneyCellItem {
+- (BOOL)isAbleleftMoneyCellItem {
     BOOL isAble = YES;
     if(0 == self.userInfoModel.userAssets.availablePoint.doubleValue) {
         isAble = NO;
@@ -139,7 +149,7 @@
 }
 
 - (NSString *)buttonShowContent {
-    NSString *content = @"添加银行卡";
+    NSString *content = @"";
     switch (self.buttonType) {
         case HSJBUYBUTTON_WITHMONEY:
         {
@@ -150,8 +160,18 @@
         case HSJBUYBUTTON_NOMONEY:
             content = @"立即转入";
             break;
+        case HSJBUYBUTTON_TIMER:
+            content = self.timerContent;
+            break;
+        case HSJBUYBUTTON_BINDCARD:
+            content = @"添加银行卡";;
+            break;
+        case HSJBUYBUTTON_EXITED:
+            content = @"销售结束";
+            break;
             
         default:
+            content = @"立即转入";
             break;
     }
     
@@ -159,15 +179,52 @@
 }
 
 - (HSJBUYBUTTON_TYPE)buttonType {
-    HSJBUYBUTTON_TYPE buttonType = HSJBUYBUTTON_BINDCARD;
-    if(self.userInfoModel.userInfo.hasBindCard.boolValue || !self.isAbleBankCellItem) {
-        double money = self.inputMoney.doubleValue;
-        buttonType = HSJBUYBUTTON_NOMONEY;
-        if(money > 0) {
-            buttonType = HSJBUYBUTTON_WITHMONEY;
+    HSJBUYBUTTON_TYPE buttonType;
+    if(self.timerManager.isTimerWorking) {
+        buttonType = HSJBUYBUTTON_TIMER;
+    }
+    else {
+        buttonType = [self buttonTypeByPlanState];
+        if(buttonType == HSJBUYBUTTON_JOIN) {
+            buttonType = HSJBUYBUTTON_BINDCARD;
+            if(self.userInfoModel.userInfo.hasBindCard.boolValue || !self.isAbleBankCellItem) {
+                double money = self.inputMoney.doubleValue;
+                buttonType = HSJBUYBUTTON_NOMONEY;
+                if(money > 0) {
+                    buttonType = HSJBUYBUTTON_WITHMONEY;
+                }
+            }
         }
     }
     return buttonType;
+}
+
+- (HSJBUYBUTTON_TYPE)buttonTypeByPlanState {
+    HSJBUYBUTTON_TYPE type;
+    switch ([self.planModel.unifyStatus integerValue]) {
+        case 0://等待预售开始超过30分
+        case 1://等待预售开始小于30分钟
+        case 2://预定
+        case 3://预定满额
+        case 4://等待开放购买大于30分钟
+        case 5://等待开放购买小于30分钟
+            type = HSJBUYBUTTON_EXITED;
+            break;
+        case 6:
+            type = HSJBUYBUTTON_JOIN;
+            break;
+        case 7://销售结束
+        case 8://收益中
+        case 9://开放期
+        case 10://已退出
+            type = HSJBUYBUTTON_EXITED;
+            break;
+        default:
+            type = HSJBUYBUTTON_JOIN;
+            break;
+    }
+    
+    return type;
 }
 
 - (NSArray *)cellDataList {
@@ -336,5 +393,42 @@
         [self showToast:erroInfo];
     }
     return result;
+}
+
+//开启倒计时
+- (BOOL)startCountDownTimer:(void (^)(void)) timerBlock {
+    BOOL result = NO;
+    if(self.planModel.diffTime.longLongValue > 0) {
+        if(!_timerManager) {
+            kWeakSelf
+            self.timerManager = [HXBNsTimerManager createTimer:1 startSeconds:0 countDownTime:NO notifyCall:^(NSString *times) {
+                if(timerBlock) {
+                    weakSelf.timerContent = [weakSelf makeTimerContent:times.intValue];
+                    timerBlock();
+                }
+            }];
+            [self.timerManager startTimer];
+        }
+    }
+    return result;
+}
+
+- (NSString *)makeTimerContent:(int)diffSecond{
+    double temp = self.planModel.diffTime.longLongValue-diffSecond*1000;
+    if(temp < 0) {
+        temp = 0;
+        [self.timerManager stopTimer];
+    }
+    
+    NSString *content = @"";
+    if (temp > 3600000){//1小时
+        content = [[HXBBaseHandDate sharedHandleDate] millisecond_StringFromDate:self.planModel.beginSellingTime andDateFormat:@"MM月dd日 HH:mm开售"];
+    }else
+    {
+        NSString *tempStr = [NSString stringWithFormat:@"%lf", temp];
+        content = [[HXBBaseHandDate sharedHandleDate] millisecond_StringFromDate:tempStr andDateFormat:@"mm分ss秒后开始加入"];
+    }
+    
+    return content;
 }
 @end

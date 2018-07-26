@@ -11,6 +11,7 @@
 #import "SVGKit/SVGKImage.h"
 #import "HXBBaseTabBarController.h"
 #import "HXBBaseNavigationController.h"
+#import "HSJNoDataOrNetViewController.h"
 
 @interface HXBBaseViewController () <UIGestureRecognizerDelegate> {
     BOOL _isInitNavBar;
@@ -24,7 +25,8 @@
 @property (nonatomic, strong) UIView* curNavColorView;
 //分割线
 @property (nonatomic,strong) UIImageView *splitLineImv;
-
+//无数据视图
+@property (nonatomic, strong) HSJNoDataOrNetViewController *noDataOrNetVC;
 @end
 
 @implementation HXBBaseViewController
@@ -35,12 +37,11 @@
     [super viewDidLoad];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
-    [self buildSafeAreaView];
+    [self buildPreloadView];
     self.view.backgroundColor = [UIColor whiteColor];
     self.safeAreaView.backgroundColor = [UIColor clearColor];
     if(self.navigationController) {
         self.isWhiteColourGradientNavigationBar = YES;
-        self.isShowSplitLine = NO;
     }
 }
 
@@ -48,16 +49,23 @@
     if(!_splitLineImv) {
         _splitLineImv = [[UIImageView alloc] init];
         _splitLineImv.backgroundColor = kHXBColor_EEEEF5_100;
+        _splitLineImv.hidden = YES;
     }
     
     return _splitLineImv;
 }
 
-- (void)buildSafeAreaView {
+- (void)buildPreloadView {
     _safeAreaView = [[UIView alloc] init];
     [self.view addSubview:_safeAreaView];
     [self.view sendSubviewToBack:_safeAreaView];
     [self.view addSubview:self.splitLineImv];
+    
+    self.noDataOrNetVC = [[HSJNoDataOrNetViewController alloc] init];
+    [self.view addSubview:self.noDataOrNetVC.view];
+    self.noDataOrNetVC.view.hidden = YES;
+    
+    //
     if(self.iswithTabbarInPage) {
         [_safeAreaView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.mas_equalTo(self.contentViewInsetWithTabbar);
@@ -68,9 +76,15 @@
             make.edges.mas_equalTo(self.contentViewInsetNoTabbar);
         }];
     }
+    //
     [self.splitLineImv mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(self.safeAreaView);
         make.height.mas_equalTo(0.5);
+    }];
+    //
+    [self.noDataOrNetVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.splitLineImv.mas_bottom);
+        make.left.right.bottom.equalTo(self.safeAreaView);
     }];
 }
 
@@ -218,6 +232,26 @@
     self.splitLineImv.hidden = !isShowSplitLine;
     if(self.isShowSplitLine) {
         [self.view bringSubviewToFront:self.splitLineImv];
+    }
+}
+
+- (void)setIsShowNonetView:(BOOL)isShowNonetView {
+    _isShowNonetView = isShowNonetView;
+    
+    self.noDataOrNetVC.view.hidden = !isShowNonetView;
+    if(isShowNonetView) {
+        self.noDataOrNetVC.isNoNetWork = YES;
+        [self.view bringSubviewToFront:self.noDataOrNetVC.view];
+    }
+}
+
+- (void)setIsShowNodataView:(BOOL)isShowNodataView {
+    _isShowNodataView = isShowNodataView;
+    
+    self.noDataOrNetVC.view.hidden = !isShowNodataView;
+    if(isShowNodataView) {
+        self.noDataOrNetVC.isNoNetWork = NO;
+        [self.view bringSubviewToFront:self.noDataOrNetVC.view];
     }
 }
 
