@@ -104,6 +104,12 @@
     }];
 }
 
+- (void)setInfoModel:(HSJGlobalInfoModel *)infoModel {
+    _infoModel = infoModel;
+    [self.platformAmountView setAmountText:infoModel.financePlanSumAmountText andWithAmountTextUnit:infoModel.financePlanSumAmountTextUnit];
+    [self.userAmountView setAmountText:infoModel.financePlanEarnInterestText andWithAmountTextUnit:infoModel.financePlanEarnInterestTextUnit];
+}
+
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
@@ -136,8 +142,13 @@
     if (!_platformAmountView) {
         _platformAmountView = [[HSJUserAmountView alloc] init];
         _platformAmountView.backgroundColor = kHXBColor_FCF7F6_100;
-        _platformAmountView.amountStr = @"15.20亿元";
         _platformAmountView.describeStr = @"累计成交金额";
+        kWeakSelf
+        _platformAmountView.viewClickBlock = ^{
+            if (weakSelf.platformAmountClickBlock) {
+                weakSelf.platformAmountClickBlock();
+            }
+        };
     }
     return _platformAmountView;
 }
@@ -146,8 +157,13 @@
     if (!_userAmountView) {
         _userAmountView = [[HSJUserAmountView alloc] init];
         _userAmountView.backgroundColor = kHXBColor_F5F7FF_100;
-        _userAmountView.amountStr = @"4435万元";
         _userAmountView.describeStr = @"累计为用户赚取";
+        kWeakSelf
+        _userAmountView.viewClickBlock = ^{
+            if (weakSelf.userAmountClickBlock) {
+                weakSelf.userAmountClickBlock();
+            }
+        };
     }
     return _userAmountView;
 }
@@ -156,6 +172,12 @@
         _registeredCapitalView = [[HXBUpAndDownLayoutView alloc] initWithFrame:CGRectZero];
         _registeredCapitalView.title = @"2亿注册资本";
         _registeredCapitalView.imageName = @"home_money";
+        kWeakSelf
+        _registeredCapitalView.clickActionBlock = ^{
+            if (weakSelf.registeredCapitalClickBlock) {
+                weakSelf.registeredCapitalClickBlock();
+            }
+        };
     }
     return _registeredCapitalView;
 }
@@ -165,6 +187,12 @@
         _creditView = [[HXBUpAndDownLayoutView alloc] initWithFrame:CGRectZero];
         _creditView.title = @"AAA信用评级";
         _creditView.imageName = @"home_AAA";
+        kWeakSelf
+        _creditView.clickActionBlock = ^{
+            if (weakSelf.creditClickBlock) {
+                weakSelf.creditClickBlock();
+            }
+        };
     }
     return _creditView;
 }
@@ -174,6 +202,12 @@
         _bankView = [[HXBUpAndDownLayoutView alloc] initWithFrame:CGRectZero];
         _bankView.title = @"恒丰银行存管";
         _bankView.imageName = @"home_bank";
+        kWeakSelf
+        _bankView.clickActionBlock = ^{
+            if (weakSelf.bankClickBlock) {
+                weakSelf.bankClickBlock();
+            }
+        };
     }
     return _bankView;
 }

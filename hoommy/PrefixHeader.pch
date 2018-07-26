@@ -25,6 +25,7 @@
 #import "HXBRootVCManager.h"
 #import "KeyChainManage.h"
 #import "HXBRequestUserInfoViewModel.h"
+#import "HXBUmengManagar.h"
 ////////////////////////////////////////
 #import "NYBaseRequest.h"
 

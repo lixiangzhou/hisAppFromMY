@@ -40,6 +40,16 @@
     [self mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.left.equalTo(self.titleLabel);
     }];
+    
+    UITapGestureRecognizer *clickAction = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickAction)];
+    [self addGestureRecognizer:clickAction];
+}
+
+
+- (void)clickAction {
+    if (self.clickActionBlock) {
+        self.clickActionBlock();
+    }
 }
 
 - (void)setImageName:(NSString *)imageName {

@@ -6,8 +6,7 @@
 //  Copyright © 2018年 caihongji. All rights reserved.
 //
 
-NSString *const HSJHomePlanCellIdentifier = @"HSJHomePlanCellIdentifier";
-NSString *const HSJHomeActivityCellIdentifier = @"HSJHomeActivityCellIdentifier";
+
 
 #import "HSJHomeViewController.h"
 #import "HSJPlanDetailController.h"
@@ -20,6 +19,7 @@ NSString *const HSJHomeActivityCellIdentifier = @"HSJHomeActivityCellIdentifier"
 #import "HXBExtensionMethodTool.h"
 #import "UIScrollView+HXBScrollView.h"
 #import "HXBNoticeViewController.h"
+#import "HXBBaseWKWebViewController.h"
 @interface HSJHomeViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) HSJHomeCustomNavbarView *navView;
@@ -65,98 +65,62 @@ NSString *const HSJHomeActivityCellIdentifier = @"HSJHomeActivityCellIdentifier"
     kWeakSelf
     [self.viewModel getHomeDataWithResultBlock:^(id responseData, NSError *erro) {
         weakSelf.headerView.homeModel = weakSelf.viewModel.homeModel;
+        [weakSelf updateUI];
         [weakSelf.mainTabelView reloadData];
         [weakSelf.mainTabelView endRefresh:YES];
+    }];
+    [self.viewModel getGlobal:^(HSJGlobalInfoModel *infoModel) {
+        weakSelf.footerView.infoModel = infoModel;
     }];
 }
 
 - (void)updateUI {
-    if (KeyChain.isLogin) {
+    if (self.viewModel.homeModel.articleList.count) {
         self.headerView.height = kScrAdaptationH750(400);
-    } else {
-        self.headerView.height =  kScrAdaptationH750(558);
+    }  else if (!self.viewModel.homeModel.articleList.count){
+        self.headerView.height = kScrAdaptationH750(310);
     }
-    [self.headerView updateUI];
     self.mainTabelView.tableHeaderView = self.headerView;
-}
-
-
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
 }
 
 #pragma mark - UITableViewDelegate,UITableViewDataSource
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
-        return self.viewModel.homeModel.dataList.count;
-    }
-    return 2;
+    return self.viewModel.homeModel.dataList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
-        HSJHomePlanTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:HSJHomePlanCellIdentifier];
-        cell.planModel = self.viewModel.homeModel.dataList[indexPath.row];
-        return cell;
-    } else {
-        HSJHomeActivityCell *cell = [tableView dequeueReusableCellWithIdentifier:HSJHomeActivityCellIdentifier];
-        return cell;
-    }
+    return [self.viewModel tableView:tableView cellForRowAtIndexPath:indexPath];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
-        if (KeyChain.isLogin) {
-            return kScrAdaptationH750(656);
-        } else {
-            return kScrAdaptationH750(578);
-        }
-    } else {
-        return kScrAdaptationH750(200);
-    }
-    
-    
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 0.01;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == 1) {
-        return kScrAdaptationH750(20);
-    }
-    return 0.01;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    return [[UIView alloc] init];
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    return [[UIView alloc] init];
+    return [self.viewModel.cellHeightArray[indexPath.row] floatValue];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
+    HSJHomePlanModel * cellmodel = self.viewModel.homeModel.dataList[indexPath.row];
+    if ([cellmodel.viewItemType  isEqual: @"product"]) {
+        if (KeyChain.isLogin) {
+            [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_HomeSignInPlanClick];
+        } else {
+            [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_HomeSignupPlanClick];
+        }
         HSJPlanDetailController* vc = [[HSJPlanDetailController alloc] init];
-        vc.planId = self.viewModel.homeModel.dataList[indexPath.row].planId;
+        vc.planId = self.viewModel.homeModel.dataList[indexPath.row].ID;
         [self.navigationController pushViewController:vc animated:YES];
+    } else if ([cellmodel.viewItemType  isEqual: @"signuph5"]) {
+        [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_HomeSignupClick];
+        BannerModel *bannerModel = [[BannerModel alloc] init];
+        bannerModel.type = cellmodel.type;
+        bannerModel.link = cellmodel.link;
+        [HXBExtensionMethodTool pushToViewControllerWithModel:bannerModel andWithFromVC:self];
+    } else if([cellmodel.viewItemType  isEqual: @"h5"]) {
+        BannerModel *bannerModel = [[BannerModel alloc] init];
+        bannerModel.type = cellmodel.type;
+        bannerModel.link = cellmodel.link;
+        [HXBExtensionMethodTool pushToViewControllerWithModel:bannerModel andWithFromVC:self];
     }
+    
 }
 
 - (HSJHomeCustomNavbarView *)navView {
@@ -167,6 +131,7 @@ NSString *const HSJHomeActivityCellIdentifier = @"HSJHomeActivityCellIdentifier"
         _navView.titleFount = kHXBFont_PINGFANGSC_REGULAR_750(40);
         kWeakSelf
         _navView.noticeBlock = ^{
+            [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_HomeNoticeClick];
             HXBNoticeViewController *noticeVC = [[HXBNoticeViewController alloc] init];
             [weakSelf.navigationController pushViewController:noticeVC animated:YES];
         };
@@ -178,14 +143,13 @@ NSString *const HSJHomeActivityCellIdentifier = @"HSJHomeActivityCellIdentifier"
 
 - (HSJHomeHeaderView *)headerView {
     if (!_headerView) {
-        _headerView = [[HSJHomeHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScrAdaptationH750(558))];
+        _headerView = [[HSJHomeHeaderView alloc] initWithFrame:CGRectZero];
         kWeakSelf
         _headerView.bannerDidSelectItemAtIndex = ^(NSInteger index) {
             [HXBExtensionMethodTool pushToViewControllerWithModel:weakSelf.viewModel.homeModel.bannerList[index] andWithFromVC:weakSelf];
         };
-        
         _headerView.titleDidSelectItemAtIndex = ^(NSInteger index) {
-            IDPLogDebug(@"标题滚动");
+            [HXBBaseWKWebViewController pushWithPageUrl:weakSelf.viewModel.homeModel.articleList[index].link fromController:weakSelf];
         };
         
     }
@@ -195,6 +159,21 @@ NSString *const HSJHomeActivityCellIdentifier = @"HSJHomeActivityCellIdentifier"
 - (HSJHomeFooterView *)footerView {
     if (!_footerView) {
         _footerView = [[HSJHomeFooterView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScrAdaptationH750(630))];
+        _footerView.platformAmountClickBlock = ^{
+             [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_HomeSafeClick];
+        };
+        _footerView.userAmountClickBlock = ^{
+             [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_HomeSafeClick];
+        };
+        _footerView.bankClickBlock = ^{
+            [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_HomeBankClick];
+        };
+        _footerView.creditClickBlock = ^{
+            [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_HomeCreditClick];
+        };
+        _footerView.registeredCapitalClickBlock = ^{
+            [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_HomeRegisteredCapitalClick];
+        };
     }
     return _footerView;
 }
@@ -223,6 +202,10 @@ NSString *const HSJHomeActivityCellIdentifier = @"HSJHomeActivityCellIdentifier"
 - (HSJHomeVCViewModel *)viewModel {
     if (!_viewModel) {
         _viewModel = [[HSJHomeVCViewModel alloc] init];
+        kWeakSelf
+        _viewModel.updateCellHeight = ^() {
+            [weakSelf.mainTabelView reloadData];
+        };
     }
     return _viewModel;
 }

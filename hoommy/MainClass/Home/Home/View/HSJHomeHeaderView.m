@@ -9,7 +9,7 @@
 #import "HSJHomeHeaderView.h"
 #import "SDCycleScrollView.h"
 #import "HSJTitleCollectionViewCell.h"
-#import "HSJUnLogin.h"
+
 @interface HSJHomeHeaderView()<SDCycleScrollViewDelegate>
 
 @property (nonatomic, strong) SDCycleScrollView *titleCycleScrollView;
@@ -17,10 +17,6 @@
 @property (nonatomic, strong) SDCycleScrollView *bannerView;
 
 @property (nonatomic, strong) UIButton *titleCycleRightBtn;
-
-@property (nonatomic, strong) HSJUnLogin *unLoginView;
-
-@property (nonatomic, strong) UIView *segmentLineView;
 
 @end
 
@@ -38,48 +34,22 @@
 - (void)setupUI {
     [self setupBannerView];
     [self setupCycleScrollView];
-    [self addSubview:self.unLoginView];
-    [self addSubview:self.segmentLineView];
     [self.titleCycleScrollView addSubview:self.titleCycleRightBtn];
     [self.titleCycleRightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.titleCycleScrollView);
         make.width.height.offset(kScrAdaptationH750(32));
         make.right.equalTo(self.titleCycleScrollView.mas_right).offset(-kScrAdaptationW750(30));
     }];
-    [self.unLoginView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self);
-        make.top.equalTo(self.titleCycleScrollView.mas_bottom).offset(kScrAdaptationH750(32));
-        make.height.offset(kScrAdaptationH750(93));
-    }];
-    [self.segmentLineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self);
-        make.top.equalTo(self.unLoginView.mas_bottom).offset(kScrAdaptationH750(32));
-        make.height.offset(kScrAdaptationH750(20));
-    }];
-    
+
 }
 
-- (void)updateUI {
-    if (KeyChain.isLogin) {
-        self.unLoginView.hidden = YES;
-        self.segmentLineView.hidden = YES;
-    } else {
-        self.unLoginView.hidden = NO;
-        self.segmentLineView.hidden = NO;
-    }
-}
 
 - (void)setupBannerView {
-    self.bannerView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectZero delegate:self placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    self.bannerView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(kScrAdaptationW750(30), kScrAdaptationH750(10), kScreenWidth - 2 * kScrAdaptationW750(30) , kScrAdaptationH750(300)) delegate:self placeholderImage:[UIImage imageNamed:@"placeholder"]];
     self.bannerView.pageControlAliment = SDCycleScrollViewPageContolAlimentRight;
     self.bannerView.showPageControl = NO;
+    self.bannerView.autoScrollTimeInterval = 3;
     [self addSubview:self.bannerView];
-    [self.bannerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self).offset(kScrAdaptationW750(30));
-        make.right.equalTo(self).offset(-kScrAdaptationW750(30));
-        make.top.equalTo(self).offset(kScrAdaptationW750(10));
-        make.height.offset(kScrAdaptationH750(300));
-    }];
 }
 
 - (void)setupCycleScrollView {
@@ -87,7 +57,6 @@
     self.titleCycleScrollView.autoScrollTimeInterval = 2.5;
     self.titleCycleScrollView.scrollDirection = UICollectionViewScrollDirectionVertical;
     self.titleCycleScrollView.showPageControl = NO;
-    self.titleCycleScrollView.localizationImageNamesGroup = @[@"1111",@"455"];
     [self addSubview:self.titleCycleScrollView];
     [self.titleCycleScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self).offset(kScrAdaptationW750(30));
@@ -104,7 +73,15 @@
         [imageArray addObject:bannerModel.image];
     }
     self.bannerView.imageURLStringsGroup = imageArray;
+    if (homeModel.articleList.count) {
+        self.titleCycleScrollView.hidden = NO;
+        self.titleCycleScrollView.localizationImageNamesGroup = homeModel.articleList;
+    } else {
+        self.titleCycleScrollView.hidden = YES;
+    }
 }
+
+
 
 // 如果要实现自定义cell的轮播图，必须先实现customCollectionViewCellClassForCycleScrollView:和setupCustomCell:forIndex:代理方法
 
@@ -119,7 +96,9 @@
 - (void)setupCustomCell:(UICollectionViewCell *)cell forIndex:(NSInteger)index cycleScrollView:(SDCycleScrollView *)view
 {
     HSJTitleCollectionViewCell *myCell = (HSJTitleCollectionViewCell *)cell;
-    myCell.imageName = @"home_message";
+    ;
+    myCell.imageName = self.homeModel.articleList[index].tag;
+    myCell.titleStr = self.homeModel.articleList[index].title;
 }
 
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index {
@@ -138,23 +117,10 @@
     if (!_titleCycleRightBtn) {
         _titleCycleRightBtn = [[UIButton alloc] init];
         [_titleCycleRightBtn setImage:[UIImage imageNamed:@"Home_rightBtn"] forState:(UIControlStateNormal)];
+        _titleCycleRightBtn.enabled = NO;
     }
     return _titleCycleRightBtn;
 }
 
-- (HSJUnLogin *)unLoginView {
-    if (!_unLoginView) {
-        _unLoginView = [[HSJUnLogin alloc] init];
-    }
-    return _unLoginView;
-}
-
-- (UIView *)segmentLineView {
-    if (!_segmentLineView) {
-        _segmentLineView = [[UIView alloc] init];
-        _segmentLineView.backgroundColor = kHXBBackgroundColor;
-    }
-    return _segmentLineView;
-}
 
 @end

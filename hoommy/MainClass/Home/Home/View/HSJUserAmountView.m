@@ -29,18 +29,28 @@
     [self addSubview:self.amountLabel];
     [self addSubview:self.tipLabel];
     [self.amountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self).offset(kScrAdaptationH750(46));
+        make.top.equalTo(self).offset(kScrAdaptationH750(40));
         make.centerX.equalTo(self);
+        make.height.offset(kScrAdaptationH750(64));
     }];
     [self.tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.amountLabel);
-        make.top.equalTo(self.amountLabel.mas_bottom).offset(kScrAdaptationH750(6));
+        make.height.offset(kScrAdaptationH750(32)); make.top.equalTo(self.amountLabel.mas_bottom).offset(kScrAdaptationH750(6));
     }];
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewClick)];
+    [self addGestureRecognizer:tapGestureRecognizer];
 }
 
-- (void)setAmountStr:(NSString *)amountStr {
-    _amountStr = amountStr;
-    NSRange range = NSMakeRange(amountStr.length - 2, 2);
+- (void)viewClick {
+    if (self.viewClickBlock) {
+        self.viewClickBlock();
+    }
+}
+
+
+- (void)setAmountText:(NSString *)amountText andWithAmountTextUnit:(NSString *)amountTextUnit {
+    NSString *amountStr = [NSString stringWithFormat:@"%@%@",amountText,amountTextUnit];
+    NSRange range = [amountStr rangeOfString:amountTextUnit];
     self.amountLabel.attributedText = [NSMutableAttributedString setupAttributeStringWithString:amountStr WithRange:(NSRange)range andAttributeColor:kHXBFontColor_7F85A1_100 andAttributeFont:kHXBFont_PINGFANGSC_REGULAR_750(30)];
 }
 

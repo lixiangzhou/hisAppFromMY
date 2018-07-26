@@ -7,10 +7,16 @@
 //
 
 #import "HSJHomeActivityCell.h"
+#import <UIImageView+WebCache.h>
+
+
+NSString *const HSJHomeActivityCellIdentifier = @"HSJHomeActivityCellIdentifier";
 
 @interface HSJHomeActivityCell()
 
 @property (nonatomic, strong) UIView *segmentLineView;
+
+@property (nonatomic, strong) UIImageView *h5ImageView;
 
 @end
 
@@ -26,16 +32,21 @@
 
 - (void)setupUI {
     [self.contentView addSubview:self.segmentLineView];
-    self.imageView.image = [UIImage imageNamed:@"HomeActivity"];
-    
+    [self.contentView addSubview:self.h5ImageView];
     [self.segmentLineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(self.contentView);
         make.height.offset(kScrAdaptationH750(20));
     }];
-    [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.h5ImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.equalTo(self.contentView);
         make.bottom.equalTo(self.segmentLineView.mas_top);
     }];
+    self.h5ImageView.contentMode = UIViewContentModeScaleAspectFit;
+}
+
+- (void)setPlanModel:(HSJHomePlanModel *)planModel {
+    _planModel = planModel;
+    [self.h5ImageView sd_setImageWithURL:[NSURL URLWithString:planModel.image] placeholderImage:[UIImage imageNamed:@"HomeActivity"]];
 }
 
 - (UIView *)segmentLineView {
@@ -46,5 +57,11 @@
     return _segmentLineView;
 }
 
+- (UIImageView *)h5ImageView {
+    if (!_h5ImageView) {
+        _h5ImageView = [[UIImageView alloc] init];
+    }
+    return _h5ImageView;
+}
 
 @end
