@@ -82,14 +82,10 @@
             self.inEnabled = YES;
             break;
         case 7:
-            self.inText = @"销售结束";
-            break;
         case 8:
         case 9:
-            self.inText = @"收益中";
-            break;
         case 10:
-            self.inText = @"项目完结";
+            self.inText = @"销售结束";
             break;
     }
 }
