@@ -100,15 +100,27 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     HSJHomePlanModel * cellmodel = self.viewModel.homeModel.dataList[indexPath.row];
     if ([cellmodel.viewItemType  isEqual: @"product"]) {
+        if (KeyChain.isLogin) {
+            [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_HomeSignInPlanClick];
+        } else {
+            [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_HomeSignupPlanClick];
+        }
         HSJPlanDetailController* vc = [[HSJPlanDetailController alloc] init];
         vc.planId = self.viewModel.homeModel.dataList[indexPath.row].ID;
         [self.navigationController pushViewController:vc animated:YES];
-    } else if ([cellmodel.viewItemType  isEqual: @"signuph5"] || [cellmodel.viewItemType  isEqual: @"h5"]) {
+    } else if ([cellmodel.viewItemType  isEqual: @"signuph5"]) {
+        [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_HomeSignupClick];
+        BannerModel *bannerModel = [[BannerModel alloc] init];
+        bannerModel.type = cellmodel.type;
+        bannerModel.link = cellmodel.link;
+        [HXBExtensionMethodTool pushToViewControllerWithModel:bannerModel andWithFromVC:self];
+    } else if([cellmodel.viewItemType  isEqual: @"h5"]) {
         BannerModel *bannerModel = [[BannerModel alloc] init];
         bannerModel.type = cellmodel.type;
         bannerModel.link = cellmodel.link;
         [HXBExtensionMethodTool pushToViewControllerWithModel:bannerModel andWithFromVC:self];
     }
+    
 }
 
 - (HSJHomeCustomNavbarView *)navView {
@@ -119,6 +131,7 @@
         _navView.titleFount = kHXBFont_PINGFANGSC_REGULAR_750(40);
         kWeakSelf
         _navView.noticeBlock = ^{
+            [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_HomeNoticeClick];
             HXBNoticeViewController *noticeVC = [[HXBNoticeViewController alloc] init];
             [weakSelf.navigationController pushViewController:noticeVC animated:YES];
         };
@@ -146,6 +159,21 @@
 - (HSJHomeFooterView *)footerView {
     if (!_footerView) {
         _footerView = [[HSJHomeFooterView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScrAdaptationH750(630))];
+        _footerView.platformAmountClickBlock = ^{
+             [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_HomeSafeClick];
+        };
+        _footerView.userAmountClickBlock = ^{
+             [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_HomeSafeClick];
+        };
+        _footerView.bankClickBlock = ^{
+            [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_HomeBankClick];
+        };
+        _footerView.creditClickBlock = ^{
+            [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_HomeCreditClick];
+        };
+        _footerView.registeredCapitalClickBlock = ^{
+            [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_HomeRegisteredCapitalClick];
+        };
     }
     return _footerView;
 }

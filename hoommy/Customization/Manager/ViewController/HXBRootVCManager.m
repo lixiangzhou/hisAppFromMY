@@ -41,7 +41,7 @@
 - (void)createRootVCAndMakeKeyWindow {
     [[UITextField appearance] setTintColor:[UIColor blackColor]];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-    
+    [HXBUmengManagar HXB_umengStart];
     [[HXBAdvertiseManager shared] getSplash];
     [[HSJGlobalInfoManager shared] getData];
     

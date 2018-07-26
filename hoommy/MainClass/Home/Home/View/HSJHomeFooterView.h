@@ -12,5 +12,14 @@
 @interface HSJHomeFooterView : UIView
 
 @property (nonatomic, strong) HSJGlobalInfoModel *infoModel;
-
+///平台累计成交金额点击事件
+@property (nonatomic, strong) void(^platformAmountClickBlock)(void);
+///平台为用户累计赚取金额点击事件
+@property (nonatomic, strong) void(^userAmountClickBlock)(void);
+///恒丰银行存管点击事件
+@property (nonatomic, strong) void(^bankClickBlock)(void);
+///AAA信用评级点击事件
+@property (nonatomic, strong) void(^creditClickBlock)(void);
+///2亿注册资本点击事件
+@property (nonatomic, strong) void(^registeredCapitalClickBlock)(void);
 @end

@@ -37,6 +37,14 @@
         make.centerX.equalTo(self.amountLabel);
         make.height.offset(kScrAdaptationH750(32)); make.top.equalTo(self.amountLabel.mas_bottom).offset(kScrAdaptationH750(6));
     }];
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewClick)];
+    [self addGestureRecognizer:tapGestureRecognizer];
+}
+
+- (void)viewClick {
+    if (self.viewClickBlock) {
+        self.viewClickBlock();
+    }
 }
 
 

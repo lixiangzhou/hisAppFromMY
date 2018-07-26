@@ -143,6 +143,12 @@
         _platformAmountView = [[HSJUserAmountView alloc] init];
         _platformAmountView.backgroundColor = kHXBColor_FCF7F6_100;
         _platformAmountView.describeStr = @"累计成交金额";
+        kWeakSelf
+        _platformAmountView.viewClickBlock = ^{
+            if (weakSelf.platformAmountClickBlock) {
+                weakSelf.platformAmountClickBlock();
+            }
+        };
     }
     return _platformAmountView;
 }
@@ -152,6 +158,12 @@
         _userAmountView = [[HSJUserAmountView alloc] init];
         _userAmountView.backgroundColor = kHXBColor_F5F7FF_100;
         _userAmountView.describeStr = @"累计为用户赚取";
+        kWeakSelf
+        _userAmountView.viewClickBlock = ^{
+            if (weakSelf.userAmountClickBlock) {
+                weakSelf.userAmountClickBlock();
+            }
+        };
     }
     return _userAmountView;
 }
@@ -160,8 +172,11 @@
         _registeredCapitalView = [[HXBUpAndDownLayoutView alloc] initWithFrame:CGRectZero];
         _registeredCapitalView.title = @"2亿注册资本";
         _registeredCapitalView.imageName = @"home_money";
+        kWeakSelf
         _registeredCapitalView.clickActionBlock = ^{
-            IDPLogDebug(@"2亿注册资本");
+            if (weakSelf.registeredCapitalClickBlock) {
+                weakSelf.registeredCapitalClickBlock();
+            }
         };
     }
     return _registeredCapitalView;
@@ -172,8 +187,11 @@
         _creditView = [[HXBUpAndDownLayoutView alloc] initWithFrame:CGRectZero];
         _creditView.title = @"AAA信用评级";
         _creditView.imageName = @"home_AAA";
+        kWeakSelf
         _creditView.clickActionBlock = ^{
-            IDPLogDebug(@"AAA信用评级");
+            if (weakSelf.creditClickBlock) {
+                weakSelf.creditClickBlock();
+            }
         };
     }
     return _creditView;
@@ -184,8 +202,11 @@
         _bankView = [[HXBUpAndDownLayoutView alloc] initWithFrame:CGRectZero];
         _bankView.title = @"恒丰银行存管";
         _bankView.imageName = @"home_bank";
+        kWeakSelf
         _bankView.clickActionBlock = ^{
-            IDPLogDebug(@"恒丰银行存管");
+            if (weakSelf.bankClickBlock) {
+                weakSelf.bankClickBlock();
+            }
         };
     }
     return _bankView;
