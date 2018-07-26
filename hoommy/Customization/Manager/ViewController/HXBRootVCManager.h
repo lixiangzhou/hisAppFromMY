@@ -27,7 +27,7 @@
 - (void)createRootVCAndMakeKeyWindow;
 
 ///// 进入手势密码控制器，或tabBar
-//- (void)enterTheGesturePasswordVCOrTabBar;
+- (void)enterTheGesturePasswordVCOrTabBar;
 
 /// 让tabBarVC 成为 root VC
 - (void)makeTabbarRootVC;
