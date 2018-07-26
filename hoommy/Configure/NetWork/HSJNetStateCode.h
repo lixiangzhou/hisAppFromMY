@@ -57,6 +57,14 @@ static NSString *const kHSHUmeng_HomeBankClick = @"2007";
 static NSString *const kHSHUmeng_HomeCreditClick = @"2008";
 static NSString *const kHSHUmeng_HomeRegisteredCapitalClick = @"2009";
 static NSString *const kHSHUmeng_HomeSignInPlanClick = @"2010";
+///详情页面
+static NSString *const kHSHUmeng_DetailBackClick = @"2012";
+static NSString *const kHSHUmeng_DetailUnBuyInClick = @"2013";
+static NSString *const kHSHUmeng_DetailUnBuyCalculatorClick = @"2014";
+static NSString *const kHSHUmeng_DetailHasBuyInClick = @"2015";
+static NSString *const kHSHUmeng_DetailHasBuyOutClick = @"2016";
+static NSString *const kHSHUmeng_DetailHasBuyCalculatorClick = @"2017";
+
 
 
 

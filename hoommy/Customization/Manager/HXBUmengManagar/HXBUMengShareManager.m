@@ -77,7 +77,6 @@
 
 
 + (void) showShareMenuViewInWindowWith:(HXBUMShareViewModel *)shareVM {
-    [HXBUmengManagar HXB_clickEventWithEnevtId:kHXBUmeng_invite_alert];
     if (KeyChain.ishaveNet) {
         HXBUmengViewController *UmengVC = [[HXBUmengViewController alloc] init];
         UmengVC.shareVM = shareVM;
