@@ -12,7 +12,6 @@
 /// 展示登录的VC
 extern NSString *const kHXBNotification_ShowLoginVC;
 extern NSString *const kHXBNotification_RefreshHomeData;
-extern NSString *const kHXBNotification_ShowSignUpVC;
 extern NSString *const kHXBNotification_IsLoginToReloadTableView;
 ///跳转我的界面
 extern NSString *const kHXBNotification_LoginSuccess_PushMYVC;

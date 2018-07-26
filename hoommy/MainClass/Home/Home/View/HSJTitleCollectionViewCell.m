@@ -8,6 +8,7 @@
 //
 
 #import "HSJTitleCollectionViewCell.h"
+
 @interface HSJTitleCollectionViewCell()
 
 @property (nonatomic, strong) UIImageView *imageView;
@@ -42,10 +43,20 @@
     }];
     
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.imageView.mas_right).offset(kScrAdaptationH750(30));
+        make.left.equalTo(self.imageView.mas_right).offset(kScrAdaptationH750(17.6));
         make.top.bottom.equalTo(self.contentView);
-        make.width.offset(kScrAdaptationH(50));
+        make.right.equalTo(self.contentView).offset(-kScrAdaptationW750(70));
     }];
+}
+
+- (void)setTitleStr:(NSString *)titleStr {
+    _titleStr = titleStr;
+    self.titleLabel.text = titleStr;
+}
+
+- (void)setImageName:(NSString *)imageName {
+    _imageName = imageName;
+    self.imageView.image = [UIImage imageNamed:imageName];
 }
 
 - (UILabel *)titleLabel {
@@ -53,7 +64,7 @@
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(24);
         _titleLabel.textColor = kHXBColor_FB7F67_100;
-        _titleLabel.text = @"母婴APP";
+        _titleLabel.text = @"--";
     }
     return _titleLabel;
 }

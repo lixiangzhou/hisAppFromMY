@@ -8,6 +8,9 @@
 
 #import "HSJHomePlanTableViewCell.h"
 #import "HSJHomePlanView.h"
+
+NSString *const HSJHomePlanCellIdentifier = @"HSJHomePlanCellIdentifier";
+
 @interface HSJHomePlanTableViewCell()
 
 @property (nonatomic, strong) HSJHomePlanView *planView;
@@ -33,7 +36,7 @@
     }];
 }
 
-- (void)setPlanModel:(HSJPlanModel *)planModel {
+- (void)setPlanModel:(HSJHomePlanModel *)planModel {
     _planModel = planModel;
     self.planView.planModel = planModel;
 }
@@ -44,6 +47,7 @@
     }
     return _planView;
 }
+
 
 
 @end

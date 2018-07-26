@@ -9,7 +9,7 @@
 #import "HXBUmengManagar.h"
 #import "UMMobClick/MobClick.h"//友盟统计
 
-static NSString *const appKey = @"596359ca5312dd05b4001381";
+static NSString *const appKey = @"5b470771f43e481d570000b2";
 static NSString *const channelId = @"App Store";
 
 

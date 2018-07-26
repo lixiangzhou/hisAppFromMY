@@ -11,7 +11,7 @@
 #import "HXBUmengViewController.h"
 #import "HXBUmengManagar.h"
 //友盟APPkey
-#define kUMAppKey @"596359ca5312dd05b4001381"
+#define kUMAppKey @"5b470771f43e481d570000b2"
 //微信APPkey
 #define kWechatAppKey @"wxcbdc25fe98ea7b17"
 //微信AppSecret

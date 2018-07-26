@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HSJGlobalInfoModel.h"
 
 @interface HSJHomeFooterView : UIView
+
+@property (nonatomic, strong) HSJGlobalInfoModel *infoModel;
 
 @end
