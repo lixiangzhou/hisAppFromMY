@@ -78,4 +78,19 @@ static NSString *const kHSHUmeng_DepositoryMobileTextFieldClick = @"2040";
 static NSString *const kHSHUmeng_DepositoryBankListClick = @"2041";
 static NSString *const kHSHUmeng_DepositoryOpenClick = @"2042";
 
+///登录/注册
+static NSString *const kHSHUmeng_SignInAndUpPhoneTextFieldClick = @"2043";
+static NSString *const kHSHUmeng_SignInAndUpNextButtonClick = @"2044";
+static NSString *const kHSHUmeng_SignInPasswordTextFieldClick = @"2045";
+static NSString *const kHSHUmeng_SignInPasswordButtonClick = @"2046";
+static NSString *const kHSHUmeng_SignInGoCodeSignInButtonClick = @"2047";
+static NSString *const kHSHUmeng_SignInCodeTextFieldClick = @"2048";
+static NSString *const kHSHUmeng_SignInGetCodeButtonClick = @"2049";
+static NSString *const kHSHUmeng_SignInVoiceCodeButtonClick = @"2050";
+static NSString *const kHSHUmeng_SignInCodeSignInButtonClick = @"2051";
+static NSString *const kHSHUmeng_SignUpCodeTextFieldClick = @"2052";
+static NSString *const kHSHUmeng_SignUpGetCodeButtonClick = @"2053";
+static NSString *const kHSHUmeng_SignUpVoiceCodeButtonClick = @"2054";
+static NSString *const kHSHUmeng_SignUpPasswordTextFieldClick = @"2055";
+static NSString *const kHSHUmeng_SignUpButtonClick = @"2056";
 #endif /* HSJNetStateCode_h */
