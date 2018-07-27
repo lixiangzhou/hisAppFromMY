@@ -15,6 +15,7 @@
 #import "HSJRollOutController.h"
 #import "HSJBuyViewController.h"
 #import "HSJEarningCalculatorView.h"
+#import "HSJSignInViewController.h"
 
 @interface HSJPlanDetailController () <UIScrollViewDelegate>
 @property (nonatomic, weak) UIView *navView;
@@ -286,20 +287,35 @@
 
 #pragma mark - Action
 - (void)inClick {
-    HSJBuyViewController *vc = [HSJBuyViewController new];
-    [self.navigationController pushViewController:vc animated:YES];
+    if (KeyChain.isLogin) {
+        HSJBuyViewController *vc = [HSJBuyViewController new];
+        vc.planId = self.planId;
+        [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_ShowLoginVC object:nil];
+    }
 }
 
 - (void)outClick {
-    HSJRollOutController *vc = [HSJRollOutController new];
-    [self.navigationController pushViewController:vc animated:YES];
+    if (KeyChain.isLogin) {
+        HSJRollOutController *vc = [HSJRollOutController new];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_ShowLoginVC object:nil];
+    }
 }
 
 - (void)calClick {
+    kWeakSelf
     [HSJEarningCalculatorView showWithInterest:self.viewModel.interest buyBlock:^(NSString *value) {
-        HSJBuyViewController *vc = [HSJBuyViewController new];
-        vc.startMoney = value;
-        [self.navigationController pushViewController:vc animated:YES];
+        if (KeyChain.isLogin) {
+            HSJBuyViewController *vc = [HSJBuyViewController new];
+            vc.planId = weakSelf.planId;
+            vc.startMoney = value;
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+        } else {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_ShowLoginVC object:nil];
+        }
     }];
 }
 
