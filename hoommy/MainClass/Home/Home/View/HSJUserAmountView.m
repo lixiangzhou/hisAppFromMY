@@ -49,6 +49,8 @@
 
 
 - (void)setAmountText:(NSString *)amountText andWithAmountTextUnit:(NSString *)amountTextUnit {
+    amountText = amountText? : @"";
+    amountTextUnit = amountTextUnit? : @"";
     NSString *amountStr = [NSString stringWithFormat:@"%@%@",amountText,amountTextUnit];
     NSRange range = [amountStr rangeOfString:amountTextUnit];
     self.amountLabel.attributedText = [NSMutableAttributedString setupAttributeStringWithString:amountStr WithRange:(NSRange)range andAttributeColor:kHXBFontColor_7F85A1_100 andAttributeFont:kHXBFont_PINGFANGSC_REGULAR_750(30)];

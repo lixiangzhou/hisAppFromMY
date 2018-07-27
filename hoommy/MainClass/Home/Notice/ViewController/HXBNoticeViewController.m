@@ -85,11 +85,10 @@
     static NSString *identifier = @"HXBNoticeViewControllerCell";
     HXBNoticeCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (!cell) {
-        cell = [[HXBNoticeCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
+        cell = [[HXBNoticeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
     HSJNoticeListModel *noticModel = self.noticeViewModel.noticModel.dataList[indexPath.row];
-    cell.textLabel.text = noticModel.title;
-    cell.detailTextLabel.text = [[HXBBaseHandDate sharedHandleDate] millisecond_StringFromDate:noticModel.date andDateFormat:@"MM-dd"];
+    cell.noticModel = noticModel;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
