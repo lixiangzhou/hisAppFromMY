@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "UIViewController+HSContentAreaInset.h"
 #import "UIViewController+HSJStandard.h"
+#import "HSJNoDataView.h"
 
 @interface HXBBaseViewController : UIViewController
 ///所有的子视图都在这个视图里添加
@@ -29,6 +30,8 @@
 @property (nonatomic, assign) BOOL isShowNonetView;
 //是否显示无数据源视图
 @property (nonatomic, assign) BOOL isShowNodataView;
+/// 无数据页面，在局部控件中显示，需要自己根据需要添加和布局，如需全屏，使用上面的 isShowNodataView
+@property (nonatomic, strong) HSJNoDataView *noDataView;
 
 ///可以重写返回方法
 - (void)leftBackBtnClick;

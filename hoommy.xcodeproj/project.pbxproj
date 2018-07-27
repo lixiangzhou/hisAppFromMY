@@ -105,6 +105,8 @@
 		8D60B4DE20F7486300287E52 /* HSJDepositoryOpenViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B4D320F7486300287E52 /* HSJDepositoryOpenViewModel.m */; };
 		8D60B4E120F748BC00287E52 /* UITextField+HLNumberFormatTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B4E020F748BC00287E52 /* UITextField+HLNumberFormatTextField.m */; };
 		8DB77F6A210585A5003EE881 /* HSJRollOutDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB77F69210585A5003EE881 /* HSJRollOutDetailCell.m */; };
+		8DB86DEA210B10150070557F /* HSJNoDataOrNetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB86DE9210B10140070557F /* HSJNoDataOrNetViewController.m */; };
+		8DB86DEE210B10350070557F /* HSJNoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB86DED210B10350070557F /* HSJNoDataView.m */; };
 		8DD6B9B22106C27C00E8980F /* HSJDepositoryOpenTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD6B9B12106C27C00E8980F /* HSJDepositoryOpenTipView.m */; };
 		8DD6B9B52106D90C00E8980F /* HSJEarningCalculatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD6B9B42106D90C00E8980F /* HSJEarningCalculatorView.m */; };
 		9A0BD51D20F6F8ED00B1CC59 /* UIButton+HxbButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A0BD51C20F6F8ED00B1CC59 /* UIButton+HxbButton.m */; };
@@ -325,7 +327,6 @@
 		9AB9D06C21086C5F00B366A7 /* HXBTransactionPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB9D06A21086C5E00B366A7 /* HXBTransactionPasswordView.m */; };
 		9AB9D06F2108750200B366A7 /* HXBFinModel_BuyResoult_PlanModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB9D06E2108750100B366A7 /* HXBFinModel_BuyResoult_PlanModel.m */; };
 		9AB9D07621096FF100B366A7 /* HSJPlanBuyResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB9D07521096FF100B366A7 /* HSJPlanBuyResultViewController.m */; };
-		9AB9D07B2109D1BF00B366A7 /* HSJNoDataOrNetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB9D07A2109D1BF00B366A7 /* HSJNoDataOrNetViewController.m */; };
 		9ACB2F3C20EF6E08005C3C3D /* HSJKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ACB2F3B20EF6E08005C3C3D /* HSJKeyChainStore.m */; };
 		9AF51DA120FC487D008A8CF4 /* HSJCALayerTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF51DA020FC487D008A8CF4 /* HSJCALayerTool.m */; };
 		9AF51DA420FC7458008A8CF4 /* HSJClientServeTelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF51DA320FC7458008A8CF4 /* HSJClientServeTelView.m */; };
@@ -600,6 +601,10 @@
 		8D60B4E020F748BC00287E52 /* UITextField+HLNumberFormatTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+HLNumberFormatTextField.m"; sourceTree = "<group>"; };
 		8DB77F68210585A5003EE881 /* HSJRollOutDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJRollOutDetailCell.h; sourceTree = "<group>"; };
 		8DB77F69210585A5003EE881 /* HSJRollOutDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJRollOutDetailCell.m; sourceTree = "<group>"; };
+		8DB86DE8210B10140070557F /* HSJNoDataOrNetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSJNoDataOrNetViewController.h; sourceTree = "<group>"; };
+		8DB86DE9210B10140070557F /* HSJNoDataOrNetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSJNoDataOrNetViewController.m; sourceTree = "<group>"; };
+		8DB86DEC210B10350070557F /* HSJNoDataView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJNoDataView.h; sourceTree = "<group>"; };
+		8DB86DED210B10350070557F /* HSJNoDataView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJNoDataView.m; sourceTree = "<group>"; };
 		8DD6B9B02106C27C00E8980F /* HSJDepositoryOpenTipView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJDepositoryOpenTipView.h; sourceTree = "<group>"; };
 		8DD6B9B12106C27C00E8980F /* HSJDepositoryOpenTipView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJDepositoryOpenTipView.m; sourceTree = "<group>"; };
 		8DD6B9B32106D90C00E8980F /* HSJEarningCalculatorView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJEarningCalculatorView.h; sourceTree = "<group>"; };
@@ -1013,8 +1018,6 @@
 		9AB9D06E2108750100B366A7 /* HXBFinModel_BuyResoult_PlanModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBFinModel_BuyResoult_PlanModel.m; sourceTree = "<group>"; };
 		9AB9D07421096FF100B366A7 /* HSJPlanBuyResultViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJPlanBuyResultViewController.h; sourceTree = "<group>"; };
 		9AB9D07521096FF100B366A7 /* HSJPlanBuyResultViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJPlanBuyResultViewController.m; sourceTree = "<group>"; };
-		9AB9D0792109D1BF00B366A7 /* HSJNoDataOrNetViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJNoDataOrNetViewController.h; sourceTree = "<group>"; };
-		9AB9D07A2109D1BF00B366A7 /* HSJNoDataOrNetViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJNoDataOrNetViewController.m; sourceTree = "<group>"; };
 		9ACB2F3A20EF6E08005C3C3D /* HSJKeyChainStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJKeyChainStore.h; sourceTree = "<group>"; };
 		9ACB2F3B20EF6E08005C3C3D /* HSJKeyChainStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJKeyChainStore.m; sourceTree = "<group>"; };
 		9AF51D9F20FC487D008A8CF4 /* HSJCALayerTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJCALayerTool.h; sourceTree = "<group>"; };
@@ -1809,6 +1812,33 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		8DB86DE6210B10140070557F /* NoDataOrNet */ = {
+			isa = PBXGroup;
+			children = (
+				8DB86DEB210B10190070557F /* View */,
+				8DB86DE7210B10140070557F /* ViewController */,
+			);
+			path = NoDataOrNet;
+			sourceTree = "<group>";
+		};
+		8DB86DE7210B10140070557F /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8DB86DE8210B10140070557F /* HSJNoDataOrNetViewController.h */,
+				8DB86DE9210B10140070557F /* HSJNoDataOrNetViewController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		8DB86DEB210B10190070557F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8DB86DEC210B10350070557F /* HSJNoDataView.h */,
+				8DB86DED210B10350070557F /* HSJNoDataView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		9A0BD51920F6F71100B1CC59 /* Macros */ = {
 			isa = PBXGroup;
 			children = (
@@ -2528,7 +2558,7 @@
 		9A97D90C20EF420000688ADB /* MainClass */ = {
 			isa = PBXGroup;
 			children = (
-				9AB9D0772109D16200B366A7 /* NoDataOrNet */,
+				8DB86DE6210B10140070557F /* NoDataOrNet */,
 				4EA6107C2105CC10008580DD /* HXBUmengUShare */,
 				9AA70B3A20FEF0F6008B3007 /* Buy */,
 				8D142A9B20FDBF0100520728 /* CommonApiTool */,
@@ -3323,24 +3353,6 @@
 			path = PlanBuy;
 			sourceTree = "<group>";
 		};
-		9AB9D0772109D16200B366A7 /* NoDataOrNet */ = {
-			isa = PBXGroup;
-			children = (
-				9AB9D0782109D18700B366A7 /* ViewController */,
-			);
-			path = NoDataOrNet;
-			sourceTree = "<group>";
-		};
-		9AB9D0782109D18700B366A7 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				9AB9D0792109D1BF00B366A7 /* HSJNoDataOrNetViewController.h */,
-				9AB9D07A2109D1BF00B366A7 /* HSJNoDataOrNetViewController.m */,
-			);
-			name = ViewController;
-			path = "../New Group/ViewController";
-			sourceTree = "<group>";
-		};
 		9ACB2F3920EF6DB0005C3C3D /* HSJKeyChainStore */ = {
 			isa = PBXGroup;
 			children = (
@@ -3940,6 +3952,7 @@
 				9A37498B20F859A100F39681 /* HXBVerificationCodeAlertView.m in Sources */,
 				9A97DA8C20EF420200688ADB /* NSString+HxbPerMilMoney.m in Sources */,
 				9A4B189820F60C2B006B83C7 /* HXBCardholderInformationView.m in Sources */,
+				8DB86DEE210B10350070557F /* HSJNoDataView.m in Sources */,
 				9AF51EED20FDCA65008A8CF4 /* HXBSetTransactionPasswordViewController.m in Sources */,
 				E153B9D020FC8E15002BE1AE /* HXBMYCapitalRecord_TableViewCell.m in Sources */,
 				9A97DA6C20EF420200688ADB /* LazyCatLoadingView.m in Sources */,
@@ -4003,7 +4016,7 @@
 				4EA610D22105E69F008580DD /* HXBNoticModel.m in Sources */,
 				9A4B18B120F620B8006B83C7 /* HXBCardBinModel.m in Sources */,
 				9A97DA7A20EF420200688ADB /* HXBWKWebViewProgressView.m in Sources */,
-				9AB9D07B2109D1BF00B366A7 /* HSJNoDataOrNetViewController.m in Sources */,
+				8DB86DEA210B10150070557F /* HSJNoDataOrNetViewController.m in Sources */,
 				E153B9D220FC8E15002BE1AE /* HXBMYCapitalRecord_TableViewHeaderView.m in Sources */,
 				8D60B4D520F7486300287E52 /* PCCircle.m in Sources */,
 				E14B9F9820FD8AF80084F007 /* HXBMY_AllFinanceView.m in Sources */,
