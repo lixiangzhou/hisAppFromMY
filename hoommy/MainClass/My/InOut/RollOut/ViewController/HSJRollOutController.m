@@ -54,6 +54,8 @@
     [self.safeAreaView addSubview:tableView];
     self.tableView = tableView;
     
+    [self.tableView addSubview:self.noDataView];
+    
     UIButton *batchBtn = [[UIButton alloc] init];
     [batchBtn setTitleColor:kHXBColor_488CFF_100 forState:UIControlStateNormal];
     [batchBtn setTitle:@"批量转出" forState:UIControlStateNormal];
@@ -114,6 +116,11 @@
         make.bottom.right.equalTo(@kScrAdaptationW(-15));
         make.height.equalTo(@kScrAdaptationW(41));
     }];
+    
+    [self.noDataView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.tableView);
+        make.centerY.equalTo(self.tableView).offset(self.headerView.height * 0.5);
+    }];
 }
 
 #pragma mark - Network
@@ -121,6 +128,7 @@
     kWeakSelf
     [self.viewModel getAssets:^(BOOL isSuccess) {
         weakSelf.headerView.assetsModel = weakSelf.viewModel.assetsModel;
+        weakSelf.noDataView.hidden = weakSelf.viewModel.dataSource.count > 0;
     }];
     
     [self getListData:YES];
