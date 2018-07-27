@@ -48,7 +48,7 @@
 
 - (void)setupData {
     self.viewModel = [[HSJBuyViewModel alloc] init];
-    self.planId = @"1216";
+    self.planId = @"1229";
     self.viewModel.inputMoney = self.startMoney;
     if(!self.planModel) {
         kWeakSelf
@@ -189,6 +189,7 @@
 - (void)updateHeadView {
     self.headView.addUpLimitMoney = self.viewModel.addUpLimit;
     self.headView.addCondition = self.viewModel.addCondition;
+    self.headView.inputMoney = self.viewModel.inputMoney;
     
     if(HSJBUYBUTTON_EXITED==self.viewModel.buttonType || HSJBUYBUTTON_TIMER==self.viewModel.buttonType) {
         self.headView.enableContentTf = NO;
@@ -232,6 +233,8 @@
         BOOL moneyCheckResult = [self.viewModel checkMoney:^(BOOL isLess) {
             if(isLess) {
                 weakSelf.viewModel.inputMoney = weakSelf.viewModel.planModel.minRegisterAmount;
+                [weakSelf.viewModel buildCellDataList];
+                [weakSelf reload];
                 [weakSelf updateHeadView];
                 [weakSelf updateFootView];
             }
@@ -318,6 +321,13 @@
 - (void)planBuy:(NSDictionary*)paramDic {
     kWeakSelf
     [self.viewModel planBuyReslutWithPlanID:self.viewModel.planModel.planId parameter:paramDic resultBlock:^(BOOL isSuccess) {
+        if([self.viewModel.buyType isEqualToString:@"balance"]) {//余额购买
+            [self.passwordView removeFromSuperview];
+        }
+        else {
+            [self.alertVC dismissViewControllerAnimated:NO completion:nil];
+        }
+        
         if(isSuccess) {
             [weakSelf buyResult:0];
         }
@@ -328,15 +338,17 @@
 }
 
 - (void)buyResult:(NSInteger)state {
-    HSJPlanBuyResultViewController  *vc = [[HSJPlanBuyResultViewController alloc] init];
-    vc.state = state;
-    if(0 == state) {
-        vc.lockStart = self.viewModel.resultModel.lockStart;
+    if(kBuy_Toast != state) {
+        HSJPlanBuyResultViewController  *vc = [[HSJPlanBuyResultViewController alloc] init];
+        vc.state = state;
+        if(0 == state) {
+            vc.lockStart = self.viewModel.resultModel.lockStart;
+        }
+        else {
+            vc.erroInfo = self.viewModel.buyErrorMessage;
+        }
+        [self.navigationController pushViewController:vc animated:YES];
     }
-    else {
-        vc.erroInfo = self.viewModel.buyErrorMessage;
-    }
-    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)lookUpAgreement {

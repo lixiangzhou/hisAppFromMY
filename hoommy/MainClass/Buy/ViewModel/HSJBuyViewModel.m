@@ -76,7 +76,8 @@
             NSString *errorType = responseObject[kResponseErrorData][@"errorType"];
             if (status) {
                 if ([errorType isEqualToString:@"TOAST"]) {
-                    [HxbHUDProgress showTextWithMessage:responseObject[@"message"]];
+                    UINavigationController *navVC = [HXBRootVCManager manager].mainTabbarVC.selectedViewController;
+                    [HxbHUDProgress showTextInView:navVC.topViewController.view text:responseObject[@"message"]];
                     status = kBuy_Toast;
                 } else if ([errorType isEqualToString:@"RESULT"]) {
                     status = kBuy_Result;
@@ -348,16 +349,18 @@
         if(money > self.addUpLimit) {
             erroInfo = @"转入金额已超上限";
         }
-        if(money<self.planModel.minRegisterAmount.doubleValue && self.addUpLimit>self.planModel.minRegisterAmount.doubleValue) {
-            erroInfo = [NSString stringWithFormat:@"起投金额需为%@", [NSString hxb_getPerMilWithIntegetNumber:self.planModel.minRegisterAmount.doubleValue]];
-            if(lessthanStartMoneyBLock) {
-                lessthanStartMoneyBLock(YES);
+        else{
+            if(money<self.planModel.minRegisterAmount.doubleValue && self.addUpLimit>=self.planModel.minRegisterAmount.doubleValue) {
+                erroInfo = [NSString stringWithFormat:@"起投金额需为%@", [NSString hxb_getPerMilWithIntegetNumber:self.planModel.minRegisterAmount.doubleValue]];
+                if(lessthanStartMoneyBLock) {
+                    lessthanStartMoneyBLock(YES);
+                }
             }
-        }
-        if(money>self.planModel.minRegisterAmount.doubleValue && self.addUpLimit>self.planModel.registerMultipleAmount.doubleValue) {
-            int leftValue = money-self.planModel.minRegisterAmount.doubleValue;
-            if(leftValue % self.planModel.registerMultipleAmount.intValue != 0) {
-                erroInfo = [NSString stringWithFormat:@"转入金额需%@起投，%@倍数递增；", [NSString hxb_getPerMilWithIntegetNumber:self.planModel.minRegisterAmount.doubleValue], [NSString hxb_getPerMilWithIntegetNumber:self.planModel.registerMultipleAmount.doubleValue]];
+            if(self.addUpLimit>=self.planModel.registerMultipleAmount.doubleValue) {
+                int leftValue = money-self.planModel.minRegisterAmount.doubleValue;
+                if(leftValue % self.planModel.registerMultipleAmount.intValue != 0) {
+                    erroInfo = [NSString stringWithFormat:@"转入金额需%@起投，%@倍数递增；", [NSString hxb_getPerMilWithIntegetNumber:self.planModel.minRegisterAmount.doubleValue], [NSString hxb_getPerMilWithIntegetNumber:self.planModel.registerMultipleAmount.doubleValue]];
+                }
             }
         }
     }
