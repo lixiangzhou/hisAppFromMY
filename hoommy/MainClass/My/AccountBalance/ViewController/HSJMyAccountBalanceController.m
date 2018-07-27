@@ -9,7 +9,7 @@
 #import "HSJMyAccountBalanceController.h"
 #import "HSJMyAccountBalanceHeadView.h"
 #import "HxbWithdrawViewController.h"
-
+#import "HSJBuyViewController.h"
 #import "HSJRollOutPlanDetailController.h"
 
 @interface HSJMyAccountBalanceController ()
@@ -58,6 +58,9 @@
 
 - (void)intoBtnClick:(UIButton *)sender {
     NSLog(@"转入存钱罐");
+    HSJBuyViewController *vc = [HSJBuyViewController new];
+    vc.planId = @"1216";
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)withdrawalBtnClick:(UIButton *)sender {
