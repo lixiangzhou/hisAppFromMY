@@ -62,11 +62,6 @@
         [self.accountOpeningBackgroundImage addSubview:self.accumulatedProfitLabel];
         [self.accountOpeningBackgroundImage addSubview:self.assetsTotalTitleLabel];///资产总额
         [self.accountOpeningBackgroundImage addSubview:self.assetsTotalLabel];
-//        [self addSubview:self.balanceTitleLabel]; ///可用余额
-//        [self addSubview:self.balanceLabel];
-//        [self addSubview:self.topupButton];
-//        [self addSubview:self.withdrawButton];
-//        [self addSubview:self.lineView];
         [self.accountOpeningBackgroundImage addSubview:self.noAccountOpeningBackgroundImage];
         [self setupSubViewFrame];
         
@@ -115,17 +110,16 @@
         make.bottom.equalTo(weakSelf.accountOpeningBackgroundImage).offset(kScrAdaptationH(15));
         make.right.equalTo(weakSelf.accountOpeningBackgroundImage).offset(kScrAdaptationH(4));
     }];
-    
-    [self.yesterdayInterestTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.assetsTotalTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.accountOpeningBackgroundImage).offset(kScrAdaptationW750(60));
         make.top.equalTo(weakSelf.accountOpeningBackgroundImage).offset(kScrAdaptationH750(60));
         make.height.equalTo(@kScrAdaptationH(17));
-        make.width.equalTo(@kScrAdaptationW(68));
+        make.width.equalTo(@kScrAdaptationW750(150));
     }];
-    [self.yesterdayInterestLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(weakSelf.yesterdayInterestTitleLabel);
-        make.top.equalTo(weakSelf.yesterdayInterestTitleLabel.mas_bottom).offset(kScrAdaptationH(9.5));
-        make.height.equalTo(@kScrAdaptationH(35));
+    [self.assetsTotalLabel mas_makeConstraints:^(MASConstraintMaker *make) { //zong
+        make.left.equalTo(weakSelf.assetsTotalTitleLabel);
+        make.top.equalTo(weakSelf.assetsTotalTitleLabel.mas_bottom).offset(kScrAdaptationH750(13));
+        make.height.equalTo(@kScrAdaptationH750(82));
         make.right.equalTo(weakSelf.accountOpeningBackgroundImage).offset(kScrAdaptationW(-15));
     }];
     [self.securyButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -134,56 +128,30 @@
         make.right.equalTo(weakSelf.accountOpeningBackgroundImage).offset(kScrAdaptationW750(-50));
         make.height.offset(kScrAdaptationH(12));
     }];
-    [self.accumulatedProfitTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(weakSelf.yesterdayInterestLabel);
-        make.width.equalTo(@kScrAdaptationW(80));
-        make.top.equalTo(weakSelf.yesterdayInterestLabel.mas_bottom).offset(kScrAdaptationH(25));
-        make.height.equalTo(@kScrAdaptationH(17));
-    }];
-    [self.accumulatedProfitLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(weakSelf.accumulatedProfitTitleLabel.mas_left);
-        make.top.equalTo(weakSelf.accumulatedProfitTitleLabel.mas_bottom).offset(kScrAdaptationH(2));
-        make.height.equalTo(@kScrAdaptationH(19));
-    }];
-    [self.assetsTotalTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(weakSelf.accumulatedProfitTitleLabel.mas_right).offset(kScrAdaptationW(85));
-        make.top.equalTo(weakSelf.accumulatedProfitTitleLabel);
-        make.height.equalTo(weakSelf.accumulatedProfitTitleLabel);
-        make.width.equalTo(@kScrAdaptationW(80));
-    }];
-    [self.assetsTotalLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.yesterdayInterestTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.assetsTotalTitleLabel);
-        make.top.equalTo(weakSelf.accumulatedProfitLabel);
-        make.height.equalTo(weakSelf.accumulatedProfitLabel);
+        make.width.equalTo(@kScrAdaptationW750(150));
+        make.top.equalTo(weakSelf.assetsTotalLabel.mas_bottom).offset(kScrAdaptationH750(44));
+        make.height.equalTo(@kScrAdaptationH750(32));
+    }];
+    [self.yesterdayInterestLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(weakSelf.yesterdayInterestTitleLabel);
+        make.top.equalTo(weakSelf.yesterdayInterestTitleLabel.mas_bottom).offset(kScrAdaptationH750(9));
+        make.height.equalTo(@kScrAdaptationH750(47));
+    }];
+    
+    [self.accumulatedProfitTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(kScrAdaptationW750(386));
+        make.top.equalTo(weakSelf.yesterdayInterestTitleLabel);
+        make.height.equalTo(weakSelf.yesterdayInterestTitleLabel);
+        make.width.equalTo(@kScrAdaptationW750(150));
+    }];
+    [self.accumulatedProfitLabel mas_makeConstraints:^(MASConstraintMaker *make) { //leiji
+        make.left.equalTo(weakSelf.accumulatedProfitTitleLabel);
+        make.top.equalTo(weakSelf.yesterdayInterestLabel);
+        make.height.equalTo(weakSelf.yesterdayInterestLabel);
         make.right.equalTo(weakSelf.accountOpeningBackgroundImage.mas_right).offset(kScrAdaptationW(-15));
     }];
-//    [self.balanceTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.equalTo(weakSelf).offset(kScrAdaptationW(15));
-//        make.width.equalTo(@kScrAdaptationW(70));
-//        make.top.equalTo(weakSelf.accountOpeningBackgroundImage.mas_bottom).offset(kScrAdaptationH(39.5));
-//        make.height.equalTo(@kScrAdaptationH(12));
-//    }];
-//    [self.balanceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.equalTo(weakSelf.balanceTitleLabel.mas_right).offset(kScrAdaptationW(10));
-//        make.top.equalTo(weakSelf.accountOpeningBackgroundImage.mas_bottom).offset(kScrAdaptationH(35));
-////        make.width.equalTo(@kScrAdaptationW750(280));
-//        make.height.equalTo(@kScrAdaptationH(21));
-//    }];
-//    [self.topupButton mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.equalTo(weakSelf).offset(kScrAdaptationW(230));
-//        make.top.equalTo(weakSelf.accountOpeningBackgroundImage.mas_bottom).offset(kScrAdaptationH(33));
-//        make.width.equalTo(@kScrAdaptationW(60));
-//        make.height.equalTo(@kScrAdaptationH(25));
-//    }];
-//    [self.withdrawButton mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.equalTo(weakSelf.topupButton.mas_right).offset(kScrAdaptationW(10));
-//        make.width.top.height.equalTo(weakSelf.topupButton);
-//    }];
-//    [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.width.left.equalTo(weakSelf);
-//        make.top.equalTo(weakSelf.mas_bottom).offset(kScrAdaptationH(-1));
-//        make.height.equalTo(@kScrAdaptationH(1));
-//    }];
 }
 
 - (void)clickAllFinanceButton: (UITapGestureRecognizer *)tap {
@@ -211,7 +179,7 @@
         self.noAccountOpeningBackgroundImage.hidden = YES;
     }
     
-    self.phoneLabel.text = _userInfoModel.userInfo.username?:[KeyChain.mobile hxb_hiddenPhonNumberWithMid];
+    self.phoneLabel.text = [_userInfoModel.userInfo.mobile hxb_hiddenPhonNumberWithMid];
     NSString *accumulatedProfitStr = userInfoModel.userAssets.earnTotal? [NSString GetPerMilWithDouble:[userInfoModel.userAssets.earnTotal doubleValue]]: @"0.00";
     NSString *balance = userInfoModel.userAssets.availablePoint ? [NSString GetPerMilWithDouble:[userInfoModel.userAssets.availablePoint doubleValue]] : @"0.00";
     NSString *yesterdayInterest = [NSString GetPerMilWithDouble:[userInfoModel.userAssets.earnTotal doubleValue]];
@@ -419,7 +387,7 @@
     if (!_yesterdayInterestLabel) {
         _yesterdayInterestLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _yesterdayInterestLabel.textAlignment = NSTextAlignmentLeft;
-        _yesterdayInterestLabel.font = kHXBFont_PINGFANGSC_REGULAR(35);
+        _yesterdayInterestLabel.font = kHXBFont_PINGFANGSC_REGULAR(20);
         _yesterdayInterestLabel.textColor = kHXBColor_333333_100;
         _yesterdayInterestLabel.text = @"0.00";
     }
@@ -460,7 +428,7 @@
         _assetsTotalLabel = [[UILabel alloc]initWithFrame:CGRectZero];
         _assetsTotalLabel.text = @"0.00";
         _assetsTotalLabel.textAlignment = NSTextAlignmentLeft;
-        _assetsTotalLabel.font = kHXBFont_PINGFANGSC_REGULAR(20);
+        _assetsTotalLabel.font = kHXBFont_PINGFANGSC_REGULAR(35);
         _assetsTotalLabel.textColor = kHXBColor_333333_100;
     }
     return _assetsTotalLabel;

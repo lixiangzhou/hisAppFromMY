@@ -38,7 +38,6 @@
         make.width.height.equalTo(@kScrAdaptationW750(34));
     }];
     [self.textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        //            make.left.equalTo(self.imageView.mas_right).offset(kScrAdaptationW(10));
         make.left.equalTo(weakSelf.leftImageView.mas_right).offset(kScrAdaptationW750(14));
         make.centerY.equalTo(weakSelf.contentView);
     }];

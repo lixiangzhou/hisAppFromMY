@@ -18,7 +18,7 @@
 
 @property (nonatomic,strong)HSJFinAddRecortdViewModel *viewModel;
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) HXBNoDataView *nodataView;
+
 
 @end
 
@@ -76,12 +76,8 @@
     kWeakSelf
     [self.viewModel getFinAddRecortd:isNew planID:self.planId resultBlock:^(BOOL isSuccess) {
         if (isSuccess) {
-            if (!weakSelf.viewModel.dataSource.count) {
-                weakSelf.nodataView.hidden = NO;
-            } else
-            {
-                weakSelf.nodataView.hidden = YES;
-            }
+            
+            self.isShowNodataView = weakSelf.viewModel.dataSource.count<=0;
             weakSelf.tableView.hidden = NO;
             [weakSelf.tableView reloadData];
             
@@ -150,21 +146,6 @@
 #pragma mark - Action
 
 #pragma mark - Setter / Getter / Lazy
-- (HXBNoDataView *)nodataView {
-    if (!_nodataView) {
-        _nodataView = [[HXBNoDataView alloc]initWithFrame:CGRectZero];
-        _nodataView.imageName = @"Fin_NotData";
-        _nodataView.noDataMassage = @"暂无数据";
-        //        _nodataView.downPULLMassage = @"下拉进行刷新";
-        kWeakSelf
-        [self.tableView addSubview:_nodataView];
-        [_nodataView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(weakSelf.tableView).offset(kScrAdaptationH(100));
-            make.height.width.equalTo(@(kScrAdaptationH(184)));
-            make.centerX.equalTo(weakSelf.tableView);
-        }];
-    }
-    return _nodataView;
-}
+
 
 @end
