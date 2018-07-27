@@ -129,7 +129,7 @@
     cell.model = model;
     kWeakSelf
     cell.statusActionBlock = ^(HSJFinAddRecortdModel *model) {
-        NSString *url = kHXB_Negotiate_ServePlan_AccountURL(weakSelf.planId);
+        NSString *url = kHXB_Negotiate_ServeLoan_AccountURL(model.loanId);
         [HXBBaseWKWebViewController pushWithPageUrl:[NSString splicingH5hostWithURL:url] fromController:weakSelf];
     };
 
