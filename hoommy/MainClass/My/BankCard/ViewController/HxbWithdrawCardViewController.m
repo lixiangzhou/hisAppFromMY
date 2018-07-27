@@ -223,6 +223,7 @@
     if (indexPath.row==1 && text.length >= 12) {
         kWeakSelf
         NSString *cardNo = [text stringByReplacingOccurrencesOfString:@" " withString:@""];
+        [self.bindBankCardVM cancelRequest];
         [self.bindBankCardVM checkCardBinResultRequestWithBankNumber:cardNo andisToastTip:NO andCallBack:^(id responseData, NSError *erro) {
             if (erro) {
                 weakSelf.bindBankCardVM.cardBinModel = nil;
@@ -257,12 +258,25 @@
  开通存管账户
  */
 - (void)openStorageWithArgument:(NSDictionary *)dic{
+    NSString *bankCard = [dic stringAtPath:@"bankCard"];
+    //接口调用
     kWeakSelf
-    [self.bindBankCardVM bindBankCardRequestWithArgument:dic andFinishBlock:^(id responseData, NSError *erro) {
-        if (!erro) {
-            [weakSelf bindBankCardRequest];
+    [self.bindBankCardVM showProgress:nil];
+    [self.bindBankCardVM checkCardBinResultRequestWithBankNumberExtend:bankCard andisToastTip:YES showHug:NO andCallBack:^(id responseData, NSError *erro) {
+        if(!erro) {
+            [weakSelf.bindBankCardVM bindBankCardRequestWithArgument:dic showHug:NO andFinishBlock:^(id responseData, NSError *erro) {
+                [weakSelf.bindBankCardVM hideProgress:nil];
+                if (!erro) {
+                    [weakSelf bindBankCardRequest];
+                }
+            }];
+        }
+        else {
+            [weakSelf.bindBankCardVM hideProgress:nil];
         }
     }];
+    
+    
 }
 
 - (void)bindBankCardRequest {

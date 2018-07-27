@@ -113,4 +113,11 @@
     
     return errMsg;
 }
+
+/**
+ 取消所有网络请求
+ */
+- (void)cancelRequest {
+    [[HXBBaseRequestManager sharedInstance] cancelRequest:self];
+}
 @end

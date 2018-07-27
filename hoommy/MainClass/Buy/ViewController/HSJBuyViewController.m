@@ -52,7 +52,8 @@
     self.viewModel.inputMoney = self.startMoney;
     if(!self.planModel) {
         kWeakSelf
-        [self.viewModel getDataWithId:self.planId showHug:YES resultBlock:^(id responseData, NSError *erro) {
+        NSString *planId = self.planId?:@"";
+        [self.viewModel getDataWithId:planId showHug:YES resultBlock:^(id responseData, NSError *erro) {
             if(!erro) {
                 weakSelf.viewModel.planModel = responseData;
                 [weakSelf startSaleTimer];
