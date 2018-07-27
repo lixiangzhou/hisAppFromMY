@@ -53,4 +53,9 @@ typedef void(^NetWorkResponseBlock)(id responseData, NSError* erro);
  @return 消息
  */
 - (NSString*)getErroMessage:(NSDictionary*)responseObj;
+
+/**
+ 取消所有网络请求
+ */
+- (void)cancelRequest;
 @end

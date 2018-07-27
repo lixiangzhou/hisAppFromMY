@@ -52,7 +52,7 @@
  
  @param requestArgument 绑卡的字典数据
  */
-- (void)bindBankCardRequestWithArgument:(NSDictionary *)requestArgument andFinishBlock:(NetWorkResponseBlock)finishBlock;
+- (void)bindBankCardRequestWithArgument:(NSDictionary *)requestArgument showHug:(BOOL)isShowHug andFinishBlock:(NetWorkResponseBlock)finishBlock;
 
 /**
  验证身份证号
@@ -73,7 +73,16 @@
  
  @param bankNumber 银行卡号
  @param isToast 是否需要提示信息
- @param callBackBlock 回调
+ @param resultBlock 回调
  */
 - (void)checkCardBinResultRequestWithBankNumber:(NSString *)bankNumber andisToastTip:(BOOL)isToast andCallBack:(NetWorkResponseBlock)resultBlock;
+
+/**
+ 卡bin校验扩展
+ 
+ @param bankNumber 银行卡号
+ @param isToast 是否需要提示信息
+ @param resultBlock 回调
+ */
+- (void)checkCardBinResultRequestWithBankNumberExtend:(NSString *)bankNumber andisToastTip:(BOOL)isToast showHug:(BOOL)isShowHug andCallBack:(NetWorkResponseBlock)resultBlock;
 @end

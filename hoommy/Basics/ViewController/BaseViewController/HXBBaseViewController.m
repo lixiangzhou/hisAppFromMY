@@ -307,6 +307,14 @@
     return _navgationBarImageView;
 }
 
+- (HSJNoDataView *)noDataView {
+    if (_noDataView == nil) {
+        _noDataView = [HSJNoDataView new];
+        _noDataView.hidden = YES;
+    }
+    return _noDataView;
+}
+
 #pragma mark - Other
 ///白色的电池栏
 - (UIStatusBarStyle)preferredStatusBarStyle

@@ -135,7 +135,9 @@ MyViewHeaderDelegate
             HSJMyViewController *VC = (HSJMyViewController *)[UIResponder findNextResponderForClass:[HSJMyViewController class] ByFirstResponder:self];
             [VC.navigationController pushViewController:vc animated:YES];
         } else {
-            NSLog(@"红利计划");
+            NSLog(@"零钱罐");
+            [HXBUmengManagar HXB_clickEventWithEnevtId: kHSJUmeng_MyBankCardClick];
+            
 //            [HXBUmengManagar HXB_clickEventWithEnevtId:kHXBUmeng_invite_entrance];
 //            HxbMyViewController *VC = (HxbMyViewController *)[UIResponder findNextResponderForClass:[HxbMyViewController class] ByFirstResponder:self];
 //            HXBBannerWebViewController *webViewVC = [[HXBBannerWebViewController alloc] init];

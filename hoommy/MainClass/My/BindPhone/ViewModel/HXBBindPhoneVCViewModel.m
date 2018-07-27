@@ -38,6 +38,7 @@
         cellModel.keyboardType = UIKeyboardTypeNumberPad;
         cellModel.limtTextLenght = 18;
         cellModel.isCanEdit = YES;
+        cellModel.isIDCardTextField = YES;
         [dataList addObject:cellModel];
         cellModel = [[HXBBindPhoneCellModel alloc] initModel:@"验证码" placeText:@"请输入验证码" isLastItem:YES text:@""];
         cellModel.isCanEdit = YES;
