@@ -34,6 +34,7 @@
         return;
     }
     self.isNew = [self.planModel.novice isEqualToString:@"1"];
+    self.hasBuy = self.planModel.hasBuy;
     
     self.interestString = [self getInterestString];
     self.baseInterestString = [self getBaseInterestString];

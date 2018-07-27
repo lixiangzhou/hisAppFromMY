@@ -287,6 +287,12 @@
 
 #pragma mark - Action
 - (void)inClick {
+    if (self.viewModel.hasBuy) {
+        [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_DetailHasBuyInClick];
+    } else {
+        [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_DetailUnBuyInClick];
+    }
+    
     if (KeyChain.isLogin) {
         HSJBuyViewController *vc = [HSJBuyViewController new];
         vc.planId = self.planId;
@@ -297,6 +303,8 @@
 }
 
 - (void)outClick {
+    [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_DetailHasBuyOutClick];
+    
     if (KeyChain.isLogin) {
         HSJRollOutController *vc = [HSJRollOutController new];
         [self.navigationController pushViewController:vc animated:YES];
@@ -306,6 +314,12 @@
 }
 
 - (void)calClick {
+    if (self.viewModel.hasBuy) {
+        [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_DetailHasBuyCalculatorClick];
+    } else {
+        [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_DetailUnBuyCalculatorClick];
+    }
+    
     kWeakSelf
     [HSJEarningCalculatorView showWithInterest:self.viewModel.interest buyBlock:^(NSString *value) {
         if (KeyChain.isLogin) {
@@ -317,6 +331,11 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_ShowLoginVC object:nil];
         }
     }];
+}
+
+- (void)leftBackBtnClick {
+    [super leftBackBtnClick];
+    [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_DetailBackClick];
 }
 
 @end

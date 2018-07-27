@@ -31,6 +31,8 @@
 @property (nonatomic, weak) PCCircleInfoView *infoView;
 
 @property (nonatomic, weak) UIButton *resetBtn;
+
+@property (nonatomic, assign) BOOL hasSetFirstSuccess;
 @end
 
 @implementation HSJGestureSettingController
@@ -105,6 +107,14 @@
     [PCCircleViewConst saveGesture:nil Key:gestureOneSaveKey];
 }
 
+- (void)leftBackBtnClick {
+    if (self.hasSetFirstSuccess) {
+        [self popToViewControllerWithClassName:@"HxbAccountInfoViewController"];
+    } else {
+        [super leftBackBtnClick];
+    }
+}
+
 #pragma mark - CircleViewDelegate - Setting
 - (void)circleView:(PCCircleView *)view type:(CircleViewType)type connectCirclesLessThanNeedWithGesture:(NSString *)gesture
 {
@@ -123,6 +133,8 @@
 - (void)circleView:(PCCircleView *)view type:(CircleViewType)type didCompleteSetFirstGesture:(NSString *)gesture
 {
     NSLog(@"获得第一个手势密码%@", gesture);
+    self.hasSetFirstSuccess = YES;
+    
     self.resetBtn.hidden = NO;
     [self.msgLabel showNormalMsg:@"再次设置手势密码"];
     [self infoViewSelectedSubviewsSameAsCircleView:view];
@@ -139,20 +151,8 @@
         
         [self.msgLabel showWarnMsg:gestureTextSetSuccess];
         [PCCircleViewConst saveGesture:gesture Key:gestureFinalSaveKey];
-
-        __block UIViewController *popToVC = nil;
-        [self.navigationController.childViewControllers enumerateObjectsUsingBlock:^(__kindof UIViewController * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            if ([obj isKindOfClass:NSClassFromString(@"HxbAccountInfoViewController")]) {
-                popToVC = obj;
-                *stop = YES;
-            }
-        }];
         
-        if (popToVC && self.switchType == HXBAccountSecureSwitchTypeOn) {   // 从账户安全页进去的
-            [self.navigationController popToViewController:popToVC animated:YES];
-        } else if (self.switchType == HXBAccountSecureSwitchTypeChange) {
-            [self.navigationController popToRootViewControllerAnimated:YES];
-        }
+        [self popToViewControllerWithClassName:@"HxbAccountInfoViewController"];
     } else {
         self.resetBtn.hidden = NO;
         [self.msgLabel showWarnMsgAndShake:gestureTextDrawAgainError];

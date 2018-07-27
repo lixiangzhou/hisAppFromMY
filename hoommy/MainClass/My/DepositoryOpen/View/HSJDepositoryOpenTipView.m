@@ -105,6 +105,7 @@
 
 #pragma mark - Action
 - (void)openAccountBtnClick {
+    [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_DepositoryTipOpenClick];
     if (self.isShowWithOpenBlock) {
         if (self.openBlock) {
             self.openBlock();
@@ -116,6 +117,7 @@
 }
 
 - (void)closeBtnClick {
+    [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_DepositoryTipCloseClick];
     HSJDepositoryOpenTipView *tipView = [HSJDepositoryOpenTipView shared];
     
     tipView.alpha = 1;

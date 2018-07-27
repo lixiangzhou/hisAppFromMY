@@ -14,7 +14,7 @@
 #import "HSJSignInViewModel.h"
 #import "HSJCheckCaptcha.h"
 #import "HXBGeneralAlertVC.h"
-@interface HSJCodeSigInViewController ()
+@interface HSJCodeSigInViewController ()<UITextFieldDelegate>
 
 @property (nonatomic, strong) UILabel *titleLabel;
 
@@ -93,6 +93,7 @@
     }];
 }
 - (void)signInButtonClick {
+    [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_SignInCodeSignInButtonClick];
     kWeakSelf
     [self.viewModel loginRequetWithMobile:self.viewModel.phoneNumber password:@"" andWithSmscode:self.codeTextField.text andWithCaptcha:self.captcha resultBlock:^(BOOL isSuccess,BOOL isNeedCaptcha) {
         weakSelf.captcha = @"";
@@ -133,6 +134,7 @@
 }
 
 - (void)getVoiceCode {
+    [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_SignInVoiceCodeButtonClick];
     HXBGeneralAlertVC *alertVC = [[HXBGeneralAlertVC alloc] initWithMessageTitle:@"获取语音验证码" andSubTitle:@"我们将以电话形式告知验证码，请您注意接听" andLeftBtnName:@"暂不接听" andRightBtnName:@"现在接听" isHideCancelBtn:NO isClickedBackgroundDiss:NO];
     [self presentViewController:alertVC animated:NO completion:nil];
     kWeakSelf
@@ -145,6 +147,7 @@
 }
 
 - (void)getCode {
+    [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_SignInGetCodeButtonClick];
     [self getVoiceCodeWithType:@"sms"];
 }
 
@@ -182,6 +185,14 @@
     [self.codeButton setTitleColor:kHXBFontColor_FB9561_100 forState:(UIControlStateNormal)];
 }
 
+#pragma mark - UITextFieldDelegate
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    if (self.codeTextField.textField == textField) {
+        [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_SignInCodeTextFieldClick];
+    }
+}
+
 - (HXBCustomTextField *)codeTextField {
     if (!_codeTextField) {
         _codeTextField = [[HXBCustomTextField alloc] init];
@@ -195,6 +206,7 @@
         _codeTextField.limitStringLength = 6;
         _codeTextField.bottomLineEditingColor = kHXBSpacingColor_F5F5F9_100;
         _codeTextField.bottomLineNormalColor = kHXBSpacingColor_F5F5F9_100;
+        _codeTextField.delegate = self;
         kWeakSelf
         _codeTextField.block = ^(NSString *text1) {
             weakSelf.signInButton.enabled = text1.length;
