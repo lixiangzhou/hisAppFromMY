@@ -11,7 +11,7 @@
 #import "HSJCodeSigInViewController.h"
 #import "HSJSignInButton.h"
 #import "HSJCheckCaptcha.h"
-@interface HSJPasswordSigInViewController ()
+@interface HSJPasswordSigInViewController ()<UITextFieldDelegate>
 
 @property (nonatomic, strong) UILabel *titleLabel;
 
@@ -61,6 +61,7 @@
 
 
 - (void)nextButtonClick {
+    [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_SignInPasswordButtonClick];
     kWeakSelf
     [self.viewModel loginRequetWithMobile:self.viewModel.phoneNumber password:self.passwordField.text andWithSmscode:@"" andWithCaptcha:weakSelf.captcha resultBlock:^(BOOL isSuccess,BOOL isNeedCaptcha) {
         weakSelf.captcha = @"";
@@ -102,9 +103,19 @@
 }
 
 - (void)getCode {
+    [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_SignInGoCodeSignInButtonClick];
+    
     HSJCodeSigInViewController *codeSigInVC = [[HSJCodeSigInViewController alloc] init];
     codeSigInVC.viewModel = self.viewModel;
     [self.navigationController pushViewController:codeSigInVC animated:YES];
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    if (self.passwordField.textField == textField) {
+        [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_SignInPasswordTextFieldClick];
+    }
 }
 
 - (HXBCustomTextField *)passwordField {
@@ -118,6 +129,7 @@
         _passwordField.textColor = kHXBFontColor_555555_100;
         _passwordField.bottomLineEditingColor = kHXBSpacingColor_F5F5F9_100;
         _passwordField.bottomLineNormalColor = kHXBSpacingColor_F5F5F9_100;
+        _passwordField.delegate = self;
         kWeakSelf
         _passwordField.block = ^(NSString *text1) {
             weakSelf.nextButton.enabled = text1.length;

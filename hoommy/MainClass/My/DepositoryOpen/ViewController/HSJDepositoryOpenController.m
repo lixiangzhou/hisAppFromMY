@@ -330,6 +330,17 @@
 #pragma mark - UITextFieldDelegate
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     self.currentField = textField;
+    if (self.nameView.textField == textField) {
+        [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_DepositoryNameTextFieldClick];
+    } else if (self.idView.idTextField == textField) {
+        [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_DepositoryIDTextFieldClick];
+    } else if (self.transactionPwdView.textField == textField) {
+        [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_DepositoryTransactionPwdTextFieldClick];
+    } else if (self.bankNoView.textField == textField) {
+        [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_DepositoryBankNoTextFieldClick];
+    } else if (self.mobileView.textField == textField) {
+        [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_DepositoryMobileTextFieldClick];
+    }
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField
@@ -564,6 +575,8 @@
 #pragma mark - Action
 /// 开通恒丰银行存管账户
 - (void)bottomBtnClick {
+    [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_DepositoryOpenClick];
+    
     if ([self judgeIsTure]) return;
 
     [self.view endEditing:YES];
@@ -591,9 +604,16 @@
 
 /// 查看银行限额
 - (void)checkBankLimit {
+    [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_DepositoryBankListClick];
+    
     HXBBankCardListViewController *VC = [[HXBBankCardListViewController alloc] init];
     HXBBaseNavigationController *nav = [[HXBBaseNavigationController alloc] initWithRootViewController:VC];
     [self presentViewController:nav animated:YES completion:nil];
+}
+
+- (void)leftBackBtnClick {
+    [super leftBackBtnClick];
+    [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_DepositoryBackClick];
 }
 
 @end

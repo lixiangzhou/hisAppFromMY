@@ -286,21 +286,38 @@
 
 #pragma mark - Action
 - (void)inClick {
+    if (self.viewModel.hasBuy) {
+        [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_DetailHasBuyInClick];
+    } else {
+        [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_DetailUnBuyInClick];
+    }
     HSJBuyViewController *vc = [HSJBuyViewController new];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)outClick {
+    [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_DetailHasBuyOutClick];
     HSJRollOutController *vc = [HSJRollOutController new];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)calClick {
+    if (self.viewModel.hasBuy) {
+        [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_DetailHasBuyCalculatorClick];
+    } else {
+        [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_DetailUnBuyCalculatorClick];
+    }
+    
     [HSJEarningCalculatorView showWithInterest:self.viewModel.interest buyBlock:^(NSString *value) {
         HSJBuyViewController *vc = [HSJBuyViewController new];
         vc.startMoney = value;
         [self.navigationController pushViewController:vc animated:YES];
     }];
+}
+
+- (void)leftBackBtnClick {
+    [super leftBackBtnClick];
+    [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_DetailBackClick];
 }
 
 @end

@@ -28,6 +28,8 @@
 @property (nonatomic, copy) NSString *endLockDateString;
 /// 利率 用于计算器计算用
 @property (nonatomic, assign) double interest;
+/// 是否投资过
+@property (nonatomic, assign) BOOL hasBuy;
 
 /// 转入的属性
 @property (nonatomic, strong) UIColor *inTextColor;
