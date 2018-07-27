@@ -93,4 +93,20 @@ static NSString *const kHSHUmeng_SignUpGetCodeButtonClick = @"2053";
 static NSString *const kHSHUmeng_SignUpVoiceCodeButtonClick = @"2054";
 static NSString *const kHSHUmeng_SignUpPasswordTextFieldClick = @"2055";
 static NSString *const kHSHUmeng_SignUpButtonClick = @"2056";
+
+///我的账户
+static NSString *const kHSJUmeng_MyTabClick = @"2057";
+static NSString *const kHSJUmeng_MyGoDepositoryClick = @"2058";
+static NSString *const kHSJUmeng_MyBalanceClick = @"2059";
+static NSString *const kHSJUmeng_MyPlanClick = @"2060";
+static NSString *const kHSJUmeng_MyBankCardClick = @"2060";
+static NSString *const kHSJUmeng_MyRiskAssessmentClick = @"2062";
+static NSString *const kHSJUmeng_MyServicerMobileClick = @"2063";
+static NSString *const kHSJUmeng_MySettingClick = @"2064";
+static NSString *const kHSJUmeng_MyTransactionRecordClick = @"2065";
+static NSString *const kHSJUmeng_MyIntoPlanClick = @"2066";
+static NSString *const kHSJUmeng_MyWithdrawCashToBankCardClick = @"2067";
+static NSString *const kHSJUmeng_MyWithdrawCashRecordClick = @"2068";
+static NSString *const kHSJUmeng_MyWithdrawCashClick = @"2069";
+static NSString *const kHSJUmeng_MyWithdrawCashCodeButtonClick = @"2070";
 #endif /* HSJNetStateCode_h */
