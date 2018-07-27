@@ -23,11 +23,6 @@
  */
 @property (nonatomic, strong) UITableView *withdrawRecordTableView;
 
-/**
- 暂无数据接口
- */
-@property (nonatomic, strong) HXBNoDataView *nodataView;
-
 
 @end
 
@@ -38,8 +33,6 @@
     self.title = @"提现进度";
     [self loadCashRegisterDataNeeedShowLoading:YES];
     [self.view addSubview:self.withdrawRecordTableView];
-    [self nodataView];
-    
 }
 #pragma mark - Events
 ///无网状态的网络连接
@@ -78,7 +71,7 @@
 }
 //判断是否有数据
 - (void)isHaveData {
-    self.nodataView.hidden = self.withdrawRecordViewModel.withdrawRecordListModel.dataList.count;
+    self.isShowNodataView = self.withdrawRecordViewModel.withdrawRecordListModel.dataList.count<=0;
 }
 
 #pragma mark - UITableViewDataSource
@@ -166,21 +159,4 @@
     return _withdrawRecordViewModel;
 }
 
-- (HXBNoDataView *)nodataView {
-    if (!_nodataView) {
-        _nodataView = [[HXBNoDataView alloc]initWithFrame:CGRectZero];
-        _nodataView.imageName = @"Fin_NotData";
-        _nodataView.noDataMassage = @"暂无数据";
-        _nodataView.userInteractionEnabled = NO;
-        _nodataView.hidden = YES;
-        [self.withdrawRecordTableView addSubview:_nodataView];
-        //        _nodataView.downPULLMassage = @"下拉进行刷新";
-        [_nodataView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.withdrawRecordTableView).offset(kScrAdaptationH(100));
-            make.height.width.equalTo(@(kScrAdaptationH(184)));
-            make.centerX.equalTo(self.withdrawRecordTableView);
-        }];
-    }
-    return _nodataView;
-}
 @end

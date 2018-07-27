@@ -23,7 +23,9 @@
 #import "HSJMyHomeInfoTableViewCell.h"
 #import "HXBMiddlekey.h"
 #import "HSJMyAccountBalanceController.h"
+#import "HSJRollOutPlanDetailController.h"
 
+#import "HSJFragmentViewController.h"
 @interface HxbMyView ()
 <
 UITableViewDelegate,
@@ -136,13 +138,13 @@ MyViewHeaderDelegate
             [VC.navigationController pushViewController:vc animated:YES];
         } else {
             NSLog(@"零钱罐");
-            [HXBUmengManagar HXB_clickEventWithEnevtId: kHSJUmeng_MyBankCardClick];
             
-//            [HXBUmengManagar HXB_clickEventWithEnevtId:kHXBUmeng_invite_entrance];
-//            HxbMyViewController *VC = (HxbMyViewController *)[UIResponder findNextResponderForClass:[HxbMyViewController class] ByFirstResponder:self];
-//            HXBBannerWebViewController *webViewVC = [[HXBBannerWebViewController alloc] init];
-//            webViewVC.pageUrl = kHXBH5_InviteDetailURL;
-//            [VC.navigationController pushViewController:webViewVC animated:YES];
+            [HXBUmengManagar HXB_clickEventWithEnevtId: kHSJUmeng_MyBankCardClick];
+
+            HSJRollOutPlanDetailController *rollOutPlanDetailVC = [HSJRollOutPlanDetailController new];
+            rollOutPlanDetailVC.planId = @"1216";
+            HSJMyViewController *VC = (HSJMyViewController *)[UIResponder findNextResponderForClass:[HSJMyViewController class] ByFirstResponder:self];
+            [VC.navigationController pushViewController:rollOutPlanDetailVC animated:YES];
         }
     }
     if (indexPath.section == 1) {//第一组
@@ -194,14 +196,11 @@ MyViewHeaderDelegate
 
 #pragma TableViewDataSource
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *celledStr = @"celled";
-    HXBMyHomeViewCell *cell = [tableView dequeueReusableCellWithIdentifier:celledStr];
-    if (cell == nil) {
-        cell = [[HXBMyHomeViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:celledStr];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.textLabel.font = kHXBFont_PINGFANGSC_REGULAR(15);
-        cell.textLabel.textColor = COR6;
-    }
+    
+    HXBMyHomeViewCell *cell = [[HXBMyHomeViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"celled"];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.textLabel.font = kHXBFont_PINGFANGSC_REGULAR(15);
+    cell.textLabel.textColor = COR6;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
