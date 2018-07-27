@@ -18,7 +18,7 @@
 /**
  状态
  */
-/*
+
 - (NSString *) status {
     if (!_status) {
         ///String    投标中
@@ -88,5 +88,5 @@
     }
     return _status;
 }
-*/
+
 @end

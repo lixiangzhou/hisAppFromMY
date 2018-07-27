@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 @class HXBWithdrawRecordModel;
-@interface HXBWithdrawRecordListModel : Jastor
+@interface HXBWithdrawRecordListModel : NSObject
 
 /**
  提现记录列表

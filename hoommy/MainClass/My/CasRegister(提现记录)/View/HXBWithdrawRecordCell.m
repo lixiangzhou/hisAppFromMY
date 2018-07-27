@@ -18,27 +18,27 @@
  银行名称
  */
 @property (nonatomic, strong) UILabel *bankNameLabel;
-/**
- 银行尾号
- */
-@property (nonatomic, strong) UILabel *bankNumLabel;
-/**
+/*
  提现状态描述
  */
 @property (nonatomic, strong) UILabel *logDescLabel;
-
+/**
+ 提现申请日期
+ */
+@property (nonatomic, strong) UILabel *applyDateLabel;
 /**
  提现申请时间
  */
 @property (nonatomic, strong) UILabel *applyTimeLabel;
-/**
- 提现状态对应文案描述
- */
-@property (nonatomic, strong) UILabel *cashDrawStatusLabel;
+
 /**
  分割线
  */
 @property (nonatomic, strong) UIView *partingLineView;
+/**
+ 圆点
+ */
+@property (nonatomic, strong) UIView *circularPointView;
 @end
 
 
@@ -57,67 +57,79 @@
 - (void)setupSubView {
     [self.contentView addSubview:self.cashAmountLabel];
     [self.contentView addSubview:self.bankNameLabel];
-    [self.contentView addSubview:self.bankNumLabel];
     [self.contentView addSubview:self.logDescLabel];
+    [self.contentView addSubview:self.applyDateLabel];
     [self.contentView addSubview:self.applyTimeLabel];
-    [self.contentView addSubview:self.cashDrawStatusLabel];
     [self.contentView addSubview:self.partingLineView];
+    [self.contentView addSubview:self.circularPointView];
 }
 
 - (void)setupSubViewFrame {
-    [self.cashAmountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentView).offset(kScrAdaptationH750(40));
-        make.left.equalTo(self.contentView).offset(kScrAdaptationW750(30));
-    }];
-    [self.bankNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.cashAmountLabel.mas_left);
-        make.top.equalTo(self.cashAmountLabel.mas_bottom).offset(kScrAdaptationH750(30));
-    }];
-    [self.bankNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.bankNameLabel.mas_right);
-        make.centerY.equalTo(self.bankNameLabel);
-    }];
-    [self.logDescLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.cashAmountLabel.mas_left);
-        make.top.equalTo(self.bankNameLabel.mas_bottom).offset(kScrAdaptationH750(14));
-    }];
-    [self.cashDrawStatusLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.cashAmountLabel);
-        make.right.equalTo(self.contentView).offset(kScrAdaptationW750(-30));
+    
+    kWeakSelf
+    [self.applyDateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(@kScrAdaptationW(15));
+        make.top.equalTo(@kScrAdaptationH(30));
+        make.width.equalTo(@kScrAdaptationW(40));
+        make.height.equalTo(@kScrAdaptationH(20));
     }];
     [self.applyTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.cashDrawStatusLabel.mas_right);
-        make.centerY.equalTo(self.bankNameLabel);
+        make.height.equalTo(@kScrAdaptationH(17));
+        make.top.equalTo(weakSelf.applyDateLabel.mas_bottom).offset(kScrAdaptationH(5));
+        make.left.width.equalTo(weakSelf.applyDateLabel);
     }];
     [self.partingLineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.cashAmountLabel.mas_left);
-        make.right.equalTo(self.cashDrawStatusLabel.mas_right);
-        make.bottom.equalTo(self.contentView);
-        make.height.offset(kHXBDivisionLineHeight);
+        make.left.equalTo(@kScrAdaptationW(65));
+        make.top.bottom.equalTo(self.contentView);
+        make.width.equalTo(@kHXBDivisionLineHeight);
+    }];
+    [self.circularPointView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.height.equalTo(@kScrAdaptationW(9));
+        make.centerY.equalTo(weakSelf.contentView);
+        make.centerX.equalTo(weakSelf.partingLineView);
+    }];
+    [self.cashAmountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(weakSelf.circularPointView);
+        make.left.equalTo(weakSelf.circularPointView.mas_right).offset(kScrAdaptationW(15));
+        make.height.equalTo(@kScrAdaptationH(20));
+    }];
+    [self.bankNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(weakSelf.cashAmountLabel.mas_right).offset(kScrAdaptationW(15));
+        make.centerY.equalTo(weakSelf.cashAmountLabel);
+        make.right.offset(kScrAdaptationW(-15));
+        make.height.equalTo(@kScrAdaptationH(17));
+    }];
+    [self.logDescLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(weakSelf.cashAmountLabel);
+        make.top.equalTo(self.cashAmountLabel.mas_bottom).offset(kScrAdaptationH(10));
+        make.height.equalTo(@kScrAdaptationH(17));
+        make.right.offset(kScrAdaptationW(15));
     }];
 }
 
 #pragma mark - Getters and Setters
 
 - (void)setWithdrawRecordModel:(HXBWithdrawRecordModel *)withdrawRecordModel {
+    
     _withdrawRecordModel = withdrawRecordModel;
-    self.cashAmountLabel.text = [NSString stringWithFormat:@"提现金额：%@元",withdrawRecordModel.cashAmount];
-    self.bankNameLabel.text = withdrawRecordModel.bankName;
-    self.bankNumLabel.text = withdrawRecordModel.bankLastNum;
-    self.logDescLabel.text = withdrawRecordModel.logText;
-    self.cashDrawStatusLabel.text = withdrawRecordModel.statusText;
-    self.applyTimeLabel.text = withdrawRecordModel.applyTimeStr;
-    if (withdrawRecordModel.isBlueColor) {
-        self.cashDrawStatusLabel.textColor = COR30;
-    } else {
-        self.cashDrawStatusLabel.textColor = COR10;
-    }
+    self.circularPointView.backgroundColor = withdrawRecordModel.stateColor;
+    self.cashAmountLabel.text = [NSString stringWithFormat:@"%@元",withdrawRecordModel.cashAmount];
+    self.bankNameLabel.text = [NSString stringWithFormat:@"%@%@",withdrawRecordModel.bankName,withdrawRecordModel.bankLastNum];
+    
+    NSString *logDesc = [NSString stringWithFormat:@" %@",withdrawRecordModel.logDesc];
+    self.logDescLabel.attributedText = [NSAttributedString setupAttributeStringWithBeforeString:withdrawRecordModel.cashDrawName  WithBeforeRange:NSMakeRange(0, withdrawRecordModel.cashDrawName.length) andAttributeColor:withdrawRecordModel.stateColor andAttributeFont:kHXBFont_PINGFANGSC_REGULAR(12) afterString:logDesc WithAfterRange:NSMakeRange(0, logDesc.length) andAttributeColor:RGB(21, 21, 21) andAttributeFont:kHXBFont_PINGFANGSC_REGULAR(12)];
+    
+    NSArray *arr = [withdrawRecordModel.applyTimeStr componentsSeparatedByString:@" "]; // 2017-09-28,12:04
+    NSArray *arr1 = [arr[0] componentsSeparatedByString:@"-"]; // 2017,09,28
+    self.applyDateLabel.text = [NSString stringWithFormat:@"%@日",arr1.lastObject];
+    self.applyTimeLabel.text = arr.lastObject;
 }
+
 #pragma mark - Lazy
 - (UILabel *)cashAmountLabel {
     if (!_cashAmountLabel) {
         _cashAmountLabel = [[UILabel alloc] init];
-        _cashAmountLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(28);
+        _cashAmountLabel.font = kHXBFont_PINGFANGSC_REGULAR(14);
         _cashAmountLabel.textColor = COR6;
     }
     return _cashAmountLabel;
@@ -125,48 +137,54 @@
 - (UILabel *)bankNameLabel {
     if (!_bankNameLabel) {
         _bankNameLabel = [[UILabel alloc] init];
-        _bankNameLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(24);
+        _bankNameLabel.textAlignment = NSTextAlignmentRight;
+        _bankNameLabel.font = kHXBFont_PINGFANGSC_REGULAR(12);
         _bankNameLabel.textColor = COR10;
     }
     return _bankNameLabel;
 }
-- (UILabel *)bankNumLabel {
-    if (!_bankNumLabel) {
-        _bankNumLabel = [[UILabel alloc] init];
-        _bankNumLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(24);
-        _bankNumLabel.textColor = COR10;
-    }
-    return _bankNumLabel;
-}
 - (UILabel *)logDescLabel {
     if (!_logDescLabel) {
         _logDescLabel = [[UILabel alloc] init];
-        _logDescLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(24);
-        _logDescLabel.textColor = COR10;
+        _logDescLabel.textAlignment = NSTextAlignmentLeft;
+        _logDescLabel.font = kHXBFont_PINGFANGSC_REGULAR(12);
+        _logDescLabel.textColor = RGB(21, 21, 21);
     }
     return _logDescLabel;
+}
+- (UILabel *)applyDateLabel {
+    if (!_applyDateLabel) {
+        _applyDateLabel = [[UILabel alloc] init];
+        _applyDateLabel.textAlignment = NSTextAlignmentLeft;
+        _applyDateLabel.font = kHXBFont_PINGFANGSC_REGULAR(14);
+        _applyDateLabel.textColor = kHXBColor_333333_100;
+    }
+    return _applyDateLabel;
 }
 - (UILabel *)applyTimeLabel {
     if (!_applyTimeLabel) {
         _applyTimeLabel = [[UILabel alloc] init];
-        _applyTimeLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(24);
-        _applyTimeLabel.textColor = COR10;
+        _applyTimeLabel.textAlignment = NSTextAlignmentLeft;
+        _applyTimeLabel.font = kHXBFont_PINGFANGSC_REGULAR(12);
+        _applyTimeLabel.textColor = RGB(146, 149, 162);
     }
     return _applyTimeLabel;
 }
-- (UILabel *)cashDrawStatusLabel {
-    if (!_cashDrawStatusLabel) {
-        _cashDrawStatusLabel = [[UILabel alloc] init];
-        _cashDrawStatusLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(28);
-        _cashDrawStatusLabel.textColor = COR10;
-    }
-    return _cashDrawStatusLabel;
-}
+
 -(UIView *)partingLineView {
     if (!_partingLineView) {
         _partingLineView = [[UIView alloc] init];
         _partingLineView.backgroundColor = COR12;
     }
     return _partingLineView;
+}
+-(UIView *)circularPointView {
+    if (!_circularPointView) {
+        _circularPointView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScrAdaptationW(9), kScrAdaptationW(9))];
+        _circularPointView.layer.masksToBounds = YES;
+        _circularPointView.layer.cornerRadius = _circularPointView.frame.size.width/2;
+        _circularPointView.backgroundColor = COR12;
+    }
+    return _circularPointView;
 }
 @end
