@@ -32,7 +32,6 @@
 
 @property (nonatomic, weak) UIButton *resetBtn;
 
-@property (nonatomic, assign) BOOL hasSetFirstSuccess;
 @end
 
 @implementation HSJGestureSettingController
@@ -108,11 +107,7 @@
 }
 
 - (void)leftBackBtnClick {
-    if (self.hasSetFirstSuccess) {
-        [self popToViewControllerWithClassName:@"HxbAccountInfoViewController"];
-    } else {
-        [super leftBackBtnClick];
-    }
+    [self popToViewControllerWithClassName:@"HxbAccountInfoViewController"];
 }
 
 #pragma mark - CircleViewDelegate - Setting
@@ -133,7 +128,6 @@
 - (void)circleView:(PCCircleView *)view type:(CircleViewType)type didCompleteSetFirstGesture:(NSString *)gesture
 {
     NSLog(@"获得第一个手势密码%@", gesture);
-    self.hasSetFirstSuccess = YES;
     
     self.resetBtn.hidden = NO;
     [self.msgLabel showNormalMsg:@"再次设置手势密码"];
