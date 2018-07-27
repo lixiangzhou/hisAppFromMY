@@ -10,9 +10,13 @@
 
 @interface HSJHomePlanModel : HSJBaseModel
 /**
+ 视图类型
+ */
+@property (nonatomic, copy) NSString *viewItemType;
+/**
   基础利率
  */
-@property (nonatomic, assign) float baseInterestRate;
+@property (nonatomic, copy) NSString *baseInterestRate;
 /**
  开始销售时间
  */
@@ -36,11 +40,17 @@
 /**
  计划 Id
  */
-@property (nonatomic, assign) int planID;
+@property (nonatomic, copy) NSString *ID;
 /**
   锁定期限(月),计划期限
  */
 @property (nonatomic, copy) NSString *lockPeriod;
+
+/**
+ 新手的锁定期
+ */
+@property (nonatomic, copy) NSString *lockDays;
+
 /**
  最小购买金额
  */
@@ -82,6 +92,29 @@
  */
 @property (nonatomic, copy) NSString *featuredSlogan;
 
+//--------------------------- signuph5 和 h5 ----------------------
 
+/**
+ link
+ */
+@property (nonatomic, copy) NSString *link;
+/**
+ 跳转类型
+ */
+@property (nonatomic, copy) NSString *type;
+/**
+ title
+ */
+@property (nonatomic, copy) NSString *title;
+
+/**
+ 图片地址
+ */
+@property (nonatomic, copy) NSString *image;
+
+/**
+ cell的高度
+ */
+@property (nonatomic, assign) float cellHeight;
 
 @end

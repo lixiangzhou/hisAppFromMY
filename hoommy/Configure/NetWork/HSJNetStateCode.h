@@ -38,25 +38,26 @@ typedef enum : NSUInteger {
     kHXBPurchase_Processing = -999,
 } HSJNetStateCode;
 
+typedef enum : NSUInteger {
+    kBuy_Toast = 10001,
+    kBuy_Result = 10002,
+    kBuy_Processing = 10003,
+} KHXBBuy_Code;
+
 /**
- code 码
+ 友盟统计码
  */
-static NSString *const kHXBUmeng_loginToRegist = @"1000";
-static NSString *const kHXBUmeng_registFirst = @"1001";
-static NSString *const kHXBUmeng_registSuccess = @"1002";
-static NSString *const kHXBUmeng_registSuccess_lead = @"1003";
-static NSString *const kHXBUmeng_registSuccess_return = @"1004";
-static NSString *const kHXBUmeng_alertBtn = @"1005";
-static NSString *const kHXBUmeng_commitBtn = @"1006";
-static NSString *const kHXBUmeng_topup_money = @"1007";
-static NSString *const kHXBUmeng_withdraw_money = @"1008";
-static NSString *const kHXBUmeng_invite_entrance = @"1009";
-static NSString *const kHXBUmeng_invite_alert = @"1010";
-static NSString *const kHXBUmeng_invite_weChat = @"1011";
-static NSString *const kHXBUmeng_invite_friendCircle = @"1012";
-static NSString *const kHXBUmeng_invite_QQ = @"1013";
-static NSString *const kHXBUmeng_invite_QQSpace = @"1014";
-static NSString *const kHXBUmeng_investSucess_seeResult = @"1015";
-static NSString *const kHXBUmeng_inviteSucess_share = @"1016";
+///首页
+static NSString *const kHSJUmeng_HomeTabClick = @"2001";
+static NSString *const kHSHUmeng_HomeNoticeClick = @"2002";
+static NSString *const kHSHUmeng_HomeSignupClick = @"2003";
+static NSString *const kHSHUmeng_HomeSignupPlanClick = @"2005";
+static NSString *const kHSHUmeng_HomeSafeClick = @"2006";
+static NSString *const kHSHUmeng_HomeBankClick = @"2007";
+static NSString *const kHSHUmeng_HomeCreditClick = @"2008";
+static NSString *const kHSHUmeng_HomeRegisteredCapitalClick = @"2009";
+static NSString *const kHSHUmeng_HomeSignInPlanClick = @"2010";
+
+
 
 #endif /* HSJNetStateCode_h */

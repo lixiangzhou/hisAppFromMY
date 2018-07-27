@@ -167,10 +167,10 @@
                 
                 weakSelf.topLabel.text = [NSString stringWithFormat:@"%.2f", infoModel.userAssets.yesterdayInterest];
                 
-                NSString *assetsTotal = [NSString GetPerMilWithDouble: infoModel.userAssets.assetsTotal.doubleValue];
+                NSString *assetsTotal = [NSString GetPerMilWithDouble: infoModel.userAssets.stepUpAssets];
                 weakSelf.leftLabel.text = [assetsTotal isEqualToString:@"0"] ? @"0.00" : assetsTotal;
                 
-                NSString *earnTotal = [NSString GetPerMilWithDouble: infoModel.userAssets.earnTotal.doubleValue];
+                NSString *earnTotal = [NSString GetPerMilWithDouble: infoModel.userAssets.stepUpSumPlanInterest];
                 weakSelf.centerLabel.text = [earnTotal isEqualToString:@"0"] ? @"0.00" : earnTotal;
             }
         }];

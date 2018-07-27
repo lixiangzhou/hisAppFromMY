@@ -27,7 +27,7 @@
 /// 锁定结束时间
 @property (nonatomic, copy) NSString *endLockingTime;
 /// 计划 id
-@property (nonatomic, copy) NSString *id;
+@property (nonatomic, copy) NSString *planId;
 /// 加息利率
 @property (nonatomic, copy) NSString *extraInterestRate;
 /// 计划名称
@@ -48,6 +48,8 @@
 @property (nonatomic, copy) NSString *minRegisterAmount;
 /// 加入倍数金额
 @property (nonatomic, copy) NSString *registerMultipleAmount;
+//收益类型
+@property (nonatomic, copy) NSString *cashType;
 // 计划状态
 @property (nonatomic, copy) NSString *unifyStatus;
 /// 开始销售时间

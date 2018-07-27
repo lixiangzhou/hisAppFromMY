@@ -14,6 +14,7 @@
 #import "HXBBannerViewModel.h"
 #import "HXBNoticeViewController.h"
 #import "HSJPlanDetailController.h"
+#import "HSJDepositoryOpenController.h"
 @implementation HXBExtensionMethodTool
 
 // 点击benner跳转的方法(公告列表，详情，计划列表) H5
@@ -22,17 +23,15 @@
     __block HXBBaseViewController *vc;
     if ([model.type isEqualToString:@"native"]) {
         [model.link parseUrlParam:^(NSString *path, NSDictionary *paramDic) {
-            if ([path isEqualToString:kNoticeVC]) { // 公告列表页
-                HXBNoticeViewController *noticeVC = [HXBNoticeViewController new];
-                vc = noticeVC;
-            } else if ([path isEqualToString:kPlanDetailVC]) { // 计划详情
+             if ([path isEqualToString:kPlanDetailVC]) { // 计划详情
                 HSJPlanDetailController *planVC = [HSJPlanDetailController new];
                 planVC.planId = paramDic[@"productId"];
                 vc = planVC;
-            }  else if ([path isEqualToString:kRegisterVC]) { //跳转登录注册
-                [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_ShowSignUpVC object:nil];
-            } else {
-                
+            }  else if ([path isEqualToString:kRegisterVC] || [path isEqualToString:kLoginVC]) { //跳转登录注册
+                [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_ShowLoginVC object:nil];
+            } else if([path isEqualToString:kEscrowActivityVC]) {
+                HSJDepositoryOpenController *openDepositAccountVC = [[HSJDepositoryOpenController alloc] init];
+                vc = openDepositAccountVC;
             }
         }];
         

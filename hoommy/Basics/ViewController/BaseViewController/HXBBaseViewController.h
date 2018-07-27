@@ -25,6 +25,10 @@
 @property (nonatomic, assign) BOOL iswithTabbarInPage;
 //是否显示分割线
 @property (nonatomic, assign) BOOL isShowSplitLine;
+//是否显示无网络视图
+@property (nonatomic, assign) BOOL isShowNonetView;
+//是否显示无数据源视图
+@property (nonatomic, assign) BOOL isShowNodataView;
 
 ///可以重写返回方法
 - (void)leftBackBtnClick;

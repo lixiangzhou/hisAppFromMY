@@ -131,15 +131,10 @@
     self.riskApplyAgreementView.selectState = isAgreeRiskApplyAgreement;
 }
 
-- (void)setIsTransparentBtnColor:(BOOL)isTransparentBtnColor {
-    _isTransparentBtnColor = isTransparentBtnColor;
+- (void)setButtonBackGroundColor:(UIColor *)buttonBackGroundColor {
+    _buttonBackGroundColor = buttonBackGroundColor;
     
-    if(isTransparentBtnColor) {
-       _actionBtn.backgroundColor = kHXBColor_FF7055_40;
-    }
-    else {
-        _actionBtn.backgroundColor = kHXBColor_FF7055_100;
-    }
+    _actionBtn.backgroundColor = buttonBackGroundColor;
 }
 
 - (void)setBtnContent:(NSString *)btnContent {

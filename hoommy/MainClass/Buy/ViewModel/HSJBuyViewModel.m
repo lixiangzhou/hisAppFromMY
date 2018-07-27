@@ -7,13 +7,23 @@
 //
 
 #import "HSJBuyViewModel.h"
+#import "HXBNsTimerManager.h"
 
 @interface HSJBuyViewModel()
 @property (nonatomic, assign, readonly) BOOL isAbleleftMoneyCellItem;
 @property (nonatomic, assign, readonly) BOOL isAbleBankCellItem;
+
+@property (nonatomic, strong) HXBNsTimerManager *timerManager;
+//倒计时,对应的文本变化
+@property (nonatomic, strong) NSString *timerContent;
 @end
 
 @implementation HSJBuyViewModel
+- (void)dealloc
+{
+    [self.timerManager stopTimer];
+}
+
 #pragma mark 数据请求处理
 - (instancetype)init {
     self = [super init];
@@ -23,10 +33,83 @@
     return self;
 }
 
+- (BOOL)erroStateCodeDeal:(NYBaseRequest *)request response:(NSDictionary *)responseObject {
+    if([request.requestUrl containsString:@"/result"]) {
+        return NO;
+    }
+    
+    return [super erroStateCodeDeal:request response:responseObject];
+}
+
 - (void)hideProgress:(NYBaseRequest *)request {
     if(!self.isLoadingData) {
         [super hideProgress:request];
     }
+}
+
+/**
+ 计划购买
+ 
+ @param planID 计划id
+ @param parameter 请求参数
+ @param resultBlock 返回数据
+ */
+- (void)planBuyReslutWithPlanID: (NSString *)planID
+                     parameter : (NSDictionary *)parameter
+                    resultBlock: (void(^)(BOOL isSuccess))resultBlock {
+    NYBaseRequest *request = [[NYBaseRequest alloc] initWithDelegate:self];
+    request.requestMethod = NYRequestMethodPost;
+    request.requestUrl = kHXBFin_Plan_ConfirmBuyReslutURL(planID);
+    request.requestArgument = parameter;
+    request.showHud = YES;
+    request.hudShowContent = @"安全支付";
+    kWeakSelf
+    [request loadData:^(NYBaseRequest *request, NSDictionary *responseObject) {
+        NSDictionary *data = responseObject[kResponseData];
+        weakSelf.resultModel = [[HXBFinModel_BuyResoult_PlanModel alloc] initWithDictionary:data];
+        if (resultBlock) resultBlock(YES);
+    } failure:^(NYBaseRequest *request, NSError *error) {
+        NSDictionary *responseObject = error.userInfo;
+        if (responseObject) {
+            NSInteger status = [responseObject[kResponseStatus] integerValue];
+            weakSelf.buyErrorMessage = responseObject[kResponseMessage];
+            NSString *errorType = responseObject[kResponseErrorData][@"errorType"];
+            if (status) {
+                if ([errorType isEqualToString:@"TOAST"]) {
+                    [HxbHUDProgress showTextWithMessage:responseObject[@"message"]];
+                    status = kBuy_Toast;
+                } else if ([errorType isEqualToString:@"RESULT"]) {
+                    status = kBuy_Result;
+                } else if ([errorType isEqualToString:@"PROCESSING"]) {
+                    status = kBuy_Processing;
+                }
+                weakSelf.buyErrorCode = status;
+            }
+        }
+        if (resultBlock) resultBlock(NO);
+    }];
+}
+
+/**
+ 获取充值短验
+ @param amount 充值金额
+ @param action 判断是否为提现或者充值
+ @param type 短信验证码或是语言验证码
+ @param resultBlock 请求回调
+ */
+- (void)getVerifyCodeRequesWithRechargeAmount:(NSString *)amount andWithType:(NSString *)type  andWithAction:(NSString *)action resultBlock:(NetWorkResponseBlock)resultBlock {
+    [self verifyCodeRequestWithResultBlock:^(NYBaseRequest *request) {
+        request.requestArgument = @{
+                                    @"amount" : amount,
+                                    @"action":action,
+                                    @"type":type
+                                    };
+        request.showHud = YES;
+    } resultBlock:^(id responseObject, NSError *error) {
+        if(resultBlock) {
+            resultBlock(responseObject, error);
+        }
+    }];
 }
 
 #pragma  mark 逻辑处理
@@ -40,7 +123,7 @@
     return isAble;
 }
 
-- (BOOL)isIsAbleleftMoneyCellItem {
+- (BOOL)isAbleleftMoneyCellItem {
     BOOL isAble = YES;
     if(0 == self.userInfoModel.userAssets.availablePoint.doubleValue) {
         isAble = NO;
@@ -66,15 +149,82 @@
 }
 
 - (NSString *)buttonShowContent {
-    NSString *content = @"添加银行卡";
-    if(self.userInfoModel.userInfo.hasBindCard.boolValue) {
-        double money = self.inputMoney.doubleValue;
-        content = @"立即转入";
-        if(money > 0) {
-            content = [NSString stringWithFormat:@"%@%.2lf元", content, money];
+    NSString *content = @"";
+    switch (self.buttonType) {
+        case HSJBUYBUTTON_WITHMONEY:
+        {
+            double money = self.inputMoney.doubleValue;
+            content = [NSString stringWithFormat:@"立即转入%.2lf元", money];
+            break;
+        }
+        case HSJBUYBUTTON_NOMONEY:
+            content = @"立即转入";
+            break;
+        case HSJBUYBUTTON_TIMER:
+            content = self.timerContent;
+            break;
+        case HSJBUYBUTTON_BINDCARD:
+            content = @"添加银行卡";;
+            break;
+        case HSJBUYBUTTON_EXITED:
+            content = @"销售结束";
+            break;
+            
+        default:
+            content = @"立即转入";
+            break;
+    }
+    
+    return content;
+}
+
+- (HSJBUYBUTTON_TYPE)buttonType {
+    HSJBUYBUTTON_TYPE buttonType;
+    if(self.timerManager.isTimerWorking) {
+        buttonType = HSJBUYBUTTON_TIMER;
+    }
+    else {
+        buttonType = [self buttonTypeByPlanState];
+        if(buttonType == HSJBUYBUTTON_JOIN) {
+            buttonType = HSJBUYBUTTON_BINDCARD;
+            if(self.userInfoModel.userInfo.hasBindCard.boolValue || !self.isAbleBankCellItem) {
+                double money = self.inputMoney.doubleValue;
+                buttonType = HSJBUYBUTTON_NOMONEY;
+                if(money > 0) {
+                    buttonType = HSJBUYBUTTON_WITHMONEY;
+                }
+            }
         }
     }
-    return content;
+    return buttonType;
+}
+
+- (HSJBUYBUTTON_TYPE)buttonTypeByPlanState {
+    HSJBUYBUTTON_TYPE type;
+    switch ([self.planModel.unifyStatus integerValue]) {
+        case 0://等待预售开始超过30分
+        case 1://等待预售开始小于30分钟
+        case 2://预定
+        case 3://预定满额
+        case 4://等待开放购买大于30分钟
+        case 5://等待开放购买小于30分钟
+            type = HSJBUYBUTTON_EXITED;
+            break;
+        case 6:
+            type = HSJBUYBUTTON_JOIN;
+            break;
+        case 7://销售结束
+        case 8://收益中
+        case 9://开放期
+        case 10://已退出
+            type = HSJBUYBUTTON_EXITED;
+            break;
+        default:
+            type = HSJBUYBUTTON_JOIN;
+            break;
+    }
+    
+    return type;
 }
 
 - (NSArray *)cellDataList {
@@ -98,6 +248,14 @@
     float creditor = MIN(remainAmount, userRemainAmount);
     
     return creditor;
+}
+
+- (NSString *)buyType {
+    NSString *buyType = @"balance";//余额购买
+    if(self.isAbleBankCellItem) {
+        buyType = @"recharge";
+    }
+    return buyType;
 }
 
 - (void)buildCellDataList {
@@ -180,20 +338,23 @@
 }
 
 //校验数据
-- (BOOL)checkMoney:(void (^)(BOOL isLess))LessthanStartMoneyBLock {
+- (BOOL)checkMoney:(void (^)(BOOL isLess))lessthanStartMoneyBLock {
     BOOL result = YES;
     double money = self.inputMoney.doubleValue;
     NSString *erroInfo = @"";
     
     //校验金额
     if(money > 0) {
-        if(money < self.planModel.minRegisterAmount.doubleValue) {
-            erroInfo = [NSString stringWithFormat:@"起投金额需为%@", [NSString hxb_getPerMilWithIntegetNumber:self.planModel.minRegisterAmount.doubleValue]];
-        }
-        else if(money > self.addUpLimit) {
+        if(money > self.addUpLimit) {
             erroInfo = @"转入金额已超上限";
         }
-        else {
+        if(money<self.planModel.minRegisterAmount.doubleValue && self.addUpLimit>self.planModel.minRegisterAmount.doubleValue) {
+            erroInfo = [NSString stringWithFormat:@"起投金额需为%@", [NSString hxb_getPerMilWithIntegetNumber:self.planModel.minRegisterAmount.doubleValue]];
+            if(lessthanStartMoneyBLock) {
+                lessthanStartMoneyBLock(YES);
+            }
+        }
+        if(money>self.planModel.minRegisterAmount.doubleValue && self.addUpLimit>self.planModel.registerMultipleAmount.doubleValue) {
             int leftValue = money-self.planModel.minRegisterAmount.doubleValue;
             if(leftValue % self.planModel.registerMultipleAmount.intValue != 0) {
                 erroInfo = [NSString stringWithFormat:@"转入金额需%@起投，%@倍数递增；", [NSString hxb_getPerMilWithIntegetNumber:self.planModel.minRegisterAmount.doubleValue], [NSString hxb_getPerMilWithIntegetNumber:self.planModel.registerMultipleAmount.doubleValue]];
@@ -221,7 +382,7 @@
         result = NO;
         erroInfo = @"请同意协议组";
     }
-    else if(self.isShowRiskAgeement && !isAgreeRiskApplyAgreement) {
+    if(self.isShowRiskAgeement && !isAgreeRiskApplyAgreement) {
         result = NO;
         erroInfo = @"请同意风险承受说明";
     }
@@ -232,5 +393,42 @@
         [self showToast:erroInfo];
     }
     return result;
+}
+
+//开启倒计时
+- (BOOL)startCountDownTimer:(void (^)(void)) timerBlock {
+    BOOL result = NO;
+    if(self.planModel.diffTime.longLongValue > 0) {
+        if(!_timerManager) {
+            kWeakSelf
+            self.timerManager = [HXBNsTimerManager createTimer:1 startSeconds:0 countDownTime:NO notifyCall:^(NSString *times) {
+                if(timerBlock) {
+                    weakSelf.timerContent = [weakSelf makeTimerContent:times.intValue];
+                    timerBlock();
+                }
+            }];
+            [self.timerManager startTimer];
+        }
+    }
+    return result;
+}
+
+- (NSString *)makeTimerContent:(int)diffSecond{
+    double temp = self.planModel.diffTime.longLongValue-diffSecond*1000;
+    if(temp < 0) {
+        temp = 0;
+        [self.timerManager stopTimer];
+    }
+    
+    NSString *content = @"";
+    if (temp > 3600000){//1小时
+        content = [[HXBBaseHandDate sharedHandleDate] millisecond_StringFromDate:self.planModel.beginSellingTime andDateFormat:@"MM月dd日 HH:mm开售"];
+    }else
+    {
+        NSString *tempStr = [NSString stringWithFormat:@"%lf", temp];
+        content = [[HXBBaseHandDate sharedHandleDate] millisecond_StringFromDate:tempStr andDateFormat:@"mm分ss秒后开始加入"];
+    }
+    
+    return content;
 }
 @end

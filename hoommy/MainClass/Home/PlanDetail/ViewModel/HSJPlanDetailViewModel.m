@@ -65,7 +65,7 @@
         case 5:
         {
             if (self.needCountDown) {
-                self.inText = [NSString stringWithFormat:@"%0lld:%0lld后开售", self.diffTime / 60, self.diffTime % 60];
+                self.inText = [NSString stringWithFormat:@"%02lld:%02lld后开售", self.diffTime / 60, self.diffTime % 60];
             } else {
                 NSDate *date = [[HXBBaseHandDate sharedHandleDate] returnDateWithOBJ:self.planModel.beginSellingTime  andDateFormatter:@"yyyy-MM-dd HH:mm:ss"];
                 NSString *dateStr = @(date.timeIntervalSince1970).description;
@@ -82,14 +82,10 @@
             self.inEnabled = YES;
             break;
         case 7:
-            self.inText = @"销售结束";
-            break;
         case 8:
         case 9:
-            self.inText = @"收益中";
-            break;
         case 10:
-            self.inText = @"项目完结";
+            self.inText = @"销售结束";
             break;
     }
 }
@@ -149,17 +145,19 @@
 #pragma mark - Action
 - (void)timerAction {
     if (self.needCountDown) {
-        self.inText = [NSString stringWithFormat:@"%0lld:%0lld后开售", self.diffTime / 60, self.diffTime % 60];
+        self.inText = [NSString stringWithFormat:@"%02lld:%02lld后开售", self.diffTime / 60, self.diffTime % 60];
         self.inTextColor = kHXBColor_FF7055_100;
         self.inBackgroundImage = [UIImage imageNamed:@"plandetail_btn_empty_bg"];
         self.inEnabled = NO;
         self.diffTime -= 1;
-    } else {
+    } else if (self.diffTime < 0) {
         self.inText = @"转入";
         self.inTextColor = [UIColor whiteColor];
         self.inBackgroundImage = [UIImage imageNamed:@"plandetail_btn_normal_bg"];
         self.inEnabled = YES;
         [self stopTimer];
+    } else {    // XX-XX 后开售时，也要倒计时
+        self.diffTime -= 1;
     }
     
     if (self.timerBlock) {
@@ -171,7 +169,7 @@
 - (void)startTimer {
     [self stopTimer];
     
-    if (self.needCountDown) {
+    if (self.diffTime > 0) {
         self.timer = [TimerWeakTarget scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
     }
 }

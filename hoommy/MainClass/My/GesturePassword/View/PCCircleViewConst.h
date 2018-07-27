@@ -164,7 +164,7 @@
 /**
  *  再次绘制不一致，提示文字
  */
-#define gestureTextDrawAgainError @"两次密码不一致，请重新绘制"
+#define gestureTextDrawAgainError @"密码不一致，请重新设置"
 
 /**
  *  设置成功

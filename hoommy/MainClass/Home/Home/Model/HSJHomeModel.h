@@ -7,13 +7,16 @@
 //
 
 #import "HSJBaseModel.h"
-#import "HSJPlanModel.h"
+#import "HSJHomePlanModel.h"
 #import "BannerModel.h"
+#import "HSJHomeArtileModel.h"
 @interface HSJHomeModel : HSJBaseModel
 
-@property (nonatomic, strong) NSArray<HSJPlanModel *> *dataList;
+@property (nonatomic, strong) NSArray<HSJHomePlanModel *> *dataList;
 
 @property (nonatomic, strong) NSArray<BannerModel *> *bannerList;
+
+@property (nonatomic, strong) NSArray<HSJHomeArtileModel *> *articleList;
 
 @property (nonatomic, assign) double end;
 

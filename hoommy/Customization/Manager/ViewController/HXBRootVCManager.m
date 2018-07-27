@@ -41,7 +41,7 @@
 - (void)createRootVCAndMakeKeyWindow {
     [[UITextField appearance] setTintColor:[UIColor blackColor]];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-    
+    [HXBUmengManagar HXB_umengStart];
     [[HXBAdvertiseManager shared] getSplash];
     [[HSJGlobalInfoManager shared] getData];
     
@@ -133,6 +133,59 @@
         return [self topControllerWithRootController:rootController.presentedViewController];
     } else {
         return rootController;
+    }
+}
+
+- (void)enterTheGesturePasswordVCOrTabBar
+{
+    if ([self.mainTabbarVC isKindOfClass:[HXBBaseTabBarController class]] == NO) {
+        return;
+    }
+    if (KeyChain.isLogin) {
+        NSLog(@"%@ %@ %d", KeyChain.gesturePwd, KeyChain.skipGesture, KeyChain.skipGestureAlertAppeared);
+        if (KeyChain.gesturePwd.length > 0 && [KeyChain.skipGesture isEqualToString:kHXBGesturePwdSkipeNO]) {   // 已有手势密码，手势登录
+            [self.window.rootViewController.presentedViewController dismissViewControllerAnimated:NO completion:nil];
+            HSJGestureLoginController *gesturePasswordVC = [[HSJGestureLoginController alloc] init];
+            gesturePasswordVC.type = HSJGestureTypeLogin;
+            [self.gesturePwdVC.view removeFromSuperview];
+            id block = self.gesturePwdVC.dismissBlock;
+            self.gesturePwdVC = gesturePasswordVC;
+            
+            if ([HXBAdvertiseManager shared].couldPopAtHomeAfterSlashOrGesturePwd == NO) {
+                self.gesturePwdVC.dismissBlock = block;
+            } else {
+                kWeakSelf
+                self.gesturePwdVC.dismissBlock = ^(BOOL delay, BOOL toActivity, BOOL popRightNow) {
+                    [weakSelf.gesturePwdVC.view removeFromSuperview];
+                };
+            }
+        } else {
+            NSString *skip = KeyChain.skipGesture;
+            BOOL skipGesturePwd = NO;
+            if ([skip isEqualToString:kHXBGesturePwdSkipeNONE]) {
+                skipGesturePwd = [skip isEqualToString:kHXBGesturePwdSkipeYES];
+            }
+            
+            BOOL appeared = KeyChain.skipGestureAlertAppeared;
+            
+            if (skipGesturePwd && appeared) {
+                return;
+            } else {
+                [self.window.rootViewController.presentedViewController dismissViewControllerAnimated:NO completion:nil];
+                HSJGestureLoginController *gesturePasswordVC = [[HSJGestureLoginController alloc] init];
+                gesturePasswordVC.type = HSJGestureTypeSetting;
+                gesturePasswordVC.showSkip = YES;
+                [self.gesturePwdVC.view removeFromSuperview];
+                id block = self.gesturePwdVC.dismissBlock;
+                self.gesturePwdVC = gesturePasswordVC;
+                
+                if ([HXBAdvertiseManager shared].couldPopAtHomeAfterSlashOrGesturePwd == NO) {
+                    self.gesturePwdVC.dismissBlock = block;
+                }
+            }
+        }
+        
+        [self showGesturePwd];
     }
 }
 

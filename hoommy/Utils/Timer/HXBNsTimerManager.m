@@ -40,6 +40,11 @@
 {
     HXBNsTimerManager* manager = [[HXBNsTimerManager alloc] init];
     manager.totalSeconds = ts;
+    if(!isCountDown) {
+        if(0 == ts) {
+            manager.totalSeconds = 99999999;
+        }
+    }
     manager.repeatSecond = ti;
     manager.countDownBlock = countDownBlock;
     manager.isCountDown = isCountDown;

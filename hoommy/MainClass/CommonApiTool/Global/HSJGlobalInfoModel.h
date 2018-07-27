@@ -52,5 +52,23 @@
 /// 计划为用户累计赚取收益
 @property (nonatomic, assign) CGFloat financePlanEarnInterest;
 
+/**
+ 累计成交金额单位
+ */
+@property (nonatomic, copy) NSString *financePlanSumAmountTextUnit;
 
+/**
+ 累计成交金额
+ */
+@property (nonatomic, copy) NSString *financePlanSumAmountText;
+
+/**
+ 为用户赚取金额单位
+ */
+@property (nonatomic, copy) NSString *financePlanEarnInterestTextUnit;
+
+/**
+ 为用户赚取金额
+ */
+@property (nonatomic, copy) NSString *financePlanEarnInterestText;
 @end

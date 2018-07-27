@@ -13,6 +13,7 @@
 //#import "HXBExtensionMethodTool.h"
 #import "HXBAdvertiseManager.h"
 #import "UIImage+HXBUtil.h"
+#import "HXBExtensionMethodTool.h"
 
 @interface HxbAdvertiseViewController ()
 @property (nonatomic, strong) UIImageView *topImageView;
@@ -99,9 +100,9 @@
 }
 
 - (void)toActivity {
-//    UINavigationController *nav = [HXBRootVCManager manager].mainTabbarVC.childViewControllers[0];
-//    HXBBaseViewController *homeVC = (HXBBaseViewController *)nav.childViewControllers.firstObject;
-//    [HXBExtensionMethodTool pushToViewControllerWithModel:self.viewModel.bannerModel andWithFromVC:homeVC];
+    UINavigationController *nav = [HXBRootVCManager manager].mainTabbarVC.childViewControllers[0];
+    HXBBaseViewController *homeVC = (HXBBaseViewController *)nav.childViewControllers.firstObject;
+    [HXBExtensionMethodTool pushToViewControllerWithModel:self.viewModel.bannerModel andWithFromVC:homeVC];
 }
 
 - (void)dealloc {

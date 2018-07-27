@@ -52,7 +52,7 @@
  @param resultBlock 请求结果回调的block
  */
 - (void)verifyCodeRequestWithResultBlock:(void(^)(NYBaseRequest* request)) requestBlock resultBlock:(void(^)(id responseObject, NSError *error))resultBlock {
-    NYBaseRequest *versionUpdateAPI = [[NYBaseRequest alloc] init];
+    NYBaseRequest *versionUpdateAPI = [[NYBaseRequest alloc] initWithDelegate:self];
     versionUpdateAPI.requestUrl = kHXBUser_smscodeURL;
     versionUpdateAPI.requestMethod = NYRequestMethodPost;
     if (requestBlock) {

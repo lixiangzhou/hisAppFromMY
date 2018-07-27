@@ -63,7 +63,7 @@
     PCLockLabel *msgLabel = [[PCLockLabel alloc] init];
     msgLabel.frame = CGRectMake(0, infoView.bottom + 50, kScreenW, 20);
     msgLabel.font = kHXBFont_PINGFANGSC_REGULAR(14);
-    [msgLabel showNormalMsg:@"每次开启红小宝可使用手势密码"];
+    [msgLabel showNormalMsg:@"设置手势密码"];
     self.msgLabel = msgLabel;
     [self.view addSubview:msgLabel];
     
@@ -124,7 +124,7 @@
 {
     NSLog(@"获得第一个手势密码%@", gesture);
     self.resetBtn.hidden = NO;
-    [self.msgLabel showNormalMsg:gestureTextDrawAgain];
+    [self.msgLabel showNormalMsg:@"再次设置手势密码"];
     [self infoViewSelectedSubviewsSameAsCircleView:view];
 }
 

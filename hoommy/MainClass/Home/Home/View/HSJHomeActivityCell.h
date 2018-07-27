@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HSJHomePlanModel.h"
+
+extern NSString *const HSJHomeActivityCellIdentifier;
 
 @interface HSJHomeActivityCell : UITableViewCell
+
+@property (nonatomic, strong) HSJHomePlanModel *planModel;
 
 @end
