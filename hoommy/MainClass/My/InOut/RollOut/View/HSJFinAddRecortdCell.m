@@ -18,6 +18,7 @@ NSString * const HSJFinAddRecortdCellIdentifier = @"HSJFinAddRecortdCellIdentifi
 @property (nonatomic, strong) UIButton *contractButton;
 @property (nonatomic, strong) UILabel *lendTimeLabel;
 @property (nonatomic, strong) UIImageView *stateImgV;
+@property (nonatomic, strong) UILabel *stateTitleLabel;
 @end
 
 @implementation HSJFinAddRecortdCell
@@ -44,6 +45,7 @@ NSString * const HSJFinAddRecortdCellIdentifier = @"HSJFinAddRecortdCellIdentifi
     [self.contentView addSubview:self.contractButton];
     [self.contentView addSubview:self.lendTimeLabel];
     [self.contentView addSubview:self.stateImgV];
+    [self.stateImgV addSubview:self.stateTitleLabel];
     
     kWeakSelf
     [bgView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -83,6 +85,12 @@ NSString * const HSJFinAddRecortdCellIdentifier = @"HSJFinAddRecortdCellIdentifi
         make.width.equalTo(@kScrAdaptationW750(106));
         make.height.equalTo(@kScrAdaptationH750(88));
     }];
+    [self.stateTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.offset(kScrAdaptationH(-2));
+        make.height.equalTo(@kScrAdaptationH750(24));
+        make.left.offset(kScrAdaptationW750(10));
+        make.right.offset(kScrAdaptationW750(-10));
+    }];
 }
 
 - (void)statusAction {
@@ -101,8 +109,7 @@ NSString * const HSJFinAddRecortdCellIdentifier = @"HSJFinAddRecortdCellIdentifi
     NSString *lendTimeLabelTitle = @"出借时间：";
     NSString *time = [[HXBBaseHandDate sharedHandleDate] millisecond_StringFromDate:self.model.lendTime andDateFormat:@"yyyy-MM-dd"];;
     self.lendTimeLabel.attributedText = [NSAttributedString setupAttributeStringWithBeforeString:lendTimeLabelTitle  WithBeforeRange:NSMakeRange(0, lendTimeLabelTitle.length) andAttributeColor:RGB(146, 149, 162) andAttributeFont:kHXBFont_24 afterString:time WithAfterRange:NSMakeRange(0, time.length) andAttributeColor:RGB(21, 21, 21) andAttributeFont:kHXBFont_24];
-    
-    self.stateImgV.image = [UIImage imageNamed:self.model.status];
+    self.stateTitleLabel.text = model.status;
 }
 
 
@@ -150,7 +157,7 @@ NSString * const HSJFinAddRecortdCellIdentifier = @"HSJFinAddRecortdCellIdentifi
 - (UILabel *)lendTimeLabel {
     if (!_lendTimeLabel) {
         _lendTimeLabel = [UILabel new];
-        _lendTimeLabel.textColor = RGB(146, 149, 162);;
+        _lendTimeLabel.textColor = RGB(146, 149, 162);
         _lendTimeLabel.font = kHXBFont_24;
     }
     return _lendTimeLabel;
@@ -158,11 +165,19 @@ NSString * const HSJFinAddRecortdCellIdentifier = @"HSJFinAddRecortdCellIdentifi
 - (UIImageView *)stateImgV {
     if (!_stateImgV) {
         _stateImgV = [UIImageView new];
+        _stateImgV.image = [UIImage imageNamed:@"addRecord_state"];
     }
     return _stateImgV;
 }
 
-
+- (UILabel *)stateTitleLabel {
+    if (!_stateTitleLabel) {
+        _stateTitleLabel = [UILabel new];
+        _stateTitleLabel.textColor = RGB(255, 112, 85);
+        _stateTitleLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(20);
+    }
+    return _stateTitleLabel;
+}
 
 
 

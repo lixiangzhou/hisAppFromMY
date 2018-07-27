@@ -64,7 +64,6 @@
 @property (nonatomic,copy) NSString *lenderEarned;
 ///    可用余
 @property (nonatomic,copy) NSString *availablePoint;
-@property (nonatomic,assign) double stepUpAssets;
 ///    冻结余额
 @property (nonatomic,copy) NSString *frozenPoint;
 @property (nonatomic,copy) NSString *hasRecharge;
