@@ -43,4 +43,6 @@
 + (NSString*)isOrNoPasswordStyle:(NSString *)passWordName;
 ///限制UITextfield两位小数的输入
 + (BOOL)checkBothDecimalPlaces: (NSString *)str;
+// 2017-09-28 12:04 -> 2017年09月
++ (NSString *)hxb_formatKeyString:(NSString *)string;
 @end

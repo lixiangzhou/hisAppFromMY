@@ -115,7 +115,7 @@
  */
 - (void)setupRightBarBtn {
     UIButton *cashRegisterBtn = [[UIButton alloc] init];
-    [cashRegisterBtn setTitle:@"提现记录" forState:(UIControlStateNormal)];
+    [cashRegisterBtn setTitle:@"提现进度" forState:(UIControlStateNormal)];
     [cashRegisterBtn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
     cashRegisterBtn.titleLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(28);
     [cashRegisterBtn addTarget:self action:@selector(pushCashRegisterVC) forControlEvents:(UIControlEventTouchUpInside)];

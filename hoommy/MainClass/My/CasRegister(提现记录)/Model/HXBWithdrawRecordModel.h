@@ -17,11 +17,11 @@
 /**
  提现状态对应文案描述
  */
-@property (nonatomic, copy) NSString *statusText;
+@property (nonatomic, copy) NSString *cashDrawName;
 /**
  预计到账时间
  */
-@property (nonatomic, copy) NSString *arrivalTimeText;
+@property (nonatomic, copy) NSString *arrivalTime;
 /**
  银行编码
  */
@@ -37,11 +37,11 @@
 /**
  提现状态码
  */
-@property (nonatomic, copy) NSString *status;
+@property (nonatomic, copy) NSString *cashDrawStatus;
 /**
  提现状态描述
  */
-@property (nonatomic, copy) NSString *logText;
+@property (nonatomic, copy) NSString *logDesc;
 /**
  提现银行卡
  */
@@ -51,7 +51,7 @@
 /**
  控制按钮颜色
  */
-@property (nonatomic, assign) BOOL isBlueColor;
+@property (nonatomic, strong) UIColor * stateColor;
 /**
  银行卡尾号截取
  */

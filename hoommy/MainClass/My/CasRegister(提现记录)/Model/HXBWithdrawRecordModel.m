@@ -10,9 +10,17 @@
 
 @implementation HXBWithdrawRecordModel
 
-- (BOOL)isBlueColor {
-    _isBlueColor = [self.status isEqualToString:@"INPROCESS"] || [self.status isEqualToString:@"UNKNOW"];
-    return _isBlueColor;
+- (UIColor *)stateColor {
+    
+    if ([self.cashDrawStatus isEqualToString:@"CASHDRAW_SUCCESS"]) {
+        _stateColor = RGB(212, 173, 114);
+    } else if ([self.cashDrawStatus isEqualToString:@"CASHDRAW_FAIL"]) {
+        _stateColor = RGB(254, 126, 94);
+    } else {
+        _stateColor = RGB(72, 140, 255);
+    }
+    
+    return _stateColor;
 }
 
 

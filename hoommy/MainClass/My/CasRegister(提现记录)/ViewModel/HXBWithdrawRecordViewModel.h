@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "HSJBaseViewModel.h"
 
-@class HXBWithdrawRecordListModel;
+@class HXBWithdrawRecordListModel,HXBWithdrawRecordModel;
 @interface HXBWithdrawRecordViewModel : HSJBaseViewModel
 /**
  提现进度模型
@@ -17,6 +17,12 @@
 @property (nonatomic, strong) HXBWithdrawRecordListModel *withdrawRecordListModel;
 
 @property (nonatomic,assign) NSInteger withdrawRecordPage;
+
+/// 提现进度模型key
+@property (nonatomic,strong) NSMutableArray <NSString *> *formatWithdrawRecordDataKeyList;
+/// 提现进度模型value
+@property (nonatomic, strong) NSMutableDictionary  *formatWithdrawRecordDataValueList;
+
 /**
   提现进度
  @param isLoading 是否显示加载

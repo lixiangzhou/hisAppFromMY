@@ -294,4 +294,16 @@
     
     return result;
 }
+
+// 2017-09-28 12:04 -> 2017年09月
++ (NSString *)hxb_formatKeyString:(NSString *)string{
+    
+    NSString *maskStr = @" ";
+    NSArray *arr = [string componentsSeparatedByString:maskStr]; // 2017-09-28,12:04
+    NSString *maskStr1 = @"-";
+    NSArray *arr1 = [arr[0] componentsSeparatedByString:maskStr1]; // 2017,09,28
+    
+    return [NSString stringWithFormat:@"%@年%@月",arr1[0],arr1[1]];
+}
+
 @end

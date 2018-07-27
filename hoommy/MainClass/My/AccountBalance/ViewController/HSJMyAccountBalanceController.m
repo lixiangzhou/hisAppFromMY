@@ -58,14 +58,6 @@
 
 - (void)intoBtnClick:(UIButton *)sender {
     NSLog(@"转入存钱罐");
-    
-    
-    
-    
-    HSJRollOutPlanDetailController *VC = [HSJRollOutPlanDetailController new];
-    VC.planId = @"80";
-    [self.navigationController pushViewController:VC animated:YES];
-    
 }
 
 - (void)withdrawalBtnClick:(UIButton *)sender {
