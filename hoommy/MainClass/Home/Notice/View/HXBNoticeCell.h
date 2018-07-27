@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HSJNoticeListModel.h"
 
 @interface HXBNoticeCell : UITableViewCell
 
+@property (nonatomic, strong) HSJNoticeListModel *noticModel;
 
 @end

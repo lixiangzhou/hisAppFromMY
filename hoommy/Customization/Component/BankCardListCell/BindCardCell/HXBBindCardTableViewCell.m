@@ -165,6 +165,8 @@
     self.contentTf.text = cellModel.text;
     _contentTf.keyboardType = UIKeyboardTypeDecimalPad;
     _contentTf.limitStringLength = cellModel.limtTextLenght;
+    _contentTf.secureTextEntry = cellModel.secureTextEntry;
+    _contentTf.isIDCardTextField = cellModel.isIDCardTextField;
     
     if(cellModel.rightButtonText) {
         [self.codeBt setTitle:cellModel.rightButtonText forState:UIControlStateNormal];

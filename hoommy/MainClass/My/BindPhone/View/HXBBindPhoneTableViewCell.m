@@ -165,6 +165,7 @@
     self.contentTf.text = cellModel.text;
     _contentTf.keyboardType = UIKeyboardTypeDecimalPad;
     _contentTf.limitStringLength = cellModel.limtTextLenght;
+    _contentTf.isIDCardTextField = cellModel.isIDCardTextField;
     
     if(cellModel.isShowCheckCodeView) {
         [self.codeBt mas_updateConstraints:^(MASConstraintMaker *make) {
