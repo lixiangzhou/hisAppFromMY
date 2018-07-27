@@ -123,6 +123,7 @@
 }
 
 - (void)nextButtonClick {
+    [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_SignInAndUpNextButtonClick];
     kWeakSelf
     [self.viewModel checkExistMobile:self.phoneTextField.text resultBlock:^(HSJSignInModel *responseData, NSError *erro) {
         if (responseData.exist) {
@@ -141,6 +142,14 @@
 
 }
 
+#pragma mark - UITextFieldDelegate
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    if (self.phoneTextField.textField == textField) {
+        [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_SignInAndUpPhoneTextFieldClick];
+    }
+}
+
 - (HXBCustomTextField *)phoneTextField {
     if (!_phoneTextField) {
         _phoneTextField = [[HXBCustomTextField alloc] init];
@@ -153,6 +162,7 @@
         _phoneTextField.textColor = kHXBFontColor_555555_100;
         _phoneTextField.bottomLineEditingColor = kHXBSpacingColor_F5F5F9_100;
         _phoneTextField.bottomLineNormalColor = kHXBSpacingColor_F5F5F9_100;
+        _phoneTextField.delegate = self;
         kWeakSelf
         _phoneTextField.block = ^(NSString *text1) {
             weakSelf.nextButton.enabled = text1.length;

@@ -58,6 +58,39 @@ static NSString *const kHSHUmeng_HomeCreditClick = @"2008";
 static NSString *const kHSHUmeng_HomeRegisteredCapitalClick = @"2009";
 static NSString *const kHSHUmeng_HomeSignInPlanClick = @"2010";
 
+///详情页面
+static NSString *const kHSHUmeng_DetailBackClick = @"2012";
+static NSString *const kHSHUmeng_DetailUnBuyInClick = @"2013";
+static NSString *const kHSHUmeng_DetailUnBuyCalculatorClick = @"2014";
+static NSString *const kHSHUmeng_DetailHasBuyInClick = @"2015";
+static NSString *const kHSHUmeng_DetailHasBuyOutClick = @"2016";
+static NSString *const kHSHUmeng_DetailHasBuyCalculatorClick = @"2017";
 
+///开户页
+static NSString *const kHSHUmeng_DepositoryTipOpenClick = @"2033";
+static NSString *const kHSHUmeng_DepositoryTipCloseClick = @"2034";
+static NSString *const kHSHUmeng_DepositoryBackClick = @"2035";
+static NSString *const kHSHUmeng_DepositoryNameTextFieldClick = @"2036";
+static NSString *const kHSHUmeng_DepositoryIDTextFieldClick = @"2037";
+static NSString *const kHSHUmeng_DepositoryTransactionPwdTextFieldClick = @"2038";
+static NSString *const kHSHUmeng_DepositoryBankNoTextFieldClick = @"2039";
+static NSString *const kHSHUmeng_DepositoryMobileTextFieldClick = @"2040";
+static NSString *const kHSHUmeng_DepositoryBankListClick = @"2041";
+static NSString *const kHSHUmeng_DepositoryOpenClick = @"2042";
 
+///登录/注册
+static NSString *const kHSHUmeng_SignInAndUpPhoneTextFieldClick = @"2043";
+static NSString *const kHSHUmeng_SignInAndUpNextButtonClick = @"2044";
+static NSString *const kHSHUmeng_SignInPasswordTextFieldClick = @"2045";
+static NSString *const kHSHUmeng_SignInPasswordButtonClick = @"2046";
+static NSString *const kHSHUmeng_SignInGoCodeSignInButtonClick = @"2047";
+static NSString *const kHSHUmeng_SignInCodeTextFieldClick = @"2048";
+static NSString *const kHSHUmeng_SignInGetCodeButtonClick = @"2049";
+static NSString *const kHSHUmeng_SignInVoiceCodeButtonClick = @"2050";
+static NSString *const kHSHUmeng_SignInCodeSignInButtonClick = @"2051";
+static NSString *const kHSHUmeng_SignUpCodeTextFieldClick = @"2052";
+static NSString *const kHSHUmeng_SignUpGetCodeButtonClick = @"2053";
+static NSString *const kHSHUmeng_SignUpVoiceCodeButtonClick = @"2054";
+static NSString *const kHSHUmeng_SignUpPasswordTextFieldClick = @"2055";
+static NSString *const kHSHUmeng_SignUpButtonClick = @"2056";
 #endif /* HSJNetStateCode_h */
