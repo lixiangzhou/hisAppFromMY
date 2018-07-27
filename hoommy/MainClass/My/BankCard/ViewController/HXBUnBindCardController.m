@@ -60,6 +60,7 @@
     cellModel.isCanEdit = YES;
     cellModel.keyboardType = UIKeyboardTypeNumberPad;
     cellModel.limtTextLenght = 18;
+    cellModel.isIDCardTextField = YES;
     [dataList addObject:cellModel];
     
     cellModel = [[HXBBindCardCellModel alloc] initModel:@"交易密码" placeText:@"请输入交易密码" text:@""];

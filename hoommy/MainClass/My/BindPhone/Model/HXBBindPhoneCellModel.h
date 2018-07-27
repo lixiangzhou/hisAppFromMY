@@ -18,6 +18,7 @@
 @property (nonatomic, assign) int limtTextLenght;//默认值999999, 无限制
 @property (nonatomic, assign) BOOL isCanEdit;
 @property (nonatomic, assign) UIKeyboardType keyboardType;
+@property (nonatomic, assign) BOOL isIDCardTextField;
 
 - (instancetype)initModel:(NSString*)title placeText:(NSString*)place isLastItem:(BOOL)isLast text:(NSString*)content;
 @end
