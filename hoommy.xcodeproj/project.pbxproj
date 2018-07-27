@@ -107,7 +107,6 @@
 		8D60B4DE20F7486300287E52 /* HSJDepositoryOpenViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B4D320F7486300287E52 /* HSJDepositoryOpenViewModel.m */; };
 		8D60B4E120F748BC00287E52 /* UITextField+HLNumberFormatTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B4E020F748BC00287E52 /* UITextField+HLNumberFormatTextField.m */; };
 		8DB77F6A210585A5003EE881 /* HSJRollOutDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB77F69210585A5003EE881 /* HSJRollOutDetailCell.m */; };
-		8DB86DEE210B10350070557F /* HSJNoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB86DED210B10350070557F /* HSJNoDataView.m */; };
 		8DD6B9B22106C27C00E8980F /* HSJDepositoryOpenTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD6B9B12106C27C00E8980F /* HSJDepositoryOpenTipView.m */; };
 		8DD6B9B52106D90C00E8980F /* HSJEarningCalculatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD6B9B42106D90C00E8980F /* HSJEarningCalculatorView.m */; };
 		9A0BD51D20F6F8ED00B1CC59 /* UIButton+HxbButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A0BD51C20F6F8ED00B1CC59 /* UIButton+HxbButton.m */; };
@@ -3963,7 +3962,6 @@
 				9A37498B20F859A100F39681 /* HXBVerificationCodeAlertView.m in Sources */,
 				9A97DA8C20EF420200688ADB /* NSString+HxbPerMilMoney.m in Sources */,
 				9A4B189820F60C2B006B83C7 /* HXBCardholderInformationView.m in Sources */,
-				8DB86DEE210B10350070557F /* HSJNoDataView.m in Sources */,
 				9AF51EED20FDCA65008A8CF4 /* HXBSetTransactionPasswordViewController.m in Sources */,
 				E153B9D020FC8E15002BE1AE /* HXBMYCapitalRecord_TableViewCell.m in Sources */,
 				9A97DA6C20EF420200688ADB /* LazyCatLoadingView.m in Sources */,

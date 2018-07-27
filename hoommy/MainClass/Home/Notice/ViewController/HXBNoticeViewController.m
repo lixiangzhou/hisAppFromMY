@@ -22,7 +22,6 @@
  */
 @property (nonatomic, strong) HXBNoticeVCViewModel *noticeViewModel;
 
-@property (nonatomic, strong) HXBNoDataView *nodataView;
 @end
 
 @implementation HXBNoticeViewController
@@ -51,12 +50,8 @@
     //公告请求接口
     [self.noticeViewModel noticeRequestWithisUPReloadData:isUPReloadData andCallbackBlock:^(BOOL isSuccess) {
         if (isSuccess) {
-            if (!weakSelf.noticeViewModel.noticModel.dataList.count) {
-                weakSelf.nodataView.hidden = NO;
-            }else
-            {
-                weakSelf.nodataView.hidden = YES;
-            }
+            weakSelf.isShowNodataView = !weakSelf.noticeViewModel.noticModel.dataList.count;
+
             weakSelf.mainTabelView.hidden = NO;
             [weakSelf.mainTabelView reloadData];
             [weakSelf setTableFooterView:weakSelf.mainTabelView];
@@ -145,20 +140,5 @@
         _noticeViewModel = [[HXBNoticeVCViewModel alloc] init];
     }
     return _noticeViewModel;
-}
-- (HXBNoDataView *)nodataView {
-    if (!_nodataView) {
-        _nodataView = [[HXBNoDataView alloc]initWithFrame:CGRectZero];
-        _nodataView.imageName = @"Fin_NotData";
-        _nodataView.noDataMassage = @"暂无数据";
-//        _nodataView.downPULLMassage = @"下拉进行刷新";
-        [self.mainTabelView addSubview:_nodataView];
-        [_nodataView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.mainTabelView).offset(kScrAdaptationH(100));
-            make.height.width.equalTo(@(kScrAdaptationH(184)));
-            make.centerX.equalTo(self.mainTabelView);
-        }];
-    }
-    return _nodataView;
 }
 @end
