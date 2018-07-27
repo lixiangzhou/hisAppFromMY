@@ -105,6 +105,7 @@
 
 #pragma mark - Action
 - (void)rollOutAction {
+    [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_RollOutSingieSureClick];
     HSJRollOutConfirmController *VC = [HSJRollOutConfirmController new];
     VC.ids = @[self.planId];
     [self.navigationController pushViewController:VC animated:YES];
