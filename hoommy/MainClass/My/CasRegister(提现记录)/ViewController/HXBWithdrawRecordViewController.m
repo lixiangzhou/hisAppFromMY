@@ -89,22 +89,32 @@
         cell = [[HXBWithdrawRecordCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:identifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    cell.withdrawRecordModel = self.withdrawRecordViewModel.withdrawRecordListModel.dataList[indexPath.row];
+//    cell.withdrawRecordModel = self.withdrawRecordViewModel.withdrawRecordListModel.dataList[indexPath.row];
+    NSString *key = self.withdrawRecordViewModel.formatWithdrawRecordDataKeyList[indexPath.section];
+    NSArray *keyValueArray = self.withdrawRecordViewModel.formatWithdrawRecordDataValueList[key];
+    cell.withdrawRecordModel = keyValueArray[indexPath.row];
     
     return cell;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.withdrawRecordViewModel.withdrawRecordListModel.dataList.count;
+//    return self.withdrawRecordViewModel.withdrawRecordListModel.dataList.count;
+    NSString *key = self.withdrawRecordViewModel.formatWithdrawRecordDataKeyList[section];
+    NSArray *keyValueArray = self.withdrawRecordViewModel.formatWithdrawRecordDataValueList[key];
+    return keyValueArray.count;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return self.withdrawRecordViewModel.formatWithdrawRecordDataKeyList.count;
 }
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return kScrAdaptationH750(200);
+    return kScrAdaptationH(87);
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return kScrAdaptationH750(20);
+    return kScrAdaptationH(40);
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
@@ -114,6 +124,12 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *headView = [[UIView alloc] init];
     headView.backgroundColor = BACKGROUNDCOLOR;
+    UILabel *lab = [[UILabel alloc]initWithFrame: CGRectMake(kScrAdaptationW(15), kScrAdaptationH(10), kScrAdaptationW(80), kScrAdaptationH(20))];
+    lab.textColor = kHXBColor_333333_100;
+    lab.font = kHXBFont_PINGFANGSC_REGULAR(14);
+    lab.text = self.withdrawRecordViewModel.formatWithdrawRecordDataKeyList[section];;
+    [headView addSubview:lab];
+    
     return headView;
 }
 

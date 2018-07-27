@@ -141,7 +141,10 @@
     HXBBaseNavigationController *vc = (HXBBaseNavigationController *)viewController ;
     if ([vc.topViewController isMemberOfClass:[HSJHomeViewController class]]) {
         [HXBUmengManagar HXB_clickEventWithEnevtId:kHSJUmeng_HomeTabClick];
+    } else if ([vc.topViewController isMemberOfClass:[HSJHomeViewController class]]) {
+        [HXBUmengManagar HXB_clickEventWithEnevtId:kHSJUmeng_MyTabClick];
     }
+    
 }
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
