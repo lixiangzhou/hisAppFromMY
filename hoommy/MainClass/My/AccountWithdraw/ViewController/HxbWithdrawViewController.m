@@ -128,6 +128,7 @@
  进入提现记录
  */
 - (void)pushCashRegisterVC {
+    [HXBUmengManagar HXB_clickEventWithEnevtId: kHSJUmeng_MyWithdrawCashRecordClick];
     HXBWithdrawRecordViewController *cashRegisterVC = [[HXBWithdrawRecordViewController alloc] init];
     [self.navigationController pushViewController:cashRegisterVC animated:YES];
 }
@@ -238,6 +239,7 @@
     [self.viewModel getVerifyCodeRequesWithRechargeAmount:self.amountTextField.text andWithType:@"sms" andWithAction:@"withdraw" andCallbackBlock:^(BOOL isSuccess,NSError *error) {
         if (isSuccess) {
             [weakSelf withdrawals];
+            [HXBUmengManagar HXB_clickEventWithEnevtId: kHSJUmeng_MyWithdrawCashCodeButtonClick];
             [weakSelf.alertVC.verificationCodeAlertView disEnabledBtns];
         }
         else {
@@ -268,6 +270,7 @@
 }
 
 - (void)nextButtonClick:(UIButton *)sender{
+    [HXBUmengManagar HXB_clickEventWithEnevtId:kHSJUmeng_MyWithdrawCashClick];
     self.withdrawModel.bankCard.amount = self.amountTextField.text;
     if ([_amountTextField.text doubleValue] > self.withdrawModel.balanceAmount) {
         [HxbHUDProgress showTextWithMessage:@"余额不足"];
