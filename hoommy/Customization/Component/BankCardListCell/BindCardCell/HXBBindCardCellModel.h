@@ -19,6 +19,7 @@
 @property (nonatomic, assign) BOOL isCanEdit;
 @property (nonatomic, assign) UIKeyboardType keyboardType;
 @property (nonatomic, assign) BOOL isBankCardNoField;
+@property (nonatomic, assign) BOOL secureTextEntry;//安全文本
 
 - (instancetype)initModel:(NSString*)title placeText:(NSString*)place text:(NSString*)content;
 @end

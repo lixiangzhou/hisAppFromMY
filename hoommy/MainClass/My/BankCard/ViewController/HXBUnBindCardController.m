@@ -66,6 +66,7 @@
     cellModel.isCanEdit = YES;
     cellModel.limtTextLenght = 6;
     cellModel.keyboardType = UIKeyboardTypeNumberPad;
+    cellModel.secureTextEntry = YES;
     [dataList addObject:cellModel];
 }
 

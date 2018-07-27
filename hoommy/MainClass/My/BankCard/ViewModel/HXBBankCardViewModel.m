@@ -85,6 +85,7 @@
         request.requestUrl = kHXBUserInfo_UnbindBankCard;
         request.requestMethod = NYRequestMethodPost;
         request.requestArgument = param;
+        request.showHud = YES;
     } responseResult:^(id responseData, NSError *erro) {
         if(!erro) {
             if (finishBlock) {
@@ -100,6 +101,9 @@
                     }
                 } else {
                     [weakSelf showToast:[weakSelf getErroMessage:responseObject]];
+                    if (finishBlock) {
+                        finishBlock(NO, nil, NO);
+                    }
                 }
             }
             else{
@@ -111,14 +115,14 @@
     }];
 }
 
-- (void)bindBankCardRequestWithArgument:(NSDictionary *)requestArgument andFinishBlock:(NetWorkResponseBlock)finishBlock
+- (void)bindBankCardRequestWithArgument:(NSDictionary *)requestArgument showHug:(BOOL)isShowHug andFinishBlock:(NetWorkResponseBlock)finishBlock
 {
     kWeakSelf
     [self loadData:^(NYBaseRequest *request) {
         request.requestUrl = kHXBAccount_Bindcard;
         request.requestMethod = NYRequestMethodPost;
         request.requestArgument = requestArgument;
-        request.showHud = YES;
+        request.showHud = isShowHug;
     } responseResult:^(id responseData, NSError *erro) {
         if(erro && erro.code==HSJNetStateCodeCommonInterfaceErro) {
             NSInteger status =  [self getStateCode:erro.userInfo];
@@ -147,14 +151,13 @@
 }
 
 /**
- 卡bin校验
+ 卡bin校验扩展
  
  @param bankNumber 银行卡号
  @param isToast 是否需要提示信息
- @param callBackBlock 回调
+ @param resultBlock 回调
  */
-- (void)checkCardBinResultRequestWithBankNumber:(NSString *)bankNumber andisToastTip:(BOOL)isToast andCallBack:(NetWorkResponseBlock)resultBlock
-{
+- (void)checkCardBinResultRequestWithBankNumberExtend:(NSString *)bankNumber andisToastTip:(BOOL)isToast showHug:(BOOL)isShowHug andCallBack:(NetWorkResponseBlock)resultBlock {
     if (bankNumber == nil) bankNumber = @"";
     
     kWeakSelf
@@ -164,7 +167,7 @@
         request.requestArgument = @{
                                     @"bankCard" : bankNumber
                                     };
-        request.showHud = isToast;
+        request.showHud = isShowHug;
         weakSelf.cardBinIsShowTost = isToast;
         request.modelType = [HXBCardBinModel class];
     } responseResult:^(id responseData, NSError *erro) {
@@ -173,6 +176,18 @@
             resultBlock(responseData, erro);
         }
     }];
+}
+
+/**
+ 卡bin校验
+ 
+ @param bankNumber 银行卡号
+ @param isToast 是否需要提示信息
+ @param resultBlock 回调
+ */
+- (void)checkCardBinResultRequestWithBankNumber:(NSString *)bankNumber andisToastTip:(BOOL)isToast andCallBack:(NetWorkResponseBlock)resultBlock
+{
+    [self checkCardBinResultRequestWithBankNumberExtend:bankNumber andisToastTip:isToast showHug:isToast andCallBack:resultBlock];
 }
 
 - (NSString *)validateIdCardNo:(NSString *)cardNo
