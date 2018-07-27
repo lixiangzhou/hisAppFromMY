@@ -66,6 +66,25 @@ static NSString *const kHSHUmeng_DetailHasBuyInClick = @"2015";
 static NSString *const kHSHUmeng_DetailHasBuyOutClick = @"2016";
 static NSString *const kHSHUmeng_DetailHasBuyCalculatorClick = @"2017";
 
+///购买页
+static NSString *const kHSHUmeng_BuyIntoClick = @"2018";
+static NSString *const kHSHUmeng_BuyAmountTextFieldClick = @"2019";
+static NSString *const kHSHUmeng_BuySureButtonClick = @"2020";
+static NSString *const kHSHUmeng_BuyTransactionPasswordCancelClick = @"2021";
+static NSString *const kHSHUmeng_BuyTransactionPasswordSureClick = @"2022";
+static NSString *const kHSHUmeng_BuyCodeCancelClick = @"2023";
+static NSString *const kHSHUmeng_BuyCodeSureClick = @"2024";
+static NSString *const kHSHUmeng_BuyAddBankCardSmallButtonClick = @"2025";
+static NSString *const kHSHUmeng_BuyAddBankCardButtonClick = @"2026";
+static NSString *const kHSHUmeng_BuyChangeBankCardButtonClick = @"2027";
+static NSString *const kHSHUmeng_BuyRiskAssessmentClick = @"2028";
+
+///转出
+static NSString *const kHSHUmeng_RollOutBatchClick = @"2029";
+static NSString *const kHSHUmeng_RollOutSingieClick = @"2030";
+static NSString *const kHSHUmeng_RollOutBatchSureClick = @"2031";
+static NSString *const kHSHUmeng_RollOutSingieSureClick = @"2032";
+
 ///开户页
 static NSString *const kHSHUmeng_DepositoryTipOpenClick = @"2033";
 static NSString *const kHSHUmeng_DepositoryTipCloseClick = @"2034";

@@ -175,6 +175,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.viewModel.editing == NO) {
+        [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_RollOutSingieClick];
         HSJRollOutPlanDetailController *VC = [HSJRollOutPlanDetailController new];
         HSJRollOutCellViewModel *vm = self.viewModel.dataSource[indexPath.row];
         VC.planId = vm.model.id;
@@ -184,6 +185,9 @@
 
 #pragma mark - Action
 - (void)batchProcess {
+    if (self.batchBtn.selected == NO) {
+        [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_RollOutBatchClick];
+    }
     self.batchBtn.selected = !self.batchBtn.isSelected;
     
     self.viewModel.editing = self.batchBtn.selected;
@@ -198,7 +202,8 @@
 }
      
  - (void)rollOutAction {
-     if (self.viewModel.hasQuitPlans) {         
+     [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_RollOutBatchSureClick];
+     if (self.viewModel.hasQuitPlans) {
          if (self.viewModel.selectedIds.count == 0) {
              [HxbHUDProgress showTextWithMessage:@"请选择要转出的内容"];
          } else {

@@ -97,10 +97,12 @@
         //跳转资产目录
         if (KeyChain.isLogin) {
             if (!weakSelf.viewModel.userInfoModel.userInfo.isCreateEscrowAcc) { //未开户
+                [HXBUmengManagar HXB_clickEventWithEnevtId:kHSJUmeng_MyGoDepositoryClick];
                 HSJDepositoryOpenController *openVC = [[HSJDepositoryOpenController alloc] init];
                 openVC.title = @"开通存管账户";
                 [self.navigationController pushViewController:openVC animated:YES];
             } else { //已开户去账户资产页
+                [HXBUmengManagar HXB_clickEventWithEnevtId:kHSJUmeng_MyBalanceClick];
                 HXBMY_AllFinanceViewController *allFinanceViewController = [[HXBMY_AllFinanceViewController alloc]init];
                 [weakSelf.navigationController pushViewController:allFinanceViewController animated:YES];
             }
@@ -113,6 +115,7 @@
 
 #pragma mark - MyViewDelegate
 - (void)didLeftHeadBtnClick:(UIButton *)sender{
+    [HXBUmengManagar HXB_clickEventWithEnevtId: kHSJUmeng_MySettingClick];
     HxbAccountInfoViewController *accountInfoVC = [[HxbAccountInfoViewController alloc]init];
     accountInfoVC.userInfoModel = self.viewModel.userInfoModel;
     accountInfoVC.isDisplayAdvisor = self.viewModel.userInfoModel.userInfo.isDisplayAdvisor;
@@ -130,11 +133,13 @@
 }
 /// 交易记录
 -(void)didClickCapitalRecordBtn:(UIButton *)sender {
+    [HXBUmengManagar HXB_clickEventWithEnevtId: kHSJUmeng_MyTransactionRecordClick];
     HXBMY_CapitalRecordViewController *capitalRecordViewController = [[HXBMY_CapitalRecordViewController alloc]init];
     [self.navigationController pushViewController:capitalRecordViewController animated:YES];
 }
 /// 红小宝客服
 - (void)didClickHelp:(UIButton *)sender {
+    [HXBUmengManagar HXB_clickEventWithEnevtId: kHSJUmeng_MyServicerMobileClick];
     [HXBAlertManager callupWithphoneNumber:kServiceMobile andWithTitle:@"红小宝客服电话" Message:kServiceMobile];
 }
 
@@ -152,6 +157,8 @@
             [self entryDepositoryAccount];
         }
         else{
+            [HXBUmengManagar HXB_clickEventWithEnevtId: kHSJUmeng_MyBankCardClick];
+
             if (1 == self.myView.userInfoModel.userInfo.hasBindCard.intValue) { //已绑卡
                 //进入银行卡页面
                 HxbMyBankCardViewController *vc = [[HxbMyBankCardViewController alloc] init];
@@ -173,7 +180,7 @@
 //        HSJBuyViewController *vc = [[HSJBuyViewController alloc] init];
 //        [self.navigationController pushViewController:vc animated:YES];
 //        return;
-        
+        [HXBUmengManagar HXB_clickEventWithEnevtId: kHSJUmeng_MyRiskAssessmentClick];
         HSJRiskAssessmentViewController *riskAssessmentVC = [[HSJRiskAssessmentViewController alloc] init];
         [self.navigationController pushViewController:riskAssessmentVC animated:YES];
     }
