@@ -66,6 +66,7 @@
         [navVC setViewControllers:[NSArray arrayWithArray:tempList]];
         if(navVC != self.navigationController) {
             [self.navigationController popToRootViewControllerAnimated:NO];
+            [HXBRootVCManager manager].mainTabbarVC.selectedIndex = [HXBRootVCManager manager].mainTabbarVC.viewControllers.count-1;
         }
     }
     else {//重新加入
