@@ -188,7 +188,7 @@
         buttonType = [self buttonTypeByPlanState];
         if(buttonType == HSJBUYBUTTON_JOIN) {
             buttonType = HSJBUYBUTTON_BINDCARD;
-            if(self.userInfoModel.userInfo.hasBindCard.boolValue || !self.isAbleBankCellItem) {
+            if(self.userInfoModel.userInfo.hasBindCard.boolValue) {
                 double money = self.inputMoney.doubleValue;
                 buttonType = HSJBUYBUTTON_NOMONEY;
                 if(money > 0) {

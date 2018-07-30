@@ -296,7 +296,14 @@
         if (self.block) { // 绑卡成功，返回
             self.block(1);
         };
-        [self leftBackBtnClick];
+        HXBBaseNavigationController *navVC = (HXBBaseNavigationController*)self.navigationController;
+        UIViewController *vc = [navVC getViewControllerByClassName:@"HSJBuyViewController"];
+        if(vc) {
+            [navVC popToViewController:vc animated:YES];
+        }
+        else{
+            [self.navigationController popToRootViewControllerAnimated:NO];
+        }
     }
 }
 

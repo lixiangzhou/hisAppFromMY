@@ -209,7 +209,7 @@
         self.footView.enableAddButton = NO;
         self.footView.buttonBackGroundColor = kHXBColor_ECECF0_100;
     }
-    else if(HSJBUYBUTTON_TIMER == self.viewModel.buttonType) {
+    else if(HSJBUYBUTTON_TIMER == self.viewModel.buttonType || HSJBUYBUTTON_NOMONEY == self.viewModel.buttonType) {
         self.footView.enableAddButton = NO;
         self.footView.buttonBackGroundColor = kHXBColor_FF7055_40;
     }

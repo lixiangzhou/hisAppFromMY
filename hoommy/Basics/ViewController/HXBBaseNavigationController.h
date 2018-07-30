@@ -29,5 +29,11 @@ typedef enum : NSUInteger {
  * @parma animated 是否支持动画
  */
 - (void)popViewControllerWithToViewController: (NSString *)toViewControllerStr andAnimated: (BOOL)animated;
+/**
+ 获取控制器
 
+ @param controllerClass 类名
+ @return 控制器
+ */
+- (UIViewController *)getViewControllerByClassName:(NSString*)className;
 @end
