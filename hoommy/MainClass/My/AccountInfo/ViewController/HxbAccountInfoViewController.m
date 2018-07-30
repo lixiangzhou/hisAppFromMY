@@ -620,7 +620,21 @@ UITableViewDataSource
     alertVC.isCenterShow = YES;
     [self presentViewController:alertVC animated:NO completion:nil];
     [alertVC setRightBtnBlock:^{
-        [KeyChain signOut];
+        
+        [weakSelf.viewModel userLogOut:YES resultBlock:^(id responseData, NSError *erro) {
+            if (erro) {
+                NSDictionary *respObj = erro.userInfo;
+                
+                if ([respObj isKindOfClass:[NSDictionary class]]) {
+                    
+                    if ([weakSelf.viewModel getStateCode:respObj] != kHXBCode_Enum_RequestOverrun) {
+                        [weakSelf showToast:[weakSelf.viewModel getErroMessage:responseData]];
+                    }
+                } else {
+                    [weakSelf showToast:@"退出失败"];
+                }
+            }
+        }];
         [(HXBBaseTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController setSelectedIndex:0];
         [weakSelf.navigationController popToRootViewControllerAnimated:YES];
     }];
