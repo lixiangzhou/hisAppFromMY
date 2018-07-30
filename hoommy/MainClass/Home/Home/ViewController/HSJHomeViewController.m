@@ -22,6 +22,7 @@
 #import "HXBBaseWKWebViewController.h"
 #import "HXBAdvertiseManager.h"
 #import "HXBVersionUpdateManager.h"
+#import "HSJBuyViewController.h"
 
 @interface HSJHomeViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -98,7 +99,16 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [self.viewModel tableView:tableView cellForRowAtIndexPath:indexPath];
+    HSJHomePlanTableViewCell *cell = (HSJHomePlanTableViewCell*)[self.viewModel tableView:tableView cellForRowAtIndexPath:indexPath];
+    if([cell isKindOfClass:[HSJHomePlanTableViewCell class]] && !cell.intoButtonAct) {
+        kWeakSelf;
+        cell.intoButtonAct = ^(NSString *planId) {
+            HSJBuyViewController *vc = [[HSJBuyViewController alloc] init];
+            vc.planId = planId;
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+        };
+    }
+    return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
