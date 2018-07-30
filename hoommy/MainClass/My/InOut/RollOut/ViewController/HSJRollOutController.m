@@ -67,6 +67,7 @@
 
     // 底部视图
     UIView *bottomView = [UIView new];
+    bottomView.clipsToBounds = YES;
     [self.safeAreaView addSubview:bottomView];
     self.bottomView = bottomView;
 
@@ -128,7 +129,6 @@
     kWeakSelf
     [self.viewModel getAssets:^(BOOL isSuccess) {
         weakSelf.headerView.assetsModel = weakSelf.viewModel.assetsModel;
-        weakSelf.noDataView.hidden = weakSelf.viewModel.dataSource.count > 0;
     }];
     
     [self getListData:YES];
@@ -145,6 +145,7 @@
     [self.viewModel getPlans:isNew resultBlock:^(BOOL isSuccess) {
         if (isSuccess) {
             [weakSelf.tableView reloadData];
+            weakSelf.noDataView.hidden = weakSelf.viewModel.dataSource.count > 0;
             if (weakSelf.viewModel.footerType == HSJRefreshFooterTypeMoreData) {
                 [weakSelf.tableView.mj_footer endRefreshing];
                 weakSelf.tableView.footerWithRefreshBlock = ^(UIScrollView *scrollView) {

@@ -233,7 +233,6 @@
             alertVC.isCenterShow = YES;
             [KeyChain removeGesture];
             KeyChain.skipGesture = kHXBGesturePwdSkipeYES;
-            [KeyChain signOut];
             
             kWeakSelf
             alertVC.leftBtnBlock = ^{
@@ -248,7 +247,7 @@
             };
             alertVC.rightBtnBlock = ^{
                 [weakSelf.viewModel userLogOut:YES resultBlock:^(id responseData, NSError *erro) {
-                    if (erro == nil) {                    
+                    if (erro == nil) {
                         if (weakSelf.dismissBlock) {
                             weakSelf.dismissBlock(NO, NO, NO);
                         }

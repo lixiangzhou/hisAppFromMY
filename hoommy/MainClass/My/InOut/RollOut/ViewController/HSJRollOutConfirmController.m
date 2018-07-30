@@ -27,7 +27,8 @@
     
     self.title = @"转出到账户余额";
     self.viewModel = [HSJRollOutConfirmViewModel new];
-    [self setUI];  
+    [self setUI];
+    [self getData];
 }
 
 #pragma mark - UI
