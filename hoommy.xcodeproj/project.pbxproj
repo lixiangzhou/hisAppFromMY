@@ -10,6 +10,7 @@
 		1B74F72E67F77E394AFF76A6 /* libPods-hoommy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 73C7B870EA4F77D826DA647B /* libPods-hoommy.a */; };
 		4E0019A42106C7D200D6F4DE /* HSJNoticeListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0019A32106C7D200D6F4DE /* HSJNoticeListModel.m */; };
 		4E0019AA21072A9700D6F4DE /* HSJHomeArtileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0019A921072A9700D6F4DE /* HSJHomeArtileModel.m */; };
+		4E342555210B1BAA00DD81D1 /* HSJNoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E342554210B1BAA00DD81D1 /* HSJNoDataView.m */; };
 		4E43B06B20EF7C60000BDAE7 /* UIImageView+HxbSDWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E43B06A20EF7C5F000BDAE7 /* UIImageView+HxbSDWebImage.m */; };
 		4E53C8F620F88C4F0040F830 /* HSJSignupViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E53C8F520F88C4F0040F830 /* HSJSignupViewModel.m */; };
 		4E53C8FA20F89C330040F830 /* HSJSignInModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E53C8F920F89C330040F830 /* HSJSignInModel.m */; };
@@ -17,6 +18,7 @@
 		4E79DB692100420800837A0F /* HSJHomeHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E79DB682100420800837A0F /* HSJHomeHeaderView.m */; };
 		4E79DB6F21008AD300837A0F /* HSJHomePlanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E79DB6E21008AD300837A0F /* HSJHomePlanView.m */; };
 		4E7EE27520F72D6F007D96E1 /* HSJSignInButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7EE27420F72D6F007D96E1 /* HSJSignInButton.m */; };
+		4E87E465210B0D820069A3D3 /* HSJNoDataOrNetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E87E464210B0D820069A3D3 /* HSJNoDataOrNetViewController.m */; };
 		4E8A4DE520FDDA5F001B9ADA /* HSJHomeCustomNavbarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8A4DE420FDDA5F001B9ADA /* HSJHomeCustomNavbarView.m */; };
 		4E8A5D8020FF4218001E6125 /* HSJTitleCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8A5D7F20FF4218001E6125 /* HSJTitleCollectionViewCell.m */; };
 		4E8DB75420F5AEE3000712D7 /* TimerWeakTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8DB75220F5AEE3000712D7 /* TimerWeakTarget.m */; };
@@ -343,6 +345,7 @@
 		E10796BE2106C569000AFAC2 /* HXBSendSmscodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = E10796BC2106C568000AFAC2 /* HXBSendSmscodeView.m */; };
 		E10796C12106C79E000AFAC2 /* HXBFinBaseNegotiateView.m in Sources */ = {isa = PBXBuildFile; fileRef = E10796C02106C79E000AFAC2 /* HXBFinBaseNegotiateView.m */; };
 		E10796C42106C8D1000AFAC2 /* HXBSendSmscodeVCViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E10796C32106C8D1000AFAC2 /* HXBSendSmscodeVCViewModel.m */; };
+		E1083BBE210EF81100004066 /* HSJMyAccountBalanceViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E1083BBD210EF81100004066 /* HSJMyAccountBalanceViewModel.m */; };
 		E13A0E7C20F48D9F00A3E364 /* HXBGeneralAlertVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E13A0E7B20F48D9F00A3E364 /* HXBGeneralAlertVC.m */; };
 		E13A0E8420F48EF600A3E364 /* HXB_XYTools.m in Sources */ = {isa = PBXBuildFile; fileRef = E13A0E8320F48EF500A3E364 /* HXB_XYTools.m */; };
 		E13A0EF320F49E2500A3E364 /* HXBRequestUserInfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E13A0ED520F49E2500A3E364 /* HXBRequestUserInfoViewModel.m */; };
@@ -410,6 +413,8 @@
 		4E0019A32106C7D200D6F4DE /* HSJNoticeListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJNoticeListModel.m; sourceTree = "<group>"; };
 		4E0019A821072A9700D6F4DE /* HSJHomeArtileModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJHomeArtileModel.h; sourceTree = "<group>"; };
 		4E0019A921072A9700D6F4DE /* HSJHomeArtileModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJHomeArtileModel.m; sourceTree = "<group>"; };
+		4E342553210B1BAA00DD81D1 /* HSJNoDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSJNoDataView.h; sourceTree = "<group>"; };
+		4E342554210B1BAA00DD81D1 /* HSJNoDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSJNoDataView.m; sourceTree = "<group>"; };
 		4E43B06920EF7C5F000BDAE7 /* UIImageView+HxbSDWebImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+HxbSDWebImage.h"; sourceTree = "<group>"; };
 		4E43B06A20EF7C5F000BDAE7 /* UIImageView+HxbSDWebImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+HxbSDWebImage.m"; sourceTree = "<group>"; };
 		4E53C8F420F88C4F0040F830 /* HSJSignupViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJSignupViewModel.h; sourceTree = "<group>"; };
@@ -424,6 +429,8 @@
 		4E79DB6E21008AD300837A0F /* HSJHomePlanView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJHomePlanView.m; sourceTree = "<group>"; };
 		4E7EE27320F72D6F007D96E1 /* HSJSignInButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJSignInButton.h; sourceTree = "<group>"; };
 		4E7EE27420F72D6F007D96E1 /* HSJSignInButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJSignInButton.m; sourceTree = "<group>"; };
+		4E87E463210B0D820069A3D3 /* HSJNoDataOrNetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSJNoDataOrNetViewController.h; sourceTree = "<group>"; };
+		4E87E464210B0D820069A3D3 /* HSJNoDataOrNetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSJNoDataOrNetViewController.m; sourceTree = "<group>"; };
 		4E8A4DE320FDDA5F001B9ADA /* HSJHomeCustomNavbarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJHomeCustomNavbarView.h; sourceTree = "<group>"; };
 		4E8A4DE420FDDA5F001B9ADA /* HSJHomeCustomNavbarView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJHomeCustomNavbarView.m; sourceTree = "<group>"; };
 		4E8A5D7E20FF4218001E6125 /* HSJTitleCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJTitleCollectionViewCell.h; sourceTree = "<group>"; };
@@ -602,9 +609,6 @@
 		8D60B4E020F748BC00287E52 /* UITextField+HLNumberFormatTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+HLNumberFormatTextField.m"; sourceTree = "<group>"; };
 		8DB77F68210585A5003EE881 /* HSJRollOutDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJRollOutDetailCell.h; sourceTree = "<group>"; };
 		8DB77F69210585A5003EE881 /* HSJRollOutDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJRollOutDetailCell.m; sourceTree = "<group>"; };
-		8DB86DE8210B10140070557F /* HSJNoDataOrNetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSJNoDataOrNetViewController.h; sourceTree = "<group>"; };
-		8DB86DE9210B10140070557F /* HSJNoDataOrNetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSJNoDataOrNetViewController.m; sourceTree = "<group>"; };
-		8DB86DEC210B10350070557F /* HSJNoDataView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJNoDataView.h; sourceTree = "<group>"; };
 		8DB86DED210B10350070557F /* HSJNoDataView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJNoDataView.m; sourceTree = "<group>"; };
 		8DB86DEF210EBCDC0070557F /* HSJGestureLoginViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJGestureLoginViewModel.h; sourceTree = "<group>"; };
 		8DB86DF0210EBCDC0070557F /* HSJGestureLoginViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJGestureLoginViewModel.m; sourceTree = "<group>"; };
@@ -1051,6 +1055,8 @@
 		E10796C02106C79E000AFAC2 /* HXBFinBaseNegotiateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBFinBaseNegotiateView.m; sourceTree = "<group>"; };
 		E10796C22106C8D0000AFAC2 /* HXBSendSmscodeVCViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBSendSmscodeVCViewModel.h; sourceTree = "<group>"; };
 		E10796C32106C8D1000AFAC2 /* HXBSendSmscodeVCViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBSendSmscodeVCViewModel.m; sourceTree = "<group>"; };
+		E1083BBC210EF81100004066 /* HSJMyAccountBalanceViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJMyAccountBalanceViewModel.h; sourceTree = "<group>"; };
+		E1083BBD210EF81100004066 /* HSJMyAccountBalanceViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJMyAccountBalanceViewModel.m; sourceTree = "<group>"; };
 		E13A0E7920F48D6D00A3E364 /* HXBColorMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBColorMacro.h; sourceTree = "<group>"; };
 		E13A0E7A20F48D9F00A3E364 /* HXBGeneralAlertVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBGeneralAlertVC.h; sourceTree = "<group>"; };
 		E13A0E7B20F48D9F00A3E364 /* HXBGeneralAlertVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBGeneralAlertVC.m; sourceTree = "<group>"; };
@@ -1168,6 +1174,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4E342551210B1B9700DD81D1 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				8DB86DED210B10350070557F /* HSJNoDataView.m */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		4E342552210B1BAA00DD81D1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4E342553210B1BAA00DD81D1 /* HSJNoDataView.h */,
+				4E342554210B1BAA00DD81D1 /* HSJNoDataView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		4E53C8F720F89C1A0040F830 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1186,6 +1209,24 @@
 				4E7EE27420F72D6F007D96E1 /* HSJSignInButton.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		4E87E461210B0D820069A3D3 /* NoDataOrNet */ = {
+			isa = PBXGroup;
+			children = (
+				4E342552210B1BAA00DD81D1 /* View */,
+				4E87E462210B0D820069A3D3 /* ViewController */,
+			);
+			path = NoDataOrNet;
+			sourceTree = "<group>";
+		};
+		4E87E462210B0D820069A3D3 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4E87E463210B0D820069A3D3 /* HSJNoDataOrNetViewController.h */,
+				4E87E464210B0D820069A3D3 /* HSJNoDataOrNetViewController.m */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		4E8DB75520F5B60A000712D7 /* ViewModel */ = {
@@ -1815,33 +1856,6 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		8DB86DE6210B10140070557F /* NoDataOrNet */ = {
-			isa = PBXGroup;
-			children = (
-				8DB86DEB210B10190070557F /* View */,
-				8DB86DE7210B10140070557F /* ViewController */,
-			);
-			path = NoDataOrNet;
-			sourceTree = "<group>";
-		};
-		8DB86DE7210B10140070557F /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				8DB86DE8210B10140070557F /* HSJNoDataOrNetViewController.h */,
-				8DB86DE9210B10140070557F /* HSJNoDataOrNetViewController.m */,
-			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
-		8DB86DEB210B10190070557F /* View */ = {
-			isa = PBXGroup;
-			children = (
-				8DB86DEC210B10350070557F /* HSJNoDataView.h */,
-				8DB86DED210B10350070557F /* HSJNoDataView.m */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		9A0BD51920F6F71100B1CC59 /* Macros */ = {
 			isa = PBXGroup;
 			children = (
@@ -2406,6 +2420,7 @@
 				9A6E0A5820F84C9700598071 /* Products */,
 				CF54BBECD744511DC299BD08 /* Pods */,
 				52DAD5FB0889718E49F314DE /* Frameworks */,
+				4E342551210B1B9700DD81D1 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 			usesTabs = 0;
@@ -2561,7 +2576,7 @@
 		9A97D90C20EF420000688ADB /* MainClass */ = {
 			isa = PBXGroup;
 			children = (
-				8DB86DE6210B10140070557F /* NoDataOrNet */,
+				4E87E461210B0D820069A3D3 /* NoDataOrNet */,
 				4EA6107C2105CC10008580DD /* HXBUmengUShare */,
 				9AA70B3A20FEF0F6008B3007 /* Buy */,
 				8D142A9B20FDBF0100520728 /* CommonApiTool */,
@@ -3461,6 +3476,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		E1083BBB210EF7C400004066 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				E1083BBC210EF81100004066 /* HSJMyAccountBalanceViewModel.h */,
+				E1083BBD210EF81100004066 /* HSJMyAccountBalanceViewModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		E13A0E7D20F48DF400A3E364 /* AccountInfo */ = {
 			isa = PBXGroup;
 			children = (
@@ -3557,6 +3581,7 @@
 		E1425BB42101E6900049C3F4 /* AccountBalance */ = {
 			isa = PBXGroup;
 			children = (
+				E1083BBB210EF7C400004066 /* ViewModel */,
 				E1425BB92101E71E0049C3F4 /* View */,
 				E1425BB82101E7060049C3F4 /* ViewController */,
 			);
@@ -3957,7 +3982,6 @@
 				9A37498B20F859A100F39681 /* HXBVerificationCodeAlertView.m in Sources */,
 				9A97DA8C20EF420200688ADB /* NSString+HxbPerMilMoney.m in Sources */,
 				9A4B189820F60C2B006B83C7 /* HXBCardholderInformationView.m in Sources */,
-				8DB86DEE210B10350070557F /* HSJNoDataView.m in Sources */,
 				9AF51EED20FDCA65008A8CF4 /* HXBSetTransactionPasswordViewController.m in Sources */,
 				E153B9D020FC8E15002BE1AE /* HXBMYCapitalRecord_TableViewCell.m in Sources */,
 				9A97DA6C20EF420200688ADB /* LazyCatLoadingView.m in Sources */,
@@ -4021,7 +4045,7 @@
 				4EA610D22105E69F008580DD /* HXBNoticModel.m in Sources */,
 				9A4B18B120F620B8006B83C7 /* HXBCardBinModel.m in Sources */,
 				9A97DA7A20EF420200688ADB /* HXBWKWebViewProgressView.m in Sources */,
-				8DB86DEA210B10150070557F /* HSJNoDataOrNetViewController.m in Sources */,
+				4E87E465210B0D820069A3D3 /* HSJNoDataOrNetViewController.m in Sources */,
 				E153B9D220FC8E15002BE1AE /* HXBMYCapitalRecord_TableViewHeaderView.m in Sources */,
 				8D60B4D520F7486300287E52 /* PCCircle.m in Sources */,
 				E14B9F9820FD8AF80084F007 /* HXBMY_AllFinanceView.m in Sources */,
@@ -4050,6 +4074,7 @@
 				9A6E0A6A20F84CA000598071 /* main.m in Sources */,
 				4EA610BD2105E40E008580DD /* BannerModel.m in Sources */,
 				E153B9C420FC8563002BE1AE /* HXBMY_CapitalRecordViewController.m in Sources */,
+				E1083BBE210EF81100004066 /* HSJMyAccountBalanceViewModel.m in Sources */,
 				9A97DA6720EF420200688ADB /* HSJFragmentViewController.m in Sources */,
 				8D142A9020FD9B4D00520728 /* HXBAdvertiseManager.m in Sources */,
 				E153B9B920FC84A4002BE1AE /* HxbMyViewHeaderView.m in Sources */,
@@ -4106,6 +4131,7 @@
 				9A97DA6F20EF420200688ADB /* HSJLoadClassTest.m in Sources */,
 				9A97DAB320EF420200688ADB /* HXBBaseRequestManager.m in Sources */,
 				9A97DA8420EF420200688ADB /* NSArray+HxbLog.m in Sources */,
+				4E342555210B1BAA00DD81D1 /* HSJNoDataView.m in Sources */,
 				9AA70B4720FEF3CC008B3007 /* HSJBuyHeadView.m in Sources */,
 				9A4B181720F34434006B83C7 /* HXBBindPhoneTableViewCell.m in Sources */,
 				4E7EE27520F72D6F007D96E1 /* HSJSignInButton.m in Sources */,

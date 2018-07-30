@@ -43,7 +43,8 @@
 @property (nonatomic, copy) NSString *skipGesture;
 /// 是否弹窗过忽略手势密码
 @property (nonatomic, assign) BOOL skipGestureAlertAppeared;
-
+///缓存首页获取的计划列表中的第一条记录的planid
+@property (nonatomic ,copy) NSString *firstPlanIdInPlanList;
 
 /**
  *  获取KeyChainManage单例

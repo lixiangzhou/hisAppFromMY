@@ -31,6 +31,9 @@
     } responseResult:^(HSJHomeModel *responseData, NSError *erro) {
         if (responseData) {
             weakSelf.homeModel = responseData;
+            HSJHomePlanModel *planModel = [self.homeModel.dataList safeObjectAtIndex:0];
+            //缓存第一个计划的id
+            KeyChain.firstPlanIdInPlanList = planModel.ID;
         }
         resultBlock(responseData,erro);
     }];
