@@ -15,6 +15,8 @@ typedef enum : NSUInteger {
     HSJStepUpStatusNOQUIT,
     /// QUITING: 退出中
     HSJStepUpStatusQUITING,
+    /// 等待退出
+    HSJStepUpStatusWAITQUIT
 } HSJStepUpStatus;
 
 @interface HSJRollOutModel : HSJBaseModel
@@ -39,5 +41,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, copy) NSString *stepUpPlanStatus;
 /// 请求退出时间
 @property (nonatomic, copy) NSString *endLockingRequestTime;
+/// 新手计划实际退出日期(注意锁定期结束时间区别)
+@property (nonatomic, copy) NSString *quitDate;
 
 @end

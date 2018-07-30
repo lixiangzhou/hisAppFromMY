@@ -48,9 +48,7 @@
     
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
+- (void)reLoadWhenViewAppear {
     [self getHomeData];
     [self updateUI];
     

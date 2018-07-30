@@ -42,6 +42,9 @@
     [self.contentView addSubview:self.subTitleLabel];
     
     [self setupSubViewFrame];
+    if(self.getVerificationCodeBlock) {
+        self.getVerificationCodeBlock();
+    }
 }
 
 -(void)setIsSpeechVerificationCode:(BOOL)isSpeechVerificationCode{
