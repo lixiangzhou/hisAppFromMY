@@ -49,6 +49,6 @@
  *  获取KeyChainManage单例
  */
 + (instancetype)sharedInstance;
-- (void)signOut;      //!< 退出登录
+- (void)signOut;      //!< 退出登录后的数据清理
 - (void)removeGesture;
 @end

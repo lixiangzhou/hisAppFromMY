@@ -64,7 +64,6 @@ static NSString *const hostH5 = @"hostH5";
 {
     KeyChainManage *manager = KeyChain;
     self.isLogin = NO;
-    [HXBRequestUserInfoViewModel signOut];
     [manager.keychain removeItemForKey:kLoginPwd];
     [manager.keychain removeItemForKey:kTradePwd];
     [manager.keychain removeItemForKey:kToken];
