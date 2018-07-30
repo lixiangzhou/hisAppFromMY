@@ -20,6 +20,9 @@
 #import "UIScrollView+HXBScrollView.h"
 #import "HXBNoticeViewController.h"
 #import "HXBBaseWKWebViewController.h"
+#import "HXBAdvertiseManager.h"
+#import "HXBVersionUpdateManager.h"
+
 @interface HSJHomeViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) HSJHomeCustomNavbarView *navView;
@@ -46,8 +49,13 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
     [self getHomeData];
     [self updateUI];
+    
+    if ([HXBAdvertiseManager shared].couldPopAtHomeAfterSlashOrGesturePwd) {
+        [[HXBVersionUpdateManager sharedInstance] show];
+    }
 }
 
 - (void)setUI {

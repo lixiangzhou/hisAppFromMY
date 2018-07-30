@@ -79,14 +79,16 @@
             } else {
                 [[HXBRootVCManager manager].gesturePwdVC.view removeFromSuperview];
             }
+            
             if (toActivity) {
                 [weakSelf toActivity];
-            }
-            
-            if (popRightNow) {
-                [[HXBRootVCManager manager] popWindowsAtHomeAfterSlashOrGesturePwd];
-            } else {
                 [HXBAdvertiseManager shared].couldPopAtHomeAfterSlashOrGesturePwd = YES;
+            } else {
+                if (popRightNow) {
+                    [[HXBRootVCManager manager] popWindowsAtHomeAfterSlashOrGesturePwd];
+                } else {
+                    [HXBAdvertiseManager shared].couldPopAtHomeAfterSlashOrGesturePwd = YES;
+                }
             }
         };
     } else {
