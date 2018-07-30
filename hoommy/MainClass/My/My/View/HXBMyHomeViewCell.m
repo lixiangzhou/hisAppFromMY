@@ -50,7 +50,6 @@
     [self.descLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf.textLabel);
         make.height.equalTo(@kScrAdaptationH750(24));
-        make.left.equalTo(weakSelf.textLabel.mas_right).offset(kScrAdaptationW750(15));
         make.right.equalTo(weakSelf.contentView.mas_right).offset(kScrAdaptationW750(5));
     }];
 }
