@@ -30,7 +30,8 @@ static NSString *const kMobile = @"kMobile";
 static NSString * const kCiphertext = @"ciphertext";
 //H5页面的BaseURL
 static NSString *const hostH5 = @"hostH5";
-
+//缓存首页获取的计划列表中的第一条记录的planid
+static NSString *const kFirstPlanId = @"kFirstPlanId";
 
 @interface KeyChainManage ()
 
@@ -94,6 +95,7 @@ static NSString *const hostH5 = @"hostH5";
     [self.keychain setItem:h5host ForKey:hostH5];
 }
 
+
 - (NSString *)mobile {
     NSString *mobile = [self.keychain itemForkey:kMobile];
     return mobile?:@"";
@@ -102,8 +104,17 @@ static NSString *const hostH5 = @"hostH5";
 - (void)setSiginCount:(NSString *)siginCount {
     [self.keychain setItem:siginCount ForKey:kSiginPwd];
 }
+
 - (NSString *)siginCount {
     return [self.keychain itemForkey:kSiginPwd] ? : @"0";
+}
+
+- (void)setFirstPlanIdInPlanList:(NSString *)firstPlanIdInPlanList {
+    [self.keychain setItem:firstPlanIdInPlanList ForKey:kFirstPlanId];
+}
+
+- (NSString *)firstPlanIdInPlanList {
+    return [self.keychain itemForkey:kFirstPlanId] ?: @"";
 }
 
 - (void)setMobile:(NSString *)mobile {
