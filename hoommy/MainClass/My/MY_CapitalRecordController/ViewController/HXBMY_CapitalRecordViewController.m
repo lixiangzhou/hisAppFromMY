@@ -74,9 +74,10 @@ static NSInteger const defaultPageCount = 20;
 
     self.tableView.frame = CGRectMake(0, HXBStatusBarAndNavigationBarHeight, kScreenWidth, kScreenHeight - HXBStatusBarAndNavigationBarHeight);
     self.tableView.backgroundColor = kHXBColor_BackGround;
+    [self.view addSubview:self.tableView];
+    [self.tableView addSubview:self.noDataView];
     [self refresh];
     [HXBMiddlekey AdaptationiOS11WithTableView:self.tableView];
-    [self.view addSubview:self.tableView];
     [self setUPNAVItem];
 }
 
@@ -86,6 +87,9 @@ static NSInteger const defaultPageCount = 20;
     [self.tableView setHeaderWithRefreshBlock:^(UIScrollView *scrollView) {
         weakSelf.capitalRecordViewModel.capitalRecordPage = 1;
         [weakSelf downDataWithScreenType:weakSelf.screenType];
+    }];
+    [self.noDataView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self.tableView);
     }];
 }
 
@@ -108,6 +112,7 @@ static NSInteger const defaultPageCount = 20;
             } else {
                 [weakSelf.tableView endRefresh:YES];
             }
+            weakSelf.noDataView.hidden = weakSelf.capitalRecordViewModel.capitalRecordViewModel_array.count;
         } else {
             [weakSelf.tableView endRefresh:NO];
         }

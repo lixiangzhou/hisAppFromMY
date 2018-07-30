@@ -88,7 +88,8 @@
 - (void)subViewControllerNames: (NSArray <NSString *> *)subViewControllerNameArray andNavigationControllerTitleArray: (NSArray<NSString *>*)titleArray andImageNameArray: (NSArray<NSString *>*)imageNameArray andSelectImageCommonName: (NSArray<NSString *>*)selectImageCommonNameArray{
     
     for (int i = 0; i < subViewControllerNameArray.count; i ++) {
-        UIViewController *VC = [self ctratSubControllerWithName:subViewControllerNameArray[i]];
+        HXBBaseViewController *VC = (HXBBaseViewController *)[self ctratSubControllerWithName:subViewControllerNameArray[i]];
+        VC.iswithTabbarInPage = YES;
         UIEdgeInsets insets = UIEdgeInsetsMake(8, 0, -8, 0);
         self.tabBar.items[i].imageInsets = insets;
         //设置字体

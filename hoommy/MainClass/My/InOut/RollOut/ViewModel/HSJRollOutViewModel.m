@@ -33,6 +33,7 @@
     [self loadData:^(NYBaseRequest *request) {
         request.requestUrl = kHXBMY_PlanAccountRequestURL;
         request.modelType = [HSJPlanAssetsModel class];
+        request.showHud = YES;
     } responseResult:^(id responseData, NSError *erro) {
         weakSelf.assetsModel = responseData;
         resultBlock(responseData != nil);
@@ -48,6 +49,7 @@
     [self loadData:^(NYBaseRequest *request) {
         request.requestUrl = kHXBMY_PlanListURL;
         request.requestArgument = @{@"filter": @"4", @"page": @(page)};
+        request.showHud = YES;
     } responseResult:^(id responseData, NSError *erro) {
         if (responseData) {
             NSDictionary *data = responseData[@"data"];

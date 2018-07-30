@@ -27,7 +27,8 @@
     
     self.title = @"转出到账户余额";
     self.viewModel = [HSJRollOutConfirmViewModel new];
-    [self setUI];  
+    [self setUI];
+    [self getData];
 }
 
 #pragma mark - UI
@@ -170,11 +171,12 @@
             HXBVerificationCodeAlertVC *alertVC = [[HXBVerificationCodeAlertVC alloc] init];
             alertVC.messageTitle = @"短信验证码";
             alertVC.subTitle = [NSString stringWithFormat:@"已发送到手机号%@，请注意查收", [KeyChain.mobile replaceStringWithStartLocation:3 lenght:4]];
-            
+            __weak HXBVerificationCodeAlertVC *weakVC = alertVC;
             alertVC.sureBtnClick = ^(NSString *pwd) {
                 [weakSelf.viewModel quit:weakSelf.ids smsCode:pwd resultBlock:^(BOOL isSuccess) {
                     [weakSelf processResult:isSuccess];
                 }];
+                [weakVC dismissViewControllerAnimated:YES completion:nil];
             };
             [weakSelf presentViewController:alertVC animated:NO completion:nil];
         }

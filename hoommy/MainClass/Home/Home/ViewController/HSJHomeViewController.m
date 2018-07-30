@@ -20,6 +20,9 @@
 #import "UIScrollView+HXBScrollView.h"
 #import "HXBNoticeViewController.h"
 #import "HXBBaseWKWebViewController.h"
+#import "HXBAdvertiseManager.h"
+#import "HXBVersionUpdateManager.h"
+
 @interface HSJHomeViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) HSJHomeCustomNavbarView *navView;
@@ -46,8 +49,13 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
     [self getHomeData];
     [self updateUI];
+    
+    if ([HXBAdvertiseManager shared].couldPopAtHomeAfterSlashOrGesturePwd) {
+        [[HXBVersionUpdateManager sharedInstance] show];
+    }
 }
 
 - (void)setUI {
@@ -159,20 +167,26 @@
 - (HSJHomeFooterView *)footerView {
     if (!_footerView) {
         _footerView = [[HSJHomeFooterView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScrAdaptationH750(630))];
+        kWeakSelf
         _footerView.platformAmountClickBlock = ^{
              [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_HomeSafeClick];
+            [HXBBaseWKWebViewController pushWithPageUrl:[NSString stringWithFormat:@"%@/baby/data",KeyChain.h5host] fromController:weakSelf];
         };
         _footerView.userAmountClickBlock = ^{
              [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_HomeSafeClick];
+            [HXBBaseWKWebViewController pushWithPageUrl:[NSString stringWithFormat:@"%@/baby/data",KeyChain.h5host] fromController:weakSelf];
         };
         _footerView.bankClickBlock = ^{
             [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_HomeBankClick];
+            [HXBBaseWKWebViewController pushWithPageUrl:[NSString stringWithFormat:@"%@/baby/intro#section1",KeyChain.h5host] fromController:weakSelf];
         };
         _footerView.creditClickBlock = ^{
             [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_HomeCreditClick];
+            [HXBBaseWKWebViewController pushWithPageUrl:[NSString stringWithFormat:@"%@/baby/intro#section2",KeyChain.h5host] fromController:weakSelf];
         };
         _footerView.registeredCapitalClickBlock = ^{
             [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_HomeRegisteredCapitalClick];
+            [HXBBaseWKWebViewController pushWithPageUrl:[NSString stringWithFormat:@"%@/baby/intro#section3",KeyChain.h5host] fromController:weakSelf];
         };
     }
     return _footerView;
