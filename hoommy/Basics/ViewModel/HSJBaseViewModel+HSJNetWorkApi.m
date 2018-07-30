@@ -92,6 +92,7 @@
     [self loadData:^(NYBaseRequest *request) {
         request.requestUrl = kHXBUser_signOutURL;
         request.requestMethod = NYRequestMethodPost;
+        request.showHud = isShowHud;
     } responseResult:^(id responseData, NSError *erro) {
         if(!erro) {
             [KeyChain signOut];
