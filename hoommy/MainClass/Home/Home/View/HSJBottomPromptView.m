@@ -42,9 +42,15 @@
 - (UILabel *)bankLabel {
     if (!_bankLabel) {
         _bankLabel = [[UILabel alloc] init];
-        _bankLabel.text = @"恒丰银行资金存管";
         _bankLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(24);
         _bankLabel.textColor = kHXBColor_7F85A1_100;
+        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] init];
+        NSTextAttachment *attachment = [NSTextAttachment new];
+        attachment.image = [UIImage imageNamed:@"home_bot_safety"];
+        attachment.bounds = CGRectMake(0, -1, attachment.image.size.width, attachment.image.size.height);
+        [attr appendAttributedString:[NSAttributedString attributedStringWithAttachment:attachment]];
+        [attr appendAttributedString:[[NSAttributedString alloc] initWithString:@" 恒丰银行资金存管" attributes:nil]];
+        _bankLabel.attributedText = attr;
     }
     return _bankLabel;
 }
