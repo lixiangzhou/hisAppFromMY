@@ -633,10 +633,11 @@ UITableViewDataSource
                 } else {
                     [weakSelf showToast:@"退出失败"];
                 }
+            } else {
+                [(HXBBaseTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController setSelectedIndex:0];
+                [weakSelf.navigationController popToRootViewControllerAnimated:YES];
             }
         }];
-        [(HXBBaseTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController setSelectedIndex:0];
-        [weakSelf.navigationController popToRootViewControllerAnimated:YES];
     }];
 }
 
