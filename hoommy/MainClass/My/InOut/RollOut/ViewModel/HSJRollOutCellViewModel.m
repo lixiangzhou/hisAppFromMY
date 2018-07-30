@@ -99,6 +99,7 @@
             self.statusTextColor = kHXBColor_999999_100;
             self.statusFont = kHXBFont_28;
             self.statusBtnEnabled = NO;
+            self.statusLineNum = 1;
         }
             break;
         case HSJStepUpStatusQUIT:
@@ -106,6 +107,7 @@
             self.statusTextColor = kHXBColor_D1A666_100;
             self.statusFont = kHXBFont_28;
             self.statusBtnEnabled = YES;
+            self.statusLineNum = 1;
         }
             break;
         case HSJStepUpStatusNOQUIT:
@@ -113,13 +115,15 @@
             self.statusTextColor = kHXBColor_999999_100;
             self.statusFont = kHXBFont_24;
             self.statusBtnEnabled = NO;
+            self.statusLineNum = 2;
         }
             break;
         case HSJStepUpStatusWAITQUIT:
         {
             self.statusTextColor = kHXBColor_999999_100;
-            self.statusFont = kHXBFont_28;
+            self.statusFont = kHXBFont_24;
             self.statusBtnEnabled = NO;
+            self.statusLineNum = 2;
         }
             break;
     }

@@ -79,7 +79,7 @@
         NSString *statusString = nil;
         if (self.stepupStatus == HSJStepUpStatusQUIT) {
             statusString = @"转出";
-        } else if (self.stepupStatus == HSJStepUpStatusNOQUIT || self.stepupStatus == HSJStepUpStatusWAITQUIT) {
+        } else if (self.stepupStatus == HSJStepUpStatusNOQUIT) {
             statusString = [NSString stringWithFormat:@"%@可转", dateString];
         } else if (self.stepupStatus == HSJStepUpStatusWAITQUIT) {
             statusString = [NSString stringWithFormat:@"%@转出", quitTimeString];
