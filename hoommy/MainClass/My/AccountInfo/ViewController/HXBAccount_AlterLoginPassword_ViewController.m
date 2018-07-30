@@ -65,21 +65,21 @@
             return;
         }
         NSLog(@"---%ld---",KeyChain.siginCount.integerValue);
-        if (KeyChain.siginCount.integerValue >= 3) {
-            [self alertVC_4];
-        } else {
-            
-            [self.viewModel mobifyPassword_LoginRequest_requestWithOldPwd:password_Original andNewPwd:password_New andSuccessBlock:^{
-                KeyChain.siginCount = @(0).description;
-                [KeyChain signOut];
-                weakSelf.tabBarController.selectedIndex = 0;
-                [HxbHUDProgress showTextWithMessage:@"密码修改成功，请用新密码号登录"];
-                [weakSelf.navigationController popToRootViewControllerAnimated:NO];
-                [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_ShowLoginVC object:nil];
-            } andFailureBlock:^(NSError *error) {
-                KeyChain.siginCount = @(KeyChain.siginCount.integerValue + 1).description;
-            }];
-        }
+        
+        [self.viewModel mobifyPassword_LoginRequest_requestWithOldPwd:password_Original andNewPwd:password_New andSuccessBlock:^{
+            KeyChain.siginCount = @(0).description;
+            [KeyChain signOut];
+            weakSelf.tabBarController.selectedIndex = 0;
+            [HxbHUDProgress showTextWithMessage:@"密码修改成功，请用新密码号登录"];
+            [weakSelf.navigationController popToRootViewControllerAnimated:NO];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_ShowLoginVC object:nil];
+        } andFailureBlock:^(NSError *error) {
+            KeyChain.siginCount = @(KeyChain.siginCount.integerValue + 1).description;
+            if (error.code != HSJNetStateCodeAlreadyPopWindow && KeyChain.siginCount.integerValue >= 3) {
+                [self alertVC_4];
+            }
+        }];
+        
         
 //        if (KeyChain.siginCount.integerValue > 5) {
 //            [self alertVC_5];
