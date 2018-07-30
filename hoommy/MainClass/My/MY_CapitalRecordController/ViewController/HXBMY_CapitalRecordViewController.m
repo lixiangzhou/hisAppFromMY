@@ -112,7 +112,7 @@ static NSInteger const defaultPageCount = 20;
             } else {
                 [weakSelf.tableView endRefresh:YES];
             }
-            self.noDataView.hidden = weakSelf.capitalRecordViewModel.capitalRecordViewModel_array.count;
+            weakSelf.noDataView.hidden = weakSelf.capitalRecordViewModel.capitalRecordViewModel_array.count;
         } else {
             [weakSelf.tableView endRefresh:NO];
         }
