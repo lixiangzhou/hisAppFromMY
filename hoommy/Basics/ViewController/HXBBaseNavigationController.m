@@ -49,6 +49,14 @@
     [super pushViewController:viewController animated:animated];
 }
 
+- (void)setViewControllers:(NSArray<UIViewController *> *)viewControllers animated:(BOOL)animated {
+    self.enableFullScreenGesture = YES;
+    viewControllers.lastObject.hidesBottomBarWhenPushed = YES;
+    self.navigationBar.hidden = NO;
+    
+    [super setViewControllers:viewControllers animated:animated];
+}
+
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
     ///这里有两个条件不允许手势执行，1、当前控制器为根控制器；2、如果这个push、pop动画正在执行（私有属性）3、向左滑
     BOOL panLeft = [(UIPanGestureRecognizer *)gestureRecognizer translationInView:gestureRecognizer.view].x > 0;
