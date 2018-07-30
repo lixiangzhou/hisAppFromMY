@@ -16,6 +16,7 @@
 #import "NSDate+IDPExtension.h"
 #import "HXBGeneralAlertVC.h"
 #import "HXBAdvertiseManager.h"
+#import "HSJGestureLoginViewModel.h"
 
 @interface HSJGestureLoginController () <CircleViewDelegate>
 /**
@@ -30,6 +31,8 @@
 
 @property (nonatomic, weak) UIButton *btn;
 @property (nonatomic, weak) UIButton *skipBtn;
+
+@property (nonatomic, strong) HSJGestureLoginViewModel *viewModel;
 @end
 
 @implementation HSJGestureLoginController
@@ -42,6 +45,7 @@
     
     ((HXBBaseNavigationController *)self.navigationController).enableFullScreenGesture = NO;
     
+    self.viewModel = [HSJGestureLoginViewModel new];
     [self setUI];
 }
 
@@ -58,7 +62,7 @@
     
     UILabel *mobileLabel = [UILabel new];
     mobileLabel.text = [NSString stringWithFormat:@"欢迎回来 %@", [KeyChain.mobile replaceStringWithStartLocation:3 lenght:4]];
-//    mobileLabel.text = @"欢迎回来 133****3213";
+    //    mobileLabel.text = @"欢迎回来 133****3213";
     mobileLabel.textColor = kHXBColor_333333_100;
     mobileLabel.font = kHXBFont_28;
     mobileLabel.frame = CGRectMake(dateLabel.x, dateLabel.bottom, kScreenH - 50, 20);
@@ -104,7 +108,7 @@
             btn.hidden = YES;
             [btn setTitle:@"重新设置" forState:UIControlStateNormal];
             
-            if (self.showSkip) {            
+            if (self.showSkip) {
                 UIButton *skipBtn = [UIButton new];
                 [skipBtn setTitle:@"跳过" forState:UIControlStateNormal];
                 [skipBtn setTitleColor:kHXBColor_488CFF_100 forState:UIControlStateNormal];
@@ -140,19 +144,20 @@
 
 #pragma mark - Action
 - (void)click {
-    switch (self.type) {
-        case HSJGestureTypeLogin:
-            [KeyChain signOut];
-            [self.view removeFromSuperview];
-            [HXBAdvertiseManager shared].couldPopAtHomeAfterSlashOrGesturePwd = YES;
-            [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_RefreshHomeData object:nil];
-            [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_ShowLoginVC object:nil];
-            break;
-        case HSJGestureTypeSetting:
-            self.btn.hidden = YES;
-            [self.msgLabel showNormalMsg:gestureTextBeforeSet];
-            [PCCircleViewConst saveGesture:nil Key:gestureOneSaveKey];
-            break;
+    kWeakSelf
+    if (self.type == HSJGestureTypeLogin) {
+        [self.viewModel userLogOut:YES resultBlock:^(id responseData, NSError *erro) {
+            if (erro == nil) {
+                [weakSelf.view removeFromSuperview];
+                [HXBAdvertiseManager shared].couldPopAtHomeAfterSlashOrGesturePwd = YES;
+                [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_RefreshHomeData object:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_ShowLoginVC object:nil];
+            }
+        }];
+    } else if (self.type == HSJGestureTypeSetting) {
+        self.btn.hidden = YES;
+        [self.msgLabel showNormalMsg:gestureTextBeforeSet];
+        [PCCircleViewConst saveGesture:nil Key:gestureOneSaveKey];
     }
 }
 
@@ -232,17 +237,25 @@
             
             kWeakSelf
             alertVC.leftBtnBlock = ^{
-                if (weakSelf.dismissBlock) {
-                    weakSelf.dismissBlock(NO, NO, YES);
-                }
-                [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_RefreshHomeData object:nil];
+                [weakSelf.viewModel userLogOut:YES resultBlock:^(id responseData, NSError *erro) {
+                    if (erro == nil) {
+                        if (weakSelf.dismissBlock) {
+                            weakSelf.dismissBlock(NO, NO, YES);
+                        }
+                        [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_RefreshHomeData object:nil];
+                    }
+                }];
             };
             alertVC.rightBtnBlock = ^{
-                if (weakSelf.dismissBlock) {
-                    weakSelf.dismissBlock(NO, NO, NO);
-                }
-                [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_RefreshHomeData object:nil];
-                [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_ShowLoginVC object:@{kHXBMY_VersionUpdateURL : @YES}];
+                [weakSelf.viewModel userLogOut:YES resultBlock:^(id responseData, NSError *erro) {
+                    if (erro == nil) {                    
+                        if (weakSelf.dismissBlock) {
+                            weakSelf.dismissBlock(NO, NO, NO);
+                        }
+                        [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_RefreshHomeData object:nil];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_ShowLoginVC object:@{kHXBMY_VersionUpdateURL : @YES}];
+                    }
+                }];
             };
             
             [self presentViewController:alertVC animated:NO completion:nil];

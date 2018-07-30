@@ -107,6 +107,7 @@
 		8DB77F6A210585A5003EE881 /* HSJRollOutDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB77F69210585A5003EE881 /* HSJRollOutDetailCell.m */; };
 		8DB86DEA210B10150070557F /* HSJNoDataOrNetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB86DE9210B10140070557F /* HSJNoDataOrNetViewController.m */; };
 		8DB86DEE210B10350070557F /* HSJNoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB86DED210B10350070557F /* HSJNoDataView.m */; };
+		8DB86DF1210EBCDC0070557F /* HSJGestureLoginViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB86DF0210EBCDC0070557F /* HSJGestureLoginViewModel.m */; };
 		8DD6B9B22106C27C00E8980F /* HSJDepositoryOpenTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD6B9B12106C27C00E8980F /* HSJDepositoryOpenTipView.m */; };
 		8DD6B9B52106D90C00E8980F /* HSJEarningCalculatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD6B9B42106D90C00E8980F /* HSJEarningCalculatorView.m */; };
 		9A0BD51D20F6F8ED00B1CC59 /* UIButton+HxbButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A0BD51C20F6F8ED00B1CC59 /* UIButton+HxbButton.m */; };
@@ -605,6 +606,8 @@
 		8DB86DE9210B10140070557F /* HSJNoDataOrNetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSJNoDataOrNetViewController.m; sourceTree = "<group>"; };
 		8DB86DEC210B10350070557F /* HSJNoDataView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJNoDataView.h; sourceTree = "<group>"; };
 		8DB86DED210B10350070557F /* HSJNoDataView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJNoDataView.m; sourceTree = "<group>"; };
+		8DB86DEF210EBCDC0070557F /* HSJGestureLoginViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJGestureLoginViewModel.h; sourceTree = "<group>"; };
+		8DB86DF0210EBCDC0070557F /* HSJGestureLoginViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJGestureLoginViewModel.m; sourceTree = "<group>"; };
 		8DD6B9B02106C27C00E8980F /* HSJDepositoryOpenTipView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJDepositoryOpenTipView.h; sourceTree = "<group>"; };
 		8DD6B9B12106C27C00E8980F /* HSJDepositoryOpenTipView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJDepositoryOpenTipView.m; sourceTree = "<group>"; };
 		8DD6B9B32106D90C00E8980F /* HSJEarningCalculatorView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJEarningCalculatorView.h; sourceTree = "<group>"; };
@@ -3700,6 +3703,8 @@
 			children = (
 				E15B4B92210070E400700C54 /* HSJMyGestureViewModel.h */,
 				E15B4B91210070E400700C54 /* HSJMyGestureViewModel.m */,
+				8DB86DEF210EBCDC0070557F /* HSJGestureLoginViewModel.h */,
+				8DB86DF0210EBCDC0070557F /* HSJGestureLoginViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -4145,6 +4150,7 @@
 				9A37491D20F8516300F39681 /* HXBMyBankResultViewController.m in Sources */,
 				9A3749A520F85CF700F39681 /* HXBWithdrawRecordViewController.m in Sources */,
 				E1BC17CD2108262600AF8D0F /* HSJFinAddRecortdModel.m in Sources */,
+				8DB86DF1210EBCDC0070557F /* HSJGestureLoginViewModel.m in Sources */,
 				8D142A9220FD9B4D00520728 /* HXBAdvertiseViewModel.m in Sources */,
 				9A97DA8F20EF420200688ADB /* UIColor+HxbColor.m in Sources */,
 				4E0019A42106C7D200D6F4DE /* HSJNoticeListModel.m in Sources */,
