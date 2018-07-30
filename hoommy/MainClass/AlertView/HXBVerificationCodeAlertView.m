@@ -40,7 +40,7 @@
         [self addSubview:self.speechVerificationCodeBtn];
         [self setupSubViewFrame];
         self.textField.clearButtonMode = UITextFieldViewModeWhileEditing;
-        [self getVerificationCode];
+//        [self getVerificationCode];
     }
     return self;
 }
