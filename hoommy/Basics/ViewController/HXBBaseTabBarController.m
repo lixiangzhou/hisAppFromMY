@@ -12,6 +12,8 @@
 #import "HSJMyViewController.h"
 #import "HSJSignInViewController.h"
 #import "HSJHomeViewController.h"
+#import "HXBBaseUrlSettingView.h"
+
 @interface HXBBaseTabBarController ()<UITabBarControllerDelegate>
 
 @end
@@ -178,5 +180,10 @@
     return _selectColor;
 }
 
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
+    if (HXBShakeChangeBaseUrl == YES) {
+        [[HXBBaseUrlSettingView settingView] show];
+    }
+}
 @end
 

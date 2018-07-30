@@ -107,8 +107,6 @@
 		8D60B4DE20F7486300287E52 /* HSJDepositoryOpenViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B4D320F7486300287E52 /* HSJDepositoryOpenViewModel.m */; };
 		8D60B4E120F748BC00287E52 /* UITextField+HLNumberFormatTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B4E020F748BC00287E52 /* UITextField+HLNumberFormatTextField.m */; };
 		8DB77F6A210585A5003EE881 /* HSJRollOutDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB77F69210585A5003EE881 /* HSJRollOutDetailCell.m */; };
-		8DB86DEA210B10150070557F /* HSJNoDataOrNetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB86DE9210B10140070557F /* HSJNoDataOrNetViewController.m */; };
-		8DB86DEE210B10350070557F /* HSJNoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB86DED210B10350070557F /* HSJNoDataView.m */; };
 		8DB86DF1210EBCDC0070557F /* HSJGestureLoginViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB86DF0210EBCDC0070557F /* HSJGestureLoginViewModel.m */; };
 		8DD6B9B22106C27C00E8980F /* HSJDepositoryOpenTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD6B9B12106C27C00E8980F /* HSJDepositoryOpenTipView.m */; };
 		8DD6B9B52106D90C00E8980F /* HSJEarningCalculatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD6B9B42106D90C00E8980F /* HSJEarningCalculatorView.m */; };
@@ -214,6 +212,7 @@
 		9A6E0A6A20F84CA000598071 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A6E0A6920F84CA000598071 /* main.m */; };
 		9A6E0A7420F84CA000598071 /* hoommyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A6E0A7320F84CA000598071 /* hoommyTests.m */; };
 		9A6E0A7F20F84CA000598071 /* hoommyUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A6E0A7E20F84CA000598071 /* hoommyUITests.m */; };
+		9A7AFFF4210F2F3C003FACDE /* HXBBaseUrlSettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A7AFFF3210F2F3B003FACDE /* HXBBaseUrlSettingView.m */; };
 		9A97DA5E20EF420200688ADB /* KeyChainManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A97D8F320EF420000688ADB /* KeyChainManage.m */; };
 		9A97DA5F20EF420200688ADB /* HSJTokenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A97D8F620EF420000688ADB /* HSJTokenManager.m */; };
 		9A97DA6020EF420200688ADB /* HXBTokenModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A97D8F820EF420000688ADB /* HXBTokenModel.m */; };
@@ -807,6 +806,8 @@
 		9A6E0A7A20F84CA000598071 /* hoommyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = hoommyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A6E0A7E20F84CA000598071 /* hoommyUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = hoommyUITests.m; sourceTree = "<group>"; };
 		9A6E0A8020F84CA000598071 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9A7AFFF2210F2F3B003FACDE /* HXBBaseUrlSettingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBBaseUrlSettingView.h; sourceTree = "<group>"; };
+		9A7AFFF3210F2F3B003FACDE /* HXBBaseUrlSettingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBBaseUrlSettingView.m; sourceTree = "<group>"; };
 		9A97D8F220EF420000688ADB /* KeyChainManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyChainManage.h; sourceTree = "<group>"; };
 		9A97D8F320EF420000688ADB /* KeyChainManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyChainManage.m; sourceTree = "<group>"; };
 		9A97D8F520EF420000688ADB /* HSJTokenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSJTokenManager.h; sourceTree = "<group>"; };
@@ -1260,6 +1261,7 @@
 		4EA57D1020F34B6C006FD573 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				9A7AFFF1210F2F3B003FACDE /* BaseURLShakeView */,
 				4EA610A22105E389008580DD /* Extraction */,
 				9A3749CD20F883CE00F39681 /* BankCardListCell */,
 				9A3749B420F85EA200F39681 /* NODataView */,
@@ -2468,6 +2470,15 @@
 				9A6E0A8020F84CA000598071 /* Info.plist */,
 			);
 			path = hoommyUITests;
+			sourceTree = "<group>";
+		};
+		9A7AFFF1210F2F3B003FACDE /* BaseURLShakeView */ = {
+			isa = PBXGroup;
+			children = (
+				9A7AFFF2210F2F3B003FACDE /* HXBBaseUrlSettingView.h */,
+				9A7AFFF3210F2F3B003FACDE /* HXBBaseUrlSettingView.m */,
+			);
+			path = BaseURLShakeView;
 			sourceTree = "<group>";
 		};
 		9A97D8EF20EF420000688ADB /* Customization */ = {
@@ -4138,6 +4149,7 @@
 				9A97DA8920EF420200688ADB /* NSString+HxbGeneral.m in Sources */,
 				8D5D612720FF1D34003F94D9 /* HSJRollOutPlanDetailRowModel.m in Sources */,
 				4EA57D2120F34D0D006FD573 /* HXBCustomTextField.m in Sources */,
+				9A7AFFF4210F2F3C003FACDE /* HXBBaseUrlSettingView.m in Sources */,
 				4EA610D32105E69F008580DD /* HXBNoticeCell.m in Sources */,
 				9A97DA6120EF420200688ADB /* HXBThemAdapterManager.m in Sources */,
 				9AA70B4A20FEF3EA008B3007 /* HSJBuyFootView.m in Sources */,

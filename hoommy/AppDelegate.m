@@ -11,6 +11,7 @@
 #import "IQKeyboardManager.h"
 #import "HXBVersionUpdateManager.h"
 #import "HXBRootVCManager.h"
+#import "HXBBaseUrlSettingView.h"
 
 @interface AppDelegate ()
 @property (nonatomic, strong) NSDate *exitTime;
@@ -24,6 +25,7 @@
     
     [self setKeyboardManager];
     [[HXBRootVCManager manager] createRootVCAndMakeKeyWindow];
+    [HXBBaseUrlSettingView attatchToWindow];
     
     return YES;
 }

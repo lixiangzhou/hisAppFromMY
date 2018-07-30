@@ -19,4 +19,6 @@
 #import "MacrosInBusiness.h"
 #import "HXBEnumerateTransitionManager.h"
 
+//是否开启摇一摇功能
+#define HXBShakeChangeBaseUrl YES
 #endif /* HSJConfig_h */
