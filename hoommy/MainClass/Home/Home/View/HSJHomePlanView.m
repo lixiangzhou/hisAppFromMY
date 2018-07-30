@@ -132,7 +132,7 @@
     [self.refundableLabel mas_updateConstraints:^(MASConstraintMaker *make) {
         make.width.offset(refundableLabelSize.width + 2 * kScrAdaptationW750(14));
     }];
-    
+    [self updateUI];
 }
 
 - (NSString *)getLockString {
