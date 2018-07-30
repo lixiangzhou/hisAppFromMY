@@ -47,6 +47,7 @@
         self.statusString = @"转出";
     } else if ([self.model.stepUpPlanStatus isEqualToString:@"NOQUIT"]) {
         self.stepupStatus = HSJStepUpStatusNOQUIT;
+        
         NSDate *date = [NSDate dateWithTimeIntervalSince1970:self.model.endLockingTime.doubleValue / 1000];
         NSDateFormatter *df = [[NSDateFormatter alloc] init];
         df.dateFormat = @"MM月dd日";
@@ -55,6 +56,14 @@
     } else if ([self.model.stepUpPlanStatus isEqualToString:@"QUITING"]) {
         self.stepupStatus = HSJStepUpStatusQUITING;
         self.statusString = @"转出中";
+    } else if ([self.model.stepUpPlanStatus isEqualToString:@"WAITQUIT"]) {
+        self.stepupStatus = HSJStepUpStatusWAITQUIT;
+        
+        NSDate *date = [NSDate dateWithTimeIntervalSince1970:self.model.quitDate.doubleValue / 1000];
+        NSDateFormatter *df = [[NSDateFormatter alloc] init];
+        df.dateFormat = @"MM月dd日";
+        NSString *dateString = [df stringFromDate:date];
+        self.statusString = [NSString stringWithFormat:@"%@\n转出", dateString];
     }
 }
 
@@ -106,11 +115,18 @@
             self.statusBtnEnabled = NO;
         }
             break;
+        case HSJStepUpStatusWAITQUIT:
+        {
+            self.statusTextColor = kHXBColor_999999_100;
+            self.statusFont = kHXBFont_28;
+            self.statusBtnEnabled = NO;
+        }
+            break;
     }
     
     if (self.isEditing) {
         self.statusBtnEnabled = NO;
-        if (self.stepupStatus == HSJStepUpStatusQUITING || self.stepupStatus == HSJStepUpStatusNOQUIT) {
+        if (self.stepupStatus == HSJStepUpStatusQUITING || self.stepupStatus == HSJStepUpStatusNOQUIT || self.stepupStatus == HSJStepUpStatusWAITQUIT) {
             self.leftAccountColor = kHXBColor_FF7055_40;
             self.leftAccountDescColor = kHXBColor_999999_40;
             

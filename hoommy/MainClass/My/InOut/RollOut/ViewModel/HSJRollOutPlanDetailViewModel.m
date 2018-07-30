@@ -35,6 +35,8 @@
         self.stepupStatus = HSJStepUpStatusNOQUIT;
     } else if ([self.model.stepUpPlanStatus isEqualToString:@"QUITING"]) {
         self.stepupStatus = HSJStepUpStatusQUITING;
+    } else if ([self.model.stepUpPlanStatus isEqualToString:@"WAITQUIT"]) {
+        self.stepupStatus = HSJStepUpStatusWAITQUIT;
     }
     
     self.hideBottomView = self.stepupStatus != HSJStepUpStatusQUIT;
@@ -66,20 +68,40 @@
     NSDate *endLockingRequestTime = [NSDate dateWithTimeIntervalSince1970:self.model.endLockingRequestTime.doubleValue / 1000];
     NSString *endLockingRequestTimeString = [df stringFromDate:endLockingRequestTime];
     
-    if (self.stepupStatus == HSJStepUpStatusQUIT || self.stepupStatus == HSJStepUpStatusNOQUIT) {
+    // 退出时间
+    NSDate *quitTime = [NSDate dateWithTimeIntervalSince1970:self.model.quitDate.doubleValue / 1000];
+    NSString *quitTimeString = [df stringFromDate:quitTime];
+    
+    if (self.stepupStatus == HSJStepUpStatusQUIT || self.stepupStatus == HSJStepUpStatusNOQUIT || self.stepupStatus == HSJStepUpStatusWAITQUIT) {
         NSDate *date = [NSDate dateWithTimeIntervalSince1970:self.model.endLockingTime.doubleValue / 1000];
         NSString *dateString = [df stringFromDate:date];
-        NSString *statusString = self.stepupStatus == HSJStepUpStatusQUIT ? @"转出" : [NSString stringWithFormat:@"%@可转", dateString];
+        
+        NSString *statusString = nil;
+        if (self.stepupStatus == HSJStepUpStatusQUIT) {
+            statusString = @"转出";
+        } else if (self.stepupStatus == HSJStepUpStatusNOQUIT || self.stepupStatus == HSJStepUpStatusWAITQUIT) {
+            statusString = [NSString stringWithFormat:@"%@可转", dateString];
+        } else if (self.stepupStatus == HSJStepUpStatusWAITQUIT) {
+            statusString = [NSString stringWithFormat:@"%@转出", quitTimeString];
+        }
         
         HSJRollOutPlanDetailRowModel *model = [[HSJRollOutPlanDetailRowModel alloc] initWithType:HSJRollOutPlanDetailRowTypeNormal left:@"状态" right:statusString protocol:nil className:nil];
         model.rightLabelColor = kHXBColor_FF7055_100;
+        
+       NSArray *g1 = @[[[HSJRollOutPlanDetailRowModel alloc] initWithType:HSJRollOutPlanDetailRowTypeNormal left:@"转入金额" right:joinInString protocol:nil className:nil],
+          [[HSJRollOutPlanDetailRowModel alloc] initWithType:HSJRollOutPlanDetailRowTypeNormal left:@"已赚收益" right:earnAmount protocol:nil className:nil],
+          [[HSJRollOutPlanDetailRowModel alloc] initWithType:HSJRollOutPlanDetailRowTypeNormal left:@"今日预期年化" right:totalInterest protocol:nil className:nil],
+          [[HSJRollOutPlanDetailRowModel alloc] initWithType:HSJRollOutPlanDetailRowTypeNormal left:@"转入时间" right:registerTimeString protocol:nil className:nil]];
+        
+        NSMutableArray *group1 = [[NSMutableArray alloc] initWithArray:g1];
+        if (self.stepupStatus == HSJStepUpStatusWAITQUIT) {
+            [group1 addObject:[[HSJRollOutPlanDetailRowModel alloc] initWithType:HSJRollOutPlanDetailRowTypeNormal left:@"转出时间" right:endLockingRequestTimeString protocol:nil className:nil]];
+        }
+        
+        [group1 addObject:model];
+        
         // 可退出、不可退出
-        self.dataSource = @[
-                            @[[[HSJRollOutPlanDetailRowModel alloc] initWithType:HSJRollOutPlanDetailRowTypeNormal left:@"转入金额" right:joinInString protocol:nil className:nil],
-                            [[HSJRollOutPlanDetailRowModel alloc] initWithType:HSJRollOutPlanDetailRowTypeNormal left:@"已赚收益" right:earnAmount protocol:nil className:nil],
-                            [[HSJRollOutPlanDetailRowModel alloc] initWithType:HSJRollOutPlanDetailRowTypeNormal left:@"今日预期年化" right:totalInterest protocol:nil className:nil],
-                            [[HSJRollOutPlanDetailRowModel alloc] initWithType:HSJRollOutPlanDetailRowTypeNormal left:@"转入时间" right:registerTimeString protocol:nil className:nil],
-                            model],
+        self.dataSource = @[group1,
                             
                             @[[[HSJRollOutPlanDetailRowModel alloc] initWithType:HSJRollOutPlanDetailRowTypeAction left:@"投标记录" right:nil protocol:nil className:nil]],
                             
