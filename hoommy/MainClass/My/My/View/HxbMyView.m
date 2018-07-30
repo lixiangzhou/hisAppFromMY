@@ -35,6 +35,7 @@ MyViewHeaderDelegate
 @property (nonatomic, strong) UITableView *mainTableView;
 @property (nonatomic, strong) HxbMyViewHeaderView *headerView;
 @property (nonatomic, strong) UIView *bottomView;
+@property (nonatomic, strong) UIView *navView;
 //@property (nonatomic, strong) UIButton *signOutButton;
 @property (nonatomic, copy) void(^clickAllFinanceButtonWithBlock)(UILabel *button);
 @end
@@ -48,10 +49,21 @@ MyViewHeaderDelegate
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
+        [self addSubview:self.navView];
         [self addSubview:self.mainTableView];
     }
     return self;
 }
+
+- (UIView *)navView {
+    if (!_navView) {
+        _navView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, HXBStatusBarAndNavigationBarHeight)];
+        _navView.backgroundColor = [UIColor clearColor];
+    }
+    return _navView;
+}
+
+
 
 /**
  数据模型的set方法
@@ -142,7 +154,7 @@ MyViewHeaderDelegate
             [HXBUmengManagar HXB_clickEventWithEnevtId: kHSJUmeng_MyBankCardClick];
 
             HSJRollOutPlanDetailController *rollOutPlanDetailVC = [HSJRollOutPlanDetailController new];
-            rollOutPlanDetailVC.planId = @"1216";
+            rollOutPlanDetailVC.planId = [KeyChain firstPlanIdInPlanList];
             HSJMyViewController *VC = (HSJMyViewController *)[UIResponder findNextResponderForClass:[HSJMyViewController class] ByFirstResponder:self];
             [VC.navigationController pushViewController:rollOutPlanDetailVC animated:YES];
         }

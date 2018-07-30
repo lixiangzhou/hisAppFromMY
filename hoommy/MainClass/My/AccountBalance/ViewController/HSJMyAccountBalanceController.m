@@ -11,11 +11,13 @@
 #import "HxbWithdrawViewController.h"
 #import "HSJBuyViewController.h"
 #import "HSJRollOutPlanDetailController.h"
+#import "HSJMyAccountBalanceViewModel.h"
 
 @interface HSJMyAccountBalanceController ()
 @property (nonatomic,strong) HSJMyAccountBalanceHeadView *headView;
 @property (nonatomic,strong) UIButton *intoBtn;
 @property (nonatomic,strong) UIButton *withdrawalBtn;
+@property (nonatomic,strong) HSJMyAccountBalanceViewModel *viewModel;
 @end
 
 @implementation HSJMyAccountBalanceController
@@ -23,9 +25,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"账户余额";
-    
+    self.viewModel = [[HSJMyAccountBalanceViewModel alloc] init];
     [self addSubView];
     [self makeConstraints];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self loadData_userInfo];
+}
+
+- (void)loadData_userInfo {
+    kWeakSelf
+    [self.viewModel downLoadUserInfo:NO resultBlock:^(id responseData, NSError *erro) {
+        if (!erro) {
+            weakSelf.viewModel.userInfoModel = responseData;
+            weakSelf.headView.userInfoModel = responseData;
+        }
+    }];
 }
 
 - (void)addSubView {
@@ -60,7 +77,7 @@
     NSLog(@"转入存钱罐");
     [HXBUmengManagar HXB_clickEventWithEnevtId: kHSJUmeng_MyIntoPlanClick];
     HSJBuyViewController *vc = [HSJBuyViewController new];
-    vc.planId = @"1216";
+    vc.planId = [KeyChain firstPlanIdInPlanList];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
