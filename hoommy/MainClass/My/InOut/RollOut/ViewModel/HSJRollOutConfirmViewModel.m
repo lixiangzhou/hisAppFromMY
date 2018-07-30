@@ -15,6 +15,7 @@
         request.requestArgument = @{@"action": @"confirm", @"id": ids};
         request.requestUrl = kHXBMY_PlanQuit;
         request.requestMethod = NYRequestMethodPost;
+        request.showHud = YES;
         request.modelType = [HSJRollOutConfirmModel class];
     } responseResult:^(id responseData, NSError *erro) {
         weakSelf.model = responseData;
@@ -37,6 +38,7 @@
         request.requestArgument = @{@"action": @"confirm", @"id": ids, @"smscode": smsCode};
         request.requestUrl = kHXBMY_PlanQuit;
         request.requestMethod = NYRequestMethodPost;
+        request.showHud = YES;
     } responseResult:^(id responseData, NSError *erro) {
         resultBlock(responseData != nil);
     }];
