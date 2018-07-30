@@ -342,6 +342,7 @@
 		E10796BE2106C569000AFAC2 /* HXBSendSmscodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = E10796BC2106C568000AFAC2 /* HXBSendSmscodeView.m */; };
 		E10796C12106C79E000AFAC2 /* HXBFinBaseNegotiateView.m in Sources */ = {isa = PBXBuildFile; fileRef = E10796C02106C79E000AFAC2 /* HXBFinBaseNegotiateView.m */; };
 		E10796C42106C8D1000AFAC2 /* HXBSendSmscodeVCViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E10796C32106C8D1000AFAC2 /* HXBSendSmscodeVCViewModel.m */; };
+		E1083BBE210EF81100004066 /* HSJMyAccountBalanceViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E1083BBD210EF81100004066 /* HSJMyAccountBalanceViewModel.m */; };
 		E13A0E7C20F48D9F00A3E364 /* HXBGeneralAlertVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E13A0E7B20F48D9F00A3E364 /* HXBGeneralAlertVC.m */; };
 		E13A0E8420F48EF600A3E364 /* HXB_XYTools.m in Sources */ = {isa = PBXBuildFile; fileRef = E13A0E8320F48EF500A3E364 /* HXB_XYTools.m */; };
 		E13A0EF320F49E2500A3E364 /* HXBRequestUserInfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E13A0ED520F49E2500A3E364 /* HXBRequestUserInfoViewModel.m */; };
@@ -1048,6 +1049,8 @@
 		E10796C02106C79E000AFAC2 /* HXBFinBaseNegotiateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBFinBaseNegotiateView.m; sourceTree = "<group>"; };
 		E10796C22106C8D0000AFAC2 /* HXBSendSmscodeVCViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBSendSmscodeVCViewModel.h; sourceTree = "<group>"; };
 		E10796C32106C8D1000AFAC2 /* HXBSendSmscodeVCViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBSendSmscodeVCViewModel.m; sourceTree = "<group>"; };
+		E1083BBC210EF81100004066 /* HSJMyAccountBalanceViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJMyAccountBalanceViewModel.h; sourceTree = "<group>"; };
+		E1083BBD210EF81100004066 /* HSJMyAccountBalanceViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJMyAccountBalanceViewModel.m; sourceTree = "<group>"; };
 		E13A0E7920F48D6D00A3E364 /* HXBColorMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBColorMacro.h; sourceTree = "<group>"; };
 		E13A0E7A20F48D9F00A3E364 /* HXBGeneralAlertVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBGeneralAlertVC.h; sourceTree = "<group>"; };
 		E13A0E7B20F48D9F00A3E364 /* HXBGeneralAlertVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBGeneralAlertVC.m; sourceTree = "<group>"; };
@@ -3458,6 +3461,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		E1083BBB210EF7C400004066 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				E1083BBC210EF81100004066 /* HSJMyAccountBalanceViewModel.h */,
+				E1083BBD210EF81100004066 /* HSJMyAccountBalanceViewModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		E13A0E7D20F48DF400A3E364 /* AccountInfo */ = {
 			isa = PBXGroup;
 			children = (
@@ -3554,6 +3566,7 @@
 		E1425BB42101E6900049C3F4 /* AccountBalance */ = {
 			isa = PBXGroup;
 			children = (
+				E1083BBB210EF7C400004066 /* ViewModel */,
 				E1425BB92101E71E0049C3F4 /* View */,
 				E1425BB82101E7060049C3F4 /* ViewController */,
 			);
@@ -4045,6 +4058,7 @@
 				9A6E0A6A20F84CA000598071 /* main.m in Sources */,
 				4EA610BD2105E40E008580DD /* BannerModel.m in Sources */,
 				E153B9C420FC8563002BE1AE /* HXBMY_CapitalRecordViewController.m in Sources */,
+				E1083BBE210EF81100004066 /* HSJMyAccountBalanceViewModel.m in Sources */,
 				9A97DA6720EF420200688ADB /* HSJFragmentViewController.m in Sources */,
 				8D142A9020FD9B4D00520728 /* HXBAdvertiseManager.m in Sources */,
 				E153B9B920FC84A4002BE1AE /* HxbMyViewHeaderView.m in Sources */,

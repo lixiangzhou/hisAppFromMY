@@ -154,7 +154,7 @@ MyViewHeaderDelegate
             [HXBUmengManagar HXB_clickEventWithEnevtId: kHSJUmeng_MyBankCardClick];
 
             HSJRollOutPlanDetailController *rollOutPlanDetailVC = [HSJRollOutPlanDetailController new];
-            rollOutPlanDetailVC.planId = @"1216";
+            rollOutPlanDetailVC.planId = [KeyChain firstPlanIdInPlanList];
             HSJMyViewController *VC = (HSJMyViewController *)[UIResponder findNextResponderForClass:[HSJMyViewController class] ByFirstResponder:self];
             [VC.navigationController pushViewController:rollOutPlanDetailVC animated:YES];
         }
