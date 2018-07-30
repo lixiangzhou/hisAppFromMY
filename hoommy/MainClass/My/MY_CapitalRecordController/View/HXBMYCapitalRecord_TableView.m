@@ -21,8 +21,6 @@ static NSString * const HeaderID = @"HeaderID";
 //每月存放的内容
 @property (nonatomic, strong) NSMutableArray *transactionArr;
 
-@property (nonatomic, strong) HXBNoDataView *nodataView;
-
 @end
 
 @implementation HXBMYCapitalRecord_TableView
@@ -33,7 +31,6 @@ static NSString * const HeaderID = @"HeaderID";
         [self.transactionArr removeAllObjects];
         [self.tagArr removeAllObjects];
     }
-    self.nodataView.hidden = capitalRecortdDetailViewModelArray.count;
     for (int i = 0; i < capitalRecortdDetailViewModelArray.count; i++) {
         HXBMYViewModel_MainCapitalRecordViewModel *mainCapitalRecordViewModel = capitalRecortdDetailViewModelArray[i];
         if (![[self.tagArr lastObject] isEqualToString:mainCapitalRecordViewModel.capitalRecordModel.tag]) {
@@ -57,7 +54,6 @@ static NSString * const HeaderID = @"HeaderID";
 - (instancetype) initWithFrame:(CGRect)frame style:(UITableViewStyle)style {
     if (self = [super initWithFrame:frame style:style]) {
         [self setUP];
-        self.nodataView.hidden = NO;
     }
     return self;
 }
@@ -121,20 +117,5 @@ static NSString * const HeaderID = @"HeaderID";
         _transactionArr = [NSMutableArray array];
     }
     return _transactionArr;
-}
-- (HXBNoDataView *)nodataView {
-    if (!_nodataView) {
-        _nodataView = [[HXBNoDataView alloc]initWithFrame:CGRectZero];
-        [self addSubview:_nodataView];
-        _nodataView.imageName = @"Fin_NotData";
-        _nodataView.noDataMassage = @"暂无数据";
-//        _nodataView.downPULLMassage = @"下拉进行刷新";
-        [_nodataView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self).offset(kScrAdaptationH(100));
-            make.height.width.equalTo(@(kScrAdaptationH(184)));
-            make.centerX.equalTo(self);
-        }];
-    }
-    return _nodataView;
 }
 @end
