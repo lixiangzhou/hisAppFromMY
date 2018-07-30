@@ -130,12 +130,20 @@
         {
             NSString *phone = [self.viewModel getTextAtIndex:0];
             NSString *smsCode = [self.viewModel getTextAtIndex:1];
-            kWeakSelf
-            [self.viewModel mobifyPhoneNumberWithNewPhoneNumber:phone andWithNewsmscode:smsCode andWithCaptcha:self.checkPaptcha resultBlock:^(BOOL isSuccess) {
-                if (isSuccess) {
-                    [weakSelf checkIdentitySmsSuccessWithIDCard:nil andCode:nil];
-                }
-            }];
+            if(0 == phone.length) {
+                [HxbHUDProgress showTextInView:self.view text:@"请输入新的手机号码"];
+            }
+            else if(0 == smsCode.length) {
+                [HxbHUDProgress showTextInView:self.view text:@"请输入验证码"];
+            }
+            else {
+                kWeakSelf
+                [self.viewModel mobifyPhoneNumberWithNewPhoneNumber:phone andWithNewsmscode:smsCode andWithCaptcha:self.checkPaptcha resultBlock:^(BOOL isSuccess) {
+                    if (isSuccess) {
+                        [weakSelf checkIdentitySmsSuccessWithIDCard:nil andCode:nil];
+                    }
+                }];
+            }
             break;
         }
             
@@ -183,9 +191,13 @@
 
 - (void)verifyWithIDCard:(NSString *)IDCard andCode:(NSString *)code
 {
-    if (code.length == 0) {
-        [HxbHUDProgress showTextWithMessage:@"短信验证码不能为空"];
-    } else {
+    if (0 == IDCard.length) {
+        [HxbHUDProgress showTextWithMessage:@"请输入您的身份证号码"];
+    }
+    else if(0 == code.length) {
+        [HxbHUDProgress showTextWithMessage:@"请输入验证码"];
+    }
+    else {
         kWeakSelf
         [self.viewModel modifyBindPhone:IDCard code:code resultBlock:^(id responseData, NSError *erro) {
             if(!erro) {
