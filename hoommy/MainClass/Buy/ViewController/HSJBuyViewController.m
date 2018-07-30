@@ -48,28 +48,32 @@
 
 - (void)setupData {
     self.viewModel = [[HSJBuyViewModel alloc] init];
+    kWeakSelf
+    self.viewModel.hugViewBlock = ^UIView *{
+        if(weakSelf.presentedViewController) {
+            return weakSelf.presentedViewController.view;
+        }
+        return weakSelf.view;
+    };
     self.viewModel.inputMoney = self.startMoney;
-    if(!self.planModel) {
-        kWeakSelf
-        NSString *planId = self.planId?:@"";
-        [self.viewModel getDataWithId:planId showHug:YES resultBlock:^(id responseData, NSError *erro) {
-            if(!erro) {
-                weakSelf.viewModel.planModel = responseData;
-                [weakSelf startSaleTimer];
-                [weakSelf resultDeal];
-            }
-        }];
-    }
-    else{
-        self.viewModel.planModel = self.planModel;
-    }
+    
+    NSString *planId = self.planId?:@"";
+    [self.viewModel getDataWithId:planId showHug:YES resultBlock:^(id responseData, NSError *erro) {
+        if(!erro) {
+            weakSelf.viewModel.planModel = responseData;
+            [weakSelf startSaleTimer];
+            [weakSelf resultDeal];
+        }
+    }];
     [self loadUserInfo];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyCall:) name:kHXBNotification_unBindBankCard object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyCall:) name:kHXBNotification_bindBankCard object:nil];
 }
 
 - (void)notifyCall:(NSNotification*)notify {
     NSDictionary *resultDic = notify.userInfo;
-    if([notify.name isEqualToString:kHXBNotification_unBindBankCard]) {
+    if([notify.name isEqualToString:kHXBNotification_unBindBankCard] || [notify.name isEqualToString:kHXBNotification_bindBankCard]) {
         NSString *result = [resultDic stringAtPath:@"result"];
         if([result isEqualToString:@"YES"]) {
             [self loadUserInfo];
@@ -81,7 +85,6 @@
     kWeakSelf
     [self.viewModel downLoadUserInfo:YES resultBlock:^(id responseData, NSError *erro) {
         if(!erro) {
-            weakSelf.planModel = responseData;
             weakSelf.viewModel.userInfoModel = responseData;
             [weakSelf resultDeal];
         }

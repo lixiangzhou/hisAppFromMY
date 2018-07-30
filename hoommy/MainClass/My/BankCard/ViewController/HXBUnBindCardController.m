@@ -179,6 +179,9 @@
     [self.bankCardViewModel requestUnBindWithParam:@{@"idCardNo": idCardNo, @"cashPassword": transactionPwd} finishBlock:^(BOOL succeed, NSString *errorMessage, BOOL canPush) {
         // 防止按钮重复点击
         weakSelf.unBindBtn.enabled = YES;
+        if(succeed) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_bindBankCard object:nil userInfo:@{@"result":@"YES"}];
+        }
         
         if (canPush) {
             HXBMyBankResultViewController *VC = [HXBMyBankResultViewController new];

@@ -31,5 +31,7 @@ extern NSString *const kHXBNotification_starCountDown;
 extern NSString *const kHXBNotification_registrationStartCountdown;
 //解绑卡结果通知
 extern NSString *const kHXBNotification_unBindBankCard;
+//绑卡结果通知
+extern NSString *const kHXBNotification_bindBankCard;
 /// 刷新资产列表页（账户内计划列表页）
 extern NSString *const kHXBNotification_RefreshAccountPlanList;

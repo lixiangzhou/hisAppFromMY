@@ -280,6 +280,7 @@
 }
 
 - (void)bindBankCardRequest {
+    [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_unBindBankCard object:nil userInfo:@{@"result":@"YES"}];
     if (self.type == HXBRechargeAndWithdrawalsLogicalJudgment_Recharge) {
         
         HxbMyTopUpViewController *hxbMyTopUpViewController = [[HxbMyTopUpViewController alloc]init];
