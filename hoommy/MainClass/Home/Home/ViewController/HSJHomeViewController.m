@@ -20,6 +20,10 @@
 #import "UIScrollView+HXBScrollView.h"
 #import "HXBNoticeViewController.h"
 #import "HXBBaseWKWebViewController.h"
+#import "HXBAdvertiseManager.h"
+#import "HXBVersionUpdateManager.h"
+#import "HSJBuyViewController.h"
+
 @interface HSJHomeViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) HSJHomeCustomNavbarView *navView;
@@ -46,8 +50,13 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
     [self getHomeData];
     [self updateUI];
+    
+    if ([HXBAdvertiseManager shared].couldPopAtHomeAfterSlashOrGesturePwd) {
+        [[HXBVersionUpdateManager sharedInstance] show];
+    }
 }
 
 - (void)setUI {
@@ -90,7 +99,16 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [self.viewModel tableView:tableView cellForRowAtIndexPath:indexPath];
+    HSJHomePlanTableViewCell *cell = (HSJHomePlanTableViewCell*)[self.viewModel tableView:tableView cellForRowAtIndexPath:indexPath];
+    if([cell isKindOfClass:[HSJHomePlanTableViewCell class]] && !cell.intoButtonAct) {
+        kWeakSelf;
+        cell.intoButtonAct = ^(NSString *planId) {
+            HSJBuyViewController *vc = [[HSJBuyViewController alloc] init];
+            vc.planId = planId;
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+        };
+    }
+    return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

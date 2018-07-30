@@ -68,7 +68,14 @@
 #pragma mark - Action
 // 点击返回
 - (void)leftBackBtnClick {
-    [self popToViewControllerWithClassName:@"HxbAccountInfoViewController"];
+    HXBBaseNavigationController *navVC = (HXBBaseNavigationController*)self.navigationController;
+    UIViewController *vc = [navVC getViewControllerByClassName:@"HSJBuyViewController"];
+    if(vc) {
+        [navVC popToViewController:vc animated:YES];
+    }
+    else{
+        [self.navigationController popToRootViewControllerAnimated:NO];
+    }
 }
 
 // 点击重新绑卡按钮
@@ -77,18 +84,21 @@
         //进入绑卡界面
         HxbWithdrawCardViewController *withdrawCardViewController = [[HxbWithdrawCardViewController alloc] init];
         withdrawCardViewController.title = @"绑卡";
-        withdrawCardViewController.className = @"HxbAccountInfoViewController";
         withdrawCardViewController.type = HXBRechargeAndWithdrawalsLogicalJudgment_Other;
         [self.navigationController pushViewController:withdrawCardViewController animated:YES];
     } else {
-        [self popToViewControllerWithClassName:@"HSJMyViewController"];
+        [self leftBackBtnClick];
     }
 
 }
 
 // 点击我的账户按钮
 - (void)myAccountButtonClick {
-    [self popToViewControllerWithClassName:@"HSJMyViewController"];
+    [self.navigationController popToRootViewControllerAnimated:NO];
+    HXBBaseNavigationController *navVC = (HXBBaseNavigationController*)[HXBRootVCManager manager].mainTabbarVC.viewControllers.lastObject;
+    if(self.navigationController != navVC){
+        [HXBRootVCManager manager].mainTabbarVC.selectedIndex = [HXBRootVCManager manager].mainTabbarVC.viewControllers.count-1;
+    }
 }
 
 @end

@@ -72,7 +72,6 @@
     
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, HXBStatusBarHeight, kScreenWidth, 44)];
     titleLabel.font = kHXBFont_34;
-    titleLabel.text = @"钱生钱计划";
     titleLabel.textColor = kHXBColor_564727_100;
     titleLabel.textAlignment = NSTextAlignmentCenter;
     [navView addSubview:titleLabel];
@@ -265,6 +264,7 @@
 }
 
 - (void)setData {
+    self.titleLabel.text = self.viewModel.planModel.name;
     self.topView.viewModel = self.viewModel;
     self.rulerView.viewModel = self.viewModel;
     self.advantageView.viewModel = self.viewModel;

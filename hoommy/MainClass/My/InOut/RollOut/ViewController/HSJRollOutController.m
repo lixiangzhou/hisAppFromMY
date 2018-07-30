@@ -36,7 +36,7 @@
     
     self.viewModel = [HSJRollOutViewModel new];
     [self setUI];
-    [self updateData];
+    [self getData];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateData) name:kHXBNotification_RefreshAccountPlanList object:nil];
 }
 
@@ -67,6 +67,7 @@
 
     // 底部视图
     UIView *bottomView = [UIView new];
+    bottomView.clipsToBounds = YES;
     [self.safeAreaView addSubview:bottomView];
     self.bottomView = bottomView;
 
@@ -124,14 +125,19 @@
 }
 
 #pragma mark - Network
-- (void)updateData {
+- (void)getData {
     kWeakSelf
     [self.viewModel getAssets:^(BOOL isSuccess) {
         weakSelf.headerView.assetsModel = weakSelf.viewModel.assetsModel;
-        weakSelf.noDataView.hidden = weakSelf.viewModel.dataSource.count > 0;
     }];
     
     [self getListData:YES];
+}
+
+- (void)updateData {
+    [self getData];
+    self.batchBtn.selected = NO;
+    [self updateViews];
 }
 
 - (void)getListData:(BOOL)isNew {
@@ -139,6 +145,7 @@
     [self.viewModel getPlans:isNew resultBlock:^(BOOL isSuccess) {
         if (isSuccess) {
             [weakSelf.tableView reloadData];
+            weakSelf.noDataView.hidden = weakSelf.viewModel.dataSource.count > 0;
             if (weakSelf.viewModel.footerType == HSJRefreshFooterTypeMoreData) {
                 [weakSelf.tableView.mj_footer endRefreshing];
                 weakSelf.tableView.footerWithRefreshBlock = ^(UIScrollView *scrollView) {
@@ -196,17 +203,18 @@
     if (self.batchBtn.selected == NO) {
         [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_RollOutBatchClick];
     }
+    
+    if (self.batchBtn.selected == NO) {
+        [self.viewModel calAmount];
+        if (self.viewModel.hasQuitPlans == NO) {
+            [HxbHUDProgress showTextWithMessage:@"当前无可转出内容"];
+            return;
+        }
+    }
+    
     self.batchBtn.selected = !self.batchBtn.isSelected;
     
-    self.viewModel.editing = self.batchBtn.selected;
-    
-    [self.tableView reloadData];
-    self.bottomView.hidden = !self.viewModel.editing;
-    [self.bottomView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.equalTo(@(self.viewModel.editing ? 90 : 0));
-    }];
-    
-    [self updateAmount];
+    [self updateViews];
 }
      
  - (void)rollOutAction {
@@ -231,5 +239,16 @@
      self.rollOutLabel.text = self.viewModel.amount;
  }
 
+- (void)updateViews {
+    self.viewModel.editing = self.batchBtn.selected;
+    
+    [self.tableView reloadData];
+    self.bottomView.hidden = !self.viewModel.editing;
+    [self.bottomView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@(self.viewModel.editing ? 90 : 0));
+    }];
+    
+    [self updateAmount];
+}
 
 @end

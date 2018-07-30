@@ -44,6 +44,12 @@ NSString *const HSJHomePlanCellIdentifier = @"HSJHomePlanCellIdentifier";
 - (HSJHomePlanView *)planView {
     if (!_planView) {
         _planView = [[HSJHomePlanView alloc] initWithFrame:CGRectZero];
+        kWeakSelf
+        _planView.intoButtonAct = ^(NSString *planId) {
+            if(weakSelf.intoButtonAct) {
+                weakSelf.intoButtonAct(planId);
+            }
+        };
     }
     return _planView;
 }

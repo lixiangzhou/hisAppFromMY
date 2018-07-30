@@ -60,6 +60,7 @@
                                      @"smscode" : smscode?:@"",
                                      @"captcha" : captcha?:@"",///       否    string    图验(只有在登录错误超过3次才需要输入图验)
                                      };
+        request.showHud = YES;
     } responseResult:^(id responseData, NSError *erro) {
         if (!erro) {
             if ((![mobile isEqualToString:KeyChain.mobile]) && KeyChain.mobile) {

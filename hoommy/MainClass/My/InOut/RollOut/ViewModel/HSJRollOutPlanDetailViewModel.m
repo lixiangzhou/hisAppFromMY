@@ -15,6 +15,7 @@
     [self loadData:^(NYBaseRequest *request) {
         request.requestUrl = kHXBMY_PlanDetaileURL(planId);
         request.modelType = [HSJRollOutModel class];
+        request.showHud = YES;
     } responseResult:^(id responseData, NSError *erro) {
         weakSelf.model = responseData;
         resultBlock(responseData != nil);

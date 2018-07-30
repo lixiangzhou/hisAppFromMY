@@ -27,6 +27,7 @@
         request.requestUrl = kHSJHomeBaby;
         request.requestMethod = NYRequestMethodGet;
         request.modelType = [HSJHomeModel class];
+        request.showHud = YES;
     } responseResult:^(HSJHomeModel *responseData, NSError *erro) {
         if (responseData) {
             weakSelf.homeModel = responseData;

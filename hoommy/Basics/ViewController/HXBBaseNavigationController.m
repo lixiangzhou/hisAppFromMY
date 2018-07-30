@@ -74,11 +74,22 @@
 
 #pragma mark - setter pop的自定义
 - (void)popViewControllerWithToViewController: (NSString *)toViewControllerStr andAnimated: (BOOL)animated{
+    UIViewController *toVC = [self getViewControllerByClassName:toViewControllerStr];
+    if(toVC) {
+        [self popToViewController:toVC animated:animated];
+    }
+    else {
+        [self popViewControllerAnimated:animated];
+    }
+}
+
+- (UIViewController *)getViewControllerByClassName:(NSString*)className {
     for (UIViewController *toVC in self.childViewControllers) {
-        if ([NSStringFromClass(toVC.class) isEqualToString:toViewControllerStr]) {
-            [self popToViewController:toVC animated:animated];
+        if ([NSStringFromClass(toVC.class) isEqualToString:className]) {
+            return toVC;
         }
     }
+    return nil;
 }
 
 - (UIViewController *)popViewControllerAnimated:(BOOL)animated {

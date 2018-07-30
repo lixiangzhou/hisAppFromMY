@@ -50,12 +50,13 @@
         request.requestMethod = NYRequestMethodPost;
         request.requestUrl = kHXBUser_SignUPURL;
         request.requestArgument = @{
-                                      @"mobile"    : mobile,///           是    string    手机号
-                                      @"smscode" : smscode,///          是    string    短信验证码
-                                      @"password" : password,///       是    string    密码
+                                    @"mobile"    : mobile ?: @"",///           是    string    手机号
+                                      @"smscode" : smscode ?: @"",///          是    string    短信验证码
+                                      @"password" : password ?: @"",///       是    string    密码
                                       @"utmSource" : @"",///推广渠道
                                       @"marketSource" : @"ios"///市场来源
                                       };
+        request.showHud = YES;
     } responseResult:^(id responseData, NSError *erro) {
         if (resultBlock) {
             if (responseData) {

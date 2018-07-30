@@ -26,7 +26,7 @@
 
 @property (nonatomic, strong) UILabel *refundableLabel;
 
-@property (nonatomic, strong) UILabel *intoLabel;
+@property (nonatomic, strong) UIButton *intoBtn;
 
 @property (nonatomic, strong) UIView *segmentBottomLine;
 
@@ -52,7 +52,7 @@
     [self addSubview:self.annualizedTextLabel];
     [self addSubview:self.depositoryLabel];
     [self addSubview:self.refundableLabel];
-    [self addSubview:self.intoLabel];
+    [self addSubview:self.intoBtn];
     [self addSubview:self.segmentBottomLine];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self).offset(kScrAdaptationW750(30));
@@ -98,7 +98,7 @@
         make.centerY.equalTo(self.depositoryLabel);
         make.height.offset(kScrAdaptationH750(39));
     }];
-    [self.intoLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.intoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.expectedRateLabel);
         make.height.offset(kScrAdaptationH750(80));
         make.width.offset(kScrAdaptationW750(280));
@@ -115,10 +115,10 @@
 - (void)updateUI {
     if (KeyChain.isLogin) {
         self.planBackgroundImageView.image = [UIImage imageNamed:@"Home_Invest_Plan_Bg"];
-        self.intoLabel.hidden = NO;
+        self.intoBtn.hidden = NO;
     } else {
         self.planBackgroundImageView.image = [UIImage imageNamed:@"Home_Signup_Plan_Bg"];
-        self.intoLabel.hidden = YES;
+        self.intoBtn.hidden = YES;
     }
 }
 
@@ -132,7 +132,7 @@
     [self.refundableLabel mas_updateConstraints:^(MASConstraintMaker *make) {
         make.width.offset(refundableLabelSize.width + 2 * kScrAdaptationW750(14));
     }];
-    
+    [self updateUI];
 }
 
 - (NSString *)getLockString {
@@ -227,18 +227,24 @@
     return _refundableLabel;
 }
 
-- (UILabel *)intoLabel {
-    if (!_intoLabel) {
-        _intoLabel = [[UILabel alloc] init];
-        _intoLabel.text = @"转入";
-        _intoLabel.textAlignment = NSTextAlignmentCenter;
-        _intoLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(32);
-        _intoLabel.textColor = kHXBColor_FFFFFF_100;
-        _intoLabel.backgroundColor = kHXBColor_FF7055_100;
-        _intoLabel.layer.cornerRadius = kScrAdaptationW750(40);
-        _intoLabel.layer.masksToBounds = YES;
+- (UIButton *)intoBtn {
+    if (!_intoBtn) {
+        _intoBtn = [[UIButton alloc] init];
+        [_intoBtn setTitle:@"转入" forState:UIControlStateNormal];
+        _intoBtn.titleLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(32);
+        [_intoBtn setTitleColor:kHXBColor_FFFFFF_100 forState:UIControlStateNormal];
+        _intoBtn.backgroundColor = kHXBColor_FF7055_100;
+        _intoBtn.layer.cornerRadius = kScrAdaptationW750(40);
+        _intoBtn.layer.masksToBounds = YES;
+        [_intoBtn addTarget:self action:@selector(intoButtonAct:) forControlEvents:UIControlEventTouchUpInside];
     }
-    return _intoLabel;
+    return _intoBtn;
+}
+
+- (void)intoButtonAct:(UIButton*)button {
+    if(self.intoButtonAct) {
+        self.intoButtonAct(self.planModel.ID);
+    }
 }
 
 - (UIView *)segmentBottomLine {
