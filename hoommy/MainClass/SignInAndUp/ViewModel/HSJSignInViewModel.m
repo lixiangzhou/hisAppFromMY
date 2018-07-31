@@ -65,8 +65,11 @@
         request.showHud = YES;
     } responseResult:^(id responseData, NSError *erro) {
         if (!erro) {
-            if ((![mobile isEqualToString:KeyChain.mobile]) && KeyChain.mobile) {
+            NSString *oldMobile = KeyChain.mobile;
+            BOOL needChange = oldMobile && ![mobile isEqualToString:oldMobile];
+            if (needChange) {
                 [KeyChain removeGesture];
+                // 移除原来的值
                 KeyChain.skipGesture = kHXBGesturePwdSkipeNONE;
                 KeyChain.skipGestureAlertAppeared = NO;
                 [HXBRootVCManager manager].gesturePwdVC = nil;
@@ -75,6 +78,12 @@
             
             KeyChain.isLogin = YES;
             KeyChain.mobile = mobile;
+            
+            if (needChange) {
+                // 设置新的值
+                KeyChain.skipGesture = kHXBGesturePwdSkipeNONE;
+                KeyChain.skipGestureAlertAppeared = NO;
+            }
             resultBlock(YES,NO);
         } else {
             NSDictionary *response = erro.userInfo;
