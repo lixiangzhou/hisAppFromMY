@@ -7,12 +7,13 @@
 //
 
 #import "HSJBaseViewModel.h"
+#import "HXBUserInfoModel.h"
 
 @interface HSJBaseViewModel (HSJNetWorkApi)
 
 - (void)checkVersionUpdate:(NetWorkResponseBlock)resultBlock;
 
-- (void)downLoadUserInfo:(BOOL)isShowHud resultBlock:(NetWorkResponseBlock)resultBlock;
+- (void)downLoadUserInfo:(BOOL)isShowHud resultBlock:(void(^)(HXBUserInfoModel *userInfoModel, NSError* erro))resultBlock;
 
 - (void)verifyCodeRequestWithResultBlock:(void(^)(NYBaseRequest* request)) requestBlock resultBlock:(void(^)(id responseObject, NSError *error))resultBlock;
 //产品详情

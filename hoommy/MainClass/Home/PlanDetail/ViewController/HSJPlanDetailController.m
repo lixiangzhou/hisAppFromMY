@@ -16,6 +16,7 @@
 #import "HSJBuyViewController.h"
 #import "HSJEarningCalculatorView.h"
 #import "HSJSignInViewController.h"
+#import "HSJDepositoryOpenTipView.h"
 
 @interface HSJPlanDetailController () <UIScrollViewDelegate>
 @property (nonatomic, weak) UIView *navView;
@@ -294,9 +295,19 @@
     }
     
     if (KeyChain.isLogin) {
-        HSJBuyViewController *vc = [HSJBuyViewController new];
-        vc.planId = self.planId;
-        [self.navigationController pushViewController:vc animated:YES];
+        kWeakSelf
+        [self.viewModel downLoadUserInfo:YES resultBlock:^(HXBUserInfoModel *userInfoModel, NSError *erro) {
+            if (userInfoModel.userInfo.isCreateEscrowAcc == NO) {
+                [HSJDepositoryOpenTipView show];
+            } else if ([userInfoModel.userInfo.riskType isEqualToString:@"立即评测"]) {
+                [weakSelf.viewModel riskTypeAssementFrom:weakSelf];
+            } else {
+                HSJBuyViewController *vc = [HSJBuyViewController new];
+                vc.planId = weakSelf.planId;
+                [weakSelf.navigationController pushViewController:vc animated:YES];
+            }
+        }];
+        
     } else {
         [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_ShowLoginVC object:nil];
     }

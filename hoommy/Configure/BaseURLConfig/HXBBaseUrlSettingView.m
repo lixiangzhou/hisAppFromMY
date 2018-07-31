@@ -7,7 +7,6 @@
 //
 
 #import "HXBBaseUrlSettingView.h"
-#import "NYNetworkConfig.h"
 #import <ReactiveObjC.h>
 
 @interface HXBBaseUrlSettingView ()
@@ -48,7 +47,7 @@
 
 - (void)setUI {
     UITextField *textField = [UITextField new];
-    textField.text = [NYNetworkConfig sharedInstance].baseUrl;
+    textField.text = [HXBBaseUrlManager manager].baseUrl;
     textField.placeholder = @"例如：http://192.168.1.36:3100";
     textField.borderStyle = UITextBorderStyleRoundedRect;
     textField.layer.borderWidth = 0.5;
@@ -74,7 +73,7 @@
     
     [[btn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
         
-        [NYNetworkConfig sharedInstance].baseUrl = [textField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+        [HXBBaseUrlManager manager].baseUrl = [textField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
         
         [textField resignFirstResponder];
         

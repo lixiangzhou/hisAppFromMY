@@ -10,8 +10,6 @@
 
 @interface HSJRiskAssessmentViewController ()
 
-@property (nonatomic,copy) void(^popBlock)(NSString *type);
-
 @end
 
 @implementation HSJRiskAssessmentViewController
@@ -85,8 +83,5 @@
     [self callHandler:@"skipTest" data:nil];
 }
 
-- (void)popWithBlock:(void (^)(NSString *type))popBlock {
-    self.popBlock = popBlock;
-}
 
 @end

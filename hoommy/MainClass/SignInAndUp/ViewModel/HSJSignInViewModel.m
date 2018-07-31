@@ -8,6 +8,8 @@
 
 #import "HSJSignInViewModel.h"
 #import "HSJSignInModel.h"
+#import "HXBRootVCManager.h"
+
 @implementation HSJSignInViewModel
 
 
@@ -67,6 +69,7 @@
                 [KeyChain removeGesture];
                 KeyChain.skipGesture = kHXBGesturePwdSkipeNONE;
                 KeyChain.skipGestureAlertAppeared = NO;
+                [HXBRootVCManager manager].gesturePwdVC = nil;
             }
             KeyChain.gesturePwdCount = 5;
             
