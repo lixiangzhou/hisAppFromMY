@@ -73,10 +73,13 @@
 - (void)getHomeData {
     kWeakSelf
     [self.viewModel getHomeDataWithResultBlock:^(id responseData, NSError *erro) {
-        weakSelf.headerView.homeModel = weakSelf.viewModel.homeModel;
-        [weakSelf updateUI];
-        [weakSelf.mainTabelView reloadData];
-        [weakSelf.mainTabelView endRefresh:YES];
+        if(!erro) {
+            weakSelf.headerView.homeModel = weakSelf.viewModel.homeModel;
+            [weakSelf updateUI];
+            [weakSelf.mainTabelView reloadData];
+            [weakSelf.mainTabelView endRefresh:YES];
+        }
+        
     }];
     [self.viewModel getGlobal:^(HSJGlobalInfoModel *infoModel) {
         weakSelf.footerView.infoModel = infoModel;
