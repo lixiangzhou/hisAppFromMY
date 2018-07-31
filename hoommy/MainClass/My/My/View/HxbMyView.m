@@ -23,9 +23,10 @@
 #import "HSJMyHomeInfoTableViewCell.h"
 #import "HXBMiddlekey.h"
 #import "HSJMyAccountBalanceController.h"
-#import "HSJRollOutPlanDetailController.h"
-
+#import "HSJPlanDetailController.h"
+#import "HSJDepositoryOpenController.h"
 #import "HSJFragmentViewController.h"
+
 @interface HxbMyView ()
 <
 UITableViewDelegate,
@@ -143,20 +144,29 @@ MyViewHeaderDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            NSLog(@"恒丰银行账户余额");
-            HSJMyAccountBalanceController *vc = [HSJMyAccountBalanceController new];
-            vc.userInfoModel = self.userInfoModel;
-            HSJMyViewController *VC = (HSJMyViewController *)[UIResponder findNextResponderForClass:[HSJMyViewController class] ByFirstResponder:self];
-            [VC.navigationController pushViewController:vc animated:YES];
+            if (!self.userInfoModel.userInfo.isCreateEscrowAcc) { //未开户
+                [HXBUmengManagar HXB_clickEventWithEnevtId:kHSJUmeng_MyGoDepositoryClick];
+                HSJDepositoryOpenController *openVC = [[HSJDepositoryOpenController alloc] init];
+                openVC.title = @"开通存管账户";
+                HSJMyViewController *VC = (HSJMyViewController *)[UIResponder findNextResponderForClass:[HSJMyViewController class] ByFirstResponder:self];
+                [VC.navigationController pushViewController:openVC animated:YES];
+            } else { //已开户
+                NSLog(@"恒丰银行账户余额");
+                HSJMyAccountBalanceController *vc = [HSJMyAccountBalanceController new];
+                vc.userInfoModel = self.userInfoModel;
+                HSJMyViewController *VC = (HSJMyViewController *)[UIResponder findNextResponderForClass:[HSJMyViewController class] ByFirstResponder:self];
+                [VC.navigationController pushViewController:vc animated:YES];
+            }     
         } else {
             NSLog(@"零钱罐");
             
             [HXBUmengManagar HXB_clickEventWithEnevtId: kHSJUmeng_MyBankCardClick];
-
-            HSJRollOutPlanDetailController *rollOutPlanDetailVC = [HSJRollOutPlanDetailController new];
-            rollOutPlanDetailVC.planId = [KeyChain firstPlanIdInPlanList];
+            
+            HSJPlanDetailController* vc = [[HSJPlanDetailController alloc] init];
+            vc.planId = [KeyChain firstPlanIdInPlanList];
+    
             HSJMyViewController *VC = (HSJMyViewController *)[UIResponder findNextResponderForClass:[HSJMyViewController class] ByFirstResponder:self];
-            [VC.navigationController pushViewController:rollOutPlanDetailVC animated:YES];
+            [VC.navigationController pushViewController:vc animated:YES];
         }
     }
     if (indexPath.section == 1) {//第一组

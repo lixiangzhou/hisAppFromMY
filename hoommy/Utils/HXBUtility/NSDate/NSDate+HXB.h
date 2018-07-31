@@ -11,4 +11,7 @@
 @interface NSDate (HXB)
 /// 毫秒级时间
 + (NSString *)milliSecondSince1970;
+
+/// 传入date，返回此天的0时0分0秒时间
++ (NSDate *)getDayZeroTimestamp:(NSDate *)aDate;
 @end
