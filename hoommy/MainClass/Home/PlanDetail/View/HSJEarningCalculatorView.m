@@ -28,6 +28,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self setUI];
+        [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:nil action:nil]];
     }
     return self;
 }
@@ -168,9 +169,11 @@
         make.centerX.equalTo(contentView);
     }];
     
+    
     [closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(titleLabel);
-        make.left.equalTo(@kScrAdaptationW(8));
+        make.centerY.equalTo(titleLabel);
+        make.left.equalTo(self);
+        make.width.height.equalTo(@40);
     }];
     
     [inputField mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -361,6 +364,7 @@
 - (NSString *)getFieldValue {
     NSString *currentMoney = [self.inputField.text stringByReplacingOccurrencesOfString:@"," withString:@""];
     currentMoney = [currentMoney stringByReplacingOccurrencesOfString:@"¥" withString:@""];
+    currentMoney = [currentMoney stringByReplacingOccurrencesOfString:@"￥" withString:@""];
     return currentMoney;
 }
 
