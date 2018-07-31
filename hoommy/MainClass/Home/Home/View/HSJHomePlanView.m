@@ -124,7 +124,7 @@
 
 - (void)setPlanModel:(HSJHomePlanModel *)planModel {
     _planModel = planModel;
-    self.expectedRateLabel.text = [NSString stringWithFormat:@"%@%%",planModel.baseInterestRate];
+    self.expectedRateLabel.text = [NSString stringWithFormat:@"%@%%",planModel.expectedRate];
     
     self.refundableLabel.text = [self getLockString];
     
