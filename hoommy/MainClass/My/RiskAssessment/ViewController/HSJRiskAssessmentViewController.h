@@ -9,5 +9,5 @@
 #import "HXBBaseWKWebViewController.h"
 
 @interface HSJRiskAssessmentViewController : HXBBaseWKWebViewController
-
+@property (nonatomic,copy) void(^popBlock)(NSString *type);
 @end

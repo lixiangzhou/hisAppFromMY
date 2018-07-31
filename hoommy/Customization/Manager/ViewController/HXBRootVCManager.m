@@ -29,10 +29,6 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         manager = [HXBRootVCManager new];
-        UIViewController *vc = [manager getTabBarOrGesPwdVC];
-        if ([vc isKindOfClass:[HSJGestureLoginController class]]) {
-            manager.gesturePwdVC = (HSJGestureLoginController *)vc;
-        }
     });
     return manager;
 }
@@ -181,6 +177,13 @@
                 
                 if ([HXBAdvertiseManager shared].couldPopAtHomeAfterSlashOrGesturePwd == NO) {
                     self.gesturePwdVC.dismissBlock = block;
+                } else {
+                    if (block == nil) {
+                        kWeakSelf
+                        self.gesturePwdVC.dismissBlock = ^(BOOL delay, BOOL toActivity, BOOL popRightNow) {
+                            [weakSelf.gesturePwdVC.view removeFromSuperview];
+                        };
+                    }
                 }
             }
         }
@@ -260,4 +263,13 @@
     return _advertiseVC;
 }
 
+- (HSJGestureLoginController *)gesturePwdVC {
+    if (_gesturePwdVC == nil) {
+        UIViewController *vc = [self getTabBarOrGesPwdVC];
+        if ([vc isKindOfClass:[HSJGestureLoginController class]]) {
+            self.gesturePwdVC = (HSJGestureLoginController *)vc;
+        }
+    }
+    return _gesturePwdVC;
+}
 @end

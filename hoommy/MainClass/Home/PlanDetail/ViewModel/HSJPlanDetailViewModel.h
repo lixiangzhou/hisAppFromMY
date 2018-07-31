@@ -41,5 +41,5 @@
 
 
 - (void)getDataWithId:(NSString *)planId resultBlock:(void(^)(BOOL isSuccess))resultBlock;
-
+- (void)riskTypeAssementFrom:(UIViewController *)controller;
 @end

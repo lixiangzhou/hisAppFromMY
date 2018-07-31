@@ -238,7 +238,7 @@
             [self.viewModel signUPRequetWithMobile:weakSelf.phonNumber smscode:smscode password:password inviteCode:inviteCode resultBlock:^(BOOL isSuccess) {
                 if (isSuccess) {
                     [KeyChain removeGesture];
-                    KeyChain.skipGesture = nil;
+                    KeyChain.skipGesture = kHXBGesturePwdSkipeNONE;
                     KeyChain.skipGestureAlertAppeared = NO;
                     
                     KeyChain.mobile = weakSelf.phonNumber;
