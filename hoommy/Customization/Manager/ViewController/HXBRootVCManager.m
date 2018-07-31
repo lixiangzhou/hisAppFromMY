@@ -14,6 +14,7 @@
 #import "HXBAdvertiseManager.h"
 #import "HxbAdvertiseViewController.h"
 #import "HSJGlobalInfoManager.h"
+#import "HXBHomePopViewManager.h"
 
 #define AXHVersionKey @"version"
 
@@ -42,6 +43,7 @@
     [[UITextField appearance] setTintColor:[UIColor blackColor]];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     [HXBUmengManagar HXB_umengStart];
+    [[HXBHomePopViewManager sharedInstance] getHomePopViewData];//获取首页弹窗数据
     [[HXBAdvertiseManager shared] getSplash];
     [[HSJGlobalInfoManager shared] getData];
     
@@ -116,8 +118,8 @@
 
 - (void)popWindowsAtHomeAfterSlashOrGesturePwd {
     [HXBAdvertiseManager shared].couldPopAtHomeAfterSlashOrGesturePwd = YES;
-//    UIViewController *VC = self.mainTabbarVC.childViewControllers.firstObject.childViewControllers.firstObject;
-//    [[HXBHomePopViewManager sharedInstance] popHomeViewfromController:VC];//展示首页弹窗
+    UIViewController *VC = self.mainTabbarVC.childViewControllers.firstObject.childViewControllers.firstObject;
+    [[HXBHomePopViewManager sharedInstance] popHomeViewfromController:VC];//展示首页弹窗
     [[HXBVersionUpdateManager sharedInstance] show];
 }
 

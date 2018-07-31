@@ -11,6 +11,7 @@
 
 #define kHXBMY_VersionUpdateURL @"/update"//版本更新
 #define kHXBSplash            @"/splash"///闪屏接口
+#define kHXBHome_PopView @"/popups"///首页弹窗
 #define kGlobal                 @"/global" /// 全局统计
 #define kHSJHomeBaby            @"/home/baby" /// 全局统计
 //MARK: ======================= 协议 ==========================
