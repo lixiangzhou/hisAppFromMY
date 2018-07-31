@@ -22,10 +22,13 @@
 }
 
 + (void)showTextInView:(UIView*)view text:(NSString *)message {
+    [self showTextInView:view text:message completion:nil];
+}
+
++ (void)showTextInView:(UIView*)view text:(NSString *)message completion:(void (^)(void))completionBlock {
     if(message.length <= 0) {
         return;
     }
-    [SGInfoAlert showInfo:message bgColor:[UIColor blackColor].CGColor inView:view vertical:0.3];
+    [SGInfoAlert showInfo:message bgColor:[UIColor blackColor].CGColor inView:view vertical:0.3 completion:completionBlock];
 }
-
 @end

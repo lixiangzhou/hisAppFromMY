@@ -24,4 +24,10 @@
           inView:(UIView*)view 
         vertical:(float)height;
 
++ (void)showInfo:(NSString*)info
+         bgColor:(CGColorRef)color
+          inView:(UIView*)view
+        vertical:(float)height
+      completion:(void (^)(void))completionBlock;
+
 @end

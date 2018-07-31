@@ -12,4 +12,5 @@
 
 + (void)showTextWithMessage:(NSString *)message;
 + (void)showTextInView:(UIView*)view text:(NSString *)message;
++ (void)showTextInView:(UIView*)view text:(NSString *)message completion:(void (^)(void))completionBlock;
 @end
