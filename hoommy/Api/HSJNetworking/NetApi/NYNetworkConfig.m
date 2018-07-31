@@ -16,9 +16,13 @@
 static NSString *const User_Agent = @"X-Hxb-User-Agent";
 ///通用接口Header必传字段 token
 static NSString *const X_HxbAuth_Token = @"X-Hxb-Auth-Token";
+//
+static NSString *HXBBaseUrlKey = @"HXBBaseUrlKey";
 
 ///网络数据的基本数据类
-@interface NYNetworkConfig ()
+@interface NYNetworkConfig (){
+    NSString *_baseUrl;
+}
 
 @property (nonatomic, strong, readwrite) NSDictionary *additionalHeaderFields;
 
@@ -50,12 +54,13 @@ static NSString *const X_HxbAuth_Token = @"X-Hxb-Auth-Token";
         self.version = [[[NSBundle mainBundle]infoDictionary]objectForKey:@"CFBundleShortVersionString"] ?: @"";
         self.userAgent = [NSString stringWithFormat:@"%@/IOS %@/v%@ iphone" ,[HXBDeviceVersion deviceVersion],self.systemVision,self.version] ?: @"";
         _additionalHeaderFields = @{};
-        self.baseUrl = @"";
+        _defaultTimeOutInterval = 20;
         self.defaultAcceptableStatusCodes = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(200, 100)];
         self.defaultAcceptableContentTypes = [NSSet setWithObjects:@"text/json", @"text/html", @"text/javascript", @"application/json",@"application/x-www-form-urlencoded",@"image/png", @"text/plain",nil];
     }
     return self;
 }
+
 
 //- (NSString *)baseUrl {
 //    if(_baseUrl.length <= 0) {
@@ -63,6 +68,31 @@ static NSString *const X_HxbAuth_Token = @"X-Hxb-Auth-Token";
 //    }
 //    return _baseUrl;
 //}
+//- (NSString *)baseUrl {
+//    if (HXBShakeChangeBaseUrl == NO) {
+//        // 线上环境
+//        _baseUrl = @"https://api.hoomxb.com";
+//    } else {
+//        NSString *storedBaseUrl = [[NSUserDefaults standardUserDefaults] objectForKey:HXBBaseUrlKey];
+//        // http://192.168.1.36:3100 长度24
+//        if (storedBaseUrl.length > 0) {
+//            _baseUrl = storedBaseUrl;
+//        } else {
+//            _baseUrl = @"http://192.168.1.31:3100";
+//        }
+//    }
+//    
+//    return _baseUrl;
+//}
+
+
+- (void)setBaseUrl:(NSString *)baseUrl {
+    if (HXBShakeChangeBaseUrl == NO) {
+        return;
+    }
+    _baseUrl = baseUrl;
+    [[NSUserDefaults standardUserDefaults] setObject:baseUrl forKey:HXBBaseUrlKey];
+}
 
 //MARK: 设置请求基本信息
 - (NSDictionary *)additionalHeaderFields

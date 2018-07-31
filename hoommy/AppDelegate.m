@@ -31,6 +31,7 @@
     }
     
     [[HXBRootVCManager manager] createRootVCAndMakeKeyWindow];
+    [HXBBaseUrlSettingView attatchToWindow];
     
     return YES;
 }
