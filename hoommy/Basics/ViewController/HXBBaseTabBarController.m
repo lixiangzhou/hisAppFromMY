@@ -166,6 +166,12 @@
     return YES;
 }
 
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
+    if (HXBShakeChangeBaseUrl == YES) {
+        [[HXBBaseUrlSettingView settingView] show];
+    }
+}
+
 #pragma mark - gtter方法
 - (UIColor *)normalColor {
     if (!_normalColor) {
@@ -180,10 +186,5 @@
     return _selectColor;
 }
 
-- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
-    if (HXBShakeChangeBaseUrl == YES) {
-        [[HXBBaseUrlSettingView settingView] show];
-    }
-}
 @end
 

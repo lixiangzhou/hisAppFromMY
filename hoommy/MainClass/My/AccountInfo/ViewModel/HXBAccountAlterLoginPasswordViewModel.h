@@ -10,6 +10,7 @@
 
 @interface HXBAccountAlterLoginPasswordViewModel : HSJBaseViewModel
 
+
 - (void)mobifyPassword_LoginRequest_requestWithOldPwd: (NSString *)oldPassword
                                             andNewPwd: (NSString *)newPassword
                                       andSuccessBlock: (void(^)())successDateBlock

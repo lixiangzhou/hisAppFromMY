@@ -557,13 +557,19 @@
     NSString *bankNo = [self.bankNoView.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSString *mobile = [self.mobileView.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     
-    BOOL nameEnable = username.length >= 2;
-    BOOL idNoEnable = idNo.length >= self.idView.limitStringLength;
-    BOOL pwdEnable = transactionPwd.length >= self.transactionPwdView.limitStringLength;
-    BOOL bankNoEnable = bankNo.length >= 12;
-    BOOL mobileEnable = mobile.length >= self.mobileView.limitStringLength;
+//    BOOL nameEnable = username.length >= 2;
+//    BOOL idNoEnable = idNo.length >= self.idView.limitStringLength;
+//    BOOL pwdEnable = transactionPwd.length >= self.transactionPwdView.limitStringLength;
+//    BOOL bankNoEnable = bankNo.length >= 12;
+//    BOOL mobileEnable = mobile.length >= self.mobileView.limitStringLength;
     
-    if (nameEnable && idNoEnable && pwdEnable && bankNoEnable && mobileEnable && self.isAgree) {
+    BOOL nameEnable = username.length > 0;
+    BOOL idNoEnable = idNo.length > 0;
+    BOOL pwdEnable = transactionPwd.length > 0;
+    BOOL bankNoEnable = bankNo.length > 0;
+    BOOL mobileEnable = mobile.length > 0;
+    
+    if ((nameEnable || idNoEnable || pwdEnable || bankNoEnable || mobileEnable) && self.isAgree) {
         self.bottomBtn.backgroundColor = kHXBColor_D5B775;
         self.bottomBtn.enabled = YES;
     } else {

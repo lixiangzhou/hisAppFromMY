@@ -30,10 +30,17 @@
     } failure:^(NYBaseRequest *request, NSError *error) {
         if (failureBlock) failureBlock(error);
     }];
+}
+
+- (BOOL)erroStateCodeDeal:(NYBaseRequest *)request response:(NSDictionary *)responseObject {
+    if([request.requestUrl containsString:kHXBSetUPAccount_MobifyPassword_LoginRequestURL] ) {
     
+        if (KeyChain.siginCount.integerValue >= 3 && ![responseObject[@"message"] isEqualToString:@"新旧登录密码不能一致"]) {
+            return NO;
+        }
+    }
     
-    
-    
+    return [super erroStateCodeDeal:request response:responseObject];
 }
 
 - (void)getVerifyCodeRequesWithMobile: (NSString *)mobile

@@ -17,6 +17,7 @@
 //#import "HXBHomePopViewManager.h"
 #import "HXBGeneralAlertVC.h"
 #import "HxbHUDProgress.h"
+#import "HXBHomePopViewManager.h"
 
 @interface HXBAlertManager ()
 
@@ -207,16 +208,16 @@
         [alertVC setClickXYRightButtonBlock:^{
             NSURL *url = [NSURL URLWithString:versionUpdateModel.url];
             [[UIApplication sharedApplication] openURL:url];
-//            [[HXBHomePopViewManager sharedInstance] popHomeViewfromController:[HXBRootVCManager manager].topVC];//展示首页弹窗
+            [[HXBHomePopViewManager sharedInstance] popHomeViewfromController:[HXBRootVCManager manager].topVC];//展示首页弹窗
         }];
 
         [alertVC setClickXYLeftButtonBlock:^{
             //点击取消处理
-//            [[HXBHomePopViewManager sharedInstance] popHomeViewfromController:[HXBRootVCManager manager].topVC];//展示首页弹窗
+            [[HXBHomePopViewManager sharedInstance] popHomeViewfromController:[HXBRootVCManager manager].topVC];//展示首页弹窗
         }];
         [self promptPriorityWithAlertVC:alertVC];
     } else {
-//        [[HXBHomePopViewManager sharedInstance] popHomeViewfromController:[HXBRootVCManager manager].topVC];//展示首页弹窗
+        [[HXBHomePopViewManager sharedInstance] popHomeViewfromController:[HXBRootVCManager manager].topVC];//展示首页弹窗
     }
 }
 

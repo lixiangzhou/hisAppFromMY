@@ -29,6 +29,12 @@
     [Fabric with:@[[Crashlytics class]]];
     //设置键盘
     [self setKeyboardManager];
+    
+    if (HXBShakeChangeBaseUrl == YES) {
+        [HXBBaseUrlSettingView attatchToWindow];
+        [[HXBBaseUrlManager manager] startObserve];
+    }
+    
     [[HXBRootVCManager manager] createRootVCAndMakeKeyWindow];
     [HXBBaseUrlSettingView attatchToWindow];
     
@@ -60,7 +66,7 @@
     
     NSDate *nowTime = [NSDate date];
     NSTimeInterval timeDifference = [nowTime timeIntervalSinceDate: self.exitTime];
-    if (timeDifference > 5 && ![HXBVersionUpdateManager sharedInstance].isMandatoryUpdate) {
+    if (timeDifference > 3600 && ![HXBVersionUpdateManager sharedInstance].isMandatoryUpdate) {
         [[HXBRootVCManager manager] enterTheGesturePasswordVCOrTabBar];
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_starCountDown object:nil];
@@ -73,20 +79,6 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-}
-
-- (void)setNetworkConfig
-{
-    NYNetworkConfig *config = [NYNetworkConfig sharedInstance];
-//    config.baseUrl = [HXBBaseUrlManager manager].baseUrl;
-    
-//    if (HXBShakeChangeBaseUrl == YES) {
-//        // 当baseUrl 改变的时候，需要更新 config.baseUrl
-//        [RACObserve([HXBBaseUrlManager manager], baseUrl) subscribeNext:^(id  _Nullable x) {
-//            config.baseUrl = x;
-//        }];
-//    }
-    config.version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
 }
 
 @end

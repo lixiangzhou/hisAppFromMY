@@ -27,7 +27,7 @@
     }];
 }
 
-- (void)downLoadUserInfo:(BOOL)isShowHud resultBlock:(NetWorkResponseBlock)resultBlock {
+- (void)downLoadUserInfo:(BOOL)isShowHud resultBlock:(void(^)(HXBUserInfoModel *userInfoModel, NSError* erro))resultBlock {
     if(!KeyChain.isLogin) {
         return;
     }

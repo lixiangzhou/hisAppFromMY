@@ -76,7 +76,15 @@ static NSString *const kFirstPlanId = @"kFirstPlanId";
     NSString *ciphertext = [self.keychain itemForkey:kCiphertext];
     return ciphertext?:@"";
 }
-
+- (void)setLoginPwd:(NSString *)loginPwd
+{
+    [self.keychain setItem:loginPwd ForKey:kLoginPwd];
+}
+- (NSString *)loginPwd
+{
+    NSString *loginPwd = [self.keychain itemForkey:kLoginPwd];
+    return loginPwd?:@"";
+}
 - (void)setCiphertext:(NSString *)ciphertext
 {
     [self.keychain setItem:ciphertext ForKey:kCiphertext];

@@ -14,6 +14,7 @@
 #import "HXBAdvertiseManager.h"
 #import "HxbAdvertiseViewController.h"
 #import "HSJGlobalInfoManager.h"
+#import "HXBHomePopViewManager.h"
 
 #define AXHVersionKey @"version"
 
@@ -29,10 +30,6 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         manager = [HXBRootVCManager new];
-        UIViewController *vc = [manager getTabBarOrGesPwdVC];
-        if ([vc isKindOfClass:[HSJGestureLoginController class]]) {
-            manager.gesturePwdVC = (HSJGestureLoginController *)vc;
-        }
     });
     return manager;
 }
@@ -41,7 +38,9 @@
 - (void)createRootVCAndMakeKeyWindow {
     [[UITextField appearance] setTintColor:[UIColor blackColor]];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    
     [HXBUmengManagar HXB_umengStart];
+    [[HXBHomePopViewManager sharedInstance] getHomePopViewData];//获取首页弹窗数据
     [[HXBAdvertiseManager shared] getSplash];
     [[HSJGlobalInfoManager shared] getData];
     
@@ -116,8 +115,8 @@
 
 - (void)popWindowsAtHomeAfterSlashOrGesturePwd {
     [HXBAdvertiseManager shared].couldPopAtHomeAfterSlashOrGesturePwd = YES;
-//    UIViewController *VC = self.mainTabbarVC.childViewControllers.firstObject.childViewControllers.firstObject;
-//    [[HXBHomePopViewManager sharedInstance] popHomeViewfromController:VC];//展示首页弹窗
+    UIViewController *VC = self.mainTabbarVC.childViewControllers.firstObject.childViewControllers.firstObject;
+    [[HXBHomePopViewManager sharedInstance] popHomeViewfromController:VC];//展示首页弹窗
     [[HXBVersionUpdateManager sharedInstance] show];
 }
 
@@ -181,6 +180,13 @@
                 
                 if ([HXBAdvertiseManager shared].couldPopAtHomeAfterSlashOrGesturePwd == NO) {
                     self.gesturePwdVC.dismissBlock = block;
+                } else {
+                    if (block == nil) {
+                        kWeakSelf
+                        self.gesturePwdVC.dismissBlock = ^(BOOL delay, BOOL toActivity, BOOL popRightNow) {
+                            [weakSelf.gesturePwdVC.view removeFromSuperview];
+                        };
+                    }
                 }
             }
         }
@@ -260,4 +266,13 @@
     return _advertiseVC;
 }
 
+- (HSJGestureLoginController *)gesturePwdVC {
+    if (_gesturePwdVC == nil) {
+        UIViewController *vc = [self getTabBarOrGesPwdVC];
+        if ([vc isKindOfClass:[HSJGestureLoginController class]]) {
+            self.gesturePwdVC = (HSJGestureLoginController *)vc;
+        }
+    }
+    return _gesturePwdVC;
+}
 @end
