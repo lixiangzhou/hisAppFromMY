@@ -54,7 +54,7 @@ static NSString *HXBBaseUrlKey = @"HXBBaseUrlKey";
         self.version = [[[NSBundle mainBundle]infoDictionary]objectForKey:@"CFBundleShortVersionString"] ?: @"";
         self.userAgent = [NSString stringWithFormat:@"%@/IOS %@/v%@ iphone" ,[HXBDeviceVersion deviceVersion],self.systemVision,self.version] ?: @"";
         _additionalHeaderFields = @{};
-        self.baseUrl = @"";
+        _defaultTimeOutInterval = 20;
         self.defaultAcceptableStatusCodes = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(200, 100)];
         self.defaultAcceptableContentTypes = [NSSet setWithObjects:@"text/json", @"text/html", @"text/javascript", @"application/json",@"application/x-www-form-urlencoded",@"image/png", @"text/plain",nil];
     }
