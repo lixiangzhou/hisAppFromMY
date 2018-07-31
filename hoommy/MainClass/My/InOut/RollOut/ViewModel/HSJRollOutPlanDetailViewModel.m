@@ -42,30 +42,24 @@
     self.hideBottomView = self.stepupStatus != HSJStepUpStatusQUIT;
     
     // 转入金额
-    NSString *joinInString = [NSString GetPerMilWithDouble:self.model.amount.doubleValue];
-    joinInString = [joinInString isEqualToString:@"0"] ? @"0.00" : joinInString;
-    joinInString = [NSString stringWithFormat:@"%@元", joinInString];
+    NSString *joinInString = [NSString hsj_moneyValueSuffix:model.amount.doubleValue];
     
     // 待转出金额
-    NSString *leftAccountString = [NSString GetPerMilWithDouble:self.model.redProgressLeft.doubleValue];
-    leftAccountString = [leftAccountString isEqualToString:@"0"] ? @"0.00" : leftAccountString;
-    leftAccountString = [NSString stringWithFormat:@"%@元", leftAccountString];
+    NSString *leftAccountString = [NSString hsj_moneyValueSuffix:model.redProgressLeft.doubleValue];
     
     // 已赚收益
-    NSString *earnAmount = [NSString GetPerMilWithDouble:model.earnAmount.doubleValue];
-    earnAmount = [joinInString isEqualToString:@"0"] ? @"0.00" : earnAmount;
-    earnAmount = [NSString stringWithFormat:@"%@元", earnAmount];
+    NSString *earnAmount = [NSString hsj_moneyValueSuffix:model.earnAmount.doubleValue];
     
-    // 今日预期年化
-    NSString *totalInterest = [NSString stringWithFormat:@"%.2f%%", model.totalInterest.doubleValue];
+    // 预期年化
+    NSString *expectedRate = [NSString stringWithFormat:@"%.2f%%", model.expectedRate.doubleValue];
     
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
     df.dateFormat = @"yyyy-MM-dd";
     // 转入时间
-    NSDate *registerTime = [NSDate dateWithTimeIntervalSince1970:self.model.registerTime.doubleValue / 1000];
+    NSDate *registerTime = [NSDate dateWithTimeIntervalSince1970:model.registerTime.doubleValue / 1000];
     NSString *registerTimeString = [df stringFromDate:registerTime];
     // 转出时间
-    NSDate *endLockingRequestTime = [NSDate dateWithTimeIntervalSince1970:self.model.endLockingRequestTime.doubleValue / 1000];
+    NSDate *endLockingRequestTime = [NSDate dateWithTimeIntervalSince1970:model.endLockingRequestTime.doubleValue / 1000];
     NSString *endLockingRequestTimeString = [df stringFromDate:endLockingRequestTime];
     
     // 退出时间
@@ -90,7 +84,7 @@
         
        NSArray *g1 = @[[[HSJRollOutPlanDetailRowModel alloc] initWithType:HSJRollOutPlanDetailRowTypeNormal left:@"转入金额" right:joinInString protocol:nil className:nil],
           [[HSJRollOutPlanDetailRowModel alloc] initWithType:HSJRollOutPlanDetailRowTypeNormal left:@"已赚收益" right:earnAmount protocol:nil className:nil],
-          [[HSJRollOutPlanDetailRowModel alloc] initWithType:HSJRollOutPlanDetailRowTypeNormal left:@"今日预期年化" right:totalInterest protocol:nil className:nil],
+          [[HSJRollOutPlanDetailRowModel alloc] initWithType:HSJRollOutPlanDetailRowTypeNormal left:@"今日预期年化" right:expectedRate protocol:nil className:nil],
           [[HSJRollOutPlanDetailRowModel alloc] initWithType:HSJRollOutPlanDetailRowTypeNormal left:@"转入时间" right:registerTimeString protocol:nil className:nil]];
         
         NSMutableArray *group1 = [[NSMutableArray alloc] initWithArray:g1];
@@ -114,7 +108,7 @@
         self.dataSource = @[
                             @[[[HSJRollOutPlanDetailRowModel alloc] initWithType:HSJRollOutPlanDetailRowTypeNormal left:@"转入金额" right:joinInString protocol:nil className:nil],
                             [[HSJRollOutPlanDetailRowModel alloc] initWithType:HSJRollOutPlanDetailRowTypeNormal left:@"待转出金额" right:leftAccountString protocol:nil className:nil],
-                            [[HSJRollOutPlanDetailRowModel alloc] initWithType:HSJRollOutPlanDetailRowTypeNormal left:@"今日预期年化" right:totalInterest protocol:nil className:nil],
+                            [[HSJRollOutPlanDetailRowModel alloc] initWithType:HSJRollOutPlanDetailRowTypeNormal left:@"今日预期年化" right:expectedRate protocol:nil className:nil],
                             [[HSJRollOutPlanDetailRowModel alloc] initWithType:HSJRollOutPlanDetailRowTypeNormal left:@"转入时间" right:registerTimeString protocol:nil className:nil],
                             [[HSJRollOutPlanDetailRowModel alloc] initWithType:HSJRollOutPlanDetailRowTypeNormal left:@"转出时间" right:endLockingRequestTimeString protocol:nil className:nil],
                             model],

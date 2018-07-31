@@ -24,17 +24,12 @@
 
 - (void)setModel:(HSJRollOutModel *)model {
     _model = model;
-
-    NSString *leftAccountString = [NSString GetPerMilWithDouble:self.model.redProgressLeft.doubleValue];
-    self.leftAccountString = [leftAccountString isEqualToString:@"0"] ? @"0.00" : leftAccountString;
     
-    NSString *joinInString = [NSString GetPerMilWithDouble:self.model.finalAmount.doubleValue];
-    joinInString = [joinInString isEqualToString:@"0"] ? @"0.00" : joinInString;
-    self.joinInString = [NSString stringWithFormat:@"%@元", joinInString];
+    self.leftAccountString = [NSString hsj_simpleMoneyValue:self.model.redProgressLeft.doubleValue];
     
-    NSString *earnInterestString = [NSString GetPerMilWithDouble:self.model.earnAmount.doubleValue];
-    earnInterestString = [earnInterestString isEqualToString:@"0"] ? @"0.00" : earnInterestString;
-    self.earnInterestString = [NSString stringWithFormat:@"%@元", earnInterestString];
+    self.joinInString = [NSString hsj_moneyValueSuffix:self.model.finalAmount.doubleValue];
+    
+    self.earnInterestString = [NSString hsj_moneyValueSuffix:self.model.earnAmount.doubleValue]; 
 
     [self setStatus];
     

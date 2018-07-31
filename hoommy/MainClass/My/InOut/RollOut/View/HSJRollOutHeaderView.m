@@ -98,11 +98,8 @@
 - (void)setAssetsModel:(HSJPlanAssetsModel *)assetsModel {
     _assetsModel = assetsModel;
     
-    NSString *currentStepupAmount = [NSString GetPerMilWithDouble:assetsModel.currentStepupAmount];
-    self.holdAssetsLabel.text = [currentStepupAmount isEqualToString:@"0"] ? @"0.00" : currentStepupAmount;
-    
-    NSString *stepUpCanSaleAmount = [NSString GetPerMilWithDouble:assetsModel.stepUpCanSaleAmount];
-    self.rollOutAssetsLabel.text = [stepUpCanSaleAmount isEqualToString:@"0"] ? @"0.00" : stepUpCanSaleAmount;
+    self.holdAssetsLabel.text = [NSString hsj_simpleMoneyValue:assetsModel.currentStepupAmount];
+    self.rollOutAssetsLabel.text = [NSString hsj_simpleMoneyValue:assetsModel.stepUpCanSaleAmount];
 }
 
 @end

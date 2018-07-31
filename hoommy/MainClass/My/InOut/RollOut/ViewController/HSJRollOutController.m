@@ -61,6 +61,7 @@
     [batchBtn setTitle:@"批量转出" forState:UIControlStateNormal];
     [batchBtn setTitle:@"       取消" forState:UIControlStateSelected];
     batchBtn.titleLabel.font = kHXBFont_28;
+    [batchBtn sizeToFit];
     [batchBtn addTarget:self action:@selector(batchProcess) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:batchBtn];
     self.batchBtn = batchBtn;
