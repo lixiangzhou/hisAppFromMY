@@ -75,12 +75,15 @@ static void addRoundedRectToPath(CGContextRef context, CGRect rect,
 }
 
 // 渐变消失
-- (void)fadeAway{
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:1.5f];
-    self.alpha = .0;
-    [UIView commitAnimations];
-    [self performSelector:@selector(remove) withObject:nil afterDelay:1.5f];
+- (void)fadeAway:(void (^)(void))completionBlock{
+    [UIView animateWithDuration:1.5 animations:^{
+        self.alpha = .0;
+    } completion:^(BOOL finished) {
+        [self remove];
+        if(completionBlock) {
+            completionBlock();
+        }
+    }];
 }
 
 
@@ -89,12 +92,20 @@ static void addRoundedRectToPath(CGContextRef context, CGRect rect,
          bgColor:(CGColorRef)color
           inView:(UIView *)view 
         vertical:(float)height{
+    [self showInfo:info bgColor:color inView:view vertical:height completion:nil];
+}
+
++ (void)showInfo:(NSString*)info
+         bgColor:(CGColorRef)color
+          inView:(UIView*)view
+        vertical:(float)height
+      completion:(void (^)(void))completionBlock {
     height = height < 0 ? 0 : height > 1 ? 1 : height;
     
     CGSize size = [info caleFontSize:[UIFont systemFontOfSize:kSGInfoAlert_fontSize] forMaxSize:kMax_ConstrainedSize lineBreakMode:NSLineBreakByWordWrapping];
     
-   // [info caleFontSize:[UIFont systemFontOfSize:kSGInfoAlert_fontSize]
-                  // constrainedToSize:kMax_ConstrainedSize];
+    // [info caleFontSize:[UIFont systemFontOfSize:kSGInfoAlert_fontSize]
+    // constrainedToSize:kMax_ConstrainedSize];
     CGRect frame = CGRectMake(0, 0, size.width, size.height);
     int tag = -100000;
     SGInfoAlert *alert = [view viewWithTag:tag];
@@ -111,7 +122,6 @@ static void addRoundedRectToPath(CGContextRef context, CGRect rect,
     [UIView setAnimationDuration:.3f];
     alert.alpha = 1.0;
     [UIView commitAnimations];
-    [alert performSelector:@selector(fadeAway) withObject:nil afterDelay:1.5];
+    [alert performSelector:@selector(fadeAway:) withObject:completionBlock afterDelay:1.5];
 }
-
 @end
