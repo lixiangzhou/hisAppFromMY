@@ -12,6 +12,8 @@
 #import "HXBVersionUpdateManager.h"
 #import "HXBRootVCManager.h"
 #import "HXBBaseUrlSettingView.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 
 @interface AppDelegate ()
 @property (nonatomic, strong) NSDate *exitTime;
@@ -23,6 +25,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    //fabrci crash 统计
+    [Fabric with:@[[Crashlytics class]]];
+    //设置键盘
     [self setKeyboardManager];
     
     if (HXBShakeChangeBaseUrl == YES) {

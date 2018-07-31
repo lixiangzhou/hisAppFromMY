@@ -66,7 +66,7 @@
         }
         NSLog(@"---%ld---",KeyChain.siginCount.integerValue);
         
-        [self.viewModel mobifyPassword_LoginRequest_requestWithOldPwd:password_Original andNewPwd:password_New andSuccessBlock:^{
+        [weakSelf.viewModel mobifyPassword_LoginRequest_requestWithOldPwd:password_Original andNewPwd:password_New andSuccessBlock:^{
             KeyChain.siginCount = @(0).description;
             [KeyChain signOut];
             weakSelf.tabBarController.selectedIndex = 0;
@@ -75,11 +75,11 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_ShowLoginVC object:nil];
         } andFailureBlock:^(NSError *error) {
             KeyChain.siginCount = @(KeyChain.siginCount.integerValue + 1).description;
-            if (error.code != HSJNetStateCodeAlreadyPopWindow && KeyChain.siginCount.integerValue >= 3) {
-                [self alertVC_4];
-            }
         }];
         
+        if ( KeyChain.siginCount.integerValue >= 3 ) { //error.code != HSJNetStateCodeAlreadyPopWindow &&
+            [weakSelf alertVC_4];
+        }
         
 //        if (KeyChain.siginCount.integerValue > 5) {
 //            [self alertVC_5];

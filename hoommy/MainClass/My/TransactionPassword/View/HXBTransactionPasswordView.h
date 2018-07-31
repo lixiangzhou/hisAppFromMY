@@ -14,6 +14,7 @@
  输入密码回调
  */
 @property (nonatomic, copy) void (^getTransactionPasswordBlock)(NSString *password);
+@property (nonatomic, strong) void (^cancelAction)(void);
 //展示
 - (void)showInView:(UIView *)view;
 //关闭

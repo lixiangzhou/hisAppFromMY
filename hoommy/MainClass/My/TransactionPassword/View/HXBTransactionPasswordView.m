@@ -282,11 +282,17 @@
 - (UIButton *)backgroundButton {
     if (!_backgroundButton) {
         _backgroundButton = [[UIButton alloc] init];
-        [_backgroundButton addTarget:self action:@selector(closePasswordView) forControlEvents:(UIControlEventTouchUpInside)];
+        [_backgroundButton addTarget:self action:@selector(backgroundButtonAct:) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _backgroundButton;
 }
 
+- (void)backgroundButtonAct:(UIButton*)button {
+    [self closePasswordView];
+    if(self.cancelAction) {
+        self.cancelAction();
+    }
+}
 
 #pragma mark - Helper
 

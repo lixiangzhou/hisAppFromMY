@@ -11,6 +11,7 @@
 
 #define kHXBMY_VersionUpdateURL @"/update"//版本更新
 #define kHXBSplash            @"/splash"///闪屏接口
+#define kHXBHome_PopView @"/popups"///首页弹窗
 #define kGlobal                 @"/global" /// 全局统计
 #define kHSJHomeBaby            @"/home/baby" /// 全局统计
 //MARK: ======================= 协议 ==========================
@@ -59,7 +60,6 @@
 #define kHXBSetTransaction_MobifyPassword_CashpwdEditURL @"/account/cashpwd/edit"//修改交易密码--修改交易密码接口w
 #define kHXBSetTransaction_MobifyPhoneNumber_CashMobileEditURL @"/account/mobile"//修改手机号--修改手机号接口
 
-#define kHXBUser_LoginURL @"/user/login"//登录
 
 #define kHXBMY_PlanAccountRequestURL @"/account/planAssets"///账户内 账户内Plan资产
 #define kHXBMY_PlanListURL @"/account/plan"//账户内  planlist

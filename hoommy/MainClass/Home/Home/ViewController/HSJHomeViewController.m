@@ -23,6 +23,7 @@
 #import "HXBAdvertiseManager.h"
 #import "HXBVersionUpdateManager.h"
 #import "HSJBuyViewController.h"
+#import "HXBHomePopViewManager.h"
 
 @interface HSJHomeViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -54,6 +55,7 @@
     
     if ([HXBAdvertiseManager shared].couldPopAtHomeAfterSlashOrGesturePwd) {
         [[HXBVersionUpdateManager sharedInstance] show];
+        [[HXBHomePopViewManager sharedInstance] popHomeViewfromController:self];//展示首页弹窗
     }
 }
 
