@@ -128,7 +128,7 @@
     
     [rightDescLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(rightLabel.mas_bottom).offset(kScrAdaptationW(4));
-        make.right.greaterThanOrEqualTo(@-15);
+        make.right.lessThanOrEqualTo(@-15);
     }];
     
     [centerLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -152,7 +152,7 @@
         self.topDescLabel.text = @"昨日收益(元)";
         
         self.leftLabel.text = @"0.00";
-        self.leftDescLabel.text = @"总资产(元）";
+        self.leftDescLabel.text = @"总资产(元)";
         
         self.centerLabel.text = @"0.00";
         self.centerDescLabel.text = @"累计收益(元)";
@@ -165,20 +165,18 @@
             if (responseData) {
                 HXBUserInfoModel *infoModel = (HXBUserInfoModel *)responseData;
                 
-                weakSelf.topLabel.text = [NSString stringWithFormat:@"%.2f", infoModel.userAssets.yesterdayInterest];
+                weakSelf.topLabel.text = [NSString hsj_simpleMoneyValue:infoModel.userAssets.yesterdayInterest];
                 
-                NSString *assetsTotal = [NSString GetPerMilWithDouble: infoModel.userAssets.stepUpAssets];
-                weakSelf.leftLabel.text = [assetsTotal isEqualToString:@"0"] ? @"0.00" : assetsTotal;
+                weakSelf.leftLabel.text = [NSString hsj_simpleMoneyValue:infoModel.userAssets.stepUpAssets];
                 
-                NSString *earnTotal = [NSString GetPerMilWithDouble: infoModel.userAssets.stepUpSumPlanInterest];
-                weakSelf.centerLabel.text = [earnTotal isEqualToString:@"0"] ? @"0.00" : earnTotal;
+                weakSelf.centerLabel.text = [NSString hsj_simpleMoneyValue:infoModel.userAssets.stepUpSumPlanInterest];
             }
         }];
     } else {
         self.topLabel.text = viewModel.interestString;
         self.topDescLabel.text = @"今日预期年化";
         
-        self.leftLabel.text = [NSString stringWithFormat:@"%@元", viewModel.planModel.tenThousandExceptedIncome];
+        self.leftLabel.text = [NSString hsj_moneyValueSuffix:viewModel.planModel.tenThousandExceptedIncome.doubleValue];
         self.leftDescLabel.text = @"万元日预期收益";
         
         self.centerLabel.text = [NSString stringWithFormat:@"%@后可退", viewModel.lockString];

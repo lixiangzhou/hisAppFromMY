@@ -170,7 +170,7 @@
 - (HXBUpAndDownLayoutView *)registeredCapitalView {
     if (!_registeredCapitalView) {
         _registeredCapitalView = [[HXBUpAndDownLayoutView alloc] initWithFrame:CGRectZero];
-        _registeredCapitalView.title = @"2亿注册资本";
+        _registeredCapitalView.title = @"多重安全保障";
         _registeredCapitalView.imageName = @"home_money";
         kWeakSelf
         _registeredCapitalView.clickActionBlock = ^{
