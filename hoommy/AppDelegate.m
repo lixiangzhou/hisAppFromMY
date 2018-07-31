@@ -11,6 +11,7 @@
 #import "IQKeyboardManager.h"
 #import "HXBVersionUpdateManager.h"
 #import "HXBRootVCManager.h"
+#import "HXBBaseUrlSettingView.h"
 
 @interface AppDelegate ()
 @property (nonatomic, strong) NSDate *exitTime;
@@ -23,6 +24,12 @@
     // Override point for customization after application launch.
     
     [self setKeyboardManager];
+    
+    if (HXBShakeChangeBaseUrl == YES) {
+        [HXBBaseUrlSettingView attatchToWindow];
+        [[HXBBaseUrlManager manager] startObserve];
+    }
+    
     [[HXBRootVCManager manager] createRootVCAndMakeKeyWindow];
     
     return YES;
@@ -66,20 +73,6 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-}
-
-- (void)setNetworkConfig
-{
-    NYNetworkConfig *config = [NYNetworkConfig sharedInstance];
-//    config.baseUrl = [HXBBaseUrlManager manager].baseUrl;
-    
-//    if (HXBShakeChangeBaseUrl == YES) {
-//        // 当baseUrl 改变的时候，需要更新 config.baseUrl
-//        [RACObserve([HXBBaseUrlManager manager], baseUrl) subscribeNext:^(id  _Nullable x) {
-//            config.baseUrl = x;
-//        }];
-//    }
-    config.version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
 }
 
 @end

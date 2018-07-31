@@ -12,6 +12,8 @@
 #import "HSJMyViewController.h"
 #import "HSJSignInViewController.h"
 #import "HSJHomeViewController.h"
+#import "HXBBaseUrlSettingView.h"
+
 @interface HXBBaseTabBarController ()<UITabBarControllerDelegate>
 
 @end
@@ -162,6 +164,12 @@
     }
     
     return YES;
+}
+
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
+    if (HXBShakeChangeBaseUrl == YES) {
+        [[HXBBaseUrlSettingView settingView] show];
+    }
 }
 
 #pragma mark - gtter方法

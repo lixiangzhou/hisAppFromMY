@@ -57,12 +57,12 @@ static NSString *const X_HxbAuth_Token = @"X-Hxb-Auth-Token";
     return self;
 }
 
-- (NSString *)baseUrl {
-    if(_baseUrl.length <= 0) {
-        return @"http://192.168.1.31:3100";
-    }
-    return _baseUrl;
-}
+//- (NSString *)baseUrl {
+//    if(_baseUrl.length <= 0) {
+//        return @"http://192.168.1.31:3100";
+//    }
+//    return _baseUrl;
+//}
 
 //MARK: 设置请求基本信息
 - (NSDictionary *)additionalHeaderFields

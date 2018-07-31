@@ -81,6 +81,8 @@
 		8D591BFE20F84D8F007CA4BE /* HSJPlanDetailAdvantageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D591BFD20F84D8F007CA4BE /* HSJPlanDetailAdvantageView.m */; };
 		8D591C0420F8591B007CA4BE /* HSJPlanDetailInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D591C0320F8591B007CA4BE /* HSJPlanDetailInfoView.m */; };
 		8D591C0820F88521007CA4BE /* HSJPlanDetailViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D591C0720F88521007CA4BE /* HSJPlanDetailViewModel.m */; };
+		8D5D124B211035C6001C4E41 /* HXBBaseUrlManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5D1248211035C6001C4E41 /* HXBBaseUrlManager.m */; };
+		8D5D124C211035C6001C4E41 /* HXBBaseUrlSettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5D124A211035C6001C4E41 /* HXBBaseUrlSettingView.m */; };
 		8D5D610320FEDEF2003F94D9 /* HSJRollOutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5D610220FEDEF2003F94D9 /* HSJRollOutController.m */; };
 		8D5D610920FEDFB1003F94D9 /* HSJRollOutHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5D610820FEDFB1003F94D9 /* HSJRollOutHeaderView.m */; };
 		8D5D610C20FEDFEB003F94D9 /* HSJRollOutViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5D610B20FEDFEB003F94D9 /* HSJRollOutViewModel.m */; };
@@ -107,8 +109,6 @@
 		8D60B4DE20F7486300287E52 /* HSJDepositoryOpenViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B4D320F7486300287E52 /* HSJDepositoryOpenViewModel.m */; };
 		8D60B4E120F748BC00287E52 /* UITextField+HLNumberFormatTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D60B4E020F748BC00287E52 /* UITextField+HLNumberFormatTextField.m */; };
 		8DB77F6A210585A5003EE881 /* HSJRollOutDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB77F69210585A5003EE881 /* HSJRollOutDetailCell.m */; };
-		8DB86DEA210B10150070557F /* HSJNoDataOrNetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB86DE9210B10140070557F /* HSJNoDataOrNetViewController.m */; };
-		8DB86DEE210B10350070557F /* HSJNoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB86DED210B10350070557F /* HSJNoDataView.m */; };
 		8DB86DF1210EBCDC0070557F /* HSJGestureLoginViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB86DF0210EBCDC0070557F /* HSJGestureLoginViewModel.m */; };
 		8DD6B9B22106C27C00E8980F /* HSJDepositoryOpenTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD6B9B12106C27C00E8980F /* HSJDepositoryOpenTipView.m */; };
 		8DD6B9B52106D90C00E8980F /* HSJEarningCalculatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD6B9B42106D90C00E8980F /* HSJEarningCalculatorView.m */; };
@@ -557,6 +557,10 @@
 		8D591C0320F8591B007CA4BE /* HSJPlanDetailInfoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJPlanDetailInfoView.m; sourceTree = "<group>"; };
 		8D591C0620F88521007CA4BE /* HSJPlanDetailViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJPlanDetailViewModel.h; sourceTree = "<group>"; };
 		8D591C0720F88521007CA4BE /* HSJPlanDetailViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJPlanDetailViewModel.m; sourceTree = "<group>"; };
+		8D5D1247211035C6001C4E41 /* HXBBaseUrlManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBBaseUrlManager.h; sourceTree = "<group>"; };
+		8D5D1248211035C6001C4E41 /* HXBBaseUrlManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBBaseUrlManager.m; sourceTree = "<group>"; };
+		8D5D1249211035C6001C4E41 /* HXBBaseUrlSettingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBBaseUrlSettingView.h; sourceTree = "<group>"; };
+		8D5D124A211035C6001C4E41 /* HXBBaseUrlSettingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBBaseUrlSettingView.m; sourceTree = "<group>"; };
 		8D5D610120FEDEF2003F94D9 /* HSJRollOutController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJRollOutController.h; sourceTree = "<group>"; };
 		8D5D610220FEDEF2003F94D9 /* HSJRollOutController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJRollOutController.m; sourceTree = "<group>"; };
 		8D5D610720FEDFB1003F94D9 /* HSJRollOutHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJRollOutHeaderView.h; sourceTree = "<group>"; };
@@ -1692,6 +1696,17 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		8D5D1246211035C6001C4E41 /* BaseURLConfig */ = {
+			isa = PBXGroup;
+			children = (
+				8D5D1247211035C6001C4E41 /* HXBBaseUrlManager.h */,
+				8D5D1248211035C6001C4E41 /* HXBBaseUrlManager.m */,
+				8D5D1249211035C6001C4E41 /* HXBBaseUrlSettingView.h */,
+				8D5D124A211035C6001C4E41 /* HXBBaseUrlSettingView.m */,
+			);
+			path = BaseURLConfig;
+			sourceTree = "<group>";
+		};
 		8D5D60FE20FEDE92003F94D9 /* InOut */ = {
 			isa = PBXGroup;
 			children = (
@@ -2746,6 +2761,7 @@
 			isa = PBXGroup;
 			children = (
 				9A97D93720EF420000688ADB /* HSJConfig.h */,
+				8D5D1246211035C6001C4E41 /* BaseURLConfig */,
 				9A0BD51920F6F71100B1CC59 /* Macros */,
 				9A97D93820EF420000688ADB /* NetWork */,
 				9A97D93B20EF420000688ADB /* Notification */,
@@ -4187,6 +4203,7 @@
 				9A37496E20F855CF00F39681 /* HxbWithdrawViewController.m in Sources */,
 				8D5D613320FF2CA3003F94D9 /* HSJRollOutConfirmModel.m in Sources */,
 				9A0BD52520F6FBB300B1CC59 /* HXBUserInfoView.m in Sources */,
+				8D5D124B211035C6001C4E41 /* HXBBaseUrlManager.m in Sources */,
 				E153B9C320FC8563002BE1AE /* HXBMY_Capital_Sift_ViewController.m in Sources */,
 				9A97DA6520EF420200688ADB /* HSJTopFragmentNavgationView.m in Sources */,
 				9A4B181520F34434006B83C7 /* HXBBindPhoneCellModel.m in Sources */,
@@ -4199,6 +4216,7 @@
 				8D591C0420F8591B007CA4BE /* HSJPlanDetailInfoView.m in Sources */,
 				9A37490620F7691500F39681 /* HXBCheckCaptchaViewModel.m in Sources */,
 				9A37490C20F76C2000F39681 /* HXBTokenManager.m in Sources */,
+				8D5D124C211035C6001C4E41 /* HXBBaseUrlSettingView.m in Sources */,
 				9A37496820F8557B00F39681 /* HxbMyTopUpViewController.m in Sources */,
 				4E43B06B20EF7C60000BDAE7 /* UIImageView+HxbSDWebImage.m in Sources */,
 				4E0019AA21072A9700D6F4DE /* HSJHomeArtileModel.m in Sources */,
