@@ -294,23 +294,7 @@
         [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_DetailUnBuyInClick];
     }
     
-    if (KeyChain.isLogin) {
-        kWeakSelf
-        [self.viewModel downLoadUserInfo:YES resultBlock:^(HXBUserInfoModel *userInfoModel, NSError *erro) {
-            if (userInfoModel.userInfo.isCreateEscrowAcc == NO) {
-                [HSJDepositoryOpenTipView show];
-            } else if ([userInfoModel.userInfo.riskType isEqualToString:@"立即评测"]) {
-                [weakSelf.viewModel riskTypeAssementFrom:weakSelf];
-            } else {
-                HSJBuyViewController *vc = [HSJBuyViewController new];
-                vc.planId = weakSelf.planId;
-                [weakSelf.navigationController pushViewController:vc animated:YES];
-            }
-        }];
-        
-    } else {
-        [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_ShowLoginVC object:nil];
-    }
+    [self toRollOut];
 }
 
 - (void)outClick {
@@ -333,20 +317,33 @@
     
     kWeakSelf
     [HSJEarningCalculatorView showWithInterest:self.viewModel.interest buyBlock:^(NSString *value) {
-        if (KeyChain.isLogin) {
-            HSJBuyViewController *vc = [HSJBuyViewController new];
-            vc.planId = weakSelf.planId;
-            vc.startMoney = value;
-            [weakSelf.navigationController pushViewController:vc animated:YES];
-        } else {
-            [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_ShowLoginVC object:nil];
-        }
+        [weakSelf toRollOut];
     }];
 }
 
 - (void)leftBackBtnClick {
     [super leftBackBtnClick];
     [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_DetailBackClick];
+}
+
+- (void)toRollOut {
+    if (KeyChain.isLogin) {
+        kWeakSelf
+        [self.viewModel downLoadUserInfo:YES resultBlock:^(HXBUserInfoModel *userInfoModel, NSError *erro) {
+            if (userInfoModel.userInfo.isCreateEscrowAcc == NO) {
+                [HSJDepositoryOpenTipView show];
+            } else if ([userInfoModel.userInfo.riskType isEqualToString:@"立即评测"]) {
+                [weakSelf.viewModel riskTypeAssementFrom:weakSelf];
+            } else {
+                HSJBuyViewController *vc = [HSJBuyViewController new];
+                vc.planId = weakSelf.planId;
+                [weakSelf.navigationController pushViewController:vc animated:YES];
+            }
+        }];
+        
+    } else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_ShowLoginVC object:nil];
+    }
 }
 
 @end
