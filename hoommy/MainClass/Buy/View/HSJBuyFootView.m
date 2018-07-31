@@ -74,6 +74,9 @@
         _riskApplyAgreementView.text = attributedString;
         _riskApplyAgreementView.agreeBtnBlock = ^(BOOL isSelected){
             weakSelf.isAgreeRiskApplyAgreement = isSelected;
+            if(isSelected) {
+                [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_BuyRiskAssessmentClick];
+            }
         };
     }
     return _riskApplyAgreementView;

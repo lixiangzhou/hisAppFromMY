@@ -9,7 +9,7 @@
 #import "HSJBuyHeadView.h"
 #import "HXBCustomTextField.h"
 
-@interface HSJBuyHeadView()
+@interface HSJBuyHeadView()<UITextFieldDelegate>
 @property (nonatomic, strong) UIImageView *prompBackGroundImv;
 @property (nonatomic, strong) UILabel *prompLb;
 
@@ -138,6 +138,7 @@
         _contentTf.isHidenLine = YES;
         _contentTf.limitStringLength = 9;
         _contentTf.keyboardType = UIKeyboardTypeNumberPad;
+        _contentTf.delegate = self;
         
         kWeakSelf
         _contentTf.block = ^(NSString *text1) {
@@ -195,6 +196,10 @@
     _enableContentTf = enableContentTf;
     
     self.contentTf.userInteractionEnabled = enableContentTf;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_BuyAmountTextFieldClick];
 }
 /*
 // Only override drawRect: if you perform custom drawing.
