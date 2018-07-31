@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HXBBaseUrlManager.h"
 
 @interface HXBBaseUrlSettingView : UIView
 

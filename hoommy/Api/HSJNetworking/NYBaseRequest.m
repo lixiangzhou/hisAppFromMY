@@ -22,7 +22,13 @@
     self = [super init];
     if (self) {
         _requestMethod = NYRequestMethodGet;
-        _timeoutInterval = 20;
+        if(HXBShakeChangeBaseUrl) {
+            _timeoutInterval = 40;
+        }
+        else{
+            _timeoutInterval = 20;
+        }
+        
         _isReturnJsonData = YES;
         _requestUrl = @"";
     }

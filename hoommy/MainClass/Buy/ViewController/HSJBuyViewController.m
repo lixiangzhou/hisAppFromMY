@@ -46,6 +46,11 @@
     [self setupConstraints];
 }
 
+- (void)leftBackBtnClick {
+    [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_BuyIntoClick];
+    [super leftBackBtnClick];
+}
+
 - (void)setupData {
     self.viewModel = [[HSJBuyViewModel alloc] init];
     kWeakSelf
@@ -229,6 +234,7 @@
             [weakSelf loadUserInfo];
         };
         [self.navigationController pushViewController:vc animated:YES];
+        [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_BuyAddBankCardButtonClick];
     }
     else {
         kWeakSelf
@@ -250,6 +256,7 @@
                 [self showRechargeAlertVC];
             }
         }
+        [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_BuySureButtonClick];
     }
     
 }
@@ -268,6 +275,10 @@
                 //@"couponId": weakSelf.couponid
                 };
         [weakSelf planBuy:dic];
+        [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_BuyTransactionPasswordSureClick];
+    };
+    self.passwordView.cancelAction = ^{
+        [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_BuyTransactionPasswordCancelClick];
     };
 }
 
@@ -291,6 +302,7 @@
 //                    @"couponId": weakSelf.couponid
                     };
             [weakSelf planBuy:dic];
+            [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_BuyCodeSureClick];
         };
         self.alertVC.getVerificationCodeBlock = ^{
             [weakSelf.alertVC.verificationCodeAlertView enabledBtns];
@@ -301,6 +313,7 @@
             [weakSelf sendSmsCodeWithMoney:rechargeMoney];
         };
         self.alertVC.cancelBtnClickBlock = ^{
+            [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_BuyCodeCancelClick];
         };
         [self presentViewController:self.alertVC animated:NO completion:nil];
     }
@@ -403,12 +416,14 @@
                     [weakSelf loadUserInfo];
                 };
                 [self.navigationController pushViewController:vc animated:YES];
+                [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_BuyAddBankCardSmallButtonClick];
             }
             else{//换卡
                 HxbMyBankCardViewController *vc = [[HxbMyBankCardViewController alloc] init];
                 vc.isBank = YES;
                 vc.isCashPasswordPassed = @"1";
                 [self.navigationController pushViewController:vc animated:YES];
+                [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_BuyChangeBankCardButtonClick];
             }
         }
     }
