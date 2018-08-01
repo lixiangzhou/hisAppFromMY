@@ -26,6 +26,9 @@
 }
 
 - (void)setupUI {
+    self.layer.cornerRadius = 2;
+    self.clipsToBounds = YES;
+    
     [self addSubview:self.amountLabel];
     [self addSubview:self.tipLabel];
     [self.amountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -35,7 +38,8 @@
     }];
     [self.tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.amountLabel);
-        make.height.offset(kScrAdaptationH750(32)); make.top.equalTo(self.amountLabel.mas_bottom).offset(kScrAdaptationH750(6));
+        make.height.offset(kScrAdaptationH750(32));
+        make.top.equalTo(self.amountLabel.mas_bottom).offset(kScrAdaptationH750(20));
     }];
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewClick)];
     [self addGestureRecognizer:tapGestureRecognizer];

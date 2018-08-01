@@ -47,7 +47,7 @@
     
     UILabel *holdAssetsLabel = [UILabel new];
     holdAssetsLabel.text = @"0.00";
-    holdAssetsLabel.font = kHXBFont_40;
+    holdAssetsLabel.font = [UIFont boldSystemFontOfSize:20];
     holdAssetsLabel.textColor = [UIColor whiteColor];
     [bgView addSubview:holdAssetsLabel];
     self.holdAssetsLabel = holdAssetsLabel;
@@ -60,7 +60,7 @@
     
     UILabel *rollOutAssetsLabel = [UILabel new];
     rollOutAssetsLabel.text = @"0.00";
-    rollOutAssetsLabel.font = kHXBFont_40;
+    rollOutAssetsLabel.font = [UIFont boldSystemFontOfSize:20];
     rollOutAssetsLabel.textColor = [UIColor whiteColor];
     [bgView addSubview:rollOutAssetsLabel];
     self.rollOutAssetsLabel = rollOutAssetsLabel;

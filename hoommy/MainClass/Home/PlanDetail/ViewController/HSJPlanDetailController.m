@@ -22,6 +22,7 @@
 @property (nonatomic, weak) UIView *navView;
 @property (nonatomic, weak) UIButton *backBtn;
 @property (nonatomic, weak) UILabel *titleLabel;
+@property (nonatomic, weak) UIView *navViewBottomLine;
 
 @property (nonatomic, weak) UIScrollView *scrollView;
 @property (nonatomic, weak) HSJPlanDetailTopView *topView;
@@ -31,6 +32,7 @@
 
 @property (nonatomic, strong) HSJPlanDetailViewModel *viewModel;
 @property (nonatomic, weak) UIView *bottomView;
+@property (nonatomic, weak) UIView *bottomContentView;
 @property (nonatomic, weak) UIButton *inBtn;
 @end
 
@@ -84,6 +86,16 @@
     backBtn.adjustsImageWhenHighlighted = NO;
     [navView addSubview:backBtn];
     self.backBtn = backBtn;
+    
+    UIView *navViewBottomLine = [UIView new];
+    navViewBottomLine.backgroundColor = kHXBColor_EEEEF5_100;
+    navViewBottomLine.hidden = YES;
+    [navView addSubview:navViewBottomLine];
+    self.navViewBottomLine = navViewBottomLine;
+    [navViewBottomLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.left.right.equalTo(navView);
+        make.height.equalTo(@0.5);
+    }];
 }
 
 
@@ -91,6 +103,7 @@
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.view.frame];
     scrollView.alwaysBounceVertical = YES;
     scrollView.backgroundColor = BACKGROUNDCOLOR;
+    scrollView.showsVerticalScrollIndicator = NO;
     if (@available(iOS 11.0, *)) {
         scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
@@ -99,6 +112,10 @@
     [self.view insertSubview:scrollView belowSubview:self.navView];
     
     HSJPlanDetailTopView *topView = [HSJPlanDetailTopView new];
+    kWeakSelf
+    topView.calBlock = ^{
+        [weakSelf calClick];
+    };
     [self.scrollView addSubview:topView];
     self.topView = topView;
     
@@ -135,8 +152,7 @@
     }];
     
     [self.view layoutIfNeeded];
-    
-    scrollView.contentSize = CGSizeMake(kScreenWidth, CGRectGetMaxY(infoView.frame) + 100);
+    scrollView.contentSize = CGSizeMake(kScreenWidth, CGRectGetMaxY(infoView.frame) + 80 + HXBBottomAdditionHeight);
 }
 
 - (void)setupBottomView {
@@ -145,30 +161,41 @@
     [self.view addSubview:bottomView];
     self.bottomView = bottomView;
     
+    UIView *bottomContentView = [UIView new];
+    [bottomView addSubview:bottomContentView];
+    self.bottomContentView = bottomContentView;
+    
     UIView *sepLine = [UIView new];
-    sepLine.backgroundColor = self.scrollView.backgroundColor;
+    sepLine.backgroundColor = kHXBColor_ECECEC_100;
     [bottomView addSubview:sepLine];
     
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(@(-HXBTabbarSafeBottomMargin));
-        make.left.right.equalTo(self.view);
-        make.height.equalTo(@kScrAdaptationW(64));
+        make.left.right.bottom.equalTo(self.view);
+        make.height.equalTo(@(64 + HXBBottomAdditionHeight));
     }];
     
     [sepLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(bottomView);
         make.height.equalTo(@1);
     }];
+    
+    [bottomContentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.equalTo(bottomView);
+        make.height.equalTo(@64);
+    }];
 }
 
 - (void)updateBottomView {
-    [self.bottomView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [self.bottomContentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
-    if (self.viewModel.planModel.hasBuy) {
+    if (self.viewModel.hasBuy) {
         [self setupBuyBottomView];
     } else {
         [self setupUnBuyBottomView];
     }
+    
+    [self.view layoutIfNeeded];
+    self.scrollView.contentSize = CGSizeMake(kScreenWidth, CGRectGetMaxY(self.infoView.frame) + 80 + HXBBottomAdditionHeight);
     
     [self updateInBtnState];
 }
@@ -186,7 +213,8 @@
     [calBtn setImage:[UIImage imageNamed:@"detail_cal"] forState:UIControlStateNormal];
     [calBtn addTarget:self action:@selector(calClick) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.bottomView addSubview:calBtn];
+    [self.bottomContentView addSubview:calBtn];
+    
     
     UIButton *inBtn = [UIButton new];
     [inBtn setTitle:@"转入" forState:UIControlStateNormal];
@@ -195,17 +223,18 @@
     [inBtn addTarget:self action:@selector(inClick) forControlEvents:UIControlEventTouchUpInside];
     self.inBtn = inBtn;
     
-    [self.bottomView addSubview:inBtn];
+    [self.bottomContentView addSubview:inBtn];
     
     [calBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(@kScrAdaptationW(15));
-        make.centerY.equalTo(self.bottomView);
+        make.centerY.equalTo(self.bottomContentView);
         make.width.height.equalTo(@kScrAdaptationW(35));
     }];
     
     [inBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(@kScrAdaptationW(-15));
-        make.centerY.height.equalTo(calBtn);
+        make.centerY.equalTo(self.bottomContentView);
+        make.height.equalTo(@kScrAdaptationW(41));
         make.left.equalTo(calBtn.mas_right).offset(15);
     }];
 }
@@ -219,7 +248,7 @@
     outBtn.adjustsImageWhenHighlighted = NO;
     [outBtn addTarget:self action:@selector(outClick) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.bottomView addSubview:outBtn];
+    [self.bottomContentView addSubview:outBtn];
     
     UIButton *inBtn = [UIButton new];
     [inBtn setTitle:@"转入" forState:UIControlStateNormal];
@@ -232,18 +261,12 @@
     [inBtn addTarget:self action:@selector(inClick) forControlEvents:UIControlEventTouchUpInside];
     self.inBtn = inBtn;
     
-    [self.bottomView addSubview:inBtn];
-    
-    [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(@(-HXBTabbarSafeBottomMargin));
-        make.left.right.equalTo(self.view);
-        make.height.equalTo(@kScrAdaptationW(64));
-    }];
+    [self.bottomContentView addSubview:inBtn];
     
     [outBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(@kScrAdaptationW(15));
         make.height.equalTo(@kScrAdaptationW(41));
-        make.centerY.equalTo(self.bottomView);
+        make.centerY.equalTo(self.bottomContentView);
     }];
     
     [inBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -280,9 +303,11 @@
     CGFloat offsetY = scrollView.contentOffset.y;
     if (offsetY > 30) {
         self.navView.backgroundColor = [UIColor whiteColor];
+        self.navViewBottomLine.hidden = NO;
     } else {
         offsetY = MIN(0, offsetY);
         self.navView.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:offsetY / 30];
+        self.navViewBottomLine.hidden = YES;
     }
 }
 

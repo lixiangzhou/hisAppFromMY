@@ -201,7 +201,7 @@
         _navView = [[HSJHomeCustomNavbarView alloc] init];
         _navView.title = @"红小宝";
         _navView.titleColor = kHXBColor_333333_100;
-        _navView.titleFount = kHXBFont_PINGFANGSC_REGULAR_750(40);
+        _navView.titleFount = [UIFont boldSystemFontOfSize:20];
         kWeakSelf
         _navView.noticeBlock = ^{
             [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_HomeNoticeClick];

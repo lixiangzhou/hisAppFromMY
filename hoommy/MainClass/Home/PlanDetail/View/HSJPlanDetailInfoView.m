@@ -90,23 +90,24 @@
 
 #pragma mark - Helper
 - (void)setData {
-    [self updateDataWithTotlaNum:0 totalMoney:0];
+    [self updateDataWithTotlaNum:0 totalMoney:@"0" moneyUnit:@"元"];
     
     kWeakSelf
     [[HSJGlobalInfoManager shared] getData:^(HSJGlobalInfoModel *infoModel) {
         [weakSelf updateDataWithTotlaNum:infoModel.financePlanSubPointCount
-                          totalMoney:infoModel.financePlanEarnInterest];
+                              totalMoney:infoModel.financePlanEarnInterestText
+                               moneyUnit:infoModel.financePlanEarnInterestTextUnit];
     }];
 }
 
-- (void)updateDataWithTotlaNum:(NSInteger)totalNum totalMoney:(CGFloat)totalMoney {
+- (void)updateDataWithTotlaNum:(NSInteger)totalNum totalMoney:(NSString *)totalMoney moneyUnit:(NSString *)moneyUnit {
     NSMutableAttributedString *totalNumAttr = [[NSMutableAttributedString alloc] initWithString:@"共计 "];
-    [totalNumAttr appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%zd", totalNum] attributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:12]}]];
+    [totalNumAttr appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%zd", totalNum] attributes:@{NSFontAttributeName: kHXBFont_DINCondensed_BOLD(17)}]];
     [totalNumAttr appendAttributedString:[[NSAttributedString alloc] initWithString:@" 名妈妈开启豪妈小金库"]];
     
     NSMutableAttributedString *totalMoneyAttr = [[NSMutableAttributedString alloc] initWithString:@"累计为宝宝成功攒钱 "];
-    [totalMoneyAttr appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%.2f", totalMoney] attributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:12]}]];
-    [totalMoneyAttr appendAttributedString:[[NSAttributedString alloc] initWithString:@" 元"]];
+    [totalMoneyAttr appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", totalMoney] attributes:@{NSFontAttributeName: kHXBFont_DINCondensed_BOLD(17)}]];
+    [totalMoneyAttr appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@", moneyUnit]]];
     
     self.totalNumLabel.attributedText = totalNumAttr;
     self.totalMoneyLabel.attributedText = totalMoneyAttr;

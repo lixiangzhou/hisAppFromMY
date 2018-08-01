@@ -12,6 +12,8 @@
 #import "NSString+HxbPerMilMoney.h"
 
 @interface HSJPlanDetailTopView ()
+@property (nonatomic, weak) UIImageView *bgView;
+
 @property (nonatomic, weak) UILabel *topLabel;
 @property (nonatomic, weak) UILabel *topDescLabel;
 @property (nonatomic, weak) UILabel *leftLabel;
@@ -20,6 +22,9 @@
 @property (nonatomic, weak) UILabel *centerDescLabel;
 @property (nonatomic, weak) UILabel *rightLabel;
 @property (nonatomic, weak) UILabel *rightDescLabel;
+
+@property (nonatomic, weak) UIView *additionView;
+@property (nonatomic, weak) UILabel *addtionDescLabel;
 @end
 
 @implementation HSJPlanDetailTopView
@@ -41,10 +46,11 @@
     
     UIImageView *bgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail_top_bg"]];
     [self addSubview:bgView];
+    self.bgView = bgView;
     
     // Top
     UILabel *topLabel = [UILabel new];
-    topLabel.font = kHXBFont_40;
+    topLabel.font = kHXBFont_80;
     topLabel.textColor = kHXBColor_976A02_100;
     [self addSubview:topLabel];
     self.topLabel = topLabel;
@@ -94,6 +100,32 @@
     [self addSubview:rightDescLabel];
     self.rightDescLabel = rightDescLabel;
     
+    // Addtion
+    UIView *additionView = [UIView new];
+    [self addSubview:additionView];
+    self.additionView = additionView;
+    
+    UIView *sepLine = [UIView new];
+    sepLine.backgroundColor = kHXBColor_C5AB71_30;
+    [additionView addSubview:sepLine];
+    
+    UILabel *addtionDescLabel = [UILabel new];
+    addtionDescLabel.font = kHXBFont_24;
+    addtionDescLabel.textColor = kHXBColor_976A02_100;
+    [additionView addSubview:addtionDescLabel];
+    self.addtionDescLabel = addtionDescLabel;
+
+    UIButton *calBtn = [UIButton new];
+    [calBtn setImage:[UIImage imageNamed:@"detail_buy_cal"] forState:UIControlStateNormal];
+    [calBtn setTitle:@" 计算收益" forState:UIControlStateNormal];
+    calBtn.titleLabel.font = kHXBFont_24;
+    [calBtn setTitleColor:kHXBColor_976A02_100 forState:UIControlStateNormal];
+    [calBtn setTitleColor:kHXBColor_976A02_100 forState:UIControlStateHighlighted];
+    calBtn.adjustsImageWhenHighlighted = NO;
+    [calBtn sizeToFit];
+    [additionView addSubview:calBtn];
+    [calBtn addTarget:self action:@selector(calAction) forControlEvents:UIControlEventTouchUpInside];
+    
     [bgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self);
     }];
@@ -101,7 +133,6 @@
     [topLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(@(kScrAdaptationW(90) + HXBStatusBarAdditionHeight));
         make.centerX.equalTo(self);
-//        make.height.equalTo(@kScrAdaptationW(20));
     }];
     
     [topDescLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -139,15 +170,53 @@
     [centerDescLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(centerLabel.mas_bottom).offset(kScrAdaptationW(4));
         make.centerX.equalTo(centerLabel);
-        make.bottom.equalTo(@kScrAdaptationW(-38));
     }];
+    
+    [additionView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(centerDescLabel.mas_bottom).offset(1);
+        make.left.right.equalTo(self);
+        make.bottom.equalTo(@kScrAdaptationW(-38));
+        make.height.equalTo(@45);
+    }];
+    
+    [sepLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.equalTo(@15);
+        make.right.equalTo(@-15);
+        make.height.equalTo(@0.5);
+    }];
+    
+    [addtionDescLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(sepLine);
+        make.bottom.equalTo(additionView);
+    }];
+    
+    [calBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(addtionDescLabel);
+        make.right.equalTo(sepLine);
+        make.width.equalTo(@(calBtn.width));
+        make.height.equalTo(@(calBtn.height + 10));
+    }];
+}
+
+#pragma mark - Action
+- (void)calAction {
+    if (self.calBlock) {
+        self.calBlock();
+    }
 }
 
 #pragma mark - Setter / Getter / Lazy
 - (void)setViewModel:(HSJPlanDetailViewModel *)viewModel {
     _viewModel = viewModel;
     
+    [self.additionView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(viewModel.planModel.hasBuy ? @45 : @0);
+    }];
+    
+    self.additionView.hidden = viewModel.planModel.hasBuy == NO;
+    
     if (viewModel.planModel.hasBuy) {
+        self.bgView.image = [UIImage imageNamed:@"detail_top_buy_bg"];
         self.topLabel.text = @"0.00";
         self.topDescLabel.text = @"昨日收益(元)";
         
@@ -160,11 +229,11 @@
         self.rightLabel.text = viewModel.interestString;
         self.rightDescLabel.text = @"今日预期年化";
         
+        self.addtionDescLabel.text = [NSString stringWithFormat:@"投资1万元日预期收益%@", [NSString hsj_moneyValueSuffix:viewModel.planModel.tenThousandExceptedIncome.doubleValue]];
+        
         kWeakSelf
-        [self.viewModel downLoadUserInfo:NO resultBlock:^(id responseData, NSError *erro) {
-            if (responseData) {
-                HXBUserInfoModel *infoModel = (HXBUserInfoModel *)responseData;
-                
+        [self.viewModel downLoadUserInfo:NO resultBlock:^(HXBUserInfoModel *infoModel, NSError *erro) {
+            if (infoModel) {
                 weakSelf.topLabel.text = [NSString hsj_simpleMoneyValue:infoModel.userAssets.yesterdayInterest];
                 
                 weakSelf.leftLabel.text = [NSString hsj_simpleMoneyValue:infoModel.userAssets.stepUpAssets];
@@ -173,6 +242,7 @@
             }
         }];
     } else {
+        self.bgView.image = [UIImage imageNamed:@"detail_top_bg"];
         self.topLabel.text = viewModel.interestString;
         self.topDescLabel.text = @"今日预期年化";
         
@@ -190,9 +260,7 @@
         [[HSJGlobalInfoManager shared] getData:^(HSJGlobalInfoModel *infoModel) {
             weakSelf.rightLabel.text = [NSString stringWithFormat:@"%zd人", infoModel.financePlanSubPointCountIn7Days];
         }];
-        
     }
-    
 }
 
 

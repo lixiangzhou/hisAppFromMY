@@ -16,10 +16,6 @@
 
 /// 基础利率 + 加息利率
 @property (nonatomic, copy) NSString *interestString;
-/// 是否新手
-@property (nonatomic, assign) BOOL isNew;
-/// 基础年利率
-@property (nonatomic, copy) NSString *baseInterestString;
 /// 锁定期
 @property (nonatomic, copy) NSString *lockString;
 /// 开始计息时间

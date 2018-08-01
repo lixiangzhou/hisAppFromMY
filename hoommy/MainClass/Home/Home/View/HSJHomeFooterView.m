@@ -72,8 +72,8 @@
     [self.platformAmountView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self).offset(kScrAdaptationW750(30));
         make.right.equalTo(self.mas_centerX).offset(-kScrAdaptationW750(10));
-        make.height.offset(kScrAdaptationH750(178));
-        make.top.equalTo(self.titleLabel.mas_bottom).offset(kScrAdaptationH750(38));
+        make.height.offset(kScrAdaptationW750(178));
+        make.top.equalTo(self.titleLabel.mas_bottom).offset(kScrAdaptationW750(38));
     }];
     [self.userAmountView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self).offset(-kScrAdaptationW750(30));
@@ -132,7 +132,7 @@
     if (!_messageLabel) {
         _messageLabel = [[UILabel alloc] init];
         _messageLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(24);
-        _messageLabel.textColor = kHXBColor_CBCBCB_100;
+        _messageLabel.textColor = kHXBColor_7F85A1_100;
         _messageLabel.text = @"10万妈妈的智慧选择";
     }
     return _messageLabel;

@@ -79,7 +79,7 @@
     
     [rightLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(titleLabel);
-        make.left.equalTo(titleLabel.mas_right).offset(-kScrAdaptationW(10));
+        make.left.equalTo(titleLabel.mas_right).offset(kScrAdaptationW(10));
     }];
     
     [rowView1 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -110,7 +110,7 @@
     
     UILabel *titleLabel = [UILabel new];
     titleLabel.text = title;
-    titleLabel.font = kHXBFont_30;
+    titleLabel.font = [UIFont boldSystemFontOfSize:15];//kHXBFont_30;
     titleLabel.textColor = kHXBColor_C5AB71_100;
     [view addSubview:titleLabel];
     
@@ -143,7 +143,7 @@
     _viewModel = viewModel;
     
     self.moreLabel.text = @"收益更高";
-    self.moreDescLabel.text = [NSString stringWithFormat:@"平均历史年化收益率%@%%，更多零花钱任你花", viewModel.baseInterestString];
+    self.moreDescLabel.text = [NSString stringWithFormat:@"平均历史年化收益率%@%%，更多零花钱任你花", viewModel.planModel.expectedRate];
     
     self.exitLabel.text = @"退出灵活";
     self.exitDescLabel.text = [NSString stringWithFormat:@"持有%@后，可随时申请退出", viewModel.lockString];

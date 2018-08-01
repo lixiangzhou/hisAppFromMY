@@ -9,6 +9,8 @@
 #import "HSJHomeHeaderView.h"
 #import "SDCycleScrollView.h"
 #import "HSJTitleCollectionViewCell.h"
+#import "HSJHomeBannerCell.h"
+#import "EllipsePageControl.h"
 
 @interface HSJHomeHeaderView()<SDCycleScrollViewDelegate>
 
@@ -17,6 +19,8 @@
 @property (nonatomic, strong) SDCycleScrollView *bannerView;
 
 @property (nonatomic, strong) UIButton *titleCycleRightBtn;
+
+@property(nonatomic,strong) EllipsePageControl *bannerPageControl;
 
 @end
 
@@ -46,14 +50,33 @@
 
 - (void)setupBannerView {
     self.bannerView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(kScrAdaptationW750(30), kScrAdaptationH750(10), kScreenWidth - 2 * kScrAdaptationW750(30) , kScrAdaptationH750(300)) delegate:self placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    self.bannerView.backgroundColor = [UIColor whiteColor];
     self.bannerView.pageControlAliment = SDCycleScrollViewPageContolAlimentRight;
     self.bannerView.showPageControl = NO;
     self.bannerView.autoScrollTimeInterval = 3;
     [self addSubview:self.bannerView];
+    
+    self.bannerPageControl = [[EllipsePageControl alloc] initWithFrame:CGRectMake(0, 0,kScreenWidth, kScrAdaptationW(4))];
+    self.bannerPageControl.controlSpacing = kScrAdaptationW(4);
+    self.bannerPageControl.otherColor = [UIColor colorWithWhite:1 alpha:0.3];
+    self.bannerPageControl.currentColor = [UIColor colorWithWhite:1 alpha:0.8];
+    
+    [self addSubview:self.bannerPageControl];
+    
+    [self.bannerPageControl mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self.bannerView);
+        make.height.offset(kScrAdaptationH(4));
+        make.bottom.equalTo(self).offset(-kScrAdaptationH(20));
+    }];
+    
+    kWeakSelf
+    self.bannerView.itemDidScrollOperationBlock = ^(NSInteger currentIndex) {
+        weakSelf.bannerPageControl.currentPage = currentIndex;
+    };
 }
 
 - (void)setupCycleScrollView {
-    self.titleCycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, kScreenWidth, kScrAdaptationH750(64)) delegate:self placeholderImage:[UIImage imageNamed:@"123213"]];
+    self.titleCycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, kScreenWidth, kScrAdaptationH750(64)) delegate:self placeholderImage:nil];
     self.titleCycleScrollView.autoScrollTimeInterval = 2.5;
     self.titleCycleScrollView.scrollDirection = UICollectionViewScrollDirectionVertical;
     self.titleCycleScrollView.showPageControl = NO;
@@ -68,11 +91,10 @@
 
 - (void)setHomeModel:(HSJHomeModel *)homeModel {
     _homeModel = homeModel;
-    NSMutableArray *imageArray = [NSMutableArray array];
-    for (BannerModel *bannerModel in homeModel.bannerList) {
-        [imageArray addObject:bannerModel.image];
-    }
-    self.bannerView.imageURLStringsGroup = imageArray;
+
+    self.bannerView.localizationImageNamesGroup = homeModel.bannerList;
+    self.bannerPageControl.numberOfPages = homeModel.bannerList.count;
+    
     if (homeModel.articleList.count) {
         self.titleCycleScrollView.hidden = NO;
         self.titleCycleScrollView.localizationImageNamesGroup = homeModel.articleList;
@@ -87,18 +109,22 @@
 
 - (Class)customCollectionViewCellClassForCycleScrollView:(SDCycleScrollView *)view
 {
-    if (view != self.titleCycleScrollView) {
-        return nil;
+    if ([view isEqual:self.titleCycleScrollView]) {
+        return [HSJTitleCollectionViewCell class];
     }
-    return [HSJTitleCollectionViewCell class];
+    return [HSJHomeBannerCell class];
 }
 
 - (void)setupCustomCell:(UICollectionViewCell *)cell forIndex:(NSInteger)index cycleScrollView:(SDCycleScrollView *)view
 {
-    HSJTitleCollectionViewCell *myCell = (HSJTitleCollectionViewCell *)cell;
-    ;
-    myCell.imageName = self.homeModel.articleList[index].tag;
-    myCell.titleStr = self.homeModel.articleList[index].title;
+    if ([view isEqual:self.titleCycleScrollView]) {
+        HSJTitleCollectionViewCell *myCell = (HSJTitleCollectionViewCell *)cell;
+        myCell.imageName = self.homeModel.articleList[index].tag;
+        myCell.titleStr = self.homeModel.articleList[index].title;
+    } else {
+        HSJHomeBannerCell *bannerCell = (HSJHomeBannerCell *)cell;
+        bannerCell.image = self.homeModel.bannerList[index].image;
+    }
 }
 
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index {
@@ -112,6 +138,9 @@
         }
     }
 }
+
+
+
 
 - (UIButton *)titleCycleRightBtn {
     if (!_titleCycleRightBtn) {
