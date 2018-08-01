@@ -13,6 +13,8 @@
 #import "HSJHomePlanTableViewCell.h"
 #import "HSJHomeActivityCell.h"
 #import <ReactiveObjC.h>
+#import "HXBGeneralAlertVC.h"
+#import "HSJRiskAssessmentViewController.h"
 
 @interface HSJHomeVCViewModel()
 
@@ -21,13 +23,13 @@
 @end
 @implementation HSJHomeVCViewModel
 
-- (void)getHomeDataWithResultBlock:(NetWorkResponseBlock)resultBlock {
+- (void)getHomeDataWithResultBlock:(NetWorkResponseBlock)resultBlock showHug:(BOOL)isShowHug{
     kWeakSelf
     [self loadData:^(NYBaseRequest *request) {
         request.requestUrl = kHSJHomeBaby;
         request.requestMethod = NYRequestMethodGet;
         request.modelType = [HSJHomeModel class];
-        request.showHud = YES;
+        request.showHud = isShowHug;
     } responseResult:^(HSJHomeModel *responseData, NSError *erro) {
         if (responseData) {
             weakSelf.homeModel = responseData;
@@ -93,7 +95,7 @@
             self.cellHeightArray[i] = KeyChain.isLogin ? @kScrAdaptationH750(676) : @kScrAdaptationH750(598);
 
         } else if ([planModel.viewItemType  isEqual: @"signuph5"])  {
-            self.cellHeightArray[i] = @kScrAdaptationH750(145);
+            self.cellHeightArray[i] = @kScrAdaptationH750(157);
             [[SDWebImageManager sharedManager] loadImageWithURL:[NSURL URLWithString:planModel.image] options:SDWebImageLowPriority progress:nil completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
                 if (image) {
                     CGFloat cellHeight = kScreenWidth / image.size.width * image.size.height + kScrAdaptationH750(20);
@@ -129,4 +131,34 @@
     return _cellHeightArray;
 }
 
+//风险测评
+- (void)riskTypeAssementFrom:(UIViewController *)controller {
+    HXBGeneralAlertVC *alertVC = [[HXBGeneralAlertVC alloc] initWithMessageTitle:@"" andSubTitle:@"您尚未进行风险评测，请评测后再进行出借" andLeftBtnName:@"我是保守型" andRightBtnName:@"立即评测" isHideCancelBtn:YES isClickedBackgroundDiss:YES];
+    kWeakSelf
+    [alertVC setLeftBtnBlock:^{
+        [weakSelf setRiskTypeDefault];
+    }];
+    [alertVC setRightBtnBlock:^{
+        HSJRiskAssessmentViewController *riskAssessmentVC = [[HSJRiskAssessmentViewController alloc] init];
+        [controller.navigationController pushViewController:riskAssessmentVC animated:YES];
+        __weak typeof(riskAssessmentVC) weakRiskAssessmentVC = riskAssessmentVC;
+        riskAssessmentVC.popBlock = ^(NSString *type) {
+            [weakRiskAssessmentVC.navigationController popToViewController:controller animated:YES];
+        };
+    }];
+    
+    [controller presentViewController:alertVC animated:NO completion:nil];
+}
+
+- (void)setRiskTypeDefault
+{
+    self.userInfoModel = nil;
+    [self loadData:^(NYBaseRequest *request) {
+        request.requestUrl = kHXBUser_riskModifyScoreURL;
+        request.requestMethod = NYRequestMethodPost;
+        request.requestArgument = @{@"score": @"0"};
+    } responseResult:^(id responseData, NSError *erro) {
+        
+    }];
+}
 @end

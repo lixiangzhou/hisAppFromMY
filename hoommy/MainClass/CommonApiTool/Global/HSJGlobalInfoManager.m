@@ -25,6 +25,14 @@
     return manager;
 }
 
+- (BOOL)erroStateCodeDeal:(NYBaseRequest *)request response:(NSDictionary *)responseObject {
+    return NO;
+}
+
+- (BOOL)erroResponseCodeDeal:(NYBaseRequest *)request error:(NSError *)error {
+    return NO;
+}
+
 - (void)getData {
     [self getData:nil];
 }
@@ -52,13 +60,13 @@
                 resultBlock(self.infoModel);
             }
         } else {
-            if (responseData == nil) {
-                if (weakSelf.retryCount <= 3) {
-                    weakSelf.retryCount += 1;
-                    // 没有获取到数据就获取
-                    [weakSelf getData:nil];
-                }
-            }
+//            if (responseData == nil) {
+//                if (weakSelf.retryCount <= 3) {
+//                    weakSelf.retryCount += 1;
+//                    // 没有获取到数据就获取
+//                    [weakSelf getData:nil];
+//                }
+//            }
         }
         
     }];

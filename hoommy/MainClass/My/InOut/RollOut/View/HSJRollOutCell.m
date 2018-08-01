@@ -58,7 +58,7 @@ NSString *const HSJRollOutCellIdentifier = @"HSJRollOutCellIdentifier";
     UILabel *leftAccountLabel = [UILabel new];
     leftAccountLabel.text = @"0.00";
     leftAccountLabel.textColor = kHXBColor_FF7055_100;
-    leftAccountLabel.font = kHXBFont_34;
+    leftAccountLabel.font = [UIFont boldSystemFontOfSize:17];//kHXBFont_34;
     [self.infoView addSubview:leftAccountLabel];
     self.leftAccountLabel = leftAccountLabel;
     

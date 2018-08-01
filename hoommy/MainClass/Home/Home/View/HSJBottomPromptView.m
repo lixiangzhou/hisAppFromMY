@@ -35,7 +35,7 @@
     }];
     [self.riskLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self);
-        make.top.equalTo(self.mas_centerY).offset(kScrAdaptationH750(4));
+        make.top.equalTo(self.mas_centerY).offset(kScrAdaptationH750(9));
     }];
 }
 
@@ -58,9 +58,9 @@
 - (UILabel *)riskLabel {
     if (!_riskLabel) {
         _riskLabel = [[UILabel alloc] init];
-        _riskLabel.text = @"-市场有风险 出借需谨慎-";
-        _riskLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(24);
-        _riskLabel.textColor = kHXBColor_7F85A1_100;
+        _riskLabel.text = @"- 市场有风险  出借需谨慎 -";
+        _riskLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(20);
+        _riskLabel.textColor = kHXBColor_7F85A1_60;
     }
     return _riskLabel;
 }

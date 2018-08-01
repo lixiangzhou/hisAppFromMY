@@ -43,8 +43,8 @@
 @implementation HSJMyViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
     self.isFullScreenShow = YES;
+    [super viewDidLoad];
 
     self.viewModel = [[HSJMyViewVCViewModel alloc] init];
     [self setupSubView];
