@@ -187,7 +187,7 @@
     if (!_expectedRateLabel) {
         _expectedRateLabel = [[UILabel alloc] init];
         _expectedRateLabel.text = @"--";
-        _expectedRateLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(100);
+        _expectedRateLabel.font = [UIFont boldSystemFontOfSize:50]; //kHXBFont_PINGFANGSC_REGULAR_750(100);
         _expectedRateLabel.textColor = kHXBColor_FF7055_100;
     }
     return _expectedRateLabel;

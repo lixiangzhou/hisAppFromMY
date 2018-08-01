@@ -143,8 +143,7 @@
     }];
     
     [self.view layoutIfNeeded];
-    
-    scrollView.contentSize = CGSizeMake(kScreenWidth, CGRectGetMaxY(infoView.frame) + 120);
+    scrollView.contentSize = CGSizeMake(kScreenWidth, CGRectGetMaxY(infoView.frame) + 80 + HXBBottomAdditionHeight);
 }
 
 - (void)setupBottomView {
@@ -158,9 +157,8 @@
     [bottomView addSubview:sepLine];
     
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(@(-HXBTabbarSafeBottomMargin));
-        make.left.right.equalTo(self.view);
-        make.height.equalTo(@kScrAdaptationW(64));
+        make.left.right.bottom.equalTo(self.view);
+        make.height.equalTo(@(64 + HXBBottomAdditionHeight));
     }];
     
     [sepLine mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -177,6 +175,9 @@
     } else {
         [self setupUnBuyBottomView];
     }
+    
+    [self.view layoutIfNeeded];
+    self.scrollView.contentSize = CGSizeMake(kScreenWidth, CGRectGetMaxY(self.infoView.frame) + 80 + HXBBottomAdditionHeight);
     
     [self updateInBtnState];
 }
@@ -209,13 +210,14 @@
     
     [calBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(@kScrAdaptationW(15));
-        make.centerY.equalTo(self.bottomView);
+        make.top.equalTo(@kScrAdaptationW(15));
         make.width.height.equalTo(@kScrAdaptationW(35));
     }];
     
     [inBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(@kScrAdaptationW(-15));
-        make.centerY.height.equalTo(calBtn);
+        make.centerY.equalTo(calBtn);
+        make.height.equalTo(@kScrAdaptationW(41));
         make.left.equalTo(calBtn.mas_right).offset(15);
     }];
 }
@@ -246,16 +248,10 @@
     [self.bottomView addSubview:inBtn];
     [self.bottomChangedViews addObject:inBtn];
     
-    [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(@(-HXBTabbarSafeBottomMargin));
-        make.left.right.equalTo(self.view);
-        make.height.equalTo(@kScrAdaptationW(64));
-    }];
-    
     [outBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(@kScrAdaptationW(15));
         make.height.equalTo(@kScrAdaptationW(41));
-        make.centerY.equalTo(self.bottomView);
+        make.top.equalTo(@kScrAdaptationW(15));
     }];
     
     [inBtn mas_makeConstraints:^(MASConstraintMaker *make) {

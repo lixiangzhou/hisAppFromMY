@@ -205,13 +205,13 @@
         [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_RollOutBatchClick];
     }
     
-    if (self.batchBtn.selected == NO) {
-        [self.viewModel calAmount];
-        if (self.viewModel.hasQuitPlans == NO) {
-            [HxbHUDProgress showTextWithMessage:@"当前无可转出内容"];
-            return;
-        }
-    }
+//    if (self.batchBtn.selected == NO) {
+//        [self.viewModel calAmount];
+//        if (self.viewModel.hasQuitPlans == NO) {
+//            [HxbHUDProgress showTextWithMessage:@"当前无可转出内容"];
+//            return;
+//        }
+//    }
     
     self.batchBtn.selected = !self.batchBtn.isSelected;
     
