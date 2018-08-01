@@ -136,6 +136,7 @@
         //全屏控制
         if(self.isFullScreenShow) {
             [self.navigationController setNavigationBarHidden:YES animated:animated];
+            self.navigationItem.title = nil;
             if(!_isInitNavBar) {
                 self.isTransparentNavigationBar = YES;
                 self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor clearColor],NSBackgroundColorAttributeName:[UIColor clearColor]};

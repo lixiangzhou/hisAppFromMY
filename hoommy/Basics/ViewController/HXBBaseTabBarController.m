@@ -106,14 +106,11 @@
         [NAV.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : self.selectColor} forState:UIControlStateSelected];
         
         // 设置image 及渲染模式
-        SVGKImage *svgImage = [SVGKImage imageNamed:imageNameArray[i]];
-        UIImage *image = [svgImage.UIImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-        NAV.tabBarItem.image = image;
-
-        svgImage = [SVGKImage imageNamed:selectImageCommonNameArray[i]];
-        UIImage *selectImage = svgImage.UIImage;
-        selectImage = [selectImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-        NAV.tabBarItem.selectedImage = selectImage;
+//        SVGKImage *svgImage = [SVGKImage imageNamed:imageNameArray[i]];
+//        UIImage *image = [svgImage.UIImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        NAV.tabBarItem.image = [UIImage imageNamed:imageNameArray[i]];
+        NAV.tabBarItem.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
+        NAV.tabBarItem.selectedImage = [[UIImage imageNamed:selectImageCommonNameArray[i]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];//selectImage;
         
         [self addChildViewController:NAV];
         if (i == 2) {

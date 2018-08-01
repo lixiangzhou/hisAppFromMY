@@ -9,6 +9,7 @@
 #import "HSJHomeHeaderView.h"
 #import "SDCycleScrollView.h"
 #import "HSJTitleCollectionViewCell.h"
+#import "HSJHomeBannerCell.h"
 
 @interface HSJHomeHeaderView()<SDCycleScrollViewDelegate>
 
@@ -72,7 +73,7 @@
     for (BannerModel *bannerModel in homeModel.bannerList) {
         [imageArray addObject:bannerModel.image];
     }
-    self.bannerView.imageURLStringsGroup = imageArray;
+//    self.bannerView.imageURLStringsGroup = imageArray;
     if (homeModel.articleList.count) {
         self.titleCycleScrollView.hidden = NO;
         self.titleCycleScrollView.localizationImageNamesGroup = homeModel.articleList;
@@ -87,18 +88,22 @@
 
 - (Class)customCollectionViewCellClassForCycleScrollView:(SDCycleScrollView *)view
 {
-    if (view != self.titleCycleScrollView) {
-        return nil;
+    if ([view isEqual:self.titleCycleScrollView]) {
+        return [HSJTitleCollectionViewCell class];
     }
-    return [HSJTitleCollectionViewCell class];
+    return [HSJHomeBannerCell class];
 }
 
 - (void)setupCustomCell:(UICollectionViewCell *)cell forIndex:(NSInteger)index cycleScrollView:(SDCycleScrollView *)view
 {
-    HSJTitleCollectionViewCell *myCell = (HSJTitleCollectionViewCell *)cell;
-    ;
-    myCell.imageName = self.homeModel.articleList[index].tag;
-    myCell.titleStr = self.homeModel.articleList[index].title;
+    if ([view isEqual:self.titleCycleScrollView]) {
+        HSJTitleCollectionViewCell *myCell = (HSJTitleCollectionViewCell *)cell;
+        myCell.imageName = self.homeModel.articleList[index].tag;
+        myCell.titleStr = self.homeModel.articleList[index].title;
+    } else {
+        HSJHomeBannerCell *bannerCell = (HSJHomeBannerCell *)cell;
+        bannerCell.image = self.homeModel.bannerList[index].image;
+    }
 }
 
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index {

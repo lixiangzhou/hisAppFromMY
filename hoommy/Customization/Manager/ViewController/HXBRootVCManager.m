@@ -218,11 +218,11 @@
                                          @"HSJMyViewController"//我的
                                          ];
         //title 集合
-        NSArray *controllerTitleArray = @[@"首页",@"我的"];
+        NSArray *controllerTitleArray = @[@"",@""];
         //正常图片
-        NSArray *imageArray = @[@"home_Unselected.svg",@"my_Unselected.svg"];
+        NSArray *imageArray = @[@"tabbar_home",@"tabbar_mine"];
         //选中下的图片
-        NSArray *commonName = @[@"home_Selected.svg",@"my_Selected.svg"];
+        NSArray *commonName = @[@"tabbar_home_sel",@"tabbar_mine_sel"];
         
         for (UIView *view in self.mainTabbarVC.tabBar.subviews) {
             NSLog(@"view = %@", view);

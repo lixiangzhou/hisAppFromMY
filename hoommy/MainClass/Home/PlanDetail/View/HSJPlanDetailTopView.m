@@ -115,18 +115,16 @@
     [additionView addSubview:addtionDescLabel];
     self.addtionDescLabel = addtionDescLabel;
 
-    UIImageView *calIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail_buy_cal"]];
-    calIcon.userInteractionEnabled = YES;
-    [calIcon addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(calAction)]];
-    [additionView addSubview:calIcon];
-    
-    UILabel *calLabel = [UILabel new];
-    calLabel.font = kHXBFont_24;
-    calLabel.textColor = kHXBColor_976A02_100;
-    calLabel.text = @"计算收益";
-    calLabel.userInteractionEnabled = YES;
-    [calLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(calAction)]];
-    [additionView addSubview:calLabel];
+    UIButton *calBtn = [UIButton new];
+    [calBtn setImage:[UIImage imageNamed:@"detail_buy_cal"] forState:UIControlStateNormal];
+    [calBtn setTitle:@" 计算收益" forState:UIControlStateNormal];
+    calBtn.titleLabel.font = kHXBFont_24;
+    [calBtn setTitleColor:kHXBColor_976A02_100 forState:UIControlStateNormal];
+    [calBtn setTitleColor:kHXBColor_976A02_100 forState:UIControlStateHighlighted];
+    calBtn.adjustsImageWhenHighlighted = NO;
+    [calBtn sizeToFit];
+    [additionView addSubview:calBtn];
+    [calBtn addTarget:self action:@selector(calAction) forControlEvents:UIControlEventTouchUpInside];
     
     [bgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self);
@@ -192,14 +190,11 @@
         make.bottom.equalTo(additionView);
     }];
     
-    [calIcon mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(calLabel);
-        make.right.equalTo(calLabel.mas_left).offset(-5);
-    }];
-    
-    [calLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [calBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(addtionDescLabel);
         make.right.equalTo(sepLine);
+        make.width.equalTo(@(calBtn.width));
+        make.height.equalTo(@(calBtn.height + 10));
     }];
 }
 
