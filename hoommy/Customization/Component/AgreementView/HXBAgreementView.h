@@ -19,6 +19,8 @@
 
 @property (nonatomic, assign) BOOL selectState;
 
+@property (nonatomic, assign) BOOL isAllowAllScreenClick;
+
 /**
  点击对号按钮回调的Block
  */

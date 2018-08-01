@@ -17,6 +17,7 @@
 
 @property (nonatomic, assign) BOOL isSvnImage;
 @property (nonatomic, assign) BOOL isShowArrow;
+@property (nonatomic, assign) BOOL isDisable;
 
 - initCellModel:(BOOL)isSvnImage showArrow:(BOOL)isShowArrow;
 @end

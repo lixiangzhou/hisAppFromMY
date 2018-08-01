@@ -13,6 +13,7 @@
 @property (nonatomic, strong) UIButton *agreeBtn;
 
 @property (nonatomic, strong) CJLabel *negotiateView;
+@property (nonatomic, strong) UIButton *allScreenClickBtn;
 
 /**
  需要添加点击事件的富文本
@@ -28,6 +29,7 @@
     if (self = [super initWithFrame:frame]) {
         [self addSubview:self.agreeBtn];
         [self addSubview:self.negotiateView];
+        [self addSubview:self.allScreenClickBtn];
         [self setupSubViewFrame];
     }
     return self;
@@ -41,12 +43,11 @@
     }];
     [self.negotiateView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.agreeBtn.mas_right).offset(kScrAdaptationW(7));
-        make.top.equalTo(self);
+        make.top.right.bottom.equalTo(self);
         make.right.equalTo(self);
     }];
-    [self mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.negotiateView.mas_top);
-        make.bottom.equalTo(self.negotiateView.mas_bottom);
+    [self.allScreenClickBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self);
     }];
 }
 
@@ -98,6 +99,12 @@
     self.negotiateView.text = text;
 }
 
+- (void)setIsAllowAllScreenClick:(BOOL)isAllowAllScreenClick {
+    _isAllowAllScreenClick = isAllowAllScreenClick;
+    
+    self.allScreenClickBtn.userInteractionEnabled = isAllowAllScreenClick;
+}
+
 #pragma mark - 懒加载
 - (UIButton *)agreeBtn
 {
@@ -125,6 +132,20 @@
     if (self.agreeBtnBlock) {
         self.agreeBtnBlock(self.agreeBtn.selected);
     }
+}
+
+- (UIButton *)allScreenClickBtn {
+    if(!_allScreenClickBtn) {
+        _allScreenClickBtn = [[UIButton alloc] init];
+        _allScreenClickBtn.userInteractionEnabled = NO;
+        [_allScreenClickBtn addTarget:self action:@selector(allScreenClickAct:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    return _allScreenClickBtn;
+}
+
+- (void)allScreenClickAct:(UIButton*)button {
+    [self agreeBtnClick];
 }
 
 - (void)setSelectState:(BOOL)selectState {
