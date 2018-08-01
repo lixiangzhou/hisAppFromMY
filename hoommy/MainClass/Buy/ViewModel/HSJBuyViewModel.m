@@ -118,7 +118,7 @@
 - (BOOL)isAbleBankCellItem {
     double money = self.inputMoney.doubleValue;
     BOOL isAble = YES;
-    if(self.userInfoModel.userAssets.availablePoint.doubleValue > money) {
+    if(self.userInfoModel.userAssets.availablePoint.doubleValue >= money) {
         isAble = NO;
     }
     return isAble;

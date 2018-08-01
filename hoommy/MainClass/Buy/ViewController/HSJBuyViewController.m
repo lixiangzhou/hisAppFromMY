@@ -286,6 +286,7 @@
     if (!self.presentedViewController) {
         self.alertVC = [[HXBVerificationCodeAlertVC alloc] init];
         self.alertVC.isCleanPassword = YES;
+        self.alertVC.isSendCodeWhenIntoPage = YES;
         double rechargeMoney = [self.viewModel.inputMoney doubleValue] - self.viewModel.userInfoModel.userAssets.availablePoint.floatValue;
         self.alertVC.messageTitle = @"请输入短信验证码";
         self.alertVC.subTitle = [NSString stringWithFormat:@"已发送到%@上，请查收", [self.viewModel.userInfoModel.userBank.securyMobile replaceStringWithStartLocation:3 lenght:4]];
@@ -369,7 +370,7 @@
 - (void)lookUpAgreement {
     HSJAgreementsViewController *vc = [[HSJAgreementsViewController alloc] init];
     vc.isFullScreenShow = YES;
-    [self presentViewController:vc animated:YES completion:nil];
+    [self presentViewController:vc animated:NO completion:nil];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

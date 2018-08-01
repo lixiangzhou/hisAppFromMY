@@ -42,7 +42,7 @@
     [self.contentView addSubview:self.subTitleLabel];
     
     [self setupSubViewFrame];
-    if(self.getVerificationCodeBlock) {
+    if(self.isSendCodeWhenIntoPage && self.getVerificationCodeBlock) {
         self.getVerificationCodeBlock();
     }
 }

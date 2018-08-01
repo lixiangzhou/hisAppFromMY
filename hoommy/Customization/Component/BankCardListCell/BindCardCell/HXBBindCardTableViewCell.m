@@ -139,6 +139,7 @@
         _prompTf.font = kHXBFont_PINGFANGSC_REGULAR(12);
         _prompTf.isHidenLine = YES;
         _prompTf.hidden = YES;
+        _prompTf.userInteractionEnabled = NO;
     }
     return _prompTf;
 }

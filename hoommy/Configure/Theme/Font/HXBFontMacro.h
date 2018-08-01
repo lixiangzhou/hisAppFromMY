@@ -18,8 +18,8 @@
 #define kHXBFont_Bold_PINGFANGSC_REGULAR(s)            ([UIFont fontWithName:@"HelveticaNeue-Bold" size:kScrAdaptationW(s)])
 #define kHXBFont_PINGFANGSC_REGULAR_750(s)        ([UIFont fontWithName:@"HelveticaNeue" size:kScrAdaptationW750(s)])
 //Impact字体, 仅用于显示数字
-#define kHXBFont_IMPACT_REGULAR(s)            ([UIFont fontWithName:@"DINCondensed-Bold" size:kScrAdaptationW(s)])
-#define kHXBFont_IMPACT_REGULAR_750(s)        ([UIFont fontWithName:@"DINCondensed-Bold" size:kScrAdaptationW750(s)])
+#define kHXBFont_IMPACT_REGULAR(s)            ([UIFont fontWithName:@"Impact" size:kScrAdaptationW(s)])
+#define kHXBFont_IMPACT_REGULAR_750(s)        ([UIFont fontWithName:@"Impact" size:kScrAdaptationW750(s)])
 //DINCondensed字体
 #define kHXBFont_DINCondensed_BOLD(s)            ([UIFont fontWithName:@"DINCondensed-Bold" size:kScrAdaptationW(s)])
 #define kHXBFont_DINCondensed_BOLD_750(s)        ([UIFont fontWithName:@"DINCondensed-Bold" size:kScrAdaptationW750(s)])
