@@ -82,7 +82,12 @@
     HSJSignInViewController *signInVC = [[HSJSignInViewController alloc] init];
     HXBBaseNavigationController *nav = [[HXBBaseNavigationController alloc] initWithRootViewController:signInVC];
     signInVC.selectedIndexVC = notification.object[@"selectedIndex"];
-    [self presentViewController:nav animated:YES completion:nil];
+    dispatch_async(dispatch_get_main_queue(), ^(void){
+        [self presentViewController:nav animated:YES completion:nil];
+    });
+    
+
+//    [self presentViewController:nav animated:YES completion:nil];
 }
 
 #pragma mark - 封装的方法

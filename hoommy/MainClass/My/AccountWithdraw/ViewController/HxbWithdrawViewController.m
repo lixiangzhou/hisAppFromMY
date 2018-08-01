@@ -362,7 +362,7 @@
     NSMutableAttributedString *info = [NSAttributedString setupAttributeStringWithString:str WithRange:NSMakeRange(0, str.length) andAttributeColor:RGB(146, 149, 162) andAttributeFont:kHXBFont_PINGFANGSC_REGULAR_750(24)];
     
     NSString *yuanStr = @"元";
-    NSString *amount = [NSString GetPerMilWithDouble:withdrawModel.balanceAmount];
+    NSString *amount = [NSString hsj_simpleMoneyValue:withdrawModel.balanceAmount];
     NSAttributedString *info2 = [NSAttributedString setupAttributeStringWithBeforeString:amount  WithBeforeRange:NSMakeRange(0, amount.length) andAttributeColor:HXBC_Red_Light andAttributeFont:kHXBFont_PINGFANGSC_REGULAR_750(24) afterString:yuanStr WithAfterRange:NSMakeRange(0, yuanStr.length) andAttributeColor:RGB(146, 149, 162) andAttributeFont:kHXBFont_PINGFANGSC_REGULAR_750(24)];
     [info appendAttributedString:info2];
     self.availableBalanceLabel.attributedText = info;
