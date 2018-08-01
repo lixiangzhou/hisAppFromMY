@@ -23,6 +23,9 @@
 //是否有语音验证码
 @property (nonatomic, assign) BOOL isSpeechVerificationCode;
 
+//是否在进入页面时就发送验证码
+@property (nonatomic, assign) BOOL isSendCodeWhenIntoPage;
+
 /**
  是否清空
  */

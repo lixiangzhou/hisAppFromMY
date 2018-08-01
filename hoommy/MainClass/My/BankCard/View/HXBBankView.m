@@ -85,7 +85,7 @@
         make.top.equalTo(self.backImageView.mas_bottom).offset(kScrAdaptationW(10));
         make.left.equalTo(self.backImageView);
         make.height.offset(kScrAdaptationW(30));
-        make.width.offset(kScrAdaptationW(112));
+        make.width.offset(kScrAdaptationW(115));
     }];
     //backImageView
     [self.iconView mas_makeConstraints:^(MASConstraintMaker *make) {

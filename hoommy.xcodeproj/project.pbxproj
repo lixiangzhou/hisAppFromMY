@@ -303,6 +303,7 @@
 		9A97DAD220EF420200688ADB /* sanbiao.svg in Resources */ = {isa = PBXBuildFile; fileRef = 9A97DA5B20EF420200688ADB /* sanbiao.svg */; };
 		9A97DAD320EF420200688ADB /* trading_record.svg in Resources */ = {isa = PBXBuildFile; fileRef = 9A97DA5C20EF420200688ADB /* trading_record.svg */; };
 		9A97DAD420EF420200688ADB /* transaction_password.svg in Resources */ = {isa = PBXBuildFile; fileRef = 9A97DA5D20EF420200688ADB /* transaction_password.svg */; };
+		9AA0696A2111AED800A83ED7 /* Impact.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AA069692111AED500A83ED7 /* Impact.ttf */; };
 		9AA70B4120FEF323008B3007 /* HSJBuyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA70B4020FEF323008B3007 /* HSJBuyViewController.m */; };
 		9AA70B4420FEF369008B3007 /* HSJBuyViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA70B4320FEF369008B3007 /* HSJBuyViewModel.m */; };
 		9AA70B4720FEF3CC008B3007 /* HSJBuyHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA70B4620FEF3CC008B3007 /* HSJBuyHeadView.m */; };
@@ -982,6 +983,7 @@
 		9A97DA5B20EF420200688ADB /* sanbiao.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = sanbiao.svg; sourceTree = "<group>"; };
 		9A97DA5C20EF420200688ADB /* trading_record.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = trading_record.svg; sourceTree = "<group>"; };
 		9A97DA5D20EF420200688ADB /* transaction_password.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = transaction_password.svg; sourceTree = "<group>"; };
+		9AA069692111AED500A83ED7 /* Impact.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Impact.ttf; sourceTree = "<group>"; };
 		9AA70B3F20FEF323008B3007 /* HSJBuyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJBuyViewController.h; sourceTree = "<group>"; };
 		9AA70B4020FEF323008B3007 /* HSJBuyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJBuyViewController.m; sourceTree = "<group>"; };
 		9AA70B4220FEF369008B3007 /* HSJBuyViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJBuyViewModel.h; sourceTree = "<group>"; };
@@ -3224,6 +3226,7 @@
 		9A97DA3E20EF420200688ADB /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				9AA069602111806D00A83ED7 /* Font */,
 				9A97DA3F20EF420200688ADB /* hengfeng */,
 				9A97DA4020EF420200688ADB /* Image */,
 				9A97DA4220EF420200688ADB /* register.geojson */,
@@ -3284,6 +3287,22 @@
 				9A6E0A6920F84CA000598071 /* main.m */,
 			);
 			name = Other;
+			sourceTree = "<group>";
+		};
+		9AA069602111806D00A83ED7 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				9AA069612111806D00A83ED7 /* impact */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
+		9AA069612111806D00A83ED7 /* impact */ = {
+			isa = PBXGroup;
+			children = (
+				9AA069692111AED500A83ED7 /* Impact.ttf */,
+			);
+			path = impact;
 			sourceTree = "<group>";
 		};
 		9AA70B3A20FEF0F6008B3007 /* Buy */ = {
@@ -3882,6 +3901,7 @@
 				9A6E0A6720F84CA000598071 /* LaunchScreen.storyboard in Resources */,
 				9A97DACB20EF420200688ADB /* mobile.svg in Resources */,
 				9A97DABB20EF420200688ADB /* arrow.svg in Resources */,
+				9AA0696A2111AED800A83ED7 /* Impact.ttf in Resources */,
 				9A97DACD20EF420200688ADB /* my_Selected.svg in Resources */,
 				9A97DAC120EF420200688ADB /* card.svg in Resources */,
 				9A97DAD220EF420200688ADB /* sanbiao.svg in Resources */,

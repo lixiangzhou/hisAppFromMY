@@ -102,9 +102,9 @@
                 openVC.title = @"开通存管账户";
                 [self.navigationController pushViewController:openVC animated:YES];
             } else { //已开户去账户资产页
-                [HXBUmengManagar HXB_clickEventWithEnevtId:kHSJUmeng_MyBalanceClick];
-                HXBMY_AllFinanceViewController *allFinanceViewController = [[HXBMY_AllFinanceViewController alloc]init];
-                [weakSelf.navigationController pushViewController:allFinanceViewController animated:YES];
+//                [HXBUmengManagar HXB_clickEventWithEnevtId:kHSJUmeng_MyBalanceClick];
+//                HXBMY_AllFinanceViewController *allFinanceViewController = [[HXBMY_AllFinanceViewController alloc]init];
+//                [weakSelf.navigationController pushViewController:allFinanceViewController animated:YES];
             }
         }
     }];

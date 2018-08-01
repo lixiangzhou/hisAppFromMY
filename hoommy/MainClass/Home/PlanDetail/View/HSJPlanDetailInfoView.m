@@ -102,11 +102,11 @@
 
 - (void)updateDataWithTotlaNum:(NSInteger)totalNum totalMoney:(NSString *)totalMoney moneyUnit:(NSString *)moneyUnit {
     NSMutableAttributedString *totalNumAttr = [[NSMutableAttributedString alloc] initWithString:@"共计 "];
-    [totalNumAttr appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%zd", totalNum] attributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:17]}]];
+    [totalNumAttr appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%zd", totalNum] attributes:@{NSFontAttributeName: kHXBFont_DINCondensed_BOLD(17)}]];
     [totalNumAttr appendAttributedString:[[NSAttributedString alloc] initWithString:@" 名妈妈开启豪妈小金库"]];
     
     NSMutableAttributedString *totalMoneyAttr = [[NSMutableAttributedString alloc] initWithString:@"累计为宝宝成功攒钱 "];
-    [totalMoneyAttr appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", totalMoney] attributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:17]}]];
+    [totalMoneyAttr appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", totalMoney] attributes:@{NSFontAttributeName: kHXBFont_DINCondensed_BOLD(17)}]];
     [totalMoneyAttr appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@", moneyUnit]]];
     
     self.totalNumLabel.attributedText = totalNumAttr;

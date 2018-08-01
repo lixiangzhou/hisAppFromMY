@@ -139,6 +139,7 @@
         _prompTf.font = kHXBFont_PINGFANGSC_REGULAR(12);
         _prompTf.isHidenLine = YES;
         _prompTf.hidden = YES;
+        _prompTf.userInteractionEnabled = NO;
     }
     return _prompTf;
 }
@@ -172,7 +173,7 @@
         [self.codeBt setTitle:cellModel.rightButtonText forState:UIControlStateNormal];
         CGFloat width = [cellModel.rightButtonText caleFontWidhSize:self.codeBt.titleLabel.font forViewHeight:self.codeBt.height];
         [self.codeBt mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.width.mas_equalTo(kScrAdaptationW(width+5));
+            make.width.mas_equalTo(kScrAdaptationW(width+10));
         }];
         self.codeBt.hidden = NO;
     }

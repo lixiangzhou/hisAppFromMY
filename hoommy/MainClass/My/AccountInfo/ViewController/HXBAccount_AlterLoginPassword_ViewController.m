@@ -77,7 +77,8 @@
             KeyChain.siginCount = @(KeyChain.siginCount.integerValue + 1).description;
         }];
         
-        if ( KeyChain.siginCount.integerValue >= 3 ) { //error.code != HSJNetStateCodeAlreadyPopWindow &&
+        if (KeyChain.siginCount.integerValue >= 3) {
+            KeyChain.siginCount = @(0).description;
             [weakSelf alertVC_4];
         }
         

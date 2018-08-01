@@ -191,10 +191,14 @@
 
 - (void)verifyWithIDCard:(NSString *)IDCard andCode:(NSString *)code
 {
-    if (0 == IDCard.length) {
-        [HxbHUDProgress showTextWithMessage:@"请输入您的身份证号码"];
+    if(self.viewModel.cellDataList.count > 1) {
+        if (0 == IDCard.length) {
+            [HxbHUDProgress showTextWithMessage:@"请输入您的身份证号码"];
+            return;
+        }
     }
-    else if(0 == code.length) {
+    
+    if(0 == code.length) {
         [HxbHUDProgress showTextWithMessage:@"请输入验证码"];
     }
     else {

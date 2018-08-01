@@ -8,12 +8,16 @@
 
 #import "HSJBaseViewModel.h"
 #import "HSJHomeModel.h"
+
 @class HSJGlobalInfoModel;
+
 @interface HSJHomeVCViewModel : HSJBaseViewModel
 
 @property (nonatomic, strong) HSJHomeModel *homeModel;
 
 @property (nonatomic, strong) HSJGlobalInfoModel *infoModel;
+
+@property (nonatomic, strong) HXBUserInfoModel *userInfoModel;
 
 @property (nonatomic, strong, readonly) NSMutableArray *cellHeightArray;
 
@@ -21,7 +25,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 
-- (void)getHomeDataWithResultBlock:(NetWorkResponseBlock)resultBlock;
+- (void)getHomeDataWithResultBlock:(NetWorkResponseBlock)resultBlock showHug:(BOOL)isShowHug;
 
 - (void)getGlobal:(void (^)(HSJGlobalInfoModel *))resultBlock;
+
+//风险测评
+- (void)riskTypeAssementFrom:(UIViewController *)controller;
 @end

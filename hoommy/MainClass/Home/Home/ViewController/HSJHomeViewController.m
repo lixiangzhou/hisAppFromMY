@@ -24,6 +24,7 @@
 #import "HXBVersionUpdateManager.h"
 #import "HSJBuyViewController.h"
 #import "HXBHomePopViewManager.h"
+#import "HSJDepositoryOpenTipView.h"
 
 @interface HSJHomeViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -37,6 +38,9 @@
 
 @property (nonatomic, strong) HSJHomeVCViewModel *viewModel;
 
+//等待加入的计划id
+@property (nonatomic, copy) NSString *planIdOfWaitJoin;
+
 @end
 
 @implementation HSJHomeViewController
@@ -46,12 +50,21 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self setUI];
-    
+    for(NSString *fontfamilyname in [UIFont familyNames])
+    {
+        NSLog(@"family:'%@'",fontfamilyname);
+        for(NSString *fontName in [UIFont fontNamesForFamilyName:fontfamilyname])
+        {
+            NSLog(@"\tfont:'%@'",fontName);
+        }
+        NSLog(@"-------------");
+    }
 }
 
 - (void)reLoadWhenViewAppear {
-    [self getHomeData];
-    [self updateUI];
+    BOOL isShowHug = self.viewModel.homeModel? NO : YES;
+    [self getHomeData:isShowHug];
+    [self loadUserInfo:NO];
     
     if ([HXBAdvertiseManager shared].couldPopAtHomeAfterSlashOrGesturePwd) {
         [[HXBVersionUpdateManager sharedInstance] show];
@@ -70,20 +83,40 @@
     }];
 }
 
-- (void)getHomeData {
+- (void)getHomeData:(BOOL)isShowHug  {
     kWeakSelf
     [self.viewModel getHomeDataWithResultBlock:^(id responseData, NSError *erro) {
+        [weakSelf.mainTabelView endRefresh:YES];
         if(!erro) {
             weakSelf.headerView.homeModel = weakSelf.viewModel.homeModel;
             [weakSelf updateUI];
             [weakSelf.mainTabelView reloadData];
-            [weakSelf.mainTabelView endRefresh:YES];
         }
         
-    }];
+    } showHug:isShowHug];
+    
     [self.viewModel getGlobal:^(HSJGlobalInfoModel *infoModel) {
         weakSelf.footerView.infoModel = infoModel;
     }];
+}
+
+- (void)loadUserInfo:(BOOL)isShowHug {
+    self.viewModel.userInfoModel = nil;
+    if(KeyChain.isLogin) {
+        kWeakSelf
+        [self.viewModel downLoadUserInfo:isShowHug resultBlock:^(HXBUserInfoModel *userInfoModel, NSError *erro) {
+            if(!erro) {
+                weakSelf.viewModel.userInfoModel = userInfoModel;
+                if(weakSelf.planIdOfWaitJoin) {
+                    [weakSelf joinAction:weakSelf.planIdOfWaitJoin];
+                }
+            }
+            weakSelf.planIdOfWaitJoin = nil;
+        }];
+    }
+    else {
+        IDPLogDebug(@"没有登录, 不能获取用户信息");
+    }
 }
 
 - (void)updateUI {
@@ -93,6 +126,21 @@
         self.headerView.height = kScrAdaptationH750(310);
     }
     self.mainTabelView.tableHeaderView = self.headerView;
+}
+
+- (void)joinAction:(NSString*)planId{
+    HXBUserInfoModel *userInfoModel = self.viewModel.userInfoModel;
+    if(userInfoModel) {
+        if (userInfoModel.userInfo.isCreateEscrowAcc == NO) {
+            [HSJDepositoryOpenTipView show];
+        } else if ([userInfoModel.userInfo.riskType isEqualToString:@"立即评测"]) {
+            [self.viewModel riskTypeAssementFrom:self];
+        } else {
+            HSJBuyViewController *vc = [HSJBuyViewController new];
+            vc.planId = planId;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }
 }
 
 #pragma mark - UITableViewDelegate,UITableViewDataSource
@@ -106,9 +154,13 @@
     if([cell isKindOfClass:[HSJHomePlanTableViewCell class]] && !cell.intoButtonAct) {
         kWeakSelf;
         cell.intoButtonAct = ^(NSString *planId) {
-            HSJBuyViewController *vc = [[HSJBuyViewController alloc] init];
-            vc.planId = planId;
-            [weakSelf.navigationController pushViewController:vc animated:YES];
+            if(weakSelf.viewModel.userInfoModel) {
+                [weakSelf joinAction:planId];
+            }
+            else {
+                weakSelf.planIdOfWaitJoin = planId;
+                [weakSelf loadUserInfo:YES];
+            }
         };
     }
     return cell;
@@ -220,7 +272,7 @@
         kWeakSelf
         _mainTabelView.freshOption = ScrollViewFreshOptionDownPull;
         _mainTabelView.headerWithRefreshBlock = ^(UIScrollView *scrollView) {
-            [weakSelf getHomeData];
+            [weakSelf getHomeData:NO];
         };
     }
     return _mainTabelView;

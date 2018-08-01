@@ -118,7 +118,7 @@
 - (BOOL)isAbleBankCellItem {
     double money = self.inputMoney.doubleValue;
     BOOL isAble = YES;
-    if(self.userInfoModel.userAssets.availablePoint.doubleValue > money) {
+    if(self.userInfoModel.userAssets.availablePoint.doubleValue >= money) {
         isAble = NO;
     }
     return isAble;
@@ -288,6 +288,7 @@
 
 - (void)buildBankCellItem {
     HSJBuyCellModel *cellModel = [self.cellDataList safeObjectAtIndex:1];
+    cellModel.arrowText = @"";
     if(!self.userInfoModel.userInfo.hasBindCard.boolValue) {//绑卡
         cellModel.iconName = @"bindBankCard";
         cellModel.isShowArrow = YES;
@@ -301,7 +302,7 @@
         cellModel.iconName = self.userInfoModel.userBank.bankCode;
         cellModel.isSvnImage = YES;
         NSString *tempStr = [self.userInfoModel.userBank.cardId substringFromIndex:self.userInfoModel.userBank.cardId.length-4];
-        NSString *str1 = [NSString stringWithFormat:@"%@", self.userInfoModel.userBank.name];
+        NSString *str1 = [NSString stringWithFormat:@"%@", self.userInfoModel.userBank.bankType];
         NSString *str2 = [NSString stringWithFormat:@" (**%@)\n%@", tempStr, self.userInfoModel.userBank.quota];
         cellModel.title = [self buildAttributedString:str1 secondString:str2 state:self.isAbleBankCellItem];
         
