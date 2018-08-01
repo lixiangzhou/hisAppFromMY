@@ -111,9 +111,7 @@
         }
     }
     
-    NSString *valueString = [NSString GetPerMilWithDouble:value];
-    valueString = [valueString isEqualToString:@"0"] ? @"0.00" : valueString;
-    self.amount = [NSString stringWithFormat:@"待转出金额%@元", valueString];
+    self.amount = [NSString stringWithFormat:@"待转出金额%@", [NSString hsj_moneyValueSuffix:value]];
 }
 
 - (NSMutableArray *)selectedIds {

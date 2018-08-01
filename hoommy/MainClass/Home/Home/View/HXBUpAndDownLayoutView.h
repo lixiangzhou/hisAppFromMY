@@ -20,6 +20,6 @@
  */
 @property (nonatomic, copy) NSString *title;
 
-@property (nonatomic, strong) void(^clickActionBlock)();
+@property (nonatomic, strong) void(^clickActionBlock)(void);
 
 @end

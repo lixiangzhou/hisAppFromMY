@@ -117,6 +117,8 @@
 @property (nonatomic,copy) NSString *hasEverInvestLoan;
 ///    是否投资 true:
 @property (nonatomic,copy) NSString *hasEverInvestFinancePlan;
+/// 是否有月升投资
+@property (nonatomic,copy) NSString *hasEverInvestStepUp;
 ///    int    是否绑卡 1：已绑卡， 0：未绑卡
 @property (nonatomic,copy) NSString *hasBindCard;
 ///是否开同存管

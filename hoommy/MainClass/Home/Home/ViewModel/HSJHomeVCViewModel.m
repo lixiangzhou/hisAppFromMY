@@ -92,7 +92,7 @@
             self.cellHeightArray[i] = KeyChain.isLogin ? @kScrAdaptationH750(676) : @kScrAdaptationH750(598);
 
         } else if ([planModel.viewItemType  isEqual: @"signuph5"])  {
-            self.cellHeightArray[i] = @kScrAdaptationH750(145);
+            self.cellHeightArray[i] = @kScrAdaptationH750(157);
             [[SDWebImageManager sharedManager] loadImageWithURL:[NSURL URLWithString:planModel.image] options:SDWebImageLowPriority progress:nil completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
                 if (image) {
                     CGFloat cellHeight = kScreenWidth / image.size.width * image.size.height + kScrAdaptationH750(20);

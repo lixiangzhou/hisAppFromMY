@@ -97,7 +97,7 @@
     
     [rightLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(titleLabel);
-        make.left.equalTo(titleLabel.mas_right).offset(-kScrAdaptationW(10));
+        make.left.equalTo(titleLabel.mas_right).offset(kScrAdaptationW(10));
     }];
     
     [bgLineView mas_makeConstraints:^(MASConstraintMaker *make) {
