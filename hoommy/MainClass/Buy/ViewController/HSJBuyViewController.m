@@ -369,7 +369,7 @@
 - (void)lookUpAgreement {
     HSJAgreementsViewController *vc = [[HSJAgreementsViewController alloc] init];
     vc.isFullScreenShow = YES;
-    [self presentViewController:vc animated:YES completion:nil];
+    [self presentViewController:vc animated:NO completion:nil];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
