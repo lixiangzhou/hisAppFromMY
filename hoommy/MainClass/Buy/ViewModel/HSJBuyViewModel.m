@@ -267,13 +267,14 @@
 - (void)buildLeftMoneyCellItem {
     //余额信息
     HSJBuyCellModel *cellModel = [self.cellDataList safeObjectAtIndex:0];
-    cellModel.iconName = @"leftMoneyNormal";
+//    cellModel.iconName = @"leftMoneyNormal";
+    cellModel.iconName = @"leftMoneySelect";
     NSString *str1 = @"可用余额";
     NSString *str2 = [NSString stringWithFormat:@"\n%.2f元", self.userInfoModel.userAssets.availablePoint.floatValue];
-    if(self.isAbleleftMoneyCellItem) {
-        cellModel.iconName = @"leftMoneySelect";
-    }
-    cellModel.title = [self buildAttributedString:str1 secondString:str2 state:self.isAbleleftMoneyCellItem];
+    cellModel.isDisable = !self.isAbleleftMoneyCellItem;
+    
+//    cellModel.title = [self buildAttributedString:str1 secondString:str2 state:self.isAbleleftMoneyCellItem];
+    cellModel.title = [self buildAttributedString:str1 secondString:str2 state:YES];
     
     //描述信息
     double money = self.inputMoney.doubleValue;
@@ -289,6 +290,7 @@
 - (void)buildBankCellItem {
     HSJBuyCellModel *cellModel = [self.cellDataList safeObjectAtIndex:1];
     cellModel.arrowText = @"";
+    cellModel.isDisable = NO;
     if(!self.userInfoModel.userInfo.hasBindCard.boolValue) {//绑卡
         cellModel.iconName = @"bindBankCard";
         cellModel.isShowArrow = YES;
@@ -298,13 +300,15 @@
         cellModel.title = [self buildAttributedString:str1 secondString:str2 state:YES];
     }
     else{
+        cellModel.isDisable = !self.isAbleBankCellItem;
         //描述信息
         cellModel.iconName = self.userInfoModel.userBank.bankCode;
         cellModel.isSvnImage = YES;
         NSString *tempStr = [self.userInfoModel.userBank.cardId substringFromIndex:self.userInfoModel.userBank.cardId.length-4];
         NSString *str1 = [NSString stringWithFormat:@"%@", self.userInfoModel.userBank.bankType];
         NSString *str2 = [NSString stringWithFormat:@" (**%@)\n%@", tempStr, self.userInfoModel.userBank.quota];
-        cellModel.title = [self buildAttributedString:str1 secondString:str2 state:self.isAbleBankCellItem];
+//        cellModel.title = [self buildAttributedString:str1 secondString:str2 state:self.isAbleBankCellItem];
+        cellModel.title = [self buildAttributedString:str1 secondString:str2 state:YES];
         
         if(self.userInfoModel.userBank.quotaStatus) {//银行卡可用
             cellModel.isShowArrow = NO;
