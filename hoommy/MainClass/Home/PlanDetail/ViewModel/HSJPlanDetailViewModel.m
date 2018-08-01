@@ -123,10 +123,10 @@
 }
 
 - (NSString *)getInterestString {
-    if (self.isNew && self.planModel.expectedRate.length > 0) {
-        return [NSString stringWithFormat:@"%@%%+%@%%", self.planModel.expectedRate, self.planModel.subsidyInterestRate];
-    } else {
+    if (self.planModel.extraInterestRate.doubleValue != 0) {
         return [NSString stringWithFormat:@"%@%%+%@%%", self.planModel.baseInterestRate, self.planModel.extraInterestRate];
+    } else {
+        return [NSString stringWithFormat:@"%@%%", self.planModel.baseInterestRate];
     }
 }
 
