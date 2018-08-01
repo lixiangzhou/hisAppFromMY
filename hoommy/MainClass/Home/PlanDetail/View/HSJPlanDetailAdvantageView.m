@@ -143,7 +143,7 @@
     _viewModel = viewModel;
     
     self.moreLabel.text = @"收益更高";
-    self.moreDescLabel.text = [NSString stringWithFormat:@"平均历史年化收益率%@%%，更多零花钱任你花", viewModel.baseInterestString];
+    self.moreDescLabel.text = [NSString stringWithFormat:@"平均历史年化收益率%@%%，更多零花钱任你花", viewModel.planModel.expectedRate];
     
     self.exitLabel.text = @"退出灵活";
     self.exitDescLabel.text = [NSString stringWithFormat:@"持有%@后，可随时申请退出", viewModel.lockString];

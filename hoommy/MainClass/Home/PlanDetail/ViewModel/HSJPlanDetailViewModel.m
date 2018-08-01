@@ -22,10 +22,43 @@
 
 - (void)getDataWithId:(NSString *)planId resultBlock:(void (^)(BOOL))resultBlock {
     kWeakSelf
-    [self getDataWithId:planId showHug:YES resultBlock:^(id responseData, NSError *erro) {
-        weakSelf.planModel = responseData;
-        resultBlock(responseData != nil);
-    }];
+    if (KeyChain.isLogin) {
+        __block BOOL loadedUserInfo = NO;
+        __block BOOL loadedPlanInfo = NO;
+        
+        __block HSJPlanModel *planModel = nil;
+        
+        [self downLoadUserInfo:YES resultBlock:^(HXBUserInfoModel *userInfoModel, NSError *erro) {
+            loadedUserInfo = YES;
+            if (userInfoModel) {
+                weakSelf.hasBuy = [userInfoModel.userInfo.hasEverInvestStepUp isEqualToString:@"1"];
+            } else {
+                weakSelf.hasBuy = NO;
+            }
+            if (loadedUserInfo && loadedPlanInfo) {
+                weakSelf.planModel = planModel;
+                resultBlock(planModel != nil);
+            }
+        }];
+        
+        [self getDataWithId:planId showHug:YES resultBlock:^(id responseData, NSError *erro) {
+            loadedPlanInfo = YES;
+            planModel = responseData;
+            
+            if (loadedUserInfo && loadedPlanInfo) {
+                weakSelf.planModel = planModel;
+                resultBlock(responseData != nil);
+            }
+        }];
+        
+    } else {
+        [self getDataWithId:planId showHug:YES resultBlock:^(id responseData, NSError *erro) {
+            weakSelf.hasBuy = NO;
+            weakSelf.planModel = responseData;
+            resultBlock(responseData != nil);
+        }];
+    }
+    
 }
 
 - (void)setRiskTypeDefault
@@ -64,10 +97,8 @@
     if (planModel == nil) {
         return;
     }
-    self.hasBuy = self.planModel.hasBuy;
     
     self.interestString = [self getInterestString];
-    self.baseInterestString = [self getBaseInterestString];
     self.lockString = [self getLockString];
     self.startDateString = [self getStartDateString];
     self.endLockDateString = [self getEndLockDateString];
@@ -127,12 +158,6 @@
     } else {
         return [NSString stringWithFormat:@"%@%%", self.planModel.baseInterestRate];
     }
-}
-
-
-
-- (NSString *)getBaseInterestString {
-    return self.planModel.baseInterestRate;
 }
 
 - (double)getInterestValue {

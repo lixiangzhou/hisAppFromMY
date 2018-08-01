@@ -30,9 +30,11 @@ NSString *const HSJHomeBannerCellIdentifier = @"HSJHomeBannerCellIdentifier";
 #pragma mark - UI
 
 - (void)setUI {
+    self.backgroundColor = [UIColor whiteColor];
     UIImageView *imageView = [UIImageView new];
     imageView.layer.cornerRadius = 10;
-    imageView.clipsToBounds = YES;
+    imageView.layer.masksToBounds = YES;
+    imageView.contentMode = UIViewContentModeScaleToFill;
     [self.contentView addSubview:imageView];
     self.imageView = imageView;
     

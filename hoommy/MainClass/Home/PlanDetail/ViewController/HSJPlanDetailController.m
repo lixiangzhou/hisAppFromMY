@@ -188,7 +188,7 @@
 - (void)updateBottomView {
     [self.bottomContentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
-    if (self.viewModel.planModel.hasBuy) {
+    if (self.viewModel.hasBuy) {
         [self setupBuyBottomView];
     } else {
         [self setupUnBuyBottomView];

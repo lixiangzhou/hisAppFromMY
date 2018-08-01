@@ -232,10 +232,8 @@
         self.addtionDescLabel.text = [NSString stringWithFormat:@"投资1万元日预期收益%@", [NSString hsj_moneyValueSuffix:viewModel.planModel.tenThousandExceptedIncome.doubleValue]];
         
         kWeakSelf
-        [self.viewModel downLoadUserInfo:NO resultBlock:^(id responseData, NSError *erro) {
-            if (responseData) {
-                HXBUserInfoModel *infoModel = (HXBUserInfoModel *)responseData;
-                
+        [self.viewModel downLoadUserInfo:NO resultBlock:^(HXBUserInfoModel *infoModel, NSError *erro) {
+            if (infoModel) {
                 weakSelf.topLabel.text = [NSString hsj_simpleMoneyValue:infoModel.userAssets.yesterdayInterest];
                 
                 weakSelf.leftLabel.text = [NSString hsj_simpleMoneyValue:infoModel.userAssets.stepUpAssets];
@@ -262,9 +260,7 @@
         [[HSJGlobalInfoManager shared] getData:^(HSJGlobalInfoModel *infoModel) {
             weakSelf.rightLabel.text = [NSString stringWithFormat:@"%zd人", infoModel.financePlanSubPointCountIn7Days];
         }];
-        
     }
-    
 }
 
 

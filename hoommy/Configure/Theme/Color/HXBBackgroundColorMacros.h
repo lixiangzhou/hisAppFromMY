@@ -77,6 +77,7 @@
 #define kHXBColor_FE7E5E_100         UIColorFromRGB(0xFE7E5E)
 #define kHXBColor_FFE6A4_100         UIColorFromRGB(0xFFE6A4)
 #define kHXBColor_7F85A1_100         UIColorFromRGB(0x7F85A1)
+#define kHXBColor_7F85A1_60          RGBA(127, 133, 161, 0.6)
 #define kHXBColor_FCF4E5_100         UIColorFromRGB(0xFCF4E5)
 
 #endif /* HXBBackgroundColorMacros_h */
