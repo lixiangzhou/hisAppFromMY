@@ -31,9 +31,12 @@
     } responseResult:^(HSJHomeModel *responseData, NSError *erro) {
         if (responseData) {
             weakSelf.homeModel = responseData;
-            HSJHomePlanModel *planModel = [self.homeModel.dataList safeObjectAtIndex:0];
-            //缓存第一个计划的id
-            KeyChain.firstPlanIdInPlanList = planModel.ID;
+            [self.homeModel.dataList enumerateObjectsUsingBlock:^(HSJHomePlanModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                if ([obj.viewItemType isEqualToString:@"product"]) {
+                    KeyChain.firstPlanIdInPlanList = obj.ID;//缓存第一个计划的id
+                    *stop = YES;
+                }
+            }];
         }
         resultBlock(responseData,erro);
     }];

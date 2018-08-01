@@ -13,7 +13,6 @@
 #import "HSJRollOutPlanDetailController.h"
 #import "HSJMyAccountBalanceViewModel.h"
 #import "HSJPlanDetailViewModel.h"
-
 @interface HSJMyAccountBalanceController ()
 @property (nonatomic,strong) HSJMyAccountBalanceHeadView *headView;
 @property (nonatomic,strong) UIButton *intoBtn;

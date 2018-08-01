@@ -202,13 +202,13 @@ MyViewHeaderDelegate
     if (section == 1 || section == 2) {
         supV = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScrAdaptationH750(100))];
         supV.backgroundColor = [UIColor whiteColor];
-        UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(kScrAdaptationW750(30), kScrAdaptationH750(35), kScrAdaptationW750(200), kScrAdaptationH750(48))];
+        UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(kScrAdaptationW750(30), kScrAdaptationH750(26), kScrAdaptationW750(200), kScrAdaptationH750(48))];
         lab.textAlignment = NSTextAlignmentLeft;
         lab.font = kHXBFont_PINGFANGSC_REGULAR_750(34);
         lab.textColor = RGBA(51, 51, 51, 1);
         UIView *lineV = [[UIView alloc]initWithFrame:CGRectMake(0, supV.frame.size.height-kHXBDivisionLineHeight, kScreenWidth, kHXBDivisionLineHeight)];
         lineV.backgroundColor = RGBA(244, 243, 248, 1);
-        [supV addSubview:lineV];
+//        [supV addSubview:lineV];
         [supV addSubview:lab];
         lab.text = section == 1? @"我的信息" : @"热门推荐";
         return supV;
