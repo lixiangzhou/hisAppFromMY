@@ -62,6 +62,7 @@
 - (HXBAgreementView *)riskApplyAgreementView {
     if (!_riskApplyAgreementView) {
         _riskApplyAgreementView = [[HXBAgreementView alloc] initWithFrame:CGRectZero];
+        _riskApplyAgreementView.isAllowAllScreenClick = YES;
         
         NSString *tempStr = @"我同意超出个人风险承受能力的金额";
         NSAttributedString *attString = [[NSAttributedString alloc] initWithString:tempStr];
@@ -85,7 +86,7 @@
 - (HXBAgreementView *)agreementGroupView {
     if (!_agreementGroupView) {
         _agreementGroupView = [[HXBAgreementView alloc] initWithFrame:CGRectZero];
-        
+        _agreementGroupView.isAllowAllScreenClick = YES;
         kWeakSelf
         NSString *tempStr = @"我已阅读并同意协议    ";
         NSAttributedString *attString = [[NSAttributedString alloc] initWithString:tempStr];
