@@ -27,6 +27,7 @@
 #import "HSJDepositoryOpenController.h"
 #import "HSJGestureSettingController.h"
 #import "NSString+HxbPerMilMoney.h"
+#import "HSJDepositoryOpenTipController.h"
 
 
 typedef enum : NSUInteger {
@@ -140,7 +141,12 @@ UITableViewDataSource
 
 #pragma mark 修改交易密码
 - (void)modifyTransactionPwd {
-    if (self.userInfoModel.userInfo.isUnbundling) {
+    if([self.userInfoModel.userInfo.isIdPassed isEqualToString:@"0"]) {//未实名
+        HSJDepositoryOpenTipController *vc = [[HSJDepositoryOpenTipController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+        return;
+    }
+    else if (self.userInfoModel.userInfo.isUnbundling) {
         [HXBAlertManager callupWithphoneNumber:kServiceMobile andWithTitle:@"温馨提示" Message:[NSString stringWithFormat:@"您的身份信息不完善，请联系客服 %@", kServiceMobile]];
         return;
     }

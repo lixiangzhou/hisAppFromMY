@@ -172,7 +172,7 @@
         [self.codeBt setTitle:cellModel.rightButtonText forState:UIControlStateNormal];
         CGFloat width = [cellModel.rightButtonText caleFontWidhSize:self.codeBt.titleLabel.font forViewHeight:self.codeBt.height];
         [self.codeBt mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.width.mas_equalTo(kScrAdaptationW(width+5));
+            make.width.mas_equalTo(kScrAdaptationW(width+10));
         }];
         self.codeBt.hidden = NO;
     }

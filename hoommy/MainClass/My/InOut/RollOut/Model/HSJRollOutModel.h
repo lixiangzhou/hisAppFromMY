@@ -35,13 +35,14 @@ typedef enum : NSUInteger {
 @property (nonatomic, copy) NSString *registerTime;
 /// 退出日期
 @property (nonatomic, copy) NSString *endLockingTime;
-/// 预期收益
-@property (nonatomic, copy) NSString *totalInterest;
+///// 预期收益
+//@property (nonatomic, copy) NSString *totalInterest;
 /// 月升计划状态
 @property (nonatomic, copy) NSString *stepUpPlanStatus;
 /// 请求退出时间
 @property (nonatomic, copy) NSString *endLockingRequestTime;
 /// 新手计划实际退出日期(注意锁定期结束时间区别)
 @property (nonatomic, copy) NSString *quitDate;
-
+/// 预期年化收益率
+@property (nonatomic, copy) NSString *expectedRate;
 @end

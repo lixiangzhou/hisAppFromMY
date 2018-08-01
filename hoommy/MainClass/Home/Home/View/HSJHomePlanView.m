@@ -124,7 +124,7 @@
 
 - (void)setPlanModel:(HSJHomePlanModel *)planModel {
     _planModel = planModel;
-    self.expectedRateLabel.text = [NSString stringWithFormat:@"%@%%",planModel.baseInterestRate];
+    self.expectedRateLabel.text = [NSString stringWithFormat:@"%@%%",planModel.expectedRate];
     
     self.refundableLabel.text = [self getLockString];
     
@@ -187,7 +187,7 @@
     if (!_expectedRateLabel) {
         _expectedRateLabel = [[UILabel alloc] init];
         _expectedRateLabel.text = @"--";
-        _expectedRateLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(100);
+        _expectedRateLabel.font = kHXBFont_IMPACT_REGULAR_750(100);
         _expectedRateLabel.textColor = kHXBColor_FF7055_100;
     }
     return _expectedRateLabel;

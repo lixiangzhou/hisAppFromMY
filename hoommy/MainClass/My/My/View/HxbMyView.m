@@ -233,7 +233,7 @@ MyViewHeaderDelegate
             cell.isShowLine = YES;
             cell.imageName = @"me_hongli_asset";
         } else {
-            cell.textLabel.text = @"零钱罐";
+            cell.textLabel.text = @"存钱罐";
             NSString *str = [NSString hsj_simpleMoneyValue:self.userInfoModel.userAssets.stepUpAssets];
             cell.desc = [str isEqualToString:@"0元"]?@"0.00元":str;
             cell.isShowLine = NO;
