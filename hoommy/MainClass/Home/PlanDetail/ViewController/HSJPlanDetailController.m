@@ -32,6 +32,8 @@
 @property (nonatomic, strong) HSJPlanDetailViewModel *viewModel;
 @property (nonatomic, weak) UIView *bottomView;
 @property (nonatomic, weak) UIButton *inBtn;
+
+@property (nonatomic, strong) NSMutableArray *bottomChangedViews;
 @end
 
 @implementation HSJPlanDetailController
@@ -43,6 +45,7 @@
     [super viewDidLoad];
     
     self.viewModel = [HSJPlanDetailViewModel new];
+    self.bottomChangedViews = [NSMutableArray new];
     
     [self setUI];
     
@@ -91,6 +94,7 @@
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.view.frame];
     scrollView.alwaysBounceVertical = YES;
     scrollView.backgroundColor = BACKGROUNDCOLOR;
+    scrollView.showsVerticalScrollIndicator = NO;
     if (@available(iOS 11.0, *)) {
         scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
@@ -99,6 +103,10 @@
     [self.view insertSubview:scrollView belowSubview:self.navView];
     
     HSJPlanDetailTopView *topView = [HSJPlanDetailTopView new];
+    kWeakSelf
+    topView.calBlock = ^{
+        [weakSelf calClick];
+    };
     [self.scrollView addSubview:topView];
     self.topView = topView;
     
@@ -136,7 +144,7 @@
     
     [self.view layoutIfNeeded];
     
-    scrollView.contentSize = CGSizeMake(kScreenWidth, CGRectGetMaxY(infoView.frame) + 100);
+    scrollView.contentSize = CGSizeMake(kScreenWidth, CGRectGetMaxY(infoView.frame) + 120);
 }
 
 - (void)setupBottomView {
@@ -146,7 +154,7 @@
     self.bottomView = bottomView;
     
     UIView *sepLine = [UIView new];
-    sepLine.backgroundColor = self.scrollView.backgroundColor;
+    sepLine.backgroundColor = kHXBColor_ECECEC_100;
     [bottomView addSubview:sepLine];
     
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -162,7 +170,7 @@
 }
 
 - (void)updateBottomView {
-    [self.bottomView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [self.bottomChangedViews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     if (self.viewModel.planModel.hasBuy) {
         [self setupBuyBottomView];
@@ -187,6 +195,7 @@
     [calBtn addTarget:self action:@selector(calClick) forControlEvents:UIControlEventTouchUpInside];
     
     [self.bottomView addSubview:calBtn];
+    [self.bottomChangedViews addObject:calBtn];
     
     UIButton *inBtn = [UIButton new];
     [inBtn setTitle:@"转入" forState:UIControlStateNormal];
@@ -196,6 +205,7 @@
     self.inBtn = inBtn;
     
     [self.bottomView addSubview:inBtn];
+    [self.bottomChangedViews addObject:inBtn];
     
     [calBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(@kScrAdaptationW(15));
@@ -220,6 +230,7 @@
     [outBtn addTarget:self action:@selector(outClick) forControlEvents:UIControlEventTouchUpInside];
     
     [self.bottomView addSubview:outBtn];
+    [self.bottomChangedViews addObject:outBtn];
     
     UIButton *inBtn = [UIButton new];
     [inBtn setTitle:@"转入" forState:UIControlStateNormal];
@@ -233,6 +244,7 @@
     self.inBtn = inBtn;
     
     [self.bottomView addSubview:inBtn];
+    [self.bottomChangedViews addObject:inBtn];
     
     [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(@(-HXBTabbarSafeBottomMargin));

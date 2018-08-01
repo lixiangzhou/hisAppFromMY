@@ -79,7 +79,7 @@
     
     [rightLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(titleLabel);
-        make.left.equalTo(titleLabel.mas_right).offset(-kScrAdaptationW(10));
+        make.left.equalTo(titleLabel.mas_right).offset(kScrAdaptationW(10));
     }];
     
     [rowView1 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -110,7 +110,7 @@
     
     UILabel *titleLabel = [UILabel new];
     titleLabel.text = title;
-    titleLabel.font = kHXBFont_30;
+    titleLabel.font = [UIFont boldSystemFontOfSize:15];//kHXBFont_30;
     titleLabel.textColor = kHXBColor_C5AB71_100;
     [view addSubview:titleLabel];
     

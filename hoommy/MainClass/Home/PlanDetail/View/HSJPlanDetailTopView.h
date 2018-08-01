@@ -11,4 +11,5 @@
 
 @interface HSJPlanDetailTopView : UIView
 @property (nonatomic, strong) HSJPlanDetailViewModel *viewModel;
+@property (nonatomic, copy) void (^calBlock)(void);
 @end

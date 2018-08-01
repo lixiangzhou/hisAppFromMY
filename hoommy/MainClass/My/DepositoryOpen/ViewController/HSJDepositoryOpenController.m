@@ -133,6 +133,8 @@
     [self commonTextViewProp:transactionPwdView];
     [self.scrollView addSubview:transactionPwdView];
     self.transactionPwdView = transactionPwdView;
+    transactionPwdView.bottomLineEditingColor = [UIColor clearColor];
+    transactionPwdView.bottomLineNormalColor = [UIColor clearColor];
 
     [sectionView1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.scrollView);
@@ -169,7 +171,7 @@
     bankNoView.leftImage = [UIImage imageNamed:@"depository_bank"];
     bankNoView.placeholder = @"银行卡号";
     bankNoView.limitStringLength = 31;
-    bankNoView.textFieldRightOffset = 70;
+    bankNoView.textFieldRightOffset = 80;
     bankNoView.keyboardType = UIKeyboardTypeNumberPad;
     [self commonTextViewProp:bankNoView];
 
@@ -179,11 +181,10 @@
         if (bankNumber.length>=12) {
             [weakSelf.viewModel checkCardBinResultRequestWithBankNumber:bankNumber andisToastTip:NO andCallBack:^(BOOL isSuccess) {
                 if (isSuccess) {
+                    weakSelf.bankNameView.leftImage = [UIImage imageNamed:weakSelf.viewModel.cardBinModel.bankCode];
                     if (weakSelf.viewModel.cardBinModel.creditCard) {
-                        weakSelf.bankNameView.svgImageName = weakSelf.viewModel.cardBinModel.bankCode;
                         weakSelf.bankNameView.text = @"此卡为信用卡，暂不支持";
                     } else {
-                        weakSelf.bankNameView.svgImageName = weakSelf.viewModel.cardBinModel.bankCode;
                         weakSelf.bankNameView.text = [NSString stringWithFormat:@"%@：%@",weakSelf.viewModel.cardBinModel.bankName, weakSelf.viewModel.cardBinModel.quota];
                     }
                     [weakSelf showBankNameView];
@@ -211,6 +212,7 @@
     bankNameView.userInteractionEnabled = NO;
     bankNameView.textColor = kHXBColor_999999_100;
     bankNameView.bottomLineNormalColor = kHXBColor_ECECEC_100;
+    bankNameView.font = kHXBFont_28;
     [self.scrollView insertSubview:bankNameView belowSubview:bankNoView];
     self.bankNameView = bankNameView;
     
@@ -222,6 +224,8 @@
     [self commonTextViewProp:mobileView];
     [self.scrollView addSubview:mobileView];
     self.mobileView = mobileView;
+    mobileView.bottomLineEditingColor = [UIColor clearColor];
+    mobileView.bottomLineNormalColor = [UIColor clearColor];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
 
@@ -547,6 +551,7 @@
     textView.font = kHXBFont_28;
     textView.textColor = kHXBFontColor_333333_100;
     textView.bottomLineNormalColor = kHXBColor_ECECEC_100;
+    textView.bottomLineEditingColor = kHXBColor_ECECEC_100;
     textView.delegate = self;
 }
 

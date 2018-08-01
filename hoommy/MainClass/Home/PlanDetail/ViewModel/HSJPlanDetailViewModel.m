@@ -64,7 +64,6 @@
     if (planModel == nil) {
         return;
     }
-    self.isNew = [self.planModel.novice isEqualToString:@"1"];
     self.hasBuy = self.planModel.hasBuy;
     
     self.interestString = [self getInterestString];
@@ -130,20 +129,14 @@
     }
 }
 
+
+
 - (NSString *)getBaseInterestString {
-    if (self.isNew && self.planModel.expectedRate.length > 0) {
-        return self.planModel.expectedRate;
-    } else {
-        return self.planModel.baseInterestRate;
-    }
+    return self.planModel.baseInterestRate;
 }
 
 - (double)getInterestValue {
-    if (self.isNew && self.planModel.expectedRate.length > 0) {
-        return (self.planModel.expectedRate.doubleValue + self.planModel.subsidyInterestRate.doubleValue) * 0.01;
-    } else {
-        return (self.planModel.baseInterestRate.doubleValue + self.planModel.extraInterestRate.doubleValue) * 0.01;
-    }
+    return (self.planModel.baseInterestRate.doubleValue + self.planModel.extraInterestRate.doubleValue) * 0.01;
 }
 
 - (NSString *)getLockString {

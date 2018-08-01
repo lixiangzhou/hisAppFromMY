@@ -101,11 +101,11 @@
 
 - (void)updateDataWithTotlaNum:(NSInteger)totalNum totalMoney:(CGFloat)totalMoney {
     NSMutableAttributedString *totalNumAttr = [[NSMutableAttributedString alloc] initWithString:@"共计 "];
-    [totalNumAttr appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%zd", totalNum] attributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:12]}]];
+    [totalNumAttr appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%zd", totalNum] attributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:17]}]];
     [totalNumAttr appendAttributedString:[[NSAttributedString alloc] initWithString:@" 名妈妈开启豪妈小金库"]];
     
     NSMutableAttributedString *totalMoneyAttr = [[NSMutableAttributedString alloc] initWithString:@"累计为宝宝成功攒钱 "];
-    [totalMoneyAttr appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%.2f", totalMoney] attributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:12]}]];
+    [totalMoneyAttr appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%.2f", totalMoney] attributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:17]}]];
     [totalMoneyAttr appendAttributedString:[[NSAttributedString alloc] initWithString:@" 元"]];
     
     self.totalNumLabel.attributedText = totalNumAttr;

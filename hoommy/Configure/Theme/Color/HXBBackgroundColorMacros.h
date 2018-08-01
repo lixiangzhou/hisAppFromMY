@@ -28,6 +28,7 @@
 #define kHXBColor_564727_100                UIColorFromRGB(0x564727)
 #define kHXBColor_976A02_100                UIColorFromRGB(0x976A02)
 #define kHXBColor_C5AB71_100                UIColorFromRGB(0xC5AB71)
+#define kHXBColor_C5AB71_30                 RGBA(197, 171, 113,0.3)
 #define kHXBColor_9B878B_100                UIColorFromRGB(0x9B878B)
 
 ///灰色系列的背景色
