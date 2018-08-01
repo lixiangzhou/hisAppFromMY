@@ -180,10 +180,10 @@
     }
     
     self.phoneLabel.text = [_userInfoModel.userInfo.mobile hxb_hiddenPhonNumberWithMid];
-    NSString *accumulatedProfitStr = userInfoModel.userAssets.earnTotal? [NSString GetPerMilWithDouble:[userInfoModel.userAssets.earnTotal doubleValue]]: @"0.00";
-    NSString *balance = userInfoModel.userAssets.availablePoint ? [NSString GetPerMilWithDouble:[userInfoModel.userAssets.availablePoint doubleValue]] : @"0.00";
-    NSString *yesterdayInterest = [NSString GetPerMilWithDouble:[userInfoModel.userAssets.earnTotal doubleValue]];
-    NSString *assetsTotal = [NSString GetPerMilWithDouble:[userInfoModel.userAssets.assetsTotal doubleValue]];
+    NSString *accumulatedProfitStr = userInfoModel.userAssets.earnTotal? [NSString hsj_simpleMoneyValue:[userInfoModel.userAssets.earnTotal doubleValue]]: @"0.00";
+    NSString *balance = userInfoModel.userAssets.availablePoint ? [NSString hsj_simpleMoneyValue:[userInfoModel.userAssets.availablePoint doubleValue]] : @"0.00";
+    NSString *yesterdayInterest = [NSString hsj_simpleMoneyValue:[userInfoModel.userAssets.earnTotal doubleValue]];
+    NSString *assetsTotal = [NSString hsj_simpleMoneyValue:[userInfoModel.userAssets.assetsTotal doubleValue]];
     if ([KeyChain.ciphertext isEqualToString:@"0"]) {
         self.securyButton.selected = NO;
         self.yesterdayInterestLabel.text = [yesterdayInterest isEqualToString:@"0"]?@"0.00":yesterdayInterest;
@@ -214,15 +214,15 @@
 //    }
 //
 //    self.phoneLabel.text = [KeyChain.mobile hxb_hiddenPhonNumberWithMid];
-//    NSString *accumulatedProfitStr = accountInfoViewModel.earnTotal? [NSString GetPerMilWithDouble:accountInfoViewModel.earnTotal]: @"0.00";
-//    NSString *balance = accountInfoViewModel.availablePoint ? [NSString GetPerMilWithDouble:accountInfoViewModel.availablePoint] : @"0.00";
-//    NSString *yesterdayInterest = [NSString GetPerMilWithDouble:accountInfoViewModel.yesterdayInterest];
+//    NSString *accumulatedProfitStr = accountInfoViewModel.earnTotal? [NSString hsj_simpleMoneyValue:accountInfoViewModel.earnTotal]: @"0.00";
+//    NSString *balance = accountInfoViewModel.availablePoint ? [NSString hsj_simpleMoneyValue:accountInfoViewModel.availablePoint] : @"0.00";
+//    NSString *yesterdayInterest = [NSString hsj_simpleMoneyValue:accountInfoViewModel.yesterdayInterest];
 //    if ([KeyChain.ciphertext isEqualToString:@"0"]) {
 //        self.securyButton.selected = NO;
 //        self.yesterdayInterestLabel.text = yesterdayInterest;
 //        self.accumulatedProfitLabel.text = accumulatedProfitStr;
 //        self.balanceLabel.text = balance;
-//        self.assetsTotalLabel.text = [NSString GetPerMilWithDouble:accountInfoViewModel.assetsTotal];
+//        self.assetsTotalLabel.text = [NSString hsj_simpleMoneyValue:accountInfoViewModel.assetsTotal];
 //    } else {
 //        self.securyButton.selected = YES;
 //        self.accumulatedProfitLabel.text = kSecuryText;
@@ -247,10 +247,10 @@
 
 - (void)securyButtonClick:(UIButton *)rightHeadBtn
 {
-    NSString *accumulatedProfitStr = _userInfoModel.userAssets.earnTotal? [NSString GetPerMilWithDouble:[_userInfoModel.userAssets.earnTotal doubleValue]]: @"0.00";
-    NSString *balance = _userInfoModel.userAssets.availablePoint ? [NSString GetPerMilWithDouble:[_userInfoModel.userAssets.availablePoint doubleValue]] : @"0.00";
-    NSString *yesterdayInterest = [NSString GetPerMilWithDouble:[_userInfoModel.userAssets.earnTotal doubleValue]];
-    NSString *assetsTotal = [NSString GetPerMilWithDouble:[_userInfoModel.userAssets.assetsTotal doubleValue]];
+    NSString *accumulatedProfitStr = _userInfoModel.userAssets.earnTotal? [NSString hsj_simpleMoneyValue:[_userInfoModel.userAssets.earnTotal doubleValue]]: @"0.00";
+    NSString *balance = _userInfoModel.userAssets.availablePoint ? [NSString hsj_simpleMoneyValue:[_userInfoModel.userAssets.availablePoint doubleValue]] : @"0.00";
+    NSString *yesterdayInterest = [NSString hsj_simpleMoneyValue:[_userInfoModel.userAssets.earnTotal doubleValue]];
+    NSString *assetsTotal = [NSString hsj_simpleMoneyValue:[_userInfoModel.userAssets.assetsTotal doubleValue]];
     
     if ([KeyChain.ciphertext isEqualToString:@"0"]){
         KeyChain.ciphertext = @"1";
