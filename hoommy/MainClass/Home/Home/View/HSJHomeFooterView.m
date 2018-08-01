@@ -132,7 +132,7 @@
     if (!_messageLabel) {
         _messageLabel = [[UILabel alloc] init];
         _messageLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(24);
-        _messageLabel.textColor = kHXBColor_CBCBCB_100;
+        _messageLabel.textColor = kHXBColor_7F85A1_100;
         _messageLabel.text = @"10万妈妈的智慧选择";
     }
     return _messageLabel;

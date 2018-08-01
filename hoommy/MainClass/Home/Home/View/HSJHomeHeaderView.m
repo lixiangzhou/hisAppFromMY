@@ -47,6 +47,7 @@
 
 - (void)setupBannerView {
     self.bannerView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(kScrAdaptationW750(30), kScrAdaptationH750(10), kScreenWidth - 2 * kScrAdaptationW750(30) , kScrAdaptationH750(300)) delegate:self placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    self.bannerView.backgroundColor = [UIColor whiteColor];
     self.bannerView.pageControlAliment = SDCycleScrollViewPageContolAlimentRight;
     self.bannerView.showPageControl = NO;
     self.bannerView.autoScrollTimeInterval = 3;
@@ -69,11 +70,12 @@
 
 - (void)setHomeModel:(HSJHomeModel *)homeModel {
     _homeModel = homeModel;
-    NSMutableArray *imageArray = [NSMutableArray array];
-    for (BannerModel *bannerModel in homeModel.bannerList) {
-        [imageArray addObject:bannerModel.image];
-    }
+//    NSMutableArray *imageArray = [NSMutableArray array];
+//    for (BannerModel *bannerModel in homeModel.bannerList) {
+//        [imageArray addObject:bannerModel.image];
+//    }
 //    self.bannerView.imageURLStringsGroup = imageArray;
+    self.bannerView.localizationImageNamesGroup = homeModel.bannerList;
     if (homeModel.articleList.count) {
         self.titleCycleScrollView.hidden = NO;
         self.titleCycleScrollView.localizationImageNamesGroup = homeModel.articleList;
