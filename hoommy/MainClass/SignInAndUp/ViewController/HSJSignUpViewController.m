@@ -89,9 +89,10 @@
         make.height.offset(kScrAdaptationH(40));
     }];
     
+    [self.codeButton sizeToFit];
     [self.codeButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.right.height.equalTo(self.codeTextField);
-        make.width.offset(kScrAdaptationW(60));
+        make.width.mas_equalTo(self.codeButton.size.width);
     }];
     
     [self.voiceCodeButton mas_makeConstraints:^(MASConstraintMaker *make) {
