@@ -110,7 +110,7 @@
         
         self.inputTitleLb = [[UILabel alloc] init];
         self.inputTitleLb.textColor = kHXBFontColor_333333_100;
-        self.inputTitleLb.font = kHXBFont_30;
+        self.inputTitleLb.font = kHXBFont_Bold_PINGFANGSC_REGULAR(15);
         [_inputView addSubview:self.inputTitleLb];
         
         self.titleLb = [[UILabel alloc] init];

@@ -12,6 +12,7 @@
 #import "HSJBuyViewController.h"
 #import "HSJRollOutPlanDetailController.h"
 #import "HSJMyAccountBalanceViewModel.h"
+#import "HSJPlanDetailViewModel.h"
 
 @interface HSJMyAccountBalanceController ()
 @property (nonatomic,strong) HSJMyAccountBalanceHeadView *headView;
@@ -76,9 +77,14 @@
 - (void)intoBtnClick:(UIButton *)sender {
     NSLog(@"转入存钱罐");
     [HXBUmengManagar HXB_clickEventWithEnevtId: kHSJUmeng_MyIntoPlanClick];
-    HSJBuyViewController *vc = [HSJBuyViewController new];
-    vc.planId = [KeyChain firstPlanIdInPlanList];
-    [self.navigationController pushViewController:vc animated:YES];
+    if ([self.userInfoModel.userInfo.riskType isEqualToString:@"立即评测"]) {
+        kWeakSelf
+        [[HSJPlanDetailViewModel new] riskTypeAssementFrom:weakSelf];
+    } else {
+        HSJBuyViewController *vc = [HSJBuyViewController new];
+        vc.planId = [KeyChain firstPlanIdInPlanList];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 - (void)withdrawalBtnClick:(UIButton *)sender {

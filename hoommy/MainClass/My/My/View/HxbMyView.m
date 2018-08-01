@@ -318,7 +318,7 @@ MyViewHeaderDelegate
         [helpBtn setImage:[UIImage imageNamed:@"my_help"] forState:UIControlStateNormal];
         [helpBtn setTitle:@"红小宝客服" forState:UIControlStateNormal];
         [helpBtn addTarget:self action:@selector(didClickHelp:) forControlEvents:UIControlEventTouchUpInside];
-        helpBtn.layer.cornerRadius = 5;
+        helpBtn.layer.cornerRadius = kScrAdaptationH750(35);
         helpBtn.layer.masksToBounds = YES;
         [helpBtn setImageEdgeInsets:UIEdgeInsetsMake(0.0, -10, 0.0, 0.0)];
         [helpBtn setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 10, 0.0, 0)];
@@ -338,7 +338,7 @@ MyViewHeaderDelegate
         lab.textAlignment = NSTextAlignmentCenter;
         [lab setFont:kHXBFont_PINGFANGSC_REGULAR_750(20)];
         lab.textColor = RGB(127, 133, 161);
-        lab.text = @"客服电话时间：工作日9:00-18:00";
+        lab.text = @"客服电话时间：工作日 9:00-18:00";
         [_bottomView addSubview:lab];
         [lab mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self->_bottomView);
