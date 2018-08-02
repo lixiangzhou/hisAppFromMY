@@ -107,7 +107,7 @@ MyViewHeaderDelegate
     
     NSString *bankDesc = self.userInfoModel.userBank.cardId.length>4?[self.userInfoModel.userBank.cardId substringFromIndex:self.userInfoModel.userBank.cardId.length-4]:@"--";
     BOOL state = [self.userInfoModel.userInfo.hasBindCard isEqualToString:@"1"]?YES:NO;
-    bankModel.desc = state?[NSString stringWithFormat:@"尾号%@",bankDesc]:@"立即绑定";
+    bankModel.desc = state?[NSString stringWithFormat:@"尾号%@",bankDesc]:@"立即绑定 >>";
     bankModel.type = HSJMyHomeInfoTypeModifyBank;
     bankModel.infoBlock = ^(NSInteger type) {
         [weakSelf.delegate didMyHomeInfoClick:type state:state];
@@ -116,7 +116,7 @@ MyViewHeaderDelegate
     
     HSJMyHomeInfoModel *infoModel = [HSJMyHomeInfoModel new];
     state = !self.userInfoModel.userInfo.riskType||[self.userInfoModel.userInfo.riskType isEqualToString:@"立即评测"]?NO:YES;
-    infoModel.desc = state?self.userInfoModel.userInfo.riskType:[NSString stringWithFormat:@"立即评测"];
+    infoModel.desc = state?self.userInfoModel.userInfo.riskType:[NSString stringWithFormat:@"立即评测 >>"];
     infoModel.type = HSJMyHomeInfoTypeLoginEvaluating;
     infoModel.infoBlock = ^(NSInteger type) {
         [weakSelf.delegate didMyHomeInfoClick:type state:state];
@@ -172,17 +172,19 @@ MyViewHeaderDelegate
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 1 || indexPath.section == 2) {
+    if (indexPath.section == 1 ) {
         return kScrAdaptationH750(260);
+    } else if (indexPath.section == 2) {
+        return kScrAdaptationH750(280);
     } else {
-        return kScrAdaptationH(44.5);
+        return kScrAdaptationH750(116);
     }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (section == 0) {
         return 0.1f;
     }else{
-        return kScrAdaptationH750(100);
+        return kScrAdaptationH750(84);
     }
 }
 
@@ -193,9 +195,9 @@ MyViewHeaderDelegate
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *supV = nil;
     if (section == 1 || section == 2) {
-        supV = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScrAdaptationH750(100))];
+        supV = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScrAdaptationH750(84))];
         supV.backgroundColor = [UIColor whiteColor];
-        UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(kScrAdaptationW750(30), kScrAdaptationH750(26), kScrAdaptationW750(200), kScrAdaptationH750(48))];
+        UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(kScrAdaptationW750(30), kScrAdaptationH750(44), kScrAdaptationW750(200), kScrAdaptationH750(48))];
         lab.textAlignment = NSTextAlignmentLeft;
         lab.font = kHXBFont_PINGFANGSC_REGULAR_750(34);
         lab.textColor = RGBA(51, 51, 51, 1);
@@ -304,7 +306,7 @@ MyViewHeaderDelegate
 
 - (UIView *)bottomView {
     if (!_bottomView) {
-        _bottomView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kMainScreenWidth, kScrAdaptationH750(202))];
+        _bottomView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kMainScreenWidth, kScrAdaptationH750(182))];
         _bottomView.userInteractionEnabled = YES;
         //        _bottomView.backgroundColor = [UIColor clearColor];
         UIButton *helpBtn = [[UIButton alloc]initWithFrame:CGRectZero];

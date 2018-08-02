@@ -44,13 +44,13 @@
     [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.bottom.equalTo(weakSelf);
         make.left.equalTo(weakSelf.textLabel);
-        make.height.offset(kHXBDivisionLineHeight);
+        make.height.offset(kScrAdaptationH750(1.0f));
         
     }];
     [self.descLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf.textLabel);
         make.height.equalTo(@kScrAdaptationH750(24));
-        make.right.equalTo(weakSelf.contentView.mas_right).offset(kScrAdaptationW750(5));
+        make.right.equalTo(weakSelf.contentView.mas_right).offset(kScrAdaptationW750(-10));
     }];
 }
 
@@ -79,7 +79,7 @@
 - (UILabel *)descLab{
     if (!_descLab) {
         _descLab = [[UILabel alloc]initWithFrame:CGRectMake(kScrAdaptationW750(750-66-300), kScrAdaptationH750(38), kScrAdaptationW750(300), kScrAdaptationH750(24))];
-        _descLab.font = kHXBFont_PINGFANGSC_REGULAR_750(24);
+        _descLab.font = kHXBFont_PINGFANGSC_REGULAR_750(28);
         _descLab.textColor = kHXBColor_333333_100;
         _descLab.textAlignment = NSTextAlignmentRight;
     }

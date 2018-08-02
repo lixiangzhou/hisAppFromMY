@@ -96,7 +96,7 @@
         make.right.equalTo(weakSelf.headTopView.mas_right).offset(kScrAdaptationW(-15));
     }];
     [self.accountOpeningBackgroundImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.headTopView).offset(kScrAdaptationH750(167));
+        make.top.equalTo(weakSelf.headTopView).offset(kScrAdaptationH750(167)+HXBTabbarSafeBottomMargin);
         make.left.equalTo(weakSelf).offset(kScrAdaptationW750(5));
         make.right.right.equalTo(weakSelf).offset(kScrAdaptationW750(-5));
         make.height.offset(kScrAdaptationH750(440));
@@ -302,8 +302,9 @@
     if (!_accountOpeningBackgroundImage) {
         _accountOpeningBackgroundImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"top"]];
         _accountOpeningBackgroundImage.userInteractionEnabled = YES;
-//        _accountOpeningBackgroundImage.layer.cornerRadius = 3;
-//        _accountOpeningBackgroundImage.layer.masksToBounds = YES;
+        if (HXBIPhoneX) {
+            _accountOpeningBackgroundImage.image = [UIImage imageNamed:@""];
+        }
     }
     return _accountOpeningBackgroundImage;
 }
@@ -341,7 +342,7 @@
     if (!_yesterdayInterestLabel) {
         _yesterdayInterestLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _yesterdayInterestLabel.textAlignment = NSTextAlignmentLeft;
-        _yesterdayInterestLabel.font = kHXBFont_PINGFANGSC_REGULAR(20);
+        _yesterdayInterestLabel.font = kHXBFont_DINAlternate_BOLD_750(40);
         _yesterdayInterestLabel.textColor = kHXBColor_333333_100;
         _yesterdayInterestLabel.text = @"0.00";
     }
@@ -362,7 +363,7 @@
         _accumulatedProfitLabel = [[UILabel alloc]initWithFrame:CGRectZero];
         _accumulatedProfitLabel.text = @"0.00";
         _accumulatedProfitLabel.textAlignment = NSTextAlignmentLeft;
-        _accumulatedProfitLabel.font = kHXBFont_PINGFANGSC_REGULAR(20);
+        _accumulatedProfitLabel.font = kHXBFont_DINAlternate_BOLD_750(40);
         _accumulatedProfitLabel.textColor = kHXBColor_333333_100;
     }
     return _accumulatedProfitLabel;
@@ -382,7 +383,7 @@
         _assetsTotalLabel = [[UILabel alloc]initWithFrame:CGRectZero];
         _assetsTotalLabel.text = @"0.00";
         _assetsTotalLabel.textAlignment = NSTextAlignmentLeft;
-        _assetsTotalLabel.font = kHXBFont_IMPACT_REGULAR_750(70);
+        _assetsTotalLabel.font = kHXBFont_DINAlternate_BOLD_750(70);
         _assetsTotalLabel.textColor = kHXBColor_333333_100;
     }
     return _assetsTotalLabel;

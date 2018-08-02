@@ -57,7 +57,7 @@
     [self.headView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.equalTo(weakSelf.safeAreaView).offset(kScrAdaptationW750(18));
         make.right.equalTo(weakSelf.safeAreaView).offset(-kScrAdaptationW750(18));
-        make.height.equalTo(@kScrAdaptationH750(355));
+        make.height.equalTo(@kScrAdaptationH750(415));
     }];
     
     [self.intoBtn mas_makeConstraints:^(MASConstraintMaker *make) {

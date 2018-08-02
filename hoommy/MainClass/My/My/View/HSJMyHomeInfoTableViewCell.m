@@ -39,7 +39,7 @@ static NSUInteger const BG_BASE_TAG = 600;
         NSUInteger width = kScrAdaptationW750(330);
         [bg mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(weakSelf.contentView).offset(spacing+i*(spacing+width));
-            make.top.equalTo(weakSelf.contentView).offset(kScrAdaptationH750(40));
+            make.top.equalTo(weakSelf.contentView).offset(kScrAdaptationH750(50));
             make.bottom.equalTo(weakSelf.contentView).offset(-kScrAdaptationH750(40));
             make.width.mas_equalTo(width);
         }];
