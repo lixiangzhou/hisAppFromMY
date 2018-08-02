@@ -8,7 +8,6 @@
 
 #import "HXBBaseViewController.h"
 #import <WebKit/WebKit.h>
-#import "SVGKit/SVGKImage.h"
 #import "HXBBaseTabBarController.h"
 #import "HXBBaseNavigationController.h"
 #import "HSJNoDataOrNetViewController.h"

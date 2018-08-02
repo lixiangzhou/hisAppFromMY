@@ -82,6 +82,7 @@
     }];
     [self.annualizedTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.expectedRateLabel);
+        make.top.equalTo(self.expectedRateLabel.mas_bottom).offset(2);
     }];
     
     CGSize depositoryLabelSize = [self.depositoryLabel.text sizeWithAttributes:@{NSFontAttributeName:self.refundableLabel.font}];
@@ -101,7 +102,7 @@
         make.centerX.equalTo(self.expectedRateLabel);
         make.height.offset(kScrAdaptationH750(80));
         make.width.offset(kScrAdaptationW750(280));
-        make.top.equalTo(self.refundableLabel.mas_bottom).offset(kScrAdaptationW750(75));
+//        make.top.equalTo(self.refundableLabel.mas_bottom).offset(kScrAdaptationW750(75));
         make.bottom.equalTo(self.planBackgroundImageView.mas_bottom).offset(-kScrAdaptationH750(50));
     }];
     [self.segmentBottomLine mas_makeConstraints:^(MASConstraintMaker *make) {

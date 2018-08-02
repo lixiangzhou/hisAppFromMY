@@ -7,7 +7,7 @@
 //
 
 #import "HXBTipView.h"
-#import "SVGKit/SVGKImage.h"
+
 @interface HXBTipView ()
 
 @property (nonatomic, strong) UIImageView *iconView;

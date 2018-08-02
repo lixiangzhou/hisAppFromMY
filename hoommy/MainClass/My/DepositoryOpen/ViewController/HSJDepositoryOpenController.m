@@ -9,7 +9,6 @@
 #import "HSJDepositoryOpenController.h"
 #import "UIImageView+HxbSDWebImage.h"
 #import "HXBCustomTextField.h"
-#import "SVGKit/SVGKImage.h"
 #import "UITextField+HLNumberFormatTextField.h"
 #import "HXBAgreementView.h"
 #import "HxbHUDProgress.h"
@@ -181,7 +180,7 @@
         if (bankNumber.length>=12) {
             [weakSelf.viewModel checkCardBinResultRequestWithBankNumber:bankNumber andisToastTip:NO andCallBack:^(BOOL isSuccess) {
                 if (isSuccess) {
-                    weakSelf.bankNameView.leftImage = [UIImage imageNamed:weakSelf.viewModel.cardBinModel.bankCode];
+                    weakSelf.bankNameView.leftImage = [UIImage imageNamed:weakSelf.viewModel.cardBinModel.bankCode] ?: [UIImage imageNamed:@"bank_default"];;
                     if (weakSelf.viewModel.cardBinModel.creditCard) {
                         weakSelf.bankNameView.text = @"此卡为信用卡，暂不支持";
                     } else {

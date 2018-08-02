@@ -400,8 +400,10 @@
         [helpBtn setImage:[UIImage imageNamed:@"my_help"] forState:UIControlStateNormal];
         [helpBtn setTitle:@"红小宝客服" forState:UIControlStateNormal];
         [helpBtn addTarget:self action:@selector(didClickHelp:) forControlEvents:UIControlEventTouchUpInside];
-        helpBtn.layer.cornerRadius = 5;
+        helpBtn.layer.cornerRadius = kScrAdaptationH750(35);
         helpBtn.layer.masksToBounds = YES;
+        helpBtn.layer.borderWidth = 1.0f;
+        helpBtn.layer.borderColor = kHXBColor_7F85A1_60.CGColor;
         [helpBtn setImageEdgeInsets:UIEdgeInsetsMake(0.0, -10, 0.0, 0.0)];
         [helpBtn setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 10, 0.0, 0)];
         [helpBtn setTitleColor:RGB(127, 133, 161) forState:UIControlStateNormal];
@@ -615,7 +617,7 @@
     _bankCardModel = bankCardModel;
     self.bankNameLabel.text = self.bankCardModel.bankType;
     self.bankCardNumLabel.text = [NSString stringWithFormat:@"（尾号%@）",[self.bankCardModel.cardId substringFromIndex:self.bankCardModel.cardId.length - 4]];
-    self.bankLogoImageView.svgImageString = self.bankCardModel.bankCode;
+    self.bankLogoImageView.image = [UIImage imageNamed:self.bankCardModel.bankCode];
     
     self.arrivalDateLabel.text = bankCardModel.bankArriveTimeText;
 }
@@ -656,7 +658,7 @@
     if (!_bankLogoImageView) {
         _bankLogoImageView = [[UIImageView alloc]init];
         _bankLogoImageView.contentMode = UIViewContentModeScaleAspectFit;
-        _bankLogoImageView.svgImageString = @"默认";
+        _bankLogoImageView.image = [UIImage imageNamed:@"bank_default"];
     }
     return _bankLogoImageView;
 }
