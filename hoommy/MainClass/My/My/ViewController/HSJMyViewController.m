@@ -53,7 +53,6 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-//    [self transparentNavigationTitle];
     self.tabBarController.tabBar.hidden = NO;
 }
 
@@ -63,13 +62,8 @@
    
     //加载用户数据
     if ([KeyChain isLogin]) {
-        [self loadData_userInfo];
-//        [self loadData_accountInfo];//账户内数据总览
+        [self loadData];
     }
-//    else {
-//        self.myView.accountModel = nil;
-//        [self transparentNavigationTitle];
-//    }
 }
 #pragma mark - UI
 - (void)setupSubView {
@@ -84,7 +78,7 @@
     self.myView.userInteractionEnabled = YES;
 //    self.myView.backgroundColor = kHXBColor_BackGround;
     self.myView.homeRefreshHeaderBlock = ^(){ //下拉加载回调的Block
-        [weakSelf loadData_userInfo];
+        [weakSelf loadData];
 //        [weakSelf loadData_accountInfo];//账户内数据总览
     };
     
@@ -124,12 +118,10 @@
 }
 /// 充值
 - (void)didClickTopUpBtn:(UIButton *)sender{
-//    [HXBUmengManagar HXB_clickEventWithEnevtId:kHXBUmeng_topup_money];
     [self logicalJudgment:HXBRechargeAndWithdrawalsLogicalJudgment_Recharge];
 }
 /// 提现
 - (void)didClickWithdrawBtn:(UIButton *)sender{
-//    [HXBUmengManagar HXB_clickEventWithEnevtId:kHXBUmeng_withdraw_money];
     [self logicalJudgment:HXBRechargeAndWithdrawalsLogicalJudgment_Withdrawals];
 }
 /// 交易记录
@@ -257,15 +249,44 @@
 //        weakSelf.myView.isStopRefresh_Home = YES;
 //    }];
 //}
-- (void)loadData_userInfo {
+
+
+- (void)loadData {
     kWeakSelf
-    [self.viewModel downLoadUserInfo:NO resultBlock:^(id responseData, NSError *erro) {
-        if (!erro) {
-            weakSelf.viewModel.userInfoModel = responseData;
-            weakSelf.myView.userInfoModel = responseData;
-        }
+    dispatch_group_t group = dispatch_group_create();
+    
+    dispatch_group_enter(group);
+    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+
+        [self.viewModel downLoadUserInfo:NO resultBlock:^(id responseData, NSError *erro) {
+            
+            if (!erro) {
+                self.viewModel.userInfoModel = responseData;
+            }
+            
+            dispatch_group_leave(group);
+        }];
+    });
+    
+    dispatch_group_enter(group);
+    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+
+        
+        [self.viewModel downLoadAccountInfo:^(BOOL isSuccess) {
+            if (!isSuccess) {
+                NSLog(@"失败");
+            }
+            dispatch_group_leave(group);
+        }];
+        
+    });
+  
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        //界面刷新
         weakSelf.myView.isStopRefresh_Home = YES;
-    }];
+        weakSelf.myView.myOperateModel = weakSelf.viewModel.accountModel;
+        weakSelf.myView.userInfoModel = weakSelf.viewModel.userInfoModel;
+    });
 }
 
 - (void)didReceiveMemoryWarning {

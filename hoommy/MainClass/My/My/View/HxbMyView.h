@@ -15,7 +15,7 @@
 - (void)didClickHelp:(UIButton *_Nullable)sender;
 - (void)didMyHomeInfoClick:(NSInteger)type state:(BOOL)state;///我的信息
 @end
-//@class HXBMyRequestAccountModel;
+@class HXBMyRequestAccountModel;
 @interface HxbMyView : UIView
 
 /**
@@ -26,8 +26,7 @@
  是否停止刷新
  */
 @property (nonatomic,assign) BOOL isStopRefresh_Home;
-//@property (nonatomic, strong) HXBRequestUserInfoViewModel * _Nonnull userInfoViewModel;
-//@property (nonatomic, strong) HXBMyRequestAccountModel *_Nullable accountModel;
+@property (nonatomic,strong) HXBMyRequestAccountModel *myOperateModel;
 @property (nonatomic,strong) HXBUserInfoModel *userInfoModel;
 @property (nonatomic,weak,nullable) id<MyViewDelegate>delegate;
 ///点击了 总资产

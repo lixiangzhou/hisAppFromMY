@@ -10,12 +10,9 @@
 #import "HxbMyViewHeaderView.h"
 #import "AppDelegate.h"
 #import "HSJMyViewController.h"
-//#import "HXBMyCouponViewController.h"   // 优惠券
-//#import "HXBMY_PlanListViewController.h"///plan 列表的VC
-//#import "HXBMY_LoanListViewController.h"///散标 列表的VC
 #import "HXBMY_CapitalRecordViewController.h"//资产记录
 #import "HXBMyHomeViewCell.h"
-//#import "HXBMyRequestAccountModel.h"
+#import "HXBMyRequestAccountModel.h"
 #import "HXBUserInfoModel.h"
 //#import "HXBBannerWebViewController.h"
 #import "UIResponder+FindNext.h"
@@ -27,6 +24,9 @@
 #import "HSJDepositoryOpenController.h"
 #import "HSJFragmentViewController.h"
 #import "NSString+HxbPerMilMoney.h"
+#import "HSJMyOperateListCell.h"
+#import "BannerModel.h"
+#import "HXBExtensionMethodTool.h"
 
 @interface HxbMyView ()
 <
@@ -38,7 +38,6 @@ MyViewHeaderDelegate
 @property (nonatomic, strong) HxbMyViewHeaderView *headerView;
 @property (nonatomic, strong) UIView *bottomView;
 @property (nonatomic, strong) UIView *navView;
-//@property (nonatomic, strong) UIButton *signOutButton;
 @property (nonatomic, copy) void(^clickAllFinanceButtonWithBlock)(UILabel *button);
 @end
 
@@ -65,25 +64,11 @@ MyViewHeaderDelegate
     return _navView;
 }
 
-
-
-/**
- 数据模型的set方法
- */
-//- (void)setUserInfoViewModel:(HXBRequestUserInfoViewModel *)userInfoViewModel
-//{
-//    _userInfoViewModel = userInfoViewModel;
-//    self.headerView.userInfoViewModel = userInfoViewModel;
-//}
-
-//- (void)setAccountModel:(HXBMyRequestAccountModel *)accountModel{
-//    _accountModel = accountModel;
-//    self.headerView.accountInfoViewModel = accountModel;
-//    [self.mainTableView reloadData];
-//}
+- (void)setMyOperateModel:(HXBMyRequestAccountModel *)myOperateModel {
+    _myOperateModel = myOperateModel;
+}
 
 - (void)setUserInfoModel:(HXBUserInfoModel *)userInfoModel {
-//    _accountModel = accountModel;
     _userInfoModel = userInfoModel;
     self.headerView.userInfoModel = userInfoModel;
     [self.mainTableView reloadData];
@@ -102,6 +87,7 @@ MyViewHeaderDelegate
 - (void)didClickCapitalRecordBtn:(UIButton *_Nullable)sender {
     [self.delegate didClickCapitalRecordBtn:sender];
 }
+
 - (void)didClickHelp:(UIButton *)sender {
     [self.delegate didClickHelp:sender];
 }
@@ -157,7 +143,7 @@ MyViewHeaderDelegate
                 vc.userInfoModel = self.userInfoModel;
                 HSJMyViewController *VC = (HSJMyViewController *)[UIResponder findNextResponderForClass:[HSJMyViewController class] ByFirstResponder:self];
                 [VC.navigationController pushViewController:vc animated:YES];
-            }     
+            }
         } else {
             NSLog(@"零钱罐");
             
@@ -165,7 +151,7 @@ MyViewHeaderDelegate
             
             HSJPlanDetailController* vc = [[HSJPlanDetailController alloc] init];
             vc.planId = [KeyChain firstPlanIdInPlanList];
-    
+            
             HSJMyViewController *VC = (HSJMyViewController *)[UIResponder findNextResponderForClass:[HSJMyViewController class] ByFirstResponder:self];
             [VC.navigationController pushViewController:vc animated:YES];
         }
@@ -175,6 +161,13 @@ MyViewHeaderDelegate
     }
     if (indexPath.section == 2) {//第二组
         NSLog(@"热门推荐");
+        
+        BannerModel *bannerModel = [[BannerModel alloc] init];
+        MyRequestOperateModel *myOperateModel = self.myOperateModel.operateList[indexPath.row];
+        bannerModel.type = myOperateModel.type;
+        bannerModel.link = myOperateModel.link;
+        HSJMyViewController *VC = (HSJMyViewController *)[UIResponder findNextResponderForClass:[HSJMyViewController class] ByFirstResponder:self];
+        [HXBExtensionMethodTool pushToViewControllerWithModel:bannerModel andWithFromVC:VC];
     }
 }
 
@@ -208,7 +201,7 @@ MyViewHeaderDelegate
         lab.textColor = RGBA(51, 51, 51, 1);
         UIView *lineV = [[UIView alloc]initWithFrame:CGRectMake(0, supV.frame.size.height-kHXBDivisionLineHeight, kScreenWidth, kHXBDivisionLineHeight)];
         lineV.backgroundColor = RGBA(244, 243, 248, 1);
-//        [supV addSubview:lineV];
+        //        [supV addSubview:lineV];
         [supV addSubview:lab];
         lab.text = section == 1? @"我的信息" : @"热门推荐";
         return supV;
@@ -247,10 +240,10 @@ MyViewHeaderDelegate
         return cell;
     } else {
         // 热门推荐
-        cell.accessoryType = UITableViewCellAccessoryNone;
-        cell.contentView.layer.cornerRadius = 6;
-        cell.contentView.layer.masksToBounds = YES;
-        cell.contentView.backgroundColor = kHXBColor_BackGround;
+        HSJMyOperateListCell *myOperateListCell= [[HSJMyOperateListCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"HSJMyOperateListCell"];
+        MyRequestOperateModel *myOperateModel = self.myOperateModel.operateList[indexPath.row];
+        myOperateListCell.imageName = myOperateModel.image;
+        return myOperateListCell;
     }
     
     return cell;
@@ -262,12 +255,13 @@ MyViewHeaderDelegate
     } else if ( section == 1) {
         return 1;
     } else {
-        return 0;
+        return self.myOperateModel.operateList.count;
     }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;//暂时写死
+    NSInteger num = self.myOperateModel.operateList.count>0?1:0;
+    return 2 + num;
 }
 
 - (UITableView *)mainTableView{
@@ -312,7 +306,7 @@ MyViewHeaderDelegate
     if (!_bottomView) {
         _bottomView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kMainScreenWidth, kScrAdaptationH750(202))];
         _bottomView.userInteractionEnabled = YES;
-//        _bottomView.backgroundColor = [UIColor clearColor];
+        //        _bottomView.backgroundColor = [UIColor clearColor];
         UIButton *helpBtn = [[UIButton alloc]initWithFrame:CGRectZero];
         [_bottomView addSubview:helpBtn];
         [helpBtn setImage:[UIImage imageNamed:@"my_help"] forState:UIControlStateNormal];
