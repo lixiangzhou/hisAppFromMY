@@ -13,9 +13,10 @@
 NSString *const HSJHomeActivityCellIdentifier = @"HSJHomeActivityCellIdentifier";
 
 @interface HSJHomeActivityCell()
+@property (nonatomic, strong) NSIndexPath *indexPath;
+@property (nonatomic, strong) HSJHomePlanModel *planModel;
 
 @property (nonatomic, strong) UIView *segmentLineView;
-
 @property (nonatomic, strong) UIImageView *h5ImageView;
 
 @end
@@ -44,9 +45,25 @@ NSString *const HSJHomeActivityCellIdentifier = @"HSJHomeActivityCellIdentifier"
     self.h5ImageView.contentMode = UIViewContentModeScaleAspectFit;
 }
 
+- (void)bindData:(HSJHomePlanModel*)planModel cellIndexPath:(NSIndexPath*)indexPath {
+    self.indexPath = indexPath;
+    self.planModel = planModel;
+}
+
 - (void)setPlanModel:(HSJHomePlanModel *)planModel {
     _planModel = planModel;
-    [self.h5ImageView sd_setImageWithURL:[NSURL URLWithString:planModel.image] placeholderImage:[UIImage imageNamed:@"HomeActivity"]];
+    kWeakSelf
+    [self.h5ImageView sd_setImageWithURL:[NSURL URLWithString:planModel.image] placeholderImage:[UIImage imageNamed:@"HomeActivity"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        if(weakSelf.updateCellHeight) {
+            if (image) {
+                CGFloat cellHeight = kScreenWidth / image.size.width * image.size.height + kScrAdaptationH750(20);
+                weakSelf.updateCellHeight(cellHeight, weakSelf.indexPath.row);
+            }
+            else {
+                weakSelf.updateCellHeight(kScrAdaptationH750(200), weakSelf.indexPath.row);
+            }
+        }
+    }];
 }
 
 - (UIView *)segmentLineView {
@@ -60,6 +77,7 @@ NSString *const HSJHomeActivityCellIdentifier = @"HSJHomeActivityCellIdentifier"
 - (UIImageView *)h5ImageView {
     if (!_h5ImageView) {
         _h5ImageView = [[UIImageView alloc] init];
+        _h5ImageView.contentMode = UIViewContentModeScaleAspectFit;
     }
     return _h5ImageView;
 }

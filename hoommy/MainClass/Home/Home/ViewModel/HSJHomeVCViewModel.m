@@ -23,6 +23,15 @@
 @end
 @implementation HSJHomeVCViewModel
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _recordIsLogin = KeyChain.isLogin;
+    }
+    return self;
+}
+
 - (void)getHomeDataWithResultBlock:(NetWorkResponseBlock)resultBlock showHug:(BOOL)isShowHug{
     kWeakSelf
     [self loadData:^(NYBaseRequest *request) {
@@ -62,15 +71,28 @@
         cell.planModel = cellmodel;
         return cell;
     } else if ([cellmodel.viewItemType  isEqual: @"signuph5"] && !KeyChain.isLogin) {
-        HSJHomeActivityCell *cell = [tableView dequeueReusableCellWithIdentifier:HSJHomeActivityCellIdentifier];
-        cell.planModel = cellmodel;
-        return cell;
+        return [self buildHomeActivityCellData:tableView cellDataModel:cellmodel cellIndexPath:indexPath];
     } else if ([cellmodel.viewItemType  isEqual: @"h5"]) {
-        HSJHomeActivityCell *cell = [tableView dequeueReusableCellWithIdentifier:HSJHomeActivityCellIdentifier];
-        cell.planModel = cellmodel;
-        return cell;
+        return [self buildHomeActivityCellData:tableView cellDataModel:cellmodel cellIndexPath:indexPath];
     }
     return nil;
+}
+
+- (HSJHomeActivityCell*)buildHomeActivityCellData:(UITableView *)tableView cellDataModel:(HSJHomePlanModel*)cellmodel cellIndexPath:(NSIndexPath*)indexPath {
+    
+    HSJHomeActivityCell *cell = [tableView dequeueReusableCellWithIdentifier:HSJHomeActivityCellIdentifier];
+    [cell bindData:cellmodel cellIndexPath:indexPath];
+    kWeakSelf
+    cell.updateCellHeight = ^(CGFloat height, NSInteger index) {
+        CGFloat cellH = ((NSNumber*)(weakSelf.cellHeightArray[index])).floatValue;
+        if(cellH != height) {
+            weakSelf.cellHeightArray[index] = @(height);
+            if(weakSelf.updateCellHeight) {
+                weakSelf.updateCellHeight();
+            }
+        }
+    };
+    return cell;
 }
 
 - (void)setHomeModel:(HSJHomeModel *)homeModel {
@@ -88,7 +110,6 @@
     }
     _homeModel.dataList = cellDataList;
 
-    kWeakSelf
     for (int i = 0; i < homeModel.dataList.count; i++) {
         HSJHomePlanModel *planModel = homeModel.dataList[i];
         if ([planModel.viewItemType  isEqual: @"product"]) {
@@ -96,31 +117,25 @@
 
         } else if ([planModel.viewItemType  isEqual: @"signuph5"])  {
             self.cellHeightArray[i] = @kScrAdaptationH750(157);
-            [[SDWebImageManager sharedManager] loadImageWithURL:[NSURL URLWithString:planModel.image] options:SDWebImageLowPriority progress:nil completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
-                if (image) {
-                    CGFloat cellHeight = kScreenWidth / image.size.width * image.size.height + kScrAdaptationH750(20);
-                    if (weakSelf.updateCellHeight) {
-                        weakSelf.cellHeightArray[i] = @(cellHeight);
-                    }
+            UIImage *image = [[SDImageCache sharedImageCache] imageFromCacheForKey:planModel.image];
+            if (image) {
+                CGFloat cellHeight = kScreenWidth / image.size.width * image.size.height + kScrAdaptationH750(20);
+                if (self.updateCellHeight) {
+                    self.cellHeightArray[i] = @(cellHeight);
                 }
-            }];
+            }
         } else if ([planModel.viewItemType  isEqual: @"h5"]) {
             self.cellHeightArray[i] = @kScrAdaptationH750(200);
-            [[SDWebImageManager sharedManager] loadImageWithURL:[NSURL URLWithString:planModel.image] options:SDWebImageLowPriority progress:nil completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
-                if (image) {
-                    CGFloat cellHeight = kScreenWidth / image.size.width * image.size.height + kScrAdaptationH750(20);
-                    if (weakSelf.updateCellHeight) {
-                        weakSelf.cellHeightArray[i] = @(cellHeight);
-                    }
+            UIImage *image = [[SDImageCache sharedImageCache] imageFromCacheForKey:planModel.image];
+            if (image) {
+                CGFloat cellHeight = kScreenWidth / image.size.width * image.size.height + kScrAdaptationH750(20);
+                if (self.updateCellHeight) {
+                    self.cellHeightArray[i] = @(cellHeight);
                 }
-            }];
+            }
         } else {
             self.cellHeightArray[i] = @0;
         }
-    }
-
-    if (self.updateCellHeight) {
-        self.updateCellHeight();
     }
 }
 

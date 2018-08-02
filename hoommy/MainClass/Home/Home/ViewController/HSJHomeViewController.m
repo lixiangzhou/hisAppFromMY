@@ -72,6 +72,7 @@
         make.top.equalTo(self.navView.mas_bottom);
         make.left.right.bottom.equalTo(self.safeAreaView);
     }];
+    [self setUpScrollFreshBlock:self.mainTabelView];
 }
 
 - (void)getHomeData:(BOOL)isShowHug  {
@@ -79,9 +80,8 @@
     [self.viewModel getHomeDataWithResultBlock:^(id responseData, NSError *erro) {
         [weakSelf.mainTabelView endRefresh:YES];
         if(!erro) {
-            weakSelf.headerView.homeModel = weakSelf.viewModel.homeModel;
-            [weakSelf updateUI];
-            [weakSelf.mainTabelView reloadData];
+            [weakSelf updateHeadView];
+            [weakSelf reloadPage];
         }
         
     } showHug:isShowHug];
@@ -110,13 +110,19 @@
     }
 }
 
-- (void)updateUI {
+- (void)updateHeadView {
+    self.headerView.homeModel = self.viewModel.homeModel;
+    CGFloat height = self.headerView.height;
     if (self.viewModel.homeModel.articleList.count) {
-        self.headerView.height = kScrAdaptationH750(400);
+        height = kScrAdaptationH750(400);
     }  else if (!self.viewModel.homeModel.articleList.count){
-        self.headerView.height = kScrAdaptationH750(310);
+        height = kScrAdaptationH750(310);
     }
-    self.mainTabelView.tableHeaderView = self.headerView;
+    
+    if(height != self.headerView.height) {
+        self.headerView.height = height;
+        self.mainTabelView.tableHeaderView = self.headerView;
+    }
 }
 
 - (void)joinAction:(NSString*)planId{
@@ -234,11 +240,11 @@
         };
         _footerView.bankClickBlock = ^{
             [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_HomeBankClick];
-            [HXBBaseWKWebViewController pushWithPageUrl:[NSString stringWithFormat:@"%@/baby/intro?section=4",KeyChain.h5host] fromController:weakSelf];
+            [HXBBaseWKWebViewController pushWithPageUrl:[NSString stringWithFormat:@"%@/baby/intro?section=3",KeyChain.h5host] fromController:weakSelf];
         };
         _footerView.creditClickBlock = ^{
             [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_HomeCreditClick];
-            [HXBBaseWKWebViewController pushWithPageUrl:[NSString stringWithFormat:@"%@/baby/intro?section=3",KeyChain.h5host] fromController:weakSelf];
+            [HXBBaseWKWebViewController pushWithPageUrl:[NSString stringWithFormat:@"%@/baby/intro?section=2",KeyChain.h5host] fromController:weakSelf];
         };
         _footerView.registeredCapitalClickBlock = ^{
             [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_HomeRegisteredCapitalClick];
@@ -259,14 +265,54 @@
         _mainTabelView.delegate = self;
         _mainTabelView.dataSource = self;
         _mainTabelView.showsVerticalScrollIndicator = NO;
+        _mainTabelView.estimatedRowHeight = 0;
         _mainTabelView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        kWeakSelf
         _mainTabelView.freshOption = ScrollViewFreshOptionDownPull;
-        _mainTabelView.headerWithRefreshBlock = ^(UIScrollView *scrollView) {
-            [weakSelf getHomeData:NO];
-        };
     }
     return _mainTabelView;
+}
+
+- (void)reloadPage {
+    BOOL isFresh = NO;
+    if(KeyChain.isLogin != self.viewModel.recordIsLogin) {
+        isFresh = YES;
+    }
+    else if(!self.viewModel.recordHomeModel) {
+        isFresh = YES;
+    }
+    else if(!self.viewModel.homeModel) {
+        isFresh = YES;
+    }
+    else {
+        NSDictionary *tempDic1 = [self.viewModel.homeModel toDictionary];
+        NSDictionary *tempDic2 = [self.viewModel.recordHomeModel toDictionary];
+        NSArray *tempList1 = [tempDic1 arrayAtPath:@"dataList"];
+        NSArray *tempList2 = [tempDic2 arrayAtPath:@"dataList"];
+        if(tempList1.count != tempList2.count) {
+            isFresh = YES;
+        }
+        else {
+            for (int i=0; i<tempList1.count; i++) {
+                NSDictionary *dic1 = [tempList1 safeObjectAtIndex:0];
+                NSDictionary *dic2 = [tempList2 safeObjectAtIndex:0];
+                if(![dic1 isEqualToDictionary:dic2]) {
+                    isFresh = YES;
+                    break;
+                }
+            }
+        }
+    }
+    
+    if(isFresh) {
+        self.viewModel.recordIsLogin = KeyChain.isLogin;
+        self.viewModel.recordHomeModel = self.viewModel.homeModel;
+        self.mainTabelView.contentSize = CGSizeMake(kScreenWidth, 1000);
+        [self.mainTabelView reloadData];
+    }
+}
+
+- (void)headerRefreshAction:(UIScrollView *)scrollView {
+    [self getHomeData:NO];
 }
 
 - (HSJHomeVCViewModel *)viewModel {
@@ -274,7 +320,7 @@
         _viewModel = [[HSJHomeVCViewModel alloc] init];
         kWeakSelf
         _viewModel.updateCellHeight = ^() {
-            [weakSelf.mainTabelView reloadData];
+            [weakSelf reloadPage];
         };
     }
     return _viewModel;
