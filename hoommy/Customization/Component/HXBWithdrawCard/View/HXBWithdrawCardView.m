@@ -325,7 +325,7 @@
     if (!_bankNameTextField) {
         _bankNameTextField = [[HXBCustomTextField alloc] initWithFrame:CGRectZero];
         _bankNameTextField.placeholder = @"银行名称";
-        _bankNameTextField.svgImageName = @"默认";
+        _bankNameTextField.leftImage = [UIImage imageNamed:@"bank_default"];
         _bankNameTextField.hidden = YES;
         _bankNameTextField.userInteractionEnabled = NO;
 //        _bankNameTextField.rightImage = [SVGKImage imageNamed:@"more.svg"].UIImage;

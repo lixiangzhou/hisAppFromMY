@@ -617,7 +617,7 @@
     _bankCardModel = bankCardModel;
     self.bankNameLabel.text = self.bankCardModel.bankType;
     self.bankCardNumLabel.text = [NSString stringWithFormat:@"（尾号%@）",[self.bankCardModel.cardId substringFromIndex:self.bankCardModel.cardId.length - 4]];
-    self.bankLogoImageView.svgImageString = self.bankCardModel.bankCode;
+    self.bankLogoImageView.image = [UIImage imageNamed:self.bankCardModel.bankCode];
     
     self.arrivalDateLabel.text = bankCardModel.bankArriveTimeText;
 }
@@ -658,7 +658,7 @@
     if (!_bankLogoImageView) {
         _bankLogoImageView = [[UIImageView alloc]init];
         _bankLogoImageView.contentMode = UIViewContentModeScaleAspectFit;
-//        _bankLogoImageView.svgImageString = @"默认";
+        _bankLogoImageView.image = [UIImage imageNamed:@"bank_default"];
     }
     return _bankLogoImageView;
 }
