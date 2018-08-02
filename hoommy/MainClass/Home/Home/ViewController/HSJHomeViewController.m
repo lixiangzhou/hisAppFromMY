@@ -293,8 +293,10 @@
         }
         else {
             for (int i=0; i<tempList1.count; i++) {
-                NSDictionary *dic1 = [tempList1 safeObjectAtIndex:0];
-                NSDictionary *dic2 = [tempList2 safeObjectAtIndex:0];
+                NSMutableDictionary *dic1 = [NSMutableDictionary dictionaryWithDictionary:[tempList1 safeObjectAtIndex:i]];
+                [dic1 removeObjectForKey:@"diffTime"];
+                NSMutableDictionary *dic2 = [NSMutableDictionary dictionaryWithDictionary:[tempList2 safeObjectAtIndex:i]];
+                [dic2 removeObjectForKey:@"diffTime"];
                 if(![dic1 isEqualToDictionary:dic2]) {
                     isFresh = YES;
                     break;
