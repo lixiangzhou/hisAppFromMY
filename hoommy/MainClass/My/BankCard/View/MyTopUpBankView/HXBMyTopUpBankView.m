@@ -47,7 +47,7 @@
             weakSelf.amountLimitLabel.text = weakSelf.bankCardModel.quota;
             weakSelf.bankLogoImageView.svgImageString = weakSelf.bankCardModel.bankCode;
             if (weakSelf.bankLogoImageView.image == nil) {
-                weakSelf.bankLogoImageView.svgImageString = @"默认";
+                weakSelf.bankLogoImageView.image = [UIImage imageNamed:@"bank_default"];
             }
         }
     }];
@@ -88,7 +88,7 @@
     if (!_bankLogoImageView) {
          _bankLogoImageView = [[UIImageView alloc]init];
         _bankLogoImageView.contentMode = UIViewContentModeScaleAspectFit;
-        _bankLogoImageView.svgImageString = @"默认";
+        _bankLogoImageView.image = [UIImage imageNamed:@"bank_default"];
     }
     return _bankLogoImageView;
 }

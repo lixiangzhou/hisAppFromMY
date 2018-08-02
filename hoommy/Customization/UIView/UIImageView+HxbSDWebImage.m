@@ -19,7 +19,7 @@ static NSString *const kHXBSVGImage = @"kHXBSVGImage";
 - (void)setSvgImageString:(NSString *)svgImageString {
     
     if (!svgImageString) {
-        self.image = [SVGKImage imageNamed:@"默认"].UIImage;
+        self.image = [UIImage imageNamed:@"bank_default"];
         objc_setAssociatedObject(self, &kHXBSVGImageName, svgImageString, OBJC_ASSOCIATION_COPY_NONATOMIC);
         return;
     }
@@ -32,13 +32,13 @@ static NSString *const kHXBSVGImage = @"kHXBSVGImage";
         @try {
             self.image = [SVGKImage imageNamed:svgImageString].UIImage;
         } @catch (NSException *exception) {
-            self.image = [SVGKImage imageNamed:@"默认"].UIImage;
+            self.image = [UIImage imageNamed:@"bank_default"];
         } @finally {
             
         }
     }
     if (self.image == nil) {
-        self.image = [SVGKImage imageNamed:@"默认"].UIImage;
+        self.image = [UIImage imageNamed:@"bank_default"];
     }
     objc_setAssociatedObject(self, &kHXBSVGImageName, svgImageString, OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
