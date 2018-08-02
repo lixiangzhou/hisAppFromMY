@@ -65,7 +65,7 @@
     _bankModel = bankModel;
     self.bankNameLabel.text = bankModel.name;
     self.bankQuotaLabel.text = bankModel.quota;
-    self.bankImageView.svgImageString = [NSString stringWithFormat:@"%@.svg",bankModel.bankCode];
+    self.bankImageView.image = [UIImage imageNamed:bankModel.bankCode];
     NSLog(@"==name:%@ %@--",bankModel.name,bankModel.quota);
 }
 
