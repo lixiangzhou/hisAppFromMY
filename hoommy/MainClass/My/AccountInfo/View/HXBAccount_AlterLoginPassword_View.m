@@ -8,7 +8,7 @@
 
 #import "HXBAccount_AlterLoginPassword_View.h"
 #import "HXBCustomTextField.h"///密码的View
-#import "SVGKit/SVGKImage.h"
+
 @interface HXBAccount_AlterLoginPassword_View ()<UITextFieldDelegate>
 @property (nonatomic,strong) UILabel *password_Original_title;
 ///原始的密码的textField

@@ -105,7 +105,7 @@
     _bankCardModel = bankCardModel;
     
     //
-    self.iconView..image = [UIImage imageNamed:self.bankCardModel.bankCode];
+    self.iconView.image = [UIImage imageNamed:self.bankCardModel.bankCode];
     
     NSString* lastNo = [self.bankCardModel.cardId substringFromIndex:self.bankCardModel.cardId.length-4];
     self.bankName.text = [NSString stringWithFormat:@"%@(%@)",self.bankCardModel.bankType, lastNo];

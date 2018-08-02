@@ -151,7 +151,6 @@
         [_cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
         [_cancelBtn setTitleColor:RGB(102, 102, 102) forState:UIControlStateNormal];
         _cancelBtn.titleLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(30);
-//        [_cancelBtn setImage:[SVGKImage imageNamed:@"close.svg"].UIImage forState:UIControlStateNormal];
         _cancelBtn.backgroundColor = RGB(232, 232, 238);
         _cancelBtn.userInteractionEnabled = YES;
         [_cancelBtn addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];

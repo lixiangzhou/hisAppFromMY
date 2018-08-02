@@ -9,7 +9,6 @@
 #import "HXBCheckCaptchaViewController.h"
 #import "HXBCheckCaptcha.h"
 #import   "UIImageView+WebCache.h"
-#import "SVGKit/SVGKImage.h"
 #import "HXBCheckCaptchaViewModel.h"
 #import "Animatr.h"
 
@@ -42,7 +41,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    kWeakSelf
     self.viewModel = [[HXBCheckCaptchaViewModel alloc] init];
     
     [self setUP];
@@ -135,22 +133,6 @@
         [weakSelf dismissViewControllerAnimated:YES completion:nil];
     };
 }
-
-///**
-// 取消按钮的懒加载
-// */
-//- (UIButton *)cancelBtn
-//{
-//    if (!_cancelBtn) {
-//        _cancelBtn = [[UIButton alloc] init];
-//        //        [_cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
-//        [_cancelBtn setImage:[SVGKImage imageNamed:@"close.svg"].UIImage forState:UIControlStateNormal];
-//        [_cancelBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//        _cancelBtn.backgroundColor = [UIColor clearColor];
-//        [_cancelBtn addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
-//    }
-//    return _cancelBtn;
-//}
 
 - (void)dismiss
 {

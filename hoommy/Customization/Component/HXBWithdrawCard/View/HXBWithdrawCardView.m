@@ -8,7 +8,6 @@
 
 #import "HXBWithdrawCardView.h"
 #import "HXBBankCardListViewController.h"
-#import "SVGKit/SVGKImage.h"
 #import "HXBCustomTextField.h"
 #import "HXBCardBinModel.h"
 #import "HXBWithdrawCardViewModel.h"
@@ -289,11 +288,11 @@
     
     
     if (!cardBinModel.creditCard) {
-        self.bankNameTextField.svgImageName = cardBinModel.bankCode;
+        self.bankNameTextField.leftImage = [UIImage imageNamed:cardBinModel.bankCode];
         self.bankNameTextField.text = [NSString stringWithFormat:@"%@：%@",cardBinModel.bankName,cardBinModel.quota];
     }else
     {
-        self.bankNameTextField.svgImageName = cardBinModel.bankCode;
+        self.bankNameTextField.leftImage = [UIImage imageNamed:cardBinModel.bankCode];
         self.bankNameTextField.text = @"此卡为信用卡，暂不支持";
     }
 }
@@ -328,14 +327,7 @@
         _bankNameTextField.leftImage = [UIImage imageNamed:@"bank_default"];
         _bankNameTextField.hidden = YES;
         _bankNameTextField.userInteractionEnabled = NO;
-//        _bankNameTextField.rightImage = [SVGKImage imageNamed:@"more.svg"].UIImage;
         _bankNameTextField.isHidenLine = YES;
-//        _bankNameTextField.btnClick = ^{
-//            if (weakSelf.bankNameBtnClickBlock) {
-//                weakSelf.bankNameBtnClickBlock();
-//            }
-//        };
-        
     }
     return _bankNameTextField;
 }

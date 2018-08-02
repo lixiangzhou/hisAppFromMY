@@ -45,7 +45,7 @@
             weakSelf.bankNameLabel.text = weakSelf.bankCardModel.bankType;
             weakSelf.bankCardNumLabel.text = [NSString stringWithFormat:@"（尾号%@）",[weakSelf.bankCardModel.cardId substringFromIndex:weakSelf.bankCardModel.cardId.length - 4]];
             weakSelf.amountLimitLabel.text = weakSelf.bankCardModel.quota;
-            weakSelf.bankLogoImageView.svgImageString = weakSelf.bankCardModel.bankCode;
+            weakSelf.bankLogoImageView.image = [UIImage imageNamed:weakSelf.bankCardModel.bankCode];
             if (weakSelf.bankLogoImageView.image == nil) {
                 weakSelf.bankLogoImageView.image = [UIImage imageNamed:@"bank_default"];
             }

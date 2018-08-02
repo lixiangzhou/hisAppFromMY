@@ -9,7 +9,6 @@
 #import "HSJSignInViewController.h"
 #import "HXBCustomTextField.h"
 #import "HSJPasswordSigInViewController.h"
-#import "SVGKImage.h"
 #import "HSJSignUpViewController.h"
 #import "HSJSignInViewModel.h"
 #import "HSJSignInButton.h"

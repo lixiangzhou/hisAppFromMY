@@ -9,7 +9,6 @@
 #import "HSJDepositoryOpenController.h"
 #import "UIImageView+HxbSDWebImage.h"
 #import "HXBCustomTextField.h"
-#import "SVGKit/SVGKImage.h"
 #import "UITextField+HLNumberFormatTextField.h"
 #import "HXBAgreementView.h"
 #import "HxbHUDProgress.h"
