@@ -304,6 +304,7 @@
 		9A97DAD320EF420200688ADB /* trading_record.svg in Resources */ = {isa = PBXBuildFile; fileRef = 9A97DA5C20EF420200688ADB /* trading_record.svg */; };
 		9A97DAD420EF420200688ADB /* transaction_password.svg in Resources */ = {isa = PBXBuildFile; fileRef = 9A97DA5D20EF420200688ADB /* transaction_password.svg */; };
 		9AA0696A2111AED800A83ED7 /* Impact.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AA069692111AED500A83ED7 /* Impact.ttf */; };
+		9AA0696D211303D900A83ED7 /* DIN Alternate Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AA0696C211303D700A83ED7 /* DIN Alternate Bold.ttf */; };
 		9AA70B4120FEF323008B3007 /* HSJBuyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA70B4020FEF323008B3007 /* HSJBuyViewController.m */; };
 		9AA70B4420FEF369008B3007 /* HSJBuyViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA70B4320FEF369008B3007 /* HSJBuyViewModel.m */; };
 		9AA70B4720FEF3CC008B3007 /* HSJBuyHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA70B4620FEF3CC008B3007 /* HSJBuyHeadView.m */; };
@@ -986,6 +987,7 @@
 		9A97DA5C20EF420200688ADB /* trading_record.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = trading_record.svg; sourceTree = "<group>"; };
 		9A97DA5D20EF420200688ADB /* transaction_password.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = transaction_password.svg; sourceTree = "<group>"; };
 		9AA069692111AED500A83ED7 /* Impact.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Impact.ttf; sourceTree = "<group>"; };
+		9AA0696C211303D700A83ED7 /* DIN Alternate Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DIN Alternate Bold.ttf"; sourceTree = "<group>"; };
 		9AA70B3F20FEF323008B3007 /* HSJBuyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJBuyViewController.h; sourceTree = "<group>"; };
 		9AA70B4020FEF323008B3007 /* HSJBuyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJBuyViewController.m; sourceTree = "<group>"; };
 		9AA70B4220FEF369008B3007 /* HSJBuyViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJBuyViewModel.h; sourceTree = "<group>"; };
@@ -3300,6 +3302,7 @@
 		9AA069602111806D00A83ED7 /* Font */ = {
 			isa = PBXGroup;
 			children = (
+				9AA0696B211303D600A83ED7 /* Din */,
 				9AA069612111806D00A83ED7 /* impact */,
 			);
 			path = Font;
@@ -3311,6 +3314,14 @@
 				9AA069692111AED500A83ED7 /* Impact.ttf */,
 			);
 			path = impact;
+			sourceTree = "<group>";
+		};
+		9AA0696B211303D600A83ED7 /* Din */ = {
+			isa = PBXGroup;
+			children = (
+				9AA0696C211303D700A83ED7 /* DIN Alternate Bold.ttf */,
+			);
+			path = Din;
 			sourceTree = "<group>";
 		};
 		9AA70B3A20FEF0F6008B3007 /* Buy */ = {
@@ -3939,6 +3950,7 @@
 				9A97DABC20EF420200688ADB /* audit_status.svg in Resources */,
 				9A97DABD20EF420200688ADB /* back.svg in Resources */,
 				9A97DA7120EF420200688ADB /* HSJTestViewController.xib in Resources */,
+				9AA0696D211303D900A83ED7 /* DIN Alternate Bold.ttf in Resources */,
 				9A6E0A6220F84C9700598071 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

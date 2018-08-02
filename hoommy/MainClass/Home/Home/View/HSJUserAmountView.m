@@ -53,11 +53,11 @@
 
 
 - (void)setAmountText:(NSString *)amountText andWithAmountTextUnit:(NSString *)amountTextUnit {
-    amountText = amountText? : @"";
-    amountTextUnit = amountTextUnit? : @"";
-    NSString *amountStr = [NSString stringWithFormat:@"%@%@",amountText,amountTextUnit];
-    NSRange range = [amountStr rangeOfString:amountTextUnit];
-    self.amountLabel.attributedText = [NSMutableAttributedString setupAttributeStringWithString:amountStr WithRange:(NSRange)range andAttributeColor:kHXBFontColor_7F85A1_100 andAttributeFont:kHXBFont_PINGFANGSC_REGULAR_750(30)];
+    amountText = amountText? : @"--";
+    amountTextUnit = amountTextUnit? : @"--";
+    NSRange rangeAmountText = [amountText rangeOfString:amountText];
+    NSRange rangeAmountTextUnit = [amountTextUnit rangeOfString:amountTextUnit];
+    self.amountLabel.attributedText = [NSMutableAttributedString setupAttributeStringWithBeforeString:amountText WithBeforeRange:rangeAmountText andAttributeColor:kHXBFontColor_7F85A1_100 andAttributeFont:kHXBFont_DINCondensed_BOLD_750(64) afterString:amountTextUnit WithAfterRange:rangeAmountTextUnit andAttributeColor:kHXBFontColor_7F85A1_100 andAttributeFont:kHXBFont_30];
 }
 
 - (void)setDescribeStr:(NSString *)describeStr {
@@ -68,7 +68,7 @@
 - (UILabel *)amountLabel {
     if (!_amountLabel) {
         _amountLabel = [[UILabel alloc] init];
-        _amountLabel.textColor = kHXBFontColor_7F85A1_100;
+        _amountLabel.textColor = [UIColor redColor];//kHXBFontColor_7F85A1_100;
         _amountLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(64);
     }
     return _amountLabel;
