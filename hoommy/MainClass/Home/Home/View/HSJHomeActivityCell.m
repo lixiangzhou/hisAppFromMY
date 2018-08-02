@@ -41,7 +41,6 @@ NSString *const HSJHomeActivityCellIdentifier = @"HSJHomeActivityCellIdentifier"
         make.left.right.top.equalTo(self.contentView);
         make.bottom.equalTo(self.segmentLineView.mas_top);
     }];
-    self.h5ImageView.contentMode = UIViewContentModeScaleAspectFit;
 }
 
 - (void)setPlanModel:(HSJHomePlanModel *)planModel {
@@ -60,6 +59,7 @@ NSString *const HSJHomeActivityCellIdentifier = @"HSJHomeActivityCellIdentifier"
 - (UIImageView *)h5ImageView {
     if (!_h5ImageView) {
         _h5ImageView = [[UIImageView alloc] init];
+        _h5ImageView.contentMode = UIViewContentModeScaleToFill;
     }
     return _h5ImageView;
 }

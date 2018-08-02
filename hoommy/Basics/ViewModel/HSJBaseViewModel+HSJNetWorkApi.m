@@ -7,8 +7,20 @@
 //
 
 #import "HSJBaseViewModel+HSJNetWorkApi.h"
+#import "HSJDepositoryOpenTipView.h"
+#import "HXBGeneralAlertVC.h"
+#import "HSJRiskAssessmentViewController.h"
 
 @implementation HSJBaseViewModel (HSJNetWorkApi)
+
+static const char HXBUserInfoModelKey = '\0';
+- (void)setInnerUserInfoModel:(HXBUserInfoModel *)innerUserInfoModel {
+    objc_setAssociatedObject(self, &HXBUserInfoModelKey, innerUserInfoModel, OBJC_ASSOCIATION_RETAIN);
+}
+
+- (HXBUserInfoModel *)innerUserInfoModel {
+    return objc_getAssociatedObject(self, &HXBUserInfoModelKey);
+}
 
 - (void)checkVersionUpdate:(NetWorkResponseBlock)resultBlock {
     NSString *version = [[[NSBundle mainBundle]infoDictionary]objectForKey:@"CFBundleShortVersionString"];
@@ -39,6 +51,9 @@
         request.requestMethod = NYRequestMethodGet;
         request.modelType = NSClassFromString(@"HXBUserInfoModel");
     } responseResult:^(id responseData, NSError *erro) {
+        if (responseData) {
+            self.innerUserInfoModel = responseData;
+        }
         if(resultBlock) {
             resultBlock(responseData, erro);
         }
@@ -100,6 +115,63 @@
         if(resultBlock) {
             resultBlock(resultBlock, erro);
         }
+    }];
+}
+
+#pragma mark - 开户和风险评测
+- (void)checkDepositoryAndRiskFromController:(UIViewController *)controller finishBlock:(void (^)(void))finishBlock {
+    if (KeyChain.isLogin) {
+        // 已开户并且做过风险评测就直接执行 finishBlock
+        if (self.innerUserInfoModel.userInfo.isCreateEscrowAcc == YES && [self.innerUserInfoModel.userInfo.riskType isEqualToString:@"立即评测"] == NO) {
+            if (finishBlock) {
+                finishBlock();
+            }
+        } else {
+            kWeakSelf
+            [self downLoadUserInfo:YES resultBlock:^(HXBUserInfoModel *userInfoModel, NSError *erro) {
+                if (userInfoModel.userInfo.isCreateEscrowAcc == NO) {
+                    [HSJDepositoryOpenTipView show];
+                } else if ([userInfoModel.userInfo.riskType isEqualToString:@"立即评测"]) {
+                    [weakSelf riskTypeAssementFrom:controller];
+                } else {
+                    if (finishBlock) {
+                        finishBlock();
+                    }
+                }
+            }];
+        }
+        
+    } else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_ShowLoginVC object:nil];
+    }
+}
+
+- (void)riskTypeAssementFrom:(UIViewController *)controller {
+    HXBGeneralAlertVC *alertVC = [[HXBGeneralAlertVC alloc] initWithMessageTitle:@"" andSubTitle:@"您尚未进行风险评测，请评测后再进行出借" andLeftBtnName:@"我是保守型" andRightBtnName:@"立即评测" isHideCancelBtn:YES isClickedBackgroundDiss:YES];
+    kWeakSelf
+    [alertVC setLeftBtnBlock:^{
+        [weakSelf setRiskTypeDefault];
+    }];
+    [alertVC setRightBtnBlock:^{
+        HSJRiskAssessmentViewController *riskAssessmentVC = [[HSJRiskAssessmentViewController alloc] init];
+        [controller.navigationController pushViewController:riskAssessmentVC animated:YES];
+        __weak typeof(riskAssessmentVC) weakRiskAssessmentVC = riskAssessmentVC;
+        riskAssessmentVC.popBlock = ^(NSString *type) {
+            [weakRiskAssessmentVC.navigationController popToViewController:controller animated:YES];
+        };
+    }];
+    
+    [controller presentViewController:alertVC animated:NO completion:nil];
+}
+
+- (void)setRiskTypeDefault
+{
+    [self loadData:^(NYBaseRequest *request) {
+        request.requestUrl = kHXBUser_riskModifyScoreURL;
+        request.requestMethod = NYRequestMethodPost;
+        request.requestArgument = @{@"score": @"0"};
+    } responseResult:^(id responseData, NSError *erro) {
+        
     }];
 }
 @end
