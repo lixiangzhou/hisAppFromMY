@@ -75,31 +75,26 @@
          }];
     }
     _homeModel.dataList = cellDataList;
-
     for (int i = 0; i < homeModel.dataList.count; i++) {
         HSJHomePlanModel *planModel = homeModel.dataList[i];
         if ([planModel.viewItemType  isEqual: @"product"]) {
             planModel.cellHeight = KeyChain.isLogin ? kScrAdaptationH750(676) : kScrAdaptationH750(598);
         } else if ([planModel.viewItemType  isEqual: @"signuph5"])  {
-            self.cellHeightArray[i] = @kScrAdaptationH750(157);
+            planModel.cellHeight = 157;
             UIImage *image = [[SDImageCache sharedImageCache] imageFromCacheForKey:planModel.image];
             if (image) {
                 CGFloat cellHeight = kScreenWidth / image.size.width * image.size.height + kScrAdaptationH750(20);
-                if (self.updateCellHeight) {
-                    self.cellHeightArray[i] = @(cellHeight);
-                }
+                planModel.cellHeight = cellHeight;
             }
         } else if ([planModel.viewItemType  isEqual: @"h5"]) {
-            self.cellHeightArray[i] = @kScrAdaptationH750(200);
+            planModel.cellHeight = 200;
             UIImage *image = [[SDImageCache sharedImageCache] imageFromCacheForKey:planModel.image];
             if (image) {
                 CGFloat cellHeight = kScreenWidth / image.size.width * image.size.height + kScrAdaptationH750(20);
-                if (self.updateCellHeight) {
-                    self.cellHeightArray[i] = @(cellHeight);
-                }
+                planModel.cellHeight = cellHeight;
             }
         } else {
-            self.cellHeightArray[i] = @0;
+            planModel.cellHeight = 0;
         }
     }
 }

@@ -21,7 +21,6 @@
 @property (nonatomic, strong) HXBUserInfoModel *userInfoModel;
 
 //逻辑数据
-@property (nonatomic, strong, readonly) NSMutableArray *cellHeightArray;
 @property (nonatomic, strong) HSJHomeModel *recordHomeModel;
 
 @property (nonatomic, assign) BOOL recordIsLogin;

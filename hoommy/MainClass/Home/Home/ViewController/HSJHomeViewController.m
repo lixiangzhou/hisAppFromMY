@@ -138,14 +138,19 @@
     
     HSJHomeActivityCell *cell = [tableView dequeueReusableCellWithIdentifier:HSJHomeActivityCellIdentifier];
     [cell bindData:cellmodel cellIndexPath:indexPath];
-    kWeakSelf
-    cell.updateCellHeight = ^(CGFloat height, NSInteger index) {
-        CGFloat cellH = ((NSNumber*)(weakSelf.viewModel.cellHeightArray[index])).floatValue;
-        if(cellH != height) {
-            weakSelf.viewModel.cellHeightArray[index] = @(height);
-            [weakSelf reloadPage];
-        }
-    };
+    
+    if(!cell.updateCellHeight) {
+        kWeakSelf
+        cell.updateCellHeight = ^(CGFloat height, NSInteger index) {
+            HSJHomePlanModel *cellmodel = [weakSelf.viewModel.homeModel.dataList safeObjectAtIndex:index];
+            CGFloat cellH = cellmodel.cellHeight;
+            if(cellH != height) {
+                cellmodel.cellHeight = height;
+                [weakSelf.mainTabelView reloadData];
+            }
+        };
+    }
+    
     return cell;
 }
 
