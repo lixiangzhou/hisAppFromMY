@@ -49,9 +49,8 @@
 - (void)viewDidLoad {
     self.isFullScreenShow = YES;
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
     [self setUI];
-
 }
 
 - (void)reLoadWhenViewAppear {
@@ -204,15 +203,15 @@
         };
         _footerView.bankClickBlock = ^{
             [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_HomeBankClick];
-            [HXBBaseWKWebViewController pushWithPageUrl:[NSString stringWithFormat:@"%@/baby/intro#section1",KeyChain.h5host] fromController:weakSelf];
+            [HXBBaseWKWebViewController pushWithPageUrl:[NSString stringWithFormat:@"%@/baby/intro?section=4",KeyChain.h5host] fromController:weakSelf];
         };
         _footerView.creditClickBlock = ^{
             [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_HomeCreditClick];
-            [HXBBaseWKWebViewController pushWithPageUrl:[NSString stringWithFormat:@"%@/baby/intro#section2",KeyChain.h5host] fromController:weakSelf];
+            [HXBBaseWKWebViewController pushWithPageUrl:[NSString stringWithFormat:@"%@/baby/intro?section=3",KeyChain.h5host] fromController:weakSelf];
         };
         _footerView.registeredCapitalClickBlock = ^{
             [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_HomeRegisteredCapitalClick];
-            [HXBBaseWKWebViewController pushWithPageUrl:[NSString stringWithFormat:@"%@/baby/intro#section3",KeyChain.h5host] fromController:weakSelf];
+            [HXBBaseWKWebViewController pushWithPageUrl:[NSString stringWithFormat:@"%@/baby/intro?section=1",KeyChain.h5host] fromController:weakSelf];
         };
     }
     return _footerView;

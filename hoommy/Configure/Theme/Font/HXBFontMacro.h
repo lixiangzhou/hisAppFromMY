@@ -23,6 +23,9 @@
 //DINCondensed字体
 #define kHXBFont_DINCondensed_BOLD(s)            ([UIFont fontWithName:@"DINCondensed-Bold" size:kScrAdaptationW(s)])
 #define kHXBFont_DINCondensed_BOLD_750(s)        ([UIFont fontWithName:@"DINCondensed-Bold" size:kScrAdaptationW750(s)])
+//DINCondensed字体
+#define kHXBFont_DINAlternate_BOLD(s)            ([UIFont fontWithName:@"DINAlternate-Bold" size:kScrAdaptationW(s)])
+#define kHXBFont_DINAlternate_BOLD_750(s)        ([UIFont fontWithName:@"DINAlternate-Bold" size:kScrAdaptationW750(s)])
 
 //UI规范中的字体
 #define kHXBFont_20         kHXBFont_PINGFANGSC_REGULAR_750(20)

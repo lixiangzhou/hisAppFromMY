@@ -57,7 +57,7 @@
         if (resultBlock) {
             weakSelf.retryCount = 0;
             if (resultBlock) {
-                resultBlock(self.infoModel);
+                resultBlock(weakSelf.infoModel);
             }
         } else {
 //            if (responseData == nil) {
