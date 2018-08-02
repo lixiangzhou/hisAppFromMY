@@ -58,7 +58,6 @@
     BOOL isShowHug = self.viewModel.homeModel? NO : YES;
     [self getHomeData:isShowHug];
     [self.footerView updateData];
-    [self loadUserInfo:NO];
     
     if ([HXBAdvertiseManager shared].couldPopAtHomeAfterSlashOrGesturePwd) {
         [[HXBVersionUpdateManager sharedInstance] show];
@@ -92,25 +91,6 @@
     } showHug:isShowHug];
 }
 
-- (void)loadUserInfo:(BOOL)isShowHug {
-    self.viewModel.userInfoModel = nil;
-    if(KeyChain.isLogin) {
-        kWeakSelf
-        [self.viewModel downLoadUserInfo:isShowHug resultBlock:^(HXBUserInfoModel *userInfoModel, NSError *erro) {
-            if(!erro) {
-                weakSelf.viewModel.userInfoModel = userInfoModel;
-                if(weakSelf.planIdOfWaitJoin) {
-                    [weakSelf joinAction:weakSelf.planIdOfWaitJoin];
-                }
-            }
-            weakSelf.planIdOfWaitJoin = nil;
-        }];
-    }
-    else {
-        IDPLogDebug(@"没有登录, 不能获取用户信息");
-    }
-}
-
 #pragma mark - UITableViewDelegate,UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -124,13 +104,11 @@
         cell.planModel = cellmodel;
         kWeakSelf
         cell.intoButtonAct = ^(NSString *planId) {
-            if(weakSelf.viewModel.userInfoModel) {
-                [weakSelf joinAction:planId];
-            }
-            else {
-                weakSelf.planIdOfWaitJoin = planId;
-                [weakSelf loadUserInfo:YES];
-            }
+            [weakSelf.viewModel checkDepositoryAndRiskFromController:weakSelf finishBlock:^{
+                HSJBuyViewController *vc = [HSJBuyViewController new];
+                vc.planId = planId;
+                [weakSelf.navigationController pushViewController:vc animated:YES];
+            }];
         };
         return cell;
     } else if ([cellmodel.viewItemType  isEqual: @"signuph5"] && !KeyChain.isLogin) {
@@ -171,21 +149,6 @@
 }
 
 #pragma mark - Helper
-- (void)joinAction:(NSString*)planId{
-    HXBUserInfoModel *userInfoModel = self.viewModel.userInfoModel;
-    if(userInfoModel) {
-        if (userInfoModel.userInfo.isCreateEscrowAcc == NO) {
-            [HSJDepositoryOpenTipView show];
-        } else if ([userInfoModel.userInfo.riskType isEqualToString:@"立即评测"]) {
-            [self.viewModel riskTypeAssementFrom:self];
-        } else {
-            HSJBuyViewController *vc = [HSJBuyViewController new];
-            vc.planId = planId;
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-    }
-}
-
 - (void)updateHeaderView {
     if (self.viewModel.homeModel.articleList.count) {
         self.headerView.height = kScrAdaptationH750(400);

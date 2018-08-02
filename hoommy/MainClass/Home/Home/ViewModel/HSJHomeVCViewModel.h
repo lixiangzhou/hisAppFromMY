@@ -15,10 +15,6 @@
 
 @property (nonatomic, strong) HSJHomeModel *homeModel;
 
-@property (nonatomic, strong) HXBUserInfoModel *userInfoModel;
-
 - (void)getHomeDataWithResultBlock:(NetWorkResponseBlock)resultBlock showHug:(BOOL)isShowHug;
 
-//风险测评
-- (void)riskTypeAssementFrom:(UIViewController *)controller;
 @end

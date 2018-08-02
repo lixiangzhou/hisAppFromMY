@@ -11,11 +11,14 @@
 
 @interface HSJBaseViewModel (HSJNetWorkApi)
 
+@property (nonatomic, strong) HXBUserInfoModel *userInfoModel;
+
 - (void)checkVersionUpdate:(NetWorkResponseBlock)resultBlock;
 
 - (void)downLoadUserInfo:(BOOL)isShowHud resultBlock:(void(^)(HXBUserInfoModel *userInfoModel, NSError* erro))resultBlock;
 
 - (void)verifyCodeRequestWithResultBlock:(void(^)(NYBaseRequest* request)) requestBlock resultBlock:(void(^)(id responseObject, NSError *error))resultBlock;
+
 //产品详情
 - (void)getDataWithId:(NSString *)planId showHug:(BOOL)isShow resultBlock:(NetWorkResponseBlock)resultBlock;
 
@@ -26,4 +29,12 @@
  @param resultBlock 结果回调
  */
 - (void)userLogOut:(BOOL)isShowHud resultBlock:(NetWorkResponseBlock)resultBlock;
+
+/// 先判断登录，没有登录就去登录
+/// 在判断是否开户
+/// 最后判断是否有风险评测
+/// 都通过之后就执行 finishBlock
+- (void)checkDepositoryAndRiskFromController:(UIViewController *)controller finishBlock:(void (^)(void))finishBlock;
+/// 做风险评测
+- (void)riskTypeAssementFrom:(UIViewController *)controller;
 @end

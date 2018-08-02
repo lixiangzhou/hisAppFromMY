@@ -69,34 +69,4 @@
     }
 }
 
-//风险测评
-- (void)riskTypeAssementFrom:(UIViewController *)controller {
-    HXBGeneralAlertVC *alertVC = [[HXBGeneralAlertVC alloc] initWithMessageTitle:@"" andSubTitle:@"您尚未进行风险评测，请评测后再进行出借" andLeftBtnName:@"我是保守型" andRightBtnName:@"立即评测" isHideCancelBtn:YES isClickedBackgroundDiss:YES];
-    kWeakSelf
-    [alertVC setLeftBtnBlock:^{
-        [weakSelf setRiskTypeDefault];
-    }];
-    [alertVC setRightBtnBlock:^{
-        HSJRiskAssessmentViewController *riskAssessmentVC = [[HSJRiskAssessmentViewController alloc] init];
-        [controller.navigationController pushViewController:riskAssessmentVC animated:YES];
-        __weak typeof(riskAssessmentVC) weakRiskAssessmentVC = riskAssessmentVC;
-        riskAssessmentVC.popBlock = ^(NSString *type) {
-            [weakRiskAssessmentVC.navigationController popToViewController:controller animated:YES];
-        };
-    }];
-    
-    [controller presentViewController:alertVC animated:NO completion:nil];
-}
-
-- (void)setRiskTypeDefault
-{
-    self.userInfoModel = nil;
-    [self loadData:^(NYBaseRequest *request) {
-        request.requestUrl = kHXBUser_riskModifyScoreURL;
-        request.requestMethod = NYRequestMethodPost;
-        request.requestArgument = @{@"score": @"0"};
-    } responseResult:^(id responseData, NSError *erro) {
-        
-    }];
-}
 @end
