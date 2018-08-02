@@ -77,8 +77,7 @@
     NSLog(@"转入存钱罐");
     [HXBUmengManagar HXB_clickEventWithEnevtId: kHSJUmeng_MyIntoPlanClick];
     if ([self.userInfoModel.userInfo.riskType isEqualToString:@"立即评测"]) {
-        kWeakSelf
-        [[HSJPlanDetailViewModel new] riskTypeAssementFrom:weakSelf];
+        [self.viewModel riskTypeAssementFrom:self];
     } else {
         HSJBuyViewController *vc = [HSJBuyViewController new];
         vc.planId = [KeyChain firstPlanIdInPlanList];

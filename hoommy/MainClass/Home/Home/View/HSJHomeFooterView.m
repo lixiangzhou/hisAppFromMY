@@ -10,6 +10,8 @@
 #import "HSJUserAmountView.h"
 #import "HXBUpAndDownLayoutView.h"
 #import "HSJBottomPromptView.h"
+#import "HSJGlobalInfoManager.h"
+
 @interface HSJHomeFooterView()
 
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -104,12 +106,15 @@
     }];
 }
 
-- (void)setInfoModel:(HSJGlobalInfoModel *)infoModel {
-    _infoModel = infoModel;
-    [self.platformAmountView setAmountText:infoModel.financePlanSumAmountText andWithAmountTextUnit:infoModel.financePlanSumAmountTextUnit];
-    [self.userAmountView setAmountText:infoModel.financePlanEarnInterestText andWithAmountTextUnit:infoModel.financePlanEarnInterestTextUnit];
+#pragma mark - Network
+- (void)updateData {
+    [[HSJGlobalInfoManager shared] getData:^(HSJGlobalInfoModel *infoModel) {
+        [self.platformAmountView setAmountText:infoModel.financePlanSumAmountText andWithAmountTextUnit:infoModel.financePlanSumAmountTextUnit];
+        [self.userAmountView setAmountText:infoModel.financePlanEarnInterestText andWithAmountTextUnit:infoModel.financePlanEarnInterestTextUnit];
+    }];
 }
 
+#pragma mark - Lazy
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
