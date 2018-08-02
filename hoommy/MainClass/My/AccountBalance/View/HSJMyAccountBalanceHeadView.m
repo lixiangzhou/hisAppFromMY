@@ -34,9 +34,9 @@
 - (void)setUserInfoModel:(HXBUserInfoModel *)userInfoModel {
     _userInfoModel = userInfoModel;
     
-    NSString *yuanStr = @"元";
+    NSString *yuanStr = @" 元";
     NSString *amount = [NSString hsj_simpleMoneyValue:[self.userInfoModel.userAssets.availablePoint doubleValue]];
-    self.balanceLab.attributedText = [NSAttributedString setupAttributeStringWithBeforeString:amount  WithBeforeRange:NSMakeRange(0, amount.length) andAttributeColor:RGB(96, 103, 122) andAttributeFont:kHXBFont_PINGFANGSC_REGULAR_750(76) afterString:yuanStr WithAfterRange:NSMakeRange(0, yuanStr.length) andAttributeColor:RGB(96, 103, 122) andAttributeFont:kHXBFont_PINGFANGSC_REGULAR_750(36)];
+    self.balanceLab.attributedText = [NSAttributedString setupAttributeStringWithBeforeString:amount  WithBeforeRange:NSMakeRange(0, amount.length) andAttributeColor:RGB(96, 103, 122) andAttributeFont:kHXBFont_DINAlternate_BOLD_750(76) afterString:yuanStr WithAfterRange:NSMakeRange(0, yuanStr.length) andAttributeColor:RGB(96, 103, 122) andAttributeFont:kHXBFont_Bold_PINGFANGSC_REGULAR(18)];
     
     self.nameLab.text = [NSString stringWithFormat:@"真实姓名：%@",[self.userInfoModel.userInfo.realName replaceStringWithStartLocation:0 lenght:self.userInfoModel.userInfo.realName.length - 1]];
     
@@ -56,21 +56,21 @@
         [_bgImgView addSubview:self.userIdLab];
         
         [self.iconImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self->_bgImgView).offset(kScrAdaptationW750(60));
-            make.top.equalTo(self->_bgImgView).offset(kScrAdaptationH750(50));
+            make.left.equalTo(self->_bgImgView).offset(kScrAdaptationW750(80));
+            make.top.equalTo(self->_bgImgView).offset(kScrAdaptationH750(80));
             make.width.equalTo(@kScrAdaptationW750(50));
             make.height.equalTo(@kScrAdaptationH750(39));
         }];
         
         [self.hfLab mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(weakSelf.iconImgView.mas_right).offset(kScrAdaptationW750(20));
-            make.top.equalTo(self->_bgImgView).offset(kScrAdaptationH750(56));
+            make.top.equalTo(self->_bgImgView).offset(kScrAdaptationH750(86));
             make.right.equalTo(self->_bgImgView).offset(kScrAdaptationW750(-15));
             make.height.equalTo(@kScrAdaptationH750(28));
         }];
         
         [self.balanceLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self->_bgImgView).offset(kScrAdaptationW750(68));
+            make.left.equalTo(self->_bgImgView).offset(kScrAdaptationW750(88));
             make.right.equalTo(self->_bgImgView).offset(kScrAdaptationW750(-68));
             make.top.equalTo(weakSelf.hfLab.mas_bottom).offset(kScrAdaptationH750(50));
             make.height.equalTo(@kScrAdaptationH750(88));
@@ -83,7 +83,7 @@
         }];
         
         [self.userIdLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(weakSelf.nameLab.mas_right).offset(kScrAdaptationW750(60));
+            make.left.equalTo(weakSelf.nameLab.mas_right).offset(kScrAdaptationW750(30));
             make.top.height.equalTo(weakSelf.nameLab);
             make.right.equalTo(self->_bgImgView).offset(kScrAdaptationW750(-70));
         }];
@@ -100,7 +100,7 @@
 - (UILabel *)hfLab {
     if (!_hfLab) {
         _hfLab = [UILabel new];
-        _hfLab.font = kHXBFont_PINGFANGSC_REGULAR_750(28);
+        _hfLab.font = kHXBFont_Bold_PINGFANGSC_REGULAR(14);
         _hfLab.textColor = RGB(109, 114, 141);
         _hfLab.text = @"恒丰银行存管账户";
     }
@@ -117,7 +117,7 @@
     if (!_nameLab) {
         _nameLab = [UILabel new];
         _nameLab.font = kHXBFont_PINGFANGSC_REGULAR_750(24);
-        _nameLab.textColor = RGB(96, 103, 122);
+        _nameLab.textColor = RGBA(96, 103, 122,0.6);
     }
     return _nameLab;
 }
@@ -125,7 +125,7 @@
     if (!_userIdLab) {
         _userIdLab = [UILabel new];
         _userIdLab.font = kHXBFont_PINGFANGSC_REGULAR_750(24);
-        _userIdLab.textColor = RGB(96, 103, 122);
+        _userIdLab.textColor = RGBA(96, 103, 122,0.6);
     }
     return _userIdLab;
 }
