@@ -20,6 +20,12 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        
+        int R = (arc4random() % 256);
+        int G = (arc4random() % 256);
+        int B = (arc4random() % 256);
+        self.contentView.backgroundColor = [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:1];
+        
         self.accessoryType = UITableViewCellAccessoryNone;
         [self.contentView addSubview:self.leftImageView];
         [self setupSubViewFrame];

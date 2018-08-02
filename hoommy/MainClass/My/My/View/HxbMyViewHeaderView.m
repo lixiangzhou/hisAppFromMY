@@ -108,10 +108,10 @@
         make.right.equalTo(weakSelf.accountOpeningBackgroundImage).offset(kScrAdaptationH(4));
     }];
     [self.assetsTotalTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(weakSelf.accountOpeningBackgroundImage).offset(kScrAdaptationW750(60));
-        make.top.equalTo(weakSelf.accountOpeningBackgroundImage).offset(kScrAdaptationH750(72));
+        make.left.equalTo(weakSelf.accountOpeningBackgroundImage).offset(kScrAdaptationW750(90));
+        make.top.equalTo(weakSelf.accountOpeningBackgroundImage).offset(kScrAdaptationH750(87));
         make.height.equalTo(@kScrAdaptationH(17));
-        make.width.equalTo(@kScrAdaptationW750(150));
+        make.width.equalTo(@kScrAdaptationW750(160));
     }];
     [self.assetsTotalLabel mas_makeConstraints:^(MASConstraintMaker *make) { //zong
         make.left.equalTo(weakSelf.assetsTotalTitleLabel);
@@ -154,16 +154,6 @@
 - (void)clickAllFinanceButton: (UITapGestureRecognizer *)tap {
     if (self.clickAllFinanceButtonBlock) {
         self.clickAllFinanceButtonBlock((UILabel *)tap.view);
-        
-//        if (!self.userInfoModel.userInfo.isCreateEscrowAcc) { // 未开户
-////            HSJDepositoryOpenController *openDepositAccountVC = [[HSJDepositoryOpenController alloc] init];
-////            openDepositAccountVC.title = @"开通存管账户";
-////            openDepositAccountVC.type = HXBRechargeAndWithdrawalsLogicalJudgment_Other;
-////             [[HXBRootVCManager manager].topVC.navigationController pushViewController:openDepositAccountVC animated:YES];
-//
-//        } else {
-//            self.clickAllFinanceButtonBlock((UILabel *)tap.view);
-//        }
     }
 }
 
@@ -195,39 +185,6 @@
         self.assetsTotalLabel.text = kSecuryText;
     }
 }
-/**
- 设置数据
-
- @param accountInfoViewModel 数据模型
- */
-//- (void)setAccountInfoViewModel:(HXBMyRequestAccountModel *)accountInfoViewModel{
-//    _accountInfoViewModel = accountInfoViewModel;
-//
-////    self.accountOpeningBackgroundImage.hidden = NO;
-//    if (!self.userInfoViewModel.userInfoModel.userInfo.isCreateEscrowAcc) {
-//        self.noAccountOpeningBackgroundImage.hidden = NO;
-//    } else {
-//        self.noAccountOpeningBackgroundImage.hidden = YES;
-//    }
-//
-//    self.phoneLabel.text = [KeyChain.mobile hxb_hiddenPhonNumberWithMid];
-//    NSString *accumulatedProfitStr = accountInfoViewModel.earnTotal? [NSString hsj_simpleMoneyValue:accountInfoViewModel.earnTotal]: @"0.00";
-//    NSString *balance = accountInfoViewModel.availablePoint ? [NSString hsj_simpleMoneyValue:accountInfoViewModel.availablePoint] : @"0.00";
-//    NSString *yesterdayInterest = [NSString hsj_simpleMoneyValue:accountInfoViewModel.yesterdayInterest];
-//    if ([KeyChain.ciphertext isEqualToString:@"0"]) {
-//        self.securyButton.selected = NO;
-//        self.yesterdayInterestLabel.text = yesterdayInterest;
-//        self.accumulatedProfitLabel.text = accumulatedProfitStr;
-//        self.balanceLabel.text = balance;
-//        self.assetsTotalLabel.text = [NSString hsj_simpleMoneyValue:accountInfoViewModel.assetsTotal];
-//    } else {
-//        self.securyButton.selected = YES;
-//        self.accumulatedProfitLabel.text = kSecuryText;
-//        self.yesterdayInterestLabel.text = kSecuryText;
-//        self.balanceLabel.text = kSecuryText;
-//        self.assetsTotalLabel.text = kSecuryText;
-//    }
-//}
 
 - (void)leftHeaderButtonClick:(UIButton *)sender{
     
@@ -365,7 +322,7 @@
         _yesterdayInterestTitleLabel.textAlignment = NSTextAlignmentLeft;
         _yesterdayInterestTitleLabel.font = kHXBFont_PINGFANGSC_REGULAR(12);
         _yesterdayInterestTitleLabel.text = @"昨日收益(元)";
-        _yesterdayInterestTitleLabel.textColor = COR12;
+        _yesterdayInterestTitleLabel.textColor = RGB(127, 133, 161);
     }
     return _yesterdayInterestTitleLabel;
 }
@@ -396,7 +353,7 @@
         _accumulatedProfitTitleLabel.text = @"累计收益(元)";
         _accumulatedProfitTitleLabel.textAlignment = NSTextAlignmentLeft;
         _accumulatedProfitTitleLabel.font = kHXBFont_PINGFANGSC_REGULAR(13);
-        _accumulatedProfitTitleLabel.textColor = COR12;
+        _accumulatedProfitTitleLabel.textColor = RGB(127, 133, 161);
     }
     return _accumulatedProfitTitleLabel;
 }
@@ -416,7 +373,7 @@
         _assetsTotalTitleLabel.text = @"资产总额(元)";
         _assetsTotalTitleLabel.textAlignment = NSTextAlignmentLeft;
         _assetsTotalTitleLabel.font = kHXBFont_PINGFANGSC_REGULAR(13);
-        _assetsTotalTitleLabel.textColor = COR12;
+        _assetsTotalTitleLabel.textColor = RGB(127, 133, 161);
     }
     return _assetsTotalTitleLabel;
 }
@@ -425,7 +382,7 @@
         _assetsTotalLabel = [[UILabel alloc]initWithFrame:CGRectZero];
         _assetsTotalLabel.text = @"0.00";
         _assetsTotalLabel.textAlignment = NSTextAlignmentLeft;
-        _assetsTotalLabel.font = kHXBFont_PINGFANGSC_REGULAR(35);
+        _assetsTotalLabel.font = kHXBFont_IMPACT_REGULAR_750(70);
         _assetsTotalLabel.textColor = kHXBColor_333333_100;
     }
     return _assetsTotalLabel;

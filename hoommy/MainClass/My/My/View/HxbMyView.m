@@ -221,13 +221,13 @@ MyViewHeaderDelegate
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             cell.textLabel.text = @"恒丰银行账户余额";
-            NSString *str = [NSString hsj_simpleMoneyValue:[self.userInfoModel.userAssets.availablePoint doubleValue]];
+            NSString *str = [NSString hsj_moneyValueSuffix:[self.userInfoModel.userAssets.availablePoint doubleValue]];
             cell.desc = [str isEqualToString:@"0元"]?@"0.00元":str;
             cell.isShowLine = YES;
             cell.imageName = @"me_hongli_asset";
         } else {
             cell.textLabel.text = @"存钱罐";
-            NSString *str = [NSString hsj_simpleMoneyValue:self.userInfoModel.userAssets.stepUpAssets];
+            NSString *str = [NSString hsj_moneyValueSuffix:self.userInfoModel.userAssets.stepUpAssets];
             cell.desc = [str isEqualToString:@"0元"]?@"0.00元":str;
             cell.isShowLine = NO;
             cell.imageName = @"me_hongli";

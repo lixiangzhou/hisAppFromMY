@@ -80,7 +80,7 @@
     if (!_descLab) {
         _descLab = [[UILabel alloc]initWithFrame:CGRectMake(kScrAdaptationW750(750-66-300), kScrAdaptationH750(38), kScrAdaptationW750(300), kScrAdaptationH750(24))];
         _descLab.font = kHXBFont_PINGFANGSC_REGULAR_750(24);
-        _descLab.textColor = RGBA(153, 153, 153, 1);
+        _descLab.textColor = kHXBColor_333333_100;
         _descLab.textAlignment = NSTextAlignmentRight;
     }
     return _descLab;
