@@ -7,9 +7,6 @@
 //
 
 #import "HxbMyViewHeaderView.h"
-#import "SVGKit/SVGKImage.h"
-//#import "HXBMyRequestAccountModel.h"
-//#import "HXBOpenDepositAccountViewController.h"
 #import "HXBRootVCManager.h"
 @interface HxbMyViewHeaderView ()
 

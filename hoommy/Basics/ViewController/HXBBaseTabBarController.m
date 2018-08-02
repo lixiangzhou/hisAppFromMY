@@ -8,7 +8,6 @@
 
 #import "HXBBaseTabBarController.h"
 #import "HXBBaseNavigationController.h"
-#import "SVGKit/SVGKImage.h"
 #import "HSJMyViewController.h"
 #import "HSJSignInViewController.h"
 #import "HSJHomeViewController.h"
@@ -111,8 +110,6 @@
         [NAV.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : self.selectColor} forState:UIControlStateSelected];
         
         // 设置image 及渲染模式
-//        SVGKImage *svgImage = [SVGKImage imageNamed:imageNameArray[i]];
-//        UIImage *image = [svgImage.UIImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         NAV.tabBarItem.image = [UIImage imageNamed:imageNameArray[i]];
         NAV.tabBarItem.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
         NAV.tabBarItem.selectedImage = [[UIImage imageNamed:selectImageCommonNameArray[i]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];//selectImage;
