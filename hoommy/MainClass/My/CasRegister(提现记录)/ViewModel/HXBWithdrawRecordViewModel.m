@@ -71,7 +71,7 @@
     self.formatWithdrawRecordDataKeyList = [NSMutableArray arrayWithCapacity:self.withdrawRecordListModel.dataList.count];
     for (int i=0; i<self.withdrawRecordListModel.dataList.count; i++) {
         HXBWithdrawRecordModel *model = self.withdrawRecordListModel.dataList[i];
-        [self.formatWithdrawRecordDataKeyList addObject:[NSString hxb_formatKeyString:model.applyTime]];
+        [self.formatWithdrawRecordDataKeyList addObject:[NSString hxb_formatKeyString:model.applyTimeStr]];
     }
     self.formatWithdrawRecordDataKeyList = [self.formatWithdrawRecordDataKeyList valueForKeyPath:@"@distinctUnionOfObjects.self"];//去重
     
@@ -83,7 +83,7 @@
         [withdrawRecordListModel_temp enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             
             HXBWithdrawRecordModel *model = withdrawRecordListModel_temp[idx];
-            if ([self.formatWithdrawRecordDataKeyList[i] isEqualToString:[NSString hxb_formatKeyString:model.applyTime]]) {
+            if ([self.formatWithdrawRecordDataKeyList[i] isEqualToString:[NSString hxb_formatKeyString:model.applyTimeStr]]) {
                 [keyValueArray_temp addObject:model];
 //                [withdrawRecordListModel_temp removeObject:model];
             }
