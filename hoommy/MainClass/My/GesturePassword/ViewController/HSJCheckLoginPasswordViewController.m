@@ -9,7 +9,6 @@
 #import "HSJCheckLoginPasswordViewController.h"
 #import "HSJGestureSettingController.h"//手势密码
 #import "HXBCustomTextField.h"
-#import "SVGKit/SVGKImageView.h"
 #import "HSJMyGestureViewModel.h"
 
 @interface HSJCheckLoginPasswordViewController ()<UITextFieldDelegate>
