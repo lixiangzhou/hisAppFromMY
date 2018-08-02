@@ -400,8 +400,10 @@
         [helpBtn setImage:[UIImage imageNamed:@"my_help"] forState:UIControlStateNormal];
         [helpBtn setTitle:@"红小宝客服" forState:UIControlStateNormal];
         [helpBtn addTarget:self action:@selector(didClickHelp:) forControlEvents:UIControlEventTouchUpInside];
-        helpBtn.layer.cornerRadius = 5;
+        helpBtn.layer.cornerRadius = kScrAdaptationH750(35);
         helpBtn.layer.masksToBounds = YES;
+        helpBtn.layer.borderWidth = 1.0f;
+        helpBtn.layer.borderColor = kHXBColor_7F85A1_60.CGColor;
         [helpBtn setImageEdgeInsets:UIEdgeInsetsMake(0.0, -10, 0.0, 0.0)];
         [helpBtn setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 10, 0.0, 0)];
         [helpBtn setTitleColor:RGB(127, 133, 161) forState:UIControlStateNormal];
@@ -656,7 +658,7 @@
     if (!_bankLogoImageView) {
         _bankLogoImageView = [[UIImageView alloc]init];
         _bankLogoImageView.contentMode = UIViewContentModeScaleAspectFit;
-        _bankLogoImageView.svgImageString = @"默认";
+//        _bankLogoImageView.svgImageString = @"默认";
     }
     return _bankLogoImageView;
 }
