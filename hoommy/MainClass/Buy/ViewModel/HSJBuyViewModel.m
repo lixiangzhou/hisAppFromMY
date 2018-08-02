@@ -303,7 +303,6 @@
         cellModel.isDisable = !self.isAbleBankCellItem;
         //描述信息
         cellModel.iconName = self.userInfoModel.userBank.bankCode;
-        cellModel.isSvnImage = YES;
         NSString *tempStr = [self.userInfoModel.userBank.cardId substringFromIndex:self.userInfoModel.userBank.cardId.length-4];
         NSString *str1 = [NSString stringWithFormat:@"%@", self.userInfoModel.userBank.bankType];
         NSString *str2 = [NSString stringWithFormat:@" (**%@)\n%@", tempStr, self.userInfoModel.userBank.quota];
