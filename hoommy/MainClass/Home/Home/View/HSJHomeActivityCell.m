@@ -13,10 +13,11 @@
 NSString *const HSJHomeActivityCellIdentifier = @"HSJHomeActivityCellIdentifier";
 
 @interface HSJHomeActivityCell()
-@property (nonatomic, strong) NSIndexPath *indexPath;
 @property (nonatomic, strong) HSJHomePlanModel *planModel;
+@property (nonatomic, strong) NSIndexPath *indexPath;
 
 @property (nonatomic, strong) UIView *segmentLineView;
+
 @property (nonatomic, strong) UIImageView *h5ImageView;
 
 @end
@@ -42,7 +43,6 @@ NSString *const HSJHomeActivityCellIdentifier = @"HSJHomeActivityCellIdentifier"
         make.left.right.top.equalTo(self.contentView);
         make.bottom.equalTo(self.segmentLineView.mas_top);
     }];
-    self.h5ImageView.contentMode = UIViewContentModeScaleAspectFit;
 }
 
 - (void)bindData:(HSJHomePlanModel*)planModel cellIndexPath:(NSIndexPath*)indexPath {
@@ -52,16 +52,24 @@ NSString *const HSJHomeActivityCellIdentifier = @"HSJHomeActivityCellIdentifier"
 
 - (void)setPlanModel:(HSJHomePlanModel *)planModel {
     _planModel = planModel;
+    
     kWeakSelf
     [self.h5ImageView sd_setImageWithURL:[NSURL URLWithString:planModel.image] placeholderImage:[UIImage imageNamed:@"HomeActivity"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-        if(weakSelf.updateCellHeight) {
-            if (image) {
-                CGFloat cellHeight = kScreenWidth / image.size.width * image.size.height + kScrAdaptationH750(20);
-                weakSelf.updateCellHeight(cellHeight, weakSelf.indexPath.row);
+        CGFloat cellHeight = 157;
+        if(image) {
+            cellHeight = kScreenWidth / image.size.width * image.size.height + kScrAdaptationH750(20);
+        }
+        else {
+            if ([weakSelf.planModel.viewItemType  isEqualToString: @"signuph5"])  {
+                cellHeight = 157;
             }
-            else {
-                weakSelf.updateCellHeight(kScrAdaptationH750(200), weakSelf.indexPath.row);
+            else if ([weakSelf.planModel.viewItemType  isEqualToString: @"h5"])  {
+                cellHeight = 200;
             }
+        }
+            
+        if (weakSelf.updateCellHeight) {
+            weakSelf.updateCellHeight(cellHeight, weakSelf.indexPath.row);
         }
     }];
 }
@@ -77,7 +85,7 @@ NSString *const HSJHomeActivityCellIdentifier = @"HSJHomeActivityCellIdentifier"
 - (UIImageView *)h5ImageView {
     if (!_h5ImageView) {
         _h5ImageView = [[UIImageView alloc] init];
-        _h5ImageView.contentMode = UIViewContentModeScaleAspectFit;
+        _h5ImageView.contentMode = UIViewContentModeScaleToFill;
     }
     return _h5ImageView;
 }

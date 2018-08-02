@@ -17,10 +17,8 @@
 #import "HSJRiskAssessmentViewController.h"
 
 @interface HSJHomeVCViewModel()
-
-@property (nonatomic, strong) NSMutableArray *cellHeightArray;
-
 @end
+
 @implementation HSJHomeVCViewModel
 
 - (instancetype)init
@@ -63,38 +61,6 @@
     }];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    HSJHomePlanModel * cellmodel = self.homeModel.dataList[indexPath.row];
-    if ([cellmodel.viewItemType  isEqual: @"product"]) {
-        HSJHomePlanTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:HSJHomePlanCellIdentifier];
-        cell.planModel = cellmodel;
-        return cell;
-    } else if ([cellmodel.viewItemType  isEqual: @"signuph5"] && !KeyChain.isLogin) {
-        return [self buildHomeActivityCellData:tableView cellDataModel:cellmodel cellIndexPath:indexPath];
-    } else if ([cellmodel.viewItemType  isEqual: @"h5"]) {
-        return [self buildHomeActivityCellData:tableView cellDataModel:cellmodel cellIndexPath:indexPath];
-    }
-    return nil;
-}
-
-- (HSJHomeActivityCell*)buildHomeActivityCellData:(UITableView *)tableView cellDataModel:(HSJHomePlanModel*)cellmodel cellIndexPath:(NSIndexPath*)indexPath {
-    
-    HSJHomeActivityCell *cell = [tableView dequeueReusableCellWithIdentifier:HSJHomeActivityCellIdentifier];
-    [cell bindData:cellmodel cellIndexPath:indexPath];
-    kWeakSelf
-    cell.updateCellHeight = ^(CGFloat height, NSInteger index) {
-        CGFloat cellH = ((NSNumber*)(weakSelf.cellHeightArray[index])).floatValue;
-        if(cellH != height) {
-            weakSelf.cellHeightArray[index] = @(height);
-            if(weakSelf.updateCellHeight) {
-                weakSelf.updateCellHeight();
-            }
-        }
-    };
-    return cell;
-}
-
 - (void)setHomeModel:(HSJHomeModel *)homeModel {
     _homeModel = homeModel;
     NSMutableArray<HSJHomePlanModel *> *cellDataList = [NSMutableArray arrayWithArray:homeModel.dataList];
@@ -113,8 +79,7 @@
     for (int i = 0; i < homeModel.dataList.count; i++) {
         HSJHomePlanModel *planModel = homeModel.dataList[i];
         if ([planModel.viewItemType  isEqual: @"product"]) {
-            self.cellHeightArray[i] = KeyChain.isLogin ? @kScrAdaptationH750(676) : @kScrAdaptationH750(598);
-
+            planModel.cellHeight = KeyChain.isLogin ? kScrAdaptationH750(676) : kScrAdaptationH750(598);
         } else if ([planModel.viewItemType  isEqual: @"signuph5"])  {
             self.cellHeightArray[i] = @kScrAdaptationH750(157);
             UIImage *image = [[SDImageCache sharedImageCache] imageFromCacheForKey:planModel.image];
@@ -139,41 +104,4 @@
     }
 }
 
-- (NSMutableArray *)cellHeightArray {
-    if (!_cellHeightArray) {
-        _cellHeightArray = [NSMutableArray array];
-    }
-    return _cellHeightArray;
-}
-
-//风险测评
-- (void)riskTypeAssementFrom:(UIViewController *)controller {
-    HXBGeneralAlertVC *alertVC = [[HXBGeneralAlertVC alloc] initWithMessageTitle:@"" andSubTitle:@"您尚未进行风险评测，请评测后再进行出借" andLeftBtnName:@"我是保守型" andRightBtnName:@"立即评测" isHideCancelBtn:YES isClickedBackgroundDiss:YES];
-    kWeakSelf
-    [alertVC setLeftBtnBlock:^{
-        [weakSelf setRiskTypeDefault];
-    }];
-    [alertVC setRightBtnBlock:^{
-        HSJRiskAssessmentViewController *riskAssessmentVC = [[HSJRiskAssessmentViewController alloc] init];
-        [controller.navigationController pushViewController:riskAssessmentVC animated:YES];
-        __weak typeof(riskAssessmentVC) weakRiskAssessmentVC = riskAssessmentVC;
-        riskAssessmentVC.popBlock = ^(NSString *type) {
-            [weakRiskAssessmentVC.navigationController popToViewController:controller animated:YES];
-        };
-    }];
-    
-    [controller presentViewController:alertVC animated:NO completion:nil];
-}
-
-- (void)setRiskTypeDefault
-{
-    self.userInfoModel = nil;
-    [self loadData:^(NYBaseRequest *request) {
-        request.requestUrl = kHXBUser_riskModifyScoreURL;
-        request.requestMethod = NYRequestMethodPost;
-        request.requestArgument = @{@"score": @"0"};
-    } responseResult:^(id responseData, NSError *erro) {
-        
-    }];
-}
 @end

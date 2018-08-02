@@ -104,7 +104,6 @@
 }
 
 - (void)adjustPosition{
-    kWeakSelf
     if (self.imgView.image) {
         CGSize imageSize = self.imgView.image.size;
         CGSize imgViewSize = self.imgView.size;
@@ -188,7 +187,6 @@
         _contentView = [[UIView alloc] initWithFrame:self.bounds];
         _contentView.backgroundColor = [UIColor clearColor];
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapBGLayer:)];
-        tap.delegate = self;
         [_contentView addGestureRecognizer:tap];
         [_contentView addSubview:self.imgView];
         [_contentView addSubview:self.closeBtn];
@@ -214,7 +212,7 @@
     if (!_closeBtn) {
         _closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _closeBtn.frame = CGRectMake(kScrAdaptationW(173), kScrAdaptationH(542), kScrAdaptationW(30), kScrAdaptationH(31));
-        [_closeBtn setBackgroundImage:[UIImage imageNamed:@"homePopViewClose"] forState:UIControlStateNormal];
+        [_closeBtn setBackgroundImage:[UIImage imageNamed:@"depository_tip_close"] forState:UIControlStateNormal];
         [_closeBtn addTarget: self action:@selector(clickCloseBtn:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _closeBtn;

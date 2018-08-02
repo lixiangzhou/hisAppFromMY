@@ -45,17 +45,18 @@
 
 @implementation HSJHomeViewController
 
+#pragma mark - LifeCycle
 - (void)viewDidLoad {
     self.isFullScreenShow = YES;
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
     [self setUI];
 }
 
 - (void)reLoadWhenViewAppear {
     BOOL isShowHug = self.viewModel.homeModel? NO : YES;
     [self getHomeData:isShowHug];
-    [self loadUserInfo:NO];
+    [self.footerView updateData];
     
     if ([HXBAdvertiseManager shared].couldPopAtHomeAfterSlashOrGesturePwd) {
         [[HXBVersionUpdateManager sharedInstance] show];
@@ -66,6 +67,7 @@
 - (void)setUI {
     [self.safeAreaView addSubview:self.navView];
     [self.safeAreaView addSubview:self.mainTabelView];
+    
     [self.mainTabelView registerClass:[HSJHomePlanTableViewCell class] forCellReuseIdentifier:HSJHomePlanCellIdentifier];
     [self.mainTabelView registerClass:[HSJHomeActivityCell class] forCellReuseIdentifier:HSJHomeActivityCellIdentifier];
     [self.mainTabelView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -75,6 +77,7 @@
     [self setUpScrollFreshBlock:self.mainTabelView];
 }
 
+#pragma mark - Network
 - (void)getHomeData:(BOOL)isShowHug  {
     kWeakSelf
     [self.viewModel getHomeDataWithResultBlock:^(id responseData, NSError *erro) {
@@ -85,29 +88,6 @@
         }
         
     } showHug:isShowHug];
-    
-    [self.viewModel getGlobal:^(HSJGlobalInfoModel *infoModel) {
-        weakSelf.footerView.infoModel = infoModel;
-    }];
-}
-
-- (void)loadUserInfo:(BOOL)isShowHug {
-    self.viewModel.userInfoModel = nil;
-    if(KeyChain.isLogin) {
-        kWeakSelf
-        [self.viewModel downLoadUserInfo:isShowHug resultBlock:^(HXBUserInfoModel *userInfoModel, NSError *erro) {
-            if(!erro) {
-                weakSelf.viewModel.userInfoModel = userInfoModel;
-                if(weakSelf.planIdOfWaitJoin) {
-                    [weakSelf joinAction:weakSelf.planIdOfWaitJoin];
-                }
-            }
-            weakSelf.planIdOfWaitJoin = nil;
-        }];
-    }
-    else {
-        IDPLogDebug(@"没有登录, 不能获取用户信息");
-    }
 }
 
 - (void)updateHeadView {
@@ -125,21 +105,6 @@
     }
 }
 
-- (void)joinAction:(NSString*)planId{
-    HXBUserInfoModel *userInfoModel = self.viewModel.userInfoModel;
-    if(userInfoModel) {
-        if (userInfoModel.userInfo.isCreateEscrowAcc == NO) {
-            [HSJDepositoryOpenTipView show];
-        } else if ([userInfoModel.userInfo.riskType isEqualToString:@"立即评测"]) {
-            [self.viewModel riskTypeAssementFrom:self];
-        } else {
-            HSJBuyViewController *vc = [HSJBuyViewController new];
-            vc.planId = planId;
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-    }
-}
-
 #pragma mark - UITableViewDelegate,UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -147,28 +112,50 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    HSJHomePlanTableViewCell *cell = (HSJHomePlanTableViewCell*)[self.viewModel tableView:tableView cellForRowAtIndexPath:indexPath];
-    if([cell isKindOfClass:[HSJHomePlanTableViewCell class]] && !cell.intoButtonAct) {
-        kWeakSelf;
+    HSJHomePlanModel * cellmodel = self.viewModel.homeModel.dataList[indexPath.row];
+    if ([cellmodel.viewItemType  isEqual: @"product"]) {
+        HSJHomePlanTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:HSJHomePlanCellIdentifier];
+        cell.planModel = cellmodel;
+        kWeakSelf
         cell.intoButtonAct = ^(NSString *planId) {
-            if(weakSelf.viewModel.userInfoModel) {
-                [weakSelf joinAction:planId];
-            }
-            else {
-                weakSelf.planIdOfWaitJoin = planId;
-                [weakSelf loadUserInfo:YES];
-            }
+            [weakSelf.viewModel checkDepositoryAndRiskFromController:weakSelf finishBlock:^{
+                HSJBuyViewController *vc = [HSJBuyViewController new];
+                vc.planId = planId;
+                [weakSelf.navigationController pushViewController:vc animated:YES];
+            }];
         };
+        return cell;
+    } else if ([cellmodel.viewItemType  isEqual: @"signuph5"] && !KeyChain.isLogin) {
+        return [self buildHomeActivityCellData:tableView cellDataModel:cellmodel cellIndexPath:indexPath];
+    } else if ([cellmodel.viewItemType  isEqual: @"h5"]) {
+        return [self buildHomeActivityCellData:tableView cellDataModel:cellmodel cellIndexPath:indexPath];
+    } else {
+        return nil;
     }
+}
+
+- (HSJHomeActivityCell*)buildHomeActivityCellData:(UITableView *)tableView cellDataModel:(HSJHomePlanModel*)cellmodel cellIndexPath:(NSIndexPath*)indexPath {
+    
+    HSJHomeActivityCell *cell = [tableView dequeueReusableCellWithIdentifier:HSJHomeActivityCellIdentifier];
+    [cell bindData:cellmodel cellIndexPath:indexPath];
+    kWeakSelf
+    cell.updateCellHeight = ^(CGFloat height, NSInteger index) {
+        CGFloat cellH = ((NSNumber*)(weakSelf.viewModel.cellHeightArray[index])).floatValue;
+        if(cellH != height) {
+            weakSelf.viewModel.cellHeightArray[index] = @(height);
+            [weakSelf reloadPage];
+        }
+    };
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [self.viewModel.cellHeightArray[indexPath.row] floatValue];
+    return self.viewModel.homeModel.dataList[indexPath.row].cellHeight;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     HSJHomePlanModel * cellmodel = self.viewModel.homeModel.dataList[indexPath.row];
+    
     if ([cellmodel.viewItemType  isEqual: @"product"]) {
         if (KeyChain.isLogin) {
             [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_HomeSignInPlanClick];
@@ -178,21 +165,25 @@
         HSJPlanDetailController* vc = [[HSJPlanDetailController alloc] init];
         vc.planId = self.viewModel.homeModel.dataList[indexPath.row].ID;
         [self.navigationController pushViewController:vc animated:YES];
-    } else if ([cellmodel.viewItemType  isEqual: @"signuph5"]) {
-        [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_HomeSignupClick];
-        BannerModel *bannerModel = [[BannerModel alloc] init];
-        bannerModel.type = cellmodel.type;
-        bannerModel.link = cellmodel.link;
-        [HXBExtensionMethodTool pushToViewControllerWithModel:bannerModel andWithFromVC:self];
-    } else if([cellmodel.viewItemType  isEqual: @"h5"]) {
+    } else if ([cellmodel.viewItemType isEqual: @"signuph5"] || [cellmodel.viewItemType isEqual: @"h5"]) {
         BannerModel *bannerModel = [[BannerModel alloc] init];
         bannerModel.type = cellmodel.type;
         bannerModel.link = cellmodel.link;
         [HXBExtensionMethodTool pushToViewControllerWithModel:bannerModel andWithFromVC:self];
     }
-    
 }
 
+#pragma mark - Helper
+- (void)updateHeaderView {
+    if (self.viewModel.homeModel.articleList.count) {
+        self.headerView.height = kScrAdaptationH750(400);
+    }  else if (!self.viewModel.homeModel.articleList.count){
+        self.headerView.height = kScrAdaptationH750(310);
+    }
+    self.mainTabelView.tableHeaderView = self.headerView;
+}
+
+#pragma mark - Lazy
 - (HSJHomeCustomNavbarView *)navView {
     if (!_navView) {
         _navView = [[HSJHomeCustomNavbarView alloc] init];
@@ -208,8 +199,6 @@
     }
     return _navView;
 }
-
-
 
 - (HSJHomeHeaderView *)headerView {
     if (!_headerView) {
@@ -253,8 +242,6 @@
     }
     return _footerView;
 }
-
-
 
 - (UITableView *)mainTabelView {
     if (!_mainTabelView) {
@@ -320,10 +307,6 @@
 - (HSJHomeVCViewModel *)viewModel {
     if (!_viewModel) {
         _viewModel = [[HSJHomeVCViewModel alloc] init];
-        kWeakSelf
-        _viewModel.updateCellHeight = ^() {
-            [weakSelf reloadPage];
-        };
     }
     return _viewModel;
 }

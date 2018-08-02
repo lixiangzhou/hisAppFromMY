@@ -11,7 +11,8 @@
 
 @interface HSJHomeFooterView : UIView
 
-@property (nonatomic, strong) HSJGlobalInfoModel *infoModel;
+- (void)updateData;
+
 ///平台累计成交金额点击事件
 @property (nonatomic, strong) void(^platformAmountClickBlock)(void);
 ///平台为用户累计赚取金额点击事件

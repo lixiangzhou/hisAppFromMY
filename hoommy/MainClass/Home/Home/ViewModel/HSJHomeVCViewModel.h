@@ -29,12 +29,6 @@
 
 @property (nonatomic, strong) void(^updateCellHeight)(void);
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
-
 - (void)getHomeDataWithResultBlock:(NetWorkResponseBlock)resultBlock showHug:(BOOL)isShowHug;
-
 - (void)getGlobal:(void (^)(HSJGlobalInfoModel *))resultBlock;
-
-//风险测评
-- (void)riskTypeAssementFrom:(UIViewController *)controller;
 @end
