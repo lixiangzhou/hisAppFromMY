@@ -136,7 +136,7 @@
     [self.viewModel requestBankDataResultBlock:^(id responseData, NSError *erro) {
         if(!erro) {
             //设置绑卡信息
-            weakSelf.iconView.svgImageString = weakSelf.viewModel.bankCardModel.bankCode;
+            weakSelf.iconView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_white", weakSelf.viewModel.bankCardModel.bankCode]];
             weakSelf.bankName.text = weakSelf.viewModel.bankCardModel.bankType;
             weakSelf.realName.text = [NSString stringWithFormat:@"持卡人：%@",[weakSelf.viewModel.bankCardModel.name replaceStringWithStartLocation:0 lenght:weakSelf.viewModel.bankCardModel.name.length - 1]];
             if (weakSelf.viewModel.bankCardModel.name.length > 4) {
