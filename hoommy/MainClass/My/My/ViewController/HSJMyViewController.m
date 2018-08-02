@@ -36,6 +36,7 @@
 
 @interface HSJMyViewController ()<MyViewDelegate>
 @property (nonatomic, strong) HxbMyView *myView;
+
 @property (nonatomic, strong) HSJMyViewVCViewModel *viewModel;
 @end
 

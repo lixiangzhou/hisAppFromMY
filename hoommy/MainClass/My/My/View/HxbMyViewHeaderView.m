@@ -83,7 +83,7 @@
     }];
     [self.personalCenterButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.headTopView).offset(kScrAdaptationW(15));
-        make.top.equalTo(weakSelf.headTopView).offset(kScrAdaptationH750(59));
+        make.top.equalTo(weakSelf.headTopView).offset(kScrAdaptationH750(70)+HXBTabbarSafeBottomMargin);
         make.width.height.equalTo(@kScrAdaptationW750(68));
     }];
     [self.phoneLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -99,10 +99,10 @@
         make.right.equalTo(weakSelf.headTopView.mas_right).offset(kScrAdaptationW(-15));
     }];
     [self.accountOpeningBackgroundImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.headTopView).offset(kScrAdaptationH750(197));
+        make.top.equalTo(weakSelf.headTopView).offset(kScrAdaptationH750(167));
         make.left.equalTo(weakSelf).offset(kScrAdaptationW750(5));
         make.right.right.equalTo(weakSelf).offset(kScrAdaptationW750(-5));
-        make.height.offset(kScrAdaptationH750(380));
+        make.height.offset(kScrAdaptationH750(440));
     }];
     [self.noAccountOpeningBackgroundImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.accountOpeningBackgroundImage).offset(kScrAdaptationW(-4));
@@ -112,7 +112,7 @@
     }];
     [self.assetsTotalTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.accountOpeningBackgroundImage).offset(kScrAdaptationW750(60));
-        make.top.equalTo(weakSelf.accountOpeningBackgroundImage).offset(kScrAdaptationH750(60));
+        make.top.equalTo(weakSelf.accountOpeningBackgroundImage).offset(kScrAdaptationH750(72));
         make.height.equalTo(@kScrAdaptationH(17));
         make.width.equalTo(@kScrAdaptationW750(150));
     }];
@@ -123,7 +123,7 @@
         make.right.equalTo(weakSelf.accountOpeningBackgroundImage).offset(kScrAdaptationW(-15));
     }];
     [self.securyButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.accountOpeningBackgroundImage).offset(kScrAdaptationH(27));
+        make.top.equalTo(weakSelf.accountOpeningBackgroundImage).offset(kScrAdaptationH(27+15));
         make.width.equalTo(@kScrAdaptationW(20));
         make.right.equalTo(weakSelf.accountOpeningBackgroundImage).offset(kScrAdaptationW750(-50));
         make.height.offset(kScrAdaptationH(12));

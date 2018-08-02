@@ -102,7 +102,7 @@
     }
     else {
         [self.lineImv mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.iconImv.mas_right).offset(kScrAdaptationW(10.5));
+            make.left.equalTo(self.contentView).offset(kScrAdaptationW(49));
         }];
     }
     
@@ -111,6 +111,13 @@
 
 - (void)setCellModel:(HSJBuyCellModel *)cellModel {
     _cellModel = cellModel;
+    
+    if(cellModel.isDisable){
+        self.contentView.alpha = 0.6;
+    }
+    else {
+        self.contentView.alpha = 1;
+    }
     
     if(cellModel.isSvnImage) {
         self.iconImv.svgImageString = cellModel.iconName;

@@ -250,11 +250,11 @@ UITableViewDataSource
         [bgView addSubview:hf_bgImgV];
         
         if (self.userInfoModel.userInfo.isCreateEscrowAcc) {
-            UIImageView *hfProtocolImg = [[UIImageView alloc]initWithFrame:CGRectMake(kScrAdaptationW(15), kScrAdaptationH(11), kScrAdaptationW(11), kScrAdaptationH(13))];
+            UIImageView *hfProtocolImg = [[UIImageView alloc]initWithFrame:CGRectZero];
             hfProtocolImg.image = [UIImage imageNamed:@"home_bot_safety"];
             [hf_bgImgV addSubview:hfProtocolImg];
             
-            UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(kScrAdaptationW(31), kScrAdaptationH(11), kScrAdaptationW(300), kScrAdaptationH(20))];
+            UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(kScrAdaptationW(31), kScrAdaptationH(13), kScrAdaptationW(300), kScrAdaptationH(20))];
             name.textAlignment = NSTextAlignmentLeft;
             name.font = kHXBFont_PINGFANGSC_REGULAR(14);
             name.textColor = COR5;
@@ -266,18 +266,25 @@ UITableViewDataSource
         
             NSString *messageStr = [NSString stringWithFormat:@"真实姓名：%@%@",nameStr,idNo];
             NSRange range = [messageStr rangeOfString:idNo];
-            name.attributedText = [NSMutableAttributedString setupAttributeStringWithString:messageStr WithRange:(NSRange)range andAttributeColor:COR12 andAttributeFont:kHXBFont_PINGFANGSC_REGULAR(14)];
+            name.attributedText = [NSMutableAttributedString setupAttributeStringWithString:messageStr WithRange:(NSRange)range andAttributeColor:RGB(146, 149, 162) andAttributeFont:kHXBFont_PINGFANGSC_REGULAR(14)];
             [hf_bgImgV addSubview:name];
             
             UILabel *bankProtocolLab = [[UILabel alloc]initWithFrame:CGRectMake(kScrAdaptationW(11), kScrAdaptationH(39), kScrAdaptationW(150), kScrAdaptationH(20))];
             bankProtocolLab.textAlignment = NSTextAlignmentLeft;
             bankProtocolLab.font = kHXBFont_PINGFANGSC_REGULAR(14);
-            bankProtocolLab.textColor = COR25;
+            bankProtocolLab.textColor = RGB(72, 140, 255);
             bankProtocolLab.text = @"《恒丰银行存管协议》";
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickHFbankProtocolButton:)];
             [bankProtocolLab addGestureRecognizer:tap];
             bankProtocolLab.userInteractionEnabled = YES;
             [hf_bgImgV addSubview:bankProtocolLab];
+            
+            [hfProtocolImg mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerY.equalTo(name);
+                make.left.offset(kScrAdaptationW(15));
+                make.width.equalTo(@kScrAdaptationW(11));
+                make.height.equalTo(@kScrAdaptationH(13));
+            }];
         } else {
             UIImageView *hfProtocolImg = [[UIImageView alloc]initWithFrame:CGRectMake(kScrAdaptationW(30), kScrAdaptationH(26), kScrAdaptationW(24), kScrAdaptationH(18))];
             hfProtocolImg.image = [UIImage imageNamed:@"hflogo"];
@@ -364,16 +371,16 @@ UITableViewDataSource
 //    HXBAccountSecureCell *cell = [tableView dequeueReusableCellWithIdentifier:HXBAccountSecureCellID forIndexPath:indexPath];
     if (indexPath.section == 0) {
         cell.model = self.dataSource[indexPath.row];
-        cell.hiddenLine = cell.model.type == HXBAccountSecureTypeGesturePwdModify ?:NO;
+//        cell.hiddenLine = cell.model.type == HXBAccountSecureTypeGesturePwdModify ?:NO;
     } else if (indexPath.section == 1) {
         NSInteger row =  [tableView numberOfRowsInSection:0] + indexPath.row;
         cell.model = self.dataSource[row];
-        cell.hiddenLine = cell.model.type == HXBAccountSecureTypeAboutUs ?:NO;
+//        cell.hiddenLine = cell.model.type == HXBAccountSecureTypeAboutUs ?:NO;
     } else {
         [cell.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
         [cell.contentView addSubview:self.signOutLabel];
         cell.accessoryType = UITableViewCellAccessoryNone;
-        cell.hiddenLine = YES;
+//        cell.hiddenLine = YES;
         
         [self.signOutLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.centerX.height.width.equalTo(cell.contentView);
@@ -665,7 +672,7 @@ UITableViewDataSource
 //        [_tableView registerClass:[HXBAccountSecureCell class] forCellReuseIdentifier:HXBAccountSecureCellID];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.sectionHeaderHeight = 0.1;
         _tableView.sectionFooterHeight = 0.1;
     }

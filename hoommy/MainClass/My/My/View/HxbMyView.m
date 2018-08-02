@@ -202,13 +202,13 @@ MyViewHeaderDelegate
     if (section == 1 || section == 2) {
         supV = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScrAdaptationH750(100))];
         supV.backgroundColor = [UIColor whiteColor];
-        UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(kScrAdaptationW750(30), kScrAdaptationH750(35), kScrAdaptationW750(200), kScrAdaptationH750(48))];
+        UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(kScrAdaptationW750(30), kScrAdaptationH750(26), kScrAdaptationW750(200), kScrAdaptationH750(48))];
         lab.textAlignment = NSTextAlignmentLeft;
         lab.font = kHXBFont_PINGFANGSC_REGULAR_750(34);
         lab.textColor = RGBA(51, 51, 51, 1);
         UIView *lineV = [[UIView alloc]initWithFrame:CGRectMake(0, supV.frame.size.height-kHXBDivisionLineHeight, kScreenWidth, kHXBDivisionLineHeight)];
         lineV.backgroundColor = RGBA(244, 243, 248, 1);
-        [supV addSubview:lineV];
+//        [supV addSubview:lineV];
         [supV addSubview:lab];
         lab.text = section == 1? @"我的信息" : @"热门推荐";
         return supV;
@@ -318,7 +318,7 @@ MyViewHeaderDelegate
         [helpBtn setImage:[UIImage imageNamed:@"my_help"] forState:UIControlStateNormal];
         [helpBtn setTitle:@"红小宝客服" forState:UIControlStateNormal];
         [helpBtn addTarget:self action:@selector(didClickHelp:) forControlEvents:UIControlEventTouchUpInside];
-        helpBtn.layer.cornerRadius = 5;
+        helpBtn.layer.cornerRadius = kScrAdaptationH750(35);
         helpBtn.layer.masksToBounds = YES;
         [helpBtn setImageEdgeInsets:UIEdgeInsetsMake(0.0, -10, 0.0, 0.0)];
         [helpBtn setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 10, 0.0, 0)];
@@ -338,7 +338,7 @@ MyViewHeaderDelegate
         lab.textAlignment = NSTextAlignmentCenter;
         [lab setFont:kHXBFont_PINGFANGSC_REGULAR_750(20)];
         lab.textColor = RGB(127, 133, 161);
-        lab.text = @"客服电话时间：工作日9:00-18:00";
+        lab.text = @"客服电话时间：工作日 9:00-18:00";
         [_bottomView addSubview:lab];
         [lab mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self->_bottomView);
