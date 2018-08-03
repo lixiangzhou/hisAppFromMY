@@ -13,6 +13,8 @@
 NSString *const HSJHomeActivityCellIdentifier = @"HSJHomeActivityCellIdentifier";
 
 @interface HSJHomeActivityCell()
+@property (nonatomic, strong) HSJHomePlanModel *planModel;
+@property (nonatomic, strong) NSIndexPath *indexPath;
 
 @property (nonatomic, strong) UIView *segmentLineView;
 
@@ -43,9 +45,33 @@ NSString *const HSJHomeActivityCellIdentifier = @"HSJHomeActivityCellIdentifier"
     }];
 }
 
+- (void)bindData:(HSJHomePlanModel*)planModel cellIndexPath:(NSIndexPath*)indexPath {
+    self.indexPath = indexPath;
+    self.planModel = planModel;
+}
+
 - (void)setPlanModel:(HSJHomePlanModel *)planModel {
     _planModel = planModel;
-    [self.h5ImageView sd_setImageWithURL:[NSURL URLWithString:planModel.image] placeholderImage:[UIImage imageNamed:@"HomeActivity"]];
+    
+    kWeakSelf
+    [self.h5ImageView sd_setImageWithURL:[NSURL URLWithString:planModel.image] placeholderImage:[UIImage imageNamed:@"HomeActivity"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        CGFloat cellHeight = 157;
+        if(image) {
+            cellHeight = kScreenWidth / image.size.width * image.size.height + kScrAdaptationH750(20);
+        }
+        else {
+            if ([weakSelf.planModel.viewItemType  isEqualToString: @"signuph5"])  {
+                cellHeight = 157;
+            }
+            else if ([weakSelf.planModel.viewItemType  isEqualToString: @"h5"])  {
+                cellHeight = 200;
+            }
+        }
+            
+        if (weakSelf.updateCellHeight) {
+            weakSelf.updateCellHeight(cellHeight, weakSelf.indexPath.row);
+        }
+    }];
 }
 
 - (UIView *)segmentLineView {

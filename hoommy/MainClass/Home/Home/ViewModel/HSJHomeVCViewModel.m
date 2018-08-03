@@ -21,6 +21,15 @@
 
 @implementation HSJHomeVCViewModel
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _recordIsLogin = KeyChain.isLogin;
+    }
+    return self;
+}
+
 - (void)getHomeDataWithResultBlock:(NetWorkResponseBlock)resultBlock showHug:(BOOL)isShowHug{
     kWeakSelf
     [self loadData:^(NYBaseRequest *request) {
@@ -42,6 +51,16 @@
     }];
 }
 
+- (void)getGlobal:(void (^)(HSJGlobalInfoModel *))resultBlock {
+    kWeakSelf
+    [[HSJGlobalInfoManager shared] getData:^(HSJGlobalInfoModel *infoModel) {
+        weakSelf.infoModel = infoModel;
+        if (resultBlock) {
+            resultBlock(infoModel);
+        }
+    }];
+}
+
 - (void)setHomeModel:(HSJHomeModel *)homeModel {
     _homeModel = homeModel;
     NSMutableArray<HSJHomePlanModel *> *cellDataList = [NSMutableArray arrayWithArray:homeModel.dataList];
@@ -56,15 +75,26 @@
          }];
     }
     _homeModel.dataList = cellDataList;
-
     for (int i = 0; i < homeModel.dataList.count; i++) {
         HSJHomePlanModel *planModel = homeModel.dataList[i];
         if ([planModel.viewItemType  isEqual: @"product"]) {
             planModel.cellHeight = KeyChain.isLogin ? kScrAdaptationH750(676) : kScrAdaptationH750(598);
         } else if ([planModel.viewItemType  isEqual: @"signuph5"])  {
-            planModel.cellHeight = kScrAdaptationH750(157);
+            planModel.cellHeight = 157;
+            UIImage *image = [[SDImageCache sharedImageCache] imageFromCacheForKey:planModel.image];
+            if (image) {
+                CGFloat cellHeight = kScreenWidth / image.size.width * image.size.height + kScrAdaptationH750(20);
+                planModel.cellHeight = cellHeight;
+            }
         } else if ([planModel.viewItemType  isEqual: @"h5"]) {
-            planModel.cellHeight = kScrAdaptationH750(200);
+            planModel.cellHeight = 200;
+            UIImage *image = [[SDImageCache sharedImageCache] imageFromCacheForKey:planModel.image];
+            if (image) {
+                CGFloat cellHeight = kScreenWidth / image.size.width * image.size.height + kScrAdaptationH750(20);
+                planModel.cellHeight = cellHeight;
+            }
+        } else {
+            planModel.cellHeight = 0;
         }
     }
 }

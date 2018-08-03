@@ -29,7 +29,7 @@ NSString *const HSJHomePlanCellIdentifier = @"HSJHomePlanCellIdentifier";
 }
 
 - (void)setupUI {
-    
+    self.clipsToBounds = YES;
     [self.contentView addSubview:self.planView];
     [self.planView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.bottom.equalTo(self.contentView);

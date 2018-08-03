@@ -13,8 +13,21 @@
 
 @interface HSJHomeVCViewModel : HSJBaseViewModel
 
+//网络数据
 @property (nonatomic, strong) HSJHomeModel *homeModel;
 
-- (void)getHomeDataWithResultBlock:(NetWorkResponseBlock)resultBlock showHug:(BOOL)isShowHug;
+@property (nonatomic, strong) HSJGlobalInfoModel *infoModel;
 
+@property (nonatomic, strong) HXBUserInfoModel *userInfoModel;
+
+//逻辑数据
+@property (nonatomic, strong) HSJHomeModel *recordHomeModel;
+
+@property (nonatomic, assign) BOOL recordIsLogin;
+
+
+@property (nonatomic, strong) void(^updateCellHeight)(void);
+
+- (void)getHomeDataWithResultBlock:(NetWorkResponseBlock)resultBlock showHug:(BOOL)isShowHug;
+- (void)getGlobal:(void (^)(HSJGlobalInfoModel *))resultBlock;
 @end
