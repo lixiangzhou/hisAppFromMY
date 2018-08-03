@@ -18,6 +18,7 @@
 #import "HXBGeneralAlertVC.h"
 #import "HxbHUDProgress.h"
 #import "HXBHomePopViewManager.h"
+#import "HXBVersionUpdateManager.h"
 
 @interface HXBAlertManager ()
 
@@ -54,80 +55,6 @@
     [VC.navigationController presentViewController:alertVC animated:NO completion:nil];
 }
 
-/**
- 判断购买 判断
- */
-- (void)checkOutRiskAssessmentWithSuperVC:(UIViewController *)vc andWithPushBlock:(void(^)(NSString *hasBindCard, HXBRequestUserInfoViewModel *model))pushBlock
-{
-    kWeakSelf
-//    [KeyChain downLoadUserInfoWithRequestBlock:^(NYBaseRequest *request) {
-//        request.showHud = YES;
-//        request.hudDelegate = weakSelf;
-//     } resultBlock:^(HXBRequestUserInfoViewModel *viewModel, NSError *error) {
-//
-//
-//        if(viewModel) {
-//
-//            if (viewModel.userInfoModel.userInfo.isUnbundling) {
-//                [[weakSelf class] callupWithphoneNumber:kServiceMobile andWithTitle:@"温馨提示" Message:[NSString stringWithFormat:@"您的身份信息不完善，请联系客服 %@", kServiceMobile]];
-//                return;
-//            }
-    
-            //开通存管银行账户
-//            if (!viewModel.userInfoModel.userInfo.isCreateEscrowAcc) {
-//                HXBDepositoryAlertViewController *alertVC = [[HXBDepositoryAlertViewController alloc] init];
-//                alertVC.immediateOpenBlock = ^{
-//                    HXBOpenDepositAccountViewController *openDepositAccountVC = [[HXBOpenDepositAccountViewController alloc] init];
-//                    //                openDepositAccountVC.userModel = viewModel;
-//                    openDepositAccountVC.title = @"开通存管账户";
-//                    openDepositAccountVC.type = HXBRechargeAndWithdrawalsLogicalJudgment_Other;
-//                    [vc.navigationController pushViewController:openDepositAccountVC animated:YES];
-//                };
-//                [vc.navigationController presentViewController:alertVC animated:NO completion:nil];
-//                return;
-//            }
-            ///完善信息
-//            if (![viewModel.userInfoModel.userInfo.isCashPasswordPassed isEqualToString:@"1"])
-//            {
-//                HXBOpenDepositAccountViewController *openDepositAccountVC = [[HXBOpenDepositAccountViewController alloc] init];
-//                openDepositAccountVC.title = @"完善信息";
-//                openDepositAccountVC.type = HXBRechargeAndWithdrawalsLogicalJudgment_Other;
-//                [vc.navigationController pushViewController:openDepositAccountVC animated:YES];
-//                return;
-//            }
-            ///风险评测
-//            if ([viewModel.userInfoModel.userInfo.riskType isEqualToString:@"立即评测"]) {
-//                HXBGeneralAlertVC *alertVC = [[HXBGeneralAlertVC alloc] initWithMessageTitle:@"" andSubTitle:@"您尚未进行风险评测，请评测后再进行出借" andLeftBtnName:@"我是保守型" andRightBtnName:@"立即评测" isHideCancelBtn:YES isClickedBackgroundDiss:YES];
-//                //            alertVC.isCenterShow = YES;
-//                [vc presentViewController:alertVC animated:NO completion:nil];
-//                [alertVC setLeftBtnBlock:^{
-//                    [HXBSetGesturePasswordAgent riskModifyScoreRequestWithScore:^(NYBaseRequest *request) {
-//                        request.requestArgument = @{
-//                                                    @"score" : @"0"
-//                                                    };
-//                    } resultBlock:^(id responseObject, NSError *error) {
-//
-//                    }];
-//
-//                }];
-//                [alertVC setRightBtnBlock:^{
-//                    HXBRiskAssessmentViewController *riskAssessmentVC = [[HXBRiskAssessmentViewController alloc] init];
-//                    [vc.navigationController pushViewController:riskAssessmentVC animated:YES];
-//                    __weak typeof(riskAssessmentVC) weakRiskAssessmentVC = riskAssessmentVC;
-//                    [riskAssessmentVC popWithBlock:^(NSString *type) {
-//                        [weakRiskAssessmentVC.navigationController popToViewController:vc animated:YES];
-//                    }];
-//                }];
-//                return;
-//            }
-            
-            ///条件全部满足
-//            if (pushBlock) {
-//                pushBlock(viewModel.userInfoModel.userInfo.hasBindCard, viewModel);
-//            }
-//        }
-//    }];
-}
 /**
  初始化警告视图
  
@@ -208,15 +135,18 @@
         [alertVC setClickXYRightButtonBlock:^{
             NSURL *url = [NSURL URLWithString:versionUpdateModel.url];
             [[UIApplication sharedApplication] openURL:url];
+            [HXBVersionUpdateManager sharedInstance].isShow = YES;
             [[HXBHomePopViewManager sharedInstance] popHomeViewfromController:[HXBRootVCManager manager].topVC];//展示首页弹窗
         }];
 
         [alertVC setClickXYLeftButtonBlock:^{
             //点击取消处理
+            [HXBVersionUpdateManager sharedInstance].isShow = YES;
             [[HXBHomePopViewManager sharedInstance] popHomeViewfromController:[HXBRootVCManager manager].topVC];//展示首页弹窗
         }];
         [self promptPriorityWithAlertVC:alertVC];
     } else {
+        [HXBVersionUpdateManager sharedInstance].isShow = YES;
         [[HXBHomePopViewManager sharedInstance] popHomeViewfromController:[HXBRootVCManager manager].topVC];//展示首页弹窗
     }
 }

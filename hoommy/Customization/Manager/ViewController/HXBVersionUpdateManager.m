@@ -18,10 +18,6 @@
  是否为强制升级
  */
 @property (nonatomic, assign) BOOL isMandatoryUpdate;
-/**
- 是否展示过升级弹框
- */
-@property (nonatomic, assign) BOOL isShow;
 //只在appdelegate里面使用
 @property (nonatomic, strong) HXBVersionUpdateModel *versionUpdateModel;
 
@@ -73,7 +69,6 @@
 
 - (void)show {
     if (self.versionUpdateModel && (!self.isShow) && [[HXBAdvertiseManager shared] couldPopAtHomeAfterSlashOrGesturePwd]) {
-        self.isShow = YES;
         [HXBAlertManager checkversionUpdateWith:self.versionUpdateModel];
     }
 }
