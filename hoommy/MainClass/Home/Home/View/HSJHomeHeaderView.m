@@ -80,6 +80,7 @@
     self.titleCycleScrollView.autoScrollTimeInterval = 2.5;
     self.titleCycleScrollView.scrollDirection = UICollectionViewScrollDirectionVertical;
     self.titleCycleScrollView.showPageControl = NO;
+    [self.titleCycleScrollView disableScrollGesture];
     [self addSubview:self.titleCycleScrollView];
     [self.titleCycleScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self).offset(kScrAdaptationW750(30));

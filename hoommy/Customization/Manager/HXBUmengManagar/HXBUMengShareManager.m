@@ -78,6 +78,11 @@
 
 + (void) showShareMenuViewInWindowWith:(HXBUMShareViewModel *)shareVM {
     if (KeyChain.ishaveNet) {
+#ifndef DEBUG
+        if(!shareVM) {
+            return;
+        }
+#endif
         HXBUmengViewController *UmengVC = [[HXBUmengViewController alloc] init];
         UmengVC.shareVM = shareVM;
         [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:UmengVC animated:NO completion:^{

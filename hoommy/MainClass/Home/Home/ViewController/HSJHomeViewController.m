@@ -25,6 +25,7 @@
 #import "HSJBuyViewController.h"
 #import "HXBHomePopViewManager.h"
 #import "HSJDepositoryOpenTipView.h"
+#import "HXBBaseWKWebViewController.h"
 
 @interface HSJHomeViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -202,7 +203,11 @@
             [HXBExtensionMethodTool pushToViewControllerWithModel:weakSelf.viewModel.homeModel.bannerList[index] andWithFromVC:weakSelf];
         };
         _headerView.titleDidSelectItemAtIndex = ^(NSInteger index) {
-            [HXBBaseWKWebViewController pushWithPageUrl:weakSelf.viewModel.homeModel.articleList[index].link fromController:weakSelf];
+            HXBBaseWKWebViewController *vc = [[HXBBaseWKWebViewController alloc] init];
+            vc.pageTitle = @"小宝头条";
+            vc.pageUrl = weakSelf.viewModel.homeModel.articleList[index].link;
+            vc.isShowLeftButtonTitle = YES;
+            [weakSelf.navigationController pushViewController:vc animated:YES];
         };
         
     }

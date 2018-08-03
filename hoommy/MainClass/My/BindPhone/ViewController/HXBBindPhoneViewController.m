@@ -66,6 +66,7 @@
     
     [self.tableView registerClass:[HXBBindPhoneTableViewCell class] forCellReuseIdentifier:@"HXBBindPhoneTableViewCell"];
     self.tableView.tableFooterView = self.footView;
+    self.isShowSplitLine = YES;
 }
 
 - (void)addConstraints {

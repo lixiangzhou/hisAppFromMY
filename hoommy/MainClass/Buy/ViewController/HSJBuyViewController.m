@@ -370,6 +370,7 @@
 - (void)lookUpAgreement {
     HSJAgreementsViewController *vc = [[HSJAgreementsViewController alloc] init];
     vc.isFullScreenShow = YES;
+    vc.planId = self.planId;
     [self presentViewController:vc animated:NO completion:nil];
 }
 
