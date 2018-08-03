@@ -137,6 +137,7 @@
 - (UIButton *)allScreenClickBtn {
     if(!_allScreenClickBtn) {
         _allScreenClickBtn = [[UIButton alloc] init];
+        
         _allScreenClickBtn.userInteractionEnabled = NO;
         [_allScreenClickBtn addTarget:self action:@selector(allScreenClickAct:) forControlEvents:UIControlEventTouchUpInside];
     }

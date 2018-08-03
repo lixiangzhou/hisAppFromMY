@@ -16,5 +16,4 @@
 
 @property (nonatomic, strong) HXBRequestUserInfoViewModel *userViewModel;
 
-@property (nonatomic, strong) void (^intoButtonAct)(NSString *planId);
 @end

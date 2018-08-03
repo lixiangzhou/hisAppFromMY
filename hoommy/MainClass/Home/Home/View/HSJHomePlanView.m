@@ -237,15 +237,9 @@
         _intoBtn.backgroundColor = kHXBColor_FF7055_100;
         _intoBtn.layer.cornerRadius = kScrAdaptationW750(40);
         _intoBtn.layer.masksToBounds = YES;
-        [_intoBtn addTarget:self action:@selector(intoButtonAct:) forControlEvents:UIControlEventTouchUpInside];
+        _intoBtn.userInteractionEnabled = NO;
     }
     return _intoBtn;
-}
-
-- (void)intoButtonAct:(UIButton*)button {
-    if(self.intoButtonAct) {
-        self.intoButtonAct(self.planModel.ID);
-    }
 }
 
 - (UIView *)segmentBottomLine {
