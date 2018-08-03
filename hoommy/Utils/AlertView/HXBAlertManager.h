@@ -26,11 +26,6 @@
 + (void)checkversionUpdateWith:(HXBVersionUpdateModel *)versionUpdateModel;
 
 /**
- 判断是否风险评测 开通存管银行账户 ///完善信息
- */
-- (void)checkOutRiskAssessmentWithSuperVC:(UIViewController *)vc andWithPushBlock:(void(^)(NSString *hasBindCard, HXBRequestUserInfoViewModel *model))pushBlock;
-
-/**
  初始化警告视图
 
  @param title title
