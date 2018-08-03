@@ -14,6 +14,7 @@
 #define kHXBHome_PopView @"/popups"///首页弹窗
 #define kGlobal                 @"/global" /// 全局统计
 #define kHSJHomeBaby            @"/home/baby" /// 全局统计
+
 //MARK: ======================= 协议 ==========================
 //协议或合同名    端口号后链接    状态    账户内连接
 #define kHXB_Negotiate_SginUPURL @"/agreement/signup"///《注册服务协议》

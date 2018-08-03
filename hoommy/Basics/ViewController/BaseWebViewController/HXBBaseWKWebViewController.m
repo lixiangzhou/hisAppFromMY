@@ -20,12 +20,15 @@
     NSInteger _progressViewHeight;
     //判断是否时首次加载页面
     BOOL _firstLoadPage;
-
+    CGFloat _buttonMaxWidth;
+    CGFloat _buttonHeight;
 }
 
 @property (nonatomic, strong) WKWebView *webView;
 @property (nonatomic, strong) HXBWKWebViewProgressView* progressView;
 @property (nonatomic, strong) UIButton *rightBtn;
+@property (nonatomic, strong) UIButton *closeBtn;
+@property (nonatomic, strong) UILabel *buttonTilteLb;
 
 //分享数据
 @property (nonatomic, strong) HXBUMShareViewModel *shareViewModel;
@@ -38,7 +41,6 @@
 
 @property (nonatomic, assign) BOOL loadResult;
 
-@property (nonatomic, strong) UIButton *closeBtn;
 //显示关闭按钮控制
 @property (nonatomic, assign) BOOL showCloseButton;
 
@@ -54,6 +56,8 @@
         _firstLoadPage = YES;
         _showCloseButton = NO;
         _isShowCloseButton = YES;
+        _buttonMaxWidth = 95;
+        _buttonHeight = 35;
     }
     return self;
 }
@@ -61,15 +65,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    //计算最大高度
+    if(!self.isShowLeftButtonTitle) {
+        self.title = self.pageTitle;
+        _buttonMaxWidth = 50;
+    }
+    else{
+        self.title = nil;
+        _buttonMaxWidth = [self.pageTitle caleFontWidhSize:self.buttonTilteLb.font forViewHeight:_buttonHeight]+25;
+    }
     
+    //
     [self.view addSubview:self.webView];
     [self.view addSubview:self.progressView];
     [self setupRightBtn];
     [self setupConstraints];
-    
-    if(self.pageTitle) {
-        self.title = self.pageTitle;
-    }
     
     [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:(NSKeyValueObservingOptionNew) context:nil];
     [self.webView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:NULL];
@@ -125,11 +135,8 @@
     if(self.navigationController.viewControllers.count <= 1) {
         return;
     }
-    UIButton *leftBackBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 35)];
-    [leftBackBtn sizeToFit];
+    UIButton *leftBackBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, _buttonMaxWidth, _buttonHeight)];
     self.leftBackBtn = leftBackBtn;
-    leftBackBtn.titleLabel.font = kHXBFont_34;
-    [leftBackBtn setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
     [leftBackBtn addTarget:self action:@selector(leftBackBtnClick) forControlEvents:UIControlEventTouchUpInside];
     if(self.isFullScreenShow) {
         [leftBackBtn setImage:nil forState:UIControlStateNormal];
@@ -140,12 +147,12 @@
         [leftBackBtn setImage:[UIImage imageNamed:@"back_hei"] forState:UIControlStateHighlighted];
     }
     
-    UIButton *closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
+    UIButton *closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, _buttonMaxWidth, _buttonHeight)];
     [closeBtn setImage:[UIImage imageNamed:@"webView_close"] forState:(UIControlStateNormal)];
     [closeBtn addTarget:self action:@selector(closeBtnClick) forControlEvents:UIControlEventTouchUpInside];
     self.closeBtn = closeBtn;
     self.closeBtn.hidden = YES;
-
+    
     closeBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     leftBackBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     self.navigationItem.leftBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:leftBackBtn], [[UIBarButtonItem alloc] initWithCustomView:closeBtn]];
@@ -163,6 +170,17 @@
     else {
         [self.navigationController popViewControllerAnimated:YES];
     }
+}
+
+- (UILabel *)buttonTilteLb {
+    if(!_buttonTilteLb) {
+        _buttonTilteLb = [[UILabel alloc] initWithFrame:CGRectMake(25, 0, _buttonMaxWidth-25, _buttonHeight)];
+        _buttonTilteLb.text = self.pageTitle;
+        _buttonTilteLb.font = kHXBFont_34;
+        _buttonTilteLb.hidden = YES;
+        _buttonTilteLb.textColor = kHXBFontColor_333333_100;
+    }
+    return _buttonTilteLb;
 }
 
 - (void)closeBtnClick {
@@ -210,9 +228,15 @@
         self.closeBtn.hidden = !showCloseButton;
         if(showCloseButton) {
             self.leftBackBtn.width = 25;
+            if(self.isShowLeftButtonTitle) {
+                [self.closeBtn addSubview:self.buttonTilteLb];
+            }
         }
         else {
-            self.leftBackBtn.width = 50;
+            self.leftBackBtn.width = _buttonMaxWidth;
+            if(self.isShowLeftButtonTitle) {
+                [self.leftBackBtn addSubview:self.buttonTilteLb];
+            }
         }
     }
 }
@@ -292,6 +316,7 @@
         configuration.preferences = preferences;
         _webView = [[WKWebView alloc] initWithFrame:CGRectZero configuration:configuration];
         _webView.navigationDelegate = self.webViewModuel;
+        _webView.scrollView.delegate = self;
         if (@available(iOS 11.0, *)) {
             _webView.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
         }
@@ -369,6 +394,15 @@
     self.webView.hidden = YES;
     self.loadResult = NO;
     [self.webView reload];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if(scrollView.contentOffset.y > kScrAdaptationH(5)) {
+        self.buttonTilteLb.hidden = NO;
+    }
+    else {
+        self.buttonTilteLb.hidden = YES;
+    }
 }
 /*
 #pragma mark - Navigation

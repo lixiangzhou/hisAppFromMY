@@ -48,6 +48,9 @@ form.submit();\
 
 //是否需要显示关闭按钮
 @property (nonatomic, assign) BOOL isShowCloseButton;
+
+//是否显示左侧按钮标题
+@property (nonatomic, assign) BOOL isShowLeftButtonTitle;
 /**
  注册js回调
  
