@@ -12,8 +12,5 @@
 extern NSString *const HSJHomeActivityCellIdentifier;
 
 @interface HSJHomeActivityCell : UITableViewCell
-
-@property (nonatomic, strong) void(^updateCellHeight)(CGFloat height, NSInteger index);
-
-- (void)bindData:(HSJHomePlanModel*)planModel cellIndexPath:(NSIndexPath*)indexPath;
+@property (nonatomic, strong) HSJHomePlanModel *planModel;
 @end
