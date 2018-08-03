@@ -1267,7 +1267,6 @@
 		4EA57D1020F34B6C006FD573 /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				4EA610A22105E389008580DD /* Extraction */,
 				9A3749CD20F883CE00F39681 /* BankCardListCell */,
 				9A3749B420F85EA200F39681 /* NODataView */,
 				9A37498C20F85A8300F39681 /* CallPhoneView */,
@@ -1384,13 +1383,13 @@
 			path = HXBUmengManagar;
 			sourceTree = "<group>";
 		};
-		4EA610A22105E389008580DD /* Extraction */ = {
+		4EA610A22105E389008580DD /* UrlJumpExtention */ = {
 			isa = PBXGroup;
 			children = (
 				4EA610A32105E389008580DD /* HXBExtensionMethodTool.h */,
 				4EA610A42105E389008580DD /* HXBExtensionMethodTool.m */,
 			);
-			path = Extraction;
+			path = UrlJumpExtention;
 			sourceTree = "<group>";
 		};
 		4EA610A62105E40D008580DD /* Banner */ = {
@@ -2469,6 +2468,7 @@
 		9A97D8EF20EF420000688ADB /* Customization */ = {
 			isa = PBXGroup;
 			children = (
+				4EA610A22105E389008580DD /* UrlJumpExtention */,
 				9A3749A720F85D5500F39681 /* CountDown（date） */,
 				4EA57D1020F34B6C006FD573 /* Component */,
 				9A97D8F020EF420000688ADB /* Manager */,

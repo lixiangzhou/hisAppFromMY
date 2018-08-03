@@ -100,6 +100,7 @@
 
 //MARK: ======================= H5 =======================
 #define kHXBH5_RiskEvaluationURL [NSString stringWithFormat:@"%@/account/risk",[KeyChain h5host]]//风险评测
+#define kHXBH5_BuyPlanRangeURL(planId) [NSString stringWithFormat:@"%@/plan/%@/range",[KeyChain h5host], planId]//投资范围
 
 //MARK: ======================= 协议 ==========================
 #define kHXB_Negotiate_thirdpart @"/agreement/thirdpart" ///《恒丰银行股份有限公司杭州分行网络交易资金账户三方协议》

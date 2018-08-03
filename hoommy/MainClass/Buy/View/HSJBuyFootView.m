@@ -86,7 +86,7 @@
 - (HXBAgreementView *)agreementGroupView {
     if (!_agreementGroupView) {
         _agreementGroupView = [[HXBAgreementView alloc] initWithFrame:CGRectZero];
-        _agreementGroupView.isAllowAllScreenClick = YES;
+//        _agreementGroupView.isAllowAllScreenClick = YES;
         kWeakSelf
         NSString *tempStr = @"我已阅读并同意协议    ";
         NSAttributedString *attString = [[NSAttributedString alloc] initWithString:tempStr];
