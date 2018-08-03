@@ -40,6 +40,9 @@ form.submit();\
  */
 @property (nonatomic, copy) NSString* pageTitle;
 
+//分享视图的title
+@property (nonatomic, copy) NSString *shareViewTitle;
+
 //重新获取焦点时，是否需要重新加载, 默认值是YES
 @property (nonatomic, assign) BOOL pageReload;
 

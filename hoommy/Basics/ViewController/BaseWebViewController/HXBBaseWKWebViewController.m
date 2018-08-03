@@ -11,6 +11,9 @@
 #import "HXBWKWebviewViewModel.h"
 #import "HXBWKWebViewProgressView.h"
 #import "SVGKit/SVGKImage.h"
+#import "HXBUMengShareManager.h"
+#import "HXBUMShareViewModel.h"
+#import "HXBUMShareModel.h"
 
 @interface HXBBaseWKWebViewController ()<WKNavigationDelegate> {
     //进度视图的高度
@@ -22,6 +25,10 @@
 
 @property (nonatomic, strong) WKWebView *webView;
 @property (nonatomic, strong) HXBWKWebViewProgressView* progressView;
+@property (nonatomic, strong) UIButton *rightBtn;
+
+//分享数据
+@property (nonatomic, strong) HXBUMShareViewModel *shareViewModel;
 
 //js 代理
 @property (nonatomic, strong) WKWebViewJavascriptBridge *jsBridge;
@@ -57,6 +64,7 @@
     
     [self.view addSubview:self.webView];
     [self.view addSubview:self.progressView];
+    [self setupRightBtn];
     [self setupConstraints];
     
     if(self.pageTitle) {
@@ -71,12 +79,46 @@
     
     self.isShowSplitLine = YES;
     
-    [self registJavascriptBridge:@"" handler:^(id data, WVJBResponseCallback responseCallback) {
-        
+    kWeakSelf
+    [self registJavascriptBridge:@"shareData" handler:^(id data, WVJBResponseCallback responseCallback) {
+        [weakSelf shareDataJsCall:data];
     }];
-    [self registJavascriptBridge:@"" handler:^(id data, WVJBResponseCallback responseCallback) {
-        
+    [self registJavascriptBridge:@"showShare" handler:^(id data, WVJBResponseCallback responseCallback) {
+        [weakSelf showShareJsCall:data];
     }];
+}
+
+- (void)shareDataJsCall:(NSDictionary*)urlParamDic {
+    if(urlParamDic && [urlParamDic isKindOfClass:[NSDictionary class]]) {
+        HXBUMShareModel *shareModel = [[HXBUMShareModel alloc] initWithDictionary:urlParamDic];
+        self.shareViewModel = [[HXBUMShareViewModel alloc] init];
+        self.shareViewModel.shareModel = shareModel;
+        self.shareViewModel.shareViewTitle = self.shareViewTitle;
+        self.rightBtn.hidden = NO;
+    }
+    else {
+        self.rightBtn.hidden = YES;
+    }
+}
+
+- (void)showShareJsCall:(NSDictionary*)urlParamDic {
+    [self rightBtnClick];
+}
+
+- (void)setupRightBtn {
+    //右侧按钮
+    self.rightBtn = [[UIButton alloc] init];
+    self.rightBtn.backgroundColor = [UIColor greenColor];
+    self.rightBtn.hidden = YES;
+    [self.rightBtn sizeToFit];
+    [self.rightBtn addTarget:self action:@selector(rightBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:self.rightBtn]];
+}
+
+- (void)rightBtnClick {
+    if(self.shareViewModel) {
+        [HXBUMengShareManager showShareMenuViewInWindowWith:self.shareViewModel];
+    }
 }
 
 - (void)setupLeftBackBtn {

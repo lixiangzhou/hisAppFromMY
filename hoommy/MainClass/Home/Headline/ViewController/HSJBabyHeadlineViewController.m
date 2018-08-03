@@ -7,11 +7,9 @@
 //
 
 #import "HSJBabyHeadlineViewController.h"
-#import "HXBUMengShareManager.h"
-#import "HXBUMShareViewModel.h"
 
 @interface HSJBabyHeadlineViewController ()
-@property (nonatomic, strong) UIButton *rightBtn;
+
 @end
 
 @implementation HSJBabyHeadlineViewController
@@ -27,13 +25,7 @@
     self.title = @"";
     self.isShowCloseButton = NO;
     self.webView.scrollView.delegate = self;
-    
-    //右侧按钮
-    self.rightBtn = [[UIButton alloc] init];
-    self.rightBtn.backgroundColor = [UIColor greenColor];
-    [self.rightBtn sizeToFit];
-    [self.rightBtn addTarget:self action:@selector(rightBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:self.rightBtn]];
+    self.shareViewTitle = @"文章分享到";
 }
 
 #pragma  mark 重写基类方法
@@ -67,12 +59,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)rightBtnClick {
-    HXBUMShareViewModel *shareViewModel = [[HXBUMShareViewModel alloc] init];
-    shareViewModel.shareModel = nil;
-    shareViewModel.shareViewTitle = @"文章分享到";
-    [HXBUMengShareManager showShareMenuViewInWindowWith:shareViewModel];
-}
+
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if(scrollView.contentOffset.y > kScrAdaptationH(20)) {
