@@ -15,5 +15,4 @@ extern NSString *const HSJHomePlanCellIdentifier;
 
 @property (nonatomic, strong) HSJHomePlanModel *planModel;
 
-@property (nonatomic, strong) void (^intoButtonAct)(NSString *planId);
 @end
