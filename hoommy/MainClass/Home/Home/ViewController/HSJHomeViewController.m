@@ -116,14 +116,6 @@
     if ([cellmodel.viewItemType  isEqual: @"product"]) {
         HSJHomePlanTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:HSJHomePlanCellIdentifier];
         cell.planModel = cellmodel;
-        kWeakSelf
-        cell.intoButtonAct = ^(NSString *planId) {
-            [weakSelf.viewModel checkDepositoryAndRiskFromController:weakSelf finishBlock:^{
-                HSJBuyViewController *vc = [HSJBuyViewController new];
-                vc.planId = planId;
-                [weakSelf.navigationController pushViewController:vc animated:YES];
-            }];
-        };
         return cell;
     } else if ([cellmodel.viewItemType  isEqual: @"signuph5"] && !KeyChain.isLogin) {
         HSJHomeActivityCell *cell = [tableView dequeueReusableCellWithIdentifier:HSJHomeActivityCellIdentifier];
