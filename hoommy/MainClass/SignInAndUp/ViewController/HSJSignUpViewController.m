@@ -116,6 +116,7 @@
     
     [self.agreementView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.codeTextField);
+        make.height.equalTo(@14);
         make.top.equalTo(self.signUpButton.mas_bottom).offset(kScrAdaptationH(20));
     }];
 }

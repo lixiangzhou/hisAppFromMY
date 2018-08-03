@@ -314,6 +314,7 @@
     
     [agreementView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(bottomBtn);
+        make.height.equalTo(@14);
         make.bottom.equalTo(bottomBtn.mas_top).offset(-15);
     }];
 

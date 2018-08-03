@@ -210,12 +210,12 @@
     _viewModel = viewModel;
     
     [self.additionView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.equalTo(viewModel.planModel.hasBuy ? @45 : @0);
+        make.height.equalTo(viewModel.hasBuy ? @45 : @0);
     }];
     
-    self.additionView.hidden = viewModel.planModel.hasBuy == NO;
+    self.additionView.hidden = viewModel.hasBuy == NO;
     
-    if (viewModel.planModel.hasBuy) {
+    if (viewModel.hasBuy) {
         self.bgView.image = [UIImage imageNamed:@"detail_top_buy_bg"];
         self.topLabel.text = @"0.00";
         self.topDescLabel.text = @"昨日收益(元)";
