@@ -32,7 +32,7 @@
     [super viewDidLoad];
     self.title = @"提现进度";
     [self loadCashRegisterDataNeeedShowLoading:YES];
-    [self.view addSubview:self.withdrawRecordTableView];
+    [self.safeAreaView addSubview:self.withdrawRecordTableView];
 }
 #pragma mark - Events
 ///无网状态的网络连接
@@ -82,7 +82,7 @@
         cell = [[HXBWithdrawRecordCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:identifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-//    cell.withdrawRecordModel = self.withdrawRecordViewModel.withdrawRecordListModel.dataList[indexPath.row];
+
     NSString *key = self.withdrawRecordViewModel.formatWithdrawRecordDataKeyList[indexPath.section];
     NSArray *keyValueArray = self.withdrawRecordViewModel.formatWithdrawRecordDataValueList[key];
     cell.withdrawRecordModel = keyValueArray[indexPath.row];

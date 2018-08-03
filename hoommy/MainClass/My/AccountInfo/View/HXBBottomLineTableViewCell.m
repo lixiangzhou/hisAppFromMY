@@ -39,5 +39,18 @@
     self.line.hidden = hiddenLine;
 }
 
+- (void)setLine:(UIView *)line {
+    if (_hiddenLine) {
+        return;
+    }
+    self.line.backgroundColor = [UIColor redColor];//RGB(238, 238, 245)
+    kWeakSelf
+    [self.line mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self);
+        make.bottom.equalTo(self);
+        make.left.equalTo(weakSelf.textLabel);
+        make.height.equalTo(@2.0f);
+    }];
+}
 
 @end

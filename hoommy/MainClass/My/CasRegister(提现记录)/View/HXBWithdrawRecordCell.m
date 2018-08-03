@@ -81,7 +81,7 @@
     [self.partingLineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(@kScrAdaptationW(65));
         make.top.bottom.equalTo(self.contentView);
-        make.width.equalTo(@kHXBDivisionLineHeight);
+        make.width.equalTo(@1.0f);
     }];
     [self.circularPointView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.height.equalTo(@kScrAdaptationW(9));
@@ -116,9 +116,9 @@
     self.cashAmountLabel.text = [NSString stringWithFormat:@"%@元",withdrawRecordModel.cashAmount];
     self.bankNameLabel.text = [NSString stringWithFormat:@"%@%@",withdrawRecordModel.bankName,withdrawRecordModel.bankLastNum];
     
-    NSString *logDesc = [NSString stringWithFormat:@" %@",withdrawRecordModel.logDesc];
-    self.logDescLabel.attributedText = [NSAttributedString setupAttributeStringWithBeforeString:withdrawRecordModel.cashDrawName  WithBeforeRange:NSMakeRange(0, withdrawRecordModel.cashDrawName.length) andAttributeColor:withdrawRecordModel.stateColor andAttributeFont:kHXBFont_PINGFANGSC_REGULAR(12) afterString:logDesc WithAfterRange:NSMakeRange(0, logDesc.length) andAttributeColor:RGB(21, 21, 21) andAttributeFont:kHXBFont_PINGFANGSC_REGULAR(12)];
-    
+    NSArray *descArr = [withdrawRecordModel.logText componentsSeparatedByString:@"："];
+    NSString *logDesc = [NSString stringWithFormat:@" %@",descArr[1]];
+    self.logDescLabel.attributedText = [NSAttributedString setupAttributeStringWithBeforeString:withdrawRecordModel.statusText  WithBeforeRange:NSMakeRange(0, withdrawRecordModel.statusText.length) andAttributeColor:withdrawRecordModel.stateColor andAttributeFont:kHXBFont_PINGFANGSC_REGULAR(12) afterString:logDesc WithAfterRange:NSMakeRange(0, logDesc.length) andAttributeColor:RGB(21, 21, 21) andAttributeFont:kHXBFont_PINGFANGSC_REGULAR(12)];
     NSArray *arr = [withdrawRecordModel.applyTimeStr componentsSeparatedByString:@" "]; // 2017-09-28,12:04
     NSArray *arr1 = [arr[0] componentsSeparatedByString:@"-"]; // 2017,09,28
     self.applyDateLabel.text = [NSString stringWithFormat:@"%@日",arr1.lastObject];
@@ -174,7 +174,7 @@
 -(UIView *)partingLineView {
     if (!_partingLineView) {
         _partingLineView = [[UIView alloc] init];
-        _partingLineView.backgroundColor = COR12;
+        _partingLineView.backgroundColor = RGB(245, 245, 249);
     }
     return _partingLineView;
 }

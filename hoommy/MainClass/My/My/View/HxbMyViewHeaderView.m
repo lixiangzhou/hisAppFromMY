@@ -257,7 +257,11 @@
     if (!_headTopView) {
         _headTopView = [[UIImageView alloc] initWithFrame:CGRectZero];
         _headTopView.userInteractionEnabled = YES;
-        _headTopView.image = [UIImage imageNamed:@"my_top_bg"];
+        if (HXBIPhoneX) {
+            _headTopView.image = [UIImage imageNamed:@"my_top_bg_iphonex"];
+        } else {
+            _headTopView.image = [UIImage imageNamed:@"my_top_bg"];
+        }
         [_headTopView addSubview:self.personalCenterButton];
         [_headTopView addSubview:self.phoneLabel];
         [_headTopView addSubview:self.transactionBtn];
@@ -302,9 +306,6 @@
     if (!_accountOpeningBackgroundImage) {
         _accountOpeningBackgroundImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"top"]];
         _accountOpeningBackgroundImage.userInteractionEnabled = YES;
-        if (HXBIPhoneX) {
-            _accountOpeningBackgroundImage.image = [UIImage imageNamed:@""];
-        }
     }
     return _accountOpeningBackgroundImage;
 }
