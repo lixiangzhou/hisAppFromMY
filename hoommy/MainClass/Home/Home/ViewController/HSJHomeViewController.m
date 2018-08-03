@@ -112,7 +112,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    HSJHomePlanModel * cellmodel = self.viewModel.homeModel.dataList[indexPath.row];
+    HSJHomePlanModel *cellmodel = self.viewModel.homeModel.dataList[indexPath.row];
     if ([cellmodel.viewItemType  isEqual: @"product"]) {
         HSJHomePlanTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:HSJHomePlanCellIdentifier];
         cell.planModel = cellmodel;
@@ -126,32 +126,16 @@
         };
         return cell;
     } else if ([cellmodel.viewItemType  isEqual: @"signuph5"] && !KeyChain.isLogin) {
-        return [self buildHomeActivityCellData:tableView cellDataModel:cellmodel cellIndexPath:indexPath];
+        HSJHomeActivityCell *cell = [tableView dequeueReusableCellWithIdentifier:HSJHomeActivityCellIdentifier];
+        cell.planModel = cellmodel;
+        return cell;
     } else if ([cellmodel.viewItemType  isEqual: @"h5"]) {
-        return [self buildHomeActivityCellData:tableView cellDataModel:cellmodel cellIndexPath:indexPath];
+        HSJHomeActivityCell *cell = [tableView dequeueReusableCellWithIdentifier:HSJHomeActivityCellIdentifier];
+        cell.planModel = cellmodel;
+        return cell;
     } else {
         return nil;
     }
-}
-
-- (HSJHomeActivityCell*)buildHomeActivityCellData:(UITableView *)tableView cellDataModel:(HSJHomePlanModel*)cellmodel cellIndexPath:(NSIndexPath*)indexPath {
-    
-    HSJHomeActivityCell *cell = [tableView dequeueReusableCellWithIdentifier:HSJHomeActivityCellIdentifier];
-    [cell bindData:cellmodel cellIndexPath:indexPath];
-    
-    if(!cell.updateCellHeight) {
-        kWeakSelf
-        cell.updateCellHeight = ^(CGFloat height, NSInteger index) {
-            HSJHomePlanModel *cellmodel = [weakSelf.viewModel.homeModel.dataList safeObjectAtIndex:index];
-            CGFloat cellH = cellmodel.cellHeight;
-            if(cellH != height) {
-                cellmodel.cellHeight = height;
-                [weakSelf.mainTabelView reloadData];
-            }
-        };
-    }
-    
-    return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -186,6 +170,19 @@
         self.headerView.height = kScrAdaptationH750(310);
     }
     self.mainTabelView.tableHeaderView = self.headerView;
+}
+
+- (void)reloadPage {
+    kWeakSelf
+    [self.viewModel reloadPage:^(BOOL needReload) {
+        if (needReload) {
+            [weakSelf.mainTabelView reloadData];
+        }
+    }];
+}
+
+- (void)headerRefreshAction:(UIScrollView *)scrollView {
+    [self getHomeData:NO];
 }
 
 #pragma mark - Lazy
@@ -262,51 +259,6 @@
         _mainTabelView.freshOption = ScrollViewFreshOptionDownPull;
     }
     return _mainTabelView;
-}
-
-- (void)reloadPage {
-    BOOL isFresh = NO;
-    if(KeyChain.isLogin != self.viewModel.recordIsLogin) {
-        isFresh = YES;
-    }
-    else if(!self.viewModel.recordHomeModel) {
-        isFresh = YES;
-    }
-    else if(!self.viewModel.homeModel) {
-        isFresh = YES;
-    }
-    else {
-        NSDictionary *tempDic1 = [self.viewModel.homeModel toDictionary];
-        NSDictionary *tempDic2 = [self.viewModel.recordHomeModel toDictionary];
-        NSArray *tempList1 = [tempDic1 arrayAtPath:@"dataList"];
-        NSArray *tempList2 = [tempDic2 arrayAtPath:@"dataList"];
-        if(tempList1.count != tempList2.count) {
-            isFresh = YES;
-        }
-        else {
-            for (int i=0; i<tempList1.count; i++) {
-                NSMutableDictionary *dic1 = [NSMutableDictionary dictionaryWithDictionary:[tempList1 safeObjectAtIndex:i]];
-                [dic1 removeObjectForKey:@"diffTime"];
-                NSMutableDictionary *dic2 = [NSMutableDictionary dictionaryWithDictionary:[tempList2 safeObjectAtIndex:i]];
-                [dic2 removeObjectForKey:@"diffTime"];
-                if(![dic1 isEqualToDictionary:dic2]) {
-                    isFresh = YES;
-                    break;
-                }
-            }
-        }
-    }
-    
-    if(isFresh) {
-        self.viewModel.recordIsLogin = KeyChain.isLogin;
-        self.viewModel.recordHomeModel = self.viewModel.homeModel;
-        self.mainTabelView.contentSize = CGSizeMake(kScreenWidth, 1000);
-        [self.mainTabelView reloadData];
-    }
-}
-
-- (void)headerRefreshAction:(UIScrollView *)scrollView {
-    [self getHomeData:NO];
 }
 
 - (HSJHomeVCViewModel *)viewModel {
