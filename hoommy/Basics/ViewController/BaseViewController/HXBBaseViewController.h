@@ -32,6 +32,8 @@
 @property (nonatomic, assign) BOOL isShowNodataView;
 /// 无数据页面，在局部控件中显示，需要自己根据需要添加和布局，如需全屏，使用上面的 isShowNodataView
 @property (nonatomic, strong) HSJNoDataView *noDataView;
+///导航栏左侧按钮
+@property (nonatomic, strong) UIButton *leftBackBtn;
 
 ///可以重写返回方法
 - (void)leftBackBtnClick;

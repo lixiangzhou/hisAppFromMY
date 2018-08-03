@@ -305,6 +305,8 @@
 		9A97DAD420EF420200688ADB /* transaction_password.svg in Resources */ = {isa = PBXBuildFile; fileRef = 9A97DA5D20EF420200688ADB /* transaction_password.svg */; };
 		9AA0696A2111AED800A83ED7 /* Impact.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AA069692111AED500A83ED7 /* Impact.ttf */; };
 		9AA0696D211303D900A83ED7 /* DIN Alternate Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AA0696C211303D700A83ED7 /* DIN Alternate Bold.ttf */; };
+		9AA069722113F5B400A83ED7 /* HSJBabyHeadlineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA069712113F5B400A83ED7 /* HSJBabyHeadlineViewController.m */; };
+		9AA0697521141D6D00A83ED7 /* WebViewJavascriptBridgeBase+HXBHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA0697421141D6C00A83ED7 /* WebViewJavascriptBridgeBase+HXBHandle.m */; };
 		9AA70B4120FEF323008B3007 /* HSJBuyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA70B4020FEF323008B3007 /* HSJBuyViewController.m */; };
 		9AA70B4420FEF369008B3007 /* HSJBuyViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA70B4320FEF369008B3007 /* HSJBuyViewModel.m */; };
 		9AA70B4720FEF3CC008B3007 /* HSJBuyHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA70B4620FEF3CC008B3007 /* HSJBuyHeadView.m */; };
@@ -988,6 +990,10 @@
 		9A97DA5D20EF420200688ADB /* transaction_password.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = transaction_password.svg; sourceTree = "<group>"; };
 		9AA069692111AED500A83ED7 /* Impact.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Impact.ttf; sourceTree = "<group>"; };
 		9AA0696C211303D700A83ED7 /* DIN Alternate Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DIN Alternate Bold.ttf"; sourceTree = "<group>"; };
+		9AA069702113F5B400A83ED7 /* HSJBabyHeadlineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJBabyHeadlineViewController.h; sourceTree = "<group>"; };
+		9AA069712113F5B400A83ED7 /* HSJBabyHeadlineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJBabyHeadlineViewController.m; sourceTree = "<group>"; };
+		9AA0697321141D6C00A83ED7 /* WebViewJavascriptBridgeBase+HXBHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WebViewJavascriptBridgeBase+HXBHandle.h"; sourceTree = "<group>"; };
+		9AA0697421141D6C00A83ED7 /* WebViewJavascriptBridgeBase+HXBHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WebViewJavascriptBridgeBase+HXBHandle.m"; sourceTree = "<group>"; };
 		9AA70B3F20FEF323008B3007 /* HSJBuyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJBuyViewController.h; sourceTree = "<group>"; };
 		9AA70B4020FEF323008B3007 /* HSJBuyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJBuyViewController.m; sourceTree = "<group>"; };
 		9AA70B4220FEF369008B3007 /* HSJBuyViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJBuyViewModel.h; sourceTree = "<group>"; };
@@ -2621,6 +2627,7 @@
 		9A97D91320EF420000688ADB /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				9AA0696E2113F4C700A83ED7 /* Headline */,
 				E18977262110487300E558F9 /* HomePopView */,
 				4EA610C52105E69F008580DD /* Notice */,
 				4EA610A62105E40D008580DD /* Banner */,
@@ -2866,6 +2873,8 @@
 		9A97D95620EF420100688ADB /* BaseWebViewController */ = {
 			isa = PBXGroup;
 			children = (
+				9AA0697321141D6C00A83ED7 /* WebViewJavascriptBridgeBase+HXBHandle.h */,
+				9AA0697421141D6C00A83ED7 /* WebViewJavascriptBridgeBase+HXBHandle.m */,
 				9A97D95720EF420100688ADB /* HXBBaseWKWebViewController.h */,
 				9A97D95820EF420100688ADB /* HXBBaseWKWebViewController.m */,
 				9A97D95920EF420100688ADB /* HXBWKWebViewProgressView.h */,
@@ -3322,6 +3331,23 @@
 				9AA0696C211303D700A83ED7 /* DIN Alternate Bold.ttf */,
 			);
 			path = Din;
+			sourceTree = "<group>";
+		};
+		9AA0696E2113F4C700A83ED7 /* Headline */ = {
+			isa = PBXGroup;
+			children = (
+				9AA0696F2113F55E00A83ED7 /* ViewController */,
+			);
+			path = Headline;
+			sourceTree = "<group>";
+		};
+		9AA0696F2113F55E00A83ED7 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9AA069702113F5B400A83ED7 /* HSJBabyHeadlineViewController.h */,
+				9AA069712113F5B400A83ED7 /* HSJBabyHeadlineViewController.m */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		9AA70B3A20FEF0F6008B3007 /* Buy */ = {
@@ -4046,6 +4072,7 @@
 				9A37492120F851CF00F39681 /* HxbWithdrawResultViewController.m in Sources */,
 				E14B9F9920FD8AF80084F007 /* HXBProgressView.m in Sources */,
 				4EA610752105BA03008580DD /* HSJHomeVCViewModel.m in Sources */,
+				9AA069722113F5B400A83ED7 /* HSJBabyHeadlineViewController.m in Sources */,
 				9A0BD53220F6FD1C00B1CC59 /* HXBEnumerateTransitionManager.m in Sources */,
 				9A37491420F7714700F39681 /* AnimatedTransition.m in Sources */,
 				9A4B181820F34434006B83C7 /* HXBBindPhoneViewController.m in Sources */,
@@ -4116,6 +4143,7 @@
 				9AF51DA420FC7458008A8CF4 /* HSJClientServeTelView.m in Sources */,
 				9A97DA6D20EF420200688ADB /* HSJListViewController.m in Sources */,
 				4EA610D22105E69F008580DD /* HXBNoticModel.m in Sources */,
+				9AA0697521141D6D00A83ED7 /* WebViewJavascriptBridgeBase+HXBHandle.m in Sources */,
 				9A4B18B120F620B8006B83C7 /* HXBCardBinModel.m in Sources */,
 				9A97DA7A20EF420200688ADB /* HXBWKWebViewProgressView.m in Sources */,
 				4E87E465210B0D820069A3D3 /* HSJNoDataOrNetViewController.m in Sources */,

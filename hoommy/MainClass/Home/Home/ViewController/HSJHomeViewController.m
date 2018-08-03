@@ -25,6 +25,8 @@
 #import "HSJBuyViewController.h"
 #import "HXBHomePopViewManager.h"
 #import "HSJDepositoryOpenTipView.h"
+#import "HSJBabyHeadlineViewController.h"
+#import "HXBUMShareModel.h"
 
 @interface HSJHomeViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -213,11 +215,19 @@
             [HXBExtensionMethodTool pushToViewControllerWithModel:weakSelf.viewModel.homeModel.bannerList[index] andWithFromVC:weakSelf];
         };
         _headerView.titleDidSelectItemAtIndex = ^(NSInteger index) {
-            [HXBBaseWKWebViewController pushWithPageUrl:weakSelf.viewModel.homeModel.articleList[index].link fromController:weakSelf];
+            [weakSelf titleDidSelectItemAct:index];
         };
         
     }
     return _headerView;
+}
+
+- (void)titleDidSelectItemAct:(NSInteger) index{
+    HSJHomeArtileModel *artileModel = [self.viewModel.homeModel.articleList safeObjectAtIndex:index];
+    HSJBabyHeadlineViewController *vc = [[HSJBabyHeadlineViewController alloc] init];
+    vc.pageUrl = artileModel.link;
+    vc.pageTitle = @"小宝头条";
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (HSJHomeFooterView *)footerView {
@@ -300,7 +310,6 @@
     if(isFresh) {
         self.viewModel.recordIsLogin = KeyChain.isLogin;
         self.viewModel.recordHomeModel = self.viewModel.homeModel;
-        self.mainTabelView.contentSize = CGSizeMake(kScreenWidth, 1000);
         [self.mainTabelView reloadData];
     }
 }

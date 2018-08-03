@@ -31,22 +31,23 @@
 }
 
 - (void)setupSharItem {
+    
     NSArray *sharingPlatform = @[@(UMSocialPlatformType_WechatSession),@(UMSocialPlatformType_WechatTimeLine)];
     NSArray *iconNameArr = @[@"wechat",@"frined"];
     NSArray *nameArr = @[@"微信",@"朋友圈"];
     
-    int lineCount = 4;//每行的个数
+    int lineCount = 2;//每行的个数
     CGFloat itemHeight = kScrAdaptationH(74);
-    CGFloat itemWith = kScrAdaptationW(51);
-    CGFloat leftSpacing = kScrAdaptationW(20);
+    CGFloat itemWith = kScrAdaptationW750(100);
+    CGFloat leftSpacing = kScrAdaptationW750(175);
     CGFloat itemSpacing = (kScreenWidth - 2 * leftSpacing - lineCount * itemWith)/ (lineCount - 1);
     CGFloat midSpacing = kScrAdaptationH(15);
     UIFont *shareBtnTitleFount = kHXBFont_PINGFANGSC_REGULAR(14);
     
-    
+    CGFloat x = leftSpacing;
     for (int i = 0; i < sharingPlatform.count; i++) {
         JXLayoutButton *shareItemBtn = [JXLayoutButton buttonWithType:UIButtonTypeCustom];
-        shareItemBtn.frame = CGRectMake((itemSpacing + itemWith) * i, 0, itemWith,itemHeight);
+        shareItemBtn.frame = CGRectMake(x, 0, itemWith,itemHeight);
         shareItemBtn.titleLabel.font = shareBtnTitleFount;
         [shareItemBtn setTitleColor:COR10 forState:(UIControlStateNormal)];
         
@@ -65,6 +66,7 @@
             [shareItemBtn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_useless",iconNameArr[i]]] forState:(UIControlStateNormal)];
             [shareItemBtn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_useless",iconNameArr[i]]] forState:(UIControlStateHighlighted)];
         }
+        x += itemWith+itemSpacing;
     }
 }
 

@@ -67,7 +67,7 @@
         make.height.offset(kScrAdaptationH(49));
     }];
     [self.umengView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.bottomShareView).offset(kScrAdaptationW(20));
+        make.left.right.equalTo(self.bottomShareView);
         make.top.equalTo(self.titleLabel.mas_bottom).offset(kScrAdaptationH(25));
         make.bottom.equalTo(self.cancelBtn.mas_top);
     }];
@@ -213,9 +213,10 @@
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
-        _titleLabel.text = @"分享到";
-        _titleLabel.textColor = COR6;
-        _titleLabel.font = kHXBFont_PINGFANGSC_REGULAR(15);
+        NSString *title = self.shareVM.shareViewTitle ?: @"分享到";
+        _titleLabel.text = title;
+        _titleLabel.textColor = kHXBColor_9295A2_100;
+        _titleLabel.font = kHXBFont_28;
     }
     return _titleLabel;
 }
@@ -225,8 +226,8 @@
         _cancelBtn = [[UIButton alloc] init];
         [_cancelBtn setTitle:@"取消" forState:(UIControlStateNormal)];
         [_cancelBtn setBackgroundColor:[UIColor whiteColor]];
-        [_cancelBtn setTitleColor:COR6 forState:(UIControlStateNormal)];
-        _cancelBtn.titleLabel.font = kHXBFont_PINGFANGSC_REGULAR(15);
+        [_cancelBtn setTitleColor:kHXBColor_4A4A4A_100 forState:(UIControlStateNormal)];
+        _cancelBtn.titleLabel.font = kHXBFont_32;
         [_cancelBtn addTarget:self action:@selector(cancelShare) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _cancelBtn;
@@ -235,7 +236,6 @@
 - (HXBUmengView *)umengView {
     if (!_umengView) {
         _umengView = [[HXBUmengView alloc] init];
-        _umengView.backgroundColor = [UIColor clearColor];
         kWeakSelf
         _umengView.shareWebPageToPlatformType = ^(UMSocialPlatformType type) {
             switch ([weakSelf.shareVM getShareType]) {

@@ -18,6 +18,7 @@ typedef NS_ENUM(NSUInteger, HXBShareType) {
 @interface HXBUMShareViewModel : NSObject
 
 @property (nonatomic, strong) HXBUMShareModel *shareModel;
+@property (nonatomic, copy) NSString *shareViewTitle;
 
 
 - (HXBShareType)getShareType;

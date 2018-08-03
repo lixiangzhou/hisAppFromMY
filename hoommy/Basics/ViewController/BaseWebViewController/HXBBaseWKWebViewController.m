@@ -10,17 +10,17 @@
 #import <WebKit/WebKit.h>
 #import "HXBWKWebviewViewModel.h"
 #import "HXBWKWebViewProgressView.h"
-#import "NSString+HxbMask.h"
+#import "SVGKit/SVGKImage.h"
 
 @interface HXBBaseWKWebViewController ()<WKNavigationDelegate> {
+    //进度视图的高度
+    NSInteger _progressViewHeight;
     //判断是否时首次加载页面
     BOOL _firstLoadPage;
 
 }
 
-//进度视图的高度
-@property (nonatomic, assign) NSInteger progressViewHeight;
-
+@property (nonatomic, strong) WKWebView *webView;
 @property (nonatomic, strong) HXBWKWebViewProgressView* progressView;
 
 //js 代理
@@ -30,6 +30,10 @@
 @property (nonatomic, strong) HXBWKWebviewViewModuel *webViewModuel;
 
 @property (nonatomic, assign) BOOL loadResult;
+
+@property (nonatomic, strong) UIButton *closeBtn;
+//显示关闭按钮控制
+@property (nonatomic, assign) BOOL showCloseButton;
 
 @end
 
@@ -41,6 +45,8 @@
     if (self) {
         _pageReload = YES;
         _firstLoadPage = YES;
+        _showCloseButton = NO;
+        _isShowCloseButton = YES;
     }
     return self;
 }
@@ -49,7 +55,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.automaticallyAdjustsScrollViewInsets = NO;
     [self.view addSubview:self.webView];
     [self.view addSubview:self.progressView];
     [self setupConstraints];
@@ -60,13 +65,72 @@
     
     [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:(NSKeyValueObservingOptionNew) context:nil];
     [self.webView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:NULL];
+    [self.webView.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
     
     [self loadWebPage];
+    
+    self.isShowSplitLine = YES;
+    
+    [self registJavascriptBridge:@"" handler:^(id data, WVJBResponseCallback responseCallback) {
+        
+    }];
+    [self registJavascriptBridge:@"" handler:^(id data, WVJBResponseCallback responseCallback) {
+        
+    }];
+}
+
+- (void)setupLeftBackBtn {
+    if(self.navigationController.viewControllers.count <= 1) {
+        return;
+    }
+    UIButton *leftBackBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 35)];
+    [leftBackBtn sizeToFit];
+    self.leftBackBtn = leftBackBtn;
+    leftBackBtn.titleLabel.font = kHXBFont_34;
+    [leftBackBtn setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
+    [leftBackBtn addTarget:self action:@selector(leftBackBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    if(self.isFullScreenShow) {
+        [leftBackBtn setImage:nil forState:UIControlStateNormal];
+        [leftBackBtn setImage:nil forState:UIControlStateHighlighted];
+    }
+    else {
+        [leftBackBtn setImage:[UIImage imageNamed:@"back_hei"] forState:UIControlStateNormal];
+        [leftBackBtn setImage:[UIImage imageNamed:@"back_hei"] forState:UIControlStateHighlighted];
+    }
+    
+    UIButton *closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
+    [closeBtn setImage:[UIImage imageNamed:@"webView_close"] forState:(UIControlStateNormal)];
+    [closeBtn addTarget:self action:@selector(closeBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    self.closeBtn = closeBtn;
+    self.closeBtn.hidden = YES;
+
+    closeBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    leftBackBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    self.navigationItem.leftBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:leftBackBtn], [[UIBarButtonItem alloc] initWithCustomView:closeBtn]];
+}
+
+- (void)leftBackBtnClick {
+    if(self.isShowCloseButton && self.showCloseButton) {
+        if(self.webView.canGoBack) {
+            [self.webView goBack];
+        }
+        else {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }
+    else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
+- (void)closeBtnClick {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)dealloc {
     [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
     [self.webView removeObserver:self forKeyPath:@"title"];
+    [self.webView.scrollView removeObserver:self forKeyPath:@"contentSize"];
 }
 
 - (void)reLoadWhenViewAppear {
@@ -89,11 +153,26 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
     if ([keyPath isEqualToString:@"estimatedProgress"]) {
         [self.progressView setProgress:self.webView.estimatedProgress animated:YES];
-
     } else if ([keyPath isEqualToString:@"title"]) {
-        self.title = [NSString H5Title:self.webView.title];
+        if(!self.pageTitle) {
+            self.title = [NSString H5Title:self.webView.title];
+        }
+    } else if ([keyPath isEqualToString:@"contentSize"]) {
+        self.showCloseButton = self.webView.canGoBack;
     }
-    
+}
+
+- (void)setShowCloseButton:(BOOL)showCloseButton {
+    _showCloseButton = showCloseButton;
+    if(self.isShowCloseButton) {
+        self.closeBtn.hidden = !showCloseButton;
+        if(showCloseButton) {
+            self.leftBackBtn.width = 25;
+        }
+        else {
+            self.leftBackBtn.width = 50;
+        }
+    }
 }
 
 #pragma mark 无网络重新加载H5
@@ -105,21 +184,24 @@
 #pragma mark 安装约束
 - (void)setupConstraints {
     kWeakSelf
+    NSInteger height = _progressViewHeight;
     [self.progressView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.equalTo(weakSelf.safeAreaView);
-        make.height.mas_equalTo(weakSelf.progressViewHeight);
+        make.left.right.equalTo(weakSelf.view);
+        make.top.equalTo(weakSelf.view).offset(HXBStatusBarAndNavigationBarHeight);
+        make.height.mas_equalTo(height);
     }];
     
     [self.webView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.equalTo(weakSelf.safeAreaView);
-        make.top.equalTo(weakSelf.progressView.mas_bottom);
+        make.left.right.bottom.equalTo(weakSelf.view);
+        make.top.equalTo(weakSelf.view).offset(HXBStatusBarAndNavigationBarHeight);
     }];
 }
 
 #pragma mark 更新约束
 - (void)updateConstraints {
+    NSInteger height = _progressViewHeight;
     [self.progressView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(self.progressViewHeight);
+        make.height.mas_equalTo(height);
     }];
 }
 
@@ -236,7 +318,7 @@
     NSString *userAgent = [NSString stringWithFormat:@"%@/IOS %@/v%@ iphone" ,[HXBDeviceVersion deviceVersion],systemVersion,version];
     NSLog(@"%@",[KeyChain token]);
     [urlRequest setValue:[KeyChain token] forHTTPHeaderField:@"X-Hxb-Auth-Token"];
-//    [urlRequest setValue:userAgent forHTTPHeaderField:X_Hxb_User_Agent];
+    [urlRequest setValue:userAgent forHTTPHeaderField:X_Hxb_User_Agent];
     [self.webView loadRequest:urlRequest];
 }
 
