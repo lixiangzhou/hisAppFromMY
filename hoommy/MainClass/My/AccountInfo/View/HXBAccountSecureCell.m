@@ -33,7 +33,7 @@
     self.textLabel.text = model.title;
     
     if (model.type == HXBAccountSecureTypeGesturePwdSwitch) {
-        self.accessoryType = UITableViewCellAccessoryNone;
+    
         UISwitch *switchView = [UISwitch new];
         NSString *skip = KeyChain.skipGesture;
         BOOL isOn = NO;
@@ -44,6 +44,7 @@
         [[switchView rac_signalForControlEvents:UIControlEventValueChanged] subscribeNext:^(__kindof UISwitch * _Nullable x) {
             model.switchBlock(x.isOn);
         }];
+        self.accessoryType = UITableViewCellAccessoryNone;
         self.accessoryView = switchView;
     } else if (model.type == HXBAccountSecureTypeAboutUs || model.type == HXBAccountSecureTypeCommonProblems) {
         self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;

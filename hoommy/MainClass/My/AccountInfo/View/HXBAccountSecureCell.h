@@ -30,6 +30,6 @@ typedef void(^HXBHXBAccountSecureSwitchBlock)(BOOL);
 
 #define HXBAccountSecureCellID @"HXBAccountSecureCellID"
 
-@interface HXBAccountSecureCell : UITableViewCell//HXBBottomLineTableViewCell
+@interface HXBAccountSecureCell : HXBBottomLineTableViewCell
 @property (nonatomic, strong) HXBAccountSecureModel *model;
 @end
