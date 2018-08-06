@@ -222,7 +222,7 @@
     if (!_closeButton) {
         _closeButton = [[UIButton alloc] init];
         [_closeButton addTarget:self action:@selector(closePasswordView) forControlEvents:(UIControlEventTouchUpInside)];
-        [_closeButton setImage:[UIImage imageNamed:@"Alert_Close"] forState:(UIControlStateNormal)];
+        [_closeButton setImage:[UIImage imageNamed:@"webView_close"] forState:(UIControlStateNormal)];
         _closeButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
         _closeButton.imageEdgeInsets = UIEdgeInsetsMake(0, kScrAdaptationW750(50), 0, kHXBCloseBtnWith-kScrAdaptationW750(80));
     }
@@ -234,7 +234,7 @@
         _forgetButton = [[UIButton alloc] init];
         [_forgetButton addTarget:self action:@selector(forgetPassword) forControlEvents:UIControlEventTouchUpInside];
         [_forgetButton setTitle:@"忘记密码？" forState:(UIControlStateNormal)];
-        [_forgetButton setTitleColor:COR25 forState:(UIControlStateNormal)];
+        [_forgetButton setTitleColor:kHXBColor_FE7E5E_100 forState:(UIControlStateNormal)];
         _forgetButton.titleLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(28);
     }
     return _forgetButton;
