@@ -104,7 +104,7 @@
     self.hasQuitPlans = NO;
     for (HSJRollOutCellViewModel *vm in self.dataSource) {
         if (vm.isSelected) {        
-            value += vm.model.redProgressLeft.floatValue;
+            value += vm.model.canExitAmount;
         }
         if (vm.stepupStatus == HSJStepUpStatusQUIT) {
             self.hasQuitPlans = YES;

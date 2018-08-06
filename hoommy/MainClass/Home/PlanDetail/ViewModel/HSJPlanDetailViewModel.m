@@ -69,7 +69,7 @@
         return;
     }
     
-    self.interestString = [self getInterestString];
+    self.interestString = planModel.expectedRate;//[self getInterestString];
     self.lockString = [self getLockString];
     self.startDateString = [self getStartDateString];
     self.endLockDateString = [self getEndLockDateString];

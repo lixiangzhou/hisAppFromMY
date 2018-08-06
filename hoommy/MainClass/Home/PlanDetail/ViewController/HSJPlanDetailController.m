@@ -253,7 +253,6 @@
     UIButton *inBtn = [UIButton new];
     [inBtn setTitle:@"转入" forState:UIControlStateNormal];
     [inBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    inBtn.backgroundColor = kHXBColor_FF7055_100;
     inBtn.layer.cornerRadius = 2;
     inBtn.layer.masksToBounds = YES;
     inBtn.titleLabel.font = kHXBFont_32;
