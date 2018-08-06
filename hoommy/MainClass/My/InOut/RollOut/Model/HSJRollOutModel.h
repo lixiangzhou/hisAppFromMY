@@ -45,4 +45,6 @@ typedef enum : NSUInteger {
 @property (nonatomic, copy) NSString *quitDate;
 /// 预期年化收益率
 @property (nonatomic, copy) NSString *expectedRate;
+/// 月升可转出金额
+@property (nonatomic, assign) CGFloat canExitAmount;
 @end

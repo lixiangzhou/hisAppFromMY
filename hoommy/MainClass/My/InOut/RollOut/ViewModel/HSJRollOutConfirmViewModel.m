@@ -35,7 +35,7 @@
 
 - (void)quit:(NSArray *)ids smsCode:(NSString *)smsCode resultBlock:(void (^)(BOOL))resultBlock {
     [self loadData:^(NYBaseRequest *request) {
-        request.requestArgument = @{@"action": @"confirm", @"id": ids, @"smscode": smsCode};
+        request.requestArgument = @{@"action": @"result", @"id": ids, @"smscode": smsCode};
         request.requestUrl = kHXBMY_PlanQuit;
         request.requestMethod = NYRequestMethodPost;
         request.showHud = YES;
