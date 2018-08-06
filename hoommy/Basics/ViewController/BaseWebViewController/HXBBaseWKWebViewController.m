@@ -191,6 +191,11 @@
     [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
     [self.webView removeObserver:self forKeyPath:@"title"];
     [self.webView.scrollView removeObserver:self forKeyPath:@"contentSize"];
+    if(self.webView.isLoading) {
+        [self.webView stopLoading];
+    }
+    self.webView.scrollView.delegate = nil;
+    self.webView.navigationDelegate = nil;
 }
 
 - (void)reLoadWhenViewAppear {

@@ -123,7 +123,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *title = [self.titleList safeObjectAtIndex:indexPath.row];
     if([title isEqualToString:@"取消"]) {
-        [self dismissViewControllerAnimated:YES completion:nil];
+        [self dismissViewControllerAnimated:NO completion:nil];
     }
     else {
         [self dismissViewControllerAnimated:NO completion:nil];
