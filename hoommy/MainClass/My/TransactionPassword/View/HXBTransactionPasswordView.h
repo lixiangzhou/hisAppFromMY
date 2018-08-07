@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface HXBTransactionPasswordView : UIView
-
+@property (nonatomic, strong, readonly) UIView *loadingParentView;
 /**
  输入密码回调
  */

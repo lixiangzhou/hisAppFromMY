@@ -30,6 +30,7 @@
         
         [self downLoadUserInfo:YES resultBlock:^(HXBUserInfoModel *userInfoModel, NSError *erro) {
             loadedUserInfo = YES;
+            weakSelf.userInfoModel = userInfoModel;
             if (userInfoModel) {
                 weakSelf.hasBuy = [userInfoModel.userInfo.hasEverInvestStepUp isEqualToString:@"1"];
             } else {
@@ -69,7 +70,7 @@
         return;
     }
     
-    self.interestString = planModel.expectedRate;//[self getInterestString];
+    self.interestString = [NSString stringWithFormat:@"%@%%", planModel.expectedRate];//[self getInterestString];
     self.lockString = [self getLockString];
     self.startDateString = [self getStartDateString];
     self.endLockDateString = [self getEndLockDateString];

@@ -12,7 +12,7 @@
 #import "HXBBaseRequestManager.h"
 
 @interface HSJBaseViewModel()
-
+@property (nonatomic, weak) UIViewController *hugParentViewController;
 @end
 
 @implementation HSJBaseViewModel
@@ -31,6 +31,7 @@
     self = [super init];
     if (self) {
         self.isFilterHugHidden = YES;
+        self.hugParentViewController = [HXBRootVCManager manager].topVC;
     }
     return self;
 }
@@ -40,7 +41,11 @@
     if(self.hugViewBlock) {
         return self.hugViewBlock();
     }
-    
+    else {
+        if(self.hugParentViewController) {
+            return self.hugParentViewController.view;
+        }
+    }
     return [super getHugView];
 }
 

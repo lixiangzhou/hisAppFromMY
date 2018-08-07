@@ -12,7 +12,6 @@
 #import "HSJTokenManager.h"
 #import "HSJProgressView.h"
 
-static const char kMBProgressHUDKey = '\0';
 static const char kNetRequestListKey = '\0';
 static const char kHSJProgressViewKey = '\0';
 
@@ -21,14 +20,14 @@ static const char kHSJProgressViewKey = '\0';
 #pragma mark 属性设置
 
 - (UIView*)getHugView {
-    return [HXBRootVCManager manager].topVC.view;
+    return nil;
 }
 
 - (void)setNetRequestList:(NSMutableArray *)netRequestList {
-    [self willChangeValueForKey:@"userInfoModel"]; // KVO
+    [self willChangeValueForKey:@"netRequestList"]; // KVO
     objc_setAssociatedObject(self, &kNetRequestListKey,
                              netRequestList, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    [self didChangeValueForKey:@"userInfoModel"]; // KVO
+    [self didChangeValueForKey:@"netRequestList"]; // KVO
 }
 
 - (NSMutableArray *)netRequestList {
@@ -51,7 +50,7 @@ static const char kHSJProgressViewKey = '\0';
     }
     [parentV addSubview:progressView];
     if (isShow) {
-        [progressView bringSubviewToFront:progressView];
+        [parentV bringSubviewToFront:progressView];
         [progressView show];
     } else {
         [progressView hide];

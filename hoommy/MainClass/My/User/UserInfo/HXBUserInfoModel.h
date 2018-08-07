@@ -82,11 +82,18 @@
  激进型：[“D”, “AA”, “A”,”PROACTIVE”, “B”,”C”,”CONSERVATIVE”, “PRUDENT”]
  */
 @property (nonatomic,strong) NSArray *userRisk;
+
 /// 月升持有资产
 @property (nonatomic, assign) CGFloat stepUpAssets;
-/// 月升累计收益
-@property (nonatomic, assign) CGFloat stepUpSumPlanInterest;
 
+/// 月升累计收益
+@property (nonatomic, assign) CGFloat stepUpEarnTotal;
+
+/// 月升昨日收益
+@property (nonatomic, assign) CGFloat stepUpYesterdayEarnTotal;
+
+/// 月升持有资产
+@property (nonatomic, assign) CGFloat stepUpHoldingAmount;
 
 @end
 

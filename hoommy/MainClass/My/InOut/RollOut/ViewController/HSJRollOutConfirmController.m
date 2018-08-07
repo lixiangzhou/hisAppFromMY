@@ -41,6 +41,7 @@
     moneyLabel.font = kHXBFont_30;
     moneyLabel.textColor = kHXBColor_333333_100;
     [self.safeAreaView addSubview:moneyLabel];
+    self.moneyLabel = moneyLabel;
     
     UILabel *moneyDescLabel = [UILabel new];
     moneyDescLabel.text = @"资金将转出到您的恒丰银行存管账户中，预计需要1-2天";

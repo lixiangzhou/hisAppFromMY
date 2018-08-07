@@ -187,13 +187,13 @@
     else {
         buttonType = [self buttonTypeByPlanState];
         if(buttonType == HSJBUYBUTTON_JOIN) {
-            buttonType = HSJBUYBUTTON_BINDCARD;
-            if(self.userInfoModel.userInfo.hasBindCard.boolValue) {
-                double money = self.inputMoney.doubleValue;
-                buttonType = HSJBUYBUTTON_NOMONEY;
-                if(money > 0) {
-                    buttonType = HSJBUYBUTTON_WITHMONEY;
-                }
+            double money = self.inputMoney.doubleValue;
+            buttonType = HSJBUYBUTTON_NOMONEY;
+            if(money > 0) {
+                buttonType = HSJBUYBUTTON_WITHMONEY;
+            }
+            if(!self.userInfoModel.userInfo.hasBindCard.boolValue && [self isAbleBankCellItem]) {
+                buttonType = HSJBUYBUTTON_BINDCARD;
             }
         }
     }
@@ -354,7 +354,7 @@
             erroInfo = @"转入金额已超上限";
         }
         else{
-            if(money<self.planModel.minRegisterAmount.doubleValue && self.addUpLimit>=self.planModel.minRegisterAmount.doubleValue) {
+            if(self.planModel.isFirst.boolValue && money<self.planModel.minRegisterAmount.doubleValue && self.addUpLimit>=self.planModel.minRegisterAmount.doubleValue) {
                 erroInfo = [NSString stringWithFormat:@"起投金额需为%@", [NSString hxb_getPerMilWithIntegetNumber:self.planModel.minRegisterAmount.doubleValue]];
                 if(lessthanStartMoneyBLock) {
                     lessthanStartMoneyBLock(YES);
@@ -363,7 +363,13 @@
             if(self.addUpLimit>=self.planModel.registerMultipleAmount.doubleValue) {
                 int leftValue = money-self.planModel.minRegisterAmount.doubleValue;
                 if(leftValue % self.planModel.registerMultipleAmount.intValue != 0) {
-                    erroInfo = [NSString stringWithFormat:@"转入金额需%@起投，%@倍数递增；", [NSString hxb_getPerMilWithIntegetNumber:self.planModel.minRegisterAmount.doubleValue], [NSString hxb_getPerMilWithIntegetNumber:self.planModel.registerMultipleAmount.doubleValue]];
+                    if(self.planModel.isFirst.boolValue) {
+                        erroInfo = [NSString stringWithFormat:@"转入金额需%@起投，%@倍数递增；", [NSString hxb_getPerMilWithIntegetNumber:self.planModel.minRegisterAmount.doubleValue], [NSString hxb_getPerMilWithIntegetNumber:self.planModel.registerMultipleAmount.doubleValue]];
+                    }
+                    else{
+                        erroInfo = [NSString stringWithFormat:@"转入金额需%@倍数递增；", [NSString hxb_getPerMilWithIntegetNumber:self.planModel.minRegisterAmount.doubleValue], [NSString hxb_getPerMilWithIntegetNumber:self.planModel.registerMultipleAmount.doubleValue]];
+                    }
+                    
                 }
             }
         }
