@@ -89,22 +89,25 @@
     _editing = editing;
     [self.selectedViewModels removeAllObjects];
     [self.selectedIds removeAllObjects];
-    kWeakSelf
     [self.dataSource enumerateObjectsUsingBlock:^(HSJRollOutCellViewModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         obj.isEditing = editing;
         obj.isSelected = !editing;
-        [weakSelf.selectedViewModels addObject:obj];
-        [weakSelf.selectedIds addObject:obj.model.id];
     }];
 }
 
 - (void)calAmount {
     CGFloat value = 0;
     
+    [self.selectedViewModels removeAllObjects];
+    [self.selectedIds removeAllObjects];
+    
     self.hasQuitPlans = NO;
     for (HSJRollOutCellViewModel *vm in self.dataSource) {
         if (vm.isSelected) {        
             value += vm.model.canExitAmount;
+            
+            [self.selectedViewModels addObject:vm];
+            [self.selectedIds addObject:vm.model.id];
         }
         if (vm.stepupStatus == HSJStepUpStatusQUIT) {
             self.hasQuitPlans = YES;
