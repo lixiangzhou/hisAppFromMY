@@ -36,15 +36,18 @@ NSString * const HSJFinAddRecortdCellIdentifier = @"HSJFinAddRecortdCellIdentifi
 
 - (void)setUI {
     
+    self.backgroundColor = [UIColor clearColor];
     UIView *bgView = [UIView new];
     bgView.backgroundColor = kHXBColor_FFFFFF_100;
     [self.contentView addSubview:bgView];
-    [self.contentView addSubview:self.leftAccountLabel];
-    [self.contentView addSubview:self.leftAccountTitleLabel];
-    [self.contentView addSubview:self.loanIdLabel];
-    [self.contentView addSubview:self.contractButton];
-    [self.contentView addSubview:self.lendTimeLabel];
-    [self.contentView addSubview:self.stateImgV];
+    bgView.layer.cornerRadius = kScrAdaptationW750(2.0f);
+    bgView.layer.masksToBounds = YES;
+    [bgView addSubview:self.leftAccountLabel];
+    [bgView addSubview:self.leftAccountTitleLabel];
+    [bgView addSubview:self.loanIdLabel];
+    [bgView addSubview:self.contractButton];
+    [bgView addSubview:self.lendTimeLabel];
+    [bgView addSubview:self.stateImgV];
     [self.stateImgV addSubview:self.stateTitleLabel];
     
     kWeakSelf
@@ -86,7 +89,7 @@ NSString * const HSJFinAddRecortdCellIdentifier = @"HSJFinAddRecortdCellIdentifi
         make.height.equalTo(@kScrAdaptationH750(88));
     }];
     [self.stateTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.offset(kScrAdaptationH(-2));
+        make.centerY.offset(kScrAdaptationH750(5));
         make.height.equalTo(@kScrAdaptationH750(24));
         make.left.offset(kScrAdaptationW750(10));
         make.right.offset(kScrAdaptationW750(-10));
@@ -101,7 +104,7 @@ NSString * const HSJFinAddRecortdCellIdentifier = @"HSJFinAddRecortdCellIdentifi
 
 - (void)setModel:(HSJFinAddRecortdModel *)model {
     _model = model;
-    self.leftAccountLabel.text = [NSString GetPerMilWithDouble:self.model.amount.floatValue];
+    self.leftAccountLabel.text = [NSString hsj_simpleMoneyValue:self.model.amount.floatValue];
     
     NSString *loanIdLabelTitle = @"标的ID：";
     self.loanIdLabel.attributedText = [NSAttributedString setupAttributeStringWithBeforeString:loanIdLabelTitle  WithBeforeRange:NSMakeRange(0, loanIdLabelTitle.length) andAttributeColor:RGB(146, 149, 162) andAttributeFont:kHXBFont_24 afterString:model.loanId WithAfterRange:NSMakeRange(0, model.loanId.length) andAttributeColor:RGB(21, 21, 21) andAttributeFont:kHXBFont_24];
@@ -109,7 +112,7 @@ NSString * const HSJFinAddRecortdCellIdentifier = @"HSJFinAddRecortdCellIdentifi
     NSString *lendTimeLabelTitle = @"出借时间：";
     NSString *time = [[HXBBaseHandDate sharedHandleDate] millisecond_StringFromDate:self.model.lendTime andDateFormat:@"yyyy-MM-dd"];;
     self.lendTimeLabel.attributedText = [NSAttributedString setupAttributeStringWithBeforeString:lendTimeLabelTitle  WithBeforeRange:NSMakeRange(0, lendTimeLabelTitle.length) andAttributeColor:RGB(146, 149, 162) andAttributeFont:kHXBFont_24 afterString:time WithAfterRange:NSMakeRange(0, time.length) andAttributeColor:RGB(21, 21, 21) andAttributeFont:kHXBFont_24];
-    self.stateTitleLabel.text = model.status;
+    self.stateTitleLabel.text = model.statusText;
 }
 
 
@@ -174,7 +177,8 @@ NSString * const HSJFinAddRecortdCellIdentifier = @"HSJFinAddRecortdCellIdentifi
     if (!_stateTitleLabel) {
         _stateTitleLabel = [UILabel new];
         _stateTitleLabel.textColor = RGB(255, 112, 85);
-        _stateTitleLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(20);
+        _stateTitleLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(24);
+        _stateTitleLabel.textAlignment = NSTextAlignmentRight;
     }
     return _stateTitleLabel;
 }

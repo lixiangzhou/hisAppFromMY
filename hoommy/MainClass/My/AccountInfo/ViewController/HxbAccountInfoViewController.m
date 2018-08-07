@@ -367,20 +367,24 @@ UITableViewDataSource
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    HXBAccountSecureCell *cell = [[HXBAccountSecureCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:HXBAccountSecureCellID];
-//    HXBAccountSecureCell *cell = [tableView dequeueReusableCellWithIdentifier:HXBAccountSecureCellID forIndexPath:indexPath];
+//    HXBAccountSecureCell *cell = [[HXBAccountSecureCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:HXBAccountSecureCellID];
+    HXBAccountSecureCell *cell = [tableView dequeueReusableCellWithIdentifier:HXBAccountSecureCellID forIndexPath:indexPath];
     if (indexPath.section == 0) {
         cell.model = self.dataSource[indexPath.row];
-//        cell.hiddenLine = cell.model.type == HXBAccountSecureTypeGesturePwdModify ?:NO;
+        cell.hiddenLine = cell.model.type == HXBAccountSecureTypeGesturePwdModify ?:NO;
+        cell.isLineRight = YES;
     } else if (indexPath.section == 1) {
         NSInteger row =  [tableView numberOfRowsInSection:0] + indexPath.row;
         cell.model = self.dataSource[row];
-//        cell.hiddenLine = cell.model.type == HXBAccountSecureTypeAboutUs ?:NO;
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.hiddenLine = cell.model.type == HXBAccountSecureTypeAboutUs ?:NO;
+        cell.isLineRight = YES;
     } else {
         [cell.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
         [cell.contentView addSubview:self.signOutLabel];
         cell.accessoryType = UITableViewCellAccessoryNone;
-//        cell.hiddenLine = YES;
+        cell.hiddenLine = YES;
+        cell.isLineRight = YES;
         
         [self.signOutLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.centerX.height.width.equalTo(cell.contentView);
@@ -388,93 +392,6 @@ UITableViewDataSource
     }
     
     return cell;
-    
-    /*
-    static NSString *celledStr = @"celled";
-    HXBBottomLineTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:celledStr];
-    if (cell == nil) {
-        cell = [[HXBBottomLineTableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:celledStr];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.textLabel.font = kHXBFont_PINGFANGSC_REGULAR(15);
-        cell.textLabel.textColor = COR6;
-        cell.detailTextLabel.font = kHXBFont_PINGFANGSC_REGULAR(15);
-        cell.detailTextLabel.textColor = COR29;
-        
-    }
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    if (indexPath.section == 0) {
-        cell.detailTextLabel.text = @"绑定手机号";
-        cell.detailTextLabel.textColor = COR30;
-        
-//        cell.textLabel.text = self.userInfoViewModel.userInfoModel.userInfo.username;
-//        cell.imageView.image = [UIImage imageNamed:@"default_avatar"];
-//        cell.accessoryType = UITableViewCellAccessoryNone;
-//        cell.hiddenLine = YES;
-//        if ([self.userInfoViewModel.userInfoModel.userInfo.gender isEqualToString:@"1"]) {
-//            cell.imageView.image = [UIImage imageNamed:@"woman"];
-//        }else if([self.userInfoViewModel.userInfoModel.userInfo.gender isEqualToString:@"0"]){
-//            cell.imageView.image = [UIImage imageNamed:@"man"];
-//        }
-    }else if (indexPath.section == 1){
-        
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        if (indexPath.row == 0) {
-            cell.textLabel.text = @"恒丰银行存管账户";
-            
-            if (!self.userInfoViewModel.userInfoModel.userInfo.isCreateEscrowAcc) {
-                //开通存管银行账户
-                cell.detailTextLabel.text = @"未开户";
-            }else if (![self.userInfoViewModel.userInfoModel.userInfo.isCashPasswordPassed isEqualToString:@"1"]) {
-                //完善信息
-                cell.detailTextLabel.text = @"完善信息";
-            }else{
-                //已开通
-                cell.detailTextLabel.text = @"已开户";
-                cell.detailTextLabel.textColor = COR30;
-            }
-            cell.hiddenLine = !self.userInfoViewModel.userInfoModel.userInfo.isCreateEscrowAcc;
-            
-        } else if (indexPath.row == 1){
-            cell.textLabel.text = @"银行卡";
-            cell.hiddenLine = YES;
-            if ([self.userInfoViewModel.userInfoModel.userInfo.hasBindCard isEqualToString:@"1"]) {
-                cell.detailTextLabel.text = @"已绑定";
-                cell.detailTextLabel.textColor = COR30;
-            }else{
-                cell.detailTextLabel.text = @"未绑定";
-            }
-        }else{
-            cell.textLabel.text = @"风险评测";
-            cell.detailTextLabel.text = self.userInfoViewModel.userInfoModel.userInfo.riskType;
-        }
-    } else if (indexPath.section == 2) {
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        _itemArray = @[@"风险评测",@"账户安全",@"我的财富顾问",@"关于我们"];
-        if (!_isDisplayAdvisor) {
-            _itemArray = @[@"风险评测",@"账户安全",@"关于我们"];
-        }
-        cell.textLabel.text = _itemArray[indexPath.row];
-        cell.hiddenLine = NO;
-        if (indexPath.row == 0) {
-            cell.detailTextLabel.text = self.userInfoViewModel.userInfoModel.userInfo.riskType;
-            cell.detailTextLabel.textColor = COR30;
-            if ([cell.detailTextLabel.text isEqualToString:@"立即评测"]) {
-                cell.detailTextLabel.textColor = COR29;
-            }
-        }else if(indexPath.row == _itemArray.count - 1){
-            cell.hiddenLine = YES;
-        }
-    }else if (indexPath.section == 3){
-        cell.textLabel.text = @"";
-        cell.detailTextLabel.text = @"";
-        self.signOutLabel.frame = cell.bounds;
-        self.signOutLabel.width = kScreenWidth;
-        [cell.contentView addSubview:self.signOutLabel];
-        cell.accessoryType = UITableViewCellAccessoryNone;
-        cell.hiddenLine = YES;
-    }
-    return cell;
-     */
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -555,18 +472,8 @@ UITableViewDataSource
     [alertVC setRightBtnBlock:^{
         
         [weakSelf.viewModel userLogOut:YES resultBlock:^(id responseData, NSError *erro) {
-            if (erro) {
-                NSDictionary *respObj = erro.userInfo;
-                
-                if ([respObj isKindOfClass:[NSDictionary class]]) {
-                    
-                    if ([weakSelf.viewModel getStateCode:respObj] != kHXBCode_Enum_RequestOverrun) {
-                        [weakSelf showToast:[weakSelf.viewModel getErroMessage:responseData]];
-                    }
-                } else {
-                    [weakSelf showToast:@"退出失败"];
-                }
-            } else {
+            
+            if (!erro) {
                 [(HXBBaseTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController setSelectedIndex:0];
                 [weakSelf.navigationController popToRootViewControllerAnimated:YES];
             }
@@ -589,22 +496,15 @@ UITableViewDataSource
 - (UITableView *)tableView{
     if (!_tableView) {
         _tableView = [[UITableView  alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
-//        [_tableView registerClass:[HXBAccountSecureCell class] forCellReuseIdentifier:HXBAccountSecureCellID];
+        [_tableView registerClass:[HXBAccountSecureCell class] forCellReuseIdentifier:HXBAccountSecureCellID];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-//        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.sectionHeaderHeight = 0.1;
         _tableView.sectionFooterHeight = 0.1;
     }
     return _tableView;
 }
-
-//- (HXBRequestUserInfoViewModel *)userInfoViewModel {
-//    if(!_userInfoViewModel) {
-//        _userInfoViewModel = [[HXBRequestUserInfoViewModel alloc] init];
-//    }
-//    return _userInfoViewModel;
-//}
 
 #pragma mark - 加载数据
 - (void)loadData_userInfo:(BOOL)isShowLoading {

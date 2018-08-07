@@ -82,7 +82,7 @@
         cell = [[HXBWithdrawRecordCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:identifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-//    cell.withdrawRecordModel = self.withdrawRecordViewModel.withdrawRecordListModel.dataList[indexPath.row];
+
     NSString *key = self.withdrawRecordViewModel.formatWithdrawRecordDataKeyList[indexPath.section];
     NSArray *keyValueArray = self.withdrawRecordViewModel.formatWithdrawRecordDataValueList[key];
     cell.withdrawRecordModel = keyValueArray[indexPath.row];
