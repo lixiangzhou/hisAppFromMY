@@ -75,6 +75,7 @@
 		8D142AA220FDC00100520728 /* HSJGlobalInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D142AA120FDC00100520728 /* HSJGlobalInfoModel.m */; };
 		8D142AA520FDCDEB00520728 /* HSJPlanModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D142AA420FDCDEB00520728 /* HSJPlanModel.m */; };
 		8D2533212100994700CBF08A /* HSJRollOutCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D2533202100994700CBF08A /* HSJRollOutCellViewModel.m */; };
+		8D413B3521185BEC009574D1 /* HSJProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D413B3421185BEC009574D1 /* HSJProgressView.m */; };
 		8D591BF120F84C57007CA4BE /* HSJPlanDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D591BF020F84C57007CA4BE /* HSJPlanDetailController.m */; };
 		8D591BF820F84D1C007CA4BE /* HSJPlanDetailTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D591BF720F84D1C007CA4BE /* HSJPlanDetailTopView.m */; };
 		8D591BFB20F84D66007CA4BE /* HSJPlanDetailRulerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D591BFA20F84D66007CA4BE /* HSJPlanDetailRulerView.m */; };
@@ -539,6 +540,8 @@
 		8D142AA420FDCDEB00520728 /* HSJPlanModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJPlanModel.m; sourceTree = "<group>"; };
 		8D25331F2100994700CBF08A /* HSJRollOutCellViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJRollOutCellViewModel.h; sourceTree = "<group>"; };
 		8D2533202100994700CBF08A /* HSJRollOutCellViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJRollOutCellViewModel.m; sourceTree = "<group>"; };
+		8D413B3321185BEC009574D1 /* HSJProgressView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJProgressView.h; sourceTree = "<group>"; };
+		8D413B3421185BEC009574D1 /* HSJProgressView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJProgressView.m; sourceTree = "<group>"; };
 		8D591BEF20F84C57007CA4BE /* HSJPlanDetailController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJPlanDetailController.h; sourceTree = "<group>"; };
 		8D591BF020F84C57007CA4BE /* HSJPlanDetailController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJPlanDetailController.m; sourceTree = "<group>"; };
 		8D591BF620F84D1C007CA4BE /* HSJPlanDetailTopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJPlanDetailTopView.h; sourceTree = "<group>"; };
@@ -1647,6 +1650,15 @@
 				8D142AA420FDCDEB00520728 /* HSJPlanModel.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		8D413B3621185BF8009574D1 /* ProgressView */ = {
+			isa = PBXGroup;
+			children = (
+				8D413B3321185BEC009574D1 /* HSJProgressView.h */,
+				8D413B3421185BEC009574D1 /* HSJProgressView.m */,
+			);
+			path = ProgressView;
 			sourceTree = "<group>";
 		};
 		8D591BEC20F84C25007CA4BE /* PlanDetail */ = {
@@ -2892,6 +2904,7 @@
 		9A97D96620EF420100688ADB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				8D413B3621185BF8009574D1 /* ProgressView */,
 				9AF51D9E20FC4849008A8CF4 /* CALayerTool */,
 				9A37490D20F7714600F39681 /* TransitioningManager */,
 				E13A0F0820F4DC2600A3E364 /* Middlekey */,
@@ -4133,6 +4146,7 @@
 				4EA610BF2105E40E008580DD /* EllipsePageControl.m in Sources */,
 				E18977372110487400E558F9 /* HXBHomePopViewModel.m in Sources */,
 				E13A0F0320F4C94900A3E364 /* HXBCommonProblemViewController.m in Sources */,
+				8D413B3521185BEC009574D1 /* HSJProgressView.m in Sources */,
 				8D142A9120FD9B4D00520728 /* HxbAdvertiseViewController.m in Sources */,
 				9A37498920F859A100F39681 /* HBAlertPasswordView.m in Sources */,
 				8D5D612420FF1AD0003F94D9 /* HSJRollOutPlanDetailViewModel.m in Sources */,
@@ -4462,6 +4476,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -4483,6 +4498,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "0595d0a7-bbfe-482a-9eff-612b76578ca9";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -4520,6 +4536,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -4534,6 +4551,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "0595d0a7-bbfe-482a-9eff-612b76578ca9";
+				PROVISIONING_PROFILE_SPECIFIER = lxz_adc;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -4544,6 +4563,7 @@
 			baseConfigurationReference = 54B20A0D6605B011D885333F /* Pods-hoommy.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Z9M2NMJFP5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -4560,6 +4580,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hoomsun.muyingmoney;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -4569,6 +4591,7 @@
 			baseConfigurationReference = F3AA4ECD958918A00E682797 /* Pods-hoommy.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Z9M2NMJFP5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -4585,6 +4608,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hoomsun.muyingmoney;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
