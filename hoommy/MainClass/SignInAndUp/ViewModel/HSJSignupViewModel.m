@@ -67,6 +67,7 @@
                 KeyChain.ciphertext = @"0";
                 KeyChain.skipGesture = kHXBGesturePwdSkipeNONE;
                 KeyChain.skipGestureAlertAppeared = NO;
+                [HXBRootVCManager manager].gesturePwdVC = nil;
             }
             resultBlock(responseData,erro);
         }

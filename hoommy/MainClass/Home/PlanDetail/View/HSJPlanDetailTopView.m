@@ -217,30 +217,19 @@
     
     if (viewModel.hasBuy) {
         self.bgView.image = [UIImage imageNamed:@"detail_top_buy_bg"];
-        self.topLabel.text = @"0.00";
+        self.topLabel.text = [NSString hsj_simpleMoneyValue:viewModel.userInfoModel.userAssets.stepUpYesterdayEarnTotal];
         self.topDescLabel.text = @"昨日收益(元)";
         
-        self.leftLabel.text = @"0.00";
+        self.leftLabel.text = [NSString hsj_simpleMoneyValue:viewModel.userInfoModel.userAssets.stepUpHoldingAmount];
         self.leftDescLabel.text = @"总资产(元)";
         
-        self.centerLabel.text = @"0.00";
+        self.centerLabel.text = [NSString hsj_simpleMoneyValue:viewModel.userInfoModel.userAssets.stepUpEarnTotal];
         self.centerDescLabel.text = @"累计收益(元)";
         
         self.rightLabel.text = viewModel.interestString;
         self.rightDescLabel.text = @"今日预期年化";
         
         self.addtionDescLabel.text = [NSString stringWithFormat:@"投资1万元日预期收益%@", [NSString hsj_moneyValueSuffix:viewModel.planModel.tenThousandExceptedIncome.doubleValue]];
-        
-        kWeakSelf
-        [self.viewModel downLoadUserInfo:NO resultBlock:^(HXBUserInfoModel *infoModel, NSError *erro) {
-            if (infoModel) {
-                weakSelf.topLabel.text = [NSString hsj_simpleMoneyValue:infoModel.userAssets.yesterdayInterest];
-                
-                weakSelf.leftLabel.text = [NSString hsj_simpleMoneyValue:infoModel.userAssets.stepUpAssets];
-                
-                weakSelf.centerLabel.text = [NSString hsj_simpleMoneyValue:infoModel.userAssets.stepUpSumPlanInterest];
-            }
-        }];
     } else {
         self.bgView.image = [UIImage imageNamed:@"detail_top_bg"];
         self.topLabel.text = viewModel.interestString;

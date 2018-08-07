@@ -110,7 +110,9 @@ static const char HXBUserInfoModelKey = '\0';
         request.showHud = isShowHud;
     } responseResult:^(id responseData, NSError *erro) {
         if(!erro) {
+            NSString *ges = KeyChain.gesturePwd;
             [KeyChain signOut];
+            KeyChain.gesturePwd = ges;
         }
         if(resultBlock) {
             resultBlock(resultBlock, erro);

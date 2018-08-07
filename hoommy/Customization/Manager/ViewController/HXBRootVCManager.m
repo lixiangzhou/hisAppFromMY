@@ -68,6 +68,7 @@
 - (UIViewController *)getTabBarOrGesPwdVC {
     UIViewController *VC = nil;
     if (KeyChain.isLogin) {
+        NSLog(@"%@ %@ %d", KeyChain.gesturePwd, KeyChain.skipGesture, KeyChain.skipGestureAlertAppeared);
         if (KeyChain.gesturePwd.length > 0 && [KeyChain.skipGesture isEqualToString:kHXBGesturePwdSkipeNO]) {   // 已有手势密码，手势登录
             HSJGestureLoginController *gestureVC = [[HSJGestureLoginController alloc] init];
             gestureVC.type = HSJGestureTypeLogin;
