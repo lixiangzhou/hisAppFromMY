@@ -13,6 +13,8 @@
 #import "HSJRollOutPlanDetailController.h"
 #import "HSJMyAccountBalanceViewModel.h"
 #import "HSJPlanDetailViewModel.h"
+#import "HxbWithdrawCardViewController.h"
+
 @interface HSJMyAccountBalanceController ()
 @property (nonatomic,strong) HSJMyAccountBalanceHeadView *headView;
 @property (nonatomic,strong) UIButton *intoBtn;
@@ -87,9 +89,17 @@
 
 - (void)withdrawalBtnClick:(UIButton *)sender {
     NSLog(@"提现至银行卡");
-    [HXBUmengManagar HXB_clickEventWithEnevtId: kHSJUmeng_MyWithdrawCashToBankCardClick];
-    HxbWithdrawViewController *withdrawViewController = [[HxbWithdrawViewController alloc]init];
-    [self.navigationController pushViewController:withdrawViewController animated:YES];
+    
+    if ([self.userInfoModel.userInfo.hasBindCard isEqualToString:@"0"]) {
+        //进入绑卡界面
+        HxbWithdrawCardViewController *withdrawCardViewController = [[HxbWithdrawCardViewController alloc]init];
+        withdrawCardViewController.type = HXBRechargeAndWithdrawalsLogicalJudgment_Other;
+        [self.navigationController pushViewController:withdrawCardViewController animated:YES];
+    } else {
+        [HXBUmengManagar HXB_clickEventWithEnevtId: kHSJUmeng_MyWithdrawCashToBankCardClick];
+        HxbWithdrawViewController *withdrawViewController = [[HxbWithdrawViewController alloc]init];
+        [self.navigationController pushViewController:withdrawViewController animated:YES];
+    }
 }
 
 - (UIButton *)intoBtn {
