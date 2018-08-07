@@ -202,7 +202,7 @@
 - (UIImageView *)icon
 {
     if (!_icon) {
-        _icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"shouli"]];
+        _icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"result_handle"]];
         _icon.contentMode = UIViewContentModeScaleAspectFit;
     }
     return _icon;
