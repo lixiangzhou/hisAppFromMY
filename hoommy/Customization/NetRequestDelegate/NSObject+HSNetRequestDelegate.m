@@ -10,9 +10,11 @@
 #import <MBProgressHUD/MBProgressHUD.h>
 #import "SGInfoAlert.h"
 #import "HSJTokenManager.h"
+#import "HSJProgressView.h"
 
 static const char kMBProgressHUDKey = '\0';
 static const char kNetRequestListKey = '\0';
+static const char kHSJProgressViewKey = '\0';
 
 @implementation NSObject (HSJNetRequestDelegate)
 
@@ -42,24 +44,17 @@ static const char kNetRequestListKey = '\0';
 
 - (void)showMBP:(BOOL)isShow withHudContent:(NSString*)hudContent{
     UIView* parentV = [self getHugView];
-    MBProgressHUD* hudView = objc_getAssociatedObject(self, &kMBProgressHUDKey);
-    if (!hudView) {
-        hudView = [[MBProgressHUD alloc] initWithView:parentV];
-        hudView.removeFromSuperViewOnHide = YES;
-        hudView.contentColor = [UIColor whiteColor];
-        hudView.bezelView.backgroundColor = [UIColor blackColor];
-        hudView.label.textColor = [UIColor whiteColor];
-        objc_setAssociatedObject(self, &kMBProgressHUDKey,
-                                 hudView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    HSJProgressView *progressView = objc_getAssociatedObject(self, &kHSJProgressViewKey);
+    if (progressView == nil) {
+        progressView = [HSJProgressView new];
+        objc_setAssociatedObject(self, &kHSJProgressViewKey, progressView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
-    hudView.label.text = hudContent;
-    [parentV addSubview:hudView];
-    if(isShow){
-        [parentV bringSubviewToFront:hudView];
-        [hudView showAnimated:NO];
-    }
-    else{
-        [hudView hideAnimated:YES];
+    [parentV addSubview:progressView];
+    if (isShow) {
+        [progressView bringSubviewToFront:progressView];
+        [progressView show];
+    } else {
+        [progressView hide];
     }
 }
 
