@@ -9,9 +9,30 @@
 #import "HXBBaseViewController.h"
 #import "WKWebViewJavascriptBridge.h"
 
-@interface HXBBaseWKWebViewController : HXBBaseViewController
+#define HXB_POST_JS @"function my_post(path, params) {\
+var method = \"POST\";\
+var form = document.createElement(\"form\");\
+form.setAttribute(\"method\", method);\
+form.setAttribute(\"action\", path);\
+form.setAttribute(\"accept-charset\", \"UTF-8\");\
+for(var key in params){\
+if (params.hasOwnProperty(key)) {\
+var hiddenFild = document.createElement(\"input\");\
+hiddenFild.setAttribute(\"type\", \"hidden\");\
+hiddenFild.setAttribute(\"name\", key);\
+hiddenFild.setAttribute(\"value\", params[key]);\
+}\
+form.appendChild(hiddenFild);\
+}\
+document.body.appendChild(form);\
+form.submit();\
+}"
 
-@property (nonatomic, strong) WKWebView *webView;
+@interface HXBBaseWKWebViewController : HXBBaseViewController
+/**
+ 用于加载一个新的URLRequest。
+ */
+@property (nonatomic, strong,readonly) WKWebView *webView;
 
 @property (nonatomic, copy) NSString* pageUrl;
 /**
@@ -19,15 +40,17 @@
  */
 @property (nonatomic, copy) NSString* pageTitle;
 
+//分享视图的title
+@property (nonatomic, copy) NSString *shareViewTitle;
+
 //重新获取焦点时，是否需要重新加载, 默认值是YES
 @property (nonatomic, assign) BOOL pageReload;
 
+//是否需要显示关闭按钮
+@property (nonatomic, assign) BOOL isShowCloseButton;
 
-/**
- 加载页面
- */
-- (void)loadWebPage;
-
+//是否显示左侧按钮标题
+@property (nonatomic, assign) BOOL isShowLeftButtonTitle;
 /**
  注册js回调
  
@@ -43,11 +66,16 @@
  */
 - (void)callHandler:(NSString *)handlerName data:(id)data;
 
+
 /**
  重新加载页面
  */
 - (void)reloadPage;
 
+/**
+ 加载第三方H5页面需要重写此方法
+ */
+- (void)loadWebPage;
 /**
  push 一个显示网页的控制器
 

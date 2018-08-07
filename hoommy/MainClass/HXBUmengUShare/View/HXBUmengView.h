@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <UShareUI/UShareUI.h>
 @interface HXBUmengView : UIView
-
 /**
  点击按钮回调
  */

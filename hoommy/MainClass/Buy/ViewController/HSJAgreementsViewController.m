@@ -7,6 +7,7 @@
 //
 
 #import "HSJAgreementsViewController.h"
+#import "HXBBaseWKWebViewController.h"
 
 @interface HSJAgreementsViewController ()
 @property (nonatomic, strong) UITableView *tableView;
@@ -122,19 +123,24 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *title = [self.titleList safeObjectAtIndex:indexPath.row];
     if([title isEqualToString:@"取消"]) {
-        [self dismissViewControllerAnimated:YES completion:nil];
+        [self dismissViewControllerAnimated:NO completion:nil];
     }
     else {
         [self dismissViewControllerAnimated:NO completion:nil];
         UINavigationController *navVC = [HXBRootVCManager manager].mainTabbarVC.selectedViewController;
+        HXBBaseWKWebViewController *vc = [[HXBBaseWKWebViewController alloc] init];
         if([title isEqualToString:@"钱罐服务协议"]) {
             
         }
         else if([title isEqualToString:@"投资提示书"]) {
             
         }
-        if([title isEqualToString:@"投资范围"]) {
-            
+        else if([title isEqualToString:@"投资范围"]) {
+            vc.pageUrl = kHXBH5_BuyPlanRangeURL(self.planId);
+        }
+        
+        if(vc.pageUrl) {
+            [navVC pushViewController:vc animated:YES];
         }
     }
 }

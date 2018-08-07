@@ -16,6 +16,7 @@
 #import "HSJDepositoryOpenViewModel.h"
 #import <ReactiveObjC/ReactiveObjC.h>
 #import <IQKeyboardManager.h>
+#import "HXBBaseWKWebViewController.h"
 
 #define kInputHeight 50
 
@@ -292,14 +293,16 @@
     
     
 //    我已查看并同意《红小宝认证服务协议》与《存管服务协议》
-    NSAttributedString *attString = [[NSAttributedString alloc] initWithString:@"我已查看并同意《红小宝认证服务协议》与《存管服务协议》"];
+    NSAttributedString *attString = [[NSAttributedString alloc] initWithString:@"我已查看并同意《红小宝平台授权协议》,《恒丰银行股份有限公司杭州分行网络交易资金账户三方协议》"];
     
     NSDictionary *linkAttributes = @{NSForegroundColorAttributeName:kHXBFOntColor_4C66E7_100, NSFontAttributeName:kHXBFont_PINGFANGSC_REGULAR(12)};
-    NSMutableAttributedString *attributedString = [HXBAgreementView configureLinkAttributedString:attString withString:@"《红小宝认证服务协议》" sameStringEnable:NO linkAttributes:linkAttributes activeLinkAttributes:linkAttributes parameter:nil clickLinkBlock:^{
+    NSMutableAttributedString *attributedString = [HXBAgreementView configureLinkAttributedString:attString withString:@"《红小宝平台授权协议》" sameStringEnable:NO linkAttributes:linkAttributes activeLinkAttributes:linkAttributes parameter:nil clickLinkBlock:^{
         NSLog(@"《红小宝认证服务协议》");
+        [HXBBaseWKWebViewController pushWithPageUrl:[NSString splicingH5hostWithURL:kHXB_Negotiate_authorize] fromController:self];
     }];
-    attributedString = [HXBAgreementView configureLinkAttributedString:attributedString withString:@"《存管服务协议》" sameStringEnable:NO linkAttributes:linkAttributes activeLinkAttributes:linkAttributes parameter:nil clickLinkBlock:^{
-        NSLog(@"《存管服务协议》");
+    attributedString = [HXBAgreementView configureLinkAttributedString:attributedString withString:@"《恒丰银行股份有限公司杭州分行网络交易资金账户三方协议》" sameStringEnable:NO linkAttributes:linkAttributes activeLinkAttributes:linkAttributes parameter:nil clickLinkBlock:^{
+        NSLog(@"《恒丰银行股份有限公司杭州分行网络交易资金账户三方协议》");
+        [HXBBaseWKWebViewController pushWithPageUrl:[NSString splicingH5hostWithURL:kHXB_Negotiate_thirdpart] fromController:self];
     }];
     
     kWeakSelf
@@ -314,7 +317,7 @@
     
     [agreementView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(bottomBtn);
-        make.height.equalTo(@14);
+        make.height.equalTo(@28);
         make.bottom.equalTo(bottomBtn.mas_top).offset(-15);
     }];
 

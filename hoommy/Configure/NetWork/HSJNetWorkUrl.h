@@ -14,6 +14,7 @@
 #define kHXBHome_PopView @"/popups"///首页弹窗
 #define kGlobal                 @"/global" /// 全局统计
 #define kHSJHomeBaby            @"/home/baby" /// 全局统计
+
 //MARK: ======================= 协议 ==========================
 //协议或合同名    端口号后链接    状态    账户内连接
 #define kHXB_Negotiate_SginUPURL @"/agreement/signup"///《注册服务协议》
@@ -100,6 +101,7 @@
 
 //MARK: ======================= H5 =======================
 #define kHXBH5_RiskEvaluationURL [NSString stringWithFormat:@"%@/account/risk",[KeyChain h5host]]//风险评测
+#define kHXBH5_BuyPlanRangeURL(planId) [NSString stringWithFormat:@"%@/plan/%@/range",[KeyChain h5host], planId]//投资范围
 
 //MARK: ======================= 协议 ==========================
 #define kHXB_Negotiate_thirdpart @"/agreement/thirdpart" ///《恒丰银行股份有限公司杭州分行网络交易资金账户三方协议》

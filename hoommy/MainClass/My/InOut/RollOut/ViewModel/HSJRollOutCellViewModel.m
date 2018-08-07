@@ -25,7 +25,7 @@
 - (void)setModel:(HSJRollOutModel *)model {
     _model = model;
     
-    self.leftAccountString = [NSString hsj_simpleMoneyValue:self.model.redProgressLeft.doubleValue];
+    self.leftAccountString = [NSString hsj_simpleMoneyValue:self.model.canExitAmount];
     
     self.joinInString = [NSString hsj_moneyValueSuffix:self.model.finalAmount.doubleValue];
     

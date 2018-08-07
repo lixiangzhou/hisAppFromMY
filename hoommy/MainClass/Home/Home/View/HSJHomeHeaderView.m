@@ -65,8 +65,8 @@
     
     [self.bannerPageControl mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.bannerView);
-        make.height.offset(kScrAdaptationH(4));
-        make.bottom.equalTo(self).offset(-kScrAdaptationH(20));
+        make.height.offset(kScrAdaptationH(6));
+        make.bottom.equalTo(self.bannerView).offset(-kScrAdaptationH(5));
     }];
     
     kWeakSelf
@@ -80,6 +80,7 @@
     self.titleCycleScrollView.autoScrollTimeInterval = 2.5;
     self.titleCycleScrollView.scrollDirection = UICollectionViewScrollDirectionVertical;
     self.titleCycleScrollView.showPageControl = NO;
+    [self.titleCycleScrollView disableScrollGesture];
     [self addSubview:self.titleCycleScrollView];
     [self.titleCycleScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self).offset(kScrAdaptationW750(30));
