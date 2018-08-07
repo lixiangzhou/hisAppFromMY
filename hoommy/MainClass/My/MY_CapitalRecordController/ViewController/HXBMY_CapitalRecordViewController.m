@@ -54,8 +54,8 @@ static NSInteger const defaultPageCount = 20;
         return weakSelf.view;
     };
     self.screenType = @"";
-    [self downDataWithScreenType:@""];
     [self setUP];
+    [self downDataWithScreenType:@""];
 //    self.isColourGradientNavigationBar = YES;
 }
 

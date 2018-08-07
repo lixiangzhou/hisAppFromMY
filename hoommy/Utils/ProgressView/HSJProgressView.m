@@ -20,7 +20,7 @@
 #pragma mark - Life Cycle
 
 - (instancetype)initWithFrame:(CGRect)frame {
-    frame = [UIScreen mainScreen].bounds;
+//    frame = [UIScreen mainScreen].bounds;
     self = [super initWithFrame:frame];
     if (self) {
         [self setUI];
@@ -91,6 +91,7 @@
 
 #pragma mark - Public
 - (void)show {
+    self.frame = self.superview.bounds;
     BOOL hasTabbar = [self.viewController isKindOfClass:NSClassFromString(@"HSJHomeViewController")] || [self.viewController isKindOfClass:NSClassFromString(@"HSJMyViewController")];
     [self.contentView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(@(-50 -(hasTabbar ? HXBBottomAdditionHeight : 0)));
@@ -105,11 +106,13 @@
 }
 
 - (void)hide {
-    self.alpha = 1.0;
-    [UIView animateWithDuration:0.25 animations:^{
-        self.alpha = 0;
-    } completion:^(BOOL finished) {
-        [self.layer removeAnimationForKey:@"rotate_layer"];
-    }];
+//    self.alpha = 1.0;
+//    [UIView animateWithDuration:0.25 animations:^{
+//        self.alpha = 0;
+//    } completion:^(BOOL finished) {
+//        [self.layer removeAnimationForKey:@"rotate_layer"];
+//    }];
+    self.alpha = 0;
+    [self.layer removeAnimationForKey:@"rotate_layer"];
 }
 @end

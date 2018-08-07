@@ -39,14 +39,13 @@
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     });
     
+    [[HXBBaseRequestManager sharedInstance] addRequest:request];
     // 显示HUD
     if(request.showHud) {
         [request showLoading];
     }
     
-    [[HXBBaseRequestManager sharedInstance] addRequest:request];
     NYHTTPConnection *connection = [[NYHTTPConnection alloc]init];
-    
     __weak typeof (request) weakRequest = request;
     [connection connectWithRequest:request success:^(NYHTTPConnection *connection, id responseJsonObject) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
