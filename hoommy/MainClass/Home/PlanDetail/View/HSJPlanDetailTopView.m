@@ -234,11 +234,11 @@
         kWeakSelf
         [self.viewModel downLoadUserInfo:NO resultBlock:^(HXBUserInfoModel *infoModel, NSError *erro) {
             if (infoModel) {
-                weakSelf.topLabel.text = [NSString hsj_simpleMoneyValue:infoModel.userAssets.yesterdayInterest];
+                weakSelf.topLabel.text = [NSString hsj_simpleMoneyValue:infoModel.userAssets.stepUpYesterdayEarnTotal];
                 
-                weakSelf.leftLabel.text = [NSString hsj_simpleMoneyValue:infoModel.userAssets.stepUpAssets];
+                weakSelf.leftLabel.text = [NSString hsj_simpleMoneyValue:infoModel.userAssets.stepUpHoldingAmount];
                 
-                weakSelf.centerLabel.text = [NSString hsj_simpleMoneyValue:infoModel.userAssets.stepUpSumPlanInterest];
+                weakSelf.centerLabel.text = [NSString hsj_simpleMoneyValue:infoModel.userAssets.stepUpEarnTotal];
             }
         }];
     } else {
