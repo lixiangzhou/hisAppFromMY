@@ -18,6 +18,7 @@
 #import "HXBTransactionPasswordView.h"
 #import "HXBVerificationCodeAlertVC.h"
 #import "HSJPlanBuyResultViewController.h"
+#import "IQKeyboardManager.h"
 
 @interface HSJBuyViewController ()
 
@@ -44,6 +45,8 @@
     [self setupData];
     [self setupUI];
     [self setupConstraints];
+    
+    [IQKeyboardManager sharedManager].enable = NO;
 }
 
 - (void)leftBackBtnClick {
@@ -347,12 +350,13 @@
 - (void)planBuy:(NSDictionary*)paramDic {
     kWeakSelf
     [self.viewModel planBuyReslutWithPlanID:self.viewModel.planModel.planId parameter:paramDic resultBlock:^(BOOL isSuccess) {
-        if([self.viewModel.buyType isEqualToString:@"balance"]) {//余额购买
-            [self.passwordView removeFromSuperview];
-            [self.passwordView.loadingParentView removeFromSuperview];
+        if([weakSelf.viewModel.buyType isEqualToString:@"balance"]) {//余额购买
+            [weakSelf.passwordView removeFromSuperview];
+            [weakSelf.passwordView.loadingParentView removeFromSuperview];
+            [IQKeyboardManager sharedManager].enable = NO;
         }
         else {
-            [self.alertVC dismissViewControllerAnimated:NO completion:nil];
+            [weakSelf.alertVC dismissViewControllerAnimated:NO completion:nil];
         }
         
         if(isSuccess) {
