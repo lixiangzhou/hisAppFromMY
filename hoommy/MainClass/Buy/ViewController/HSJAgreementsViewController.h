@@ -10,5 +10,5 @@
 #import "HXBBaseViewController.h"
 
 @interface HSJAgreementsViewController : HXBBaseViewController
-
+@property (nonatomic, copy) NSString *planId;
 @end

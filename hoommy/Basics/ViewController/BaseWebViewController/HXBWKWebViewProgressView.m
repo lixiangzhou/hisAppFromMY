@@ -8,12 +8,10 @@
 
 #import "HXBWKWebViewProgressView.h"
 
-#define ProgressViewBackGroundColor [UIColor redColor]
-
 @interface HXBWKWebViewProgressView ()
 
-@property (nonatomic, strong) UIView *progressBarView;
-@property (nonatomic, assign) NSTimeInterval barAnimationDuration;
+@property (nonatomic) UIView *progressBarView;
+@property (nonatomic) NSTimeInterval barAnimationDuration;
 
 @end
 
@@ -43,7 +41,7 @@
     self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     _progressBarView = [[UIView alloc] initWithFrame:CGRectZero];
     _progressBarView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-    _progressBarView.backgroundColor = ProgressViewBackGroundColor;
+    _progressBarView.backgroundColor = COR1;
     [self addSubview:_progressBarView];
 }
 
@@ -54,18 +52,19 @@
 - (void)setProgress:(float)progress animated:(BOOL)animated
 {
     BOOL isGrowing = progress > 0.0;
+    UIView *progressBarView = _progressBarView;
     [UIView animateWithDuration:(isGrowing && animated) ? _barAnimationDuration : 0.0 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        CGRect frame = _progressBarView.frame;
-        frame.size.width = progress * [UIScreen mainScreen].bounds.size.width;
-        _progressBarView.frame = frame;
-        NSLog(@"进度%lf",_progressBarView.width);
+        CGRect frame = progressBarView.frame;
+        frame.size.width = progress * kScreenWidth;
+        progressBarView.frame = frame;
+        NSLog(@"进度%lf",progressBarView.width);
     } completion:^(BOOL finished) {
         if (progress >= 1.0) {
             if (self.webViewLoadSuccessBlock) {
                 self.webViewLoadSuccessBlock();
             }
             //完成加载之后需要将进度条重置为0
-            _progressBarView.width = 0;
+            progressBarView.width = 0;
         }
     }];
     

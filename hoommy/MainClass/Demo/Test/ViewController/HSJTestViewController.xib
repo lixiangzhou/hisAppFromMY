@@ -27,9 +27,19 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O90-dP-YB1">
+                    <rect key="frame" x="113" y="289" width="166" height="40"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.80089833210000005" green="1" blue="0.3301858111" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <state key="normal" image="0150"/>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="32.5" y="95.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="0150" width="40" height="40"/>
+    </resources>
 </document>

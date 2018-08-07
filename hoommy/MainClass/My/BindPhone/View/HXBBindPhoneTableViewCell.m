@@ -54,8 +54,8 @@
     [self.contentView addSubview:self.contentTf];
     
     self.codeBt = [[UIButton alloc] init];
-    [self.codeBt setTitleColor:kHXBFontColor_FF413C_100 forState:UIControlStateNormal];
-    [self.codeBt setTitleColor:kHXBFontColor_FF413C_100 forState:UIControlStateHighlighted];
+    [self.codeBt setTitleColor:kHXBFontColor_FE7E5E_100 forState:UIControlStateNormal];
+    [self.codeBt setTitleColor:kHXBFontColor_FE7E5E_100 forState:UIControlStateHighlighted];
     self.codeBt.titleLabel.font = kHXBFont_PINGFANGSC_REGULAR(13);
     [self.codeBt addTarget:self action:@selector(codeButtonAct:) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:self.codeBt];
@@ -68,11 +68,11 @@
     [self.contentView addSubview:self.codeLb];
     
     self.lineImv = [[UIImageView alloc] init];
-    self.lineImv.backgroundColor = kHXBColor_EEEEF5_100;
+    self.lineImv.backgroundColor = kHXBColor_f5f5f9_100;
     [self.contentView addSubview:self.lineImv];
     
     self.topLineImv = [[UIImageView alloc] init];
-    self.topLineImv.backgroundColor = kHXBColor_EEEEF5_100;
+    self.topLineImv.backgroundColor = kHXBColor_f5f5f9_100;
     [self.contentView addSubview:self.topLineImv];
 }
 
@@ -117,6 +117,8 @@
     if(!_contentTf) {
         _contentTf = [[HXBCustomTextField alloc] init];
         _contentTf.isHiddenLeftImage = YES;
+        _contentTf.textField.tintColor = kHXBColor_FE7E5E_100;
+        _contentTf.idTextField.tintColor = kHXBColor_FE7E5E_100;
         _contentTf.font = kHXBFont_PINGFANGSC_REGULAR(14);
         _contentTf.textColor = kHXBFontColor_333333_100;
         _contentTf.isHidenLine = YES;
@@ -130,12 +132,12 @@
         };
         
         _contentTf.keyBoardChange = ^(BOOL isEditState) {
-            if(isEditState) {
-                weakSelf.lineImv.backgroundColor = kHXBColor_F55151_100;
-            }
-            else{
-                weakSelf.lineImv.backgroundColor = kHXBSpacingLineColor_DDDDDD_100;
-            }
+//            if(isEditState) {
+//                weakSelf.lineImv.backgroundColor = kHXBColor_F55151_100;
+//            }
+//            else{
+//                weakSelf.lineImv.backgroundColor = kHXBColor_f5f5f9_100;
+//            }
         };
     }
     
@@ -152,9 +154,10 @@
 - (void)setIndexPath:(NSIndexPath *)indexPath {
     _indexPath = indexPath;
     
-    if(indexPath.row != 0) {
-        self.topLineImv.hidden = YES;
-    }
+    self.topLineImv.hidden = YES;
+//    if(indexPath.row != 0) {
+//        self.topLineImv.hidden = YES;
+//    }
 }
 
 - (void)setCellModel:(HXBBindPhoneCellModel *)cellModel {

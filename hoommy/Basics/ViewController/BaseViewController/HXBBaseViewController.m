@@ -77,7 +77,8 @@
     }
     //
     [self.splitLineImv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.equalTo(self.safeAreaView);
+        make.top.equalTo(self.view).offset(HXBStatusBarAndNavigationBarHeight);
+        make.left.right.equalTo(self.view);
         make.height.mas_equalTo(0.5);
     }];
     //

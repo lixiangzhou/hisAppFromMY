@@ -306,6 +306,7 @@
 		9A97DAD420EF420200688ADB /* transaction_password.svg in Resources */ = {isa = PBXBuildFile; fileRef = 9A97DA5D20EF420200688ADB /* transaction_password.svg */; };
 		9AA0696A2111AED800A83ED7 /* Impact.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AA069692111AED500A83ED7 /* Impact.ttf */; };
 		9AA0696D211303D900A83ED7 /* DIN Alternate Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AA0696C211303D700A83ED7 /* DIN Alternate Bold.ttf */; };
+		9AA0697521141D6D00A83ED7 /* WebViewJavascriptBridgeBase+HXBHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA0697421141D6C00A83ED7 /* WebViewJavascriptBridgeBase+HXBHandle.m */; };
 		9AA70B4120FEF323008B3007 /* HSJBuyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA70B4020FEF323008B3007 /* HSJBuyViewController.m */; };
 		9AA70B4420FEF369008B3007 /* HSJBuyViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA70B4320FEF369008B3007 /* HSJBuyViewModel.m */; };
 		9AA70B4720FEF3CC008B3007 /* HSJBuyHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA70B4620FEF3CC008B3007 /* HSJBuyHeadView.m */; };
@@ -991,6 +992,8 @@
 		9A97DA5D20EF420200688ADB /* transaction_password.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = transaction_password.svg; sourceTree = "<group>"; };
 		9AA069692111AED500A83ED7 /* Impact.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Impact.ttf; sourceTree = "<group>"; };
 		9AA0696C211303D700A83ED7 /* DIN Alternate Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DIN Alternate Bold.ttf"; sourceTree = "<group>"; };
+		9AA0697321141D6C00A83ED7 /* WebViewJavascriptBridgeBase+HXBHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WebViewJavascriptBridgeBase+HXBHandle.h"; sourceTree = "<group>"; };
+		9AA0697421141D6C00A83ED7 /* WebViewJavascriptBridgeBase+HXBHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WebViewJavascriptBridgeBase+HXBHandle.m"; sourceTree = "<group>"; };
 		9AA70B3F20FEF323008B3007 /* HSJBuyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJBuyViewController.h; sourceTree = "<group>"; };
 		9AA70B4020FEF323008B3007 /* HSJBuyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJBuyViewController.m; sourceTree = "<group>"; };
 		9AA70B4220FEF369008B3007 /* HSJBuyViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJBuyViewModel.h; sourceTree = "<group>"; };
@@ -1264,7 +1267,6 @@
 		4EA57D1020F34B6C006FD573 /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				4EA610A22105E389008580DD /* Extraction */,
 				9A3749CD20F883CE00F39681 /* BankCardListCell */,
 				9A3749B420F85EA200F39681 /* NODataView */,
 				9A37498C20F85A8300F39681 /* CallPhoneView */,
@@ -1381,13 +1383,13 @@
 			path = HXBUmengManagar;
 			sourceTree = "<group>";
 		};
-		4EA610A22105E389008580DD /* Extraction */ = {
+		4EA610A22105E389008580DD /* UrlJumpExtention */ = {
 			isa = PBXGroup;
 			children = (
 				4EA610A32105E389008580DD /* HXBExtensionMethodTool.h */,
 				4EA610A42105E389008580DD /* HXBExtensionMethodTool.m */,
 			);
-			path = Extraction;
+			path = UrlJumpExtention;
 			sourceTree = "<group>";
 		};
 		4EA610A62105E40D008580DD /* Banner */ = {
@@ -2475,6 +2477,7 @@
 		9A97D8EF20EF420000688ADB /* Customization */ = {
 			isa = PBXGroup;
 			children = (
+				4EA610A22105E389008580DD /* UrlJumpExtention */,
 				9A3749A720F85D5500F39681 /* CountDown（date） */,
 				4EA57D1020F34B6C006FD573 /* Component */,
 				9A97D8F020EF420000688ADB /* Manager */,
@@ -2878,6 +2881,8 @@
 		9A97D95620EF420100688ADB /* BaseWebViewController */ = {
 			isa = PBXGroup;
 			children = (
+				9AA0697321141D6C00A83ED7 /* WebViewJavascriptBridgeBase+HXBHandle.h */,
+				9AA0697421141D6C00A83ED7 /* WebViewJavascriptBridgeBase+HXBHandle.m */,
 				9A97D95720EF420100688ADB /* HXBBaseWKWebViewController.h */,
 				9A97D95820EF420100688ADB /* HXBBaseWKWebViewController.m */,
 				9A97D95920EF420100688ADB /* HXBWKWebViewProgressView.h */,
@@ -4129,6 +4134,7 @@
 				9AF51DA420FC7458008A8CF4 /* HSJClientServeTelView.m in Sources */,
 				9A97DA6D20EF420200688ADB /* HSJListViewController.m in Sources */,
 				4EA610D22105E69F008580DD /* HXBNoticModel.m in Sources */,
+				9AA0697521141D6D00A83ED7 /* WebViewJavascriptBridgeBase+HXBHandle.m in Sources */,
 				9A4B18B120F620B8006B83C7 /* HXBCardBinModel.m in Sources */,
 				9A97DA7A20EF420200688ADB /* HXBWKWebViewProgressView.m in Sources */,
 				4E87E465210B0D820069A3D3 /* HSJNoDataOrNetViewController.m in Sources */,
