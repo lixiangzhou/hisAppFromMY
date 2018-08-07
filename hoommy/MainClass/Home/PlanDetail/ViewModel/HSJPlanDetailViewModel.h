@@ -10,10 +10,11 @@
 #import "HSJBaseViewModel.h"
 #import "HSJPlanModel.h"
 
+
 @interface HSJPlanDetailViewModel : HSJBaseViewModel
 
 @property (nonatomic, strong) HSJPlanModel *planModel;
-
+@property (nonatomic, strong) HXBUserInfoModel *userInfoModel;
 /// 基础利率 + 加息利率
 @property (nonatomic, copy) NSString *interestString;
 /// 锁定期
