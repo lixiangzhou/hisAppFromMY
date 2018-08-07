@@ -71,9 +71,6 @@ static NSString *const kFirstPlanId = @"kFirstPlanId";
     [manager.keychain removeItemForKey:kToken];
     [manager.keychain removeItemForKey:kCiphertext];
     [KeyChain removeGesture];
-    
-    NSLog(@"==%@",KeyChain.firstPlanIdInPlanList);
-    NSLog(@"");
 }
 - (NSString *)ciphertext
 {

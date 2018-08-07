@@ -21,5 +21,6 @@
 @property (nonatomic,strong)NSString *rollOutleft; ///待转让金额
 @property (nonatomic,strong)NSString *financePlanSubpointId; ///计划子账户id
 @property (nonatomic,strong)NSString *tranfer; ///是否有转让记录
+@property (nonatomic,strong)NSString *statusText;
 
 @end

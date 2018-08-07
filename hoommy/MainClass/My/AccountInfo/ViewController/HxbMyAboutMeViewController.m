@@ -7,7 +7,6 @@
 //
 
 #import "HxbMyAboutMeViewController.h"
-//#import "HXBFeedbackViewController.h"
 #import "HXBVersionUpdateModel.h"//版本更新的model
 #import "HXBAgreementView.h"
 #import "HXBBottomLineTableViewCell.h"
@@ -91,7 +90,7 @@ UITableViewDelegate,UITableViewDataSource
         cell.detailTextLabel.textColor = kHXBFontColor_9295A2_100;
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
+    cell.isLineRight = YES;
         if (indexPath.row == 0) {
             cell.textLabel.text = @"红小宝客服";
             cell.detailTextLabel.text = kServiceMobile;
@@ -102,7 +101,13 @@ UITableViewDelegate,UITableViewDataSource
         }else if (indexPath.row == 2){
             cell.textLabel.text = @"版本号";
             NSString *version = [[[NSBundle mainBundle]infoDictionary]objectForKey:@"CFBundleShortVersionString"];
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"v%@",version];
+            
+            NSMutableAttributedString *attr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"v%@ ",version]];
+            NSTextAttachment *attachment = [[NSTextAttachment alloc]init];
+            attachment.image = [UIImage imageNamed:@"icon_newVersion"];
+            attachment.bounds = CGRectMake(0, -2, 31, 13);
+            [attr appendAttributedString:[NSAttributedString attributedStringWithAttachment:attachment]];
+            cell.detailTextLabel.attributedText = attr;
         }else{
             cell.textLabel.text = @"意见反馈";
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -126,6 +131,7 @@ UITableViewDelegate,UITableViewDataSource
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.tableHeaderView = self.headerView;
+        _tableView.backgroundColor = [UIColor whiteColor];
         [HXBMiddlekey AdaptationiOS11WithTableView:_tableView];
     }
     return _tableView;

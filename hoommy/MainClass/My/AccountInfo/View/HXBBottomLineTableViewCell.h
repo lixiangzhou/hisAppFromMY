@@ -13,5 +13,9 @@
  隐藏线条
  */
 @property (nonatomic, assign) BOOL hiddenLine;
+/**
+ 线条是否右移
+ */
+@property (nonatomic, assign) BOOL isLineRight;
 
 @end

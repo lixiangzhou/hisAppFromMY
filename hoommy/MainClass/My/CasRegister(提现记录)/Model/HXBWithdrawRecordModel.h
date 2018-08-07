@@ -41,12 +41,12 @@
 /**
  提现状态描述
  */
-@property (nonatomic, copy) NSString *logDesc;
+@property (nonatomic, copy) NSString *logText;
 /**
  提现银行卡
  */
 @property (nonatomic, copy) NSString *bankNum;
-
+@property (nonatomic, copy) NSString *statusText;
 /********************辅助字段****************************/
 /**
  控制按钮颜色

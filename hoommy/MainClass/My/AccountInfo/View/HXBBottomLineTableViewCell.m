@@ -39,5 +39,19 @@
     self.line.hidden = hiddenLine;
 }
 
+- (void)setIsLineRight:(BOOL)isLineRight {
+    if (_hiddenLine) {
+        return;
+    }
+    self.line.backgroundColor = RGB(238, 238, 245);
+    kWeakSelf
+    [self.line mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self);
+        make.bottom.equalTo(self);
+        make.left.equalTo(weakSelf.textLabel);
+        make.height.equalTo(@0.5f);
+    }];
+}
+
 
 @end

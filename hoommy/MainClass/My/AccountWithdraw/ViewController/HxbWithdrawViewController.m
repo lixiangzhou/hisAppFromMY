@@ -617,7 +617,7 @@
     _bankCardModel = bankCardModel;
     self.bankNameLabel.text = self.bankCardModel.bankType;
     self.bankCardNumLabel.text = [NSString stringWithFormat:@"（尾号%@）",[self.bankCardModel.cardId substringFromIndex:self.bankCardModel.cardId.length - 4]];
-    self.bankLogoImageView.image = [UIImage imageNamed:self.bankCardModel.bankCode];
+    self.bankLogoImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_white",self.bankCardModel.bankCode]];
     
     self.arrivalDateLabel.text = bankCardModel.bankArriveTimeText;
 }
