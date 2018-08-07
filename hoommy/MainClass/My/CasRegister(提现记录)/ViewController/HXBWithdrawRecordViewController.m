@@ -32,7 +32,7 @@
     [super viewDidLoad];
     self.title = @"提现进度";
     [self loadCashRegisterDataNeeedShowLoading:YES];
-    [self.safeAreaView addSubview:self.withdrawRecordTableView];
+    [self.view addSubview:self.withdrawRecordTableView];
 }
 #pragma mark - Events
 ///无网状态的网络连接

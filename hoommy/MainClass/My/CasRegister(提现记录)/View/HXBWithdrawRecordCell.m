@@ -116,8 +116,8 @@
     self.cashAmountLabel.text = [NSString stringWithFormat:@"%@元",withdrawRecordModel.cashAmount];
     self.bankNameLabel.text = [NSString stringWithFormat:@"%@%@",withdrawRecordModel.bankName,withdrawRecordModel.bankLastNum];
     
-    NSArray *descArr = [withdrawRecordModel.logText componentsSeparatedByString:@"："];
-    NSString *logDesc = [NSString stringWithFormat:@" %@",descArr[1]];
+    NSString *logDesc = [NSString stringWithFormat:@" %@",withdrawRecordModel.logText];
+    
     self.logDescLabel.attributedText = [NSAttributedString setupAttributeStringWithBeforeString:withdrawRecordModel.statusText  WithBeforeRange:NSMakeRange(0, withdrawRecordModel.statusText.length) andAttributeColor:withdrawRecordModel.stateColor andAttributeFont:kHXBFont_PINGFANGSC_REGULAR(12) afterString:logDesc WithAfterRange:NSMakeRange(0, logDesc.length) andAttributeColor:RGB(21, 21, 21) andAttributeFont:kHXBFont_PINGFANGSC_REGULAR(12)];
     NSArray *arr = [withdrawRecordModel.applyTimeStr componentsSeparatedByString:@" "]; // 2017-09-28,12:04
     NSArray *arr1 = [arr[0] componentsSeparatedByString:@"-"]; // 2017,09,28
