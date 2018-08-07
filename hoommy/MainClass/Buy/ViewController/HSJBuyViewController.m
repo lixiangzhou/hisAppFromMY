@@ -18,6 +18,7 @@
 #import "HXBTransactionPasswordView.h"
 #import "HXBVerificationCodeAlertVC.h"
 #import "HSJPlanBuyResultViewController.h"
+#import "IQKeyboardManager.h"
 
 @interface HSJBuyViewController ()
 
@@ -44,6 +45,8 @@
     [self setupData];
     [self setupUI];
     [self setupConstraints];
+    
+    [IQKeyboardManager sharedManager].enable = NO;
 }
 
 - (void)leftBackBtnClick {
@@ -55,7 +58,13 @@
     self.viewModel = [[HSJBuyViewModel alloc] init];
     kWeakSelf
     self.viewModel.hugViewBlock = ^UIView *{
-        if(weakSelf.presentedViewController) {
+        if(weakSelf.passwordView.superview) {
+            if(weakSelf.viewModel.isLoadingData) {
+                [weakSelf.view addSubview:weakSelf.passwordView.loadingParentView];
+                return weakSelf.passwordView.loadingParentView;
+            }
+        }
+        else if(weakSelf.alertVC.presentingViewController) {
             return weakSelf.presentedViewController.view;
         }
         return weakSelf.view;
@@ -214,8 +223,12 @@
         self.footView.enableAddButton = NO;
         self.footView.buttonBackGroundColor = kHXBColor_ECECF0_100;
     }
-    else if(HSJBUYBUTTON_TIMER == self.viewModel.buttonType || HSJBUYBUTTON_NOMONEY == self.viewModel.buttonType) {
+    else if(HSJBUYBUTTON_TIMER == self.viewModel.buttonType) {
         self.footView.enableAddButton = NO;
+        self.footView.buttonBackGroundColor = kHXBColor_FF7055_40;
+    }
+    else if(HSJBUYBUTTON_NOMONEY == self.viewModel.buttonType) {
+        self.footView.enableAddButton = YES;
         self.footView.buttonBackGroundColor = kHXBColor_FF7055_40;
     }
     else {
@@ -337,11 +350,13 @@
 - (void)planBuy:(NSDictionary*)paramDic {
     kWeakSelf
     [self.viewModel planBuyReslutWithPlanID:self.viewModel.planModel.planId parameter:paramDic resultBlock:^(BOOL isSuccess) {
-        if([self.viewModel.buyType isEqualToString:@"balance"]) {//余额购买
-            [self.passwordView removeFromSuperview];
+        if([weakSelf.viewModel.buyType isEqualToString:@"balance"]) {//余额购买
+            [weakSelf.passwordView removeFromSuperview];
+            [weakSelf.passwordView.loadingParentView removeFromSuperview];
+            [IQKeyboardManager sharedManager].enable = NO;
         }
         else {
-            [self.alertVC dismissViewControllerAnimated:NO completion:nil];
+            [weakSelf.alertVC dismissViewControllerAnimated:NO completion:nil];
         }
         
         if(isSuccess) {
