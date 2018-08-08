@@ -55,7 +55,13 @@
     self.viewModel = [[HSJBuyViewModel alloc] init];
     kWeakSelf
     self.viewModel.hugViewBlock = ^UIView *{
-        if(weakSelf.presentedViewController) {
+        if(weakSelf.passwordView.superview) {
+            if(weakSelf.viewModel.isLoadingData) {
+                [weakSelf.view addSubview:weakSelf.passwordView.loadingParentView];
+                return weakSelf.passwordView.loadingParentView;
+            }
+        }
+        else if(weakSelf.alertVC.presentingViewController) {
             return weakSelf.presentedViewController.view;
         }
         return weakSelf.view;
@@ -110,7 +116,7 @@
 
 - (void)setupConstraints {
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.safeAreaView);
+        make.top.left.bottom.right.equalTo(self.safeAreaView);
     }];
 }
 
@@ -214,8 +220,12 @@
         self.footView.enableAddButton = NO;
         self.footView.buttonBackGroundColor = kHXBColor_ECECF0_100;
     }
-    else if(HSJBUYBUTTON_TIMER == self.viewModel.buttonType || HSJBUYBUTTON_NOMONEY == self.viewModel.buttonType) {
+    else if(HSJBUYBUTTON_TIMER == self.viewModel.buttonType) {
         self.footView.enableAddButton = NO;
+        self.footView.buttonBackGroundColor = kHXBColor_FF7055_40;
+    }
+    else if(HSJBUYBUTTON_NOMONEY == self.viewModel.buttonType) {
+        self.footView.enableAddButton = YES;
         self.footView.buttonBackGroundColor = kHXBColor_FF7055_40;
     }
     else {
@@ -249,6 +259,7 @@
         }];
         BOOL agreementCheckResult = [self.viewModel checkAgreement:self.footView.isAgreementGroup agreeRiskApplyAgreement:self.footView.isAgreeRiskApplyAgreement];
         if(moneyCheckResult && agreementCheckResult) {//校验通过
+            [self.headView endEditing:YES];
             if([self.viewModel.buyType isEqualToString:@"balance"]) {//余额购买
                 [self alertPassWord];
             }
@@ -337,11 +348,12 @@
 - (void)planBuy:(NSDictionary*)paramDic {
     kWeakSelf
     [self.viewModel planBuyReslutWithPlanID:self.viewModel.planModel.planId parameter:paramDic resultBlock:^(BOOL isSuccess) {
-        if([self.viewModel.buyType isEqualToString:@"balance"]) {//余额购买
-            [self.passwordView removeFromSuperview];
+        if([weakSelf.viewModel.buyType isEqualToString:@"balance"]) {//余额购买
+            [weakSelf.passwordView removeFromSuperview];
+            [weakSelf.passwordView.loadingParentView removeFromSuperview];
         }
         else {
-            [self.alertVC dismissViewControllerAnimated:NO completion:nil];
+            [weakSelf.alertVC dismissViewControllerAnimated:NO completion:nil];
         }
         
         if(isSuccess) {
@@ -429,6 +441,19 @@
             }
         }
     }
+}
+
+#pragma mark 键盘改变协议处理
+- (void)keyboardShow:(CGRect)rect {
+    [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.safeAreaView).offset(-rect.size.height);
+    }];
+}
+
+- (void)keyboardHidden {
+    [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.safeAreaView);
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

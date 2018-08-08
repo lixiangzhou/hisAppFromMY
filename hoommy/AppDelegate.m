@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "NYNetworkConfig.h"
-#import "IQKeyboardManager.h"
+#import "IQKeyboardManagerExtent.h"
 #import "HXBVersionUpdateManager.h"
 #import "HXBRootVCManager.h"
 #import "HXBBaseUrlSettingView.h"
@@ -28,7 +28,7 @@
     //fabrci crash 统计
     [Fabric with:@[[Crashlytics class]]];
     //设置键盘
-    [self setKeyboardManager];
+    [[IQKeyboardManagerExtent sharedInstance] setKeyboardManager];
     
     if (HXBShakeChangeBaseUrl == YES) {
         [HXBBaseUrlSettingView attatchToWindow];
@@ -39,16 +39,6 @@
     [HXBBaseUrlSettingView attatchToWindow];
     
     return YES;
-}
-
-
-- (void)setKeyboardManager
-{
-    IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
-    manager.enable = YES;
-    manager.shouldResignOnTouchOutside = YES;
-    manager.shouldToolbarUsesTextFieldTintColor = YES;
-    manager.enableAutoToolbar = NO;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

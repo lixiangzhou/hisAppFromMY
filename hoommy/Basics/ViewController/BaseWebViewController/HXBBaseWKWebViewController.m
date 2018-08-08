@@ -118,7 +118,7 @@
 - (void)setupRightBtn {
     //右侧按钮
     self.rightBtn = [[UIButton alloc] init];
-    self.rightBtn.backgroundColor = [UIColor greenColor];
+    [self.rightBtn setImage:[UIImage imageNamed:@"Combined_Shape"] forState:UIControlStateNormal];
     self.rightBtn.hidden = YES;
     [self.rightBtn sizeToFit];
     [self.rightBtn addTarget:self action:@selector(rightBtnClick) forControlEvents:UIControlEventTouchUpInside];

@@ -42,7 +42,7 @@
     [self addSubview:self.messageImage];
     [self addSubview:self.messageLabel];
     
-    _messageImage.image = [UIImage imageNamed:@"hxb_my_message"];
+    _messageImage.image = [UIImage imageNamed:@"broadcast"];
     
     [_messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(_messageImage);

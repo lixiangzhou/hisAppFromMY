@@ -13,11 +13,17 @@
 #import "HSJRollOutPlanDetailController.h"
 #import "HSJMyAccountBalanceViewModel.h"
 #import "HSJPlanDetailViewModel.h"
+#import "HxbWithdrawCardViewController.h"
+#import "HXBMy_Withdraw_notifitionView.h"
+#import "HXBWithdrawRecordViewController.h"
+
 @interface HSJMyAccountBalanceController ()
 @property (nonatomic,strong) HSJMyAccountBalanceHeadView *headView;
+@property (nonatomic, strong) HXBMy_Withdraw_notifitionView *notifitionView;
 @property (nonatomic,strong) UIButton *intoBtn;
 @property (nonatomic,strong) UIButton *withdrawalBtn;
 @property (nonatomic,strong) HSJMyAccountBalanceViewModel *viewModel;
+@property (nonatomic,strong) InprocessCountModel *inprocessCountModel;
 @end
 
 @implementation HSJMyAccountBalanceController
@@ -26,6 +32,7 @@
     [super viewDidLoad];
     self.title = @"账户余额";
     self.viewModel = [[HSJMyAccountBalanceViewModel alloc] init];
+    
     [self addSubView];
     [self makeConstraints];
 }
@@ -37,15 +44,37 @@
 
 - (void)loadData_userInfo {
     kWeakSelf
-    [self.viewModel downLoadUserInfo:NO resultBlock:^(id responseData, NSError *erro) {
-        if (!erro) {
-            weakSelf.viewModel.userInfoModel = responseData;
-            weakSelf.headView.userInfoModel = responseData;
-        }
-    }];
+    dispatch_group_t group = dispatch_group_create();
+    dispatch_group_enter(group);
+    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        [self.viewModel downLoadUserInfo:NO resultBlock:^(id responseData, NSError *erro) {
+            if (!erro) {
+                weakSelf.viewModel.userInfoModel = responseData;
+                weakSelf.headView.userInfoModel = responseData;
+            }
+            dispatch_group_leave(group);
+        }];
+    });
+    
+    dispatch_group_enter(group);
+    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self.viewModel accountWithdrawaProcessRequestMethod:NYRequestMethodGet resultBlock:^(BOOL isSuccess) {
+            if (isSuccess) {
+                weakSelf.inprocessCountModel = weakSelf.viewModel.inprocessCountModel;
+            }
+            dispatch_group_leave(group);
+        }];
+    });
+    
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        //界面刷新
+        [self.safeAreaView setNeedsLayout];
+    });
 }
 
 - (void)addSubView {
+    [self.safeAreaView addSubview:self.notifitionView];
     [self.safeAreaView addSubview:self.headView];
     [self.safeAreaView addSubview:self.intoBtn];
     [self.safeAreaView addSubview:self.withdrawalBtn];
@@ -54,8 +83,15 @@
 - (void)makeConstraints {
     
     kWeakSelf
+    [self.notifitionView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(weakSelf.safeAreaView);
+        make.top.equalTo(weakSelf.safeAreaView).offset(kScrAdaptationW(5));
+        make.height.offset(kScrAdaptationH(36));
+    }];
+    
     [self.headView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.equalTo(weakSelf.safeAreaView).offset(kScrAdaptationW750(18));
+        make.top.equalTo(weakSelf.notifitionView.mas_bottom).offset(kScrAdaptationW(15));
+        make.left.equalTo(weakSelf.safeAreaView).offset(kScrAdaptationW750(18));
         make.right.equalTo(weakSelf.safeAreaView).offset(-kScrAdaptationW750(18));
         make.height.equalTo(@kScrAdaptationH750(415));
     }];
@@ -73,6 +109,38 @@
     }];
 }
 
+- (void)setInprocessCountModel:(InprocessCountModel *)inprocessCountModel {
+    _inprocessCountModel = inprocessCountModel;
+    if (inprocessCountModel.inprocessCount > 0) {
+        self.notifitionView.hidden = NO;
+        
+        NSString *num = [NSString stringWithFormat:@"%lu",(unsigned long)inprocessCountModel.inprocessCount];
+        NSString *str1 = @"您有";
+        NSString *str2 = @"条提现申请正在处理，";
+        NSString *str3 = @"点击查看";
+        NSMutableAttributedString *att = [NSMutableAttributedString new];
+        
+        NSMutableAttributedString *attr1 = [NSMutableAttributedString setupAttributeStringWithBeforeString:str1 WithBeforeRange:NSMakeRange(0, str1.length) andAttributeColor:RGB(209, 169, 127) andAttributeFont:kHXBFont_PINGFANGSC_REGULAR(14) afterString:num WithAfterRange:NSMakeRange(0, num.length) andAttributeColor:COR29 andAttributeFont:kHXBFont_PINGFANGSC_REGULAR(14)];
+        [att appendAttributedString:attr1];
+        
+        NSMutableAttributedString *attr2 = [NSMutableAttributedString setupAttributeStringWithString:str2 WithRange:NSMakeRange(0, str2.length) andAttributeColor:RGB(209, 169, 127) andAttributeFont:kHXBFont_PINGFANGSC_REGULAR(14)];
+        [att appendAttributedString:attr2];
+        
+        NSMutableAttributedString *attr3 = [NSMutableAttributedString setupAttributeStringWithString:str3 WithRange:NSMakeRange(0, str3.length) andAttributeColor:RGB(102, 121, 253) andAttributeFont:kHXBFont_PINGFANGSC_REGULAR(14)];
+        [att appendAttributedString:attr3];
+        
+        self.notifitionView.attributedMessageCount = att;
+        [self.notifitionView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.offset(kScrAdaptationH750(70));
+        }];
+    } else {
+        self.notifitionView.hidden = YES;
+        [self.notifitionView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.offset(kScrAdaptationH750(0));
+        }];
+    }
+}
+
 - (void)intoBtnClick:(UIButton *)sender {
     NSLog(@"转入存钱罐");
     [HXBUmengManagar HXB_clickEventWithEnevtId: kHSJUmeng_MyIntoPlanClick];
@@ -85,11 +153,26 @@
     }
 }
 
+//进入提现记录
+- (void)pushCashRegisterVC {
+    [HXBUmengManagar HXB_clickEventWithEnevtId: kHSJUmeng_MyWithdrawCashRecordClick];
+    HXBWithdrawRecordViewController *cashRegisterVC = [[HXBWithdrawRecordViewController alloc] init];
+    [self.navigationController pushViewController:cashRegisterVC animated:YES];
+}
+
 - (void)withdrawalBtnClick:(UIButton *)sender {
     NSLog(@"提现至银行卡");
-    [HXBUmengManagar HXB_clickEventWithEnevtId: kHSJUmeng_MyWithdrawCashToBankCardClick];
-    HxbWithdrawViewController *withdrawViewController = [[HxbWithdrawViewController alloc]init];
-    [self.navigationController pushViewController:withdrawViewController animated:YES];
+    
+    if ([self.userInfoModel.userInfo.hasBindCard isEqualToString:@"0"]) {
+        //进入绑卡界面
+        HxbWithdrawCardViewController *withdrawCardViewController = [[HxbWithdrawCardViewController alloc]init];
+        withdrawCardViewController.type = HXBRechargeAndWithdrawalsLogicalJudgment_Other;
+        [self.navigationController pushViewController:withdrawCardViewController animated:YES];
+    } else {
+        [HXBUmengManagar HXB_clickEventWithEnevtId: kHSJUmeng_MyWithdrawCashToBankCardClick];
+        HxbWithdrawViewController *withdrawViewController = [[HxbWithdrawViewController alloc]init];
+        [self.navigationController pushViewController:withdrawViewController animated:YES];
+    }
 }
 
 - (UIButton *)intoBtn {
@@ -128,5 +211,15 @@
     }
     return _headView;
 }
-
+- (HXBMy_Withdraw_notifitionView *)notifitionView {
+    kWeakSelf
+    if (!_notifitionView) {
+        _notifitionView = [[HXBMy_Withdraw_notifitionView alloc] initWithFrame:CGRectZero];//CGRectMake(0, HXBStatusBarAndNavigationBarHeight, kScreenWidth, kScrAdaptationH750(70))
+        _notifitionView.hidden = YES;
+    }
+    _notifitionView.block = ^{
+        [weakSelf pushCashRegisterVC];
+    };
+    return _notifitionView;
+}
 @end

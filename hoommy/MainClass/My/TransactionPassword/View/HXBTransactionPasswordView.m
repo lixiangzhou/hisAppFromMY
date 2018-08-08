@@ -24,6 +24,7 @@
 #import "HXBRootVCManager.h"
 #import "IQKeyboardManager.h"
 #import "HXBBindPhoneViewController.h"
+#import "IQKeyboardManagerExtent.h"
 
 @interface HXBTransactionPasswordView ()<UITextFieldDelegate>
 
@@ -46,6 +47,10 @@
 
 @property (nonatomic, strong) UIButton *backgroundButton;
 
+/**
+ 网络加载时, loading框显示的父视图
+ */
+@property (nonatomic, strong) UIView *loadingParentView;
 @end
 
 @implementation HXBTransactionPasswordView
@@ -164,7 +169,7 @@
 
 - (void)showInView:(UIView *)view {
     [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = NO;
-    [IQKeyboardManager sharedManager].enable = NO;
+    [IQKeyboardManagerExtent sharedInstance].enable = NO;
     [view addSubview:self];
     [self.passwordTextField becomeFirstResponder];
 }
@@ -315,11 +320,19 @@
         self.contentView.y = kScreenHeight;
     } completion:^(BOOL finished) {
         [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
-        [IQKeyboardManager sharedManager].enable = YES;
+        [IQKeyboardManagerExtent sharedInstance].enable = YES;
         [self removeFromSuperview];
     }];
 }
 
+- (UIView *)loadingParentView {
+    if(!_loadingParentView) {
+        _loadingParentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 0)];
+    }
+    _loadingParentView.height = kScreenHeight-self.contentView.height+kScrAdaptationH750(388);
+    
+    return _loadingParentView;
+}
 
 #pragma mark - Public
 - (void)dealloc {

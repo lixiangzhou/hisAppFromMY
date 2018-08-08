@@ -149,7 +149,7 @@
 
 - (UIButton *)codeButton {
     if (!_codeButton) {
-        _codeButton = [[UIButton alloc] init];
+        _codeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, kScrAdaptationW(70), kScrAdaptationH(22))];
         [_codeButton setTitle:@"验证码登录" forState:(UIControlStateNormal)];
         [_codeButton addTarget:self action:@selector(getCode) forControlEvents:(UIControlEventTouchUpInside)];
         _codeButton.titleLabel.font = kHXBFont_PINGFANGSC_REGULAR(14);
