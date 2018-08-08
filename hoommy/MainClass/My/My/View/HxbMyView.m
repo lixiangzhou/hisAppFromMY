@@ -10,7 +10,6 @@
 #import "HxbMyViewHeaderView.h"
 #import "AppDelegate.h"
 #import "HSJMyViewController.h"
-#import "HXBMY_CapitalRecordViewController.h"//资产记录
 #import "HXBMyHomeViewCell.h"
 #import "HXBMyRequestAccountModel.h"
 #import "HXBUserInfoModel.h"
