@@ -13,6 +13,7 @@
 
 @implementation HSJBaseViewModel (HSJNetWorkApi)
 
+@dynamic userInfoModel;
 static const char HXBUserInfoModelKey = '\0';
 - (void)setInnerUserInfoModel:(HXBUserInfoModel *)innerUserInfoModel {
     objc_setAssociatedObject(self, &HXBUserInfoModelKey, innerUserInfoModel, OBJC_ASSOCIATION_RETAIN);
