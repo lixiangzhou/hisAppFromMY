@@ -171,6 +171,12 @@
         _headView.inputMoney = self.startMoney;
         kWeakSelf
         _headView.textChange = ^(NSString *text) {
+            if(1 == text.length){
+                if(0 == text.intValue) {
+                    weakSelf.headView.inputMoney = @"";
+                    return ;
+                }
+            }
             weakSelf.viewModel.inputMoney = text;
             [weakSelf.viewModel buildCellDataList];
             [weakSelf reload];
