@@ -17,6 +17,7 @@
 #import "HXBGeneralAlertVC.h"
 #import "HXBAdvertiseManager.h"
 #import "HSJGestureLoginViewModel.h"
+#import "HSJProgressView.h"
 
 @interface HSJGestureLoginController () <CircleViewDelegate>
 /**
@@ -231,26 +232,36 @@
         if (KeyChain.gesturePwdCount <= 0) {
             HXBGeneralAlertVC *alertVC = [[HXBGeneralAlertVC alloc] initWithMessageTitle:@"温馨提示" andSubTitle:@"很抱歉，您的手势密码输入超限，是否使用登录密码？" andLeftBtnName:@"暂不使用" andRightBtnName:@"立即登录" isHideCancelBtn:YES isClickedBackgroundDiss:NO];
             alertVC.isCenterShow = YES;
-            [KeyChain removeGesture];
+            alertVC.isAutomaticDismiss = NO;
             KeyChain.skipGesture = kHXBGesturePwdSkipeYES;
             
             kWeakSelf
+            __weak HXBGeneralAlertVC *weakAlertVC = alertVC;
+            HSJProgressView *progressView = [HSJProgressView new];
             alertVC.leftBtnBlock = ^{
-                [weakSelf.viewModel userLogOut:YES resultBlock:^(id responseData, NSError *erro) {
+                [weakAlertVC.view addSubview:progressView];
+                [progressView show];
+                [weakSelf.viewModel userLogOut:NO resultBlock:^(id responseData, NSError *erro) {
+                    [progressView hide];
                     if (erro == nil) {
                         if (weakSelf.dismissBlock) {
                             weakSelf.dismissBlock(NO, NO, YES);
                         }
+                        [weakAlertVC dismissViewControllerAnimated:YES completion:nil];
                         [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_RefreshHomeData object:nil];
                     }
                 }];
             };
             alertVC.rightBtnBlock = ^{
-                [weakSelf.viewModel userLogOut:YES resultBlock:^(id responseData, NSError *erro) {
+                [weakAlertVC.view addSubview:progressView];
+                [progressView show];
+                [weakSelf.viewModel userLogOut:NO resultBlock:^(id responseData, NSError *erro) {
+                    [progressView hide];
                     if (erro == nil) {
                         if (weakSelf.dismissBlock) {
                             weakSelf.dismissBlock(NO, NO, NO);
                         }
+                        [weakAlertVC dismissViewControllerAnimated:YES completion:nil];
                         [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_RefreshHomeData object:nil];
                         [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_ShowLoginVC object:@{kHXBMY_VersionUpdateURL : @YES}];
                     }
