@@ -48,7 +48,11 @@
     [self.viewModel modifyTransactionPasswordWithIdCard:self.idcard password:surePassword resultBlock:^(BOOL isSuccess) {
         if (isSuccess) {
             HXBBaseNavigationController *navVC =(HXBBaseNavigationController *)weakSelf.navigationController;
-            UIViewController *accountVC = [navVC getViewControllerByClassName:@"HxbAccountInfoViewController"];
+            UIViewController *accountVC = [navVC getViewControllerByClassName:@"HSJBuyViewController"];
+            if(!accountVC) {
+                accountVC = [navVC getViewControllerByClassName:@"HxbAccountInfoViewController"];
+            }
+            
             if (accountVC != nil) {
                 [weakSelf.navigationController popToViewController:accountVC animated:YES];
             } else {
