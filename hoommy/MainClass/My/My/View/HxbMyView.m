@@ -234,21 +234,22 @@ MyViewHeaderDelegate
             cell.isShowLine = NO;
             cell.imageName = @"me_hongli";
         }
+        return cell;
     } else if (indexPath.section == 1){
         // 我的信息
         HSJMyHomeInfoTableViewCell *cell = [[HSJMyHomeInfoTableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"HSJMyHomeInfoTableViewCell"];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.infoModelArr = [self getUserInfoModelArray];
         
         return cell;
     } else {
         // 热门推荐
         HSJMyOperateListCell *myOperateListCell= [[HSJMyOperateListCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"HSJMyOperateListCell"];
+        myOperateListCell.selectionStyle = UITableViewCellSelectionStyleNone;
         MyRequestOperateModel *myOperateModel = self.myOperateModel.operateList[indexPath.row];
         myOperateListCell.imageName = myOperateModel.image;
         return myOperateListCell;
     }
-    
-    return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

@@ -35,6 +35,8 @@
 /// 最后判断是否有风险评测
 /// 都通过之后就执行 finishBlock
 - (void)checkDepositoryAndRiskFromController:(UIViewController *)controller finishBlock:(void (^)(void))finishBlock;
-/// 做风险评测
-- (void)riskTypeAssementFrom:(UIViewController *)controller;
+
+/// 做风险评测 需要回调结果
+- (void)riskTypeAssementFrom:(UIViewController *)controller resultBlock:(void (^)(void))finishBlock;
+
 @end

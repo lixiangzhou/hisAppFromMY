@@ -37,23 +37,24 @@
     shadowView.layer.shadowOffset = CGSizeMake(1, 1);//shadowOffset阴影偏移,x向右偏移4，y向下偏移4，默认(0, -3),这个跟shadowRadius配合使用
     shadowView.layer.shadowOpacity = 0.6;//阴影透明度，默认0
     shadowView.layer.shadowRadius = 1;//阴影半径，默认3
-    [self addSubview:shadowView];
+//    [self addSubview:shadowView];
     
     [self addSubview:self.messageImage];
     [self addSubview:self.messageLabel];
     
     _messageImage.image = [UIImage imageNamed:@"broadcast"];
-    
-    [_messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(_messageImage);
-        make.centerX.equalTo(self).offset(kScrAdaptationW(13));
-        make.height.offset(kScrAdaptationH750(30));
-    }];
+    kWeakSelf
     [_messageImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(_messageLabel.mas_left).offset(-kScrAdaptationW(10));
-        make.top.equalTo(@kScrAdaptationH750(26));
+        make.left.equalTo(weakSelf).offset(kScrAdaptationW(15));
+        make.centerY.equalTo(weakSelf);
         make.width.offset(kScrAdaptationW750(26));
         make.height.offset(kScrAdaptationH750(27.7));
+    }];
+    
+    [_messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.right.equalTo(weakSelf);
+        make.left.equalTo(weakSelf.messageImage.mas_right).offset(kScrAdaptationW(10));
+        make.height.offset(kScrAdaptationH750(30));
     }];
 }
 
