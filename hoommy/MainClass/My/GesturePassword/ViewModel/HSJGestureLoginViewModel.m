@@ -8,7 +8,10 @@
 
 #import "HSJGestureLoginViewModel.h"
 #import "HSJBaseViewModel+HSJNetWorkApi.h"
+#import "HXBRootVCManager.h"
 
 @implementation HSJGestureLoginViewModel
-
+- (UIView *)getHugView {
+    return [HXBRootVCManager manager].gesturePwdVC.view;
+}
 @end

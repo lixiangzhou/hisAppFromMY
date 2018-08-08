@@ -318,7 +318,7 @@
         [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_DetailUnBuyInClick];
     }
     
-    [self toRollOut];
+    [self toBuy:nil];
 }
 
 - (void)outClick {
@@ -341,7 +341,7 @@
     
     kWeakSelf
     [HSJEarningCalculatorView showWithInterest:self.viewModel.interest buyBlock:^(NSString *value) {
-        [weakSelf toRollOut];
+        [weakSelf toBuy:value];
     }];
 }
 
@@ -350,11 +350,12 @@
     [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_DetailBackClick];
 }
 
-- (void)toRollOut {
+- (void)toBuy:(NSString *)money {
     kWeakSelf
     [self.viewModel checkDepositoryAndRiskFromController:self finishBlock:^{
         HSJBuyViewController *vc = [HSJBuyViewController new];
         vc.planId = weakSelf.planId;
+        vc.startMoney = money;
         [weakSelf.navigationController pushViewController:vc animated:YES];
     }];
 }
