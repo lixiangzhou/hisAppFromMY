@@ -68,19 +68,19 @@
     };
     
     self.view.backgroundColor = [UIColor whiteColor];;
-    [self.view addSubview:self.notifitionView];
-    [self.view addSubview:self.backView];
-    [self.view addSubview:self.mybankView];
-    [self.view addSubview:self.amountTextField];
-    [self.view addSubview:self.tipImage];
-    [self.view addSubview:self.nextButton];
-    [self.view addSubview:self.availableBalanceLabel];
-    [self.view addSubview:self.freeTipLabel];
-    [self.view addSubview:self.callPhoneView];
-    [self.view addSubview:self.promptLabel];
-    [self.view addSubview:self.tiedCardLabel];
-    [self.view addSubview:self.reminderLabel];
-    [self.view addSubview:self.bottomView];
+    [self.safeAreaView addSubview:self.notifitionView];
+    [self.safeAreaView addSubview:self.backView];
+    [self.safeAreaView addSubview:self.mybankView];
+    [self.safeAreaView addSubview:self.amountTextField];
+    [self.safeAreaView addSubview:self.tipImage];
+    [self.safeAreaView addSubview:self.nextButton];
+    [self.safeAreaView addSubview:self.availableBalanceLabel];
+    [self.safeAreaView addSubview:self.freeTipLabel];
+    [self.safeAreaView addSubview:self.callPhoneView];
+    [self.safeAreaView addSubview:self.promptLabel];
+    [self.safeAreaView addSubview:self.tiedCardLabel];
+    [self.safeAreaView addSubview:self.reminderLabel];
+    [self.safeAreaView addSubview:self.bottomView];
     [self setCardViewFrame];
     //增加提现记录的按钮
     [self setupRightBarBtn];
@@ -137,14 +137,14 @@
 
     kWeakSelf
     [self.notifitionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(weakSelf.view);
-        make.top.equalTo(weakSelf.view).offset(HXBStatusBarAndNavigationBarHeight);
-        make.height.offset(kScrAdaptationH750(0));
+        make.left.right.equalTo(weakSelf.safeAreaView);
+        make.top.equalTo(weakSelf.safeAreaView).offset(kScrAdaptationW(5));
+        make.height.offset(kScrAdaptationH750(5));
     }];
     
     [self.mybankView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(weakSelf.view).offset(kScrAdaptationW750(20));
-        make.right.equalTo(weakSelf.view).offset(kScrAdaptationW750(-20));
+        make.left.equalTo(weakSelf.safeAreaView).offset(kScrAdaptationW750(20));
+        make.right.equalTo(weakSelf.safeAreaView).offset(kScrAdaptationW750(-20));
         make.top.equalTo(weakSelf.notifitionView.mas_bottom).offset(kScrAdaptationH750(30));
         make.height.offset(kScrAdaptationH750(160));
     }];
@@ -159,7 +159,7 @@
     [self.amountTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.freeTipLabel.mas_bottom).offset(kScrAdaptationH750(37));
         make.left.equalTo(weakSelf.tipImage.mas_right).offset(kScrAdaptationW750(30));
-        make.right.equalTo(weakSelf.view).offset(kScrAdaptationW750(-30));
+        make.right.equalTo(weakSelf.safeAreaView).offset(kScrAdaptationW750(-30));
         make.height.offset(kScrAdaptationH750(130));
     }];
     [self.tipImage mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -170,7 +170,7 @@
     }];
     
     [self.backView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.amountTextField.mas_bottom).offset(kScrAdaptationH750(20));
+        make.top.equalTo(weakSelf.amountTextField.mas_bottom);
         make.left.right.equalTo(weakSelf.mybankView);
         make.height.offset(kScrAdaptationH750(1));
     }];
@@ -183,36 +183,36 @@
     
     [self.nextButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.availableBalanceLabel.mas_bottom).offset(kScrAdaptationH750(116));
-        make.left.equalTo(weakSelf.view).offset(kScrAdaptationW750(40));
-        make.right.equalTo(weakSelf.view).offset(kScrAdaptationW750(-40));
+        make.left.equalTo(weakSelf.safeAreaView).offset(kScrAdaptationW750(40));
+        make.right.equalTo(weakSelf.safeAreaView).offset(kScrAdaptationW750(-40));
         make.height.offset(kScrAdaptationH750(82));
     }];
     
     [self.callPhoneView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(weakSelf.view).offset(kScrAdaptationH750(-100));
-        make.left.equalTo(weakSelf.view).offset(kScrAdaptationW750(40));
+        make.bottom.equalTo(weakSelf.safeAreaView).offset(kScrAdaptationH750(-100));
+        make.left.equalTo(weakSelf.safeAreaView).offset(kScrAdaptationW750(40));
     }];
     
     [self.promptLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(weakSelf.callPhoneView.mas_top).offset(kScrAdaptationH750(-10));
-        make.left.equalTo(weakSelf.view).offset(kScrAdaptationW750(40));
-        make.right.equalTo(weakSelf.view).offset(-kScrAdaptationW750(40));
+        make.left.equalTo(weakSelf.safeAreaView).offset(kScrAdaptationW750(40));
+        make.right.equalTo(weakSelf.safeAreaView).offset(-kScrAdaptationW750(40));
     }];
     
     [self.tiedCardLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(weakSelf.promptLabel.mas_top).offset(kScrAdaptationH750(-10));
-        make.left.equalTo(weakSelf.view).offset(kScrAdaptationW750(40));
-        make.right.equalTo(weakSelf.view).offset(-kScrAdaptationW750(40));
+        make.left.equalTo(weakSelf.safeAreaView).offset(kScrAdaptationW750(40));
+        make.right.equalTo(weakSelf.safeAreaView).offset(-kScrAdaptationW750(40));
     }];
     
     [self.reminderLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(weakSelf.tiedCardLabel.mas_top).offset(kScrAdaptationH750(-20));
-        make.left.equalTo(weakSelf.view).offset(kScrAdaptationW750(40));
+        make.left.equalTo(weakSelf.safeAreaView).offset(kScrAdaptationW750(40));
     }];
 
     [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(weakSelf.view.mas_bottom);
-        make.left.right.equalTo(weakSelf.view);
+        make.bottom.equalTo(weakSelf.safeAreaView.mas_bottom);
+        make.left.right.equalTo(weakSelf.safeAreaView);
         make.height.equalTo(@kScrAdaptationH750(202));
     }];
     
@@ -374,6 +374,27 @@
         NSString *messageStr = [NSString stringWithFormat:@"您有%d条提现申请正在处理，点击查看",withdrawModel.inprocessCount];
         NSRange range = [messageStr rangeOfString:[NSString stringWithFormat:@"%d",withdrawModel.inprocessCount]];
         self.notifitionView.attributedMessageCount = [NSMutableAttributedString setupAttributeStringWithString:messageStr WithRange:(NSRange)range andAttributeColor:COR29 andAttributeFont:kHXBFont_PINGFANGSC_REGULAR_750(24)];
+        [self.notifitionView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.offset(kScrAdaptationH750(70));
+        }];
+        
+        
+        NSString *num = [NSString stringWithFormat:@"%d",withdrawModel.inprocessCount];
+        NSString *str1 = @"您有";
+        NSString *str2 = @"条提现申请正在处理，";
+        NSString *str3 = @"点击查看";
+        NSMutableAttributedString *att = [NSMutableAttributedString new];
+        
+        NSMutableAttributedString *attr1 = [NSMutableAttributedString setupAttributeStringWithBeforeString:str1 WithBeforeRange:NSMakeRange(0, str1.length) andAttributeColor:RGB(209, 169, 127) andAttributeFont:kHXBFont_PINGFANGSC_REGULAR(14) afterString:num WithAfterRange:NSMakeRange(0, num.length) andAttributeColor:COR29 andAttributeFont:kHXBFont_PINGFANGSC_REGULAR(14)];
+        [att appendAttributedString:attr1];
+        
+        NSMutableAttributedString *attr2 = [NSMutableAttributedString setupAttributeStringWithString:str2 WithRange:NSMakeRange(0, str2.length) andAttributeColor:RGB(209, 169, 127) andAttributeFont:kHXBFont_PINGFANGSC_REGULAR(14)];
+        [att appendAttributedString:attr2];
+        
+        NSMutableAttributedString *attr3 = [NSMutableAttributedString setupAttributeStringWithString:str3 WithRange:NSMakeRange(0, str3.length) andAttributeColor:RGB(102, 121, 253) andAttributeFont:kHXBFont_PINGFANGSC_REGULAR(14)];
+        [att appendAttributedString:attr3];
+        
+        self.notifitionView.attributedMessageCount = att;
         [self.notifitionView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.offset(kScrAdaptationH750(70));
         }];

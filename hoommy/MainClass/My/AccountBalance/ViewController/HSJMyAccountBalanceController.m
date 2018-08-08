@@ -68,8 +68,9 @@
     });
     
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        weakSelf.userInfoModel = weakSelf.viewModel.userInfoModel;
         //界面刷新
-        [self.safeAreaView setNeedsLayout];
+        [weakSelf.safeAreaView setNeedsLayout];
     });
 }
 
@@ -145,7 +146,11 @@
     NSLog(@"转入存钱罐");
     [HXBUmengManagar HXB_clickEventWithEnevtId: kHSJUmeng_MyIntoPlanClick];
     if ([self.userInfoModel.userInfo.riskType isEqualToString:@"立即评测"]) {
-        [self.viewModel riskTypeAssementFrom:self];
+        kWeakSelf
+        [self.viewModel riskTypeAssementFrom:weakSelf resultBlock:^{
+            [self loadData_userInfo];
+        }];
+
     } else {
         HSJBuyViewController *vc = [HSJBuyViewController new];
         vc.planId = [KeyChain firstPlanIdInPlanList];

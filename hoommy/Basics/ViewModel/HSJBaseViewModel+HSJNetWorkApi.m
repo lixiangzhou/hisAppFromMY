@@ -135,7 +135,7 @@ static const char HXBUserInfoModelKey = '\0';
                 if (userInfoModel.userInfo.isCreateEscrowAcc == NO) {
                     [HSJDepositoryOpenTipView show];
                 } else if ([userInfoModel.userInfo.riskType isEqualToString:@"立即评测"]) {
-                    [weakSelf riskTypeAssementFrom:controller];
+                    [weakSelf riskTypeAssementFrom:controller resultBlock:nil];
                 } else {
                     if (finishBlock) {
                         finishBlock();
@@ -149,11 +149,15 @@ static const char HXBUserInfoModelKey = '\0';
     }
 }
 
-- (void)riskTypeAssementFrom:(UIViewController *)controller {
+- (void)riskTypeAssementFrom:(UIViewController *)controller resultBlock:(void (^)(void))finishBlock {
     HXBGeneralAlertVC *alertVC = [[HXBGeneralAlertVC alloc] initWithMessageTitle:@"" andSubTitle:@"您尚未进行风险评测，请评测后再进行出借" andLeftBtnName:@"我是保守型" andRightBtnName:@"立即评测" isHideCancelBtn:YES isClickedBackgroundDiss:YES];
     kWeakSelf
     [alertVC setLeftBtnBlock:^{
-        [weakSelf setRiskTypeDefault];
+        [weakSelf setRiskTypeDefaultAndResultBlock:^{
+            if (finishBlock) {
+                finishBlock();
+            }
+        }];
     }];
     [alertVC setRightBtnBlock:^{
         HSJRiskAssessmentViewController *riskAssessmentVC = [[HSJRiskAssessmentViewController alloc] init];
@@ -162,19 +166,26 @@ static const char HXBUserInfoModelKey = '\0';
         riskAssessmentVC.popBlock = ^(NSString *type) {
             [weakRiskAssessmentVC.navigationController popToViewController:controller animated:YES];
         };
+        if (finishBlock) {
+            finishBlock();
+        }
     }];
     
     [controller presentViewController:alertVC animated:NO completion:nil];
 }
 
-- (void)setRiskTypeDefault
+- (void)setRiskTypeDefaultAndResultBlock:(void (^)(void))finishBlock
 {
     [self loadData:^(NYBaseRequest *request) {
         request.requestUrl = kHXBUser_riskModifyScoreURL;
         request.requestMethod = NYRequestMethodPost;
         request.requestArgument = @{@"score": @"0"};
     } responseResult:^(id responseData, NSError *erro) {
-        
+        if (!erro) {
+            if (finishBlock) {
+                finishBlock();
+            }
+        }
     }];
 }
 @end
