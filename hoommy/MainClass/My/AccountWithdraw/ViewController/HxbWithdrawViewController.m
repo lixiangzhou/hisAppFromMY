@@ -170,7 +170,7 @@
     }];
     
     [self.backView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.amountTextField.mas_bottom).offset(kScrAdaptationH750(20));
+        make.top.equalTo(weakSelf.amountTextField.mas_bottom);
         make.left.right.equalTo(weakSelf.mybankView);
         make.height.offset(kScrAdaptationH750(1));
     }];
