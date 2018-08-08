@@ -29,5 +29,5 @@
  懒猫—存管开户
  */
 - (void)openDepositoryWithParam:(NSDictionary *)param resultBlock:(void(^)(BOOL isSuccess))resultBlock;
-
+- (void)getBankData:(void(^)(BOOL isSuccess))resultBlock;
 @end

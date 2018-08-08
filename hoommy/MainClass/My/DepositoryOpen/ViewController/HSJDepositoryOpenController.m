@@ -55,6 +55,32 @@
     self.viewModel = [HSJDepositoryOpenViewModel new];
     self.isAgree = YES;
     [self setUI];
+    
+    if (self.userInfoModel) {
+        self.title = @"完善信息";
+        HXBRequestUserInfoAPI_UserInfo *userInfo = self.userInfoModel.userInfo;
+        self.nameView.text = [userInfo.realName replaceStringWithStartLocation:0 lenght:userInfo.realName.length - 1];
+        self.nameView.userInteractionEnabled = NO;
+        
+        self.idView.text = [userInfo.idNo replaceStringWithStartLocation:1 lenght:userInfo.idNo.length - 2];
+        self.idView.userInteractionEnabled = NO;
+        
+        if ([userInfo.hasBindCard isEqualToString:@"1"]) {
+            kWeakSelf
+            [self.viewModel getBankData:^(BOOL isSuccess) {
+                if (isSuccess) {
+                    weakSelf.bankNoView.text = [weakSelf.viewModel.bankCardModel.cardId replaceStringWithStartLocation:0 lenght:weakSelf.viewModel.bankCardModel.cardId.length - 4];
+                    weakSelf.bankNameView.userInteractionEnabled = NO;
+                    
+                    weakSelf.bankNameView.text = weakSelf.viewModel.bankCardModel.bankType;
+                    weakSelf.bankNameView.userInteractionEnabled = NO;
+                    
+                    weakSelf.mobileView.text = weakSelf.viewModel.bankCardModel.securyMobile;
+                    weakSelf.mobileView.userInteractionEnabled = NO;
+                }
+            }];
+        }
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -280,9 +306,10 @@
 }
 
 - (void)setBottomView {
+    NSString *title = self.userInfoModel == nil ? @"开通恒丰银行存管账户" : @"提交";
     UIButton *bottomBtn = [[UIButton alloc] init];
     bottomBtn.backgroundColor = kHXBColor_D5B775_50;
-    [bottomBtn setTitle:@"开通恒丰银行存管账户" forState:UIControlStateNormal];
+    [bottomBtn setTitle:title forState:UIControlStateNormal];
     [bottomBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     bottomBtn.titleLabel.font = kHXBFont_PINGFANGSC_REGULAR(16);
     bottomBtn.layer.cornerRadius = 2;

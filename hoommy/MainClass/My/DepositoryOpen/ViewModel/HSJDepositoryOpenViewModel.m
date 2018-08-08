@@ -90,4 +90,17 @@
     }];
 }
 
+- (void)getBankData:(void (^)(BOOL))resultBlock {
+    kWeakSelf
+    [self loadData:^(NYBaseRequest *request) {
+        request.requestUrl = kHXBUserInfo_BankCard;
+        request.showHud = YES;
+        request.modelType = [HXBBankCardModel class];
+    } responseResult:^(id responseData, NSError *erro) {
+        weakSelf.bankCardModel = responseData;
+        if(resultBlock) {
+            resultBlock(responseData != nil);
+        }
+    }];
+}
 @end
