@@ -7,8 +7,9 @@
 //
 
 #import "HXBBaseViewController.h"
+#import "IQKeyboardManagerExtent.h"
 
-@interface HXBBaseViewController (HSJAPI)
+@interface HXBBaseViewController (HSJAPI)<KeyboardSizeChange>
 
 /**
  加载无网络视图

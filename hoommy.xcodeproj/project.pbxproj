@@ -170,6 +170,7 @@
 		9A3749D020F883E800F39681 /* HXBBankListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3749CE20F883E800F39681 /* HXBBankListCell.m */; };
 		9A3749D620FC3AAB00F39681 /* HXBBindCardCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3749D220FC3AAA00F39681 /* HXBBindCardCellModel.m */; };
 		9A3749D720FC3AAB00F39681 /* HXBBindCardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3749D520FC3AAA00F39681 /* HXBBindCardTableViewCell.m */; };
+		9A3F5400211A9D8A00B711E2 /* IQKeyboardManagerExtent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3F53FF211A9D8A00B711E2 /* IQKeyboardManagerExtent.m */; };
 		9A4B181520F34434006B83C7 /* HXBBindPhoneCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A4B180920F34433006B83C7 /* HXBBindPhoneCellModel.m */; };
 		9A4B181620F34434006B83C7 /* HXBBindPhoneTableFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A4B180C20F34433006B83C7 /* HXBBindPhoneTableFootView.m */; };
 		9A4B181720F34434006B83C7 /* HXBBindPhoneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A4B180E20F34433006B83C7 /* HXBBindPhoneTableViewCell.m */; };
@@ -734,6 +735,8 @@
 		9A3749D320FC3AAA00F39681 /* HXBBindCardTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBBindCardTableViewCell.h; sourceTree = "<group>"; };
 		9A3749D420FC3AAA00F39681 /* HXBBindCardCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBBindCardCellModel.h; sourceTree = "<group>"; };
 		9A3749D520FC3AAA00F39681 /* HXBBindCardTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBBindCardTableViewCell.m; sourceTree = "<group>"; };
+		9A3F53FE211A9D8A00B711E2 /* IQKeyboardManagerExtent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IQKeyboardManagerExtent.h; sourceTree = "<group>"; };
+		9A3F53FF211A9D8A00B711E2 /* IQKeyboardManagerExtent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IQKeyboardManagerExtent.m; sourceTree = "<group>"; };
 		9A4B180820F34433006B83C7 /* HXBBindPhoneCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBBindPhoneCellModel.h; sourceTree = "<group>"; };
 		9A4B180920F34433006B83C7 /* HXBBindPhoneCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBBindPhoneCellModel.m; sourceTree = "<group>"; };
 		9A4B180B20F34433006B83C7 /* HXBBindPhoneTableFootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBBindPhoneTableFootView.h; sourceTree = "<group>"; };
@@ -2232,6 +2235,15 @@
 			path = BindCardCell;
 			sourceTree = "<group>";
 		};
+		9A3F53FD211A9D3200B711E2 /* IQKeyboardManagerExtent */ = {
+			isa = PBXGroup;
+			children = (
+				9A3F53FE211A9D8A00B711E2 /* IQKeyboardManagerExtent.h */,
+				9A3F53FF211A9D8A00B711E2 /* IQKeyboardManagerExtent.m */,
+			);
+			path = IQKeyboardManagerExtent;
+			sourceTree = "<group>";
+		};
 		9A4B180220F33D0C006B83C7 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -2909,6 +2921,7 @@
 		9A97D96620EF420100688ADB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				9A3F53FD211A9D3200B711E2 /* IQKeyboardManagerExtent */,
 				8D413B3621185BF8009574D1 /* ProgressView */,
 				9AF51D9E20FC4849008A8CF4 /* CALayerTool */,
 				9A37490D20F7714600F39681 /* TransitioningManager */,
@@ -4062,6 +4075,7 @@
 				9A97DA9420EF420200688ADB /* UILabel+HxbLabel.m in Sources */,
 				9A4B181620F34434006B83C7 /* HXBBindPhoneTableFootView.m in Sources */,
 				9A37492120F851CF00F39681 /* HxbWithdrawResultViewController.m in Sources */,
+				9A3F5400211A9D8A00B711E2 /* IQKeyboardManagerExtent.m in Sources */,
 				E14B9F9920FD8AF80084F007 /* HXBProgressView.m in Sources */,
 				4EA610752105BA03008580DD /* HSJHomeVCViewModel.m in Sources */,
 				9A0BD53220F6FD1C00B1CC59 /* HXBEnumerateTransitionManager.m in Sources */,
