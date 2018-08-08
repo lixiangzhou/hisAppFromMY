@@ -18,7 +18,6 @@
 #import "HXBTransactionPasswordView.h"
 #import "HXBVerificationCodeAlertVC.h"
 #import "HSJPlanBuyResultViewController.h"
-#import "IQKeyboardManager.h"
 
 @interface HSJBuyViewController ()
 
@@ -45,8 +44,6 @@
     [self setupData];
     [self setupUI];
     [self setupConstraints];
-    
-    [IQKeyboardManager sharedManager].enable = NO;
 }
 
 - (void)leftBackBtnClick {
@@ -119,7 +116,7 @@
 
 - (void)setupConstraints {
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.safeAreaView);
+        make.top.left.bottom.right.equalTo(self.safeAreaView);
     }];
 }
 
@@ -262,6 +259,7 @@
         }];
         BOOL agreementCheckResult = [self.viewModel checkAgreement:self.footView.isAgreementGroup agreeRiskApplyAgreement:self.footView.isAgreeRiskApplyAgreement];
         if(moneyCheckResult && agreementCheckResult) {//校验通过
+            [self.headView endEditing:YES];
             if([self.viewModel.buyType isEqualToString:@"balance"]) {//余额购买
                 [self alertPassWord];
             }
@@ -353,7 +351,6 @@
         if([weakSelf.viewModel.buyType isEqualToString:@"balance"]) {//余额购买
             [weakSelf.passwordView removeFromSuperview];
             [weakSelf.passwordView.loadingParentView removeFromSuperview];
-            [IQKeyboardManager sharedManager].enable = NO;
         }
         else {
             [weakSelf.alertVC dismissViewControllerAnimated:NO completion:nil];
@@ -444,6 +441,19 @@
             }
         }
     }
+}
+
+#pragma mark 键盘改变协议处理
+- (void)keyboardShow:(CGRect)rect {
+    [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.safeAreaView).offset(-rect.size.height);
+    }];
+}
+
+- (void)keyboardHidden {
+    [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.safeAreaView);
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -24,6 +24,7 @@
 #import "HXBRootVCManager.h"
 #import "IQKeyboardManager.h"
 #import "HXBBindPhoneViewController.h"
+#import "IQKeyboardManagerExtent.h"
 
 @interface HXBTransactionPasswordView ()<UITextFieldDelegate>
 
@@ -168,7 +169,7 @@
 
 - (void)showInView:(UIView *)view {
     [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = NO;
-    [IQKeyboardManager sharedManager].enable = NO;
+    [IQKeyboardManagerExtent sharedInstance].enable = NO;
     [view addSubview:self];
     [self.passwordTextField becomeFirstResponder];
 }
@@ -319,7 +320,7 @@
         self.contentView.y = kScreenHeight;
     } completion:^(BOOL finished) {
         [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
-        [IQKeyboardManager sharedManager].enable = YES;
+        [IQKeyboardManagerExtent sharedInstance].enable = YES;
         [self removeFromSuperview];
     }];
 }
