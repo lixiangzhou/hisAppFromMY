@@ -259,6 +259,7 @@
         }];
         BOOL agreementCheckResult = [self.viewModel checkAgreement:self.footView.isAgreementGroup agreeRiskApplyAgreement:self.footView.isAgreeRiskApplyAgreement];
         if(moneyCheckResult && agreementCheckResult) {//校验通过
+            [self.headView endEditing:YES];
             if([self.viewModel.buyType isEqualToString:@"balance"]) {//余额购买
                 [self alertPassWord];
             }
