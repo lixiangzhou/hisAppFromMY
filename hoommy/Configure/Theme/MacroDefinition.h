@@ -10,18 +10,23 @@
 #define MacroDefinition_h
 
 //-------------------banner，首页弹框跳转原生的界面-------------------------
+//某个计划的详情页
+#define kPlanDetailVC @"/plan/plan_detail"
+//登录页面
+#define kLoginVC @"/user/login"
+//存管开户页面
+#define kEscrowActivityVC @"/home/EscrowActivity"
+
+//////////////////////////////////////////////////////////////////////////
+
 //注册页面
 #define kRegisterVC @"/account/register"
 //充值页面
 #define kRechargeVC @"/cash/recharge"
-//某个计划的详情页
-#define kPlanDetailVC @"/plan/detail"
 //某个散标的详情页
 #define kLoanDetailVC @"/loan/detail"
 //某个债转的详情页
 #define kLoanTransferDetailVC @"/loan_transfer/detail"
-//登录页面
-#define kLoginVC @"/account/login"
 //主页
 #define kHomeVC @"/home/main"
 //公告列表
@@ -32,15 +37,13 @@
 #define kLoan_fragment @"/home/loan_fragment"
 //债权转让列表页
 #define kLoantransferfragment @"/home/loan_transfer_fragment"
-//存管开户页面
-#define kEscrowActivityVC @"/home/EscrowActivity"
+
 //存管开户弹框
 #define kEscrowdialogActivityVC @"/user/escrowdialog_activity"
 //好友邀请记录
 #define kAccountFriendsRecordActivity @"/account/invite_friends_record_activity"
 // h5 调app 展示信息框
 #define kInviteSellerShowMessage @"/invite/seller"
-
 // h5 调app 恒丰银行资金存管说明
 #define kH5LandingDeposit @"/landing/deposit"
 // h5 调app 多重安全保障说明

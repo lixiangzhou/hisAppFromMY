@@ -29,7 +29,7 @@
 /**
  *  错误状态下外空心圆颜色
  */
-#define CircleStateErrorOutsideColor rgba(254,82,92,1)
+#define CircleStateErrorOutsideColor rgba(245,107,47,1)
 
 /**
  *  普通状态下内实心圆颜色

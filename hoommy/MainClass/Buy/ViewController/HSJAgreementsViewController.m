@@ -36,7 +36,7 @@
 }
 
 - (void)setupData {
-    self.titleList = @[@"钱罐服务协议", @"投资提示书", @"投资范围", @"取消"];
+    self.titleList = @[@"存钱罐服务协议", @"网络借贷协议书", @"投资范围", @"取消"];
 }
 
 - (void)setupUI {
@@ -129,14 +129,17 @@
         [self dismissViewControllerAnimated:NO completion:nil];
         UINavigationController *navVC = [HXBRootVCManager manager].mainTabbarVC.selectedViewController;
         HXBBaseWKWebViewController *vc = [[HXBBaseWKWebViewController alloc] init];
-        if([title isEqualToString:@"钱罐服务协议"]) {
-            
+        if([title isEqualToString:@"存钱罐服务协议"]) {
+            vc.pageUrl = [NSString splicingH5hostWithURL:kHXB_Negotiate_ServePlanURL];
+            vc.pageTitle = @"存钱罐服务协议";
         }
-        else if([title isEqualToString:@"投资提示书"]) {
-            
+        else if([title isEqualToString:@"网络借贷协议书"]) {
+            vc.pageUrl = [NSString splicingH5hostWithURL:kHXB_Agreement_Hint];
+            vc.pageTitle = @"网络借贷协议书";
         }
         else if([title isEqualToString:@"投资范围"]) {
             vc.pageUrl = kHXBH5_BuyPlanRangeURL(self.planId);
+            vc.pageTitle = @"投资范围";
         }
         
         if(vc.pageUrl) {

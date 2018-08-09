@@ -17,11 +17,13 @@
 
 //MARK: ======================= 协议 ==========================
 //协议或合同名    端口号后链接    状态    账户内连接
-#define kHXB_Negotiate_SginUPURL @"/agreement/signup"///《注册服务协议》
+#define kHXB_Negotiate_SginUPURL @"/agreement/babygoSignup"///《注册服务协议》
+#define kHXB_Negotiate_ServePlanURL @"/agreement/plan"///《月升服务协议书》
+#define kHXB_Agreement_Hint @"/agreement/hint"//网络借贷协议书
+#define kHXB_Negotiate_ServePlan_AccountURL(productID) [NSString stringWithFormat: @"/acount/planRise/%@/agreement",(productID)]//我的月升服务协议
+
 #define kHXB_Negotiate_CertificationURL @"/agreement/realname"///《红小宝认证服务协议》
-#define kHXB_Negotiate_ServePlanURL @"/agreement/plan"///《红利智投服务协议书》
 #define kHXB_Negotiate_ServePlanMonthURL @"/agreement/planMonth"///《按月付息服务协议书》
-#define kHXB_Negotiate_ServePlan_AccountURL(productID) [NSString stringWithFormat: @"/acount/plan/%@/agreement",(productID)]///账户内服务协议 plan
 #define kHXB_Negotiate_ServeMonthPlan_AccountURL(productID) [NSString stringWithFormat: @"/acount/planMonth/%@/agreement",(productID)]///账户内按月付息服务协议
 #define kHXB_Negotiate_ServeLoan_AccountURL(productID) [NSString stringWithFormat: @"/acount/loan/%@/agreement/",(productID)]///账户内《借款协议》
 #define kHXB_Negotiate_ServeLoanURL @"/agreement/loan"///《借款服务协议书》
@@ -32,9 +34,7 @@
 #define kHXB_Negotiate_thirdpart @"/agreement/thirdpart" ///《恒丰银行股份有限公司杭州分行网络交易资金账户三方协议》
 #define kHXB_Negotiate_authorize @"/agreement/authorize" ///《红小宝平台授权协议》
 #define kHXB_Negotiate_couponExchangeInstructionsUrl @"/discount/explain" ///优惠券使用说明
-
 #define kHXB_Negotiate_AddTrustURL @"/landing/trust"///增信页
-#define kHXB_Agreement_Hint @"/agreement/hint"//网络借贷协议书
 
 //MARK: ======================= 用户 =======================
 #define kHXBUser_UserInfoURL @"/account/info"///用户信息

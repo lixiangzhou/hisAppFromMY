@@ -10,18 +10,10 @@
 #import "HSJDepositoryOpenTipView.h"
 #import "HXBGeneralAlertVC.h"
 #import "HSJRiskAssessmentViewController.h"
+#import "HxbWithdrawCardViewController.h"
+#import "HSJDepositoryOpenController.h"
 
 @implementation HSJBaseViewModel (HSJNetWorkApi)
-
-@dynamic userInfoModel;
-static const char HXBUserInfoModelKey = '\0';
-- (void)setInnerUserInfoModel:(HXBUserInfoModel *)innerUserInfoModel {
-    objc_setAssociatedObject(self, &HXBUserInfoModelKey, innerUserInfoModel, OBJC_ASSOCIATION_RETAIN);
-}
-
-- (HXBUserInfoModel *)innerUserInfoModel {
-    return objc_getAssociatedObject(self, &HXBUserInfoModelKey);
-}
 
 - (void)checkVersionUpdate:(NetWorkResponseBlock)resultBlock {
     NSString *version = [[[NSBundle mainBundle]infoDictionary]objectForKey:@"CFBundleShortVersionString"];
@@ -52,9 +44,6 @@ static const char HXBUserInfoModelKey = '\0';
         request.requestMethod = NYRequestMethodGet;
         request.modelType = NSClassFromString(@"HXBUserInfoModel");
     } responseResult:^(id responseData, NSError *erro) {
-        if (responseData) {
-            self.innerUserInfoModel = responseData;
-        }
         if(resultBlock) {
             resultBlock(responseData, erro);
         }
@@ -121,29 +110,34 @@ static const char HXBUserInfoModelKey = '\0';
     }];
 }
 
+- (void)a {
+
+}
+
 #pragma mark - 开户和风险评测
 - (void)checkDepositoryAndRiskFromController:(UIViewController *)controller finishBlock:(void (^)(void))finishBlock {
     if (KeyChain.isLogin) {
-        // 已开户并且做过风险评测就直接执行 finishBlock
-        if (self.innerUserInfoModel.userInfo.isCreateEscrowAcc == YES && [self.innerUserInfoModel.userInfo.riskType isEqualToString:@"立即评测"] == NO) {
-            if (finishBlock) {
-                finishBlock();
-            }
-        } else {
-            kWeakSelf
-            [self downLoadUserInfo:YES resultBlock:^(HXBUserInfoModel *userInfoModel, NSError *erro) {
-                if (userInfoModel.userInfo.isCreateEscrowAcc == NO) {
-                    [HSJDepositoryOpenTipView show];
-                } else if ([userInfoModel.userInfo.riskType isEqualToString:@"立即评测"]) {
-                    [weakSelf riskTypeAssementFrom:controller resultBlock:nil];
-                } else {
-                    if (finishBlock) {
-                        finishBlock();
-                    }
+        kWeakSelf
+        [self downLoadUserInfo:YES resultBlock:^(HXBUserInfoModel *userInfoModel, NSError *erro) {
+            if (userInfoModel.userInfo.isCreateEscrowAcc == NO) {
+                [HSJDepositoryOpenTipView show];
+            } else if ([userInfoModel.userInfo.isCashPasswordPassed isEqualToString:@"1"] == NO) {
+                HSJDepositoryOpenController *vc = [HSJDepositoryOpenController new];
+                vc.userInfoModel = userInfoModel;
+                [controller.navigationController pushViewController:vc animated:YES];
+            } else if ([userInfoModel.userInfo.hasBindCard isEqualToString:@"1"] == NO) {
+                HxbWithdrawCardViewController *vc = [HxbWithdrawCardViewController new];
+                vc.type = HXBRechargeAndWithdrawalsLogicalJudgment_Other;
+                vc.userInfoModel = userInfoModel;
+                [controller.navigationController pushViewController:vc animated:YES];
+            }  else if ([userInfoModel.userInfo.riskType isEqualToString:@"立即评测"]) {
+                [weakSelf riskTypeAssementFrom:controller resultBlock:nil];
+            } else {
+                if (finishBlock) {
+                    finishBlock();
                 }
-            }];
-        }
-        
+            }
+        }];
     } else {
         [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_ShowLoginVC object:nil];
     }

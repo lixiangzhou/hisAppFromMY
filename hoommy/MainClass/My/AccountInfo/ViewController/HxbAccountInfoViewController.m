@@ -132,8 +132,10 @@ UITableViewDataSource
                 
                 [self presentViewController:alertVC animated:NO completion:nil];
             }
-            else{
-                //账户信息不完善
+            else {//账户信息不完善
+                HSJDepositoryOpenController *vc = [[HSJDepositoryOpenController alloc] init];
+                vc.userInfoModel = self.userInfoModel;
+                [self.navigationController pushViewController:vc animated:YES];
             }
         }
     }
@@ -141,27 +143,26 @@ UITableViewDataSource
 
 #pragma mark 修改交易密码
 - (void)modifyTransactionPwd {
-    if([self.userInfoModel.userInfo.isIdPassed isEqualToString:@"0"]) {//未实名
-        HSJDepositoryOpenTipController *vc = [[HSJDepositoryOpenTipController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
-        return;
-    }
-    else if (self.userInfoModel.userInfo.isUnbundling) {
+    if (self.userInfoModel.userInfo.isUnbundling) {
         [HXBAlertManager callupWithphoneNumber:kServiceMobile andWithTitle:@"温馨提示" Message:[NSString stringWithFormat:@"您的身份信息不完善，请联系客服 %@", kServiceMobile]];
         return;
     }
-    
-    if ([self.userInfoModel.userInfo.isCashPasswordPassed isEqualToString:@"1"]) {
-        [self entryBindPhonePage:HXBBindPhoneTransactionPassword];
-    }else
-    {
-        if (!self.userInfoModel.userInfo.isCreateEscrowAcc) {
-            [self entryDepositoryAccount];
+
+    if (!self.userInfoModel.userInfo.isCreateEscrowAcc) {
+        [self entryDepositoryAccount];
+    }
+    else {
+        if ([self.userInfoModel.userInfo.isCashPasswordPassed isEqualToString:@"1"]) {
+            [self entryBindPhonePage:HXBBindPhoneTransactionPassword];
         }
-        else{
-            //账户信息不完善
+        else {//账户信息不完善
+            HSJDepositoryOpenController *vc = [[HSJDepositoryOpenController alloc] init];
+            vc.userInfoModel = self.userInfoModel;
+            [self.navigationController pushViewController:vc animated:YES];
         }
     }
+    
+    
 }
 
 - (void)entryBindPhonePage:(HXBBindPhoneStepType)stepType {

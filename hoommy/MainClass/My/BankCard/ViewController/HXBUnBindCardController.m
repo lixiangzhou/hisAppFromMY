@@ -108,7 +108,7 @@
     if(!_footView) {
         _footView = [[HXBBindPhoneTableFootView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScrAdaptationH(119))];
         _footView.buttonTitle = @"确认解绑";
-        _footView.rightTopBtnTitle = @"忘记密码？";
+        _footView.rightTopBtnTitle = @"忘记密码?";
         _footView.buttonBackGroundColor = kHXBColor_FF7055_100;
         
         kWeakSelf
