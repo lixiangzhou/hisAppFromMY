@@ -76,7 +76,7 @@
         make.left.equalTo(self.titleLb.mas_right).offset(kScrAdaptationW(13));
         make.top.equalTo(self.contentView);
         make.bottom.equalTo(self.lineImv.mas_top);
-        make.right.equalTo(self.codeBt.mas_left).offset(kScrAdaptationW(5));
+        make.right.equalTo(self.codeBt.mas_left);
     }];
     
     [self.titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
