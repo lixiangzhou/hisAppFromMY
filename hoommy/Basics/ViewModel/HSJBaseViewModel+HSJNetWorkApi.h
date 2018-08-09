@@ -11,8 +11,6 @@
 
 @interface HSJBaseViewModel (HSJNetWorkApi)
 
-@property (nonatomic, strong) HXBUserInfoModel *userInfoModel;
-
 - (void)checkVersionUpdate:(NetWorkResponseBlock)resultBlock;
 
 - (void)downLoadUserInfo:(BOOL)isShowHud resultBlock:(void(^)(HXBUserInfoModel *userInfoModel, NSError* erro))resultBlock;

@@ -15,16 +15,6 @@
 
 @implementation HSJBaseViewModel (HSJNetWorkApi)
 
-@dynamic userInfoModel;
-static const char HXBUserInfoModelKey = '\0';
-- (void)setInnerUserInfoModel:(HXBUserInfoModel *)innerUserInfoModel {
-    objc_setAssociatedObject(self, &HXBUserInfoModelKey, innerUserInfoModel, OBJC_ASSOCIATION_RETAIN);
-}
-
-- (HXBUserInfoModel *)innerUserInfoModel {
-    return objc_getAssociatedObject(self, &HXBUserInfoModelKey);
-}
-
 - (void)checkVersionUpdate:(NetWorkResponseBlock)resultBlock {
     NSString *version = [[[NSBundle mainBundle]infoDictionary]objectForKey:@"CFBundleShortVersionString"];
     [self loadData:^(NYBaseRequest *request) {
@@ -54,9 +44,6 @@ static const char HXBUserInfoModelKey = '\0';
         request.requestMethod = NYRequestMethodGet;
         request.modelType = NSClassFromString(@"HXBUserInfoModel");
     } responseResult:^(id responseData, NSError *erro) {
-        if (responseData) {
-            self.innerUserInfoModel = responseData;
-        }
         if(resultBlock) {
             resultBlock(responseData, erro);
         }
