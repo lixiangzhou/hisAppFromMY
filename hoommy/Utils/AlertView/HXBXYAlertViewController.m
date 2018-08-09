@@ -9,6 +9,7 @@
 #import "HXBXYAlertViewController.h"
 #import "HXB_XYTools.h"
 #import "Animatr.h"
+
 @interface HXBXYAlertViewController ()
 @property (nonatomic,strong) Animatr *animatr;
 @property (nonatomic,copy) NSString *titleAlert;
@@ -83,7 +84,7 @@
 - (void)setUPAnimater{
     [self.animatr presentAnimaWithBlock:^(UIViewController *toVC, UIViewController *fromeVC, UIView *toView, UIView *fromeView) {
         toView.center = [UIApplication sharedApplication].keyWindow.center;
-        toView.bounds = CGRectMake(0, 0, kScrAdaptationW(295), kScrAdaptationH(110)+_messageHeight);
+        toView.bounds = CGRectMake(0, 0, kScrAdaptationW(295), kScrAdaptationH(100)+_messageHeight);
         self.animatr.isAccomplishAnima = YES;
     }];
     [self.animatr dismissAnimaWithBlock:^(UIViewController *toVC, UIViewController *fromeVC, UIView *toView, UIView *fromeView) {
@@ -148,20 +149,6 @@
         make.height.offset(_messageHeight);
     }];
     
-    [self.leftButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(weakSelf.view).offset(kScrAdaptationW(20));
-        make.bottom.equalTo(weakSelf.view.mas_bottom).offset(-kScrAdaptationH(20));
-        make.width.offset(kScrAdaptationW(115));
-        make.height.offset(kScrAdaptationH(35));
-    }];
-    
-    [self.rightButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(weakSelf.view).offset(kScrAdaptationW(-20));
-        make.centerY.equalTo(weakSelf.leftButton.mas_centerY);
-        make.width.offset(kScrAdaptationW(115));
-        make.height.offset(kScrAdaptationH(35));
-    }];
-    
     [self displayData];
 }
 
@@ -171,27 +158,28 @@
     
     if (_force == 1) { // 如果强制。只展示右边按钮
         self.leftButton.hidden = YES;
-        [self.rightButton mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.view).offset(kScrAdaptationW(20));
-            make.right.equalTo(self.view).offset(kScrAdaptationW(-20));
+        
+        [self.rightButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.bottom.left.equalTo(self.view);
+            make.height.equalTo(@44);
         }];
     } else {
         if (_isHIddenLeftBtn||!self.leftButtonMassage||(self.leftButtonMassage&&[self.leftButtonMassage isEqualToString:@""])) {
             self.leftButton.hidden = YES;
-            self.rightButton.layer.cornerRadius = kScrAdaptationW(0);
-            self.rightButton.layer.masksToBounds = YES;
-            [self.rightButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(self.view).offset(kScrAdaptationW(0));
-                make.right.equalTo(self.view).offset(kScrAdaptationW(5));
-                make.height.offset(kScrAdaptationH(40));
-                make.bottom.equalTo(self.view).offset(kScrAdaptationW(0));
+            [self.rightButton mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.right.bottom.left.equalTo(self.view);
+                make.height.equalTo(@44);
             }];
         } else {
             self.leftButton.hidden = NO;
-            [self.rightButton mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.right.equalTo(self.view).offset(kScrAdaptationW(-20));
-                make.width.offset(kScrAdaptationW(115));
-                make.height.offset(kScrAdaptationH(35));
+            [self.leftButton mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.bottom.equalTo(self.view);
+                make.height.equalTo(@44);
+            }];
+            [self.rightButton mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.right.bottom.equalTo(self.view);
+                make.left.equalTo(self.leftButton.mas_right);
+                make.width.height.equalTo(self.leftButton);
             }];
         }
     }
@@ -248,9 +236,7 @@
 - (UIButton*)rightButton {
     if (!_rightButton) {
         _rightButton = [[UIButton alloc]init];
-        _rightButton.layer.cornerRadius = kScrAdaptationW(4);
-        _rightButton.layer.masksToBounds = YES;
-        _rightButton.backgroundColor = COR29;
+        _rightButton.backgroundColor = kHXBColor_FE7E5E_100;
         [_rightButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_rightButton setTitle:self.rightButtonMassage forState:UIControlStateNormal];
         [_rightButton addTarget:self action:@selector(clickRightButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -262,12 +248,10 @@
 - (UIButton *)leftButton {
     if (!_leftButton) {
         _leftButton = [[UIButton alloc]init];
-        _leftButton.layer.cornerRadius = kScrAdaptationW(4);
-        _leftButton.layer.masksToBounds = YES;
         _leftButton.layer.borderWidth =  0.5;
-        _leftButton.layer.borderColor = COR29.CGColor;
+        _leftButton.layer.borderColor = kHXBSpacingLineColor_DDDDDD_100.CGColor;
         _leftButton.backgroundColor = [UIColor whiteColor];
-        [_leftButton setTitleColor:COR29 forState:UIControlStateNormal];
+        [_leftButton setTitleColor:kHXBColor_9295A2_100 forState:UIControlStateNormal];
         [_leftButton setTitle:self.leftButtonMassage forState:UIControlStateNormal];
         [_leftButton addTarget:self action:@selector(clickLeftButton:) forControlEvents:UIControlEventTouchUpInside];
         _leftButton.titleLabel.font = kHXBFont_PINGFANGSC_REGULAR(14);
