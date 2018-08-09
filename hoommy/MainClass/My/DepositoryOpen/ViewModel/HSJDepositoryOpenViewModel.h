@@ -16,6 +16,18 @@
 
 @property (nonatomic, strong) HXBBankCardModel *bankCardModel;
 
+/// 完善信息时使用
+@property (nonatomic, strong) HXBUserInfoModel *userInfoModel;
+/// YES 开户，NO 完善信息
+@property (nonatomic, assign) BOOL isNew;
+@property (nonatomic, copy) NSString *userName;
+@property (nonatomic, copy) NSString *idNo;
+@property (nonatomic, assign) BOOL hasBindCard;
+@property (nonatomic, copy) NSString *bankNo;
+@property (nonatomic, copy) NSString *bankName;
+@property (nonatomic, strong) UIImage *bankIcon;
+@property (nonatomic, copy) NSString *mobile;
+
 /**
  卡bin校验
  

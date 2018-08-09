@@ -53,34 +53,11 @@
     self.title = @"开通存管账户";
 
     self.viewModel = [HSJDepositoryOpenViewModel new];
+    self.viewModel.userInfoModel = self.userInfoModel;
+    
     self.isAgree = YES;
     [self setUI];
-    
-    if (self.userInfoModel) {
-        self.title = @"完善信息";
-        HXBRequestUserInfoAPI_UserInfo *userInfo = self.userInfoModel.userInfo;
-        self.nameView.text = [userInfo.realName replaceStringWithStartLocation:0 lenght:userInfo.realName.length - 1];
-        self.nameView.userInteractionEnabled = NO;
-        
-        self.idView.text = [userInfo.idNo replaceStringWithStartLocation:1 lenght:userInfo.idNo.length - 2];
-        self.idView.userInteractionEnabled = NO;
-        
-        if ([userInfo.hasBindCard isEqualToString:@"1"]) {
-            kWeakSelf
-            [self.viewModel getBankData:^(BOOL isSuccess) {
-                if (isSuccess) {
-                    weakSelf.bankNoView.text = [weakSelf.viewModel.bankCardModel.cardId replaceStringWithStartLocation:0 lenght:weakSelf.viewModel.bankCardModel.cardId.length - 4];
-                    weakSelf.bankNameView.userInteractionEnabled = NO;
-                    
-                    weakSelf.bankNameView.text = weakSelf.viewModel.bankCardModel.bankType;
-                    weakSelf.bankNameView.userInteractionEnabled = NO;
-                    
-                    weakSelf.mobileView.text = weakSelf.viewModel.bankCardModel.securyMobile;
-                    weakSelf.mobileView.userInteractionEnabled = NO;
-                }
-            }];
-        }
-    }
+    [self updateDataIfNeeded];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -318,8 +295,6 @@
     [self.scrollView addSubview:bottomBtn];
     self.bottomBtn = bottomBtn;
     
-    
-//    我已查看并同意《红小宝认证服务协议》与《存管服务协议》
     NSAttributedString *attString = [[NSAttributedString alloc] initWithString:@"我已查看并同意《红小宝平台授权协议》,《恒丰银行股份有限公司杭州分行网络交易资金账户三方协议》"];
     
     NSDictionary *linkAttributes = @{NSForegroundColorAttributeName:kHXBFOntColor_4C66E7_100, NSFontAttributeName:kHXBFont_PINGFANGSC_REGULAR(12)};
@@ -360,6 +335,35 @@
     self.scrollView.contentSize = CGSizeMake(0, CGRectGetMaxY(bottomBtn.frame) + 30);
 }
 
+- (void)updateDataIfNeeded {
+    if (self.viewModel.isNew == NO) {
+        self.title = @"完善信息";
+        self.nameView.text = self.viewModel.userName;
+        self.nameView.userInteractionEnabled = NO;
+        
+        self.idView.text = self.viewModel.idNo;
+        self.idView.userInteractionEnabled = NO;
+        
+        if (self.viewModel.hasBindCard == YES) {
+            kWeakSelf
+            [self.viewModel getBankData:^(BOOL isSuccess) {
+                if (isSuccess) {
+                    weakSelf.bankNoView.text = weakSelf.viewModel.bankNo;
+                    weakSelf.bankNameView.userInteractionEnabled = NO;
+                    
+                    weakSelf.bankNameView.text = weakSelf.viewModel.bankName;
+                    weakSelf.bankNameView.leftImage = weakSelf.viewModel.bankIcon;
+                    weakSelf.bankNameView.userInteractionEnabled = NO;
+                    
+                    weakSelf.mobileView.text = weakSelf.viewModel.mobile;
+                    weakSelf.mobileView.userInteractionEnabled = NO;
+                    
+                    [weakSelf showBankNameView];
+                }
+            }];
+        }
+    }
+}
 
 #pragma mark - UITextFieldDelegate
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
@@ -591,12 +595,6 @@
     NSString *transactionPwd = [self.transactionPwdView.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSString *bankNo = [self.bankNoView.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSString *mobile = [self.mobileView.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-    
-//    BOOL nameEnable = username.length >= 2;
-//    BOOL idNoEnable = idNo.length >= self.idView.limitStringLength;
-//    BOOL pwdEnable = transactionPwd.length >= self.transactionPwdView.limitStringLength;
-//    BOOL bankNoEnable = bankNo.length >= 12;
-//    BOOL mobileEnable = mobile.length >= self.mobileView.limitStringLength;
     
     BOOL nameEnable = username.length > 0;
     BOOL idNoEnable = idNo.length > 0;

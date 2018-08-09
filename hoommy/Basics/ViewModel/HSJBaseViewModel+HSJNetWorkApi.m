@@ -134,16 +134,16 @@ static const char HXBUserInfoModelKey = '\0';
         [self downLoadUserInfo:YES resultBlock:^(HXBUserInfoModel *userInfoModel, NSError *erro) {
             if (userInfoModel.userInfo.isCreateEscrowAcc == NO) {
                 [HSJDepositoryOpenTipView show];
+            } else if ([userInfoModel.userInfo.isCashPasswordPassed isEqualToString:@"1"] == NO) {
+                HSJDepositoryOpenController *vc = [HSJDepositoryOpenController new];
+                vc.userInfoModel = userInfoModel;
+                [controller.navigationController pushViewController:vc animated:YES];
             } else if ([userInfoModel.userInfo.hasBindCard isEqualToString:@"1"] == NO) {
                 HxbWithdrawCardViewController *vc = [HxbWithdrawCardViewController new];
                 vc.type = HXBRechargeAndWithdrawalsLogicalJudgment_Other;
                 vc.userInfoModel = userInfoModel;
                 [controller.navigationController pushViewController:vc animated:YES];
-            } else if ([userInfoModel.userInfo.isCashPasswordPassed isEqualToString:@"1"] == NO) {
-                HSJDepositoryOpenController *vc = [HSJDepositoryOpenController new];
-                vc.userInfoModel = userInfoModel;
-                [controller.navigationController pushViewController:vc animated:YES];
-            } else if ([userInfoModel.userInfo.riskType isEqualToString:@"立即评测"]) {
+            }  else if ([userInfoModel.userInfo.riskType isEqualToString:@"立即评测"]) {
                 [weakSelf riskTypeAssementFrom:controller resultBlock:nil];
             } else {
                 if (finishBlock) {

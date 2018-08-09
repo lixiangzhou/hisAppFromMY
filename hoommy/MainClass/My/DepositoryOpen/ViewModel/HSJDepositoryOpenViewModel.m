@@ -28,6 +28,7 @@
     return [super erroStateCodeDeal:request response:responseObject];
 }
 
+#pragma mark - Network
 - (void)checkCardBinResultRequestWithBankNumber:(NSString *)bankNumber andisToastTip:(BOOL)isToast andCallBack:(void(^)(BOOL isSuccess))callBackBlock
 {
     [self.cardBinrequest cancelRequest];
@@ -102,5 +103,53 @@
             resultBlock(responseData != nil);
         }
     }];
+}
+
+#pragma mark - Setter\Getter
+- (void)setUserInfoModel:(HXBUserInfoModel *)userInfoModel {
+    _userInfoModel = userInfoModel;
+    
+    self.isNew = userInfoModel == nil;
+    
+    if (self.isNew == NO) {
+        self.userName = userInfoModel.userInfo.realName;
+        self.idNo = userInfoModel.userInfo.idNo;
+        
+        self.hasBindCard = [userInfoModel.userInfo.hasBindCard isEqualToString:@"1"];
+    }
+}
+
+- (void)setBankCardModel:(HXBBankCardModel *)bankCardModel {
+    _bankCardModel = bankCardModel;
+    if (bankCardModel) {
+        self.bankNo = [self formatToBank:bankCardModel.cardId];
+        self.bankName = bankCardModel.bankType;
+        self.bankIcon = [UIImage imageNamed:bankCardModel.bankCode] ?: [UIImage imageNamed:@"bank_default"];
+        self.mobile = bankCardModel.mobile;
+    }
+}
+
+#pragma mark - Helper
+- (NSString *)formatToBank:(NSString *)string {
+    NSMutableString *newString = [NSMutableString stringWithString:[string stringByReplacingOccurrencesOfString:@" " withString:@""]];
+    if (newString.length > 4) {
+        [newString insertString:@" " atIndex:4];
+    }
+    if (newString.length > 9) {
+        [newString insertString:@" " atIndex:9];
+    }
+    if (newString.length > 14) {
+        [newString insertString:@" " atIndex:14];
+    }
+    if (newString.length > 19) {
+        [newString insertString:@" " atIndex:19];
+    }
+    if (newString.length > 24) {
+        [newString insertString:@" " atIndex:24];
+    }
+    if (newString.length > 29) {
+        [newString insertString:@" " atIndex:29];
+    }
+    return newString;
 }
 @end
