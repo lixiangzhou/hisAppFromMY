@@ -30,6 +30,8 @@
 
 /// 先判断登录，没有登录就去登录
 /// 在判断是否开户
+/// 然后判断是否有交易密码，否则去完善信息
+/// 再然后判断是否绑卡，否则去绑卡
 /// 最后判断是否有风险评测
 /// 都通过之后就执行 finishBlock
 - (void)checkDepositoryAndRiskFromController:(UIViewController *)controller finishBlock:(void (^)(void))finishBlock;
