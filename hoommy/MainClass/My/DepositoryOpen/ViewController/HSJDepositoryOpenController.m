@@ -349,7 +349,7 @@
             [self.viewModel getBankData:^(BOOL isSuccess) {
                 if (isSuccess) {
                     weakSelf.bankNoView.text = weakSelf.viewModel.bankNo;
-                    weakSelf.bankNameView.userInteractionEnabled = NO;
+                    weakSelf.bankNoView.userInteractionEnabled = NO;
                     
                     weakSelf.bankNameView.text = weakSelf.viewModel.bankName;
                     weakSelf.bankNameView.leftImage = weakSelf.viewModel.bankIcon;
