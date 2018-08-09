@@ -53,8 +53,11 @@
     self.title = @"开通存管账户";
 
     self.viewModel = [HSJDepositoryOpenViewModel new];
+    self.viewModel.userInfoModel = self.userInfoModel;
+    
     self.isAgree = YES;
     [self setUI];
+    [self updateDataIfNeeded];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -280,9 +283,10 @@
 }
 
 - (void)setBottomView {
+    NSString *title = self.userInfoModel == nil ? @"开通恒丰银行存管账户" : @"提交";
     UIButton *bottomBtn = [[UIButton alloc] init];
     bottomBtn.backgroundColor = kHXBColor_D5B775_50;
-    [bottomBtn setTitle:@"开通恒丰银行存管账户" forState:UIControlStateNormal];
+    [bottomBtn setTitle:title forState:UIControlStateNormal];
     [bottomBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     bottomBtn.titleLabel.font = kHXBFont_PINGFANGSC_REGULAR(16);
     bottomBtn.layer.cornerRadius = 2;
@@ -291,8 +295,6 @@
     [self.scrollView addSubview:bottomBtn];
     self.bottomBtn = bottomBtn;
     
-    
-//    我已查看并同意《红小宝认证服务协议》与《存管服务协议》
     NSAttributedString *attString = [[NSAttributedString alloc] initWithString:@"我已查看并同意《红小宝平台授权协议》,《恒丰银行股份有限公司杭州分行网络交易资金账户三方协议》"];
     
     NSDictionary *linkAttributes = @{NSForegroundColorAttributeName:kHXBFOntColor_4C66E7_100, NSFontAttributeName:kHXBFont_PINGFANGSC_REGULAR(12)};
@@ -333,6 +335,35 @@
     self.scrollView.contentSize = CGSizeMake(0, CGRectGetMaxY(bottomBtn.frame) + 30);
 }
 
+- (void)updateDataIfNeeded {
+    if (self.viewModel.isNew == NO) {
+        self.title = @"完善信息";
+        self.nameView.text = self.viewModel.userName;
+        self.nameView.userInteractionEnabled = NO;
+        
+        self.idView.text = self.viewModel.idNo;
+        self.idView.userInteractionEnabled = NO;
+        
+        if (self.viewModel.hasBindCard == YES) {
+            kWeakSelf
+            [self.viewModel getBankData:^(BOOL isSuccess) {
+                if (isSuccess) {
+                    weakSelf.bankNoView.text = weakSelf.viewModel.bankNo;
+                    weakSelf.bankNoView.userInteractionEnabled = NO;
+                    
+                    weakSelf.bankNameView.text = weakSelf.viewModel.bankName;
+                    weakSelf.bankNameView.leftImage = weakSelf.viewModel.bankIcon;
+                    weakSelf.bankNameView.userInteractionEnabled = NO;
+                    
+                    weakSelf.mobileView.text = weakSelf.viewModel.mobile;
+                    weakSelf.mobileView.userInteractionEnabled = NO;
+                    
+                    [weakSelf showBankNameView];
+                }
+            }];
+        }
+    }
+}
 
 #pragma mark - UITextFieldDelegate
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
@@ -564,12 +595,6 @@
     NSString *transactionPwd = [self.transactionPwdView.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSString *bankNo = [self.bankNoView.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSString *mobile = [self.mobileView.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-    
-//    BOOL nameEnable = username.length >= 2;
-//    BOOL idNoEnable = idNo.length >= self.idView.limitStringLength;
-//    BOOL pwdEnable = transactionPwd.length >= self.transactionPwdView.limitStringLength;
-//    BOOL bankNoEnable = bankNo.length >= 12;
-//    BOOL mobileEnable = mobile.length >= self.mobileView.limitStringLength;
     
     BOOL nameEnable = username.length > 0;
     BOOL idNoEnable = idNo.length > 0;
