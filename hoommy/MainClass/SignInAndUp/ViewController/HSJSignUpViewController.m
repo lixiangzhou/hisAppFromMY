@@ -15,6 +15,8 @@
 #import "HSJSignupViewModel.h"
 #import "HXBGeneralAlertVC.h"
 #import "HSJCheckCaptcha.h"
+#import "HXBBaseWKWebViewController.h"
+
 @interface HSJSignUpViewController ()<UITextFieldDelegate>
 
 @property (nonatomic, strong) UILabel *phoneLabel;
@@ -320,10 +322,14 @@
         NSAttributedString *attString = [[NSAttributedString alloc] initWithString:@"我已阅读并同意《红小宝注册服务协议》"];
         
         NSDictionary *linkAttributes = @{NSForegroundColorAttributeName:kHXBColor_73ADFF_100, NSFontAttributeName:kHXBFont_PINGFANGSC_REGULAR(12)};
+        
+        kWeakSelf
         NSMutableAttributedString *attributedString = [HXBAgreementView configureLinkAttributedString:attString withString:@"《红小宝注册服务协议》" sameStringEnable:NO linkAttributes:linkAttributes activeLinkAttributes:linkAttributes parameter:nil clickLinkBlock:^{
             NSLog(@"《红小宝认证服务协议》");
+            HXBBaseWKWebViewController *vc = [[HXBBaseWKWebViewController alloc] init];
+            vc.pageUrl = [NSString splicingH5hostWithURL:kHXB_Negotiate_SginUPURL];
+            [weakSelf.navigationController pushViewController:vc animated:YES];
         }];
-        kWeakSelf
         _agreementView.text = attributedString;
         _agreementView.agreeBtnBlock = ^(BOOL isSelected){
             weakSelf.isSelected = isSelected;

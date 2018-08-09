@@ -28,15 +28,12 @@
                 HSJPlanDetailController *planVC = [HSJPlanDetailController new];
                 planVC.planId = paramDic[@"productId"];
                 vc = planVC;
-            }  else if ([path isEqualToString:kRegisterVC] || [path isEqualToString:kLoginVC]) { //跳转登录注册
+            }  else if ([path isEqualToString:kLoginVC]) { //跳转登录注册
                 [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_ShowLoginVC object:nil];
             } else if([path isEqualToString:kEscrowActivityVC]) {   // 开户
                 HSJDepositoryOpenController *openDepositAccountVC = [[HSJDepositoryOpenController alloc] init];
                 vc = openDepositAccountVC;
-            } else if([path isEqualToString:kNoticeVC]) { // 公告列表页
-                HXBNoticeViewController *noticeVC = [HXBNoticeViewController new];
-                vc = noticeVC;
-            }
+            } 
         }];
         
     } else if ([model.type isEqualToString:@"h5"]){
