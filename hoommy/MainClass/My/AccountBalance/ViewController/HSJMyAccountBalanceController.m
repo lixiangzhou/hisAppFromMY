@@ -145,17 +145,13 @@
 - (void)intoBtnClick:(UIButton *)sender {
     NSLog(@"转入存钱罐");
     [HXBUmengManagar HXB_clickEventWithEnevtId: kHSJUmeng_MyIntoPlanClick];
-    if ([self.userInfoModel.userInfo.riskType isEqualToString:@"立即评测"]) {
-        kWeakSelf
-        [self.viewModel riskTypeAssementFrom:weakSelf resultBlock:^{
-            [self loadData_userInfo];
-        }];
-
-    } else {
+    
+    kWeakSelf
+    [self.viewModel checkDepositoryAndRiskFromController:self finishBlock:^{
         HSJBuyViewController *vc = [HSJBuyViewController new];
         vc.planId = [KeyChain firstPlanIdInPlanList];
-        [self.navigationController pushViewController:vc animated:YES];
-    }
+        [weakSelf.navigationController pushViewController:vc animated:YES];
+    }];
 }
 
 //进入提现记录
@@ -168,16 +164,12 @@
 - (void)withdrawalBtnClick:(UIButton *)sender {
     NSLog(@"提现至银行卡");
     
-    if ([self.userInfoModel.userInfo.hasBindCard isEqualToString:@"0"]) {
-        //进入绑卡界面
-        HxbWithdrawCardViewController *withdrawCardViewController = [[HxbWithdrawCardViewController alloc]init];
-        withdrawCardViewController.type = HXBRechargeAndWithdrawalsLogicalJudgment_Other;
-        [self.navigationController pushViewController:withdrawCardViewController animated:YES];
-    } else {
+    [self.viewModel checkDepositoryAndRiskFromController:self finishBlock:^{
         [HXBUmengManagar HXB_clickEventWithEnevtId: kHSJUmeng_MyWithdrawCashToBankCardClick];
         HxbWithdrawViewController *withdrawViewController = [[HxbWithdrawViewController alloc]init];
         [self.navigationController pushViewController:withdrawViewController animated:YES];
-    }
+        
+    }];
 }
 
 - (UIButton *)intoBtn {
