@@ -156,6 +156,7 @@
             }
         }];
     } else if (self.type == HSJGestureTypeSetting) {
+        self.skipBtn.hidden = NO;
         self.btn.hidden = YES;
         [self.msgLabel showNormalMsg:gestureTextBeforeSet];
         [PCCircleViewConst saveGesture:nil Key:gestureOneSaveKey];
