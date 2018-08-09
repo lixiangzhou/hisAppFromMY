@@ -366,7 +366,7 @@ static NSString *const kSendSmscodeTitle = @"获取验证码";
     self.password_TextField.attributedPlaceholder = passwordattrStr;
     
     self.sendButton.backgroundColor = RGB(222, 222, 222);
-    self.sendButton.titleLabel.font = kHXBFont_PINGFANGSC_REGULAR(14);
+    self.sendButton.titleLabel.font = kHXBFont_PINGFANGSC_REGULAR(15);
     [self.sendButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     self.sendButton.layer.cornerRadius = kScrAdaptationW(4);
     self.sendButton.layer.masksToBounds = YES;

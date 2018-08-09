@@ -21,7 +21,7 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.line = [[UIView alloc] init];
-        self.line.backgroundColor = COR12;
+        self.line.backgroundColor = RGB(245, 245, 249);
         [self addSubview:self.line];
         [self.line mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.equalTo(self);

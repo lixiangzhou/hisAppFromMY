@@ -69,7 +69,8 @@
     }];
     
     [self.bottomTipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view);
+        make.left.equalTo(self.leftLogo);
+        make.right.equalTo(self.rightLogo);
         make.bottom.equalTo(self.view).offset(-kScrAdaptationH(30));
     }];
     
@@ -202,6 +203,7 @@
         _bottomTipLabel.text = @"已接入恒丰银行资金存管";
         _bottomTipLabel.font = kHXBFont_PINGFANGSC_REGULAR(12);
         _bottomTipLabel.textColor = kHXBColor_CBCBCB_100;
+        _bottomTipLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _bottomTipLabel;
 }

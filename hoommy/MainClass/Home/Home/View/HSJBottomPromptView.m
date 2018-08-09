@@ -46,7 +46,7 @@
         _bankLabel.textColor = kHXBColor_7F85A1_100;
         NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] init];
         NSTextAttachment *attachment = [NSTextAttachment new];
-        attachment.image = [UIImage imageNamed:@"home_bot_safety"];
+        attachment.image = [UIImage imageNamed:@"home_bot_safety_no"];
         attachment.bounds = CGRectMake(0, -1, attachment.image.size.width, attachment.image.size.height);
         [attr appendAttributedString:[NSAttributedString attributedStringWithAttachment:attachment]];
         [attr appendAttributedString:[[NSAttributedString alloc] initWithString:@" 恒丰银行资金存管" attributes:nil]];
