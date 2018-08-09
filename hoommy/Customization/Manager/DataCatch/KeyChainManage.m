@@ -190,11 +190,12 @@ static NSString *const kFirstPlanId = @"kFirstPlanId";
 
 -(BOOL)isLogin
 {
-    return [[self.keychain itemForkey:kIsLogin] integerValue];
+    NSNumber *loginState = [[IDPCache sharedCache] objectForKey:kIsLogin];
+    return loginState.boolValue;
 }
 
 - (void)setIsLogin:(BOOL)isLogin {
-     [self.keychain setItem:@(isLogin).description ForKey:kIsLogin];
+    [[IDPCache sharedCache] setObj:@(isLogin) forKey:kIsLogin];
 }
 
 
