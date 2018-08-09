@@ -135,27 +135,32 @@
     if(self.navigationController.viewControllers.count <= 1) {
         return;
     }
-    UIButton *leftBackBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, _buttonMaxWidth, _buttonHeight)];
-    self.leftBackBtn = leftBackBtn;
-    [leftBackBtn addTarget:self action:@selector(leftBackBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    if(self.isFullScreenShow) {
-        [leftBackBtn setImage:nil forState:UIControlStateNormal];
-        [leftBackBtn setImage:nil forState:UIControlStateHighlighted];
-    }
-    else {
-        [leftBackBtn setImage:[UIImage imageNamed:@"back_hei"] forState:UIControlStateNormal];
-        [leftBackBtn setImage:[UIImage imageNamed:@"back_hei"] forState:UIControlStateHighlighted];
+    
+    if(!self.leftBackBtn) {
+        UIButton *leftBackBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, _buttonMaxWidth, _buttonHeight)];
+        leftBackBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        self.leftBackBtn = leftBackBtn;
+        [leftBackBtn addTarget:self action:@selector(leftBackBtnClick) forControlEvents:UIControlEventTouchUpInside];
+        if(self.isFullScreenShow) {
+            [leftBackBtn setImage:nil forState:UIControlStateNormal];
+            [leftBackBtn setImage:nil forState:UIControlStateHighlighted];
+        }
+        else {
+            [leftBackBtn setImage:[UIImage imageNamed:@"back_hei"] forState:UIControlStateNormal];
+            [leftBackBtn setImage:[UIImage imageNamed:@"back_hei"] forState:UIControlStateHighlighted];
+        }
     }
     
-    UIButton *closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, _buttonMaxWidth, _buttonHeight)];
-    [closeBtn setImage:[UIImage imageNamed:@"webView_close"] forState:(UIControlStateNormal)];
-    [closeBtn addTarget:self action:@selector(closeBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    self.closeBtn = closeBtn;
-    self.closeBtn.hidden = YES;
+    if(!self.closeBtn) {
+        UIButton *closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, _buttonMaxWidth, _buttonHeight)];
+        closeBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        [closeBtn setImage:[UIImage imageNamed:@"webView_close"] forState:(UIControlStateNormal)];
+        [closeBtn addTarget:self action:@selector(closeBtnClick) forControlEvents:UIControlEventTouchUpInside];
+        self.closeBtn = closeBtn;
+        self.closeBtn.hidden = YES;
+    }
     
-    closeBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    leftBackBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    self.navigationItem.leftBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:leftBackBtn], [[UIBarButtonItem alloc] initWithCustomView:closeBtn]];
+    self.navigationItem.leftBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:self.leftBackBtn], [[UIBarButtonItem alloc] initWithCustomView:self.closeBtn]];
 }
 
 - (void)leftBackBtnClick {
