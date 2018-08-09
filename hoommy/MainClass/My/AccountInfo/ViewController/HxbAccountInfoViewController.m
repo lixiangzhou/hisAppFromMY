@@ -366,8 +366,7 @@ UITableViewDataSource
 #pragma TableViewDataSource
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-//    HXBAccountSecureCell *cell = [[HXBAccountSecureCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:HXBAccountSecureCellID];
+
     HXBAccountSecureCell *cell = [tableView dequeueReusableCellWithIdentifier:HXBAccountSecureCellID forIndexPath:indexPath];
     if (indexPath.section == 0) {
         cell.model = self.dataSource[indexPath.row];
