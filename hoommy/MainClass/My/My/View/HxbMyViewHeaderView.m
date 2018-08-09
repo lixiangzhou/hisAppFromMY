@@ -169,7 +169,7 @@
     self.phoneLabel.text = [_userInfoModel.userInfo.mobile hxb_hiddenPhonNumberWithMid];
     NSString *accumulatedProfitStr = userInfoModel.userAssets.earnTotal? [NSString hsj_simpleMoneyValue:[userInfoModel.userAssets.earnTotal doubleValue]]: @"0.00";
     NSString *balance = userInfoModel.userAssets.availablePoint ? [NSString hsj_simpleMoneyValue:[userInfoModel.userAssets.availablePoint doubleValue]] : @"0.00";
-    NSString *yesterdayInterest = [NSString hsj_simpleMoneyValue:[userInfoModel.userAssets.earnTotal doubleValue]];
+    NSString *yesterdayInterest = [NSString hsj_simpleMoneyValue:userInfoModel.userAssets.yesterdayInterest];
     NSString *assetsTotal = [NSString hsj_simpleMoneyValue:[userInfoModel.userAssets.assetsTotal doubleValue]];
     if ([KeyChain.ciphertext isEqualToString:@"0"]) {
         self.securyButton.selected = NO;
@@ -203,7 +203,7 @@
 {
     NSString *accumulatedProfitStr = _userInfoModel.userAssets.earnTotal? [NSString hsj_simpleMoneyValue:[_userInfoModel.userAssets.earnTotal doubleValue]]: @"0.00";
     NSString *balance = _userInfoModel.userAssets.availablePoint ? [NSString hsj_simpleMoneyValue:[_userInfoModel.userAssets.availablePoint doubleValue]] : @"0.00";
-    NSString *yesterdayInterest = [NSString hsj_simpleMoneyValue:[_userInfoModel.userAssets.earnTotal doubleValue]];
+    NSString *yesterdayInterest = [NSString hsj_simpleMoneyValue:_userInfoModel.userAssets.yesterdayInterest];
     NSString *assetsTotal = [NSString hsj_simpleMoneyValue:[_userInfoModel.userAssets.assetsTotal doubleValue]];
     
     if ([KeyChain.ciphertext isEqualToString:@"0"]){

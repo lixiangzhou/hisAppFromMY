@@ -47,8 +47,12 @@
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[HSJFinAddRecortdCell class] forCellReuseIdentifier:HSJFinAddRecortdCellIdentifier];
         [HXBMiddlekey AdaptationiOS11WithTableView:_tableView];
-        _tableView.freshOption = ScrollViewFreshOptionAll;
+        [_tableView addSubview:self.noDataView];
         kWeakSelf
+        [self.noDataView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.equalTo(weakSelf.tableView);
+        }];
+        _tableView.freshOption = ScrollViewFreshOptionAll;
         _tableView.headerWithRefreshBlock = ^(UIScrollView *scrollView) {
             [weakSelf getFinAddRecortdData:YES];
         };
@@ -77,7 +81,7 @@
     [self.viewModel getFinAddRecortd:isNew planID:self.planId resultBlock:^(BOOL isSuccess) {
         if (isSuccess) {
             
-            self.isShowNodataView = weakSelf.viewModel.dataSource.count<=0;
+            self.noDataView.hidden = weakSelf.viewModel.dataSource.count>0;
             weakSelf.tableView.hidden = NO;
             [weakSelf.tableView reloadData];
             

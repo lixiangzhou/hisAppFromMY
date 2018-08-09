@@ -29,6 +29,7 @@
 @implementation HXBWithdrawRecordViewController
 #pragma mark - Life Cycle
 - (void)viewDidLoad {
+//    self.isFullScreenShow = NO;
     [super viewDidLoad];
     self.title = @"提现进度";
     [self loadCashRegisterDataNeeedShowLoading:YES];
@@ -71,7 +72,7 @@
 }
 //判断是否有数据
 - (void)isHaveData {
-    self.isShowNodataView = self.withdrawRecordViewModel.withdrawRecordListModel.dataList.count<=0;
+    self.noDataView.hidden = self.withdrawRecordViewModel.withdrawRecordListModel.dataList.count>0;
 }
 
 #pragma mark - UITableViewDataSource
@@ -147,7 +148,10 @@
         _withdrawRecordTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _withdrawRecordTableView.freshOption = ScrollViewFreshOptionDownPull;
         [self setUpScrollFreshBlock:_withdrawRecordTableView];
-        
+        [_withdrawRecordTableView addSubview:self.noDataView];
+        [self.noDataView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.equalTo(self.withdrawRecordTableView);
+        }];
     }
     return _withdrawRecordTableView;
 }
