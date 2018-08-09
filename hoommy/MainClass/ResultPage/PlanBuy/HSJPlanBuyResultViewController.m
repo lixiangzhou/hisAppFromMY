@@ -31,7 +31,7 @@
     kWeakSelf
     HXBCommonResultContentModel *contentModel = nil;
     if (0 == self.state) {
-        contentModel = [[HXBCommonResultContentModel alloc] initWithImageName:@"result_success" titleString:@"转入成功" descString:self.lockStart firstBtnTitle:@"查看我的投资"];
+        contentModel = [[HXBCommonResultContentModel alloc] initWithImageName:@"result_success" titleString:@"转入成功" descString:self.lockStart firstBtnTitle:@"查看我的出借记录"];
         contentModel.btnDescString = @"持有时间越长，收益越高";
         contentModel.btnDescHasMark = YES;
     } else {
