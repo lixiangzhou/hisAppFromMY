@@ -71,7 +71,7 @@
     lable.textAlignment = NSTextAlignmentCenter;
     lable.text = title;
     if(indexPath.row != self.titleList.count-1) {
-        lable.textColor = kHXBColor_333333_100;
+        lable.textColor = kHXBFontColor_4C7BFE_100;
     }
     else {
         lable.textColor = kHXBFontColor_4C7BFE_100;

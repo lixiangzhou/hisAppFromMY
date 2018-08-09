@@ -305,7 +305,7 @@
         cellModel.iconName = self.userInfoModel.userBank.bankCode;
         NSString *tempStr = [self.userInfoModel.userBank.cardId substringFromIndex:self.userInfoModel.userBank.cardId.length-4];
         NSString *str1 = [NSString stringWithFormat:@"%@", self.userInfoModel.userBank.bankType];
-        NSString *str2 = [NSString stringWithFormat:@" (**%@)\n%@", tempStr, self.userInfoModel.userBank.quota];
+        NSString *str2 = [NSString stringWithFormat:@" (**%@)\n%@", tempStr, [self.userInfoModel.userBank.quota stringByReplacingOccurrencesOfString:@"限额：" withString:@""]];
 //        cellModel.title = [self buildAttributedString:str1 secondString:str2 state:self.isAbleBankCellItem];
         cellModel.title = [self buildAttributedString:str1 secondString:str2 state:YES];
         
