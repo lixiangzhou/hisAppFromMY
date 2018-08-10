@@ -122,12 +122,10 @@
         HSJHomeActivityCell *cell = [tableView dequeueReusableCellWithIdentifier:HSJHomeActivityCellIdentifier];
         cell.planModel = cellmodel;
         return cell;
-    } else if ([cellmodel.viewItemType  isEqual: @"h5"]) {
+    } else { //([cellmodel.viewItemType  isEqual: @"h5"])
         HSJHomeActivityCell *cell = [tableView dequeueReusableCellWithIdentifier:HSJHomeActivityCellIdentifier];
         cell.planModel = cellmodel;
         return cell;
-    } else {
-        return nil;
     }
 }
 
