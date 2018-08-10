@@ -160,12 +160,7 @@
                 };
             }
         } else {
-            NSString *skip = KeyChain.skipGesture;
-            BOOL skipGesturePwd = NO;
-            if ([skip isEqualToString:kHXBGesturePwdSkipeNONE]) {
-                skipGesturePwd = [skip isEqualToString:kHXBGesturePwdSkipeYES];
-            }
-            
+            BOOL skipGesturePwd = [KeyChain.skipGesture isEqualToString:kHXBGesturePwdSkipeYES];
             BOOL appeared = KeyChain.skipGestureAlertAppeared;
             
             if (skipGesturePwd && appeared) {

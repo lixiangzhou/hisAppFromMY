@@ -164,13 +164,13 @@
         make.bottom.equalTo(weakSelf.contentView.mas_bottom);
         make.left.equalTo(weakSelf.contentView.mas_left);
         make.width.mas_equalTo(kScrAdaptationW750(280));
-        make.height.offset(kScrAdaptationH750(80));
+        make.height.offset(kScrAdaptationH750(88));
     }];
     [self.rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(weakSelf.contentView.mas_bottom);
         make.right.equalTo(weakSelf.contentView.mas_right);
         make.width.mas_equalTo(kScrAdaptationW750(280));
-        make.height.offset(kScrAdaptationH750(80));
+        make.height.offset(kScrAdaptationH750(88));
     }];
     if (self.isCenterShow) {
         self.subTitleTextView.textAlignment = NSTextAlignmentCenter;
@@ -226,9 +226,8 @@
         _rightBtn = [[UIButton alloc] init];
         [_rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_rightBtn addTarget:self action:@selector(rightBtnClick) forControlEvents:UIControlEventTouchUpInside];
-        [_rightBtn setBackgroundColor:RGB(245, 81, 81)];
-        _rightBtn.userInteractionEnabled = YES;
-        _rightBtn.titleLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(30);
+        [_rightBtn setBackgroundColor:kHXBColor_FE7E5E_100];
+        _rightBtn.titleLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(28);
     }
     return _rightBtn;
 }
@@ -237,11 +236,12 @@
 {
     if (!_leftBtn) {
         _leftBtn = [[UIButton alloc] init];
-        [_leftBtn setTitleColor:RGB(102, 102, 102) forState:UIControlStateNormal];
+        _leftBtn.layer.borderWidth =  0.5;
+        _leftBtn.layer.borderColor = kHXBSpacingLineColor_DDDDDD_100.CGColor;
+        [_leftBtn setTitleColor:kHXBColor_9295A2_100 forState:UIControlStateNormal];
         [_leftBtn addTarget:self action:@selector(leftBtnClick) forControlEvents:UIControlEventTouchUpInside];
-        [_leftBtn setBackgroundColor:RGB(232, 232, 238)];
-        _leftBtn.userInteractionEnabled = YES;
-        _leftBtn.titleLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(30);
+        [_leftBtn setBackgroundColor:[UIColor whiteColor]];
+        _leftBtn.titleLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(28);
     }
     return _leftBtn;
 }
@@ -251,7 +251,7 @@
     if (!_subTitleTextView) {
         _subTitleTextView = [[UITextView alloc] init];
         _subTitleTextView.textColor = RGB(102, 102, 102);
-        _subTitleTextView.font = kHXBFont_PINGFANGSC_REGULAR_750(28);
+        _subTitleTextView.font = kHXBFont_PINGFANGSC_REGULAR_750(32);
         _subTitleTextView.textAlignment = NSTextAlignmentCenter;
         _subTitleTextView.backgroundColor = [UIColor whiteColor];
 //        self.subTitleTextView.contentInset = UIEdgeInsetsZero;
@@ -289,7 +289,7 @@
     if (!_contentView) {
         _contentView = [[UIView alloc] init];
         _contentView.backgroundColor = [UIColor whiteColor];
-        _contentView.layer.cornerRadius = kScrAdaptationW750(5);
+        _contentView.layer.cornerRadius = 4;
         _contentView.layer.masksToBounds = YES;
     }
     return _contentView;
