@@ -42,6 +42,8 @@
 #define kHXBColor_CBCBCB_100                UIColorFromRGB(0xCBCBCB)
 
 #define kHXBColor_ECECEC_100                UIColorFromRGB(0xECECEC)
+#define kHXBColor_C8C9CF_100                UIColorFromRGB(0xC8C9CF)
+#define kHXBColor_E3E4E7_100                UIColorFromRGB(0xE3E4E7)
 
 ///蓝色的背景色
 #define kHXBColor_73ADFF_100                RGBA(115, 173, 255, 1)
