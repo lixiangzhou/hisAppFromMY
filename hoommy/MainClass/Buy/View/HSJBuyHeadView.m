@@ -29,16 +29,8 @@
     if (self) {
         [self setupUI];
         [self setupConstraints];
-        
-        [self testData];
     }
     return self;
-}
-
-- (void)testData {
-    self.titleLb.text = @"¥";
-    self.prompLb.text = @"可转入上限：18,000,000元";
-    self.inputTitleLb.text = @"转入金额(元)";
 }
 
 - (void)setupUI {
@@ -109,13 +101,15 @@
         _inputView = [[UIView alloc] init];
         
         self.inputTitleLb = [[UILabel alloc] init];
+        self.inputTitleLb.text = @"转入金额(元)";
         self.inputTitleLb.textColor = kHXBFontColor_333333_100;
         self.inputTitleLb.font = kHXBFont_Bold_PINGFANGSC_REGULAR(15);
         [_inputView addSubview:self.inputTitleLb];
         
         self.titleLb = [[UILabel alloc] init];
+        self.titleLb.text = @"¥";
         self.titleLb.textColor = kHXBFontColor_333333_100;
-        self.titleLb.font = kHXBFont_50;
+        self.titleLb.font = kHXBFont_Bold_PINGFANGSC_REGULAR(25);
         [_inputView addSubview:self.titleLb];
         
         [_inputView addSubview:self.contentTf];
@@ -132,7 +126,7 @@
     if(!_contentTf) {
         _contentTf = [[HXBCustomTextField alloc] init];
         _contentTf.isHiddenLeftImage = YES;
-        _contentTf.font = kHXBFont_30;
+        _contentTf.font = kHXBFont_Bold_PINGFANGSC_REGULAR(25);
         _contentTf.textColor = kHXBFontColor_333333_100;
         _contentTf.placeholder = @"1000元起投，100元递增";
         _contentTf.isHidenLine = YES;
@@ -142,16 +136,22 @@
         
         kWeakSelf
         _contentTf.block = ^(NSString *text1) {
+            if(text1.length > 0) {
+                weakSelf.contentTf.font = kHXBFont_Bold_PINGFANGSC_REGULAR(25);
+            }
+            else {
+                weakSelf.contentTf.font = kHXBFont_30;
+            }
             [weakSelf textChange:text1];
         };
         
         _contentTf.keyBoardChange = ^(BOOL isEditState) {
-            if(isEditState) {
-                weakSelf.lineImv.backgroundColor = kHXBColor_F55151_100;
-            }
-            else{
-                weakSelf.lineImv.backgroundColor = kHXBSpacingLineColor_DDDDDD_100;
-            }
+//            if(isEditState) {
+//                weakSelf.lineImv.backgroundColor = kHXBColor_F55151_100;
+//            }
+//            else{
+//                weakSelf.lineImv.backgroundColor = kHXBSpacingLineColor_DDDDDD_100;
+//            }
         };
     }
     
@@ -189,7 +189,13 @@
 - (void)setInputMoney:(NSString *)inputMoney {
     _inputMoney = inputMoney;
     
-    self.contentTf.text = inputMoney;
+    if(_inputMoney.length > 0) {
+        self.contentTf.font = kHXBFont_Bold_PINGFANGSC_REGULAR(25);
+    }
+    else {
+        self.contentTf.font = kHXBFont_30;
+    }
+    self.contentTf.text = _inputMoney;
 }
 
 - (void)setEnableContentTf:(BOOL)enableContentTf {

@@ -155,7 +155,7 @@
         case HSJBUYBUTTON_WITHMONEY:
         {
             double money = self.inputMoney.doubleValue;
-            content = [NSString stringWithFormat:@"立即转入%.2lf元", money];
+            content = [NSString stringWithFormat:@"立即转入%@", [NSString hsj_moneyValueSuffix:money]];
             break;
         }
         case HSJBUYBUTTON_NOMONEY:
@@ -270,7 +270,7 @@
 //    cellModel.iconName = @"leftMoneyNormal";
     cellModel.iconName = @"leftMoneySelect";
     NSString *str1 = @"可用余额";
-    NSString *str2 = [NSString stringWithFormat:@"\n%.2f元", self.userInfoModel.userAssets.availablePoint.floatValue];
+    NSString *str2 = [NSString stringWithFormat:@"\n%@", [NSString hsj_moneyValueSuffix:self.userInfoModel.userAssets.availablePoint.doubleValue]];
     cellModel.isDisable = !self.isAbleleftMoneyCellItem;
     
 //    cellModel.title = [self buildAttributedString:str1 secondString:str2 state:self.isAbleleftMoneyCellItem];
@@ -280,7 +280,7 @@
     double money = self.inputMoney.doubleValue;
     if(money>0 && self.isAbleleftMoneyCellItem) {
         double inputmoney = self.userInfoModel.userAssets.availablePoint.floatValue>money? money:self.userInfoModel.userAssets.availablePoint.floatValue;
-        cellModel.descripText = [NSString stringWithFormat:@"转入%.2lf元", inputmoney];
+        cellModel.descripText = [NSString stringWithFormat:@"转入%@", [NSString hsj_moneyValueSuffix:inputmoney]];
     }
     else{
         cellModel.descripText = @"";
@@ -305,7 +305,7 @@
         cellModel.iconName = self.userInfoModel.userBank.bankCode;
         NSString *tempStr = [self.userInfoModel.userBank.cardId substringFromIndex:self.userInfoModel.userBank.cardId.length-4];
         NSString *str1 = [NSString stringWithFormat:@"%@", self.userInfoModel.userBank.bankType];
-        NSString *str2 = [NSString stringWithFormat:@" (**%@)\n%@", tempStr, self.userInfoModel.userBank.quota];
+        NSString *str2 = [NSString stringWithFormat:@" (**%@)\n%@", tempStr, [self.userInfoModel.userBank.quota stringByReplacingOccurrencesOfString:@"限额：" withString:@""]];
 //        cellModel.title = [self buildAttributedString:str1 secondString:str2 state:self.isAbleBankCellItem];
         cellModel.title = [self buildAttributedString:str1 secondString:str2 state:YES];
         
@@ -338,7 +338,11 @@
         [tempStr setAttributes:@{NSFontAttributeName:kHXBFont_28, NSForegroundColorAttributeName:kHXBFontColor_9295A2_100} range:NSMakeRange(0, str1.length)];
         [tempStr setAttributes:@{NSFontAttributeName:kHXBFont_26, NSForegroundColorAttributeName:kHXBFontColor_9295A2_100} range:NSMakeRange(str1.length, str2.length)];
     }
-    
+    if(str1.length>0 && str2.length>0) {
+        NSMutableParagraphStyle * paragraphStyle1 = [[NSMutableParagraphStyle alloc] init];
+        [paragraphStyle1 setLineSpacing:kScrAdaptationH(5)];
+        [tempStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle1 range:NSMakeRange(0, [tempStr length])];
+    }
     return tempStr;
 }
 

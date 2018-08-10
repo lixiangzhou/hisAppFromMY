@@ -113,7 +113,7 @@
     _cellModel = cellModel;
     
     if(cellModel.isDisable){
-        self.contentView.alpha = 0.6;
+        self.contentView.alpha = 0.4;
     }
     else {
         self.contentView.alpha = 1;

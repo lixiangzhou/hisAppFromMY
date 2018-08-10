@@ -35,7 +35,7 @@
     
     self.titleLb = [[UILabel alloc] init];
     self.titleLb.textColor = kHXBFontColor_333333_100;
-    self.titleLb.font = kHXBFont_30;
+    self.titleLb.font = kHXBFont_Bold_PINGFANGSC_REGULAR(15);
     [self.colorBackGroundView addSubview:self.titleLb];
 }
 
