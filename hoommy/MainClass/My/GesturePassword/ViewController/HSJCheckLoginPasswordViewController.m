@@ -132,6 +132,7 @@
             if (isSuccess) {
                 if (weakSelf.switchType == HXBAccountSecureSwitchTypeOff) {
                     KeyChain.skipGesture = kHXBGesturePwdSkipeYES;
+                    KeyChain.skipGestureAlertAppeared = YES;
                     [KeyChain removeGesture];
                     [weakSelf.navigationController popViewControllerAnimated:YES];
                 } else {

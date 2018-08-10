@@ -34,7 +34,8 @@
 /// 再然后判断是否绑卡，否则去绑卡
 /// 最后判断是否有风险评测
 /// 都通过之后就执行 finishBlock
-- (void)checkDepositoryAndRiskFromController:(UIViewController *)controller finishBlock:(void (^)(void))finishBlock;
+///  checkBank: 是否检查绑卡
+- (void)checkDepositoryAndRiskFromController:(UIViewController *)controller checkBank:(BOOL)checkBank finishBlock:(void (^)(void))finishBlock;
 
 /// 做风险评测 需要回调结果
 - (void)riskTypeAssementFrom:(UIViewController *)controller resultBlock:(void (^)(void))finishBlock;

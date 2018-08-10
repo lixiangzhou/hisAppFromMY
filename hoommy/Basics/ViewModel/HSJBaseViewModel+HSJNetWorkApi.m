@@ -115,7 +115,7 @@
 }
 
 #pragma mark - 开户和风险评测
-- (void)checkDepositoryAndRiskFromController:(UIViewController *)controller finishBlock:(void (^)(void))finishBlock {
+- (void)checkDepositoryAndRiskFromController:(UIViewController *)controller checkBank:(BOOL)checkBank finishBlock:(void (^)(void))finishBlock {
     if (KeyChain.isLogin) {
         kWeakSelf
         [self downLoadUserInfo:YES resultBlock:^(HXBUserInfoModel *userInfoModel, NSError *erro) {
@@ -125,7 +125,7 @@
                 HSJDepositoryOpenController *vc = [HSJDepositoryOpenController new];
                 vc.userInfoModel = userInfoModel;
                 [controller.navigationController pushViewController:vc animated:YES];
-            } else if ([userInfoModel.userInfo.hasBindCard isEqualToString:@"1"] == NO) {
+            } else if (([userInfoModel.userInfo.hasBindCard isEqualToString:@"1"] == NO) && checkBank) {
                 HxbWithdrawCardViewController *vc = [HxbWithdrawCardViewController new];
                 vc.type = HXBRechargeAndWithdrawalsLogicalJudgment_Other;
                 vc.userInfoModel = userInfoModel;

@@ -352,7 +352,7 @@
 
 - (void)toBuy:(NSString *)money {
     kWeakSelf
-    [self.viewModel checkDepositoryAndRiskFromController:self finishBlock:^{
+    [self.viewModel checkDepositoryAndRiskFromController:self checkBank:NO finishBlock:^{
         HSJBuyViewController *vc = [HSJBuyViewController new];
         vc.planId = weakSelf.planId;
         vc.startMoney = money;

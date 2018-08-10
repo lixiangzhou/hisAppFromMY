@@ -147,7 +147,7 @@
     [HXBUmengManagar HXB_clickEventWithEnevtId: kHSJUmeng_MyIntoPlanClick];
     
     kWeakSelf
-    [self.viewModel checkDepositoryAndRiskFromController:self finishBlock:^{
+    [self.viewModel checkDepositoryAndRiskFromController:self checkBank:YES finishBlock:^{
         HSJBuyViewController *vc = [HSJBuyViewController new];
         vc.planId = [KeyChain firstPlanIdInPlanList];
         [weakSelf.navigationController pushViewController:vc animated:YES];
@@ -164,7 +164,7 @@
 - (void)withdrawalBtnClick:(UIButton *)sender {
     NSLog(@"提现至银行卡");
     
-    [self.viewModel checkDepositoryAndRiskFromController:self finishBlock:^{
+    [self.viewModel checkDepositoryAndRiskFromController:self checkBank:YES finishBlock:^{
         [HXBUmengManagar HXB_clickEventWithEnevtId: kHSJUmeng_MyWithdrawCashToBankCardClick];
         HxbWithdrawViewController *withdrawViewController = [[HxbWithdrawViewController alloc]init];
         [self.navigationController pushViewController:withdrawViewController animated:YES];

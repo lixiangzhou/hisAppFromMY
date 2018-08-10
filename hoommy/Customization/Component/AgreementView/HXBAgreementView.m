@@ -38,7 +38,8 @@
 - (void)setupSubViewFrame
 {
     [self.agreeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.equalTo(self).offset(2);
+        make.left.equalTo(self).offset(2);
+        make.top.equalTo(@3);
         make.width.height.offset(kScrAdaptationW(12));
     }];
     [self.negotiateView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -110,7 +111,7 @@
 {
     if (!_agreeBtn) {
         _agreeBtn = [[UIButton alloc] init];
-        _agreeBtn.backgroundColor = [UIColor whiteColor];
+//        _agreeBtn.backgroundColor = [UIColor whiteColor];
 //        _agreeBtn.layer.borderColor = COR10.CGColor;
 //        _agreeBtn.layer.borderWidth = kXYBorderWidth;
 //        _agreeBtn.layer.cornerRadius = kScrAdaptationW(3);
