@@ -87,9 +87,11 @@
     if (password.length == 6) {
         self.passwordText = password;
         self.checkButton.enabled = YES;
+        self.checkButton.alpha = 1;
     }
     else{
-        self.checkButton.enabled = NO;;
+        self.checkButton.enabled = NO;
+        self.checkButton.alpha = 0.4;
     }
 }
 
@@ -129,6 +131,7 @@
         _checkButton = [[UIButton alloc] init];
         _checkButton.layer.cornerRadius = 2;
         _checkButton.enabled = NO;
+        _checkButton.alpha = 0.4;
         _checkButton.titleLabel.font = kHXBFont_PINGFANGSC_REGULAR(15);
         [_checkButton setTitle:@"确定" forState:UIControlStateNormal];
         [_checkButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

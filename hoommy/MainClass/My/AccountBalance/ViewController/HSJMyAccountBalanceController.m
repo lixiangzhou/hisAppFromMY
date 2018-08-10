@@ -147,7 +147,7 @@
     [HXBUmengManagar HXB_clickEventWithEnevtId: kHSJUmeng_MyIntoPlanClick];
     
     kWeakSelf
-    [self.viewModel checkDepositoryAndRiskFromController:self checkBank:YES finishBlock:^{
+    [self.viewModel checkDepositoryAndRiskFromController:self checkBank:NO finishBlock:^{
         HSJBuyViewController *vc = [HSJBuyViewController new];
         vc.planId = [KeyChain firstPlanIdInPlanList];
         [weakSelf.navigationController pushViewController:vc animated:YES];
