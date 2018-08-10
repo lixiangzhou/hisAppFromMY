@@ -56,11 +56,6 @@
     self.isSelected = YES;
     self.viewModel = [[HSJSignupViewModel alloc] init];
     [self setupUI];
-   
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
     [self getCode];
 }
 

@@ -196,7 +196,6 @@
 		9A6E0A5C20F84C9700598071 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A6E0A5B20F84C9700598071 /* AppDelegate.m */; };
 		9A6E0A6220F84C9700598071 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A6E0A6020F84C9700598071 /* Main.storyboard */; };
 		9A6E0A6420F84CA000598071 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A6E0A6320F84CA000598071 /* Assets.xcassets */; };
-		9A6E0A6720F84CA000598071 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A6E0A6520F84CA000598071 /* LaunchScreen.storyboard */; };
 		9A6E0A6A20F84CA000598071 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A6E0A6920F84CA000598071 /* main.m */; };
 		9A6E0A7420F84CA000598071 /* hoommyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A6E0A7320F84CA000598071 /* hoommyTests.m */; };
 		9A6E0A7F20F84CA000598071 /* hoommyUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A6E0A7E20F84CA000598071 /* hoommyUITests.m */; };
@@ -788,7 +787,6 @@
 		9A6E0A5B20F84C9700598071 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		9A6E0A6120F84C9700598071 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9A6E0A6320F84CA000598071 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		9A6E0A6620F84CA000598071 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9A6E0A6820F84CA000598071 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9A6E0A6920F84CA000598071 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9A6E0A6F20F84CA000598071 /* hoommyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = hoommyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -3323,7 +3321,6 @@
 				9A6E0A5B20F84C9700598071 /* AppDelegate.m */,
 				9A6E0A6020F84C9700598071 /* Main.storyboard */,
 				9A6E0A6320F84CA000598071 /* Assets.xcassets */,
-				9A6E0A6520F84CA000598071 /* LaunchScreen.storyboard */,
 				9A6E0A6820F84CA000598071 /* Info.plist */,
 				9A6E0A6920F84CA000598071 /* main.m */,
 			);
@@ -3950,7 +3947,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A97DAC720EF420200688ADB /* hongli.svg in Resources */,
-				9A6E0A6720F84CA000598071 /* LaunchScreen.storyboard in Resources */,
 				9A97DACB20EF420200688ADB /* mobile.svg in Resources */,
 				9A97DABB20EF420200688ADB /* arrow.svg in Resources */,
 				9AA0696A2111AED800A83ED7 /* Impact.ttf in Resources */,
@@ -4450,14 +4446,6 @@
 				9A6E0A6120F84C9700598071 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		9A6E0A6520F84CA000598071 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9A6E0A6620F84CA000598071 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
