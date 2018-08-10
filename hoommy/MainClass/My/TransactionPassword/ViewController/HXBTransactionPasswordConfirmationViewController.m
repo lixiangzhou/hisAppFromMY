@@ -44,11 +44,6 @@
  */
 - (void)confirmTransactionWithPassword:(NSString *)surePassword
 {
-    if(surePassword.length < 6) {
-        [HxbHUDProgress showTextInView:self.view text:@"请输入6为交易密码"];
-        return;
-    }
-    
     kWeakSelf
     [self.viewModel modifyTransactionPasswordWithIdCard:self.idcard password:surePassword resultBlock:^(BOOL isSuccess) {
         if (isSuccess) {
