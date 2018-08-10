@@ -21,7 +21,7 @@
 #define kHXBSpacing_128      kScrAdaptationH750(128)
 
 //分割线高度
-#define kHXBDivisionLineHeight 0.5
+#define kHXBDivisionLineHeight 1.0f
 
 // iPhone X
 #define  HXBIPhoneX (kScreenWidth == 375.f && kScreenHeight == 812.f ? YES : NO)

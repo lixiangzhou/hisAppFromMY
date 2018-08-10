@@ -129,7 +129,7 @@
             }
         }
         
-        if(!_isInitNavBar) {
+        if(!self.leftBackBtn || !self.leftBackBtn.superview) {
             [self setupLeftBackBtn];
         }
         

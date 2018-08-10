@@ -205,7 +205,7 @@
 - (UIView *)bottomShareView {
     if (!_bottomShareView) {
         _bottomShareView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenHeight, kScreenWidth, kHXBShareViewHeight)];
-        _bottomShareView.backgroundColor = kHXBColor_ShareViewBackGround;
+        _bottomShareView.backgroundColor = kHXBColor_FFFEFE_100;
     }
     return _bottomShareView;
 }

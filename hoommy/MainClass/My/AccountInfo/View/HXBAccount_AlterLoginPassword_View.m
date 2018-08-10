@@ -10,6 +10,7 @@
 #import "HXBCustomTextField.h"///密码的View
 
 @interface HXBAccount_AlterLoginPassword_View ()<UITextFieldDelegate>
+@property (nonatomic,strong) UIView *lineView;
 @property (nonatomic,strong) UILabel *password_Original_title;
 ///原始的密码的textField
 @property (nonatomic,strong) HXBCustomTextField *password_Original;
@@ -38,8 +39,11 @@
 ///设置UI
 - (void)setUPView {
     kWeakSelf
+    self.lineView = [UIView new];
+    [self addSubview:self.lineView];
+    self.lineView.backgroundColor = RGB(238, 238, 245);
     self.alterButton = [UIButton btnwithTitle:@"确认修改" andTarget:self andAction:@selector(clickAlterButton:) andFrameByCategory:CGRectZero];
-    self.alterButton.backgroundColor = COR12;
+    self.alterButton.backgroundColor = kHXBColor_FF7055_40;
     self.alterButton.userInteractionEnabled = NO;
     
     [self addSubview: self.password_Original];
@@ -49,8 +53,13 @@
     [self addSubview:self.alterButton];
     [self addSubview:self.forgotPasswordButton];
     
+    [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@1.0f);
+        make.top.left.right.equalTo(weakSelf);
+    }];
+    
     [self.password_Original mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf).offset(kScrAdaptationH(28));
+        make.top.equalTo(weakSelf.lineView.mas_bottom);
         make.left.equalTo(weakSelf);
         make.right.equalTo(weakSelf);
         make.height.equalTo(@(kScrAdaptationH(60)));
@@ -83,7 +92,7 @@
     [self.forgotPasswordButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.offset(kScrAdaptationW(-15));
         make.height.equalTo(@(kScrAdaptationH(17)));
-        make.top.equalTo(weakSelf.password_New_title.mas_bottom).offset(kScrAdaptationH(26));
+        make.top.equalTo(weakSelf.password_New_title.mas_bottom).offset(kScrAdaptationH(10));
         make.width.equalTo(@kScrAdaptationW(80));
     }];
     [self.alterButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -111,7 +120,7 @@
 - (UIButton *)forgotPasswordButton {
     if (!_forgotPasswordButton) {
         _forgotPasswordButton = [UIButton new];
-        [_forgotPasswordButton setTitle:@"忘记密码?" forState:UIControlStateNormal];
+        [_forgotPasswordButton setTitle:@" 忘记密码?" forState:UIControlStateNormal];
         [_forgotPasswordButton addTarget:self action:@selector(forgotPasswordButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [_forgotPasswordButton setTitleColor:RGB(254, 126, 94) forState:UIControlStateNormal];
         [_forgotPasswordButton.titleLabel setFont:kHXBFont_PINGFANGSC_REGULAR(12)];
@@ -143,14 +152,14 @@
         _password_New = [[HXBCustomTextField alloc] init];
         _password_New.leftImage = [UIImage imageNamed:@"password"];
         _password_New.delegate = self;
-        _password_New.placeholder = @"请设置8-20位数字和字母组合的密码";
+        _password_New.placeholder = @"设置8-20位数字和字母组合";
         _password_New.secureTextEntry = YES;
         _password_New.block = ^(NSString *text) {
             if (text.length > 0 && _password_Original.text.length > 0) {
                 _alterButton.backgroundColor = COR29;
                 _alterButton.userInteractionEnabled = YES;
             } else {
-                _alterButton.backgroundColor = COR12;
+                _alterButton.backgroundColor = kHXBColor_FF7055_40;
                 _alterButton.userInteractionEnabled = NO;
             }
         };
@@ -171,7 +180,7 @@
                 _alterButton.backgroundColor = COR29;
                 _alterButton.userInteractionEnabled = YES;
             } else {
-                _alterButton.backgroundColor = COR12;
+                _alterButton.backgroundColor = kHXBColor_FF7055_40;
                 _alterButton.userInteractionEnabled = NO;
             }
         };
@@ -180,7 +189,7 @@
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
-    self.alterButton.backgroundColor = COR12;
+    self.alterButton.backgroundColor = kHXBColor_FF7055_40;
     self.alterButton.userInteractionEnabled = NO;
     return YES;
 }
