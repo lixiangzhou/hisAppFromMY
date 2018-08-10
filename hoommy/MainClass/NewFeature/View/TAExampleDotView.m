@@ -10,6 +10,10 @@
 
 static CGFloat const kAnimateDuration = 1;
 
+@interface TAExampleDotView()
+@property (nonatomic, assign) CGRect originRect;
+@end
+
 @implementation TAExampleDotView
 
 - (instancetype)init
@@ -46,7 +50,10 @@ static CGFloat const kAnimateDuration = 1;
 
 - (void)initialization
 {
+    self.layer.masksToBounds = YES;
     self.backgroundColor = kHXBBackgroundColor;
+    self.originRect = self.frame;
+    self.layer.cornerRadius = self.frame.size.width * 0.5;
 }
 
 
@@ -62,19 +69,35 @@ static CGFloat const kAnimateDuration = 1;
 
 - (void)animateToActiveState
 {
+    CGRect tempRect = self.frame;
     [UIView animateWithDuration:kAnimateDuration delay:0 usingSpringWithDamping:.5 initialSpringVelocity:-20 options:UIViewAnimationOptionCurveLinear animations:^{
-        self.backgroundColor = kHXBColor_F55151_100;
-        CGAffineTransform transform = CGAffineTransformMakeScale(2, 1);
-        self.transform = transform;
+        self.backgroundColor = kHXBColor_C8C9CF_100;
+        self.frame = CGRectMake(tempRect.origin.x, tempRect.origin.y, self.originRect.size.width * 2, self.originRect.size.height);
+        self.transform = CGAffineTransformIdentity;
+        
+        for (NSInteger i = 0; i < self.superview.subviews.count; i++) {
+            UIView *v = self.superview.subviews[i];
+            if ([v isEqual:self]) {
+                continue;
+            }
+            
+            if (v.x > self.x) {
+                v.transform = CGAffineTransformMakeTranslation(self.originRect.size.width, 0);
+            } else {
+                
+            }
+        }
     } completion:nil];
 }
 
 - (void)animateToDeactiveState
 {
-    self.transform = CGAffineTransformIdentity;
-
+    CGRect tempRect = self.frame;
     [UIView animateWithDuration:kAnimateDuration delay:0 usingSpringWithDamping:.5 initialSpringVelocity:0 options:UIViewAnimationOptionCurveLinear animations:^{
-        self.backgroundColor = kHXBBackgroundColor;
+        self.backgroundColor = kHXBColor_E3E4E7_100;
+        self.frame = CGRectMake(tempRect.origin.x, tempRect.origin.y, self.originRect.size.width, self.originRect.size.height);
+        self.transform = CGAffineTransformIdentity;
+        
     } completion:nil];
 }
 

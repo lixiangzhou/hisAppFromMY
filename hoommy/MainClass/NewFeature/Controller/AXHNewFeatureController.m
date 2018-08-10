@@ -34,7 +34,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.imageData =  @[@"HXBBankCustody", @"HXBSecurityGuarantee", @"HXBBonusPlan", @"HXBInvitingFriends"];
+    NSMutableArray *temp = [NSMutableArray arrayWithCapacity:3];
+    for (NSInteger i = 1; i <= 3; i++) {
+        if (HXBIPhoneX) {
+            [temp addObject:[NSString stringWithFormat:@"Welcome_%ld_x", (long)i]];
+        } else {
+            [temp addObject:[NSString stringWithFormat:@"Welcome_%ld", (long)i]];
+        }
+    }
+    
+    self.imageData =  temp;
     
     [self setUI];
 }
@@ -51,19 +60,22 @@
     self.collectionView.bounces = NO;
     self.collectionView.showsHorizontalScrollIndicator = NO;
     
-    self.pageControl = [[TAPageControl alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.view.frame) - kScrAdaptationH(60) - HXBBottomAdditionHeight, CGRectGetWidth(self.view.frame), 40)];
+    CGFloat marginBottom = HXBIPhoneX ? 60 : 20;
+    self.pageControl = [[TAPageControl alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.view.frame) - marginBottom - 10, CGRectGetWidth(self.view.frame), 10)];
     self.pageControl.delegate = self;
     self.pageControl.numberOfPages = self.imageData.count;
     self.pageControl.dotViewClass = [TAExampleDotView class];
-    self.pageControl.dotSize = CGSizeMake(kScrAdaptationH750(14), kScrAdaptationH750(14));
+    self.pageControl.dotSize = CGSizeMake(6, 6);
+    self.pageControl.spacingBetweenDots = 6;
+    
     [self.view addSubview:self.pageControl];
     
     [self.view addSubview:self.startButton];
     [self.startButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.offset(kScrAdaptationH750(350));
-        make.height.offset(kScrAdaptationH750(82));
+        make.width.offset(kScrAdaptationH(120));
+        make.height.offset(kScrAdaptationH(39));
         make.centerX.equalTo(self.view);
-        make.bottom.equalTo(self.pageControl.mas_top).offset(-kScrAdaptationH750(100));
+        make.bottom.equalTo(self.pageControl.mas_top).offset(HXBIPhoneX ? -50 : -30);
     }];
 }
 
@@ -94,13 +106,13 @@
     if (_startButton == nil) {
         _startButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_startButton setTitle:@"立即体验" forState:(UIControlStateNormal)];
-        [_startButton setTitleColor:kHXBColor_F55151_100 forState:(UIControlStateNormal)];
+        [_startButton setTitleColor:kHXBColor_FF7055_100 forState:(UIControlStateNormal)];
         [_startButton addTarget:self action:@selector(start) forControlEvents:UIControlEventTouchUpInside];
         _startButton.titleLabel.font = kHXBFont_PINGFANGSC_REGULAR_750(32);
-        _startButton.layer.cornerRadius = kScrAdaptationW750(8);
+        _startButton.layer.cornerRadius = 20;
         _startButton.layer.masksToBounds = YES;
-        _startButton.layer.borderWidth = kScrAdaptationH(0.8f);
-        _startButton.layer.borderColor = kHXBColor_F55151_100.CGColor;
+        _startButton.layer.borderWidth = 0.5;
+        _startButton.layer.borderColor = kHXBColor_FF7055_100.CGColor;
         _startButton.hidden = YES;
         
     }
