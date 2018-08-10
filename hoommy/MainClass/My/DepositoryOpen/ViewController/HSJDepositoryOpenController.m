@@ -205,7 +205,7 @@
     checkLimitBtn.backgroundColor = [UIColor whiteColor];
     [checkLimitBtn setTitleColor:kHXBFOntColor_4C66E7_100 forState:(UIControlStateNormal)];
     [checkLimitBtn addTarget:self action:@selector(checkBankLimit) forControlEvents:(UIControlEventTouchUpInside)];
-    checkLimitBtn.titleLabel.font = kHXBFont_PINGFANGSC_REGULAR(14);
+    checkLimitBtn.titleLabel.font = kHXBFont_PINGFANGSC_REGULAR(13);
     [checkLimitBtn sizeToFit];
     [bankNoView addSubview:checkLimitBtn];
 
@@ -436,7 +436,7 @@
     
     UILabel *titleLabel = [UILabel new];
     titleLabel.text = [NSString stringWithFormat:@"%@", title];
-    titleLabel.font = kHXBFont_30;
+    titleLabel.font = [UIFont boldSystemFontOfSize:15];
     titleLabel.textColor = kHXBFontColor_333333_100;
     [view addSubview:titleLabel];
 
@@ -580,7 +580,7 @@
 }
 
 - (void)commonTextViewProp:(HXBCustomTextField *)textView {
-    textView.bottomLineLeftOffset = 44;
+    textView.bottomLineLeftOffset = 46;
     textView.bottomLineRightOffset = 0;
     textView.font = kHXBFont_28;
     textView.textColor = kHXBFontColor_333333_100;
