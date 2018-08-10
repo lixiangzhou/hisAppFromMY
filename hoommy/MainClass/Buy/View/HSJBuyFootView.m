@@ -91,7 +91,7 @@
         NSString *tempStr = @"我已阅读并同意协议    ";
         NSAttributedString *attString = [[NSAttributedString alloc] initWithString:tempStr];
         NSDictionary *defaultAttributes = @{NSForegroundColorAttributeName:kHXBFontColor_9295A2_100, NSFontAttributeName:kHXBFont_PINGFANGSC_REGULAR(12)};
-        NSDictionary *linkAttributes = @{NSForegroundColorAttributeName:kHXBColor_73ADFF_100, NSFontAttributeName:kHXBFont_PINGFANGSC_REGULAR(12)};
+        NSDictionary *linkAttributes = @{NSForegroundColorAttributeName:kHXBFontColor_4C7BFE_100, NSFontAttributeName:kHXBFont_PINGFANGSC_REGULAR(12)};
         NSMutableAttributedString *attributedString = [HXBAgreementView configureLinkAttributedString:attString withDefaultAttributes:defaultAttributes withString:@"协议    " sameStringEnable:NO linkAttributes:linkAttributes activeLinkAttributes:linkAttributes  parameter:nil clickLinkBlock:^{
             if(weakSelf.lookUpAgreement) {
                 weakSelf.lookUpAgreement();

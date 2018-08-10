@@ -136,16 +136,22 @@
         
         kWeakSelf
         _contentTf.block = ^(NSString *text1) {
+            if(text1.length > 0) {
+                weakSelf.contentTf.font = kHXBFont_Bold_PINGFANGSC_REGULAR(25);
+            }
+            else {
+                weakSelf.contentTf.font = kHXBFont_30;
+            }
             [weakSelf textChange:text1];
         };
         
         _contentTf.keyBoardChange = ^(BOOL isEditState) {
-            if(isEditState) {
-                weakSelf.lineImv.backgroundColor = kHXBColor_F55151_100;
-            }
-            else{
-                weakSelf.lineImv.backgroundColor = kHXBSpacingLineColor_DDDDDD_100;
-            }
+//            if(isEditState) {
+//                weakSelf.lineImv.backgroundColor = kHXBColor_F55151_100;
+//            }
+//            else{
+//                weakSelf.lineImv.backgroundColor = kHXBSpacingLineColor_DDDDDD_100;
+//            }
         };
     }
     
@@ -183,7 +189,13 @@
 - (void)setInputMoney:(NSString *)inputMoney {
     _inputMoney = inputMoney;
     
-    self.contentTf.text = inputMoney;
+    if(_inputMoney.length > 0) {
+        self.contentTf.font = kHXBFont_Bold_PINGFANGSC_REGULAR(25);
+    }
+    else {
+        self.contentTf.font = kHXBFont_30;
+    }
+    self.contentTf.text = _inputMoney;
 }
 
 - (void)setEnableContentTf:(BOOL)enableContentTf {
