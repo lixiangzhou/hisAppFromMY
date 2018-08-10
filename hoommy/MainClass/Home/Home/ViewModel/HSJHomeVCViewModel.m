@@ -56,17 +56,17 @@
 
 - (void)setHomeModel:(HSJHomeModel *)homeModel {
     _homeModel = homeModel;
-    NSMutableArray<HSJHomePlanModel *> *cellDataList = [NSMutableArray arrayWithArray:homeModel.dataList];
-     if (KeyChain.isLogin) {
-         [cellDataList enumerateObjectsUsingBlock:^(HSJHomePlanModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-             if ([obj.viewItemType isEqualToString:@"signuph5"]) {
-                 *stop = YES;
-                 if (*stop == YES) {
-                     [cellDataList removeObject:obj];
-                 }
-             }
-         }];
+    NSArray *filterList = @[@"product", @"signuph5", @"h5"];
+    if (KeyChain.isLogin) {
+        filterList = @[@"product", @"h5"];
     }
+    NSMutableArray<HSJHomePlanModel *> *tempList = [NSMutableArray arrayWithArray:homeModel.dataList];
+    NSMutableArray *cellDataList = [NSMutableArray arrayWithCapacity:tempList.count];
+    [tempList enumerateObjectsUsingBlock:^(HSJHomePlanModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if([filterList containsObject:obj.viewItemType]) {
+            [cellDataList addObject:obj];
+        }
+    }];
     _homeModel.dataList = cellDataList;
     for (int i = 0; i < homeModel.dataList.count; i++) {
         HSJHomePlanModel *planModel = homeModel.dataList[i];

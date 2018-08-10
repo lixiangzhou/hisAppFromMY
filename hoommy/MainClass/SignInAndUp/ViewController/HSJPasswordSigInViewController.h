@@ -10,6 +10,9 @@
 #import "HSJSignInViewModel.h"
 @interface HSJPasswordSigInViewController : HXBBaseViewController
 
-@property (nonatomic, strong) HSJSignInViewModel *viewModel;
+/**
+ 登录的手机号
+ */
+@property (nonatomic, copy) NSString *phoneNumber;
 
 @end

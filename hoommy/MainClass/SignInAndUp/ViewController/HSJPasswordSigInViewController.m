@@ -25,13 +25,21 @@
 
 @property (nonatomic, copy) NSString *captcha;
 
+@property (nonatomic, strong) HSJSignInViewModel *viewModel;
+
 @end
 
 @implementation HSJPasswordSigInViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setupData];
     [self setupUI];
+}
+
+- (void)setupData {
+    self.viewModel = [[HSJSignInViewModel alloc] init];
+    self.viewModel.phoneNumber = self.phoneNumber;
 }
 
 - (void)setupUI {
@@ -106,7 +114,7 @@
     [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_SignInGoCodeSignInButtonClick];
     
     HSJCodeSigInViewController *codeSigInVC = [[HSJCodeSigInViewController alloc] init];
-    codeSigInVC.viewModel = self.viewModel;
+    codeSigInVC.phoneNumber = self.viewModel.phoneNumber;
     [self.navigationController pushViewController:codeSigInVC animated:YES];
 }
 

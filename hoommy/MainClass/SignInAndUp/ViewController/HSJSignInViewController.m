@@ -129,7 +129,7 @@
         if (responseData.exist) {
             //进入登录页面
             HSJPasswordSigInViewController *passwordVC = [[HSJPasswordSigInViewController alloc] init];
-            passwordVC.viewModel = weakSelf.viewModel;
+            passwordVC.phoneNumber = weakSelf.viewModel.phoneNumber;
             [weakSelf.navigationController pushViewController:passwordVC animated:YES];
         } else {
             //注册页面

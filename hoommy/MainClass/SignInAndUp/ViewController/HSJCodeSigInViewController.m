@@ -36,6 +36,7 @@
 
 @property (nonatomic, assign) int timeCount;
 
+@property (nonatomic, strong) HSJSignInViewModel *viewModel;
 
 @end
 
@@ -43,8 +44,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setupData];
     [self setupUI];
     [self getCode];
+}
+
+- (void)setupData {
+    self.viewModel = [[HSJSignInViewModel alloc] init];
+    self.viewModel.phoneNumber = self.phoneNumber;
 }
 
 - (void)setupUI {
