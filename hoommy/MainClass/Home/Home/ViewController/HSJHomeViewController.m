@@ -22,9 +22,7 @@
 #import "HXBBaseWKWebViewController.h"
 #import "HXBAdvertiseManager.h"
 #import "HXBVersionUpdateManager.h"
-#import "HSJBuyViewController.h"
 #import "HXBHomePopViewManager.h"
-#import "HSJDepositoryOpenTipView.h"
 #import "HXBBaseWKWebViewController.h"
 
 @interface HSJHomeViewController ()<UITableViewDelegate,UITableViewDataSource>
