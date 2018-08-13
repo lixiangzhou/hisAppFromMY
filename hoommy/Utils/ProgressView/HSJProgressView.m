@@ -91,7 +91,6 @@
 
 #pragma mark - Public
 - (void)show {
-    self.frame = self.superview.bounds;
     BOOL hasTabbar = [self.viewController isKindOfClass:NSClassFromString(@"HSJHomeViewController")] || [self.viewController isKindOfClass:NSClassFromString(@"HSJMyViewController")];
     [self.contentView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(@(-50 -(hasTabbar ? HXBBottomAdditionHeight : 0)));
