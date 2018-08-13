@@ -43,7 +43,9 @@
         default:
             break;
     }
-    shareURL = [NSString stringWithFormat:@"%@%@",KeyChain.h5host,shareURL];
+    if(![shareURL containsString:KeyChain.h5host]) {
+        shareURL = [NSString stringWithFormat:@"%@%@",KeyChain.h5host,shareURL];
+    }
     return shareURL;
 }
 

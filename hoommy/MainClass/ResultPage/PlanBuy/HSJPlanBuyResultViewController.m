@@ -76,7 +76,18 @@
 }
 
 - (void)leftBackBtnClick {
-    [self popToViewControllerWithClassName:@"HSJPlanDetailController"];
+    HXBBaseNavigationController* navVC = (HXBBaseNavigationController*)self.navigationController;
+    UIViewController *returnVC = [navVC getViewControllerByClassName:@"HSJPlanDetailController"];
+    if(!returnVC) {//账户余额
+        returnVC = [navVC getViewControllerByClassName:@"HSJMyAccountBalanceController"];
+    }
+    
+    if(returnVC) {
+        [navVC popToViewController:returnVC animated:YES];
+    }
+    else {
+        [navVC popToRootViewControllerAnimated:YES];
+    }
 }
 
 @end

@@ -58,7 +58,7 @@
         shareItemBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
         NSString *sharetype = sharingPlatform[i];
         shareItemBtn.tag = sharetype.intValue;
-        if ([[UMSocialManager defaultManager] isInstall:shareItemBtn.tag]) {
+        if([[UMSocialManager defaultManager] isInstall:shareItemBtn.tag]) {
             [shareItemBtn addTarget:self action:@selector(shareWithType:) forControlEvents:(UIControlEventTouchUpInside)];
             [shareItemBtn setImage:[UIImage imageNamed:iconNameArr[i]] forState:(UIControlStateNormal)];
             [shareItemBtn setImage:[UIImage imageNamed:iconNameArr[i]] forState:(UIControlStateHighlighted)];

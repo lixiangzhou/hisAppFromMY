@@ -196,7 +196,6 @@
 		9A6E0A5C20F84C9700598071 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A6E0A5B20F84C9700598071 /* AppDelegate.m */; };
 		9A6E0A6220F84C9700598071 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A6E0A6020F84C9700598071 /* Main.storyboard */; };
 		9A6E0A6420F84CA000598071 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A6E0A6320F84CA000598071 /* Assets.xcassets */; };
-		9A6E0A6720F84CA000598071 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A6E0A6520F84CA000598071 /* LaunchScreen.storyboard */; };
 		9A6E0A6A20F84CA000598071 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A6E0A6920F84CA000598071 /* main.m */; };
 		9A6E0A7420F84CA000598071 /* hoommyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A6E0A7320F84CA000598071 /* hoommyTests.m */; };
 		9A6E0A7F20F84CA000598071 /* hoommyUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A6E0A7E20F84CA000598071 /* hoommyUITests.m */; };
@@ -320,6 +319,11 @@
 		9AB9D06F2108750200B366A7 /* HXBFinModel_BuyResoult_PlanModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB9D06E2108750100B366A7 /* HXBFinModel_BuyResoult_PlanModel.m */; };
 		9AB9D07621096FF100B366A7 /* HSJPlanBuyResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB9D07521096FF100B366A7 /* HSJPlanBuyResultViewController.m */; };
 		9ACB2F3C20EF6E08005C3C3D /* HSJKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ACB2F3B20EF6E08005C3C3D /* HSJKeyChainStore.m */; };
+		9ACFC64F212172FD0064CE13 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ACFC64E212172FD0064CE13 /* SystemConfiguration.framework */; };
+		9ACFC6512121730A0064CE13 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ACFC650212173090064CE13 /* CoreTelephony.framework */; };
+		9ACFC6532121732A0064CE13 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ACFC6522121732A0064CE13 /* libsqlite3.tbd */; };
+		9ACFC655212173390064CE13 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ACFC654212173390064CE13 /* libc++.tbd */; };
+		9ACFC657212173420064CE13 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ACFC656212173410064CE13 /* libz.tbd */; };
 		9AF51DA120FC487D008A8CF4 /* HSJCALayerTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF51DA020FC487D008A8CF4 /* HSJCALayerTool.m */; };
 		9AF51DA420FC7458008A8CF4 /* HSJClientServeTelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF51DA320FC7458008A8CF4 /* HSJClientServeTelView.m */; };
 		9AF51DA820FC9084008A8CF4 /* HSJUnBindCardHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF51DA720FC9084008A8CF4 /* HSJUnBindCardHeadView.m */; };
@@ -788,7 +792,6 @@
 		9A6E0A5B20F84C9700598071 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		9A6E0A6120F84C9700598071 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9A6E0A6320F84CA000598071 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		9A6E0A6620F84CA000598071 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9A6E0A6820F84CA000598071 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9A6E0A6920F84CA000598071 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9A6E0A6F20F84CA000598071 /* hoommyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = hoommyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1021,6 +1024,11 @@
 		9AB9D07521096FF100B366A7 /* HSJPlanBuyResultViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJPlanBuyResultViewController.m; sourceTree = "<group>"; };
 		9ACB2F3A20EF6E08005C3C3D /* HSJKeyChainStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJKeyChainStore.h; sourceTree = "<group>"; };
 		9ACB2F3B20EF6E08005C3C3D /* HSJKeyChainStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJKeyChainStore.m; sourceTree = "<group>"; };
+		9ACFC64E212172FD0064CE13 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		9ACFC650212173090064CE13 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		9ACFC6522121732A0064CE13 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		9ACFC654212173390064CE13 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		9ACFC656212173410064CE13 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		9AF51D9F20FC487D008A8CF4 /* HSJCALayerTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJCALayerTool.h; sourceTree = "<group>"; };
 		9AF51DA020FC487D008A8CF4 /* HSJCALayerTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJCALayerTool.m; sourceTree = "<group>"; };
 		9AF51DA220FC7458008A8CF4 /* HSJClientServeTelView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJClientServeTelView.h; sourceTree = "<group>"; };
@@ -1163,6 +1171,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9ACFC657212173420064CE13 /* libz.tbd in Frameworks */,
+				9ACFC655212173390064CE13 /* libc++.tbd in Frameworks */,
+				9ACFC6532121732A0064CE13 /* libsqlite3.tbd in Frameworks */,
+				9ACFC6512121730A0064CE13 /* CoreTelephony.framework in Frameworks */,
+				9ACFC64F212172FD0064CE13 /* SystemConfiguration.framework in Frameworks */,
 				1B74F72E67F77E394AFF76A6 /* libPods-hoommy.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1573,6 +1586,11 @@
 		52DAD5FB0889718E49F314DE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9ACFC656212173410064CE13 /* libz.tbd */,
+				9ACFC654212173390064CE13 /* libc++.tbd */,
+				9ACFC6522121732A0064CE13 /* libsqlite3.tbd */,
+				9ACFC650212173090064CE13 /* CoreTelephony.framework */,
+				9ACFC64E212172FD0064CE13 /* SystemConfiguration.framework */,
 				73C7B870EA4F77D826DA647B /* libPods-hoommy.a */,
 			);
 			name = Frameworks;
@@ -3323,7 +3341,6 @@
 				9A6E0A5B20F84C9700598071 /* AppDelegate.m */,
 				9A6E0A6020F84C9700598071 /* Main.storyboard */,
 				9A6E0A6320F84CA000598071 /* Assets.xcassets */,
-				9A6E0A6520F84CA000598071 /* LaunchScreen.storyboard */,
 				9A6E0A6820F84CA000598071 /* Info.plist */,
 				9A6E0A6920F84CA000598071 /* main.m */,
 			);
@@ -3950,7 +3967,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A97DAC720EF420200688ADB /* hongli.svg in Resources */,
-				9A6E0A6720F84CA000598071 /* LaunchScreen.storyboard in Resources */,
 				9A97DACB20EF420200688ADB /* mobile.svg in Resources */,
 				9A97DABB20EF420200688ADB /* arrow.svg in Resources */,
 				9AA0696A2111AED800A83ED7 /* Impact.ttf in Resources */,
@@ -4450,14 +4466,6 @@
 				9A6E0A6120F84C9700598071 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		9A6E0A6520F84CA000598071 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9A6E0A6620F84CA000598071 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
