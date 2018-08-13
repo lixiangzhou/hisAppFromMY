@@ -14,6 +14,7 @@
 #import "HXBBaseUrlSettingView.h"
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
+#import "HXBUMengShareManager.h"
 
 @interface AppDelegate ()
 @property (nonatomic, strong) NSDate *exitTime;
@@ -29,6 +30,8 @@
     [Fabric with:@[[Crashlytics class]]];
     //设置键盘
     [[IQKeyboardManagerExtent sharedInstance] setKeyboardManager];
+    //友盟分享设置
+    [HXBUMengShareManager umengShareStart];
     
     if (HXBShakeChangeBaseUrl == YES) {
         [HXBBaseUrlSettingView attatchToWindow];
@@ -37,7 +40,6 @@
     
     [[HXBRootVCManager manager] createRootVCAndMakeKeyWindow];
     [HXBBaseUrlSettingView attatchToWindow];
-    
     return YES;
 }
 
@@ -69,6 +71,16 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options
+{
+    //6.3的新的API调用，是为了兼容国外平台(例如:新版facebookSDK,VK等)的调用[如果用6.2的api调用会没有回调],对国内平台没有影响
+    BOOL result = [[UMSocialManager defaultManager]  handleOpenURL:url options:options];
+    if (!result) {
+        // 其他如支付等SDK的回调
+    }
+    return result;
 }
 
 @end
