@@ -41,34 +41,26 @@
     
     [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView).offset(kScrAdaptationW750(30));
-        make.right.equalTo(self.contentView).offset(-kScrAdaptationW750(30));
+        make.right.equalTo(self.contentView);
         make.height.offset(kHXBDivisionLineHeight);
         make.bottom.equalTo(self.contentView).offset(-1);
     }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView.mas_left).offset(kScrAdaptationW(15));
-        make.top.equalTo(self.contentView).offset(kScrAdaptationH(15));
-        make.width.offset(kScrAdaptationW(263));
-        make.bottom.equalTo(self.lineView.mas_top);
-        
+        make.centerY.equalTo(self.contentView);
+        make.right.lessThanOrEqualTo(self.messageLabel.mas_left).offset(40);
     }];
     [self.messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.contentView).offset(kScrAdaptationW(-15));
-        make.width.offset(kScrAdaptationW(70));
-        make.top.equalTo(self.contentView).offset(kScrAdaptationH(16));
-        make.bottom.equalTo(self.lineView.mas_top);
+        make.centerY.equalTo(self.contentView);
     }];
-    
-   
-    
-    
 }
 
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.font = kHXBFont_PINGFANGSC_REGULAR(15);
-        _titleLabel.textColor = COR8;
+        _titleLabel.textColor = kHXBColor_333333_100;
     }
     return _titleLabel;
 }
@@ -77,7 +69,7 @@
     if (!_messageLabel) {
         _messageLabel = [[UILabel alloc] init];
         _messageLabel.font = kHXBFont_PINGFANGSC_REGULAR(12);
-        _messageLabel.textColor = COR10;
+        _messageLabel.textColor = kHXBColor_9295A2_100;
         _messageLabel.textAlignment = NSTextAlignmentRight;
     }
     return _messageLabel;
@@ -86,7 +78,7 @@
 - (UIView *)lineView {
     if (!_lineView) {
         _lineView = [[UIView alloc] init];
-        _lineView.backgroundColor = COR12;
+        _lineView.backgroundColor = kHXBColor_f5f5f9_100;
     }
     return _lineView;
 }

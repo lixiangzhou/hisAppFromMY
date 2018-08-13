@@ -107,7 +107,7 @@
         _mainTabelView.dataSource = self;
         _mainTabelView.hidden = YES;
         _mainTabelView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _mainTabelView.rowHeight = kScrAdaptationH750(90);
+        _mainTabelView.rowHeight = 50;
         _mainTabelView.freshOption = ScrollViewFreshOptionAll;
         _mainTabelView.headerWithRefreshBlock = ^(UIScrollView *scrollView) {
             [weakSelf loadDataWithIsUPReloadData:YES];
