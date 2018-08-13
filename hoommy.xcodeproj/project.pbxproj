@@ -319,6 +319,11 @@
 		9AB9D06F2108750200B366A7 /* HXBFinModel_BuyResoult_PlanModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB9D06E2108750100B366A7 /* HXBFinModel_BuyResoult_PlanModel.m */; };
 		9AB9D07621096FF100B366A7 /* HSJPlanBuyResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB9D07521096FF100B366A7 /* HSJPlanBuyResultViewController.m */; };
 		9ACB2F3C20EF6E08005C3C3D /* HSJKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ACB2F3B20EF6E08005C3C3D /* HSJKeyChainStore.m */; };
+		9ACFC64F212172FD0064CE13 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ACFC64E212172FD0064CE13 /* SystemConfiguration.framework */; };
+		9ACFC6512121730A0064CE13 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ACFC650212173090064CE13 /* CoreTelephony.framework */; };
+		9ACFC6532121732A0064CE13 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ACFC6522121732A0064CE13 /* libsqlite3.tbd */; };
+		9ACFC655212173390064CE13 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ACFC654212173390064CE13 /* libc++.tbd */; };
+		9ACFC657212173420064CE13 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ACFC656212173410064CE13 /* libz.tbd */; };
 		9AF51DA120FC487D008A8CF4 /* HSJCALayerTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF51DA020FC487D008A8CF4 /* HSJCALayerTool.m */; };
 		9AF51DA420FC7458008A8CF4 /* HSJClientServeTelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF51DA320FC7458008A8CF4 /* HSJClientServeTelView.m */; };
 		9AF51DA820FC9084008A8CF4 /* HSJUnBindCardHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF51DA720FC9084008A8CF4 /* HSJUnBindCardHeadView.m */; };
@@ -1019,6 +1024,11 @@
 		9AB9D07521096FF100B366A7 /* HSJPlanBuyResultViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJPlanBuyResultViewController.m; sourceTree = "<group>"; };
 		9ACB2F3A20EF6E08005C3C3D /* HSJKeyChainStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJKeyChainStore.h; sourceTree = "<group>"; };
 		9ACB2F3B20EF6E08005C3C3D /* HSJKeyChainStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJKeyChainStore.m; sourceTree = "<group>"; };
+		9ACFC64E212172FD0064CE13 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		9ACFC650212173090064CE13 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		9ACFC6522121732A0064CE13 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		9ACFC654212173390064CE13 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		9ACFC656212173410064CE13 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		9AF51D9F20FC487D008A8CF4 /* HSJCALayerTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJCALayerTool.h; sourceTree = "<group>"; };
 		9AF51DA020FC487D008A8CF4 /* HSJCALayerTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJCALayerTool.m; sourceTree = "<group>"; };
 		9AF51DA220FC7458008A8CF4 /* HSJClientServeTelView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJClientServeTelView.h; sourceTree = "<group>"; };
@@ -1161,6 +1171,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9ACFC657212173420064CE13 /* libz.tbd in Frameworks */,
+				9ACFC655212173390064CE13 /* libc++.tbd in Frameworks */,
+				9ACFC6532121732A0064CE13 /* libsqlite3.tbd in Frameworks */,
+				9ACFC6512121730A0064CE13 /* CoreTelephony.framework in Frameworks */,
+				9ACFC64F212172FD0064CE13 /* SystemConfiguration.framework in Frameworks */,
 				1B74F72E67F77E394AFF76A6 /* libPods-hoommy.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1571,6 +1586,11 @@
 		52DAD5FB0889718E49F314DE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9ACFC656212173410064CE13 /* libz.tbd */,
+				9ACFC654212173390064CE13 /* libc++.tbd */,
+				9ACFC6522121732A0064CE13 /* libsqlite3.tbd */,
+				9ACFC650212173090064CE13 /* CoreTelephony.framework */,
+				9ACFC64E212172FD0064CE13 /* SystemConfiguration.framework */,
 				73C7B870EA4F77D826DA647B /* libPods-hoommy.a */,
 			);
 			name = Frameworks;

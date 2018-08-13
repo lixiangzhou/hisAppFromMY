@@ -371,7 +371,7 @@
                         erroInfo = [NSString stringWithFormat:@"转入金额需%@起投，%@倍数递增；", [NSString hxb_getPerMilWithIntegetNumber:self.planModel.minRegisterAmount.doubleValue], [NSString hxb_getPerMilWithIntegetNumber:self.planModel.registerMultipleAmount.doubleValue]];
                     }
                     else{
-                        erroInfo = [NSString stringWithFormat:@"转入金额需%@倍数递增；", [NSString hxb_getPerMilWithIntegetNumber:self.planModel.minRegisterAmount.doubleValue], [NSString hxb_getPerMilWithIntegetNumber:self.planModel.registerMultipleAmount.doubleValue]];
+                        erroInfo = [NSString stringWithFormat:@"转入金额需%@倍数递增；", [NSString hxb_getPerMilWithIntegetNumber:self.planModel.registerMultipleAmount.doubleValue]];
                     }
                     
                 }

@@ -10,16 +10,14 @@
 #import <UShareUI/UShareUI.h>
 #import "HXBUmengViewController.h"
 #import "HXBUmengManagar.h"
-//友盟APPkey
+////友盟APPkey
 #define kUMAppKey @"5b470771f43e481d570000b2"
 //微信APPkey
-#define kWechatAppKey @"wxcbdc25fe98ea7b17"
+#define kWechatAppKey @"wxeeb26d5f5e3b7eed"
 //微信AppSecret
-#define kWechatAppSecret @"cbd7e23660d3af10b6ee236fa957e176"
+#define kWechatAppSecret @"faad2b554ef86c2d9026fd3287757a69"
 //QQAPPkey
 #define kQQAppKey @"1105452627"
-
-
 
 @implementation HXBUMengShareManager
 
