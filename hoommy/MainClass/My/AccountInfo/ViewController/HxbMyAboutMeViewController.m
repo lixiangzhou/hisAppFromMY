@@ -149,7 +149,7 @@ UITableViewDelegate,UITableViewDataSource
 {
     if (!_logoImageView) {
         _logoImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScrAdaptationW750(260), kScrAdaptationW750(260))];
-        _logoImageView.svgImageString = @"logo";
+        _logoImageView.image = [UIImage imageNamed:@"appLogo"];
     }
     return _logoImageView;
 }
