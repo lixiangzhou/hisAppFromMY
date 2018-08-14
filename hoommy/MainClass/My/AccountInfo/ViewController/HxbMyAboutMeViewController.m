@@ -156,7 +156,8 @@ UITableViewDelegate,UITableViewDataSource
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
-        _titleLabel.text = @"红小宝理财";
+        NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+        _titleLabel.text = [infoDictionary objectForKey:@"CFBundleDisplayName"];
         _titleLabel.textColor = kHXBFontColor_2D2F46_100;
         _titleLabel.font = kHXBFont_PINGFANGSC_REGULAR(14);
     }
