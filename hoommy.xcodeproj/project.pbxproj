@@ -324,6 +324,7 @@
 		9ACFC6532121732A0064CE13 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ACFC6522121732A0064CE13 /* libsqlite3.tbd */; };
 		9ACFC655212173390064CE13 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ACFC654212173390064CE13 /* libc++.tbd */; };
 		9ACFC657212173420064CE13 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ACFC656212173410064CE13 /* libz.tbd */; };
+		9ACFC6592122CB420064CE13 /* appLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 9ACFC6582122CB420064CE13 /* appLogo.png */; };
 		9AF51DA120FC487D008A8CF4 /* HSJCALayerTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF51DA020FC487D008A8CF4 /* HSJCALayerTool.m */; };
 		9AF51DA420FC7458008A8CF4 /* HSJClientServeTelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF51DA320FC7458008A8CF4 /* HSJClientServeTelView.m */; };
 		9AF51DA820FC9084008A8CF4 /* HSJUnBindCardHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF51DA720FC9084008A8CF4 /* HSJUnBindCardHeadView.m */; };
@@ -1029,6 +1030,7 @@
 		9ACFC6522121732A0064CE13 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		9ACFC654212173390064CE13 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		9ACFC656212173410064CE13 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		9ACFC6582122CB420064CE13 /* appLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appLogo.png; sourceTree = "<group>"; };
 		9AF51D9F20FC487D008A8CF4 /* HSJCALayerTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJCALayerTool.h; sourceTree = "<group>"; };
 		9AF51DA020FC487D008A8CF4 /* HSJCALayerTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSJCALayerTool.m; sourceTree = "<group>"; };
 		9AF51DA220FC7458008A8CF4 /* HSJClientServeTelView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSJClientServeTelView.h; sourceTree = "<group>"; };
@@ -3297,6 +3299,7 @@
 		9A97DA4020EF420200688ADB /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				9ACFC6582122CB420064CE13 /* appLogo.png */,
 				9A97DA4120EF420200688ADB /* Default-568h@2x.png */,
 			);
 			path = Image;
@@ -3988,6 +3991,7 @@
 				9A6E0A6420F84CA000598071 /* Assets.xcassets in Resources */,
 				9A97DAC220EF420200688ADB /* close.svg in Resources */,
 				9A97DAD420EF420200688ADB /* transaction_password.svg in Resources */,
+				9ACFC6592122CB420064CE13 /* appLogo.png in Resources */,
 				9A97DAC320EF420200688ADB /* explain.svg in Resources */,
 				9A97DAC820EF420200688ADB /* id_number.svg in Resources */,
 				9A97DAC920EF420200688ADB /* investment_Selected.svg in Resources */,
