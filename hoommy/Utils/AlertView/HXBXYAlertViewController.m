@@ -82,9 +82,10 @@
 }
 
 - (void)setUPAnimater{
+    kWeakSelf
     [self.animatr presentAnimaWithBlock:^(UIViewController *toVC, UIViewController *fromeVC, UIView *toView, UIView *fromeView) {
         toView.center = [UIApplication sharedApplication].keyWindow.center;
-        toView.bounds = CGRectMake(0, 0, kScrAdaptationW(295), kScrAdaptationH(100)+_messageHeight);
+        toView.bounds = CGRectMake(0, 0, kScrAdaptationW(295), kScrAdaptationH(100)+weakSelf.messageHeight);
         self.animatr.isAccomplishAnima = YES;
     }];
     [self.animatr dismissAnimaWithBlock:^(UIViewController *toVC, UIViewController *fromeVC, UIView *toView, UIView *fromeView) {
@@ -130,8 +131,8 @@
     kWeakSelf
     [self.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.view);
-        make.height.offset(kScrAdaptationH(110)+_messageHeight);
-        make.width.offset(weakSelf.view.width);
+        make.height.offset(kScrAdaptationH(110)+weakSelf.messageHeight);
+        make.width.equalTo(weakSelf.view);
         make.center.equalTo(weakSelf.view);
     }];
     
@@ -146,7 +147,7 @@
         make.top.equalTo(weakSelf.mainTitle.mas_bottom);
         make.left.equalTo(weakSelf.view).offset(kScrAdaptationW(10));
         make.right.equalTo(weakSelf.view).offset(kScrAdaptationW(-10));
-        make.height.offset(_messageHeight);
+        make.height.offset(weakSelf.messageHeight);
     }];
     
     [self displayData];
@@ -177,7 +178,8 @@
                 make.height.equalTo(@44);
             }];
             [self.rightButton mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.right.bottom.equalTo(self.view);
+                make.bottom.equalTo(self.view);
+                make.right.equalTo(self.view);
                 make.left.equalTo(self.leftButton.mas_right);
                 make.width.height.equalTo(self.leftButton);
             }];
