@@ -50,7 +50,7 @@ NSString *const HSJHomeBannerCellIdentifier = @"HSJHomeBannerCellIdentifier";
 - (void)setImage:(NSString *)image {
     _image = image;
     
-    [self.imageView sd_setImageWithURL:[NSURL URLWithString:image] placeholderImage:nil];
+    [self.imageView sd_setImageWithURL:[NSURL URLWithString:image] placeholderImage:[UIImage imageNamed:@"home_banner_placeholder"]];
 }
 
 #pragma mark - Helper
