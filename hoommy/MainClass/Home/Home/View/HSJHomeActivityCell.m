@@ -46,7 +46,7 @@ NSString *const HSJHomeActivityCellIdentifier = @"HSJHomeActivityCellIdentifier"
 
 - (void)setPlanModel:(HSJHomePlanModel *)planModel {
     _planModel = planModel;
-    [self.h5ImageView sd_setImageWithURL:[NSURL URLWithString:planModel.image] placeholderImage:[UIImage imageNamed:@"HomeActivity"]];
+    [self.h5ImageView sd_setImageWithURL:[NSURL URLWithString:planModel.image] placeholderImage:[UIImage imageNamed:@"home_activity_placeholder"]];
 }
 
 - (UIView *)segmentLineView {
