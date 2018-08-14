@@ -98,7 +98,7 @@
 
 
 //MARK: ======================= 账户信息 =======================
-#define kHXBUser_QuestionsURL           @"/questions"///常见问题
+#define kHXBUser_QuestionsURL           @"/baby/questions"///常见问题
 
 //MARK: ======================= H5 =======================
 #define kHXBH5_RiskEvaluationURL [NSString stringWithFormat:@"%@/account/risk",[KeyChain h5host]]//风险评测
