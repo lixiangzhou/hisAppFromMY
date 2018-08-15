@@ -11,9 +11,9 @@
 
 //-------------------banner，首页弹框跳转原生的界面-------------------------
 //某个计划的详情页
-#define kPlanDetailVC @"/plan/plan_detail"
+#define kPlanDetailVC @"/plan/detail"
 //登录页面
-#define kLoginVC @"/user/login"
+#define kLoginVC @"/account/login"
 //存管开户页面
 #define kEscrowActivityVC @"/home/EscrowActivity"
 
