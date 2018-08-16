@@ -26,13 +26,33 @@
 
 @implementation HSJHomeHeaderView
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = kHXBColor_FFFFFF_100;
-        
+        [self setupData];
         [self setupUI];
     }
     return self;
+}
+
+- (void)setupData {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(entryBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(becomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
+}
+
+- (void)entryBackground:(NSNotification*)notify {
+    self.titleCycleScrollView.autoScroll = NO;
+    self.bannerView.autoScroll = NO;
+}
+
+- (void)becomeActive:(NSNotification*)notify {
+    self.titleCycleScrollView.autoScroll = YES;
+    self.bannerView.autoScroll = YES;
 }
 
 - (void)setupUI {
