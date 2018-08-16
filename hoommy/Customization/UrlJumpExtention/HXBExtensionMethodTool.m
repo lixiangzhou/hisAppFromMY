@@ -31,8 +31,14 @@
             }  else if ([path isEqualToString:kLoginVC]) { //跳转登录注册
                 [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_ShowLoginVC object:nil];
             } else if([path isEqualToString:kEscrowActivityVC]) {   // 开户
-                HSJDepositoryOpenController *openDepositAccountVC = [[HSJDepositoryOpenController alloc] init];
-                vc = openDepositAccountVC;
+                if(KeyChain.isLogin) {
+                    HSJDepositoryOpenController *openDepositAccountVC = [[HSJDepositoryOpenController alloc] init];
+                    vc = openDepositAccountVC;
+                }
+                else {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_ShowLoginVC object:nil];
+                }
+                
             } 
         }];
         
