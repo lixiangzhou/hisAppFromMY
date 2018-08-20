@@ -118,10 +118,10 @@
     
     if (homeModel.articleList.count) {
         self.titleCycleScrollView.hidden = NO;
-        self.titleCycleScrollView.localizationImageNamesGroup = homeModel.articleList;
     } else {
         self.titleCycleScrollView.hidden = YES;
     }
+    self.titleCycleScrollView.localizationImageNamesGroup = homeModel.articleList;
 }
 
 
