@@ -232,6 +232,8 @@
                     [KeyChain signOut];
                     //到登录界面
                     [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_ShowLoginVC object:nil];
+                    [weakSelf.navigationController popToRootViewControllerAnimated:NO];
+                    [HXBRootVCManager manager].mainTabbarVC.selectedIndex = 0;
                 }
             }];
         }else {
