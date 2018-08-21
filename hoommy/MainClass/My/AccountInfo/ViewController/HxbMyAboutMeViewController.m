@@ -149,14 +149,15 @@ UITableViewDelegate,UITableViewDataSource
 {
     if (!_logoImageView) {
         _logoImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScrAdaptationW750(260), kScrAdaptationW750(260))];
-        _logoImageView.svgImageString = @"logo";
+        _logoImageView.image = [UIImage imageNamed:@"appLogo"];
     }
     return _logoImageView;
 }
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
-        _titleLabel.text = @"红小宝理财";
+        NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+        _titleLabel.text = [infoDictionary objectForKey:@"CFBundleDisplayName"];
         _titleLabel.textColor = kHXBFontColor_2D2F46_100;
         _titleLabel.font = kHXBFont_PINGFANGSC_REGULAR(14);
     }

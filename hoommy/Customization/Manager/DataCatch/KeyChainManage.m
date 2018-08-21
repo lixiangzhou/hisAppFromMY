@@ -133,15 +133,15 @@ static NSString *const kFirstPlanId = @"kFirstPlanId";
 - (void)setToken:(NSString *)token
 {
     if(!token) {
-        [self.keychain removeItemForKey:kToken];
+        [[IDPCache sharedCache] removeObjcetForKey:kToken];
         return;
     }
-    [self.keychain setItem:token ForKey:kToken];
+    [[IDPCache sharedCache] setObj:token forKey:kToken];
 }
 
 - (NSString *)token
 {
-    NSString *token = [self.keychain itemForkey:kToken];
+    NSString *token = [[IDPCache sharedCache] objectForKey:kToken];
     return token?:@"";
 }
 

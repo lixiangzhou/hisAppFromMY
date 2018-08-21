@@ -18,7 +18,7 @@
 //MARK: ======================= 协议 ==========================
 //协议或合同名    端口号后链接    状态    账户内连接
 #define kHXB_Negotiate_SginUPURL @"/agreement/babygoSignup"///《注册服务协议》
-#define kHXB_Negotiate_ServePlanURL @"/agreement/plan"///《月升服务协议书》
+#define kHXB_Negotiate_ServePlanURL @"/agreement/planRise"///《月升服务协议书》
 #define kHXB_Agreement_Hint @"/agreement/hint"//网络借贷协议书
 #define kHXB_Negotiate_ServePlan_AccountURL(productID) [NSString stringWithFormat: @"/acount/planRise/%@/agreement",(productID)]//我的月升服务协议
 
@@ -98,7 +98,7 @@
 
 
 //MARK: ======================= 账户信息 =======================
-#define kHXBUser_QuestionsURL           @"/questions"///常见问题
+#define kHXBUser_QuestionsURL           @"/baby/questions"///常见问题
 
 //MARK: ======================= H5 =======================
 #define kHXBH5_RiskEvaluationURL [NSString stringWithFormat:@"%@/account/risk",[KeyChain h5host]]//风险评测
