@@ -113,8 +113,8 @@
     
     HSJPlanDetailTopView *topView = [HSJPlanDetailTopView new];
     kWeakSelf
-    topView.calBlock = ^{
-        [weakSelf calClick];
+    topView.calBlock = ^(UIButton *btn) {
+        [weakSelf calClick:btn];
     };
     [self.scrollView addSubview:topView];
     self.topView = topView;
@@ -211,7 +211,7 @@
     UIButton *calBtn = [UIButton new];
     calBtn.adjustsImageWhenHighlighted = NO;
     [calBtn setImage:[UIImage imageNamed:@"detail_cal"] forState:UIControlStateNormal];
-    [calBtn addTarget:self action:@selector(calClick) forControlEvents:UIControlEventTouchUpInside];
+    [calBtn addTarget:self action:@selector(calClick:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.bottomContentView addSubview:calBtn];
     
@@ -220,7 +220,7 @@
     [inBtn setTitle:@"转入" forState:UIControlStateNormal];
     inBtn.titleLabel.font = kHXBFont_32;
     inBtn.adjustsImageWhenHighlighted = NO;
-    [inBtn addTarget:self action:@selector(inClick) forControlEvents:UIControlEventTouchUpInside];
+    [inBtn addTarget:self action:@selector(inClick:) forControlEvents:UIControlEventTouchUpInside];
     self.inBtn = inBtn;
     
     [self.bottomContentView addSubview:inBtn];
@@ -257,7 +257,7 @@
     inBtn.layer.masksToBounds = YES;
     inBtn.titleLabel.font = kHXBFont_32;
     inBtn.adjustsImageWhenHighlighted = NO;
-    [inBtn addTarget:self action:@selector(inClick) forControlEvents:UIControlEventTouchUpInside];
+    [inBtn addTarget:self action:@selector(inClick:) forControlEvents:UIControlEventTouchUpInside];
     self.inBtn = inBtn;
     
     [self.bottomContentView addSubview:inBtn];
@@ -311,14 +311,14 @@
 }
 
 #pragma mark - Action
-- (void)inClick {
+- (void)inClick:(UIButton *)btn {
     if (self.viewModel.hasBuy) {
         [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_DetailHasBuyInClick];
     } else {
         [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_DetailUnBuyInClick];
     }
     
-    [self toBuy:nil];
+    [self toBuyFrom:btn money:nil];
 }
 
 - (void)outClick {
@@ -332,7 +332,7 @@
     }
 }
 
-- (void)calClick {
+- (void)calClick:(UIButton *)btn {
     if (self.viewModel.hasBuy) {
         [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_DetailHasBuyCalculatorClick];
     } else {
@@ -341,7 +341,7 @@
     
     kWeakSelf
     [HSJEarningCalculatorView showWithInterest:self.viewModel.interest buyBlock:^(NSString *value) {
-        [weakSelf toBuy:value];
+        [weakSelf toBuyFrom:btn money:value];
     }];
 }
 
@@ -350,13 +350,15 @@
     [HXBUmengManagar HXB_clickEventWithEnevtId:kHSHUmeng_DetailBackClick];
 }
 
-- (void)toBuy:(NSString *)money {
+- (void)toBuyFrom:(UIButton *)btn money:(NSString *)money {
+    btn.enabled = NO;
     kWeakSelf
     [self.viewModel checkDepositoryAndRiskFromController:self checkBank:NO finishBlock:^{
         HSJBuyViewController *vc = [HSJBuyViewController new];
         vc.planId = weakSelf.planId;
         vc.startMoney = money;
         [weakSelf.navigationController pushViewController:vc animated:YES];
+        btn.enabled = YES;
     }];
 }
 

@@ -124,7 +124,7 @@
     calBtn.adjustsImageWhenHighlighted = NO;
     [calBtn sizeToFit];
     [additionView addSubview:calBtn];
-    [calBtn addTarget:self action:@selector(calAction) forControlEvents:UIControlEventTouchUpInside];
+    [calBtn addTarget:self action:@selector(calAction:) forControlEvents:UIControlEventTouchUpInside];
     
     [bgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self);
@@ -199,9 +199,9 @@
 }
 
 #pragma mark - Action
-- (void)calAction {
+- (void)calAction:(UIButton *)btn {
     if (self.calBlock) {
-        self.calBlock();
+        self.calBlock(btn);
     }
 }
 
