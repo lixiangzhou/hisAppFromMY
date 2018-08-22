@@ -99,7 +99,7 @@
                             
                             @[[[HSJRollOutPlanDetailRowModel alloc] initWithType:HSJRollOutPlanDetailRowTypeAction left:@"投标记录" right:nil protocol:nil className:nil]],
                             
-                            @[[[HSJRollOutPlanDetailRowModel alloc] initWithType:HSJRollOutPlanDetailRowTypeProtocol left:@"产品服务协议" right:nil protocol:nil className:nil]],
+                            @[[[HSJRollOutPlanDetailRowModel alloc] initWithType:HSJRollOutPlanDetailRowTypeProtocol left:@"存钱罐服务协议" right:nil protocol:nil className:nil]],
                             ];
     } else {
         HSJRollOutPlanDetailRowModel *model = [[HSJRollOutPlanDetailRowModel alloc] initWithType:HSJRollOutPlanDetailRowTypeNormal left:@"状态" right:@"转出中" protocol:nil className:nil];
@@ -115,7 +115,7 @@
                             
                             @[[[HSJRollOutPlanDetailRowModel alloc] initWithType:HSJRollOutPlanDetailRowTypeAction left:@"投标记录" right:nil protocol:nil className:nil]],
                             
-                            @[[[HSJRollOutPlanDetailRowModel alloc] initWithType:HSJRollOutPlanDetailRowTypeProtocol left:@"产品服务协议" right:nil protocol:nil className:nil]],
+                            @[[[HSJRollOutPlanDetailRowModel alloc] initWithType:HSJRollOutPlanDetailRowTypeProtocol left:@"存钱罐服务协议" right:nil protocol:nil className:nil]],
                             ];
     }
 }
