@@ -295,14 +295,20 @@
     [self.scrollView addSubview:bottomBtn];
     self.bottomBtn = bottomBtn;
     
-    NSAttributedString *attString = [[NSAttributedString alloc] initWithString:@"我已查看并同意《红小宝平台授权协议》,《恒丰银行股份有限公司杭州分行网络交易资金账户三方协议》"];
+    NSAttributedString *attString = [[NSAttributedString alloc] initWithString:@"我已查看并同意《红小宝平台授权协议》,《恒丰银行股份有"];
     
     NSDictionary *linkAttributes = @{NSForegroundColorAttributeName:kHXBFOntColor_4C66E7_100, NSFontAttributeName:kHXBFont_PINGFANGSC_REGULAR(12)};
     NSMutableAttributedString *attributedString = [HXBAgreementView configureLinkAttributedString:attString withString:@"《红小宝平台授权协议》" sameStringEnable:NO linkAttributes:linkAttributes activeLinkAttributes:linkAttributes parameter:nil clickLinkBlock:^{
         NSLog(@"《红小宝认证服务协议》");
         [HXBBaseWKWebViewController pushWithPageUrl:[NSString splicingH5hostWithURL:kHXB_Negotiate_authorize] fromController:self];
     }];
-    attributedString = [HXBAgreementView configureLinkAttributedString:attributedString withString:@"《恒丰银行股份有限公司杭州分行网络交易资金账户三方协议》" sameStringEnable:NO linkAttributes:linkAttributes activeLinkAttributes:linkAttributes parameter:nil clickLinkBlock:^{
+    attributedString = [HXBAgreementView configureLinkAttributedString:attributedString withString:@"《恒丰银行股份有" sameStringEnable:NO linkAttributes:linkAttributes activeLinkAttributes:linkAttributes parameter:nil clickLinkBlock:^{
+        NSLog(@"《恒丰银行股份有限公司杭州分行网络交易资金账户三方协议》");
+        [HXBBaseWKWebViewController pushWithPageUrl:[NSString splicingH5hostWithURL:kHXB_Negotiate_thirdpart] fromController:self];
+    }];
+    
+    NSAttributedString *attString2 = [[NSAttributedString alloc] initWithString:@"限公司杭州分行网络交易资金账户三方协议》"];
+    NSMutableAttributedString *attributedString2 = [HXBAgreementView configureLinkAttributedString:attString2 withString:@"限公司杭州分行网络交易资金账户三方协议》" sameStringEnable:NO linkAttributes:linkAttributes activeLinkAttributes:linkAttributes parameter:nil clickLinkBlock:^{
         NSLog(@"《恒丰银行股份有限公司杭州分行网络交易资金账户三方协议》");
         [HXBBaseWKWebViewController pushWithPageUrl:[NSString splicingH5hostWithURL:kHXB_Negotiate_thirdpart] fromController:self];
     }];
@@ -315,11 +321,24 @@
         [weakSelf setBottomBtnState];
     };
     
+    HXBAgreementView *agreementView2 = [[HXBAgreementView alloc] initWithFrame:CGRectZero];
+    agreementView2.text = attributedString2;
+    agreementView2.hideAgreeBtn = YES;
+    agreementView2.agreeBtnBlock = ^(BOOL isSelected){
+    };
+    
     [self.scrollView addSubview:agreementView];
+    [self.scrollView addSubview:agreementView2];
     
     [agreementView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(bottomBtn);
-        make.height.equalTo(@28);
+        make.height.equalTo(@14);
+        make.bottom.equalTo(agreementView2.mas_top).offset(-3);
+    }];
+    
+    [agreementView2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(bottomBtn);
+        make.height.equalTo(@14);
         make.bottom.equalTo(bottomBtn.mas_top).offset(-15);
     }];
 

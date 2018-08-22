@@ -156,6 +156,11 @@
     self.agreeBtn.selected = selectState;
 }
 
+- (void)setHideAgreeBtn:(BOOL)hideAgreeBtn {
+    _hideAgreeBtn = hideAgreeBtn;
+    self.agreeBtn.hidden = hideAgreeBtn;
+}
+
 - (CJLabel *)negotiateView
 {
     if (!_negotiateView) {

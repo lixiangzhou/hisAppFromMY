@@ -21,6 +21,8 @@
 
 @property (nonatomic, assign) BOOL isAllowAllScreenClick;
 
+@property (nonatomic, assign) BOOL hideAgreeBtn;
+
 /**
  点击对号按钮回调的Block
  */

@@ -10,12 +10,14 @@
 #import "TimerWeakTarget.h"
 #import "HXBGeneralAlertVC.h"
 #import "HSJRiskAssessmentViewController.h"
+#import "HXBNsTimerManager.h"
 
 @interface HSJPlanDetailViewModel ()
-@property (nonatomic, strong) NSTimer *timer;
+//@property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, assign) long long diffTime;
 @property (nonatomic, assign) BOOL needCountDown;
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
+@property (nonatomic, strong) HXBNsTimerManager *timerManager;
 @end
 
 @implementation HSJPlanDetailViewModel
@@ -163,40 +165,61 @@
 }
 
 #pragma mark - Action
-- (void)timerAction {
-    if (self.needCountDown) {
-        self.inText = [NSString stringWithFormat:@"%02lld:%02lld后开售", self.diffTime / 60, self.diffTime % 60];
-        self.inTextColor = [UIColor whiteColor];
-        self.inBackgroundImage = [UIImage imageNamed:@"plandetail_btn_disable_bg"];
-        self.inEnabled = NO;
-        self.diffTime -= 1;
-    } else if (self.diffTime < 0) {
-        self.inText = @"转入";
-        self.inTextColor = [UIColor whiteColor];
-        self.inBackgroundImage = [UIImage imageNamed:@"plandetail_btn_normal_bg"];
-        self.inEnabled = YES;
-        [self stopTimer];
-    } else {    // XX-XX 后开售时，也要倒计时
-        self.diffTime -= 1;
-    }
-    
-    if (self.timerBlock) {
-        self.timerBlock();
-    }
-}
+//- (void)timerAction {
+//    if (self.needCountDown) {
+//        self.inText = [NSString stringWithFormat:@"%02lld:%02lld后开售", self.diffTime / 60, self.diffTime % 60];
+//        self.inTextColor = [UIColor whiteColor];
+//        self.inBackgroundImage = [UIImage imageNamed:@"plandetail_btn_disable_bg"];
+//        self.inEnabled = NO;
+//        self.diffTime -= 1;
+//    } else if (self.diffTime < 0) {
+//        self.inText = @"转入";
+//        self.inTextColor = [UIColor whiteColor];
+//        self.inBackgroundImage = [UIImage imageNamed:@"plandetail_btn_normal_bg"];
+//        self.inEnabled = YES;
+//        [self stopTimer];
+//    } else {    // XX-XX 后开售时，也要倒计时
+//        self.diffTime -= 1;
+//    }
+//
+//    if (self.timerBlock) {
+//        self.timerBlock();
+//    }
+//}
 
 #pragma mark - Timer
 - (void)startTimer {
-    [self stopTimer];
+//    [self stopTimer];
     
     if (self.diffTime > 0) {
-        self.timer = [TimerWeakTarget scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
+//        self.timer = [TimerWeakTarget scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
+        self.timerManager = [HXBNsTimerManager createTimer:1 startSeconds:0 countDownTime:NO notifyCall:^(NSString *times) {
+            long temp = self.diffTime - times.doubleValue;
+            if(temp < 0) {
+                self.inText = @"转入";
+                self.inTextColor = [UIColor whiteColor];
+                self.inBackgroundImage = [UIImage imageNamed:@"plandetail_btn_normal_bg"];
+                self.inEnabled = YES;
+                
+                [self.timerManager stopTimer];
+            } else if (temp < 3600) {
+                self.inText = [NSString stringWithFormat:@"%02lld:%02lld后开售", temp / 60, temp % 60];
+                self.inTextColor = [UIColor whiteColor];
+                self.inBackgroundImage = [UIImage imageNamed:@"plandetail_btn_disable_bg"];
+                self.inEnabled = NO;
+            }
+            
+            if (self.timerBlock) {
+                self.timerBlock();
+            }
+           
+//            if(timerBlock) {
+//                weakSelf.timerContent = [weakSelf makeTimerContent:times.intValue];
+//                timerBlock();
+//            }
+        }];
+        [self.timerManager startTimer];
     }
-}
-
-- (void)stopTimer {
-    [self.timer invalidate];
-    self.timer = nil;
 }
 
 #pragma mark - Getter
@@ -212,4 +235,8 @@
     return _dateFormatter;
 }
 
+- (void)dealloc
+{
+    [self.timerManager stopTimer];
+}
 @end
