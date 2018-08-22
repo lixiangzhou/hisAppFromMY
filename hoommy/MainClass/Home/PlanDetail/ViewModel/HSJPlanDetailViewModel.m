@@ -105,8 +105,7 @@
                 NSString *dateStr = @(date.timeIntervalSince1970).description;
                 self.inText = [[HXBBaseHandDate sharedHandleDate] stringFromDate:dateStr andDateFormat:@"MM-dd开售"];
             }
-            self.inBackgroundImage = [UIImage imageNamed:@"plandetail_btn_empty_bg"];
-            self.inTextColor = kHXBColor_FF7055_100;
+            self.inBackgroundImage = [UIImage imageNamed:@"plandetail_btn_disable_bg"];
         }
             break;
         case 6:
