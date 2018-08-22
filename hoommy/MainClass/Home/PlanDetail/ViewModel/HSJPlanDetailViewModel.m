@@ -105,7 +105,6 @@
                 NSString *dateStr = @(date.timeIntervalSince1970).description;
                 self.inText = [[HXBBaseHandDate sharedHandleDate] stringFromDate:dateStr andDateFormat:@"MM-dd开售"];
             }
-            self.inBackgroundImage = [UIImage imageNamed:@"plandetail_btn_disable_bg"];
         }
             break;
         case 6:
@@ -167,8 +166,8 @@
 - (void)timerAction {
     if (self.needCountDown) {
         self.inText = [NSString stringWithFormat:@"%02lld:%02lld后开售", self.diffTime / 60, self.diffTime % 60];
-        self.inTextColor = kHXBColor_FF7055_100;
-        self.inBackgroundImage = [UIImage imageNamed:@"plandetail_btn_empty_bg"];
+        self.inTextColor = [UIColor whiteColor];
+        self.inBackgroundImage = [UIImage imageNamed:@"plandetail_btn_disable_bg"];
         self.inEnabled = NO;
         self.diffTime -= 1;
     } else if (self.diffTime < 0) {
