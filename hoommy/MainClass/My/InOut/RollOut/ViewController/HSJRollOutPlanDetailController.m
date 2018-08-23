@@ -91,7 +91,10 @@
         [self.navigationController pushViewController:vc animated:YES];
     } else if (model.type == HSJRollOutPlanDetailRowTypeProtocol) {
         NSString *url = kHXB_Negotiate_ServePlan_AccountURL(self.planId);
-        [HXBBaseWKWebViewController pushWithPageUrl:[NSString splicingH5hostWithURL:url] fromController:self];
+        HXBBaseWKWebViewController *vc = [[HXBBaseWKWebViewController alloc] init];
+        vc.pageUrl = [NSString splicingH5hostWithURL:url];
+        vc.pageTitle = @"存钱罐服务协议";
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
