@@ -33,10 +33,9 @@
     //友盟分享设置
     [HXBUMengShareManager umengShareStart];
     
-    if (HXBShakeChangeBaseUrl == YES) {
-        [HXBBaseUrlSettingView attatchToWindow];
-        [[HXBBaseUrlManager manager] startObserve];
-    }
+    //摇一摇配置
+    [HXBBaseUrlSettingView attatchToWindow];
+    [[HXBBaseUrlManager manager] startObserve];
     
     [[HXBRootVCManager manager] createRootVCAndMakeKeyWindow];
     [HXBBaseUrlSettingView attatchToWindow];
