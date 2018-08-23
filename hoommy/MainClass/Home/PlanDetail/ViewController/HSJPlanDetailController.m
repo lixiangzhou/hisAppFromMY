@@ -130,6 +130,12 @@
     HSJPlanDetailInfoView *infoView = [HSJPlanDetailInfoView new];
     [self.scrollView addSubview:infoView];
     self.infoView = infoView;
+    
+    scrollView.freshOption = ScrollViewFreshOptionDownPull;
+    scrollView.headerWithRefreshBlock = ^(UIScrollView *scrollView) {
+        [self getData];
+    };
+//    scrollView.mj_header.hidden = YES;
 
     [topView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(scrollView);
@@ -281,6 +287,9 @@
     kWeakSelf
     [self.viewModel getDataWithId:self.planId resultBlock:^(BOOL isSuccess) {
         if (isSuccess) {
+            [weakSelf.scrollView endRefresh:YES];
+            weakSelf.navView.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0];
+            weakSelf.navViewBottomLine.hidden = YES;
             [weakSelf setData];
         }
     }];
@@ -300,13 +309,16 @@
 #pragma mark -
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat offsetY = scrollView.contentOffset.y;
-    if (offsetY > 30) {
+    if (offsetY > 50) {
         self.navView.backgroundColor = [UIColor whiteColor];
         self.navViewBottomLine.hidden = NO;
-    } else {
+    } else if (offsetY >= 0){
         offsetY = MIN(0, offsetY);
-        self.navView.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:offsetY / 30];
+        self.navView.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:offsetY / 50];
         self.navViewBottomLine.hidden = YES;
+    } else {
+        self.navView.backgroundColor = [UIColor whiteColor];
+        self.navViewBottomLine.hidden = NO;
     }
 }
 
