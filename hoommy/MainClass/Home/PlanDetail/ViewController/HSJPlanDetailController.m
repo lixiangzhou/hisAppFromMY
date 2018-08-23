@@ -351,6 +351,12 @@
 }
 
 - (void)toBuyFrom:(UIButton *)btn money:(NSString *)money {
+    /// 防止不能没有登录时，警用了按钮的点击
+    if (KeyChain.isLogin == NO) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kHXBNotification_ShowLoginVC object:nil];
+        return;
+    }
+    
     btn.enabled = NO;
     kWeakSelf
     [self.viewModel checkDepositoryAndRiskFromController:self checkBank:NO finishBlock:^{
