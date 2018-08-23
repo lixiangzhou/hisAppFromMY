@@ -8,9 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-// 用于控制摇一摇修改baseUrl，发布线上的时候为NO，其他情况为YES
-#define HXBShakeChangeBaseUrl YES
-
 ///网络请求 的基本配置，网络状态的监听
 @interface NYNetworkConfig : NSObject
 

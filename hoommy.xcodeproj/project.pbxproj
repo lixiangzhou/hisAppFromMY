@@ -4598,7 +4598,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Z9M2NMJFP5;
+				DEVELOPMENT_TEAM = QG8F8B8JH8;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = hoommy/PrefixHeader.pch;
 				INFOPLIST_FILE = hoommy/Info.plist;
@@ -4611,7 +4611,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/hoommy/Utils/Secretlib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hoomsun.muyingmoney;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hongchong.hoomsun.hoombaby;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -4627,7 +4627,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Z9M2NMJFP5;
+				DEVELOPMENT_TEAM = QG8F8B8JH8;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = hoommy/PrefixHeader.pch;
 				INFOPLIST_FILE = hoommy/Info.plist;
@@ -4640,7 +4640,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/hoommy/Utils/Secretlib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hoomsun.muyingmoney;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hongchong.hoomsun.hoombaby;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

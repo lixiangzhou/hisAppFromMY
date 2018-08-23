@@ -20,5 +20,5 @@
 #import "HXBEnumerateTransitionManager.h"
 
 //是否开启摇一摇功能
-#define HXBShakeChangeBaseUrl YES
+#define HXBShakeChangeBaseUrl NO
 #endif /* HSJConfig_h */
