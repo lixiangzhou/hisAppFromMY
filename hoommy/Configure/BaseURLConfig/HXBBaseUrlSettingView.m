@@ -16,11 +16,13 @@
 @implementation HXBBaseUrlSettingView
 
 + (void)attatchToWindow {
-    HXBBaseUrlSettingView *view = [self settingView];
-    view.alpha = 0;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [[UIApplication sharedApplication].keyWindow addSubview:view];
-    });
+    if (HXBShakeChangeBaseUrl == YES) {
+        HXBBaseUrlSettingView *view = [self settingView];
+        view.alpha = 0;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[UIApplication sharedApplication].keyWindow addSubview:view];
+        });
+    }
 }
 
 + (instancetype)settingView {

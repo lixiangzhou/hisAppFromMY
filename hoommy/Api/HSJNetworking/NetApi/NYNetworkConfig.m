@@ -87,11 +87,10 @@ static NSString *HXBBaseUrlKey = @"HXBBaseUrlKey";
 
 
 - (void)setBaseUrl:(NSString *)baseUrl {
-    if (HXBShakeChangeBaseUrl == NO) {
-        return;
-    }
     _baseUrl = baseUrl;
-    [[NSUserDefaults standardUserDefaults] setObject:baseUrl forKey:HXBBaseUrlKey];
+    if (HXBShakeChangeBaseUrl == YES) {
+        [[NSUserDefaults standardUserDefaults] setObject:baseUrl forKey:HXBBaseUrlKey];
+    }
 }
 
 //MARK: 设置请求基本信息
