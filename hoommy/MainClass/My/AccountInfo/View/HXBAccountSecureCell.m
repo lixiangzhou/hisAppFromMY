@@ -37,6 +37,7 @@
 - (void)setModel:(HXBAccountSecureModel *)model {
     _model = model;
     self.textLabel.text = model.title;
+    self.descLab.text = @"";
     
     if (model.type == HXBAccountSecureTypeGesturePwdSwitch) {
         
