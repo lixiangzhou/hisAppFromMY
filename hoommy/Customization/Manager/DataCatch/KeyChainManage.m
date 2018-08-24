@@ -119,11 +119,12 @@ static NSString *const kFirstPlanId = @"kFirstPlanId";
 }
 
 - (void)setFirstPlanIdInPlanList:(NSString *)firstPlanIdInPlanList {
-    [self.keychain setItem:firstPlanIdInPlanList ForKey:kFirstPlanId];
+    [[IDPCache sharedCache] setObj:firstPlanIdInPlanList forKey:kFirstPlanId];
 }
 
 - (NSString *)firstPlanIdInPlanList {
-    return [self.keychain itemForkey:kFirstPlanId] ?: @"";
+    NSString *planId = [[IDPCache sharedCache] objectForKey:kFirstPlanId];
+    return planId ?: @"";
 }
 
 - (void)setMobile:(NSString *)mobile {
